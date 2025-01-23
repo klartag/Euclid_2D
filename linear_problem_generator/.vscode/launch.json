@@ -1,0 +1,50 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Linear",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=linear_problem_generator",
+                    "--package=linear_problem_generator"
+                ],
+                "filter": {
+                    "name": "linear_problem_generator",
+                    "kind": "bin"
+                }
+            },
+            "args": [
+                "--diagram=triangle"
+            ],
+            "env": {
+                "RUST_BACKTRACE": "1"
+            },
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in Linear",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=linear_problem_generator",
+                    "--package=linear_problem_generator"
+                ],
+                "filter": {
+                    "name": "linear_problem_generator",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

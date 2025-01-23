@@ -1,0 +1,14 @@
+{
+    "mypy.targets": [
+        "rules"
+    ],
+    "black-formatter.args": [
+        "-S",
+        "--line-length=120"
+    ],
+    "python.testing.pytestArgs": [
+        "rules"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
