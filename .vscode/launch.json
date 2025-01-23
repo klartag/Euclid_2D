@@ -1,0 +1,70 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "2D Euclid",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "rules",
+            "console": "integratedTerminal",
+            "args": "${command:pickArgs}",
+        },
+        {
+            "name": "Check Proof",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "rules",
+            "console": "integratedTerminal",
+            "args": "check ${command:pickArgs}",
+        },
+        {
+            "name": "Trim Proof",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "rules",
+            "console": "integratedTerminal",
+            "args": "trim ${command:pickArgs}",
+        },
+        {
+            "name": "Generate Proof",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "rules",
+            "console": "integratedTerminal",
+            "args": "prove ${command:pickArgs}",
+        },
+        {
+            "name": "Validate Proof",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "rules",
+            "console": "integratedTerminal",
+            "args": "validate ${command:pickArgs}",
+        },
+        {
+            "name": "Run all tests",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Run tests by keyword",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "args": "-k ${command:pickArgs}",
+        },
+        {
+            "name": "Hierarchy Algorithm",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "rules/constructions_and_predicates/hierarchy_algorithm.py",
+            "console": "integratedTerminal",
+        }
+    ]
+}
