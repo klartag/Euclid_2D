@@ -1,0 +1,35 @@
+directions_draw_angle:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(direction(B, A), direction(B, C))
+  conclude:
+    - exists(angle(A, B, C))
+  metadata: auto
+
+angle_draws_line:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(angle(A, B, C))
+  conclude:
+    - exists(Line(A, B), Line(B, C))
+  metadata: auto
+
+perpendicular_lines_draw_intersection:
+  inputs:
+    - k, l: Line
+  where:
+    - perpendicular(k, l)
+  conclude:
+    - exists(line_intersection(k, l))
+  metadata: auto
+
+draw_point_of_tangency:
+  inputs:
+    - l: Line
+    - c: Circle
+  where:
+    - tangent(l, c)
+  conclude:
+    - exists(line_circle_tangent_point(l, c))

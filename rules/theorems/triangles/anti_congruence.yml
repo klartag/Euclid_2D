@@ -1,0 +1,58 @@
+anti_congruent_triangle_basic_properties:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - anti_congruent_triangles(A, B, C, A', B', C')
+  conclude:
+    - not_collinear(A, B, C)
+    - not_collinear(A', B', C')
+    - distance(A, B) == distance(A', B')
+    - distance(B, C) == distance(B', C')
+    - distance(C, A) == distance(C', A')
+    - angle(A, B, C) == - angle(A', B', C') mod 360
+    - angle(B, C, A) == - angle(B', C', A') mod 360
+    - angle(C, A, B) == - angle(C', A', B') mod 360
+
+sss_anti_congruence:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - distance(A, B) == distance(A', B')
+    - distance(B, C) == distance(B', C')
+    - distance(C, A) == distance(C', A')
+    - orientation(A, B, C) == - orientation(A', B', C') mod 360
+  conclude:
+    - anti_congruent_triangles(A, B, C, A', B', C')
+
+sas_anti_congruence:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - distance(A, B) == distance(A', B')
+    - angle(A, B, C) == - angle(A', B', C') mod 360
+    - distance(B, C) == distance(B', C')
+  conclude:
+    - anti_congruent_triangles(A, B, C, A', B', C')
+
+asa_anti_congruence:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - coangle(C, A, B) == - coangle(C', A', B') mod 360
+    - distance(A, B) == distance(A', B')
+    - coangle(A, B, C) == - coangle(A', B', C') mod 360
+  conclude:
+    - anti_congruent_triangles(A, B, C, A', B', C')
+
+anti_congruence_from_anti_similar_triangles:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - anti_similar_triangles(A, B, C, A', B', C')
+    - distance(A, B) == distance(A', B')
+  conclude:
+    - anti_congruent_triangles(A, B, C, A', B', C')
+

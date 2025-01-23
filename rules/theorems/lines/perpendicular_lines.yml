@@ -1,0 +1,58 @@
+perpendicular_direction_conditions:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - twice_angle_is_180: 2 * direction(A, B) - 2 * direction(C, D) == 180 mod 360
+    - lines_are_perpendicular: perpendicular(Line(A, B), Line(C, D))
+  possible_conclusions:
+    - twice_angle_is_180 <=> lines_are_perpendicular
+  rank: 2
+
+perpendicular_angle_conditions:
+  inputs:
+    - A, B, C: Point
+  possible_conclusions:
+    - perpendicular(Line(A, B), Line(B, C)) <=> coangle(A, B, C) == 0 mod 360
+
+perpendicular_line_definition:
+  inputs:
+    - A: Point
+    - k, l: Line
+  where:
+    - A in k
+    - perpendicular(k, l)
+  conclude:
+    - k == perpendicular_line(A, l)
+  rank: 5
+
+double_perpendicular_and_parallel:
+  inputs:
+    - k, l, m: Line
+  where:
+    - perpendicular(k, l)
+  possible_conclusions:
+    - perpendicular(l, m) <=> parallel(k, m)
+  trivial_if_equal:
+    - [k, m]
+
+altitude_definition:
+  inputs:
+    - A, B, C: Point
+    - l: Line
+  where:
+    - not_collinear(A, B, C)
+    - A in l
+    - perpendicular(l, Line(B, C))
+  conclude:
+    - l == altitude(A, B, C)
+
+projection_definition:
+  inputs:
+    - A, A': Point
+    - l: Line
+  where:
+    - A' in l
+    - perpendicular(Line(A, A'), l)
+  conclude:
+    - A' == projection(A, l)
+  rank: 5

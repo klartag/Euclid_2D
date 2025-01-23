@@ -1,0 +1,39 @@
+[package]
+name = "linear_problem_generator"
+version = "1.0.0"
+edition = "2021"
+default-run = "linear"
+
+[dependencies]
+itertools = "0.12.1"
+num-traits = "0.2.18"
+rand = "0.8.5"
+rustc-hash = "1.1.0"
+rand_distr = "0.4.3"
+num-complex = "0.4.5"
+smallvec = { version = "1.13.2", features = ["serde"] }
+tqdm = "0.7.0"
+clap = { version = "4.5.20", features = ["derive"] }
+anyhow = "1.0.89"
+serde = { version = "1.0.210", features = ["derive"] }
+serde_json = "1.0.131"
+glob = "0.3.1"
+
+[dev-dependencies]
+rstest = "0.23.0"
+rstest_reuse = "0.7.0"
+
+[profile.dev]
+debug = "full"
+
+[lib]
+name = "lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "linear"
+path = "src/main.rs"
+
+[[bin]]
+name = "dedup"
+path = "src/deduplication/main.rs"

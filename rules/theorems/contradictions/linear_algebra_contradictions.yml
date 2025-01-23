@@ -1,0 +1,13 @@
+mod_360_contradiction:
+  where:
+    - 0 != 0 mod 360
+  conclude:
+    - false()
+  rank: 5
+
+r_contradiction:
+  where:
+    - 0 != 0
+  conclude:
+    - false()
+  rank: 5

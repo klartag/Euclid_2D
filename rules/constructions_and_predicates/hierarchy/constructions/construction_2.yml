@@ -1,0 +1,60 @@
+altitude:
+  conclude: ['l == perpendicular_line(A, Line(B, C))']
+  construct:
+  - {l: Line}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: swap
+  where: ['not_collinear(A, B, C)']
+angle:
+  conclude: ['a == direction(B, C) - direction(B, A) mod 360']
+  construct:
+  - {a: Angle}
+  inputs:
+  - {'A, B, C': Point}
+  where: [A != B, C != B]
+excenter:
+  conclude: ['concurrent(external_angle_bisector(A, C, B), external_angle_bisector(A,
+      B, C), internal_angle_bisector(B, A, C))', 'P == line_intersection(external_angle_bisector(A,
+      C, B), external_angle_bisector(A, B, C))']
+  construct:
+  - {P: Point}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: swap
+  where: ['not_collinear(A, B, C)']
+incenter:
+  conclude: ['concurrent(internal_angle_bisector(A, B, C), internal_angle_bisector(A,
+      C, B), internal_angle_bisector(C, A, B))', 'P == line_intersection(internal_angle_bisector(A,
+      B, C), internal_angle_bisector(A, C, B))']
+  construct:
+  - {P: Point}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
+  where: ['not_collinear(A, B, C)']
+median:
+  conclude: ['l == Line(A, midpoint(B, C))']
+  construct:
+  - {l: Line}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: swap
+  where: ['not_collinear(A, B, C)']
+perpendicular_bisector:
+  conclude: ['l == perpendicular_line(midpoint(A, B), Line(A, B))']
+  construct:
+  - {l: Line}
+  inputs:
+  - {'A, B': Point}
+  preprocess: symmetric
+  where: [A != B]
+projection:
+  conclude: ['Q == line_intersection(perpendicular_line(P, l), l)']
+  construct:
+  - {Q: Point}
+  inputs:
+  - {P: Point}
+  - {l: Line}
+  possible_conclusions: ['P not in l => perpendicular_line(P, l) == Line(P, Q)', P
+      in l => P == Q]

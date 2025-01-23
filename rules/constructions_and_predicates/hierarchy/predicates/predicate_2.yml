@@ -1,0 +1,6 @@
+bisect:
+  conclude: ['line_intersection(l, Line(A, B)) == midpoint(A, B)']
+  inputs:
+  - {l: Line}
+  - {'A, B': Point}
+  preprocess: swap

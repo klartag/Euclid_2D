@@ -1,0 +1,111 @@
+similar_triangle_basic_properties:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - similar_triangles(A, B, C, A', B', C')
+  conclude:
+    - not_collinear(A, B, C)
+    - not_collinear(A', B', C')
+    - angle(A, B, C) == angle(A', B', C') mod 360
+    - angle(B, C, A) == angle(B', C', A') mod 360
+    - angle(C, A, B) == angle(C', A', B') mod 360
+    - log(distance(A, B)) + log(distance(B', C')) == log(distance(A', B')) + log(distance(B, C))
+    - log(distance(B, C)) + log(distance(C', A')) == log(distance(B', C')) + log(distance(C, A))
+    - log(distance(C, A)) + log(distance(A', B')) == log(distance(C', A')) + log(distance(A, B))
+
+anti_similar_triangle_basic_properties:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - anti_similar_triangles(A, B, C, A', B', C')
+  conclude:
+    - not_collinear(A, B, C)
+    - not_collinear(A', B', C')
+    - angle(A, B, C) == - angle(A', B', C') mod 360
+    - angle(B, C, A) == - angle(B', C', A') mod 360
+    - angle(C, A, B) == - angle(C', A', B') mod 360
+    - log(distance(A, B)) + log(distance(B', C')) == log(distance(A', B')) + log(distance(B, C))
+    - log(distance(B, C)) + log(distance(C', A')) == log(distance(B', C')) + log(distance(C, A))
+    - log(distance(C, A)) + log(distance(A', B')) == log(distance(C', A')) + log(distance(A, B))
+
+aa_similarity:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - coangle(A, B, C) == coangle(A', B', C') mod 360
+    - coangle(B, C, A) == coangle(B', C', A') mod 360
+  conclude:
+    - similar_triangles(A, B, C, A', B', C')
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]
+
+sas_similarity:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - angle(A, B, C) == angle(A', B', C') mod 360
+    - log(distance(A, B)) - log(distance(A', B')) == log(distance(B, C)) - log(distance(B', C'))
+  conclude:
+    - similar_triangles(A, B, C, A', B', C')
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]
+
+sss_similarity:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - orientation(A, B, C) == orientation(A', B', C') mod 360
+    - log(distance(A, B)) - log(distance(A', B')) == log(distance(B, C)) - log(distance(B', C'))
+    - log(distance(A, B)) - log(distance(A', B')) == log(distance(A, C)) - log(distance(A', C'))
+  conclude:
+    - similar_triangles(A, B, C, A', B', C')
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]
+
+aa_anti_similarity:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - coangle(A, B, C) == - coangle(A', B', C') mod 360
+    - coangle(B, C, A) == - coangle(B', C', A') mod 360
+  conclude:
+    - anti_similar_triangles(A, B, C, A', B', C')
+
+sas_anti_similarity:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - angle(A, B, C) == - angle(A', B', C') mod 360
+    - log(distance(A, B)) - log(distance(A', B')) == log(distance(B, C)) - log(distance(B', C'))
+  conclude:
+    - anti_similar_triangles(A, B, C, A', B', C')
+
+sss_anti_similarity:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - orientation(A, B, C) == - orientation(A', B', C') mod 360
+    - log(distance(A, B)) - log(distance(A', B')) == log(distance(B, C)) - log(distance(B', C'))
+    - log(distance(A, B)) - log(distance(A', B')) == log(distance(A, C)) - log(distance(A', C'))
+  conclude:
+    - anti_similar_triangles(A, B, C, A', B', C')
+
+congruence_implies_similarity:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - congruence: congruent_triangles(A, B, C, A', B', C')
+    - similarity: similar_triangles(A, B, C, A', B', C')
+    - anti_congruence: anti_congruent_triangles(A, B, C, A', B', C')
+    - anti_similarity: anti_similar_triangles(A, B, C, A', B', C')
+  possible_conclusions:
+    - congruence => similarity
+    - anti_congruence => anti_similarity
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]

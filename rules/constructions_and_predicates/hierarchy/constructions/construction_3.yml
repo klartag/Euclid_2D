@@ -1,0 +1,36 @@
+excircle:
+  conclude: ['tangent(Line(A, B), c)', 'tangent(Line(B, C), c)', 'tangent(Line(C,
+      A), c)', 'excenter(A, B, C) == center(c)']
+  construct:
+  - {c: Circle}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: swap
+  where: ['not_collinear(A, B, C)']
+halfangle:
+  conclude: ['2 * h == angle(A, B, C) mod 360']
+  construct:
+  - {h: Angle}
+  inputs:
+  - {'A, B, C': Point}
+  where: [A != B, C != B]
+incircle:
+  conclude: ['tangent(Line(A, B), c)', 'tangent(Line(B, C), c)', 'tangent(Line(C,
+      A), c)', 'incenter(A, B, C) == center(c)']
+  construct:
+  - {c: Circle}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
+  where: ['not_collinear(A, B, C)']
+nine_points_circle:
+  conclude: ['midpoint(A, B) in c', 'midpoint(B, C) in c', 'midpoint(C, A) in c',
+    'midpoint(A, orthocenter(A, B, C)) in c', 'midpoint(B, orthocenter(A, B, C)) in
+      c', 'midpoint(C, orthocenter(A, B, C)) in c', 'projection(A, Line(B, C)) in
+      c', 'projection(B, Line(A, C)) in c', 'projection(C, Line(A, B)) in c']
+  construct:
+  - {c: Circle}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
+  where: ['not_collinear(A, B, C)']

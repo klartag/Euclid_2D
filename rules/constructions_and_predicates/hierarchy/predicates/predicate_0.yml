@@ -1,0 +1,20 @@
+collinear:
+  conclude: [self]
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
+concyclic:
+  conclude: [self]
+  inputs:
+  - {'A, B, C, D': Point}
+  preprocess: symmetric
+parallel:
+  conclude: [self]
+  inputs:
+  - {'k, l': Line}
+  preprocess: symmetric
+perpendicular:
+  conclude: [self]
+  inputs:
+  - {'k, l': Line}
+  preprocess: symmetric

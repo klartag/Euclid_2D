@@ -1,0 +1,36 @@
+incenter_concurrency:
+  inputs:
+    - A, B, C: Point
+  where:
+    - not_collinear(A, B, C)
+    - exists(internal_angle_bisector(A, B, C))
+    - exists(internal_angle_bisector(B, C, A))
+  conclude:
+    - incenter(A, B, C) in internal_angle_bisector(A, B, C)
+    - incenter(A, B, C) in internal_angle_bisector(B, C, A)
+    - incenter(A, B, C) in internal_angle_bisector(C, A, B)
+
+excenter_concurrency:
+  inputs:
+    - A, B, C: Point
+  where:
+    - not_collinear(A, B, C)
+    - exists(external_angle_bisector(B, C, A))
+    - exists(internal_angle_bisector(B, A, C))
+  conclude:
+    - excenter(A, B, C) in external_angle_bisector(A, B, C)
+    - excenter(A, B, C) in external_angle_bisector(B, C, A)
+    - excenter(A, B, C) in internal_angle_bisector(B, A, C)
+
+excenter_concurrency_alternate:
+  inputs:
+    - A, B, C: Point
+  where:
+    - not_collinear(A, B, C)
+    - exists(external_angle_bisector(B, C, A))
+    - exists(external_angle_bisector(A, B, C))
+  conclude:
+    - excenter(A, B, C) in external_angle_bisector(A, B, C)
+    - excenter(A, B, C) in external_angle_bisector(B, C, A)
+    - excenter(A, B, C) in internal_angle_bisector(B, A, C)
+

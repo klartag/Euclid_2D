@@ -1,0 +1,28 @@
+internal_angle_bisector_definition:
+  inputs:
+    - A, B, C, O: Point
+  where:
+    - internal_bisector_definition: Line(O, B) == internal_angle_bisector(A, O, C)
+    - internal_bisector_property: angle(A, O, B) == angle(B, O, C) mod 360
+    - internal_bisector_property_2: coangle(A, O, B) == halfangle(A, O, C) - orientation(A, O, C) mod 360
+  possible_conclusions:
+    - internal_bisector_definition <=> internal_bisector_property
+    - internal_bisector_definition & not_collinear(A, O, C) => internal_bisector_property_2
+
+external_angle_bisector_definition:
+  inputs:
+    - A, B, C, O: Point
+  where:
+    - external_bisector_definition: Line(O, B) == external_angle_bisector(A, O, C)
+    - external_bisector_property: angle(A, O, B) + angle(C, O, B) == 180 mod 360
+  possible_conclusions:
+    - external_bisector_definition <=> external_bisector_property
+
+angle_bisectors_are_perpendicular:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(internal_angle_bisector(A, B, C))
+    - exists(external_angle_bisector(A, B, C))
+  conclude:
+    - perpendicular(internal_angle_bisector(A, B, C), external_angle_bisector(A, B, C))

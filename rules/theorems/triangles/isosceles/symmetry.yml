@@ -1,0 +1,25 @@
+isosceles_triangle_altitude:
+  inputs:
+    - A, B, C: Point
+  where:
+    - isosceles_triangle(A, B, C)
+    - median_exists: exists(median(A, B, C))
+    - altitude_exists: exists(perpendicular_line(A, Line(B, C)))
+    - angle_bisector_exists: exists(internal_angle_bisector(B, A, C))
+    - perpendicular_bisector_exists: exists(perpendicular_bisector(B, C))
+    - axis_of_symmetry: identical(perpendicular_line(A, Line(B, C)), perpendicular_bisector(B, C), internal_angle_bisector(B, A, C))
+  possible_conclusions:
+    - median_exists => axis_of_symmetry
+    - altitude_exists => axis_of_symmetry
+    - angle_bisector_exists => axis_of_symmetry
+    - perpendicular_bisector_exists => axis_of_symmetry
+
+isosceles_triangle_midpoint:
+  inputs:
+    - A, B, C: Point
+  where:
+    - not_collinear(A, B, C)
+    - isosceles_triangle(A, B, C)
+    - exists(midpoint(B, C))
+  conclude:
+    - midpoint(B, C) in median(A, B, C)

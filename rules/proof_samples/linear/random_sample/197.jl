@@ -1,0 +1,25 @@
+Assumptions:
+A, B, C, D, E, F, G, H: Point
+f, g, h, i, j: Line
+c, d, e: Circle
+distinct(A, B, C, D, E, F, G, H)
+distinct(f, g, h, i, j)
+distinct(c, d, e)
+f == Line(B, A)
+g == Line(B, C)
+h == parallel_line(C, f)
+c == Circle(C, A, B)
+D in h, c
+i == Line(A, D)
+E == center(c)
+d == Circle(E, B, C)
+F == projection(E, i)
+e == Circle(D, F, C)
+G == center(d)
+j == Line(G, E)
+H in g, e
+
+Need to prove:
+H in j
+
+Proof:

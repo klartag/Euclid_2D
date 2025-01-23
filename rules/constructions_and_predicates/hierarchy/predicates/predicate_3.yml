@@ -1,0 +1,45 @@
+anti_congruent_triangles:
+  conclude: ['not_collinear(A, B, C)', 'not_collinear(X, Y, Z)', 'angle(A, B, C) ==
+      - angle(X, Y, Z) mod 360', 'angle(B, C, A) == - angle(Y, Z, X) mod 360', 'angle(C,
+      A, B) == - angle(Z, X, Y) mod 360', 'distance(A, B) == distance(X, Y)', 'distance(B,
+      C) == distance(Y, Z)', 'distance(C, A) == distance(Z, X)']
+  inputs:
+  - {'A, B, C, X, Y, Z': Point}
+  preprocess: congruence_triangles
+anti_similar_triangles:
+  conclude: ['not_collinear(A, B, C)', 'not_collinear(X, Y, Z)', 'angle(A, B, C) +
+      angle(X, Y, Z) == 0 mod 360', 'angle(B, C, A) + angle(Y, Z, X) == 0 mod 360',
+    'angle(C, A, B) + angle(Z, X, Y) == 0 mod 360']
+  inputs:
+  - {'A, B, C, X, Y, Z': Point}
+  preprocess: congruence_triangles
+congruent_triangles:
+  conclude: ['not_collinear(A, B, C)', 'not_collinear(X, Y, Z)', 'angle(A, B, C) ==
+      angle(X, Y, Z) mod 360', 'angle(B, C, A) == angle(Y, Z, X) mod 360', 'angle(C,
+      A, B) == angle(Z, X, Y) mod 360', 'distance(A, B) == distance(X, Y)', 'distance(B,
+      C) == distance(Y, Z)', 'distance(C, A) == distance(Z, X)']
+  inputs:
+  - {'A, B, C, X, Y, Z': Point}
+  preprocess: congruence_triangles
+isosceles_trapezoid:
+  conclude: ['parallel(Line(A, B), Line(C, D))', 'distance(A, D) == distance(B, C)',
+    'angle(B, C, D) == angle(C, D, A) mod 360', 'angle(D, A, B) == angle(A, B, C)
+      mod 360']
+  inputs:
+  - {'A, B, C, D': Point}
+  preprocess: pi_rotate
+parallelogram:
+  conclude: ['convex(A, B, C, D)', 'parallel(Line(A, B), Line(C, D))', 'parallel(Line(A,
+      D), Line(B, C))', 'distance(A, B) == distance(C, D)', 'distance(A, D) == distance(B,
+      C)', 'angle(A, B, C) == angle(C, D, A) mod 360', 'angle(D, A, B) == angle(B,
+      C, D) mod 360']
+  inputs:
+  - {'A, B, C, D': Point}
+  preprocess: circle_symmetry
+similar_triangles:
+  conclude: ['not_collinear(A, B, C)', 'not_collinear(X, Y, Z)', 'angle(A, B, C) ==
+      angle(X, Y, Z) mod 360', 'angle(B, C, A) == angle(Y, Z, X) mod 360', 'angle(C,
+      A, B) == angle(Z, X, Y) mod 360']
+  inputs:
+  - {'A, B, C, X, Y, Z': Point}
+  preprocess: congruence_triangles

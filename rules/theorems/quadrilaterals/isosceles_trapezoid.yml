@@ -1,0 +1,59 @@
+isosceles_trapezoid_properties:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - isosceles_trapezoid(A, B, C, D)
+  conclude:
+    - parallel(Line(A, B), Line(C, D))
+    - distance(D, A) == distance(B, C)
+    - angle(A, B, C) == angle(D, A, B)
+    - angle(B, C, D) == angle(C, D, A)
+
+isosceles_trapezoid_sufficient_conditions:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - Line(A, B) != Line(C, D)
+    - parallel(Line(A, B), Line(C, D))
+    - distance(D, A) == distance(B, C)
+    - coangle(A, B, C) == coangle(D, A, B) mod 360
+  conclude:
+    - isosceles_trapezoid(A, B, C, D)
+
+isosceles_trapezoid_symmetry:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - isosceles_trapezoid(A, B, C, D)
+  conclude:
+    - isosceles_trapezoid(A, B, D, C)
+
+isosceles_trapezoids_are_concyclic:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - is_trapezoid: parallel(Line(A, B), Line(C, D))
+    - is_isosceles_trapezoid: isosceles_trapezoid(A, B, C, D)
+    - is_concyclic: concyclic(A, B, C, D)
+  possible_conclusions:
+    - is_isosceles_trapezoid => is_concyclic
+    - is_trapezoid & is_concyclic => is_isosceles_trapezoid
+
+isosceles_trapezoids_contain_isosceles_triangles:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - isosceles_trapezoid(A, B, C, D)
+    - exists(line_intersection(Line(B, C), Line(A, D)))
+  conclude:
+    - isosceles_triangle(line_intersection(Line(B, C), Line(A, D)), A, B)
+    - isosceles_triangle(line_intersection(Line(B, C), Line(A, D)), C, D)
+
+isosceles_trapezoid_perpendicular_bisector:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - isosceles_trapezoid(A, B, C, D)
+    - exists(perpendicular_bisector(A, B))
+  conclude:
+    - perpendicular_bisector(A, B) == perpendicular_bisector(C, D)

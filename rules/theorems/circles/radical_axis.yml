@@ -1,0 +1,59 @@
+radical_axis_definition:
+  inputs:
+    - A: Point
+    - e, f: Circle
+  where:
+    - e != f
+    - equal_power_of_point: power_of_a_point(A, e) == power_of_a_point(A, f)
+    - on_radical_axis: A in radical_axis(e, f)
+  possible_conclusions:
+    - on_radical_axis <=> equal_power_of_point
+
+circle_intersection_is_on_radical_axis:
+  inputs:
+    - A: Point
+    - b, c: Circle
+  where:
+    - A in b, c
+    - exists(radical_axis(b, c))
+  conclude:
+    - A in radical_axis(b, c)
+  rank: 5
+
+radical_axis_of_intersecting_circles:
+  inputs:
+    - A, B: Point
+    - c, d: Circle
+  where:
+    - c != d
+    - A != B
+    - A, B in c, d
+  possible_conclusions:
+    - exists(Line(A, B)) => radical_axis(c, d) == Line(A, B)
+    - exists(radical_axis(c, d)) => radical_axis(c, d) == Line(A, B)
+  rank: 5
+
+radical_axis_of_tangent_circles:
+  inputs:
+    - O: Point
+    - l: Line
+    - c, d: Circle
+  where:
+    - c != d
+    - tangent(c, d)
+    - O in l, c, d
+  possible_conclusions:
+    - tangent(l, c) => radical_axis(c, d) == l & tangent(l, d)
+    - radical_axis(c, d) == l => tangent(l, c) & tangent(l, d)
+  rank: 5
+
+radical_axis_is_perpendicular_to_center_line:
+  inputs:
+    - l: Line
+    - c, d: Circle
+  where:
+    - l == radical_axis(c, d)
+    - exists(Line(center(c), center(d)))
+  conclude:
+    - perpendicular(Line(center(c), center(d)), l)
+  rank: 5

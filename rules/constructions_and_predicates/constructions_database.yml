@@ -1,0 +1,403 @@
+# This file defines the constructions used by the program.
+# Note that since constructions can use each other and I don't 
+# want to use deferred execution, constructions must come in the correct order so as to use
+# only constructions coming before
+
+# we divide the construction to 'primitive construction' and 'cosmetical construction' (which can be define purly by other constructions)
+
+#primitive
+distance:
+  inputs:
+    - A, B: Point
+  preprocess: symmetric
+  construct:
+    - d: Scalar
+
+#primitive
+center:
+  inputs:
+    - c: Circle
+  construct:
+    - O: Point
+
+#primitive
+radius:
+  inputs:
+    - c: Circle
+  construct:
+    - r: Scalar
+
+#primitive
+angle:
+  inputs:
+    - A, B, C: Point
+  where:
+    - A != B
+    - C != B
+  construct:
+    - a: Angle
+  conclude:
+    - a == direction(B, C) - direction(B, A) mod 360
+
+direction:
+  inputs:
+    - A, B: Point
+  where:
+    - A != B
+    - exists(Line(A, B))
+  construct:
+    - a: Angle
+
+halfangle:
+  inputs:
+    - A, B, C: Point
+  where:
+    - A != B
+    - C != B
+  construct:
+    - h: Angle
+  conclude:
+    - 2 * h == angle(A, B, C) mod 360
+
+orientation:
+  inputs:
+    - A, B, C: Point
+  where:
+    - A != B
+    - C != B
+  construct:
+    - o: Angle
+  conclude:
+    - 2 * o == 180 mod 360
+
+coangle:
+  inputs:
+    - A, B, C: Point
+  where:
+    - A != B
+    - C != B
+  construct:
+    - c: Angle
+
+#primitive/ cosmetical - I'm not sure
+radical_axis:
+  inputs:
+    - c1, c2: Circle
+  preprocess: symmetric
+  where:
+    - center(c1) != center(c2)
+  construct:
+    - l: Line
+
+#primitive
+Line:
+  inputs:
+    - A, B: Point
+  preprocess: symmetric
+  where:
+    - A != B
+  construct:
+    - L: Line
+  conclude:
+    - A, B in L
+
+#primitive
+Circle:
+  inputs:
+    - A, B, C: Point
+  preprocess: symmetric
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - c: Circle
+  conclude:
+    - A, B, C in c
+
+#primitive
+line_intersection:
+  inputs:
+    - l, m: Line
+  preprocess: symmetric
+  # TODO: There is no `where` clause, but the `line_intersection` should not exist if the lines are not parallel.
+  # Does this cause issues, or is it just okay?
+  construct:
+    - P: Point
+  conclude:
+    - P in l, m
+
+# primitive
+midpoint:
+  inputs:
+    - A, B: Point
+  preprocess: symmetric
+  construct:
+    - O: Point
+  conclude:
+    - between(A, O, B)
+    - distance(A, O) == distance(B, O)
+    - distance(A, O) == distance(A, B)/2
+  possible_conclusions:
+    - A != B => distinct(A, O, B)
+
+#primitive
+parallel_line:
+  inputs:
+    - A: Point
+    - l: Line
+  construct:
+    - l': Line
+  conclude:
+    - A in l'
+    - parallel(l, l')
+
+# cosmetical
+perpendicular_line:
+  inputs:
+    - A: Point
+    - l: Line
+  construct:
+    - l': Line
+  conclude:
+  #sufficient
+    - A in l'
+    - perpendicular(l, l')
+
+#cosmetical
+circumcenter:
+  inputs:
+    - A, B, C: Point
+  preprocess: symmetric
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - O: Point
+  conclude:
+    - O == center(Circle(A, B, C))
+
+#primitive
+incircle:
+  inputs:
+    - A, B, C: Point
+  preprocess: symmetric
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - c: Circle
+  conclude:
+    - tangent(Line(A, B), c)
+    - tangent(Line(B, C), c)
+    - tangent(Line(C, A), c)
+    - incenter(A, B, C) == center(c)
+
+#primitive
+excircle: # excircle correspond to vertex A
+  inputs:
+    - A, B, C: Point
+  preprocess: swap
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - c: Circle
+  conclude:
+    - tangent(Line(A, B), c)
+    - tangent(Line(B, C), c)
+    - tangent(Line(C, A), c)
+    - excenter(A, B, C) == center(c)
+
+line_circle_tangent_point:
+  inputs:
+    - l: Line
+    - c: Circle
+  where:
+    - tangent(l, c)
+  construct:
+    - P: Point
+  conclude:
+    - P in l, c
+
+#primitive
+line_circle_other_intersection: # We need one intersection so that the other intersection is known 
+  inputs:
+    - P: Point
+    - L: Line
+    - c: Circle
+  where:
+    - P in L, c
+  construct:
+    - Q: Point
+  conclude:
+    - Q in L, c
+
+#primitive
+circle_circle_other_intersection: # We need one intersection so that the other intersection is known 
+  inputs:
+    - P: Point
+    - c, d: Circle
+  where:
+    - P in c, d
+  construct:
+    - Q: Point
+  conclude:
+    - Q in c, d
+
+#primitive
+internal_angle_bisector: #bisector trough the point B
+  inputs:
+    - A, B, C: Point
+  preprocess: between
+  where:
+    - not_one_of(B, A, C)
+  construct:
+    - l: Line
+  conclude:
+    - B in l
+    
+#primitive
+external_angle_bisector: #bisector trough the point B
+  inputs:
+    - A, B, C: Point
+  preprocess: between
+  where:
+    - not_one_of(B, A, C)
+  construct:
+    - l: Line
+  conclude:
+    - B in l
+
+# cosmetical
+median: #line from point A to the midpoint of the segment BC
+  inputs:
+    - A, B, C: Point
+  preprocess: swap
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - l: Line
+  conclude:
+    - l == Line(A, midpoint(B, C))
+
+#cosmetical
+excenter: #the center of the circle whoe's tangent to BC and incribe in between BC, the extension of AB and the extension of AC
+  inputs:
+    - A, B, C: Point
+  preprocess: swap
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - P: Point
+  conclude:
+    - concurrent(external_angle_bisector(A, C, B), external_angle_bisector(A, B, C), internal_angle_bisector(B, A, C))
+    - P == line_intersection(external_angle_bisector(A, C, B), external_angle_bisector(A, B, C))
+
+#cosmetical
+incenter: #the center of the circle inscribe in triangle ABC
+  inputs:
+    - A, B, C: Point
+  preprocess: symmetric
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - P: Point
+  conclude:
+    - concurrent(internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B), internal_angle_bisector(C, A, B))
+    - P == line_intersection(internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B))
+
+#cosmetical
+centroid: #intersection of the medians in traingle ABC
+  inputs:
+    - A, B, C: Point
+  preprocess: symmetric
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - O: Point
+
+# cosmetical
+projection:
+  inputs:
+    - P: Point
+    - l: Line
+  construct:
+    - Q: Point
+  conclude:
+  #sufficient
+    - Q == line_intersection(perpendicular_line(P, l), l)
+  possible_conclusions:
+    - P not in l => perpendicular_line(P, l) == Line(P, Q)
+    - P in l => P == Q
+
+# cosmetical
+altitude: #altitude from A to BC
+  inputs:
+    - A, B, C: Point
+  preprocess: swap
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - l: Line
+  conclude:
+  #sufficient
+    - l == perpendicular_line(A, Line(B, C))
+
+#cosmetical
+orthocenter: #intersection of the altitudes in traingle ABC
+  inputs: 
+    - A, B, C: Point
+  preprocess: symmetric
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - O: Point
+
+# cosmetical
+perpendicular_bisector:
+  inputs:
+    - A, B: Point
+  preprocess: symmetric
+  where:
+    - A != B
+  construct:
+    - l: Line
+  conclude:
+  #sufficient
+    - l == perpendicular_line(midpoint(A, B), Line(A, B))
+
+# primitive 
+nine_points_circle:
+  inputs:
+    - A, B, C: Point
+  preprocess: symmetric
+  where:
+    - not_collinear(A, B, C)
+  construct:
+    - c: Circle
+  conclude:
+    - midpoint(A, B) in c
+    - midpoint(B, C) in c
+    - midpoint(C, A) in c
+    - midpoint(A, orthocenter(A, B, C)) in c
+    - midpoint(B, orthocenter(A, B, C)) in c
+    - midpoint(C, orthocenter(A, B, C)) in c
+    - projection(A, Line(B, C)) in c
+    - projection(B, Line(A, C)) in c
+    - projection(C, Line(A, B)) in c
+
+# cosmetical
+isogonal_conjugate:
+  inputs:
+    - P, A, B, C: Point
+  preprocess: last_elements
+  where:
+    - not_collinear(A, B, C)
+    - not_collinear(P, A, B)
+    - not_collinear(P, B, C)
+    - not_collinear(P, A, C)
+  construct:
+    - P': Point
+
+power_of_a_point:
+  inputs:
+    - A: Point
+    - c: Circle
+  construct:
+    - x: Scalar

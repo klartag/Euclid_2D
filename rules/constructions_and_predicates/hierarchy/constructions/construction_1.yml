@@ -1,0 +1,44 @@
+circumcenter:
+  conclude: ['O == center(Circle(A, B, C))']
+  construct:
+  - {O: Point}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
+  where: ['not_collinear(A, B, C)']
+direction:
+  construct:
+  - {a: Angle}
+  inputs:
+  - {'A, B': Point}
+  where: [A != B, 'exists(Line(A, B))']
+midpoint:
+  conclude: ['between(A, O, B)', 'distance(A, O) == distance(B, O)', 'distance(A,
+      O) == distance(A, B)/2']
+  construct:
+  - {O: Point}
+  inputs:
+  - {'A, B': Point}
+  possible_conclusions: ['A != B => distinct(A, O, B)']
+  preprocess: symmetric
+parallel_line:
+  conclude: [A in l', "parallel(l, l')"]
+  construct:
+  - {l': Line}
+  inputs:
+  - {A: Point}
+  - {l: Line}
+perpendicular_line:
+  conclude: [A in l', "perpendicular(l, l')"]
+  construct:
+  - {l': Line}
+  inputs:
+  - {A: Point}
+  - {l: Line}
+radical_axis:
+  construct:
+  - {l: Line}
+  inputs:
+  - {'c1, c2': Circle}
+  preprocess: symmetric
+  where: [center(c1) != center(c2)]

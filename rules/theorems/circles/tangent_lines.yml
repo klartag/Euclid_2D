@@ -1,0 +1,93 @@
+tangent_definition_from_perpendicularity:
+  inputs:
+    - A: Point
+    - l: Line
+    - c: Circle
+  where:
+    - A in c, l
+    - exists(center(c))
+  possible_conclusions:
+    - tangent(l, c) <=> perpendicular(l, Line(A, center(c)))
+  rank: 5
+
+tangent_chord_angle:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - distinct(A, B, C, D)
+    - not_collinear(A, B, C)
+  possible_conclusions:
+    - tangent(Line(A, D), Circle(A, B, C)) <=> coangle(B, C, A) == coangle(B, A, D) mod 360
+
+tangent_line_is_unique:
+  inputs:
+    - A: Point
+    - c: Circle
+    - l1, l2: Line
+  where:
+    - A in l1, l2, c
+    - tangent(l1, c)
+    - tangent(l2, c)
+  conclude:
+    - l1 == l2
+  rank: 3
+  trivial_if_equal:
+    - [l1, l2]
+
+tangent_point_is_unique:
+  inputs:
+    - A, B: Point
+    - c: Circle
+    - l: Line
+  where:
+    - A, B in l, c
+    - tangent(l, c)
+  conclude:
+    - A == B
+
+at_most_two_tangents:
+  inputs:
+    - A: Point
+    - k, l, m: Line
+    - c: Circle
+  where:
+    - A in k, l, m
+    - tangent(k, c)
+    - tangent(l, c)
+    - tangent(m, c)
+    - k != l
+    - k != m
+  conclude:
+    - l == m
+  rank: 3
+  trivial_if_equal:
+    - [l, m]
+
+tangent_lengths_equal:
+  inputs:
+    - A: Point
+    - k, l: Line
+    - c: Circle
+  where:
+    - A in k, l
+    - tangent(k, c)
+    - tangent(l, c)
+  conclude:
+    - distance(A, line_circle_tangent_point(k, c)) == distance(A, line_circle_tangent_point(l, c))
+  rank: 4
+  trivial_if_equal:
+    - [k, l]
+
+tangents_angle_bisector:
+  inputs:
+    - A, B, C: Point
+    - c: Circle
+  where:
+    - B, C in c
+    - B != C
+    - tangent(Line(A, B), c)
+    - tangent(Line(A, C), c)
+    - exists(center(c))
+  conclude:
+    - angle(B, A, center(c)) == angle(center(c), A, C) mod 360
+  rank: 5

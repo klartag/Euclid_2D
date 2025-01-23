@@ -1,0 +1,83 @@
+line_definition:
+  inputs:
+    - A, B: Point
+    - l: Line
+  where:
+    - A != B
+    - A in l
+    - B in l
+  conclude:
+    - l == Line(A, B)
+  rank: 5
+
+line_containment_inequality:
+  inputs:
+    - A, B: Point
+    - l: Line
+  where:
+    - A in l
+    - B not in l
+  conclude:
+    - A != B
+  metadata: auto
+
+line_inequality:
+  inputs:
+    - l, m: Line
+    - P: Point
+  where:
+    - P in l
+    - P not in m
+  conclude:
+    - l != m
+  metadata: auto
+
+line_uniqueness:
+  inputs:
+    - A, B: Point
+    - l1, l2: Line
+  where:
+    - A, B in l1
+    - A, B in l2
+    - A != B
+  conclude:
+    - l1 == l2
+  rank: 3
+  trivial_if_equal:
+    - [l1, l2]
+
+line_intersection_definition:
+  inputs:
+    - A: Point
+    - k, l: Line
+  where:
+    - k != l
+    - A in k, l
+  conclude:
+    - A == line_intersection(k, l)
+  rank: 5
+
+line_unique_intersection:
+  inputs:
+    - l, m: Line
+    - P, Q: Point
+  where:
+    - l != m
+    - P, Q in m
+    - P in l
+  possible_conclusions: 
+    - Q in l => P == Q
+    - P != Q => Q not in l
+  rank: 3
+  trivial_if_equal:
+    - [P, Q]
+
+concurrent_sufficient_conditions:
+  inputs:
+    - k, l, m: Line
+  where:
+    - distinct(k, l, m)
+    - line_intersection(k, m) == line_intersection(m, l)
+  conclude:
+    - concurrent(k, m, l)
+  rank: 5

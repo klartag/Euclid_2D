@@ -1,0 +1,31 @@
+rhombus_properties:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - rhombus(A, B, C, D)
+  conclude:
+    - parallelogram(A, B, C, D)
+    - identical(distance(A, B), distance(B, C), distance(C, D), distance(D, A))
+    - angle(A, B, C) == angle(C, D, A) mod 360
+    - angle(D, A, B) == angle(B, C, D) mod 360
+    - angle(A, B, C) + angle(B, C, D) == 180 mod 360
+
+rhombus_sufficient_conditions:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - parallelogram(A, B, C, D)
+    - distance(A, B) == distance(B, C)
+  conclude:
+    - rhombus(A, B, C, D)
+
+rhombus_diagonals:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - diagonals_exist: exists(Line(A, C), Line(B, D))
+    - is_rhombus: rhombus(A, B, C, D)
+    - is_parallelogram: parallelogram(A, B, C, D)
+    - diagonals_are_perpendicular: perpendicular(Line(A, C), Line(B, D))
+  possible_conclusions:
+    - is_rhombus & diagonals_exist <=> is_parallelogram & diagonals_are_perpendicular

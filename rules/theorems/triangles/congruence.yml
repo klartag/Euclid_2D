@@ -1,0 +1,65 @@
+congruent_triangle_basic_properties:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - congruent_triangles(A, B, C, A', B', C')
+  conclude:
+    - not_collinear(A, B, C)
+    - not_collinear(A', B', C')
+    - distance(A, B) == distance(A', B')
+    - distance(B, C) == distance(B', C')
+    - distance(C, A) == distance(C', A')
+    - angle(A, B, C) == angle(A', B', C') mod 360
+    - angle(B, C, A) == angle(B', C', A') mod 360
+    - angle(C, A, B) == angle(C', A', B') mod 360
+
+sss_congruence:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - distance(A, B) == distance(A', B')
+    - distance(B, C) == distance(B', C')
+    - distance(C, A) == distance(C', A')
+    - orientation(A, B, C) == orientation(A', B', C') mod 360
+  conclude:
+    - congruent_triangles(A, B, C, A', B', C')
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]
+
+sas_congruence:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - distance(A, B) == distance(A', B')
+    - angle(A, B, C) == angle(A', B', C') mod 360
+    - distance(B, C) == distance(B', C')
+  conclude:
+    - congruent_triangles(A, B, C, A', B', C')
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]
+
+asa_congruence:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - not_collinear(A, B, C)
+    - coangle(C, A, B) == coangle(C', A', B') mod 360
+    - distance(A, B) == distance(A', B')
+    - coangle(A, B, C) == coangle(A', B', C') mod 360
+  conclude:
+    - congruent_triangles(A, B, C, A', B', C')
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]
+
+congruence_from_similar_triangles:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - similar_triangles(A, B, C, A', B', C')
+    - distance(A, B) == distance(A', B')
+  conclude:
+    - congruent_triangles(A, B, C, A', B', C')
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]

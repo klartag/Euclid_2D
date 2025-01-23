@@ -1,0 +1,65 @@
+power_of_a_point_definition:
+  inputs:
+    - O, A, B: Point
+    - c: Circle
+  where:
+    - A != B
+    - A, B in c
+    - O not in c
+    - collinear(O, A, B)
+  conclude:
+    - log(power_of_a_point(O, c)) == log(distance(O, A)) + log(distance(O, B))
+
+power_of_a_point_in_circle:
+  inputs:
+    - O: Point
+    - c: Circle
+  where:
+    - O in c
+  conclude:
+    - power_of_a_point(O, c) == 0
+
+power_of_a_point_tangent:
+  inputs:
+    - O, A: Point
+    - c: Circle
+  where:
+    - A in c
+    - tangent(Line(O, A), c)
+  conclude:
+    - log(power_of_a_point(O, c)) == 2 * log(distance(O, A))
+
+power_of_a_point_converse:
+  inputs:
+    - O, A, B, C, D: Point
+  where:
+    - collinear(O, A, B)
+    - collinear(O, C, D)
+    - Line(A, B) != Line(C, D)
+    - orientation(O, A, C) == orientation(O, C, D) mod 360
+    - log(distance(O, A)) + log(distance(O, B)) == log(distance(O, C)) + log(distance(O, D))
+  conclude:
+    - concyclic(A, B, C, D)
+  rank: 5
+
+power_of_a_point_tangent_converse:
+  inputs:
+    - O, A, B, C: Point
+  where:
+    - collinear(O, A, B)
+    - A != B
+    - Line(O, A) != Line(O, C)
+    - orientation(O, A, C) == orientation(O, B, C) mod 360
+    - log(distance(O, A)) + log(distance(O, B)) == 2 * log(distance(O, C))
+  conclude:
+    - tangent(Line(O, C), Circle(A, B, C))
+
+power_of_a_point_on_circle:
+  inputs:
+    - A: Point
+    - c: Circle
+  where:
+    - A in c
+  conclude:
+    - power_of_a_point(A, c) == 0
+  metadata: auto

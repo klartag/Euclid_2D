@@ -1,0 +1,5 @@
+square:
+  conclude: ['rectangle(A, B, C, D)', 'distance(A, B) == distance(B, C)']
+  inputs:
+  - {'A, B, C, D': Point}
+  preprocess: circle_symmetry

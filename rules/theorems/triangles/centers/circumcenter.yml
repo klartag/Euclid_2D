@@ -1,0 +1,25 @@
+circumcenter_perpendicular_bisectors:
+  inputs:
+    - A, B, C: Point
+  where:
+    - not_collinear(A, B, C)
+    - exists(perpendicular_bisector(A, B))
+    - exists(perpendicular_bisector(B, C))
+  conclude:
+    - circumcenter(A, B, C) in perpendicular_bisector(A, B)
+    - circumcenter(A, B, C) in perpendicular_bisector(B, C)
+    - circumcenter(A, B, C) in perpendicular_bisector(C, A)
+  rank: 5
+
+right_triangle_circumcenter:
+  inputs:
+    - A, B, C: Point
+  where:
+    - right_triangle: perpendicular(Line(A, B), Line(B, C))
+    - circumcenter_exists: exists(circumcenter(A, B, C))
+    - midpoint_exists: exists(midpoint(A, C))
+    - circumcenter_and_midpoint_coincide: circumcenter(A, B, C) == midpoint(A, C)
+  possible_conclusions:
+    - right_triangle & circumcenter_exists => circumcenter_and_midpoint_coincide
+    - right_triangle & midpoint_exists => circumcenter_and_midpoint_coincide
+    - circumcenter_and_midpoint_coincide => right_triangle

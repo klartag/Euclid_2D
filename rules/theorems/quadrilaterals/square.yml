@@ -1,0 +1,9 @@
+square_properties:
+  inputs:
+    - A, B, C, D: Point
+  where: 
+    - square(A, B, C, D)
+  conclude:
+    - rectangle(A, B, C, D)
+    - rhombus(A, B, C, D)
+  rank: 5

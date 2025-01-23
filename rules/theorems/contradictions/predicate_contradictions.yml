@@ -1,0 +1,67 @@
+in_line_contradiction:
+  inputs:
+    - A: Point
+    - l: Line
+  where:
+    - A in l
+    - A not in l
+  conclude:
+    - false()
+  rank: 5
+
+in_circle_contradiction:
+  inputs:
+    - A: Point
+    - c: Circle
+  where:
+    - A in c
+    - A not in c
+  conclude:
+    - false()
+  rank: 5
+
+line_intersection_contradiction:
+  inputs:
+    - A, B: Point
+    - l, m: Line
+  where:
+    - A != B
+    - l != m
+    - A, B in l, m
+  conclude:
+    - false()
+  rank: 5
+
+line_circle_intersection_contradiction:
+  inputs:
+    - A, B, C: Point
+    - l: Line
+    - c: Circle
+  where:
+    - distinct(A, B, C)
+    - A, B, C in l, c
+  conclude:
+    - false()
+  rank: 5
+
+circle_intersection_contradiction:
+  inputs:
+    - A, B, C: Point
+    - c, d: Circle
+  where:
+    - distinct(A, B, C)
+    - c != d
+    - A, B, C in c, d
+  conclude:
+    - false()
+  rank: 5
+
+collinear_contradiction:
+  inputs:
+    - A, B, C: Point
+  where:
+    - collinear(A, B, C)
+    - not_collinear(A, B, C)
+  conclude:
+    - false()
+  rank: 5

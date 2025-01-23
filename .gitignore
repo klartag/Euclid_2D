@@ -1,0 +1,17 @@
+.vscode/
+**/__pycache__/
+
+**/*.ipynb
+
+**/Cargo.lock
+
+**/rust_code/out
+**/rust_code/target
+
+linear_b.pyd
+linear_b.so
+
+**/linear_problem_generator/out
+**/linear_problem_generator/target
+
+rules/proof_samples/proof_fail.jl

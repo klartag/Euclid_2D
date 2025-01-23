@@ -1,0 +1,50 @@
+center_not_on_circle:
+  inputs:
+    - c: Circle
+  where:
+    - exists(center(c))
+  conclude:
+    - center(c) not in c
+  rank: 1
+
+circle_radius:
+  inputs:
+    - A: Point
+    - c: Circle
+  where:
+    - exists(center(c))
+    - eq_radius: distance(center(c), A) == radius(c)
+    - in_circle: A in c
+  possible_conclusions:
+    - eq_radius <=> in_circle
+  rank: 3
+
+circle_radius_auto:
+  inputs:
+    - A: Point
+    - c: Circle
+  where:
+    - A in c
+    - exists(Line(A, center(c)))
+  conclude:
+    - distance(A, center(c)) == radius(c)
+  metadata: auto
+
+circle_by_three_points_and_center:
+  inputs:
+    - O, A, B, C: Point
+  where:
+    - distinct(A, B, C)
+    - identical(distance(O, A), distance(O, B), distance(O, C))
+  conclude:
+    - O == center(Circle(A, B, C))
+  rank: 3
+
+different_centers_imply_different_circles:
+  inputs:
+    - c, d: Circle
+  where:
+    - center(c) != center(d)
+  conclude:
+    - c != d
+  rank: 1

@@ -1,0 +1,24 @@
+same_angle:
+  inputs:
+    - O, A, B, C: Point
+  where:
+    - not_one_of(O, A, B, C)
+    - not_collinear(O, A, C)
+    - collinear(O, A, B)
+    - exists(Line(O, C))
+  conclude:
+    - coangle(A, O, C) == coangle(B, O, C) mod 360
+  rank: 2
+  trivial_if_equal:
+    - [A, B]
+
+same_angle_converse:
+  inputs:
+    - O, A, B, C: Point
+  where:
+    - coangle(A, O, C) == coangle(B, O, C) mod 360
+  conclude:
+    - collinear(O, A, B)
+  rank: 2
+  trivial_if_equal: 
+    - [A, B]

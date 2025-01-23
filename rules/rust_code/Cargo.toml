@@ -1,0 +1,26 @@
+[package]
+name = "linear-b"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+# [[bin]]
+# name = "linear_b"
+# src = "src/main.rs"
+
+[lib]
+name = "linear_b"
+crate-type = ["cdylib", "rlib"]
+src = "src/lib.rs"
+
+[dependencies]
+elsa = "1.10.0"
+itertools = "0.12.1"
+num-traits = "0.2.18"
+pyo3 = { version = "0.20.2", features = ["extension-module", "smallvec"] }
+rand = "0.8.5"
+rustc-hash = "1.1.0"
+smallvec = "1.13.2"
+
+[profile.release]
+opt-level = 3

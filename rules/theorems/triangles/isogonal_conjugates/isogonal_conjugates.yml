@@ -1,0 +1,29 @@
+isogonal_conjugate_definition:
+  inputs:
+    - A, B, C, P, Q: Point
+  where:
+    - P == isogonal_conjugate(Q, A, B, C)
+  conclude:
+    - coangle(B, A, P) == coangle(Q, A, C) mod 360
+    - coangle(C, B, P) == coangle(Q, B, A) mod 360
+    - coangle(A, C, P) == coangle(Q, C, B) mod 360
+
+isogonal_conjugate_is_involution:
+  inputs:
+    - A, B, C, P, Q: Point
+  where:
+    - P == isogonal_conjugate(Q, A, B, C)
+  conclude:
+    - Q == isogonal_conjugate(P, A, B, C)
+
+isogonal_conjugate_sufficient_conditions:
+  inputs:
+  - A, B, C, P, Q: Point
+  where:
+    - not_collinear(A, B, C)
+    - not_one_of(P, A, B, C)
+    - not_one_of(Q, A, B, C)
+    - coangle(B, A, P) == coangle(Q, A, C) mod 360
+    - coangle(C, B, P) == coangle(Q, B, A) mod 360
+  conclude:
+    - P == isogonal_conjugate(Q, A, B, C)

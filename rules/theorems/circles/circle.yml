@@ -1,0 +1,10 @@
+circle_definition:
+  inputs:
+    - A, B, C: Point
+    - c: Circle
+  where:
+    - distinct(A, B, C)
+    - A, B, C in c
+  conclude:
+    - c == Circle(A, B, C)
+  rank: 5

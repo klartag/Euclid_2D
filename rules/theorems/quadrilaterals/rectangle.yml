@@ -1,0 +1,22 @@
+rectangle_properties:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - rectangle(A, B, C, D)
+  conclude:
+    - parallelogram(A, B, C, D)
+    - isosceles_trapezoid(A, B, C, D)
+    - isosceles_trapezoid(B, C, D, A)
+    - perpendicular(Line(A, B), Line(B, C))
+    - perpendicular(Line(B, C), Line(C, D))
+    - perpendicular(Line(C, D), Line(D, A))
+    - perpendicular(Line(D, A), Line(A, B))
+
+rectangle_sufficient_conditions:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - parallelogram(A, B, C, D)
+    - perpendicular(Line(A, B), Line(B, C))
+  conclude:
+    - rectangle(A, B, C, D)

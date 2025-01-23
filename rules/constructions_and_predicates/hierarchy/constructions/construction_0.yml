@@ -1,0 +1,121 @@
+Circle:
+  conclude: ['A, B, C in c']
+  construct:
+  - {c: Circle}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
+  where: ['not_collinear(A, B, C)']
+Line:
+  conclude: ['A, B in L']
+  construct:
+  - {L: Line}
+  inputs:
+  - {'A, B': Point}
+  preprocess: symmetric
+  where: [A != B]
+center:
+  construct:
+  - {O: Point}
+  inputs:
+  - {c: Circle}
+centroid:
+  construct:
+  - {O: Point}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
+  where: ['not_collinear(A, B, C)']
+circle_circle_other_intersection:
+  conclude: ['Q in c, d']
+  construct:
+  - {Q: Point}
+  inputs:
+  - {P: Point}
+  - {'c, d': Circle}
+  where: ['P in c, d']
+coangle:
+  construct:
+  - {c: Angle}
+  inputs:
+  - {'A, B, C': Point}
+  where: [A != B, C != B]
+distance:
+  construct:
+  - {d: Scalar}
+  inputs:
+  - {'A, B': Point}
+  preprocess: symmetric
+external_angle_bisector:
+  conclude: [B in l]
+  construct:
+  - {l: Line}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: between
+  where: ['not_one_of(B, A, C)']
+internal_angle_bisector:
+  conclude: [B in l]
+  construct:
+  - {l: Line}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: between
+  where: ['not_one_of(B, A, C)']
+isogonal_conjugate:
+  construct:
+  - {P': Point}
+  inputs:
+  - {'P, A, B, C': Point}
+  preprocess: last_elements
+  where: ['not_collinear(A, B, C)', 'not_collinear(P, A, B)', 'not_collinear(P, B,
+      C)', 'not_collinear(P, A, C)']
+line_circle_other_intersection:
+  conclude: ['Q in L, c']
+  construct:
+  - {Q: Point}
+  inputs:
+  - {P: Point}
+  - {L: Line}
+  - {c: Circle}
+  where: ['P in L, c']
+line_circle_tangent_point:
+  conclude: ['P in l, c']
+  construct:
+  - {P: Point}
+  inputs:
+  - {l: Line}
+  - {c: Circle}
+  where: ['tangent(l, c)']
+line_intersection:
+  conclude: ['P in l, m']
+  construct:
+  - {P: Point}
+  inputs:
+  - {'l, m': Line}
+  preprocess: symmetric
+orientation:
+  conclude: [2 * o == 180 mod 360]
+  construct:
+  - {o: Angle}
+  inputs:
+  - {'A, B, C': Point}
+  where: [A != B, C != B]
+orthocenter:
+  construct:
+  - {O: Point}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
+  where: ['not_collinear(A, B, C)']
+power_of_a_point:
+  construct:
+  - {x: Scalar}
+  inputs:
+  - {A: Point}
+  - {c: Circle}
+radius:
+  construct:
+  - {r: Scalar}
+  inputs:
+  - {c: Circle}

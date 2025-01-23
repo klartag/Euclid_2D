@@ -1,0 +1,26 @@
+collinear_and_not_between:
+  conclude: [self, 'collinear(A, B, C)']
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: between
+concurrent:
+  conclude: ['distinct(l, m, n)', 'line_intersection(l, m) == line_intersection(m,
+      n)', 'line_intersection(m, n) == line_intersection(n, l)']
+  inputs:
+  - {'l, m, n': Line}
+  preprocess: symmetric
+isosceles_triangle:
+  conclude: ['distinct(A, B, C)', 'distance(A, B) == distance(A, C)']
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: swap
+trapezoid:
+  conclude: ['convex(A, B, C, D)', 'parallel(Line(A, B), Line(C, D))']
+  inputs:
+  - {'A, B, C, D': Point}
+  preprocess: pi_rotate
+triangle:
+  conclude: ['not_collinear(A, B, C)', 'exists(Line(A, B), Line(B, C), Line(C, A))']
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric

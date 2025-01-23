@@ -1,0 +1,11 @@
+midpoint_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - distance(A, C) == distance(B, C)
+  possible_conclusions:
+    - C in Line(A, B) => C == midpoint(A, B)
+    - between(A, C, B) => C == midpoint(A, B)
+  rank: 5
+  trivial_if_equal:
+    - [A, B]

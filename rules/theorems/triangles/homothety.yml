@@ -1,0 +1,17 @@
+homothety:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - A != A'
+    - B != B'
+    - C != C'
+    - not_collinear(A, B, C)
+    - parallel(Line(A, B), Line(A', B'))
+    - parallel(Line(B, C), Line(B', C'))
+    - parallel(Line(C, A), Line(C', A'))
+    - different_sized_triangles: distance(A, B) != distance(A', B')
+    - different_orientation: orientation(A, B, C) == - orientation(A', B', C') mod 360
+    - triangles_are_homothetic: concurrent(Line(A, A'), Line(B, B'), Line(C, C'))
+  possible_conclusions:
+    - different_sized_triangles => triangles_are_homothetic
+    - different_orientation => triangles_are_homothetic

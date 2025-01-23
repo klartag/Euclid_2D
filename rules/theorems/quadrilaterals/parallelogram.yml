@@ -1,0 +1,55 @@
+parallelogram_parallel_definition:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - Line(A, B) != Line(C, D)
+    - parallel(Line(A, B), Line(C, D))
+    - parallel(Line(B, C), Line(D, A))
+  conclude:
+    - parallelogram(A, B, C, D)
+
+parallelogram_side_definition:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - distinct(A, B, C, D)
+    - convex(A, B, C, D)
+    - Line(A, B) != Line(C, D)
+    - distance(A, B) == distance(C, D)
+    - distance(B, C) == distance(D, A)
+  conclude:
+    - parallelogram(A, B, C, D)
+
+parallelogram_parallel_side_definition:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - Line(A, B) != Line(C, D)
+    - convex(A, B, C, D)
+    - parallel(Line(A, B), Line(C, D))
+    - distance(A, B) == distance(C, D)
+  conclude:
+    - parallelogram(A, B, C, D)
+
+parallelogram_properties:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - parallelogram(A, B, C, D)
+  conclude:
+    - parallel(Line(A, B), Line(C, D))
+    - parallel(Line(B, C), Line(A, D))
+    - distance(A, B) == distance(C, D)
+    - distance(B, C) == distance(D, A)
+
+parallelogram_diagonals:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - is_parallelogram: parallelogram(A, B, C, D)
+    - diagonal_intersection_exists: exists(line_intersection(Line(A, C), Line(B, D)))
+    - midpoint_exists: exists(midpoint(A, C))
+    - diagonals_are_medians: identical(line_intersection(Line(A, C), Line(B, D)), midpoint(A, C), midpoint(B, D))
+  possible_conclusions:
+    - is_parallelogram & diagonal_intersection_exists <=> diagonals_are_medians
+    - is_parallelogram & midpoint_exists => diagonals_are_medians

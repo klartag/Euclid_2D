@@ -1,0 +1,28 @@
+Assumptions:
+A, B, C, D, E, F, G, H, I, J: Point
+f, g, h, i, j, k: Line
+c, d, e: Circle
+distinct(A, B, C, D, E, F, G, H, I, J)
+distinct(f, g, h, i, j, k)
+distinct(c, d, e)
+f == Line(B, A)
+g == Line(B, C)
+h == Line(C, A)
+i == internal_angle_bisector(C, A, B)
+j == internal_angle_bisector(A, B, C)
+D == line_intersection(j, i)
+E == projection(D, g)
+F == projection(D, h)
+G == projection(D, f)
+c == Circle(G, F, E)
+k == external_angle_bisector(G, E, B)
+H in k, c
+d == Circle(G, H, B)
+e == Circle(B, H, E)
+I == center(e)
+J == center(d)
+
+Need to prove:
+concyclic(B, G, I, J)
+
+Proof:

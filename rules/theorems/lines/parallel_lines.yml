@@ -1,0 +1,49 @@
+parallel_line_definition:
+  inputs:
+    - A: Point
+    - k, l: Line
+  where:
+    - A in k
+    - parallel(k, l)
+  conclude:
+    - k == parallel_line(A, l)
+  rank: 3
+  trivial_if_equal:
+    - [k, l]
+
+parallel_and_intersecting:
+  inputs:
+    - l1, l2: Line
+    - P: Point
+  where:
+    - parallel(l1, l2)
+    - P in l1, l2
+  conclude:
+    - l1 == l2
+  rank: 3
+  trivial_if_equal:
+    - [l1, l2]
+
+parallel_line_angles:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - Line(A, B) != Line(C, D)
+    - exists(coangle(A, B, C))
+    - parallel_lines: parallel(Line(A, B), Line(C, D))
+    - equal_coangles: coangle(A, B, C) == coangle(D, C, B) mod 360
+  possible_conclusions:
+    - parallel_lines <=> equal_coangles
+
+parallel_lines_are_transitive:
+  inputs:
+    - k, l, m: Line
+  where:
+    - parallel(k, l)
+    - parallel(l, m)
+  conclude:
+    - parallel(k, m)
+  trivial_if_equal:
+    - [k, l]
+    - [l, m]
+    - [k, m]

@@ -1,0 +1,10 @@
+triangle_halfangle_sum:
+  inputs:
+    - A, B, C: Point
+  where:
+    - distinct(A, B, C)
+    - exists(Line(A, B), Line(B, C), Line(A, C))
+    - exists(halfangle(A, B, C))
+  conclude:
+    - halfangle(A, B, C) + halfangle(B, C, A) + halfangle(C, A, B) == orientation(A, B, C) mod 360
+  rank: 4

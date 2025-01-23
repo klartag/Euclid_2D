@@ -1,0 +1,13 @@
+numpy
+torch
+transformers
+datasets
+tqdm
+sympy
+pebble
+ruamel.yaml
+adjustText
+pytest
+mergedeep
+networkx
+frozendict

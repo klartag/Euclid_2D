@@ -1,0 +1,26 @@
+point_equality_contradiction:
+  inputs:
+    - A: Point
+  where:
+    - A != A
+  conclude:
+    - false()
+  rank: 5
+
+line_equality_contradiction:
+  inputs:
+    - l: Line
+  where:
+    - l != l
+  conclude:
+    - false()
+  rank: 5
+
+circle_equality_contradiction:
+  inputs:
+    - c: Circle
+  where:
+    - c != c
+  conclude:
+    - false()
+  rank: 5

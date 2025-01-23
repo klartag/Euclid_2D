@@ -1,0 +1,31 @@
+collinear_definition:
+  inputs:
+  - A, B, C: Point
+  where:
+  - collinear(A, B, C)
+  - not_one_of(A, B, C)
+  conclude:
+  - B in Line(A, C)
+  - C in Line(A, B)
+  - Line(A, B) == Line(A, C)
+  - 2 * angle(B, A, C) == 0 mod 360
+  metadata: auto
+
+in_imply_collinear:
+  inputs:
+  - A, B, C: Point
+  where:
+  - A in Line(B, C)
+  conclude:
+  - collinear(A, B, C)
+  metadata: auto
+
+not_in_line_equivalent_to_not_collinear:
+  inputs:
+  - A, B, C: Point
+  where:
+  - not_in: A not in Line(B, C)
+  - not_collinear: not_collinear(A, B, C)
+  possible_conclusions:
+  - not_in <=> not_collinear & exists(Line(B, C))
+  metadata: auto

@@ -1,0 +1,33 @@
+median_definition:
+  inputs:
+    - A, B, C: Point
+    - l: Line
+  where:
+    - not_collinear(A, B, C)
+    - A, midpoint(B, C) in l
+  conclude:
+    - l == median(A, B, C)
+  rank: 5
+
+centroid_concurrency:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(median(A, B, C))
+    - exists(median(B, C, A))
+  conclude:
+    - centroid(A, B, C) in median(A, B, C)
+    - centroid(A, B, C) in median(B, C, A)
+    - centroid(A, B, C) in median(C, A, B)
+  rank: 5
+
+centroid_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(centroid(A, B, C))
+  conclude:
+    - centroid(A, B, C) in median(A, B, C)
+    - centroid(A, B, C) in median(B, C, A)
+    - centroid(A, B, C) in median(C, A, B)
+  rank: 5
