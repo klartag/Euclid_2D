@@ -18,8 +18,10 @@ angles_on_chord:
     - A, B, C, D in c
     - distinct(A, B, C, D)
   possible_conclusions:
-    - orientation(A, C, B) == orientation(A, D, B) mod 360 => angle(A, C, B) == angle(A, D, B) mod 360
-    - orientation(A, C, B) == - orientation(A, D, B) mod 360 => angle(A, C, B) == angle(A, D, B) + 180 mod 360
+    - orientation(A, C, B) == 90 mod 360 & orientation(A, D, B) == 90 mod 360 => angle(A, C, B) == angle(A, D, B) mod 360
+    - orientation(A, C, B) == -90 mod 360 & orientation(A, D, B) == -90 mod 360 => angle(A, C, B) == angle(A, D, B) mod 360
+    - orientation(A, C, B) == 90 mod 360 & orientation(A, D, B) == -90 mod 360 => angle(A, C, B) == angle(A, D, B) + 180 mod 360
+    - orientation(A, C, B) == -90 mod 360 & orientation(A, D, B) == 90 mod 360 => angle(A, C, B) == angle(A, D, B) + 180 mod 360
   rank: 4
 
 chords_on_equal_angles:
@@ -47,8 +49,10 @@ angles_on_equal_chords:
     # NOTE: Instead of requiring AC == A'C', we require A'C || AC', because it allows us to speak of orientation.
     - parallel(Line(A', C), Line(A, C'))
   possible_conclusions:
-    - orientation(A, B, C) == orientation(A', B', C') mod 360 => angle(A, B, C) == angle(A', B', C') mod 360
-    - orientation(A, B, C) == - orientation(A', B', C') mod 360 => angle(A, B, C) == angle(A', B', C') + 180 mod 360
+    - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == 90 mod 360 => angle(A, B, C) == angle(A', B', C') mod 360
+    - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == -90 mod 360 => angle(A, B, C) == angle(A', B', C') mod 360
+    - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == -90 mod 360 => angle(A, B, C) == angle(A', B', C') + 180 mod 360
+    - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == 90 mod 360 => angle(A, B, C) == angle(A', B', C') + 180 mod 360
   rank: 4
   trivial_if_equal:
     - [[A, C], [A', C']]

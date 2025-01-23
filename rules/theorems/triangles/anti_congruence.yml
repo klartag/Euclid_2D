@@ -21,9 +21,9 @@ sss_anti_congruence:
     - distance(A, B) == distance(A', B')
     - distance(B, C) == distance(B', C')
     - distance(C, A) == distance(C', A')
-    - orientation(A, B, C) == - orientation(A', B', C') mod 360
-  conclude:
-    - anti_congruent_triangles(A, B, C, A', B', C')
+  possible_conclusions:
+    - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == -90 mod 360 => anti_congruent_triangles(A, B, C, A', B', C')
+    - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == 90 mod 360 => anti_congruent_triangles(A, B, C, A', B', C')
 
 sas_anti_congruence:
   inputs:

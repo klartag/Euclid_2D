@@ -1,3 +1,4 @@
+from collections import Counter
 from dataclasses import dataclass
 from enum import Enum
 import glob
@@ -680,12 +681,17 @@ def main():
 
         try:
             proof = prove(incomplete_proof, interactive=args.interactive)
-
+            
             proof_text = proof.to_language_format()
             if args.overwrite:
                 open(path, 'w').write(proof_text)
             else:
                 print(proof_text)
+            
+            counter = Counter([x.theorem_name for x in proof.steps if isinstance(x, TheoremStep)])
+            longest_name = max(map(len, counter.keys()))
+            for (name, count) in sorted(counter.items(), key=lambda x:x[1]):
+                print(f'{name:<{longest_name}}:', count)
 
             if args.trim:
                 print('Running Trimmer...')

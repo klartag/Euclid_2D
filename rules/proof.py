@@ -586,7 +586,7 @@ class Proof:
 
         steps = Proof.parse_body(proof_lines, dict(assumption_objects)) if parse_proof_body else []
         
-        embedding = Proof.parse_embeds(embed_lines, assumption_objects) if len(embed_lines) > 0 else DiagramEmbedder().embed()
+        embedding = Proof.parse_embeds(embed_lines, assumption_objects) if len(embed_lines) > 0 else DiagramEmbedder().embed(assumption_objects, assumption_preds + auxiliary_preds)
         
         if embedding is not None:
             collector = NonDegeneracyPrediateCollector()

@@ -36,10 +36,10 @@ power_of_a_point_converse:
     - collinear(O, A, B)
     - collinear(O, C, D)
     - Line(A, B) != Line(C, D)
-    - orientation(O, A, C) == orientation(O, C, D) mod 360
     - log(distance(O, A)) + log(distance(O, B)) == log(distance(O, C)) + log(distance(O, D))
-  conclude:
-    - concyclic(A, B, C, D)
+  possible_conclusions:
+    - orientation(O, A, C) == 90 mod 360 & orientation(O, C, D) == 90 mod 360 => concyclic(A, B, C, D)
+    - orientation(O, A, C) == -90 mod 360 & orientation(O, C, D) == -90 mod 360 => concyclic(A, B, C, D)
   rank: 5
 
 power_of_a_point_tangent_converse:
@@ -49,10 +49,10 @@ power_of_a_point_tangent_converse:
     - collinear(O, A, B)
     - A != B
     - Line(O, A) != Line(O, C)
-    - orientation(O, A, C) == orientation(O, B, C) mod 360
     - log(distance(O, A)) + log(distance(O, B)) == 2 * log(distance(O, C))
-  conclude:
-    - tangent(Line(O, C), Circle(A, B, C))
+  possible_conclusions:
+    - orientation(O, A, C) == 90 mod 360 & orientation(O, B, C) == 90 mod 360 =>tangent(Line(O, C), Circle(A, B, C))
+    - orientation(O, A, C) == -90 mod 360 & orientation(O, B, C) == -90 mod 360 =>tangent(Line(O, C), Circle(A, B, C))
 
 power_of_a_point_on_circle:
   inputs:

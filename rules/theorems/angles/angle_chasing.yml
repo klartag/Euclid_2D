@@ -7,8 +7,10 @@ same_angle:
     - collinear(O, A, B)
     - exists(Line(O, C))
   possible_conclusions:
-    - orientation(A, O, C) == orientation(B, O, C) mod 360 => angle(A, O, C) == angle(B, O, C) mod 360
-    - orientation(A, O, C) == - orientation(B, O, C) mod 360 => angle(A, O, C) == angle(B, O, C) + 180 mod 360
+    - orientation(A, O, C) == 90 mod 360 & orientation(B, O, C) == 90 mod 360 => angle(A, O, C) == angle(B, O, C) mod 360
+    - orientation(A, O, C) == -90 mod 360 & orientation(B, O, C) == -90 mod 360 => angle(A, O, C) == angle(B, O, C) mod 360
+    - orientation(A, O, C) == 90 mod 360 & orientation(B, O, C) == -90 mod 360 => angle(A, O, C) == angle(B, O, C) + 180 mod 360
+    - orientation(A, O, C) == 90 mod 360 & orientation(B, O, C) == -90 mod 360 => angle(A, O, C) == angle(B, O, C) + 180 mod 360
   rank: 2
   trivial_if_equal:
     - [A, B]

@@ -57,11 +57,11 @@ sss_similarity:
     - A, B, C, A', B', C': Point
   where:
     - not_collinear(A, B, C)
-    - orientation(A, B, C) == orientation(A', B', C') mod 360
     - log(distance(A, B)) - log(distance(A', B')) == log(distance(B, C)) - log(distance(B', C'))
     - log(distance(A, B)) - log(distance(A', B')) == log(distance(A, C)) - log(distance(A', C'))
-  conclude:
-    - similar_triangles(A, B, C, A', B', C')
+  possible_conclusions:
+    - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == 90 mod 360 => similar_triangles(A, B, C, A', B', C')
+    - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == -90 mod 360 => similar_triangles(A, B, C, A', B', C')
   trivial_if_equal:
     - [[A, B, C], [A', B', C']]
 
@@ -90,11 +90,11 @@ sss_anti_similarity:
     - A, B, C, A', B', C': Point
   where:
     - not_collinear(A, B, C)
-    - orientation(A, B, C) == - orientation(A', B', C') mod 360
     - log(distance(A, B)) - log(distance(A', B')) == log(distance(B, C)) - log(distance(B', C'))
     - log(distance(A, B)) - log(distance(A', B')) == log(distance(A, C)) - log(distance(A', C'))
-  conclude:
-    - anti_similar_triangles(A, B, C, A', B', C')
+  possible_conclusions:
+    - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == -90 mod 360 => anti_similar_triangles(A, B, C, A', B', C')
+    - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == 90 mod 360 => anti_similar_triangles(A, B, C, A', B', C')
 
 congruence_implies_similarity:
   inputs:

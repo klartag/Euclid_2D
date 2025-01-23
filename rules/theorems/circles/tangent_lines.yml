@@ -28,8 +28,10 @@ tangent_chord_angle_reverse:
     - not_collinear(A, B, C)
     - tangent(Line(A, D), Circle(A, B, C))
   possible_conclusions:
-    - orientation(B, C, A) == orientation(B, A, D) mod 360 => angle(B, C, A) == angle(B, A, D) mod 360
-    - orientation(B, C, A) == - orientation(B, A, D) mod 360 => angle(B, C, A) == angle(B, A, D) + 180 mod 360
+    - orientation(B, C, A) == 90 mod 360 & orientation(B, A, D) == 90 mod 360 => angle(B, C, A) == angle(B, A, D) mod 360
+    - orientation(B, C, A) == -90 mod 360 & orientation(B, A, D) == -90 mod 360 => angle(B, C, A) == angle(B, A, D) mod 360
+    - orientation(B, C, A) == 90 mod 360 & orientation(B, A, D) == -90 mod 360 => angle(B, C, A) == angle(B, A, D) + 180 mod 360
+    - orientation(B, C, A) == -90 mod 360 & orientation(B, A, D) == 90 mod 360 => angle(B, C, A) == angle(B, A, D) + 180 mod 360
 
 tangent_line_is_unique:
   inputs:

@@ -42,8 +42,10 @@ parallel_line_angles_reverse:
     - exists(angle(A, B, C))
     - parallel(Line(A, B), Line(C, D))
   possible_conclusions:
-    - orientation(A, B, C) == orientation(D, C, B) mod 360 => angle(A, B, C) == angle(D, C, B) mod 360
-    - orientation(A, B, C) == - orientation(D, C, B) mod 360 => angle(A, B, C) == angle(D, C, B) + 180 mod 360
+    - orientation(A, B, C) == 90 mod 360 & orientation(D, C, B) == 90 mod 360 => angle(A, B, C) == angle(D, C, B) mod 360
+    - orientation(A, B, C) == -90 mod 360 & orientation(D, C, B) == -90 mod 360 => angle(A, B, C) == angle(D, C, B) mod 360
+    - orientation(A, B, C) == 90 mod 360 & orientation(D, C, B) == -90 mod 360 => angle(A, B, C) == angle(D, C, B) + 180 mod 360
+    - orientation(A, B, C) == -90 mod 360 & orientation(D, C, B) == 90 mod 360 => angle(A, B, C) == angle(D, C, B) + 180 mod 360
 
 parallel_lines_are_transitive:
   inputs:

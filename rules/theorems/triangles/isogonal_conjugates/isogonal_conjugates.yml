@@ -4,12 +4,18 @@ isogonal_conjugate_definition:
   where:
     - P == isogonal_conjugate(Q, A, B, C)
   possible_conclusions:
-    - orientation(B, A, P) == orientation(Q, A, C) mod 360 => angle(B, A, P) == angle(Q, A, C) mod 360
-    - orientation(B, A, P) == - orientation(Q, A, C) mod 360 => angle(B, A, P) == angle(Q, A, C) + 180 mod 360
-    - orientation(C, B, P) == orientation(Q, B, A) mod 360 => angle(C, B, P) == angle(Q, B, A) mod 360
-    - orientation(C, B, P) == - orientation(Q, B, A) mod 360 => angle(C, B, P) == angle(Q, B, A) + 180 mod 360
-    - orientation(A, C, P) == orientation(Q, C, B) mod 360 => angle(A, C, P) == angle(Q, C, B) mod 360
-    - orientation(A, C, P) == - orientation(Q, C, B) mod 360 => angle(A, C, P) == angle(Q, C, B) + 180 mod 360
+    - orientation(B, A, P) == 90 mod 360 & orientation(Q, A, C) == 90 mod 360 => angle(B, A, P) == angle(Q, A, C) mod 360
+    - orientation(B, A, P) == -90 mod 360 & orientation(Q, A, C) == -90 mod 360 => angle(B, A, P) == angle(Q, A, C) mod 360
+    - orientation(B, A, P) == 90 mod 360 & orientation(Q, A, C) == -90 mod 360 => angle(B, A, P) == angle(Q, A, C) + 180 mod 360
+    - orientation(B, A, P) == -90 mod 360 & orientation(Q, A, C) == 90 mod 360 => angle(B, A, P) == angle(Q, A, C) + 180 mod 360
+    - orientation(C, B, P) == 90 mod 360 & orientation(Q, B, A) == 90 mod 360 => angle(C, B, P) == angle(Q, B, A) mod 360
+    - orientation(C, B, P) == -90 mod 360 & orientation(Q, B, A) == -90 mod 360 => angle(C, B, P) == angle(Q, B, A) mod 360
+    - orientation(C, B, P) == 90 mod 360 & orientation(Q, B, A) == -90 mod 360 => angle(C, B, P) == angle(Q, B, A) + 180 mod 360
+    - orientation(C, B, P) == -90 mod 360 & orientation(Q, B, A) == 90 mod 360 => angle(C, B, P) == angle(Q, B, A) + 180 mod 360
+    - orientation(A, C, P) == 90 mod 360 & orientation(Q, C, B) == 90 mod 360 => angle(A, C, P) == angle(Q, C, B) mod 360
+    - orientation(A, C, P) == -90 mod 360 & orientation(Q, C, B) == -90 mod 360 => angle(A, C, P) == angle(Q, C, B) mod 360
+    - orientation(A, C, P) == 90 mod 360 & orientation(Q, C, B) == -90 mod 360 => angle(A, C, P) == angle(Q, C, B) + 180 mod 360
+    - orientation(A, C, P) == -90 mod 360 & orientation(Q, C, B) == 90 mod 360 => angle(A, C, P) == angle(Q, C, B) + 180 mod 360
 
 isogonal_conjugate_is_involution:
   inputs:
