@@ -6,8 +6,9 @@ same_angle:
     - not_collinear(O, A, C)
     - collinear(O, A, B)
     - exists(Line(O, C))
-  conclude:
-    - equal_mod_180(A, O, C, B, O, C)
+  possible_conclusions:
+    - orientation(A, O, C) == orientation(B, O, C) mod 360 => angle(A, O, C) == angle(B, O, C) mod 360
+    - orientation(A, O, C) == - orientation(B, O, C) mod 360 => angle(A, O, C) == angle(B, O, C) + 180 mod 360
   rank: 2
   trivial_if_equal:
     - [A, B]
@@ -15,10 +16,9 @@ same_angle:
 same_angle_converse:
   inputs:
     - O, A, B, C: Point
-  where:
-    - equal_mod_180(A, O, C, B, O, C)
-  conclude:
-    - collinear(O, A, B)
+  possible_conclusions:
+    - angle(A, O, C) == angle(B, O, C) mod 360 => collinear(A, O, B)
+    - angle(A, O, C) == angle(B, O, C) + 180 mod 360 => collinear(A, O, B)
   rank: 2
   trivial_if_equal: 
     - [A, B]

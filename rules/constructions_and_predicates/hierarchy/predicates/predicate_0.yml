@@ -8,10 +8,6 @@ concyclic:
   inputs:
   - {'A, B, C, D': Point}
   preprocess: symmetric
-equal_mod_180:
-  conclude: [self]
-  inputs:
-  - {"A, B, C, A', B', C'": Point}
 parallel:
   conclude: [self]
   inputs:

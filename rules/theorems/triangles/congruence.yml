@@ -45,9 +45,9 @@ asa_congruence:
     - A, B, C, A', B', C': Point
   where:
     - not_collinear(A, B, C)
-    - equal_mod_180(C, A, B, C', A', B')
+    - angle(C, A, B) == angle(C', A', B') mod 360
     - distance(A, B) == distance(A', B')
-    - equal_mod_180(A, B, C, A', B', C')
+    - angle(A, B, C) == angle(A', B', C') mod 360
   conclude:
     - congruent_triangles(A, B, C, A', B', C')
   trivial_if_equal:

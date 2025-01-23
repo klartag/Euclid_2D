@@ -17,7 +17,19 @@ tangent_chord_angle:
     - distinct(A, B, C, D)
     - not_collinear(A, B, C)
   possible_conclusions:
-    - tangent(Line(A, D), Circle(A, B, C)) <=> equal_mod_180(B, C, A, B, A, D)
+    - angle(B, C, A) == angle(B, A, D) mod 360 => tangent(Line(A, D), Circle(A, B, C))
+    - angle(B, C, A) == angle(B, A, D) + 180 mod 360 => tangent(Line(A, D), Circle(A, B, C))
+
+tangent_chord_angle_reverse:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - distinct(A, B, C, D)
+    - not_collinear(A, B, C)
+    - tangent(Line(A, D), Circle(A, B, C))
+  possible_conclusions:
+    - orientation(B, C, A) == orientation(B, A, D) mod 360 => angle(B, C, A) == angle(B, A, D) mod 360
+    - orientation(B, C, A) == - orientation(B, A, D) mod 360 => angle(B, C, A) == angle(B, A, D) + 180 mod 360
 
 tangent_line_is_unique:
   inputs:

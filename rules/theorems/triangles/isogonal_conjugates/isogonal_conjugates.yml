@@ -3,10 +3,13 @@ isogonal_conjugate_definition:
     - A, B, C, P, Q: Point
   where:
     - P == isogonal_conjugate(Q, A, B, C)
-  conclude:
-    - equal_mod_180(B, A, P, Q, A, C)
-    - equal_mod_180(C, B, P, Q, B, A)
-    - equal_mod_180(A, C, P, Q, C, B)
+  possible_conclusions:
+    - orientation(B, A, P) == orientation(Q, A, C) mod 360 => angle(B, A, P) == angle(Q, A, C) mod 360
+    - orientation(B, A, P) == - orientation(Q, A, C) mod 360 => angle(B, A, P) == angle(Q, A, C) + 180 mod 360
+    - orientation(C, B, P) == orientation(Q, B, A) mod 360 => angle(C, B, P) == angle(Q, B, A) mod 360
+    - orientation(C, B, P) == - orientation(Q, B, A) mod 360 => angle(C, B, P) == angle(Q, B, A) + 180 mod 360
+    - orientation(A, C, P) == orientation(Q, C, B) mod 360 => angle(A, C, P) == angle(Q, C, B) mod 360
+    - orientation(A, C, P) == - orientation(Q, C, B) mod 360 => angle(A, C, P) == angle(Q, C, B) + 180 mod 360
 
 isogonal_conjugate_is_involution:
   inputs:
@@ -23,7 +26,8 @@ isogonal_conjugate_sufficient_conditions:
     - not_collinear(A, B, C)
     - not_one_of(P, A, B, C)
     - not_one_of(Q, A, B, C)
-    - equal_mod_180(B, A, P, Q, A, C)
-    - equal_mod_180(C, B, P, Q, B, A)
-  conclude:
-    - P == isogonal_conjugate(Q, A, B, C)
+  possible_conclusions:
+    - angle(B, A, P) == angle(Q, A, C) mod 360 & angle(C, B, P) == angle(Q, B, A) mod 360 => P == isogonal_conjugate(Q, A, B, C)
+    - angle(B, A, P) == angle(Q, A, C) mod 360 & angle(C, B, P) == angle(Q, B, A) + 180 mod 360 => P == isogonal_conjugate(Q, A, B, C)
+    - angle(B, A, P) == angle(Q, A, C) + 180 mod 360 & angle(C, B, P) == angle(Q, B, A) mod 360 => P == isogonal_conjugate(Q, A, B, C)
+    - angle(B, A, P) == angle(Q, A, C) + 180 mod 360 & angle(C, B, P) == angle(Q, B, A) + 180 mod 360 => P == isogonal_conjugate(Q, A, B, C)

@@ -1,21 +1,13 @@
-to_equality_mod_180:
-  inputs:
-    - A, B, C, A', B', C': Point
-  possible_conclusions:
-    - angle(A, B, C) == angle(A', B', C') mod 360 => equal_mod_180(A, B, C, A', B', C')
-    - angle(A, B, C) == angle(A', B', C') + 180 mod 360 => equal_mod_180(A, B, C, A', B', C')
-    - 2 * angle(A, B, C) == 2 * angle(A', B', C') mod 360 => equal_mod_180(A, B, C, A', B', C')
-  trivial_if_equal:
-    - [[A, B, C], [A', B', C']]
-
-from_equality_mod_180:
+divide_by_2_mod_180:
   inputs:
     - A, B, C, A', B', C': Point
   where:
-    - equal_mod_180(A, B, C, A', B', C')
+    - 2 * angle(A, B, C) == 2 * angle(A', B', C') mod 360
   possible_conclusions:
     - orientation(A, B, C) == orientation(A', B', C') mod 360 => angle(A, B, C) == angle(A', B', C') mod 360
     - orientation(A, B, C) == - orientation(A', B', C') mod 360 => angle(A, B, C) == angle(A', B', C') + 180 mod 360
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]
 
 reverse_orientation:
   inputs:

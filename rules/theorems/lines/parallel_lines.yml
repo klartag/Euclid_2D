@@ -30,10 +30,20 @@ parallel_line_angles:
   where:
     - Line(A, B) != Line(C, D)
     - exists(angle(A, B, C))
-    - parallel_lines: parallel(Line(A, B), Line(C, D))
-    - equal_angles_mod_180: equal_mod_180(A, B, C, D, C, B)
   possible_conclusions:
-    - parallel_lines <=> equal_angles_mod_180
+    - angle(A, B, C) == angle(D, C, B) mod 360 => parallel(Line(A, B), Line(C, D))
+    - angle(A, B, C) == angle(D, C, B) + 180 mod 360 => parallel(Line(A, B), Line(C, D))
+
+parallel_line_angles_reverse:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - Line(A, B) != Line(C, D)
+    - exists(angle(A, B, C))
+    - parallel(Line(A, B), Line(C, D))
+  possible_conclusions:
+    - orientation(A, B, C) == orientation(D, C, B) mod 360 => angle(A, B, C) == angle(D, C, B) mod 360
+    - orientation(A, B, C) == - orientation(D, C, B) mod 360 => angle(A, B, C) == angle(D, C, B) + 180 mod 360
 
 parallel_lines_are_transitive:
   inputs:

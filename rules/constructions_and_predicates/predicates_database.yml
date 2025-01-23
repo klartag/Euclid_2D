@@ -187,9 +187,3 @@ anti_similar_triangles:
     - angle(A, B, C) + angle(X, Y, Z) == 0 mod 360
     - angle(B, C, A) + angle(Y, Z, X) == 0 mod 360 
     - angle(C, A, B) + angle(Z, X, Y) == 0 mod 360
-
-equal_mod_180:
-  inputs:
-  - A, B, C, A', B', C': Point
-  conclude:
-  - self

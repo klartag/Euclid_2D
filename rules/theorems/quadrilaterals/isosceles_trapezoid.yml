@@ -16,9 +16,9 @@ isosceles_trapezoid_sufficient_conditions:
     - Line(A, B) != Line(C, D)
     - parallel(Line(A, B), Line(C, D))
     - distance(D, A) == distance(B, C)
-    - equal_mod_180(A, B, C, D, A, B)
-  conclude:
-    - isosceles_trapezoid(A, B, C, D)
+  possible_conclusions:
+    - angle(A, B, C) == angle(D, A, B) mod 360 => isosceles_trapezoid(A, B, C, D)
+    - angle(A, B, C) == angle(D, A, B) + 180 mod 360 => isosceles_trapezoid(A, B, C, D)
 
 isosceles_trapezoid_symmetry:
   inputs:
