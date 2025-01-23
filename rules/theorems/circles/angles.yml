@@ -3,7 +3,7 @@ concyclic_sufficient_conditions:
     - A, B, C, D: Point
   where:
     - not_collinear(A, B, C)
-    - coangle(A, B, C) == coangle(A, D, C) mod 360
+    - equal_mod_180(A, B, C, A, D, C)
   conclude:
     - concyclic(A, B, C, D)
   trivial_if_equal:
@@ -18,7 +18,7 @@ angles_on_chord:
     - A, B, C, D in c
     - distinct(A, B, C, D)
   conclude:
-    - coangle(A, C, B) == coangle(A, D, B) mod 360
+    - equal_mod_180(A, C, B, A, D, B)
   rank: 4
 
 chords_on_equal_angles:
@@ -28,8 +28,8 @@ chords_on_equal_angles:
   where:
     - A, B, C, A', B', C' in c
   possible_conclusions:
-    - coangle(A, B, C) == coangle(A', B', C') mod 360 => distance(A, C) == distance(A', C')
-    - coangle(A, B, C) == -coangle(A', B', C') mod 360 => distance(A, C) == distance(A', C')
+    - angle(A, B, C) == angle(A', B', C') mod 360 => distance(A, C) == distance(A', C')
+    - angle(A, B, C) + angle(A', B', C') == 180 mod 360 => distance(A, C) == distance(A', C')
   rank: 4
   trivial_if_equal: 
     - [[A, C], [A', C']]
@@ -46,7 +46,7 @@ angles_on_equal_chords:
     # NOTE: Instead of requiring AC == A'C', we require A'C || AC', because it allows us to speak of orientation.
     - parallel(Line(A', C), Line(A, C'))
   conclude:
-    - coangle(A, B, C) == coangle(A', B', C') mod 360
+    - equal_mod_180(A, B, C, A', B', C')
   rank: 4
   trivial_if_equal:
     - [[A, C], [A', C']]
@@ -60,5 +60,5 @@ angle_to_center:
     - distinct(A, B, C)
     - exists(center(c))
   conclude:
-    - coangle(A, B, C) == halfangle(A, center(c), C) - orientation(A, center(c), C) mod 360
+    - 2 * angle(A, B, C) == angle(A, center(c), C) mod 360
   rank: 4

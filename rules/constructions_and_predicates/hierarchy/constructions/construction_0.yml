@@ -34,12 +34,6 @@ circle_circle_other_intersection:
   - {P: Point}
   - {'c, d': Circle}
   where: ['P in c, d']
-coangle:
-  construct:
-  - {c: Angle}
-  inputs:
-  - {'A, B, C': Point}
-  where: [A != B, C != B]
 distance:
   construct:
   - {d: Scalar}
@@ -100,6 +94,7 @@ orientation:
   - {o: Angle}
   inputs:
   - {'A, B, C': Point}
+  preprocess: cyclic
   where: [A != B, C != B]
 orthocenter:
   construct:

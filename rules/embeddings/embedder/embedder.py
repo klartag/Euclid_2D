@@ -3,7 +3,6 @@ import itertools
 from typing import Dict, List, Mapping, Optional, Sequence
 
 from ...geometry_objects.geo_object import GeoObject
-from ...proof import Proof
 from ...predicates.predicate import Predicate
 from ...predicates.implementations.distinct_predicate import DistinctPredicate
 from ...predicates.implementations.exists_predicate import ExistsPredicate
@@ -61,13 +60,13 @@ class DiagramEmbedder:
                     distinct_names[obj1.name].append(obj0.name)
         return distinct_names
 
-    def embed(self, proof: Proof) -> Optional[Embedding]:
-        constructions = self.sequence_assumptions(proof.assumption_objects, proof.starting_predicates())
+    def embed(self, assumption_objects: dict[str, GeoObject], starting_predicates: list[Predicate]) -> Optional[Embedding]:
+        constructions = self.sequence_assumptions(assumption_objects, starting_predicates)
 
         if constructions is None:
             return None
 
-        distinct_names: Mapping[str, List[str]] = self.get_distinct_names(proof.starting_predicates())
+        distinct_names: Mapping[str, List[str]] = self.get_distinct_names(starting_predicates)
 
         embedded_objects: Embedding = {}
 

@@ -29,11 +29,11 @@ parallel_line_angles:
     - A, B, C, D: Point
   where:
     - Line(A, B) != Line(C, D)
-    - exists(coangle(A, B, C))
+    - exists(angle(A, B, C))
     - parallel_lines: parallel(Line(A, B), Line(C, D))
-    - equal_coangles: coangle(A, B, C) == coangle(D, C, B) mod 360
+    - equal_angles_mod_180: equal_mod_180(A, B, C, D, C, B)
   possible_conclusions:
-    - parallel_lines <=> equal_coangles
+    - parallel_lines <=> equal_angles_mod_180
 
 parallel_lines_are_transitive:
   inputs:

@@ -33,8 +33,8 @@ aa_similarity:
     - A, B, C, A', B', C': Point
   where:
     - not_collinear(A, B, C)
-    - coangle(A, B, C) == coangle(A', B', C') mod 360
-    - coangle(B, C, A) == coangle(B', C', A') mod 360
+    - equal_mod_180(A, B, C, A', B', C')
+    - equal_mod_180(B, C, A, B', C', A')
   conclude:
     - similar_triangles(A, B, C, A', B', C')
   trivial_if_equal:
@@ -70,8 +70,8 @@ aa_anti_similarity:
     - A, B, C, A', B', C': Point
   where:
     - not_collinear(A, B, C)
-    - coangle(A, B, C) == - coangle(A', B', C') mod 360
-    - coangle(B, C, A) == - coangle(B', C', A') mod 360
+    - equal_mod_180(A, B, C, C', B', A')
+    - equal_mod_180(B, C, A, A', C', B')
   conclude:
     - anti_similar_triangles(A, B, C, A', B', C')
 

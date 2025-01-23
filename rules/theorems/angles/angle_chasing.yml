@@ -7,7 +7,7 @@ same_angle:
     - collinear(O, A, B)
     - exists(Line(O, C))
   conclude:
-    - coangle(A, O, C) == coangle(B, O, C) mod 360
+    - equal_mod_180(A, O, C, B, O, C)
   rank: 2
   trivial_if_equal:
     - [A, B]
@@ -16,7 +16,7 @@ same_angle_converse:
   inputs:
     - O, A, B, C: Point
   where:
-    - coangle(A, O, C) == coangle(B, O, C) mod 360
+    - equal_mod_180(A, O, C, B, O, C)
   conclude:
     - collinear(O, A, B)
   rank: 2

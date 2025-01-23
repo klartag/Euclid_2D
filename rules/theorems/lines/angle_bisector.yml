@@ -4,10 +4,8 @@ internal_angle_bisector_definition:
   where:
     - internal_bisector_definition: Line(O, B) == internal_angle_bisector(A, O, C)
     - internal_bisector_property: angle(A, O, B) == angle(B, O, C) mod 360
-    - internal_bisector_property_2: coangle(A, O, B) == halfangle(A, O, C) - orientation(A, O, C) mod 360
   possible_conclusions:
     - internal_bisector_definition <=> internal_bisector_property
-    - internal_bisector_definition & not_collinear(A, O, C) => internal_bisector_property_2
 
 external_angle_bisector_definition:
   inputs:

@@ -6,7 +6,6 @@ isosceles_triangle_properties:
   conclude:
     - distance(A, B) == distance(A, C)
     - angle(A, B, C) == angle(B, C, A) mod 360
-    - angle(A, B, C) + halfangle(C, A, B) == orientation(A, B, C) mod 360
 
 isosceles_triangle_from_sides:
   inputs:
@@ -22,6 +21,6 @@ isosceles_triangle_from_angles:
     - A, B, C: Point
   where:
     - not_collinear(A, B, C)
-    - coangle(A, B, C) == coangle(B, C, A) mod 360
+    - angle(A, B, C) == angle(B, C, A) mod 360
   conclude:
     - isosceles_triangle(A, B, C)

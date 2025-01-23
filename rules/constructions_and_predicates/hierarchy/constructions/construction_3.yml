@@ -7,13 +7,6 @@ excircle:
   - {'A, B, C': Point}
   preprocess: swap
   where: ['not_collinear(A, B, C)']
-halfangle:
-  conclude: ['2 * h == angle(A, B, C) mod 360']
-  construct:
-  - {h: Angle}
-  inputs:
-  - {'A, B, C': Point}
-  where: [A != B, C != B]
 incircle:
   conclude: ['tangent(Line(A, B), c)', 'tangent(Line(B, C), c)', 'tangent(Line(C,
       A), c)', 'incenter(A, B, C) == center(c)']

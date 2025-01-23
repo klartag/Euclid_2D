@@ -41,9 +41,9 @@ asa_anti_congruence:
     - A, B, C, A', B', C': Point
   where:
     - not_collinear(A, B, C)
-    - coangle(C, A, B) == - coangle(C', A', B') mod 360
+    - equal_mod_180(C, A, B, B', A', C')
     - distance(A, B) == distance(A', B')
-    - coangle(A, B, C) == - coangle(A', B', C') mod 360
+    - equal_mod_180(A, B, C, C', B', A')
   conclude:
     - anti_congruent_triangles(A, B, C, A', B', C')
 

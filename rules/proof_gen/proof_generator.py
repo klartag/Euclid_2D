@@ -593,15 +593,6 @@ def prove_all_assumptions(
 
 
 def prove(base: Proof, interactive: bool) -> Proof:
-    if base.embedding is None:
-        embedder = DiagramEmbedder()
-        embedding = embedder.embed(base)
-        if embedding is not None:
-            collector = NonDegeneracyPrediateCollector()
-            non_degenerecy_predicates = collector.collect(base, embedding)
-            base.embedding = embedding
-            base.auxiliary_predicates.extend(non_degenerecy_predicates)
-
     proof_gen = ProofGenerator(base, actions_per_step=10000)
 
     try:

@@ -48,20 +48,10 @@ direction:
   construct:
     - a: Angle
 
-halfangle:
-  inputs:
-    - A, B, C: Point
-  where:
-    - A != B
-    - C != B
-  construct:
-    - h: Angle
-  conclude:
-    - 2 * h == angle(A, B, C) mod 360
-
 orientation:
   inputs:
     - A, B, C: Point
+  preprocess: cyclic
   where:
     - A != B
     - C != B
@@ -69,15 +59,6 @@ orientation:
     - o: Angle
   conclude:
     - 2 * o == 180 mod 360
-
-coangle:
-  inputs:
-    - A, B, C: Point
-  where:
-    - A != B
-    - C != B
-  construct:
-    - c: Angle
 
 #primitive/ cosmetical - I'm not sure
 radical_axis:

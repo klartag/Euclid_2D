@@ -12,7 +12,7 @@ perpendicular_angle_conditions:
   inputs:
     - A, B, C: Point
   possible_conclusions:
-    - perpendicular(Line(A, B), Line(B, C)) <=> coangle(A, B, C) == 0 mod 360
+    - perpendicular(Line(A, B), Line(B, C)) <=> angle(A, B, C) == orientation(A, B, C) mod 360
 
 perpendicular_line_definition:
   inputs:

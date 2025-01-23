@@ -9,7 +9,6 @@ from ..embedded_objects import Embedding, EmbeddedPoint
 
 from ...predicates.predicate import Predicate
 from ...predicates.predicate_factory import predicate_from_args
-from ...proof import Proof
 from ...geometry_objects.construction_object import ConstructionObject
 
 
@@ -17,11 +16,11 @@ class NonDegeneracyPrediateCollector:
     def __init__(self):
         pass
 
-    def collect(self, proof: Proof, embedding: Embedding) -> List[Predicate]:
-        triangle_non_degenerecy_predicates = self.collect_triangle_non_degenerecy_predicates(proof, embedding)
+    def collect(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
+        triangle_non_degenerecy_predicates = self.collect_triangle_non_degenerecy_predicates(assumption_objects, embedding)
         return triangle_non_degenerecy_predicates
 
-    def collect_triangle_non_degenerecy_predicates(self, proof: Proof, embedding: Embedding) -> List[Predicate]:
+    def collect_triangle_non_degenerecy_predicates(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
         predicates = []
 
         points = {name: point for (name, point) in embedding.items() if isinstance(point, EmbeddedPoint)}
@@ -32,9 +31,9 @@ class NonDegeneracyPrediateCollector:
             if (point1 - point0).is_proportional(point2 - point0):
                 continue
 
-            object0 = proof.assumption_objects[name0]
-            object1 = proof.assumption_objects[name1]
-            object2 = proof.assumption_objects[name2]
+            object0 = assumption_objects[name0]
+            object1 = assumption_objects[name1]
+            object2 = assumption_objects[name2]
 
             not_collinear_predicate = predicate_from_args('not_collinear', (object0, object1, object2))
 

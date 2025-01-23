@@ -16,7 +16,7 @@ isosceles_trapezoid_sufficient_conditions:
     - Line(A, B) != Line(C, D)
     - parallel(Line(A, B), Line(C, D))
     - distance(D, A) == distance(B, C)
-    - coangle(A, B, C) == coangle(D, A, B) mod 360
+    - equal_mod_180(A, B, C, D, A, B)
   conclude:
     - isosceles_trapezoid(A, B, C, D)
 

@@ -17,7 +17,7 @@ tangent_chord_angle:
     - distinct(A, B, C, D)
     - not_collinear(A, B, C)
   possible_conclusions:
-    - tangent(Line(A, D), Circle(A, B, C)) <=> coangle(B, C, A) == coangle(B, A, D) mod 360
+    - tangent(Line(A, D), Circle(A, B, C)) <=> equal_mod_180(B, C, A, B, A, D)
 
 tangent_line_is_unique:
   inputs:

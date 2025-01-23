@@ -13,6 +13,8 @@ from typing import Iterable, Mapping, Optional
 
 from torch import tensor
 
+from .embeddings.embedder.embedder import DiagramEmbedder
+from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
 from util import BASE_PATH
 
 from . import rule_utils
@@ -583,7 +585,14 @@ class Proof:
         auxiliary_preds.append(predicate_from_args('exists', tuple(exist_objects)))
 
         steps = Proof.parse_body(proof_lines, dict(assumption_objects)) if parse_proof_body else []
-        embedding = Proof.parse_embeds(embed_lines, assumption_objects) if len(embed_lines) > 0 else None
+        
+        embedding = Proof.parse_embeds(embed_lines, assumption_objects) if len(embed_lines) > 0 else DiagramEmbedder().embed()
+        
+        if embedding is not None:
+            collector = NonDegeneracyPrediateCollector()
+            non_degenerecy_predicates = collector.collect(assumption_objects, embedding)
+            auxiliary_preds.extend(non_degenerecy_predicates)
+            
         return Proof(
             assumption_objects | target_objects,
             assumption_objects,

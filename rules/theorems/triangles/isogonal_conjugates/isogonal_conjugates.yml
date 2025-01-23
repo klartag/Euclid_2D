@@ -4,9 +4,9 @@ isogonal_conjugate_definition:
   where:
     - P == isogonal_conjugate(Q, A, B, C)
   conclude:
-    - coangle(B, A, P) == coangle(Q, A, C) mod 360
-    - coangle(C, B, P) == coangle(Q, B, A) mod 360
-    - coangle(A, C, P) == coangle(Q, C, B) mod 360
+    - equal_mod_180(B, A, P, Q, A, C)
+    - equal_mod_180(C, B, P, Q, B, A)
+    - equal_mod_180(A, C, P, Q, C, B)
 
 isogonal_conjugate_is_involution:
   inputs:
@@ -23,7 +23,7 @@ isogonal_conjugate_sufficient_conditions:
     - not_collinear(A, B, C)
     - not_one_of(P, A, B, C)
     - not_one_of(Q, A, B, C)
-    - coangle(B, A, P) == coangle(Q, A, C) mod 360
-    - coangle(C, B, P) == coangle(Q, B, A) mod 360
+    - equal_mod_180(B, A, P, Q, A, C)
+    - equal_mod_180(C, B, P, Q, B, A)
   conclude:
     - P == isogonal_conjugate(Q, A, B, C)
