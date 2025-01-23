@@ -3,7 +3,7 @@ use std::{
     slice::{Iter, SliceIndex},
 };
 
-use rand::rngs::ThreadRng;
+use rand::RngCore;
 
 use crate::geometry::{construction::Construction, construction_type::ConstructionType};
 
@@ -31,11 +31,11 @@ impl<F: GeoFloat> Embedding<F> {
 
     /// Checks whether a construction can already be found in an embedding.
     /// Returns the index in which it was found.
-    pub(crate) fn find(&self, diagram: &Diagram, construction: &Construction) -> Option<usize>
+    pub(crate) fn find(&self, diagram: &Diagram, construction: &Construction, rng: &mut Box<dyn RngCore>) -> Option<usize>
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
-        let object = diagram.try_embed_construction(construction, self).ok()?;
+        let object = diagram.try_embed_construction(construction, self, rng).ok()?;
 
         let equals_predicate_type = object.geo_type().equals_predicate();
 
@@ -52,11 +52,12 @@ impl<F: GeoFloat> Embedding<F> {
         diagram: &Diagram,
         construction: &Construction,
         index: usize,
+        rng: &mut Box<dyn RngCore>
     ) -> bool
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
-        let Ok(object) = diagram.try_embed_construction(construction, self) else {
+        let Ok(object) = diagram.try_embed_construction(construction, self, rng) else {
             return false;
         };
 

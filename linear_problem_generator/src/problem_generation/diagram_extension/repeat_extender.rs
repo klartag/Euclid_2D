@@ -1,4 +1,4 @@
-use rand::rngs::ThreadRng;
+use rand::RngCore;
 
 use crate::{
     embeddings::{embedded_diagram::EmbeddedDiagram, geo_float::GeoFloat, TryEmbed},
@@ -30,7 +30,7 @@ impl<E: DiagramExtender> RepeatExtender<E> {
 impl<E: DiagramExtender> DiagramExtender for RepeatExtender<E> {
     fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>)
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
         let target_construction_count =
             embedded_diagram.diagram().constructions.len() + self.construction_count;

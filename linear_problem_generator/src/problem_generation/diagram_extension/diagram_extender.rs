@@ -1,4 +1,4 @@
-use rand::rngs::ThreadRng;
+use rand::RngCore;
 
 use crate::{
     embeddings::{embedded_diagram, geo_float::GeoFloat, TryEmbed},
@@ -12,5 +12,5 @@ pub trait DiagramExtender {
     /// Adds new objects to a given [`EmbeddedDiagram`] according to this [`DiagramExtender`]'s strategy.
     fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>)
     where
-        ConstructionType: TryEmbed<F, ThreadRng>;
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>;
 }

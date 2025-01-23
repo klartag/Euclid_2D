@@ -1,4 +1,4 @@
-use rand::rngs::ThreadRng;
+use rand::{thread_rng, RngCore};
 use smallvec::SmallVec;
 
 use crate::{
@@ -33,15 +33,17 @@ impl<E: DiagramExtender> SymmetricalExtender<E> {
 impl<E: DiagramExtender> DiagramExtender for SymmetricalExtender<E> {
     fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>)
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
+        let mut rng: Box<dyn RngCore> = Box::new(thread_rng());
+
         let old_diagram_size = embedded_diagram.diagram().constructions.len();
         self.extender.extend_diagram(embedded_diagram);
         let new_diagram_size = embedded_diagram.diagram().constructions.len();
 
         (old_diagram_size..new_diagram_size).for_each(|construction_index| {
             (0..self.action.group_size()).for_each(|symmetry_index| {
-                self.try_push_symmetry(embedded_diagram, construction_index, symmetry_index);
+                self.try_push_symmetry(embedded_diagram, construction_index, symmetry_index, &mut rng);
             })
         });
     }
@@ -61,14 +63,15 @@ impl<E: DiagramExtender> SymmetricalExtender<E> {
     /// embedded_diagram:       An embedding of the diagram in which we are building the symmetry.
     /// construction_index:     The index of the construction whose symmetry we are building.
     /// symmetry_index:         The index of the element in the [`Self::group_action`] group we are using as a symmetry.
-    fn try_push_symmetry<F: GeoFloat>(
+    pub(crate) fn try_push_symmetry<F: GeoFloat>(
         &self,
         embedded_diagram: &mut EmbeddedDiagram<F>,
         construction_index: usize,
         symmetry_index: usize,
+        rng: &mut Box<dyn RngCore>,
     ) -> Option<usize>
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
         if let Some(i) = self.domain.iter().position(|&i| i == construction_index) {
             return Some(self.domain[self.action.apply(symmetry_index, i)]);
@@ -79,7 +82,7 @@ impl<E: DiagramExtender> SymmetricalExtender<E> {
 
         let Some(symmetrical_arguments) = arguments
             .into_iter()
-            .map(|argument| self.try_push_symmetry(embedded_diagram, argument, symmetry_index))
+            .map(|argument| self.try_push_symmetry(embedded_diagram, argument, symmetry_index, rng))
             .collect::<Option<SmallVec<_>>>()
         else {
             return None;
@@ -90,9 +93,9 @@ impl<E: DiagramExtender> SymmetricalExtender<E> {
             arguments: symmetrical_arguments,
         };
 
-        if let Some(index) = embedded_diagram.try_find(&symmetrical_construction) {
+        if let Some(index) = embedded_diagram.try_find(&symmetrical_construction, rng) {
             Some(index)
-        } else if embedded_diagram.try_push(symmetrical_construction) {
+        } else if embedded_diagram.try_push(symmetrical_construction, rng) {
             Some(embedded_diagram.diagram().constructions.len() - 1)
         } else {
             None

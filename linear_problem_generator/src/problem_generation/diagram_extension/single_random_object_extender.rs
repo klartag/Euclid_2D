@@ -1,7 +1,8 @@
 use std::collections::HashSet;
 
 use itertools::Itertools;
-use rand::{distributions::weighted::WeightedIndex, rngs::ThreadRng, seq::SliceRandom, thread_rng};
+
+use rand::{distributions::weighted::WeightedIndex, seq::SliceRandom, thread_rng, RngCore};
 use rand_distr::Distribution;
 
 use crate::{
@@ -13,13 +14,15 @@ use super::diagram_extender::DiagramExtender;
 
 /// A [`DiagramExtender`] that adds a single random object to the diagram.
 #[derive(Default)]
-pub struct SingleRandomObjectExtender {}
+pub struct SingleRandomObjectExtender { }
 
 impl DiagramExtender for SingleRandomObjectExtender {
     fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>)
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
+        let mut rng: Box<dyn RngCore> = Box::new(thread_rng());
+
         let Some(construction_type) = self.choose_construction_type() else {
             unreachable!()
         };
@@ -27,7 +30,7 @@ impl DiagramExtender for SingleRandomObjectExtender {
         if let Some(new_construction) =
             self.generate_construction(&embedded_diagram, construction_type)
         {
-            embedded_diagram.try_push(new_construction);
+            embedded_diagram.try_push(new_construction, &mut rng);
         }
     }
 }
@@ -44,8 +47,10 @@ impl SingleRandomObjectExtender {
         construction_type: ConstructionType,
     ) -> Option<Construction>
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
+        let mut rng: Box<dyn RngCore> = Box::new(thread_rng());
+
         construction_type
             .signature()
             .iter()
@@ -58,7 +63,7 @@ impl SingleRandomObjectExtender {
                     .flatten()
                     .collect::<Vec<_>>();
 
-                construction_indices.shuffle(&mut thread_rng());
+                construction_indices.shuffle(&mut *rng);
 
                 construction_indices
             })
@@ -79,7 +84,7 @@ impl SingleRandomObjectExtender {
                     .filter(|embedding| {
                         embedded_diagram
                             .diagram()
-                            .try_embed_construction(new_construction, embedding)
+                            .try_embed_construction(new_construction, embedding, &mut rng)
                             .is_ok()
                     })
                     .take(2)

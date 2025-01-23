@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use rand::rngs::ThreadRng;
+use rand::RngCore;
 
 use crate::{
     geometry::{construction::Construction, construction_type::ConstructionType, diagram::Diagram},
@@ -17,7 +17,7 @@ const ALLOWED_EMBEDDING_FAILURES: usize = 16;
 /// (We hold more than one embedding in case we fail when attempting to add a construction to one of them)
 pub struct EmbeddedDiagram<F: GeoFloat>
 where
-    ConstructionType: TryEmbed<F, ThreadRng>,
+    ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
 {
     diagram: Diagram,
     embeddings: Vec<Embedding<F>>,
@@ -25,15 +25,15 @@ where
 
 impl<F: GeoFloat> EmbeddedDiagram<F>
 where
-    ConstructionType: TryEmbed<F, ThreadRng>,
+    ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
 {
-    pub fn new(diagram: Diagram) -> Self {
+    pub fn new(diagram: Diagram, rng: &mut Box<dyn RngCore>) -> Self {
         let mut embedded_diagram = Self {
             diagram,
             embeddings: Default::default(),
         };
-        embedded_diagram.extend_embeddings();
-        embedded_diagram
+        embedded_diagram.extend_embeddings(rng);
+        embedded_diagram  
     }
 
     pub fn diagram(&self) -> &Diagram {
@@ -44,7 +44,7 @@ where
         &self.embeddings
     }
 
-    pub(crate) fn try_find(&self, construction: &Construction) -> Option<usize> {
+    pub(crate) fn try_find(&self, construction: &Construction, rng: &mut Box<dyn RngCore>) -> Option<usize> {
         if let Some(index) = self
             .diagram
             .constructions
@@ -58,20 +58,20 @@ where
             .embeddings
             .iter()
             .next()
-            .map(|embedding| embedding.find(&self.diagram, construction))
+            .map(|embedding| embedding.find(&self.diagram, construction, rng))
             .flatten()?;
 
         self.embeddings
             .iter()
             .skip(1)
-            .all(|embedding| embedding.is_found_here(&self.diagram, construction, index))
+            .all(|embedding| embedding.is_found_here(&self.diagram, construction, index, rng))
             .then_some(index)
     }
 
     /// Attempts to add a new [`Construction`] to the [`EmbeddedDiagram`].
     /// Returns whether it succeeded.
-    pub(crate) fn try_push(&mut self, construction: Construction) -> bool {
-        if !self.is_distinct_from_all_embeddings(&construction) {
+    pub(crate) fn try_push(&mut self, construction: Construction, rng: &mut Box<dyn RngCore>) -> bool {
+        if !self.is_distinct_from_all_embeddings(&construction, rng) {
             return false;
         }
 
@@ -80,7 +80,7 @@ where
             .iter()
             .map(|embedding| {
                 self.diagram
-                    .try_embed_construction(&construction, &embedding)
+                    .try_embed_construction(&construction, &embedding, rng)
             })
             .collect_vec();
 
@@ -96,34 +96,34 @@ where
         self.embeddings.retain_mut(|embedding| {
             let embedded_object = self
                 .diagram
-                .try_embed_construction(&construction, &embedding);
+                .try_embed_construction(&construction, &embedding, rng);
             if let Ok(embedded_object) = embedded_object {
                 embedding.push(embedded_object);
             }
             embedded_object.is_ok()
         });
         self.diagram.push(construction);
-        self.extend_embeddings();
+        self.extend_embeddings(rng);
 
         return true;
     }
 
     /// Checks whether there is no other construction in the diagram
     /// with identical embeddings to a given construction.
-    pub(crate) fn is_distinct_from_all_embeddings(&self, construction: &Construction) -> bool {
+    pub(crate) fn is_distinct_from_all_embeddings(&self, construction: &Construction, rng: &mut Box<dyn RngCore>) -> bool {
         self.embeddings
             .iter()
-            .all(|embedding| embedding.find(&self.diagram, construction).is_none())
+            .all(|embedding| embedding.find(&self.diagram, construction, rng).is_none())
     }
 
     /// Pushes new embeddings to the `embeddings` list until it is of length [`REQUIRED_EMBEDDING_COUNT`].
-    fn extend_embeddings(&mut self) {
+    fn extend_embeddings(&mut self, rng: &mut Box<dyn RngCore>) {
         if let Some(required_additional_embeddings) =
             REQUIRED_EMBEDDING_COUNT.checked_sub(self.embeddings.len())
         {
             self.embeddings.extend(
                 (0..)
-                    .map(|_| self.diagram.embed::<F>(MAX_EMBED_ATTEMPTS))
+                    .map(|_| self.diagram.embed::<F>(MAX_EMBED_ATTEMPTS, rng))
                     .filter_map(|result| result.ok())
                     .take(required_additional_embeddings),
             );

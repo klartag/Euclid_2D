@@ -1,11 +1,7 @@
 #![feature(let_chains)]
 
 use std::{
-    ffi::OsString,
-    fs,
-    path::{Path, PathBuf},
-    process::exit,
-    time::Instant,
+    collections::HashSet, ffi::OsString, fs, hash::DefaultHasher, path::{Path, PathBuf}, process::exit, time::Instant
 };
 
 use clap::Parser;
@@ -15,6 +11,7 @@ use lib::problem_generation::{
     DiagramExtender, HeuristicalExtender, ProblemFinder, RepeatExtender,
     SingleRandomObjectExtender, SymmetricalExtender,
 };
+use rand::{thread_rng, RngCore};
 use tqdm::Iter;
 
 use lib::geometry::{BaseDiagram, Diagram, PredicateType, Problem};
@@ -145,6 +142,10 @@ fn main() {
 
     let mut found_problems: Vec<Problem> = Default::default();
 
+    let mut problem_hashes: HashSet<u64> = Default::default();
+
+    let mut rng: Box<dyn RngCore> = Box::new(thread_rng());
+
     for _ in (0..).tqdm() {
         if args
             .problem_limit
@@ -153,7 +154,7 @@ fn main() {
             break;
         }
 
-        let mut embedded_diagram = EmbeddedDiagram::new(args.base_diagram.clone());
+        let mut embedded_diagram = EmbeddedDiagram::new(args.base_diagram.clone(), &mut rng);
         diagram_extender.extend_diagram::<F>(&mut embedded_diagram);
 
         let problems = problem_finder.find_problems::<F>(
@@ -162,10 +163,7 @@ fn main() {
         );
 
         for problem in problems.iter() {
-            if found_problems
-                .iter()
-                .find(|previous_problem| problem.is_homeomorphic_to(&previous_problem))
-                .is_some()
+            if problem_hashes.contains(&problem.hash())
             {
                 continue;
             }
@@ -180,6 +178,7 @@ fn main() {
             );
 
             found_problems.push(problem.clone());
+            problem_hashes.insert(problem.hash());
             problem_times.push(Instant::now().duration_since(start_time).as_secs() as usize);
         }
     }

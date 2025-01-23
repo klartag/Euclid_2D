@@ -1,4 +1,4 @@
-use rand::rngs::ThreadRng;
+use rand::{thread_rng, RngCore};
 
 use crate::{
     embeddings::{embedded_diagram::EmbeddedDiagram, geo_float::GeoFloat, TryEmbed},
@@ -24,8 +24,10 @@ impl<E: DiagramExtender> HeuristicalExtender<E> {
 impl<E: DiagramExtender> DiagramExtender for HeuristicalExtender<E> {
     fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>)
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
+        let mut rng: Box<dyn RngCore> = Box::new(thread_rng());
+
         let old_diagram_size = embedded_diagram.diagram().constructions.len();
         self.extender.extend_diagram(embedded_diagram);
         let new_diagram_size = embedded_diagram.diagram().constructions.len();
@@ -34,7 +36,7 @@ impl<E: DiagramExtender> DiagramExtender for HeuristicalExtender<E> {
             self.construction_heuristics(&embedded_diagram.diagram(), construction_index)
                 .into_iter()
                 .for_each(|heuristical_construction| {
-                    embedded_diagram.try_push(heuristical_construction);
+                    embedded_diagram.try_push(heuristical_construction, &mut rng);
                 });
         });
     }

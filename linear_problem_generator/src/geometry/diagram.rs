@@ -4,7 +4,7 @@ use std::{
 };
 
 use itertools::Itertools;
-use rand::{rngs::ThreadRng, thread_rng};
+use rand::{thread_rng, RngCore};
 use rustc_hash::FxHasher;
 use serde::{Deserialize, Serialize};
 use smallvec::SmallVec;
@@ -316,16 +316,17 @@ impl Diagram {
     pub(crate) fn embed<F: GeoFloat>(
         &self,
         attempt_count: usize,
+        rng: &mut Box<dyn RngCore>
     ) -> Result<Embedding<F>, EmbeddingError>
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
         (0..attempt_count)
             .filter_map(|_| {
                 let mut embeds = Embedding::<F>::new();
 
                 for construction in &self.constructions {
-                    match self.try_embed_construction::<F>(construction, &embeds) {
+                    match self.try_embed_construction::<F>(construction, &embeds, rng) {
                         Ok(embedded_obj) => embeds.push(embedded_obj),
                         Err(_) => break,
                     }
@@ -349,9 +350,10 @@ impl Diagram {
         &self,
         construction: &Construction,
         partial_embedding: &Embedding<F>,
+        rng: &mut Box<dyn RngCore>
     ) -> Result<EmbeddedObject<F>, EmbeddingError>
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
         assert!(
             !construction
@@ -370,7 +372,7 @@ impl Diagram {
 
         construction
             ._type
-            .try_build(&argument_embeddings, &mut thread_rng())
+            .try_build(&argument_embeddings, rng)
     }
 
     /// Returns the list of indices of constructions in the diagram whose constructions are deterministic.

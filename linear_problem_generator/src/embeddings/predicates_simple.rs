@@ -21,20 +21,20 @@ use super::{
 
 /// Hashes a GeoFloat in a way that is stable under small changes
 /// (i.e, with a resolution of [`GeoFloat::EPSILON`])
-fn hash_float<F: GeoFloat>(f: F) -> Option<i64> {
+pub(crate) fn hash_float<F: GeoFloat>(f: F) -> Option<i64> {
     (f / F::EPSILON).to_i64()
 }
 
 /// Hashes an EmbeddedPoint<F> in a way that is stable under small changes
 /// (i.e, with a resolution of [`GeoFloat::EPSILON`] in each coordinate)
-fn hash_point<F: GeoFloat>(p: EmbeddedPoint<F>) -> Option<(i64, i64)> {
+pub(crate) fn hash_point<F: GeoFloat>(p: EmbeddedPoint<F>) -> Option<(i64, i64)> {
     Some((hash_float(p.x)?, hash_float(p.y)?))
 }
 
 /// Hashes an EmbeddedLine<F> in a way that is stable under small changes
 /// (i.e, with a resolution of [`GeoFloat::EPSILON`] for the ratios between
 /// coefficients in [`EmbeddedLine<F>::coefficients`] with the median coefficient)
-fn hash_line<F: GeoFloat>(l: EmbeddedLine<F>) -> Option<(i64, i64, i64)> {
+pub(crate) fn hash_line<F: GeoFloat>(l: EmbeddedLine<F>) -> Option<(i64, i64, i64)> {
     let coefs = l.coefficients();
     let median = if (coefs[0] < coefs[1]) ^ (coefs[0] < coefs[2]) {
         coefs[0]
@@ -54,7 +54,7 @@ fn hash_line<F: GeoFloat>(l: EmbeddedLine<F>) -> Option<(i64, i64, i64)> {
 /// Hashes an EmbeddedPoint<F> in a way that is stable under small changes
 /// (i.e, with a resolution of [`GeoFloat::EPSILON`] in the center coordinates
 /// and the square of the radius)
-fn hash_circle<F: GeoFloat>(c: EmbeddedCircle<F>) -> Option<((i64, i64), i64)> {
+pub(crate) fn hash_circle<F: GeoFloat>(c: EmbeddedCircle<F>) -> Option<((i64, i64), i64)> {
     let Some(point_hash) = hash_point(c.center) else {
         return None;
     };

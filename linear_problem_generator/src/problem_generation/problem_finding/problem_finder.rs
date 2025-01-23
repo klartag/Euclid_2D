@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use smallvec::smallvec;
 
 use itertools::Itertools;
-use rand::rngs::ThreadRng;
+use rand::{thread_rng, RngCore};
 
 use crate::{
     embeddings::{embedding::Embedding, geo_float::GeoFloat, CheckApply, TryEmbed},
@@ -35,8 +35,11 @@ impl ProblemFinder {
         embedding: &Embedding<F>,
     ) -> Vec<Problem>
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
+        let mut rng: Box<dyn RngCore>;
+        rng = Box::new(thread_rng());
+
         self.predicate_types
             .iter()
             .map(|predicate_type| {
@@ -50,16 +53,22 @@ impl ProblemFinder {
                 diagram: diagram.clone(),
                 predicate,
             })
-            .filter(|problem| self.double_check_problem::<F>(problem))
+            .filter(|problem| self.double_check_problem::<F>(problem, &mut rng))
             .map(|problem| self.minimize_diagram_statement(&problem))
             .filter(|problem| self.is_two_dimensional(&problem.diagram))
-            .filter(|problem| self.double_check_problem::<F>(problem))
-            .filter(|problem| self.uses_nondeterministic_constructions_nontrivially::<F>(problem))
+            .collect::<Vec<_>>()
+            .into_iter()
+            .filter(|problem| self.double_check_problem::<F>(problem, &mut rng))
+            .collect::<Vec<_>>()
+            .into_iter()
+            .filter(|problem| self.uses_nondeterministic_constructions_nontrivially::<F>(problem, &mut rng))
             .map(|problem| self.generalize_diagram::<F>(problem))
             .map(|problem| self.simplify_problem_statment(problem))
             .flatten()
             .map(|problem| self.minimize_diagram_statement(&problem))
-            .filter(|problem| self.uses_nondeterministic_constructions_nontrivially::<F>(problem))
+            .collect::<Vec<_>>()
+            .into_iter()
+            .filter(|problem| self.uses_nondeterministic_constructions_nontrivially::<F>(problem, &mut rng))
             .filter(|problem| self.is_two_dimensional(&problem.diagram))
             .collect()
     }
@@ -94,9 +103,10 @@ impl ProblemFinder {
     pub(crate) fn uses_nondeterministic_constructions_nontrivially<F: GeoFloat>(
         &self,
         problem: &Problem,
+        rng: &mut Box<dyn RngCore>
     ) -> bool
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
         let nondeterministic_constructions = problem.diagram.nondeterministic_constructions();
 
@@ -136,6 +146,7 @@ impl ProblemFinder {
                     &problem.predicate,
                     construction_index,
                     &mut trivialized_construction,
+                    rng
                 ) {
                     return false;
                 }
@@ -148,8 +159,10 @@ impl ProblemFinder {
     /// Generalizes the diagram as much as possible, while still keeping the problem correct.
     pub(crate) fn generalize_diagram<F: GeoFloat>(&self, problem: Problem) -> Problem
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
+        let mut rng: Box<dyn RngCore> = Box::new(thread_rng());
+        
         let mut diagram = problem.diagram.clone();
 
         loop {
@@ -169,6 +182,7 @@ impl ProblemFinder {
                                 &problem.predicate,
                                 construction_index,
                                 &mut generalization,
+                                &mut rng
                             )
                             .then_some(generalization)
                         })
@@ -207,14 +221,15 @@ impl ProblemFinder {
         predicate: &Predicate,
         index: usize,
         generalized_construction: &mut Construction,
+        rng: &mut Box<dyn RngCore>
     ) -> bool
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
         std::mem::swap(generalized_construction, &mut diagram.constructions[index]);
 
         let is_trivialization_valid = diagram
-            .embed::<F>(MAX_EMBED_ATTEMPTS)
+            .embed::<F>(MAX_EMBED_ATTEMPTS, rng)
             .map(|embedding| {
                 predicate._type.applies(
                     &predicate
@@ -232,12 +247,12 @@ impl ProblemFinder {
 
     /// Makes sure a problem is correct by generating a bunch of diagrams
     /// and checking that the predicate is correct in each of them.
-    fn double_check_problem<F: GeoFloat>(&self, problem: &Problem) -> bool
+    fn double_check_problem<F: GeoFloat>(&self, problem: &Problem, rng: &mut Box<dyn RngCore>) -> bool
     where
-        ConstructionType: TryEmbed<F, ThreadRng>,
+        ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
         (0..REQUIRED_EMBEDDING_COUNT).all(|_| {
-            let Ok(embedding) = problem.diagram.embed(MAX_EMBED_ATTEMPTS) else {
+            let Ok(embedding) = problem.diagram.embed(MAX_EMBED_ATTEMPTS, rng) else {
                 return false;
             };
             problem.predicate._type.applies(

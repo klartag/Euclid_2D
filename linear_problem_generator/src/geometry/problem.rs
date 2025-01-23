@@ -1,9 +1,11 @@
-use std::collections::{HashMap, HashSet};
+use std::{collections::{HashMap, HashSet}, hash::{DefaultHasher, Hash, Hasher}, u64};
 
 use itertools::Itertools;
+use rand::{rngs::StdRng, RngCore, SeedableRng};
 use serde::{Deserialize, Serialize};
+use smallvec::SmallVec;
 
-use crate::naming::{geogebra_naming::GeoGebraNaming, naming_scheme::NamingScheme};
+use crate::{embeddings::{embedded_objects::{embedded_object::EmbeddedObject, embedded_point}, predicates_simple::{hash_circle, hash_line, hash_point}, EmbeddedDiagram}, geometry::{construction::Construction, construction_type::ConstructionType, PredicateType}, groups::symmetric_group::SymmetricGroup, naming::{geogebra_naming::GeoGebraNaming, naming_scheme::NamingScheme}, problem_generation::{SingleRandomObjectExtender, SymmetricalExtender}};
 
 use super::{diagram::Diagram, predicate::Predicate};
 
@@ -145,5 +147,63 @@ impl Problem {
                         .zip(problem.predicate.arguments.iter())
                         .all(|(i0, i1)| homeomorphism.get(i0) == Some(&&i1))
             })
+    }
+
+    pub fn hash(&self) -> u64 {
+        let mut rng: Box<dyn RngCore> = Box::new(StdRng::from_seed([0; 32]));
+
+        let mut embedded_diagram = EmbeddedDiagram::<f64>::new(self.diagram.clone(), &mut rng);
+        
+        let target_construction = match self.predicate._type {
+            PredicateType::Collinear => Construction {
+                _type: ConstructionType::Line,
+                arguments: [self.predicate.arguments[0], self.predicate.arguments[1]].into_iter().collect::<SmallVec<_>>(),
+            },
+            PredicateType::Concyclic => Construction {
+                _type: ConstructionType::Circumcircle,
+                arguments: [self.predicate.arguments[0], self.predicate.arguments[1], self.predicate.arguments[2]].into_iter().collect::<SmallVec<_>>(),
+            },
+            PredicateType::Concurrent => Construction {
+                _type: ConstructionType::LineIntersection,
+                arguments: [self.predicate.arguments[0], self.predicate.arguments[1]].into_iter().collect::<SmallVec<_>>(),
+            },
+            _ => { return 0; }
+        };
+
+        embedded_diagram.try_push(target_construction.clone(), &mut rng);
+        let Some(embedded_target_construction_index) = embedded_diagram.try_find(&target_construction, &mut rng) else {
+            return 0;
+        };
+
+        let extender = SymmetricalExtender::new(
+            SingleRandomObjectExtender::default(),
+            vec![0, 1, 2], Box::new(SymmetricGroup::<3>::new())
+        );
+
+        
+        let target_hashes = (0..6)
+            .map(|symmetry_index| extender.try_push_symmetry(&mut embedded_diagram, embedded_target_construction_index, symmetry_index, &mut rng))
+            .collect_vec()
+            .into_iter()
+            .map(|object_index| {
+                if let Some(object_index) = object_index {
+                    let embedded_target_object = embedded_diagram.embeddings()[0].iter().skip(object_index).next().unwrap();
+
+                    let mut state = DefaultHasher::new();
+            
+                    match embedded_target_object {
+                        EmbeddedObject::Point(embedded_point) => hash_point(embedded_point.clone()).hash(&mut state),
+                        EmbeddedObject::Line(embedded_line) => hash_line(embedded_line.clone()).hash(&mut state),
+                        EmbeddedObject::Circle(embedded_circle) => hash_circle(embedded_circle.clone()).hash(&mut state),
+                    };
+                    state.finish()
+                }
+                else {
+                    0
+                }
+            })
+            .collect_vec();
+
+        return target_hashes.into_iter().min().unwrap();
     }
 }
