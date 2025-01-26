@@ -4,7 +4,7 @@ use std::{
 };
 
 use itertools::Itertools;
-use rand::{thread_rng, RngCore};
+use rand::RngCore;
 use rustc_hash::FxHasher;
 use serde::{Deserialize, Serialize};
 use smallvec::SmallVec;

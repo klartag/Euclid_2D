@@ -27,13 +27,13 @@ impl<F: GeoFloat> EmbeddedDiagram<F>
 where
     ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
 {
-    pub fn new(diagram: Diagram, rng: &mut Box<dyn RngCore>) -> Self {
+    pub fn new(diagram: Diagram, rng: &mut Box<dyn RngCore>) -> Option<Self> {
         let mut embedded_diagram = Self {
             diagram,
             embeddings: Default::default(),
         };
-        embedded_diagram.extend_embeddings(rng);
-        embedded_diagram  
+        
+        embedded_diagram.extend_embeddings(rng).then_some(embedded_diagram)
     }
 
     pub fn diagram(&self) -> &Diagram {
@@ -103,9 +103,8 @@ where
             embedded_object.is_ok()
         });
         self.diagram.push(construction);
-        self.extend_embeddings(rng);
-
-        return true;
+        
+        self.extend_embeddings(rng)
     }
 
     /// Checks whether there is no other construction in the diagram
@@ -117,16 +116,18 @@ where
     }
 
     /// Pushes new embeddings to the `embeddings` list until it is of length [`REQUIRED_EMBEDDING_COUNT`].
-    fn extend_embeddings(&mut self, rng: &mut Box<dyn RngCore>) {
+    fn extend_embeddings(&mut self, rng: &mut Box<dyn RngCore>) -> bool {
         if let Some(required_additional_embeddings) =
             REQUIRED_EMBEDDING_COUNT.checked_sub(self.embeddings.len())
         {
             self.embeddings.extend(
-                (0..)
+                (0..(required_additional_embeddings * 10))
                     .map(|_| self.diagram.embed::<F>(MAX_EMBED_ATTEMPTS, rng))
                     .filter_map(|result| result.ok())
                     .take(required_additional_embeddings),
             );
         }
+
+        self.embeddings.len() == REQUIRED_EMBEDDING_COUNT
     }
 }

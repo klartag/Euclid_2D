@@ -28,7 +28,7 @@ impl<E: DiagramExtender> RepeatExtender<E> {
 }
 
 impl<E: DiagramExtender> DiagramExtender for RepeatExtender<E> {
-    fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>)
+    fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>) -> bool
     where
         ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
@@ -36,7 +36,11 @@ impl<E: DiagramExtender> DiagramExtender for RepeatExtender<E> {
             embedded_diagram.diagram().constructions.len() + self.construction_count;
 
         while embedded_diagram.diagram().constructions.len() < target_construction_count {
-            self.extender.extend_diagram(embedded_diagram);
+            if !self.extender.extend_diagram(embedded_diagram) {
+                return false;
+            }
         }
+
+        true
     }
 }

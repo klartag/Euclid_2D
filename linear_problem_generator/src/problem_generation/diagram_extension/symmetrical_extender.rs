@@ -31,7 +31,7 @@ impl<E: DiagramExtender> SymmetricalExtender<E> {
 }
 
 impl<E: DiagramExtender> DiagramExtender for SymmetricalExtender<E> {
-    fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>)
+    fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>) -> bool
     where
         ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
@@ -41,11 +41,11 @@ impl<E: DiagramExtender> DiagramExtender for SymmetricalExtender<E> {
         self.extender.extend_diagram(embedded_diagram);
         let new_diagram_size = embedded_diagram.diagram().constructions.len();
 
-        (old_diagram_size..new_diagram_size).for_each(|construction_index| {
-            (0..self.action.group_size()).for_each(|symmetry_index| {
-                self.try_push_symmetry(embedded_diagram, construction_index, symmetry_index, &mut rng);
-            })
-        });
+        (old_diagram_size..new_diagram_size).all(|construction_index|
+            (0..self.action.group_size()).all(|symmetry_index|
+                self.try_push_symmetry(embedded_diagram, construction_index, symmetry_index, &mut rng).is_some()
+            )
+        )
     }
 }
 

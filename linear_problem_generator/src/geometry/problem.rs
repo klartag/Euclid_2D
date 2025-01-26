@@ -5,7 +5,7 @@ use rand::{rngs::StdRng, RngCore, SeedableRng};
 use serde::{Deserialize, Serialize};
 use smallvec::SmallVec;
 
-use crate::{embeddings::{embedded_objects::{embedded_object::EmbeddedObject, embedded_point}, predicates_simple::{hash_circle, hash_line, hash_point}, EmbeddedDiagram}, geometry::{construction::Construction, construction_type::ConstructionType, PredicateType}, groups::symmetric_group::SymmetricGroup, naming::{geogebra_naming::GeoGebraNaming, naming_scheme::NamingScheme}, problem_generation::{SingleRandomObjectExtender, SymmetricalExtender}};
+use crate::{embeddings::{embedded_objects::embedded_object::EmbeddedObject, predicates_simple::{hash_circle, hash_line, hash_point}, EmbeddedDiagram}, geometry::{construction::Construction, construction_type::ConstructionType, PredicateType}, groups::symmetric_group::SymmetricGroup, naming::{geogebra_naming::GeoGebraNaming, naming_scheme::NamingScheme}, problem_generation::{SingleRandomObjectExtender, SymmetricalExtender}};
 
 use super::{diagram::Diagram, predicate::Predicate};
 
@@ -152,7 +152,9 @@ impl Problem {
     pub fn hash(&self) -> u64 {
         let mut rng: Box<dyn RngCore> = Box::new(StdRng::from_seed([0; 32]));
 
-        let mut embedded_diagram = EmbeddedDiagram::<f64>::new(self.diagram.clone(), &mut rng);
+        let Some(mut embedded_diagram) = EmbeddedDiagram::<f64>::new(self.diagram.clone(), &mut rng) else {
+            return 0;
+        };
         
         let target_construction = match self.predicate._type {
             PredicateType::Collinear => Construction {

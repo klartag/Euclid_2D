@@ -8,43 +8,54 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug Linear",
-            "cargo": {
-                "args": [
-                    "build",
-                    "--bin=linear_problem_generator",
-                    "--package=linear_problem_generator"
-                ],
-                "filter": {
-                    "name": "linear_problem_generator",
-                    "kind": "bin"
-                }
-            },
+            "program": "${workspaceFolder}/target/debug/linear.exe",
             "args": [
-                "--diagram=triangle"
+                "--diagram",
+                "triangle"
             ],
-            "env": {
-                "RUST_BACKTRACE": "1"
-            },
-            "cwd": "${workspaceFolder}"
-        },
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Debug unit tests in Linear",
-            "cargo": {
-                "args": [
-                    "test",
-                    "--no-run",
-                    "--bin=linear_problem_generator",
-                    "--package=linear_problem_generator"
-                ],
-                "filter": {
-                    "name": "linear_problem_generator",
-                    "kind": "bin"
-                }
-            },
-            "args": [],
-            "cwd": "${workspaceFolder}"
         }
+        
+        // {
+        //     "type": "lldb",
+        //     "request": "launch",
+        //     "name": "Debug Linear",
+        //     "cargo": {
+        //         "args": [
+        //             "run",
+        //             "--bin=linear",
+        //             "--package=linear_problem_generator"
+        //         ],
+        //         "filter": {
+        //             "name": "linear_problem_generator",
+        //             "kind": "bin"
+        //         }
+        //     },
+        //     "args": [
+        //         "--diagram=triangle"
+        //     ],
+        //     "env": {
+        //         "RUST_BACKTRACE": "1"
+        //     },
+        //     "cwd": "${workspaceFolder}"
+        // },
+        // {
+        //     "type": "lldb",
+        //     "request": "launch",
+        //     "name": "Debug unit tests in Linear",
+        //     "cargo": {
+        //         "args": [
+        //             "test",
+        //             "--no-run",
+        //             "--bin=linear",
+        //             "--package=linear_problem_generator"
+        //         ],
+        //         "filter": {
+        //             "name": "linear_problem_generator",
+        //             "kind": "bin"
+        //         }
+        //     },
+        //     "args": [],
+        //     "cwd": "${workspaceFolder}"
+        // }
     ]
 }

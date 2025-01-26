@@ -1,7 +1,7 @@
 #![feature(let_chains)]
 
 use std::{
-    collections::HashSet, ffi::OsString, fs, hash::DefaultHasher, path::{Path, PathBuf}, process::exit, time::Instant
+    collections::HashSet, ffi::OsString, fs, path::{Path, PathBuf}, process::exit, time::Instant
 };
 
 use clap::Parser;
@@ -154,8 +154,13 @@ fn main() {
             break;
         }
 
-        let mut embedded_diagram = EmbeddedDiagram::new(args.base_diagram.clone(), &mut rng);
-        diagram_extender.extend_diagram::<F>(&mut embedded_diagram);
+        let Some(mut embedded_diagram) = EmbeddedDiagram::new(args.base_diagram.clone(), &mut rng) else {
+            continue;
+        };
+
+        if !diagram_extender.extend_diagram::<F>(&mut embedded_diagram) {
+            continue;
+        }
 
         let problems = problem_finder.find_problems::<F>(
             &embedded_diagram.diagram(),

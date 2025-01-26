@@ -22,23 +22,25 @@ impl<E: DiagramExtender> HeuristicalExtender<E> {
 }
 
 impl<E: DiagramExtender> DiagramExtender for HeuristicalExtender<E> {
-    fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>)
+    fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>) -> bool
     where
         ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
         let mut rng: Box<dyn RngCore> = Box::new(thread_rng());
 
         let old_diagram_size = embedded_diagram.diagram().constructions.len();
-        self.extender.extend_diagram(embedded_diagram);
+        if !self.extender.extend_diagram(embedded_diagram) {
+            return false;
+        }
         let new_diagram_size = embedded_diagram.diagram().constructions.len();
 
-        (old_diagram_size..new_diagram_size).for_each(|construction_index| {
+        (old_diagram_size..new_diagram_size).all(|construction_index|
             self.construction_heuristics(&embedded_diagram.diagram(), construction_index)
                 .into_iter()
-                .for_each(|heuristical_construction| {
-                    embedded_diagram.try_push(heuristical_construction, &mut rng);
-                });
-        });
+                .all(|heuristical_construction|
+                    embedded_diagram.try_push(heuristical_construction, &mut rng)
+            )
+        )
     }
 }
 

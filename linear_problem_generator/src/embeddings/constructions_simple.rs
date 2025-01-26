@@ -104,16 +104,17 @@ where
                 }
             }
             (ConstructionType::LineCircleOtherIntersection, [Point(p), Line(l), Circle(c)]) => {
-                let (p1, p2) = l.circle_intersections(*c)?;
-                if p1.distance_squared(p2).is_approx_zero_sqr() {
+                if !p.line_distance_squared(*l).is_approx_zero_sqr() {
                     Err(EmbeddingError::Illegal)
-                } else if p.distance_squared(p1).is_approx_zero_sqr() {
-                    Ok(Point(p2))
-                } else if p.distance_squared(p2).is_approx_zero_sqr() {
-                    Ok(Point(p1))
+                } else if !(p.distance_squared(c.center) - c.radius_sqr).is_approx_zero_sqr() {
+                    Err(EmbeddingError::Illegal)
                 } else {
-                    // The given point must identically be one of the intersection points.
-                    Err(EmbeddingError::Illegal)
+                    let line_direction = l.b - l.a;
+                    let perpendicular_direction = EmbeddedPoint::new(line_direction.y, -line_direction.x);
+                    let center_line = EmbeddedLine::new(c.center, c.center + perpendicular_direction);
+                    let projection = p.project(center_line);
+
+                    Ok(Point(projection + projection - *p))
                 }
             }
             (ConstructionType::CircleIntersection, [Circle(c1), Circle(c2)]) => {
@@ -128,18 +129,16 @@ where
                 ConstructionType::CircleCircleOtherIntersection,
                 [Point(p), Circle(c1), Circle(c2)],
             ) => {
-                let Ok((p1, p2)) = c1.intersections(*c2) else {
-                    return Err(EmbeddingError::Undefined);
-                };
-
-                if p1.distance_squared(p2).is_approx_zero_sqr() {
+                if !(p.distance_squared(c1.center) - c1.radius_sqr).is_approx_zero_sqr() {
                     Err(EmbeddingError::Illegal)
-                } else if p.distance_squared(p1).is_approx_zero_sqr() {
-                    Ok(Point(p2))
-                } else if p.distance_squared(p2).is_approx_zero_sqr() {
-                    Ok(Point(p1))
+                } else if !(p.distance_squared(c2.center) - c2.radius_sqr).is_approx_zero_sqr() {
+                    Err(EmbeddingError::Illegal)
+                } else if c1.center.distance_squared(c2.center).is_approx_zero_sqr() {
+                    Err(EmbeddingError::Illegal)
                 } else {
-                    Err(EmbeddingError::Illegal)
+                    let center_line = EmbeddedLine::new(c1.center, c2.center);
+                    let projection = p.project(center_line);
+                    Ok(Point(projection + projection - *p))
                 }
             }
             (ConstructionType::CircleFromCenterAndRadius, [Point(center), Point(p)]) => Ok(Circle(

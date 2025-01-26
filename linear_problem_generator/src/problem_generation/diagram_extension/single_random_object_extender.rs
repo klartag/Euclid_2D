@@ -17,7 +17,7 @@ use super::diagram_extender::DiagramExtender;
 pub struct SingleRandomObjectExtender { }
 
 impl DiagramExtender for SingleRandomObjectExtender {
-    fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>)
+    fn extend_diagram<F: GeoFloat>(&self, embedded_diagram: &mut EmbeddedDiagram<F>) -> bool
     where
         ConstructionType: TryEmbed<F, Box<dyn RngCore>>,
     {
@@ -32,6 +32,8 @@ impl DiagramExtender for SingleRandomObjectExtender {
         {
             embedded_diagram.try_push(new_construction, &mut rng);
         }
+
+        true
     }
 }
 
