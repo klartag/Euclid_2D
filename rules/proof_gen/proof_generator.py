@@ -16,8 +16,9 @@ from typing import Callable, Optional
 
 from frozendict import frozendict
 
+from rules.embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+
 from ..embeddings.embedder.embedder import DiagramEmbedder
-from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
 from ..trimmers.old_trimmer import max_depth_trim
 
 from ..interactive_predicate_checker import InteractivePredicateChecker
@@ -27,7 +28,7 @@ from ..trimmers.trimmer import ProofTrimmer
 
 from ..predicates.predicate import Predicate
 from ..predicates.global_predicates import get_constructions
-from ..predicates.predicate_factory import parse_predicate, predicate_from_args
+from ..predicates.predicate_factory import predicate_from_args
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
 from .. import pred_config
@@ -594,6 +595,11 @@ def prove_all_assumptions(
 
 
 def prove(base: Proof, interactive: bool) -> Proof:
+    if base.embedding is not None:
+            collector = NonDegeneracyPrediateCollector()
+            non_degenerecy_predicates = collector.collect(base.assumption_objects, base.embedding)
+            base.auxiliary_predicates.extend(non_degenerecy_predicates)
+
     proof_gen = ProofGenerator(base, actions_per_step=10000)
 
     try:
@@ -655,6 +661,11 @@ def main():
         action='store_true',
     )
     parser.add_argument(
+        '--embed',
+        help='If the proof has no embedding, runs it through the DiagramEmbedder.',
+        action='store_true',
+    )
+    parser.add_argument(
         '--trim',
         help='Also runs the generated proof through the ProofTrimmer.',
         action='store_true',
@@ -662,6 +673,11 @@ def main():
     parser.add_argument(
         '--prettify',
         help='Also runs the generated proof through the ProofPrettifier.',
+        action='store_true',
+    )
+    parser.add_argument(
+        '--ignore-errors',
+        help='Only prints an error if it happens, without raising the exception.',
         action='store_true',
     )
 
@@ -677,10 +693,23 @@ def main():
             print(f'[{i+1}/{len(paths)}] Proving file "{path}":')
         else:
             print(f'Proving file "{path}":')
-        incomplete_proof = Proof.parse(path.open().read(), False)
+
+        proof = Proof.parse(path.open().read(), False)
 
         try:
-            proof = prove(incomplete_proof, interactive=args.interactive)
+            if args.trim and proof.embedding is None:
+                print('Running Embedder...')
+                diagram_embedder = DiagramEmbedder()
+                embedding = diagram_embedder.embed(proof)
+                if embedding is not None:
+                    proof.embedding = embedding
+                if args.overwrite:
+                    open(path, 'w').write(proof_text)
+                else:
+                    print(proof_text)
+                    
+            print('Running Prover...')
+            proof = prove(proof, interactive=args.interactive)
             
             proof_text = proof.to_language_format()
             if args.overwrite:
@@ -724,5 +753,9 @@ def main():
                 continue
             else:
                 return
-        except Exception as e:
+        except (Exception if args.ignore_errors else NeverMatch) as e:
             print('Error:', e)
+
+
+class NeverMatch(Exception):
+    pass

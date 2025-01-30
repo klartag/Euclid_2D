@@ -11,10 +11,6 @@ import re
 import string
 from typing import Iterable, Mapping, Optional
 
-from torch import tensor
-
-from .embeddings.embedder.embedder import DiagramEmbedder
-from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
 from util import BASE_PATH
 
 from . import rule_utils
@@ -586,13 +582,8 @@ class Proof:
 
         steps = Proof.parse_body(proof_lines, dict(assumption_objects)) if parse_proof_body else []
         
-        embedding = Proof.parse_embeds(embed_lines, assumption_objects) if len(embed_lines) > 0 else DiagramEmbedder().embed(assumption_objects, assumption_preds + auxiliary_preds)
-        
-        if embedding is not None:
-            collector = NonDegeneracyPrediateCollector()
-            non_degenerecy_predicates = collector.collect(assumption_objects, embedding)
-            auxiliary_preds.extend(non_degenerecy_predicates)
-            
+        embedding = Proof.parse_embeds(embed_lines, assumption_objects) if len(embed_lines) > 0 else None
+
         return Proof(
             assumption_objects | target_objects,
             assumption_objects,
@@ -725,8 +716,13 @@ class Proof:
 
         for step in self.steps:
             res_steps.append(step.substitute(subs))
-
-        res_embeds = {obj.substitute(subs): emb for obj, emb in self.embedding.items()}
+            
+        res_embeds = None
+        if self.embedding is not None:
+            res_embeds = {}
+            for name, embedded_object in self.embedding.items():
+                new_name = [value for obj, value in subs.items() if obj.name == name][0]
+                res_embeds[new_name] = embedded_object
 
         return Proof(
             res_assumption_objects | res_target_objects,

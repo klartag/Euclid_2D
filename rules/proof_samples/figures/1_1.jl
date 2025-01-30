@@ -13,3 +13,6 @@ Need to prove:
 distance(A, O) == distance(B, O)
 
 Proof:
+By right_triangle_circumcenter_v1 on C, A, B we get midpoint(B, C) == circumcenter(A, B, C)
+By circle_radius_v0_r on B, Circle(A, B, C) we get radius(Circle(A, B, C)) == distance(B, center(Circle(A, B, C)))
+By circle_radius_v0_r on A, Circle(A, B, C) we get radius(Circle(A, B, C)) == distance(A, center(Circle(A, B, C)))

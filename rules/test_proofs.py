@@ -117,9 +117,9 @@ def test_proof_shuffle():
     '''
     Tests that shuffling the names of objects in a proof
     does not make the proof invalid.
-    (Specifically, testing this on problem 4.1.1 from the Geometry in Figures book)
+    (Specifically, testing this on problem 1.1 from the Geometry in Figures book)
     '''
-    proof = Proof.parse((BASE_PATH / 'rules/proof_samples/figures/4_1_1.jl').open().read())
+    proof = Proof.parse((BASE_PATH / 'rules/proof_samples/figures/1_1.jl').open().read())
     shuffled = proof.shuffled()
     checker = ProofChecker(shuffled)
     checker.check()

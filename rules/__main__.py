@@ -6,6 +6,7 @@ from .proof_checker import main as proof_checker_main
 from .proof_gen.proof_generator import validate_main as proof_validator_main
 from .proof_gen.proof_generator import main as proof_generator_main
 from .trimmers.old_trimmer import main as old_trimmer_main
+from .embeddings.embedder.embedder import main as embedder_main
 from .trimmers.trimmer import main as trimmer_main
 from .proof_prettifier import main as prettifier_main
 from .pred_config import load_constructions_and_macros
@@ -26,31 +27,8 @@ Specific arguments for each command are explained when provided with the `-h` fl
 For instance: `python -m rules prove -h`.
 """
 
-
-def empty_main():
-    parser = argparse.ArgumentParser(description='Attempts to embed a problem in 2D space.')
-    parser.add_argument('path', help='The path of the problem to embed.', type=str)
-    parser.add_argument(
-        '--overwrite',
-        help='Overwrite the file with the proof when embedding is complete.',
-        action='store_true',
-    )
-    
-    args = parser.parse_args()
-
-    path = Proof.get_full_proof_path(args.path)
-
-    proof = Proof.parse(open(path, 'r').read(), False)
-
-    proof_text = proof.to_language_format()
-    if args.overwrite:
-        open(path, 'w').write(proof_text)
-    else:
-        print(proof_text)
-
-
 PROGRAM_LIST = {
-    'embed': empty_main,
+    'embed': embedder_main,
     'check': proof_checker_main,
     'validate': proof_validator_main,
     'prove': proof_generator_main,
