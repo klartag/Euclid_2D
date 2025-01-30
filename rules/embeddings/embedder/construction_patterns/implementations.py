@@ -16,12 +16,10 @@ from ...constructions import (
     new_line,
     new_circle,
     point_on_line,
-    line_on_point,
     point_on_circle,
     parallel_line,
     perpendicular_bisector,
-    projection,
-    reflection
+    projection
 )
 
 from .construction_pattern import ConstructionPattern
