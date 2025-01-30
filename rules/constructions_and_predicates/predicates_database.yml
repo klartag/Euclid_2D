@@ -21,6 +21,13 @@ collinear_and_not_between: # B in Line(A, C) but not in the segment AC
     - self
     - collinear(A, B, C)
 
+probably_between:
+  inputs:
+  - A, B, C: Point
+  preprocess: between
+  conclude:
+    - self
+
 concyclic:
   inputs:
     - A, B, C, D: Point

@@ -18,3 +18,8 @@ perpendicular:
   inputs:
   - {'k, l': Line}
   preprocess: symmetric
+probably_between:
+  conclude: [self]
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: between

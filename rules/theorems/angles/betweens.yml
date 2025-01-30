@@ -31,3 +31,22 @@ collinear_and_not_between_implies_orientation:
     - orientation(O, B, A) == orientation(O, B, C) mod 360
   rank: 2
   metadata: auto
+
+between_implies_angles:
+  inputs:
+    - A, B, C: Point
+  where:
+    - between(A, B, C)
+  conclude:
+    - angle(A, B, C) == 180 mod 360
+    - angle(B, C, A) == 0 mod 360
+    - angle(C, A, B) == 0 mod 360
+
+probably_between_and_collinear_implies_between:
+  inputs:
+    - A, B, C: Point
+  where:
+    - collinear(A, B, C)
+    - probably_between(A, B, C)
+  conclude:
+    - between(A, B, C)

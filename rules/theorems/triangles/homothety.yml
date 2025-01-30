@@ -1,4 +1,4 @@
-homothety:
+triangle_homothety:
   inputs:
     - A, B, C, A', B', C': Point
   where:
@@ -10,6 +10,8 @@ homothety:
     - parallel(Line(B, C), Line(B', C'))
     - parallel(Line(C, A), Line(C', A'))
     - triangles_are_homothetic: concurrent(Line(A, A'), Line(B, B'), Line(C, C'))
+  conclude:
+    - similar_triangles(A, B, C, A', B', C')
   possible_conclusions:
     - distance(A, B) != distance(A', B') => triangles_are_homothetic
     - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == -90 mod 360 => triangles_are_homothetic

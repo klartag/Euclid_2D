@@ -1,5 +1,7 @@
+import argparse
 import sys
 
+from .proof import Proof
 from .proof_checker import main as proof_checker_main
 from .proof_gen.proof_generator import validate_main as proof_validator_main
 from .proof_gen.proof_generator import main as proof_generator_main
@@ -13,6 +15,7 @@ HELP_MESSAGE = """\
 *** 2D Euclid ***
 The following commands are supported:
 
+embed [<args>]     -   Embeds the problem in 2D space.
 check [<args>]     -   Checks that a proof is correct.
 validate [<args>]  -   Validates that the Proof Generator can create this proof.
 prove [<args>]     -   Proves a Geometry problem.
@@ -24,7 +27,30 @@ For instance: `python -m rules prove -h`.
 """
 
 
+def empty_main():
+    parser = argparse.ArgumentParser(description='Attempts to embed a problem in 2D space.')
+    parser.add_argument('path', help='The path of the problem to embed.', type=str)
+    parser.add_argument(
+        '--overwrite',
+        help='Overwrite the file with the proof when embedding is complete.',
+        action='store_true',
+    )
+    
+    args = parser.parse_args()
+
+    path = Proof.get_full_proof_path(args.path)
+
+    proof = Proof.parse(open(path, 'r').read(), False)
+
+    proof_text = proof.to_language_format()
+    if args.overwrite:
+        open(path, 'w').write(proof_text)
+    else:
+        print(proof_text)
+
+
 PROGRAM_LIST = {
+    'embed': empty_main,
     'check': proof_checker_main,
     'validate': proof_validator_main,
     'prove': proof_generator_main,
