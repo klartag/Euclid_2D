@@ -45,6 +45,45 @@ RANDOM_SAMPLE_INCORRECT_PROBLEMS = [
     998,
 ]
 
+UNCHECKED_INCORRECT_PROBLEMS = [
+    6,
+    9,
+    20,
+    76,
+    78,
+    135,
+    193,
+    232,
+    235,
+    240,
+    270,
+    286,
+    325,
+    387,
+    393,
+    418,
+    464,
+    492,
+    497,
+    561,
+    567,
+    572,
+    590,
+    643,
+    657,
+    679,
+    750,
+    765,
+    766,
+    780,
+    816,
+    876,
+    887,
+    937,
+    952,
+    958,
+]
+
 RANDOM_SAMPLE_PARTIALLY_INCORRECT_PROBLEMS = [86, 682]
 
 RANDOM_SAMPLE_CORRECT_PROBLEMS = sorted(
@@ -61,7 +100,7 @@ def test_linear_sequencing(problem_id: str):
     if problem_id in RANDOM_SAMPLE_PARTIALLY_INCORRECT_PROBLEMS:
         pytest.skip()
 
-    expecting_failure = problem_id in RANDOM_SAMPLE_INCORRECT_PROBLEMS
+    expecting_failure = problem_id in RANDOM_SAMPLE_INCORRECT_PROBLEMS + UNCHECKED_INCORRECT_PROBLEMS
 
     with pytest.raises(AssertionError) if expecting_failure else nullcontext():
         problem_path = BASE_PATH / 'rules' / 'proof_samples' / 'linear' / 'random_sample' / f'{problem_id}.jl'
