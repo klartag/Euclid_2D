@@ -6,8 +6,8 @@ We focus on Large Language Models (LLMs), hoping to integrate an LLM proficient 
 
 We are testing the following hypotheses.
 
-Hypothesis 1: LLMs can learn to solve Euclidean geometry problems.
+Hypothesis 1: LLMs of moderate size (< 70B parameters) can learn to solve Euclidean geometry problems.
 
-Hypothesis 2: With the support of accompanying software (e.g., verifiers or numerical embeddings), LLMs can solve Euclidean geometry problems.
+Hypothesis 2: With the support of accompanying software (e.g., verifiers or numerical embeddings), such LLMs can solve Euclidean geometry problems.
 
 The level of Euclidean Geometry problems we are aiming at is roughly that of e.g. Akopyan's book "Geometry in Figures". We acknowledge the support of MSR for this project during its initial phase.
