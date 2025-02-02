@@ -1,11 +1,11 @@
-from typing import Callable, Type, TypeVar, List, Optional, Unpack
+from typing import Callable, List, Optional, Unpack
 from dataclasses import dataclass
 
 from ....geometry_objects.geo_object import GeoObject
 from ....geometry_objects.construction_object import ConstructionObject
 from ....predicates.predicate import Predicate
 
-from ..embedded_constructions.embedded_construction import EmbeddedConstruction, InputArgs, Output
+from ..embedded_constructions.embedded_construction import InputArgs, Output
 from ..embedded_constructions.explicit_embedded_construction import ExplicitEmbeddedConstruction
 
 from .construction_pattern import ConstructionPattern

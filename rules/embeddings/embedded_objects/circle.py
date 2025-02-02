@@ -3,12 +3,13 @@ from dataclasses import dataclass
 from decimal import Decimal
 from typing import Self
 
-from .embedded_object import EmbeddedObject, EPSILON
+from .embedded_object import EPSILON
+from .embedded_curve import EmbeddedCurve
 from .point import EmbeddedPoint
 
 
 @dataclass
-class EmbeddedCircle(EmbeddedObject):
+class EmbeddedCircle(EmbeddedCurve):
     '''
     Represents a circle given a center
     and the square of its radius.
@@ -24,13 +25,7 @@ class EmbeddedCircle(EmbeddedObject):
         return abs((point - self.center).length_squared() - self.radius_squared) < EPSILON**2
 
     def to_dict(self) -> dict:
-        return {
-            'center': self.center.to_dict(),
-            'radius_squared': str(self.radius_squared)
-        }
-        
+        return {'center': self.center.to_dict(), 'radius_squared': str(self.radius_squared)}
+
     def from_dict(data: dict) -> Self:
-        return EmbeddedCircle(
-            EmbeddedPoint.from_dict(data['center']),
-            Decimal(data['radius_squared'])
-        )
+        return EmbeddedCircle(EmbeddedPoint.from_dict(data['center']), Decimal(data['radius_squared']))

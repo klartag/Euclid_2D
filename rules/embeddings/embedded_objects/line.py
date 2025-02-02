@@ -2,12 +2,13 @@ from dataclasses import dataclass
 from decimal import Decimal
 from typing import Optional, Self
 
-from .embedded_object import EPSILON, EmbeddedObject
+from .embedded_object import EPSILON
+from .embedded_curve import EmbeddedCurve
 from .point import EmbeddedPoint
 
 
 @dataclass
-class EmbeddedLine(EmbeddedObject):
+class EmbeddedLine(EmbeddedCurve):
     '''
     Represents a line, going through `point`,
     and looking towards the direction `direction`.
@@ -47,13 +48,7 @@ class EmbeddedLine(EmbeddedObject):
         return self.point.is_equal(point) or (point - self.point).is_proportional(self.direction)
 
     def to_dict(self) -> dict:
-        return {
-            'point': self.point.to_dict(),
-            'direction': self.direction.to_dict()
-        }
-        
+        return {'point': self.point.to_dict(), 'direction': self.direction.to_dict()}
+
     def from_dict(data: dict) -> Self:
-        return EmbeddedLine(
-            EmbeddedPoint.from_dict(data['point']),
-            EmbeddedPoint.from_dict(data['direction'])
-        )
+        return EmbeddedLine(EmbeddedPoint.from_dict(data['point']), EmbeddedPoint.from_dict(data['direction']))

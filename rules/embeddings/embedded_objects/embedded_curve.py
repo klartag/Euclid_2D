@@ -1,0 +1,9 @@
+from abc import ABC, abstractmethod
+
+from .embedded_object import EmbeddedObject
+from .point import EmbeddedPoint
+
+
+class EmbeddedCurve(EmbeddedObject):
+    @abstractmethod
+    def contains_point(self, point: EmbeddedPoint) -> bool: ...

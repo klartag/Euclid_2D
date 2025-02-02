@@ -8,5 +8,5 @@ from .midpoint import midpoint
 from .new_object import new_point, new_line, new_circle
 from .object_on_object import point_on_line, line_on_point, point_on_circle
 from .parallels_and_perpendiculars import parallel_line, perpendicular_bisector
-from .projection import projection
-from .reflection import reflection
+from .projection import project
+from .reflection import reflect

@@ -27,11 +27,11 @@ class DiagramEmbedder:
         else:
             return None
 
-    def sequence_assumptions(
-        self, proof: Proof
-    ) -> Optional[List[EmbeddedConstruction]]:
+    def sequence_assumptions(self, proof: Proof) -> Optional[List[EmbeddedConstruction]]:
         objects = list(proof.assumption_objects.values())
-        predicates = [pred for pred in proof.assumption_predicates if not isinstance(pred, (DistinctPredicate, ExistsPredicate))]
+        predicates = [
+            pred for pred in proof.assumption_predicates if not isinstance(pred, (DistinctPredicate, ExistsPredicate))
+        ]
 
         constructions: List[EmbeddedConstruction] = []
 
@@ -64,6 +64,13 @@ class DiagramEmbedder:
                     distinct_names[obj1.name].append(obj0.name)
         return distinct_names
 
+    def check_distinct_objects(self, distinct_names: Mapping[str, List[str]], embedding: Embedding) -> bool:
+        for name0 in distinct_names:
+            for name1 in distinct_names[name0]:
+                if embedding[name0].is_equal(embedding[name1]):
+                    return False
+        return True
+
     def embed(self, proof: Proof) -> Optional[Embedding]:
         constructions = self.sequence_assumptions(proof)
 
@@ -76,18 +83,18 @@ class DiagramEmbedder:
 
         while len(constructions) > 0:
             for construction in list(constructions):
-                try:
-                    embedded_object = construction.construct(embedded_objects, distinct_names)
-                    if embedded_object is not None:
-                        embedded_objects[construction.output_name] = embedded_object
-                        constructions.remove(construction)
-                        break
-                    else:
-                        pass
-                except:
+                embedded_object = construction.construct(embedded_objects, distinct_names)
+                if embedded_object is not None:
+                    embedded_objects[construction.output_name] = embedded_object
+                    constructions.remove(construction)
+                    break
+                else:
                     pass
             else:
                 return None
+
+        if not self.check_distinct_objects(distinct_names, embedded_objects):
+            return None
 
         return embedded_objects
 
@@ -107,13 +114,13 @@ def main():
 
     path = Proof.get_full_proof_path(args.path)
     proof = Proof.parse(path.open().read(), False)
-    
+
     diagram_embedder = DiagramEmbedder()
     embedding = diagram_embedder.embed(proof)
-    
+
     if embedding is not None:
         proof.embedding = embedding
-    
+
     proof_text = proof.to_language_format()
     if args.overwrite:
         open(path, 'w').write(proof_text)

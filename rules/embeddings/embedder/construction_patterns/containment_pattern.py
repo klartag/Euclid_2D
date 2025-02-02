@@ -1,4 +1,4 @@
-from typing import Type, TypeVar, List, Optional, Tuple
+from typing import Callable, Type, TypeVar, List, Optional, Tuple, Unpack
 from dataclasses import dataclass
 
 from ....rule_utils import POINT
@@ -7,18 +7,18 @@ from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.implementations.in_predicate import InPredicate
 
-from ..embedded_constructions import EmbeddedConstruction
+from ..embedded_constructions.embedded_construction import EmbeddedConstruction, InputArgs, Output
 
 from .construction_pattern import ConstructionPattern
-
 
 C = TypeVar('C', bound=EmbeddedConstruction)
 
 
 @dataclass
-class IntersectionPattern[C](ConstructionPattern):
+class ContainmentPattern[C](ConstructionPattern):
     intersection_types: Tuple[str]
     construction_type: Type[C]
+    construction_method: Callable[[Unpack[InputArgs]], Output]
 
     def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[C]:
         if object_.type != POINT:
@@ -49,4 +49,4 @@ class IntersectionPattern[C](ConstructionPattern):
         if len(containing_objects) > 0:
             return None
 
-        return self.construction_type(tuple(sorted_object_names), object_.name)
+        return self.construction_type(tuple(sorted_object_names), object_.name, self.construction_method)
