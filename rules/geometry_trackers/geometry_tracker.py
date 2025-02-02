@@ -1,10 +1,14 @@
 import heapq
 
+from ..embeddings.constructions import CONSTRUCTION_METHOD_DICTIONARY
+
 from .linear_algebra_tracker import LinearAlgebraTracker
 
 from ..predicates.predicate_factory import predicate_from_args
 
 from ..theorem import Theorem
+
+from ..embeddings.embedded_objects import Embedding
 
 from ..proof_checker_utils import (
     ADD_CFG,
@@ -115,8 +119,11 @@ class GeometryTracker:
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
     _linear_algebra: LinearAlgebraTracker
+
     numeric_tracker: NumericTracker
     """Tracks 2D embeddings of the geometric configurations."""
+    embedding_tracker: Embedding
+    """A new numeric tracker to track 2D embeddings of the geometric configurations."""
 
     def __init__(self):
         self._objects = UnionFind()
@@ -132,13 +139,14 @@ class GeometryTracker:
 
         self.numeric_tracker = NumericTracker(NUMERIC_PRECISION)
 
+        self.embedding_tracker = {}
+
     def load_embeds(self, proof: Proof):
         """
         Loads the data of the known point embeddings.
         """
-        for obj, embed in proof.embeds.items():
-            for pred in self.numeric_tracker.add_object(obj, embed):
-                self.add_predicate(pred, ADD_CFG, 'From numeric tracker')
+        if proof.embedding is not None:
+            self.embedding_tracker = {name: embedded_object for (name, embedded_object) in proof.embedding.items()}
 
     def get_object(self, obj: GeoObject, config: StepConfig) -> GeoObject:
         """
@@ -349,6 +357,17 @@ class GeometryTracker:
                 self.process_angle(obj)
             case rule_utils.ORIENTATION:
                 self.process_orientation(obj)
+
+        if isinstance(obj, ConstructionObject) and obj.name not in self.embedding_tracker:
+            self.add_new_object_to_embedding(obj)
+
+    def add_new_object_to_embedding(self, obj: ConstructionObject):
+        construction_method = CONSTRUCTION_METHOD_DICTIONARY[obj.constructor.name]
+        for component in obj.components:
+            if component.name not in self.embedding_tracker:
+                return
+        embedded_parameters = [self.embedding_tracker[component.name] for component in obj.components]
+        self.embedding_tracker[obj.name] = construction_method(*embedded_parameters)
 
     def add_equal_angle(self, pred: Predicate, mod: int | None):
         """
@@ -813,7 +832,7 @@ class GeometryTracker:
         2. Predicates on these objects.
         3. Embeddings of the objects into R^2, if they are present.
         """
-        # self.load_embeds(proof)
+        self.load_embeds(proof)
         # Adding the objects defined by the proof.
         for obj in proof.all_objects.values():
             self.get_object(obj, ADD_CFG)
@@ -821,6 +840,6 @@ class GeometryTracker:
         # Adding the assumptions of the proof.
         for pred in proof.assumption_predicates:
             self.add_predicate(pred, ADD_CFG, 'Assumption predicate')
-        
+
         for pred in proof.auxiliary_predicates:
             self.add_predicate(pred, ADD_CFG, 'Auxiliary predicate')

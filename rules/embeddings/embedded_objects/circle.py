@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from decimal import Decimal
+from mpmath import mpf
 from typing import Self
 
 from .embedded_object import EPSILON
@@ -16,7 +16,7 @@ class EmbeddedCircle(EmbeddedCurve):
     '''
 
     center: EmbeddedPoint
-    radius_squared: Decimal
+    radius_squared: mpf
 
     def is_equal(self, other: 'EmbeddedCircle') -> bool:
         return self.center.is_equal(other.center) and abs(self.radius_squared - other.radius_squared) < EPSILON**2
@@ -28,4 +28,4 @@ class EmbeddedCircle(EmbeddedCurve):
         return {'center': self.center.to_dict(), 'radius_squared': str(self.radius_squared)}
 
     def from_dict(data: dict) -> Self:
-        return EmbeddedCircle(EmbeddedPoint.from_dict(data['center']), Decimal(data['radius_squared']))
+        return EmbeddedCircle(EmbeddedPoint.from_dict(data['center']), mpf(data['radius_squared']))

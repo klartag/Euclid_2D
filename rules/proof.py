@@ -2,7 +2,7 @@ import abc
 from collections import defaultdict
 import dataclasses
 from dataclasses import dataclass
-from decimal import Decimal
+from mpmath import mpf
 import itertools
 import json
 from pathlib import Path
@@ -17,7 +17,7 @@ from . import rule_utils
 
 from .rule_utils import ALL_TYPES, LITERAL, ProofParseError, split_args
 
-from .embeddings.embedded_objects import EmbeddedObject, EmbeddedPoint, EmbeddedLine, EmbeddedCircle, Embedding
+from .embeddings.embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, EmbeddedScalar, Embedding
 from .predicates.implementations.exists_predicate import ExistsPredicate
 from .predicates.predicate_factory import parse_predicate, predicate_from_args
 from .predicates.predicate import Predicate
@@ -510,7 +510,7 @@ class Proof:
                 case rule_utils.CIRCLE:
                     embedded_object = EmbeddedCircle.from_dict(data)
                 case rule_utils.ANGLE | rule_utils.SCALAR:
-                    embedded_object = Decimal(data)
+                    embedded_object = EmbeddedScalar(mpf(data))
 
             embedding[name] = embedded_object
 

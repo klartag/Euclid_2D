@@ -1,4 +1,4 @@
-from decimal import Decimal
+from mpmath import mp, mpf
 from typing import List
 from itertools import combinations
 
@@ -41,12 +41,19 @@ class NonDegeneracyPrediateCollector:
             diff1 = point1 - point0
             orthogonal_to_diff1 = EmbeddedPoint(diff1.y, -diff1.x)
             diff2 = point2 - point0
-            orientation = GeoObject(str(int(Decimal(90).copy_sign(diff2.scalar_product(orthogonal_to_diff1)))), LITERAL)
-
+            
+            orientation_value = int(mpf(90) * mp.sign(diff2.scalar_product(orthogonal_to_diff1)))
+            
+            orientation = GeoObject(str(orientation_value), LITERAL)
+            reverse_orientation = GeoObject(str(-orientation_value), LITERAL)
+            
             orientation_object = ConstructionObject.from_args('orientation', (object0, object1, object2))
+            reverse_orientation_object = ConstructionObject.from_args('orientation', (object2, object1, object0))
+            
             orientation_predicate = predicate_from_args('equals_mod_360', (orientation_object, orientation))
+            reverse_orientation_predicate = predicate_from_args('equals_mod_360', (reverse_orientation_object, reverse_orientation))
 
-            predicates.extend([not_collinear_predicate, orientation_predicate])
+            predicates.extend([not_collinear_predicate, orientation_predicate, reverse_orientation_predicate])
 
         return predicates
 

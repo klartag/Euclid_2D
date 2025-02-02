@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from decimal import Decimal
+from mpmath import mp, mpf
 from typing import Optional, Self
 
 from .embedded_object import EPSILON
@@ -18,7 +18,7 @@ class EmbeddedLine(EmbeddedCurve):
     direction: EmbeddedPoint
 
     @staticmethod
-    def from_equation(a: Decimal, b: Decimal, c: Decimal) -> Optional['EmbeddedLine']:
+    def from_equation(a: mpf, b: mpf, c: mpf) -> Optional['EmbeddedLine']:
         '''
         Creates a line that satisfies the equation `a*x + b*y + c == 0`.
         '''
@@ -27,11 +27,11 @@ class EmbeddedLine(EmbeddedCurve):
 
         point: EmbeddedPoint
         if abs(a) / abs(b) < 0.1:
-            point = EmbeddedPoint(Decimal('0'), -c / b)
+            point = EmbeddedPoint(mpf('0'), -c / b)
         elif abs(b) / abs(a) < 0.1:
-            point = EmbeddedPoint(-c / a, Decimal('0'))
+            point = EmbeddedPoint(-c / a, mpf('0'))
         else:
-            point = EmbeddedPoint(Decimal('1').copy_sign(a), Decimal('1').copy_sign(b)).scale(-c / (a + b))
+            point = EmbeddedPoint(mpf('1') * mp.sign(a), mpf('1') * mp.sign(b)).scale(-c / (a + b))
 
         direction = EmbeddedPoint(-b, a)
 

@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 
-from decimal import Decimal, getcontext
+from mpmath import mp, mpf
 from typing import Dict, Self
 
-getcontext().prec = 2000
-EPSILON = Decimal('0.1') ** 20
+mp.dps = 2000
+EPSILON = mpf('0.1') ** 20
 
 
 class EmbeddedObject(ABC):

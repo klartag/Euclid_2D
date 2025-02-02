@@ -14,3 +14,9 @@ Need to prove:
 angle(A, C, B) == angle(A, D, B) mod 360
 
 Proof:
+By concyclic_definition_0 on B, C, A, D we get D in Circle(A, B, C)
+By reverse_direction on C, B we get 180 == direction(C, B) - direction(B, C) mod 360
+By reverse_direction on C, A we get 180 == direction(C, A) - direction(A, C) mod 360
+By reverse_direction on D, B we get 180 == direction(D, B) - direction(B, D) mod 360
+By reverse_direction on D, A we get 180 == direction(D, A) - direction(A, D) mod 360
+By angles_on_chord_v0 on D, C, A, B, Circle(A, B, C) we get angle(D, A, C) == angle(D, B, C) mod 360

@@ -1,4 +1,4 @@
-from decimal import Decimal
+from mpmath import mpf
 
 from ..embedded_objects import EmbeddedPoint, EmbeddedLine
 
