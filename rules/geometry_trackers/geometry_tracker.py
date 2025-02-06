@@ -146,7 +146,7 @@ class GeometryTracker:
 
         self.numeric_tracker = NumericTracker(NUMERIC_PRECISION)
 
-        self.embedding_tracker = {}
+        self.embedding_tracker = Embedding()
 
     def load_embeds(self, proof: Proof):
         """

@@ -697,12 +697,15 @@ def main():
         proof = Proof.parse(path.open().read(), False)
 
         try:
-            if args.trim and proof.embedding is None:
+            if args.embed and proof.embedding is None: # ARGS.embed
                 print('Running Embedder...')
                 diagram_embedder = DiagramEmbedder()
                 embedding = diagram_embedder.embed(proof)
                 if embedding is not None:
                     proof.embedding = embedding
+                
+                proof_text = proof.to_language_format()
+                
                 if args.overwrite:
                     open(path, 'w').write(proof_text)
                 else:
