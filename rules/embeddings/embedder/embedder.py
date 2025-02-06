@@ -118,11 +118,30 @@ def main():
     diagram_embedder = DiagramEmbedder()
     embedding = diagram_embedder.embed(proof)
 
-    if embedding is not None:
-        proof.embedding = embedding
+    if embedding is None:
+        print('Embedding failed')
+        return
+    
+    proof.embedding = embedding
 
     proof_text = proof.to_language_format()
     if args.overwrite:
         open(path, 'w').write(proof_text)
     else:
         print(proof_text)
+        
+    failed_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == False]
+    unknown_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == None]
+    
+    print('Embedding successful.')
+    if len(failed_predicates) > 0:
+        print('Incorrect target predicates:')
+        for pred in failed_predicates:
+            print(pred.to_language_format())
+        print()
+        
+    if len(unknown_predicates) > 0:
+        print('Unknown target predicates:')
+        for pred in unknown_predicates:
+            print(pred.to_language_format())
+        print()
