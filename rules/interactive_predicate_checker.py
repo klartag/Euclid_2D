@@ -17,7 +17,7 @@ class InteractivePredicateChecker:
                     break
                 predicate = parse_predicate(predicate_data, object_map)
                 is_predicate_proved = self.geometry_tracker.contains_predicate(predicate)
-                is_predicate_true_in_embedding = self.geometry_tracker.check_predicate_in_embedding(predicate)
+                is_predicate_true_in_embedding = self.geometry_tracker.embedding_tracker.evaluate_predicate(predicate)
                 embedding_text = 'Undefined' if is_predicate_true_in_embedding is None else str(is_predicate_true_in_embedding)
                 print(f'{is_predicate_proved} ({embedding_text} in embedding)')
                 

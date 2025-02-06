@@ -366,61 +366,9 @@ class GeometryTracker:
                 self.process_orientation(obj)
 
         if isinstance(obj, ConstructionObject) and obj.name not in self.embedding_tracker:
-            embedded_construction_object = self.evaluate_construction_object_in_embedding(obj)
+            embedded_construction_object = self.embedding_tracker.evaluate_construction_object(obj)
             if embedded_construction_object is not None:
                 self.embedding_tracker[obj.name] = embedded_construction_object
-
-    def evaluate_construction_object_in_embedding(self, obj: ConstructionObject) -> Optional[ConstructionObject]:
-        if obj.constructor.name not in CONSTRUCTION_METHOD_DICTIONARY:
-            return None
-        construction_method = CONSTRUCTION_METHOD_DICTIONARY[obj.constructor.name]
-        embedded_parameters = []
-        for component in obj.components:
-            embedded_component = self.get_embedded_object(component)
-            if embedded_component is None:
-                return
-            embedded_parameters.append(embedded_component)
-        return construction_method(*embedded_parameters)
-        
-    def get_embedded_object(self, obj: GeoObject) -> Optional[EmbeddedObject]:
-        if obj.name in self.embedding_tracker:
-            return self.embedding_tracker[obj.name]
-        elif isinstance(obj, ConstructionObject):
-            return self.evaluate_construction_object_in_embedding(obj)
-        elif isinstance(obj, EquationObject):
-            return self.evaluate_equation_object(obj)
-        elif obj.type == LITERAL:
-            return EmbeddedScalar(mpf(obj.name))
-        else:
-            return None
-
-    def evaluate_equation_object(self, eqn: EquationObject) -> Optional[EmbeddedScalar]:
-        lhs = self.get_embedded_object(eqn.left)
-        rhs = self.get_embedded_object(eqn.right)
-        
-        if not isinstance(lhs, EmbeddedScalar) or not isinstance(rhs, EmbeddedScalar):
-            return None
-        
-        match eqn.op:
-            case EqOp.ADD: return EmbeddedScalar(lhs.value + rhs.value)
-            case EqOp.SUB: return EmbeddedScalar(lhs.value - rhs.value)
-            case EqOp.MUL: return EmbeddedScalar(lhs.value * rhs.value)
-            case EqOp.DIV: return EmbeddedScalar(lhs.value / rhs.value)
-            case _: return None
-
-        
-    def check_predicate_in_embedding(self, predicate: Predicate) -> Optional[bool]:
-        if predicate.name in PREDICATE_METHOD_DICTIONARY:
-            predicate_method = PREDICATE_METHOD_DICTIONARY[predicate.name]
-            embedded_parameters = []
-            for component in predicate.components:
-                parameter = self.get_embedded_object(component)
-                if parameter is None:
-                    return None
-                embedded_parameters.append(parameter)
-            return predicate_method(*embedded_parameters)
-        else:
-            return None
 
     def add_equal_angle(self, pred: Predicate, mod: int | None):
         """
