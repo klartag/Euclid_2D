@@ -93,7 +93,7 @@ RANDOM_SAMPLE_CORRECT_PROBLEMS = sorted(
 
 
 @pytest.mark.parametrize("problem_id", range(1000))
-def test_linear_sequencing(problem_id: str):
+def test_problem_embedding(problem_id: str):
     '''
     Tests that the DiagramEmbedder can figure out in what order
     objects need to be built, in order to create an embedding.
@@ -110,3 +110,6 @@ def test_linear_sequencing(problem_id: str):
 
         embedding = diagram_embedder.embed(proof)
         assert embedding is not None
+        
+        for target_predicate in proof.target_predicates:
+            assert embedding.evaluate_predicate(target_predicate)
