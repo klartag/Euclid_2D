@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from mpmath import mpf
 from typing import Self
 
+from ...rule_utils import SCALAR
+
 from .embedded_object import EmbeddedObject, EPSILON
 
 
@@ -13,6 +15,9 @@ class EmbeddedScalar(EmbeddedObject):
     '''
 
     value: mpf
+    
+    def _type(self) -> str:
+        return SCALAR
 
     def is_equal(self, other: 'EmbeddedScalar') -> bool:
         return abs(self.value - other.value) < EPSILON

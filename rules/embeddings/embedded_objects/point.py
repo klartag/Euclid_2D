@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from mpmath import mpf
 from typing import Self
 
+from ...rule_utils import POINT
 from .embedded_object import EmbeddedObject, EPSILON
 
 
@@ -14,6 +15,9 @@ class EmbeddedPoint(EmbeddedObject):
 
     x: mpf
     y: mpf
+    
+    def _type(self) -> str:
+        return POINT
 
     def is_equal(self, other: 'EmbeddedPoint') -> bool:
         return abs(self.x - other.x) < EPSILON and abs(self.y - other.y) < EPSILON

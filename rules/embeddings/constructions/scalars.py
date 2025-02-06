@@ -1,6 +1,6 @@
 from typing import Optional
 
-from mpmath import mp, mpf
+from mpmath import mp, mpf, pi
 
 from ..embedded_objects import EmbeddedPoint, EmbeddedScalar, EmbeddedCircle
 
@@ -14,7 +14,7 @@ def direction(point0: EmbeddedPoint, point1: EmbeddedPoint) -> Optional[Embedded
         return None
 
     diff = (point1 - point0)
-    return EmbeddedScalar(mp.atan2(diff.y, diff.x) % 360)
+    return EmbeddedScalar((mp.atan2(diff.y, diff.x) * 180 / pi) % 360)
 
 
 def angle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> Optional[EmbeddedScalar]:
@@ -22,7 +22,10 @@ def angle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -
     direction2 = direction(point1, point2)
     if direction0 is None or direction2 is None:
         return None
-    return EmbeddedScalar((direction2.value - direction0.value) % 360)
+    angle = (direction2.value - direction0.value) % 360
+    if angle > 180:
+        angle -= 360
+    return EmbeddedScalar(angle)
 
 
 def orientation(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> Optional[EmbeddedScalar]:

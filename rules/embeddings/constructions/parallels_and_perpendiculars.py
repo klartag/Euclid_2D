@@ -6,6 +6,9 @@ from ..embedded_objects import EmbeddedPoint, EmbeddedLine
 def parallel_line(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedLine:
     return EmbeddedLine(point, line.direction)
 
+def perpendicular_line(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedLine:
+    orthogonal_direction = EmbeddedPoint(line.direction.y, -line.direction.x)
+    return EmbeddedLine(point, orthogonal_direction)
 
 def perpendicular_bisector(point0: EmbeddedPoint, point1: EmbeddedPoint) -> Optional[EmbeddedLine]:
     if point0.is_equal(point1):

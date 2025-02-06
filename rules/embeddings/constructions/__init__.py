@@ -11,7 +11,7 @@ from .line import line
 from .midpoint import midpoint
 from .new_object import new_point, new_line, new_circle
 from .object_on_object import point_on_line, line_on_point, point_on_circle
-from .parallels_and_perpendiculars import parallel_line, perpendicular_bisector
+from .parallels_and_perpendiculars import parallel_line, perpendicular_line, perpendicular_bisector
 from .projection import project
 from .reflection import reflect
 from .scalars import angle, orientation, distance, direction, power_of_a_point, radius
@@ -28,6 +28,7 @@ CONSTRUCTION_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject,
     'perpendicular_bisector': perpendicular_bisector,
     'center': center,
     'parallel_line': parallel_line,
+    'perpendicular_line': perpendicular_line,
     'projection': project,
     'midpoint': midpoint,
     

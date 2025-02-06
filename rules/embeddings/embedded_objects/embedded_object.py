@@ -9,6 +9,9 @@ EPSILON = mpf('0.1') ** 20
 
 class EmbeddedObject(ABC):
     @abstractmethod
+    def _type(self) -> str: ...
+
+    @abstractmethod
     def to_dict(self) -> str: ...
 
     @abstractmethod

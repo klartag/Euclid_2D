@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from mpmath import mp, mpf
 from typing import Optional, Self
 
+from ...rule_utils import LINE
+
 from .embedded_object import EPSILON
 from .embedded_curve import EmbeddedCurve
 from .point import EmbeddedPoint
@@ -16,6 +18,9 @@ class EmbeddedLine(EmbeddedCurve):
 
     point: EmbeddedPoint
     direction: EmbeddedPoint
+
+    def _type(self) -> str:
+        return LINE
 
     @staticmethod
     def from_equation(a: mpf, b: mpf, c: mpf) -> Optional['EmbeddedLine']:

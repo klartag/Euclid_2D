@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from mpmath import mpf
 from typing import Self
 
+from ...rule_utils import CIRCLE
+
 from .embedded_object import EPSILON
 from .embedded_curve import EmbeddedCurve
 from .point import EmbeddedPoint
@@ -17,6 +19,9 @@ class EmbeddedCircle(EmbeddedCurve):
 
     center: EmbeddedPoint
     radius_squared: mpf
+    
+    def _type(self) -> str:
+        return CIRCLE
 
     def is_equal(self, other: 'EmbeddedCircle') -> bool:
         return self.center.is_equal(other.center) and abs(self.radius_squared - other.radius_squared) < EPSILON**2
