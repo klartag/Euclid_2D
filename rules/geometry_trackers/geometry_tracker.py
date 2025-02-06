@@ -15,7 +15,7 @@ from ..predicates.predicate_factory import predicate_from_args
 
 from ..theorem import Theorem
 
-from ..embeddings.embedded_objects import Embedding
+from ..embeddings import Embedding
 
 from ..proof_checker_utils import (
     ADD_CFG,
@@ -153,7 +153,7 @@ class GeometryTracker:
         Loads the data of the known point embeddings.
         """
         if proof.embedding is not None:
-            self.embedding_tracker = {name: embedded_object for (name, embedded_object) in proof.embedding.items()}
+            self.embedding_tracker = proof.embedding.shallow_copy()
 
     def get_object(self, obj: GeoObject, config: StepConfig) -> GeoObject:
         """

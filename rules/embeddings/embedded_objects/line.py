@@ -4,7 +4,7 @@ from typing import Optional, Self
 
 from ...rule_utils import LINE
 
-from .embedded_object import EPSILON
+from .embedded_object import EPSILON, EmbeddedObject
 from .embedded_curve import EmbeddedCurve
 from .point import EmbeddedPoint
 
@@ -42,7 +42,10 @@ class EmbeddedLine(EmbeddedCurve):
 
         return EmbeddedLine(point, direction)
 
-    def is_equal(self, other: 'EmbeddedLine'):
+    def is_equal(self, other: EmbeddedObject):
+        if other._type() != LINE:
+            return False
+
         if self.point.is_equal(other.point):
             return self.direction.is_proportional(other.direction)
 

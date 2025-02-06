@@ -19,8 +19,8 @@ class EmbeddedPoint(EmbeddedObject):
     def _type(self) -> str:
         return POINT
 
-    def is_equal(self, other: 'EmbeddedPoint') -> bool:
-        return abs(self.x - other.x) < EPSILON and abs(self.y - other.y) < EPSILON
+    def is_equal(self, other: EmbeddedObject) -> bool:
+        return other._type() == POINT and abs(self.x - other.x) < EPSILON and abs(self.y - other.y) < EPSILON
 
     def __add__(self, other: 'EmbeddedPoint') -> 'EmbeddedPoint':
         return EmbeddedPoint(self.x + other.x, self.y + other.y)

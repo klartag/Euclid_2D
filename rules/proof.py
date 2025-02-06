@@ -17,7 +17,8 @@ from . import rule_utils
 
 from .rule_utils import ALL_TYPES, LITERAL, ProofParseError, split_args
 
-from .embeddings.embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, EmbeddedScalar, Embedding
+from .embeddings import Embedding
+from .embeddings.embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, EmbeddedScalar
 from .predicates.implementations.exists_predicate import ExistsPredicate
 from .predicates.predicate_factory import parse_predicate, predicate_from_args
 from .predicates.predicate import Predicate
@@ -492,7 +493,7 @@ class Proof:
         """
         Parses the embedding section of the proof.
         """
-        embedding = {}
+        embedding = Embedding()
         for line in data:
             if not line.strip():
                 continue
@@ -748,7 +749,7 @@ class Proof:
             list(self.auxiliary_predicates),
             dict(self.target_objects),
             list(self.target_predicates),
-            dict(self.embedding) if self.embedding is not None else None,
+            self.embedding.shallow_copy() if self.embedding is not None else None,
             list(self.steps),
         )
 

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Callable, List, Mapping, Tuple, Optional, Unpack
 
-from ...embedded_objects.embedded_object import EmbeddedObject
+from ... import Embedding
 
 from .embedded_construction import EmbeddedConstruction
 
@@ -16,7 +16,7 @@ class ExplicitEmbeddedConstruction[InputArgs, Output](EmbeddedConstruction[Input
         self.construction_method = construction_method
 
     def construct(
-        self, embedded_objects: Mapping[str, EmbeddedObject], distinct_names: Mapping[str, List[str]]
+        self, partial_embedding: Embedding, distinct_names: Mapping[str, List[str]]
     ) -> Optional[Output]:
-        parameters = self.get_parameters(embedded_objects)
+        parameters = self.get_parameters(partial_embedding)
         return self.construction_method(*parameters)

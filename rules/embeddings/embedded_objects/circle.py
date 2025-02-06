@@ -5,7 +5,7 @@ from typing import Self
 
 from ...rule_utils import CIRCLE
 
-from .embedded_object import EPSILON
+from .embedded_object import EPSILON, EmbeddedObject
 from .embedded_curve import EmbeddedCurve
 from .point import EmbeddedPoint
 
@@ -23,8 +23,8 @@ class EmbeddedCircle(EmbeddedCurve):
     def _type(self) -> str:
         return CIRCLE
 
-    def is_equal(self, other: 'EmbeddedCircle') -> bool:
-        return self.center.is_equal(other.center) and abs(self.radius_squared - other.radius_squared) < EPSILON**2
+    def is_equal(self, other: EmbeddedObject) -> bool:
+        return other._type() == CIRCLE and self.center.is_equal(other.center) and abs(self.radius_squared - other.radius_squared) < EPSILON**2
 
     def contains_point(self, point: EmbeddedPoint) -> bool:
         return abs((point - self.center).length_squared() - self.radius_squared) < EPSILON**2

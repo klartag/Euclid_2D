@@ -5,7 +5,7 @@ from itertools import combinations
 from ...geometry_objects.geo_object import GeoObject
 from ...rule_utils import LITERAL
 
-from ..embedded_objects import Embedding, EmbeddedPoint
+from .. import Embedding, EmbeddedPoint
 
 from ...predicates.predicate import Predicate
 from ...predicates.predicate_factory import predicate_from_args

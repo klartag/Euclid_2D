@@ -10,7 +10,7 @@ from ...predicates.predicate import Predicate
 from ...predicates.implementations.distinct_predicate import DistinctPredicate
 from ...predicates.implementations.exists_predicate import ExistsPredicate
 
-from ..embedded_objects import Embedding
+from .. import Embedding
 
 from .construction_patterns.implementations import CONSTRUCTION_PATTERNS
 from .embedded_constructions.embedded_construction import EmbeddedConstruction
@@ -79,13 +79,13 @@ class DiagramEmbedder:
 
         distinct_names: Mapping[str, List[str]] = self.get_distinct_names(proof)
 
-        embedded_objects: Embedding = {}
+        embedding = Embedding()
 
         while len(constructions) > 0:
             for construction in list(constructions):
-                embedded_object = construction.construct(embedded_objects, distinct_names)
+                embedded_object = construction.construct(embedding, distinct_names)
                 if embedded_object is not None:
-                    embedded_objects[construction.output_name] = embedded_object
+                    embedding[construction.output_name] = embedded_object
                     constructions.remove(construction)
                     break
                 else:
@@ -93,10 +93,10 @@ class DiagramEmbedder:
             else:
                 return None
 
-        if not self.check_distinct_objects(distinct_names, embedded_objects):
+        if not self.check_distinct_objects(distinct_names, embedding):
             return None
 
-        return embedded_objects
+        return embedding
 
 
 def main():
