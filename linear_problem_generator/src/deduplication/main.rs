@@ -1,4 +1,4 @@
-use std::{ffi::OsString, fs, path::PathBuf};
+use std::{collections::HashSet, ffi::OsString, fs, path::PathBuf};
 
 use clap::Parser;
 use glob::glob;
@@ -152,13 +152,13 @@ fn collect_problems(dir: &PathBuf) -> Vec<Problem> {
 /// Returns the filtered problems as a vector.
 fn remove_duplicates(problems: &[Problem]) -> Vec<Problem> {
     let mut result = Vec::<Problem>::new();
+    let mut problem_hashes = HashSet::<u64>::new();
 
     for problem in problems.iter().tqdm() {
-        if result
-            .iter()
-            .all(|other_problem| !problem.is_homeomorphic_to(&other_problem))
+        if !problem_hashes.contains(&problem.hash())
         {
-            result.push(problem.clone());
+            problem_hashes.insert(problem.hash());
+            result.push(problem.clone());   
         }
     }
 
