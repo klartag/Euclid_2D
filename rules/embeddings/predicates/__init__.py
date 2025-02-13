@@ -9,6 +9,7 @@ from .equality import equals, equals_mod_360
 from .bisect import bisect
 from .line_relations import parallel, perpendicular
 from .triangles import isosceles_triangle, congruent_triangles, anti_congruent_triangles, similar_triangles, anti_similar_triangles
+from .quadrilaterals import trapezoid, isosceles_trapezoid, parallelogram, rhombus, rectangle, square
 
 
 PREDICATE_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject, ...]]], bool]] = {
@@ -29,17 +30,12 @@ PREDICATE_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject, ..
     'anti_congruent_triangles': anti_congruent_triangles,
     'similar_triangles': similar_triangles,
     'anti_similar_triangles': anti_similar_triangles,
+    
+    'trapezoid': trapezoid,
+    'isosceles_trapezoid': isosceles_trapezoid,
+    'parallelogram': parallelogram,
+    'rhombus': rhombus,
+    'rectangle': rectangle,
+    'square': square,
 }
 
-'''
-Predicates remaining:
-
-* some very atomic predicates
-
-* trapezoid
-* isosceles_trapezoid
-* parallelogram
-* rhombus
-* rectangle
-* square
-'''
