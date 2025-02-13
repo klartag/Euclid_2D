@@ -2,9 +2,10 @@ from mpmath import mpf
 from typing import Optional
 
 from ..embedded_objects import EmbeddedPoint, EmbeddedLine
-from .line import line
 from ..predicates.collinear import collinear
 
+from .line_intersection import line_intersection
+from .line import line
 
 def parallel_line(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedLine:
     return EmbeddedLine(point, line.direction)
@@ -25,3 +26,12 @@ def altitude(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint
     if collinear(point0, point1, point2):
         return None    
     return perpendicular_line(point0, line(point1, point2))
+
+def orthocenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> Optional[EmbeddedPoint]:
+    if collinear(point0, point1, point2):
+        return None
+    altitude0 = altitude(point0, point1, point2)
+    altitude1 = altitude(point1, point2, point0)
+    if altitude0 is None or altitude1 is None:
+        return None
+    return line_intersection(altitude0, altitude1)

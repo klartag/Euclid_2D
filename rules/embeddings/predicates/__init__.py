@@ -15,3 +15,25 @@ PREDICATE_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject, ..
     'equals': equals,
     'equals_mod_360': equals_mod_360,
 }
+
+'''
+Predicates remaining:
+
+* collinear_and_not_between
+* bisect
+* perpendicular
+* parallel
+* isosceles_triangle
+
+* trapezoid
+* isosceles_trapezoid
+* parallelogram
+* rhombus
+* rectangle
+* square
+
+* congruent_triangles
+* anti_congruent_triangles
+* similar_triangles
+* anti_similar_triangles
+'''
