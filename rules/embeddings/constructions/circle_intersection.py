@@ -2,7 +2,7 @@ from typing import Optional
 
 from ..embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle
 
-from .reflection import reflect
+from .reflection import reflect_point
 
 
 def line_circle_other_intersection(
@@ -10,7 +10,7 @@ def line_circle_other_intersection(
 ) -> Optional[EmbeddedPoint]:
     orthogonal_direction = EmbeddedPoint(line.direction.y, -line.direction.x)
     symmetry_line = EmbeddedLine(circle.center, orthogonal_direction)
-    other_intersection = reflect(first_intersection, symmetry_line)
+    other_intersection = reflect_point(first_intersection, symmetry_line)
     if other_intersection.is_equal(first_intersection):
         return None
     return other_intersection
@@ -22,7 +22,7 @@ def circle_circle_other_intersection(
     if circle0.center.is_equal(circle1.center):
         return None
     symmetry_line = EmbeddedLine(circle0.center, circle1.center - circle0.center)
-    other_intersection = reflect(first_intersection, symmetry_line)
+    other_intersection = reflect_point(first_intersection, symmetry_line)
     if other_intersection.is_equal(first_intersection):
         return None
     return other_intersection
