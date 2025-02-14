@@ -19,7 +19,7 @@ def circumcenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedP
     if perpendicular_bisector0 is None or perpendicular_bisector1 is None:
         return None
 
-    center = line_intersection(perpendicular_bisector0, perpendicular_bisector1)
+    return line_intersection(perpendicular_bisector0, perpendicular_bisector1)
 
 
 def circumcircle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> Optional[EmbeddedCircle]:

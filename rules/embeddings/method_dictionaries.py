@@ -25,9 +25,12 @@ from .predicates.bisect import bisect
 from .predicates.collinear import collinear, between, collinear_and_not_between
 from .predicates.concurrent import concurrent
 from .predicates.concyclic import concyclic
-from .predicates.equality import equals, equals_mod_360
+from .predicates.containment import _in, not_in
+from .predicates.convex import convex
+from .predicates.equality import equals, equals_mod_360, not_equals, not_equals_mod_360, distinct, identical, not_one_of
 from .predicates.line_relations import parallel, perpendicular
 from .predicates.quadrilaterals import trapezoid, isosceles_trapezoid, parallelogram, rhombus, rectangle, square
+from .predicates.tangent import tangent
 from .predicates.triangles import isosceles_triangle, congruent_triangles, anti_congruent_triangles, similar_triangles, anti_similar_triangles
 
 
@@ -77,10 +80,18 @@ PREDICATE_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject, ..
     'concurrent': concurrent,
     'concyclic': concyclic,
     'congruent_triangles': congruent_triangles,
+    'convex': convex,
+    'distinct': distinct,
     'equals_mod_360': equals_mod_360,
     'equals': equals,
+    'identical': identical,
+    'in': _in,
     'isosceles_trapezoid': isosceles_trapezoid,
     'isosceles_triangle': isosceles_triangle,
+    'not_equals_mod_360': not_equals_mod_360,
+    'not_equals': not_equals,
+    'not_in': not_in,
+    'not_one_of': not_one_of,
     'parallel': parallel,
     'parallelogram': parallelogram,
     'perpendicular': perpendicular,
@@ -88,5 +99,6 @@ PREDICATE_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject, ..
     'rhombus': rhombus,
     'similar_triangles': similar_triangles,
     'square': square,
+    'tangent': tangent,
     'trapezoid': trapezoid,
 }
