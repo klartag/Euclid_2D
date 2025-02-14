@@ -2,7 +2,9 @@ from typing import List
 
 from ....rule_utils import POINT, LINE, CIRCLE
 
-from ...constructions import (
+from ... import CONSTRUCTION_METHOD_DICTIONARY
+
+from ...method_dictionaries import (
     line_circle_other_intersection,
     circle_circle_other_intersection,
     circumcircle,
@@ -14,7 +16,6 @@ from ...constructions import (
     new_circle,
     point_on_line,
     point_on_circle,
-    CONSTRUCTION_METHOD_DICTIONARY,
 )
 
 from .construction_pattern import ConstructionPattern

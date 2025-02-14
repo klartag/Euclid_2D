@@ -11,8 +11,8 @@ from ..geometry_objects.construction_object import ConstructionObject
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.eq_op import EqOp
 
-from .constructions import CONSTRUCTION_METHOD_DICTIONARY
-from .predicates import PREDICATE_METHOD_DICTIONARY
+from .method_dictionaries import CONSTRUCTION_METHOD_DICTIONARY, PREDICATE_METHOD_DICTIONARY
+
 from .embedded_objects import EmbeddedObject, EmbeddedScalar
 
 

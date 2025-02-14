@@ -1,13 +1,4 @@
-from typing import Optional
-
 import heapq
-from mpmath import mpf
-
-from ..embeddings.embedded_objects import EmbeddedObject, EmbeddedScalar
-from ..embeddings.constructions import CONSTRUCTION_METHOD_DICTIONARY
-from ..embeddings.predicates import PREDICATE_METHOD_DICTIONARY
-
-from ..geometry_objects.eq_op import EqOp
 
 from .linear_algebra_tracker import LinearAlgebraTracker
 

@@ -1,6 +1,6 @@
 from ..embedded_objects import EmbeddedLine
 
-from ..constructions import line_intersection
+from ..constructions.line_intersection import line_intersection
 
 
 def concurrent(line0: EmbeddedLine, line1: EmbeddedLine, line2: EmbeddedLine) -> bool:
