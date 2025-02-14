@@ -55,9 +55,6 @@ class Construction:
         Constructs an object using the given arguments.
         """
         if len(args) != len(self.signature) or any(arg.type != sig.type for arg, sig in zip(args, self.signature)):
-            print('===============================================')
-            print(args)
-            print(self.name)
             raise ProofCheckError(f'Construction {self.name} received illegal arguments: {args}')
 
         args = self.symmetry.canonical_order(args)

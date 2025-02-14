@@ -28,6 +28,7 @@ from .predicates.concyclic import concyclic
 from .predicates.containment import _in, not_in
 from .predicates.convex import convex
 from .predicates.equality import equals, equals_mod_360, not_equals, not_equals_mod_360, distinct, identical, not_one_of
+from .predicates.exists import exists
 from .predicates.line_relations import parallel, perpendicular
 from .predicates.quadrilaterals import trapezoid, isosceles_trapezoid, parallelogram, rhombus, rectangle, square
 from .predicates.tangent import tangent
@@ -84,6 +85,7 @@ PREDICATE_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject, ..
     'distinct': distinct,
     'equals_mod_360': equals_mod_360,
     'equals': equals,
+    'exists': exists,
     'identical': identical,
     'in': _in,
     'isosceles_trapezoid': isosceles_trapezoid,

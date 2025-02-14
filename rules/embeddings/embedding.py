@@ -98,4 +98,4 @@ class Embedding:
                 embedded_parameters.append(parameter)
             return predicate_method(*embedded_parameters)
         else:
-            return None
+            raise Exception(f'Predicate {predicate.name} not recognized.')
