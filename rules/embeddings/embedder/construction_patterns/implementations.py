@@ -22,6 +22,7 @@ from .construction_pattern import ConstructionPattern
 from .explicit_construction_pattern import ExplicitConstructionPattern
 from .containment_pattern import ContainmentPattern
 from .reverse_containment_pattern import ReverseContainmentPattern
+from .simple_symmetric_predicate_pattern import SimpleSymmetricPredicatePattern
 
 from .empty_pattern import EmptyPattern
 
@@ -41,6 +42,9 @@ CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
     ReverseContainmentPattern(1, LINE, ExplicitEmbeddedConstruction, line_on_point),
     ReverseContainmentPattern(2, LINE, ExplicitEmbeddedConstruction, line),
     ReverseContainmentPattern(3, CIRCLE, ExplicitEmbeddedConstruction, circumcircle),
+    SimpleSymmetricPredicatePattern(ExplicitEmbeddedConstruction, lambda point0, point1, point2: None if circumcircle(point0, point1, point2) is None else point_on_circle(circumcircle(point0, point1, point2)), 'concyclic'),
+    SimpleSymmetricPredicatePattern(ExplicitEmbeddedConstruction, lambda point0, point1: None if line(point0, point1) is None else point_on_line(line(point0, point1)), 'collinear'),
+    SimpleSymmetricPredicatePattern(ExplicitEmbeddedConstruction, lambda line0, line1: None if line_intersection(line0, line1) is None else line_on_point(line_intersection(line0, line1)), 'concurrent'),
 ] + [
     ExplicitConstructionPattern(construction_name, construction_method)
     for (construction_name, construction_method) in CONSTRUCTION_METHOD_DICTIONARY.items()
