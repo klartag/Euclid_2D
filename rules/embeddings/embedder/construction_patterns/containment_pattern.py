@@ -35,13 +35,13 @@ class ContainmentPattern[C](ConstructionPattern):
                     return None
                 containing_objects.append(containing_object)
 
-        sorted_object_names = []
+        sorted_objects = []
 
         for intersection_type in self.intersection_types:
             for containing_object in list(containing_objects):
                 if containing_object.type == intersection_type:
                     containing_objects.remove(containing_object)
-                    sorted_object_names.append(containing_object.name)
+                    sorted_objects.append(containing_object)
                     break
             else:
                 return None
@@ -49,4 +49,4 @@ class ContainmentPattern[C](ConstructionPattern):
         if len(containing_objects) > 0:
             return None
 
-        return self.construction_type(tuple(sorted_object_names), object_.name, self.construction_method)
+        return self.construction_type(tuple(sorted_objects), object_.name, self.construction_method)

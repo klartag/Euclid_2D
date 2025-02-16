@@ -28,7 +28,6 @@ class ExplicitConstructionPattern(ConstructionPattern):
             return None
         if rhs.constructor.name != self.construction_name:
             return None
-        rhs_names = tuple([obj.name for obj in rhs.components])
-        if not (object_.name not in rhs_names and all(name.isalnum() for name in rhs_names)):
+        if any([involved_object.name == object_.name for involved_object in rhs.involved_objects()]):
             return None
-        return ExplicitEmbeddedConstruction(rhs_names, object_.name, self.construction_method)
+        return ExplicitEmbeddedConstruction(rhs.components, object_.name, self.construction_method)

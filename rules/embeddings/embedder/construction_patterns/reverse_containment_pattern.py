@@ -40,6 +40,4 @@ class ReverseContainmentPattern[C](ConstructionPattern):
         if len(contained_points) != self.contained_point_count:
             return None
 
-        point_names = [point.name for point in contained_points]
-
-        return self.construction_type(tuple(point_names), object_.name, self.construction_method)
+        return self.construction_type(tuple(contained_points), object_.name, self.construction_method)

@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import List, Mapping, TypeVar, Tuple, Optional, TypeVarTuple, Unpack
 
+from ....geometry_objects.geo_object import GeoObject
+
 from ... import Embedding
 
 from ...embedded_objects.embedded_object import EmbeddedObject
@@ -12,11 +14,11 @@ Output = TypeVar('Output', bound=EmbeddedObject)
 
 @dataclass
 class EmbeddedConstruction[InputArgs, Output](ABC):
-    input_names: Tuple[str, ...]
+    input_objects: Tuple[GeoObject, ...]
     output_name: str
 
     def get_parameters(self, partial_embedding: Embedding) -> Tuple[Unpack[InputArgs]]:
-        return tuple([partial_embedding[name] for name in self.input_names])
+        return tuple([partial_embedding.evaluate_object(obj_) for obj_ in self.input_objects])
 
     @abstractmethod
     def construct(
