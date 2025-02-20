@@ -1,6 +1,6 @@
 import abc
 from typing import Any, Generic, TypeVar
-import linear_b
+from . import linear_b
 from rules.proof_checker_utils import KNOWN_KEYS
 from rules.rule_utils import GeometryError
 from util import Bijection

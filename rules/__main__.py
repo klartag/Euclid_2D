@@ -7,6 +7,7 @@ from .trimmers.old_trimmer import main as old_trimmer_main
 from .trimmers.trimmer import main as trimmer_main
 from .proof_prettifier import main as prettifier_main
 from .pred_config import load_constructions_and_macros
+from .intermediate_step_finder.intermediate_step_finder import main as intermediate_step_finder_main
 
 
 HELP_MESSAGE = """\
@@ -31,6 +32,7 @@ PROGRAM_LIST = {
     'old_trim': old_trimmer_main,
     'trim': trimmer_main,
     'prettify': prettifier_main,
+    'test': intermediate_step_finder_main,
 }
 
 

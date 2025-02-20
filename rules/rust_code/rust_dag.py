@@ -1,5 +1,5 @@
 from typing import Generic, TypeVar
-from linear_b import RustPredicate, RustPattern, RustSignatureDag
+from .linear_b import RustPredicate, RustPattern, RustSignatureDag
 
 
 class RPredicate:

@@ -30,7 +30,7 @@ class ProofTrimmer:
 
         ProofChecker(self.proof).check()
 
-        for i in tqdm(range(len(self.proof.steps), 0, -1)):
+        for i in range(len(self.proof.steps), 0, -1):
             if i > end:
                 continue
 
