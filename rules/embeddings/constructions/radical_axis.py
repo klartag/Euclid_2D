@@ -7,7 +7,7 @@ from .parallels_and_perpendiculars import perpendicular_line
 
 
 def radical_axis(circle0: EmbeddedCircle, circle1: EmbeddedCircle) -> Optional[EmbeddedLine]:
-    center_line = line(circle0, circle1)
+    center_line = line(circle0.center, circle1.center)
     if center_line is None:
         return None
     
