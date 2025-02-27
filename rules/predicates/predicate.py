@@ -130,7 +130,7 @@ class Predicate:
         """
         Checks if a predicate is an "open" predicate, which is almost always satisfied.
         """
-        return 'not' in self.name or self.name == 'triangle' or 'distinct' in self.name
+        return 'not' in self.name or self.name in ['triangle', 'distinct', 'exists', 'convex']
 
     def potential(self, torch_obj_map: 'dict[str, Point|Line|Circle|Triangle]', eps: float = 1e-1):
         """

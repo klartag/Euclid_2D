@@ -31,8 +31,8 @@ from ..predicates.global_predicates import get_constructions
 from ..predicates.predicate_factory import predicate_from_args
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
-from .. import pred_config
 from ..geometry_objects.construction_object import Construction, ConstructionObject
+from ..embeddings.embedded_predicate_value import EmbeddedPredicateValue
 from ..proof import ObjDefineStep, Proof, Step, TheoremStep
 from ..proof_checker import CHECK_CFG, TRUST_NO_ADD_CFG, ProofChecker, involved_objects
 from ..proof_checker_utils import KNOWN_KEYS
@@ -210,7 +210,7 @@ class ProofGenerator:
                     for pred in fin_step.result_predicates
                 ):
                     continue
-                if self.is_trivial_theorem_step(fin_step):
+                if self.should_skip_theorem_step(fin_step):
                     continue
                 # print(f'Found step {fin_step.to_language_format()} with score {step.score}.')
                 found_steps.append(fin_step)
@@ -305,8 +305,14 @@ class ProofGenerator:
                 new_step = StepSuggestion(step, match_)
                 heapq.heappush(self.step_queue, new_step)
 
-    def is_trivial_theorem_step(self, theorem_step: TheoremStep) -> bool:
+    def should_skip_theorem_step(self, theorem_step: TheoremStep) -> bool:
         theorem = Theorem.all_theorems()[theorem_step.theorem_name]
+        
+        for predicate in theorem.required_embedding_predicates:
+            substituted_predicate = predicate.substitute(dict(zip(theorem.signature, theorem_step.inputs)))
+            value = self.checker.geometry_tracker.embedding_tracker.evaluate_predicate(substituted_predicate)
+            if value != EmbeddedPredicateValue.Correct:
+                return True
 
         for condition in theorem.trivial_if_equal_conditions:
             obj_names = [obj.name for obj in theorem.signature]
@@ -321,6 +327,7 @@ class ProofGenerator:
                 ############### comment for now ##############################################
                 # print(f'Found trivial theorem step! ({theorem_step})')
                 return True
+
         return False
 
 

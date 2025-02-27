@@ -3,9 +3,10 @@ import time
 
 from tqdm import tqdm
 
-from rules.proof import Proof
-from rules.proof_checker import ProofChecker
-from rules.rule_utils import ProofCheckError
+from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from ..proof import Proof
+from ..proof_checker import ProofChecker
+from ..rule_utils import ProofCheckError
 
 MIN_CHECKPOINT_STEPS = 2
 
@@ -128,6 +129,11 @@ def main():
     args = parser.parse_args()
     path = Proof.get_full_proof_path(args.path)
     proof = Proof.parse(path.open().read())
+    
+    if proof.embedding is not None:
+        collector = NonDegeneracyPrediateCollector()
+        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
+        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
 
     t0 = time.time()
     trimmer = ProofTrimmer(proof)

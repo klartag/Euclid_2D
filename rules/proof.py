@@ -511,7 +511,7 @@ class Proof:
                 case rule_utils.CIRCLE:
                     embedded_object = EmbeddedCircle.from_dict(data)
                 case rule_utils.ANGLE | rule_utils.SCALAR:
-                    embedded_object = EmbeddedScalar(mpf(data))
+                    embedded_object = EmbeddedScalar.from_dict(data)
 
             embedding[name] = embedded_object
 

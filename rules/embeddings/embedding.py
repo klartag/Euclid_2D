@@ -14,6 +14,7 @@ from ..geometry_objects.eq_op import EqOp
 from .method_dictionaries import CONSTRUCTION_METHOD_DICTIONARY, PREDICATE_METHOD_DICTIONARY
 
 from .embedded_objects import EmbeddedObject, EmbeddedScalar
+from .embedded_predicate_value import EmbeddedPredicateValue
 
 
 class Embedding:
@@ -81,21 +82,24 @@ class Embedding:
             return None
         
         match eqn.op:
-            case EqOp.ADD: return EmbeddedScalar(lhs.value + rhs.value)
-            case EqOp.SUB: return EmbeddedScalar(lhs.value - rhs.value)
-            case EqOp.MUL: return EmbeddedScalar(lhs.value * rhs.value)
-            case EqOp.DIV: return EmbeddedScalar(lhs.value / rhs.value)
+            case EqOp.ADD: return lhs + rhs
+            case EqOp.SUB: return lhs - rhs
+            case EqOp.MUL: return lhs * rhs
+            case EqOp.DIV: return lhs / rhs
             case _: return None
 
-    def evaluate_predicate(self, predicate: Predicate) -> Optional[bool]:
+    def evaluate_predicate(self, predicate: Predicate) -> EmbeddedPredicateValue:
         if predicate.name in PREDICATE_METHOD_DICTIONARY:
             predicate_method = PREDICATE_METHOD_DICTIONARY[predicate.name]
             embedded_parameters = []
             for component in predicate.components:
                 parameter = self.evaluate_object(component)
                 if parameter is None:
-                    return None
+                    return EmbeddedPredicateValue.Undefined
                 embedded_parameters.append(parameter)
-            return predicate_method(*embedded_parameters)
+            if predicate_method(*embedded_parameters):
+                return EmbeddedPredicateValue.Correct
+            else:
+                return EmbeddedPredicateValue.Incorrect
         else:
             raise Exception(f'Predicate {predicate.name} not recognized.')

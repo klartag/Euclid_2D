@@ -1,5 +1,6 @@
-import math
 from typing import TYPE_CHECKING, Mapping
+
+import math
 
 from ..predicates.global_predicates import get_constructions
 from ..symmetry import Symmetry

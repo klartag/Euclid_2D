@@ -22,26 +22,6 @@ class EmbeddedLine(EmbeddedCurve):
     def _type(self) -> str:
         return LINE
 
-    @staticmethod
-    def from_equation(a: mpf, b: mpf, c: mpf) -> Optional['EmbeddedLine']:
-        '''
-        Creates a line that satisfies the equation `a*x + b*y + c == 0`.
-        '''
-        if abs(a) < EPSILON and abs(b) < EPSILON:
-            return None
-
-        point: EmbeddedPoint
-        if abs(a) / abs(b) < 0.1:
-            point = EmbeddedPoint(mpf('0'), -c / b)
-        elif abs(b) / abs(a) < 0.1:
-            point = EmbeddedPoint(-c / a, mpf('0'))
-        else:
-            point = EmbeddedPoint(mpf('1') * mp.sign(a), mpf('1') * mp.sign(b)).scale(-c / (a + b))
-
-        direction = EmbeddedPoint(-b, a)
-
-        return EmbeddedLine(point, direction)
-
     def is_equal(self, other: EmbeddedObject):
         if other._type() != LINE:
             return False

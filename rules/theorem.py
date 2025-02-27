@@ -15,6 +15,7 @@ THEOREM_FOLDER = BASE_PATH / 'rules/theorems'
 
 INPUT_LABEL = 'inputs'
 CONDITION_LABEL = 'where'
+EMBEDDING_CONDITION_LABEL = 'where_embedding'
 CONSTRUCTION_LABEL = 'construct'
 RESULT_PREDICATE_LABEL = 'conclude'
 POSS_CONCLUSIONS_LABEL = 'possible_conclusions'
@@ -31,6 +32,8 @@ class Theorem:
     """The required types of objects."""
     required_predicates: list[Predicate]
     """The predicates the objects should satisfy."""
+    required_embedding_predicates: list[Predicate]
+    """The predicates the objects should satisfy."""
     result_objects: list[GeoObject]
     """The objects constructed by the theorem."""
     result_predicates: list[Predicate]
@@ -45,13 +48,15 @@ class Theorem:
     path: Path=None
     """Path of the file where the theorem is stored."""
 
-    def __init__(self, name: str, data: str, signature: list[GeoObject], required_predicates: list[Predicate], 
+    def __init__(self, name: str, data: str, signature: list[GeoObject],
+                 required_predicates: list[Predicate], required_embedding_predicates: list[Predicate],
                  result_objects: list[GeoObject], result_predicates: list[Predicate],
                  trivial_if_equal_conditions: list[list[list[str]]], rank: int, metadata: str, path: Path=None):
         self.name = name
         self.data = data
         self.signature = signature
         self.required_predicates = required_predicates
+        self.required_embedding_predicates = required_embedding_predicates  
         self.result_objects = result_objects
         self.result_predicates = result_predicates
         self.trivial_if_equal_conditions = trivial_if_equal_conditions
@@ -91,6 +96,7 @@ class Theorem:
             try:
                 signature: list[GeoObject] = []
                 required_predicates: list[Predicate] = []
+                required_embedding_predicates: list[Predicate] = []
                 result_objects: list[GeoObject] = []
                 result_predicates: list[Predicate] = []
                 conclusion_flows: dict[str, str] = {}
@@ -129,6 +135,15 @@ class Theorem:
                         case str():
                             predicate = parse_predicate(predicate_block, obj_map)
                             required_predicates.append(predicate)
+                        case _:
+                            raise NotImplementedError(f'Unknown predicate block type {type(predicate_block)} in theorem {theorem_name}')
+
+                for predicate_block in data.get(EMBEDDING_CONDITION_LABEL, []):
+                    match predicate_block:
+                        # Named predicates
+                        case str():
+                            predicate = parse_predicate(predicate_block, obj_map)
+                            required_embedding_predicates.append(predicate)
                         case _:
                             raise NotImplementedError(f'Unknown predicate block type {type(predicate_block)} in theorem {theorem_name}')
                             
@@ -170,7 +185,7 @@ class Theorem:
                         trivial_if_equal_conditions[i] = [[obj_name] for obj_name in trivial_if_equal_conditions[i]]
 
                 # Validating the predicates.
-                for pred in itertools.chain(required_predicates, result_predicates, predicate_map.values()):
+                for pred in itertools.chain(required_predicates + required_embedding_predicates, result_predicates, predicate_map.values()):
                     if not pred.is_valid():
                         raise ValueError(f'In theorem {theorem_name}, predicate {pred} is invalid!')
                 
@@ -179,7 +194,7 @@ class Theorem:
                 # Building the base theorem, without any conclusion flows.
                 # We build it only if there are results not using the conclusion flows.
                 if len(result_predicates) > 0 or len(result_objects) > 0:
-                    res.append(Theorem(theorem_name, data, signature, required_predicates, result_objects, result_predicates, trivial_if_equal_conditions, rank, metadata, path))
+                    res.append(Theorem(theorem_name, data, signature, required_predicates, required_embedding_predicates, result_objects, result_predicates, trivial_if_equal_conditions, rank, metadata, path))
                 
                 for flow_name, flow in conclusion_flows.items():
                     # Splitting the conclusion flow
@@ -205,9 +220,9 @@ class Theorem:
 
                     if symbol[0] == '<':
                         rev_name = f'{flow_name}_r' if symbol[-1] == '>' else flow_name
-                        res.append(Theorem(rev_name, data, signature, required_predicates + right_preds, result_objects, result_predicates + left_preds, trivial_if_equal_conditions, rank, metadata, path))
+                        res.append(Theorem(rev_name, data, signature, required_predicates + right_preds, required_embedding_predicates, result_objects, result_predicates + left_preds, trivial_if_equal_conditions, rank, metadata, path))
                     if symbol[-1] == '>':
-                        res.append(Theorem(flow_name, data, signature, required_predicates + left_preds, result_objects, result_predicates + right_preds, trivial_if_equal_conditions, rank, metadata, path))
+                        res.append(Theorem(flow_name, data, signature, required_predicates + left_preds, required_embedding_predicates, result_objects, result_predicates + right_preds, trivial_if_equal_conditions, rank, metadata, path))
             except Exception as e:
                 e.args = (f'In theorem {theorem_name}:\n{e.args[0]}',) + e.args[1:]
                 raise e

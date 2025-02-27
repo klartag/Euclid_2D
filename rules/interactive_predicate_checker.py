@@ -37,9 +37,11 @@ class InteractivePredicateChecker:
     def check_predicate(self, predicate: Predicate) -> str:
         is_predicate_proved = self.geometry_tracker.contains_predicate(predicate)
         is_predicate_true_in_embedding = self.geometry_tracker.embedding_tracker.evaluate_predicate(predicate)
-        embedding_text = 'Undefined' if is_predicate_true_in_embedding is None else str(is_predicate_true_in_embedding)
-        return f'{is_predicate_proved} ({embedding_text} in embedding)'
+        return f'{is_predicate_proved} ({is_predicate_true_in_embedding.value} in embedding)'
 
     def check_geometry_object(self, obj: GeoObject) -> str:
         embedded_object = self.geometry_tracker.embedding_tracker.evaluate_object(obj)
-        return 'Successfully evaluated in embedding.' if embedded_object is not None else  'Failed to evaluate in embedding.'
+        if embedded_object is None:
+            return 'Failed to evaluate in embedding.'
+        else:
+            return 'Successfully evaluated in embedding.'
