@@ -103,6 +103,14 @@ orthocenter:
   - {'A, B, C': Point}
   preprocess: symmetric
   where: ['not_collinear(A, B, C)']
+point_circle_tangent_line:
+  conclude: [P in l, 'tangent(l, c)']
+  construct:
+  - {l: Line}
+  inputs:
+  - {P: Point}
+  - {c: Circle}
+  where: [P in c]
 power_of_a_point:
   construct:
   - {x: Scalar}

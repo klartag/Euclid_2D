@@ -21,4 +21,6 @@ class ExplicitEmbeddedConstruction[InputArgs, Output](EmbeddedConstruction[Input
         self, partial_embedding: Embedding, distinct_names: Mapping[str, List[str]]
     ) -> Optional[Output]:
         parameters = self.get_parameters(partial_embedding)
+        if any(parameter is None for parameter in parameters):
+            return None
         return self.construction_method(*parameters)

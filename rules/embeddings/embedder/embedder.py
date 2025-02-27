@@ -1,19 +1,26 @@
 from collections import defaultdict
 import itertools
 from pathlib import Path
-from typing import Dict, List, Mapping, Optional, Sequence
+from typing import Dict, List, Mapping, Optional
 
-from rules.proof import Proof
+from rules.predicates.predicate_factory import predicate_from_args
 
+from ...rule_utils import POINT
 from ...geometry_objects.geo_object import GeoObject
 from ...predicates.predicate import Predicate
 from ...predicates.implementations.distinct_predicate import DistinctPredicate
 from ...predicates.implementations.exists_predicate import ExistsPredicate
+from ...predicates.implementations.in_predicate import InPredicate
+from ...proof import Proof
 
 from .. import Embedding
+from ..embedded_predicate_value import EmbeddedPredicateValue
 
 from .construction_patterns.implementations import CONSTRUCTION_PATTERNS
 from .embedded_constructions.embedded_construction import EmbeddedConstruction
+
+
+EMBEDDING_ATTEMPTS = 1000
 
 
 class DiagramEmbedder:
@@ -26,13 +33,27 @@ class DiagramEmbedder:
                 return construction
         else:
             return None
+    
+    def process_assumptions(self, predicates: List[Predicate]) -> Optional[List[Predicate]]:
+        processed_predicates = []
+        for pred in predicates:
+            # Removing open predicates:
+            if pred.is_open():
+                continue
+            # Splitting all `In` predicates into pieces:
+            if pred.name == 'in':
+                point_indices = [i for i in range(len(pred.components)) if pred.components[i].type == POINT]
+                curve_indices = [i for i in range(len(pred.components)) if pred.components[i].type != POINT]
+                for i in point_indices:
+                    for j in curve_indices:
+                        if i >= j:
+                            return None
+                        processed_predicates.append(predicate_from_args('in', (pred.components[i], pred.components[j])))
+            else:
+                processed_predicates.append(pred)
+        return processed_predicates
 
-    def sequence_assumptions(self, proof: Proof) -> Optional[List[EmbeddedConstruction]]:
-        objects = list(proof.assumption_objects.values())
-        predicates = [
-            pred for pred in proof.assumption_predicates if not isinstance(pred, (DistinctPredicate, ExistsPredicate))
-        ]
-
+    def sequence_assumptions(self, objects: List[GeoObject], predicates: List[Predicate]) -> Optional[List[EmbeddedConstruction]]:
         constructions: List[EmbeddedConstruction] = []
 
         while len(objects) > 0:
@@ -63,24 +84,10 @@ class DiagramEmbedder:
                     distinct_names[obj0.name].append(obj1.name)
                     distinct_names[obj1.name].append(obj0.name)
         return distinct_names
-
-    def check_distinct_objects(self, distinct_names: Mapping[str, List[str]], embedding: Embedding) -> bool:
-        for name0 in distinct_names:
-            for name1 in distinct_names[name0]:
-                if embedding[name0].is_equal(embedding[name1]):
-                    return False
-        return True
-
-    def embed(self, proof: Proof) -> Optional[Embedding]:
-        constructions = self.sequence_assumptions(proof)
-
-        if constructions is None:
-            return None
-
-        distinct_names: Mapping[str, List[str]] = self.get_distinct_names(proof)
-
+    
+    def embed_construction_sequence(self, constructions: List[EmbeddedConstruction], distinct_names: Mapping[str, List[str]]) -> Optional[Embedding]:
         embedding = Embedding()
-
+        constructions = constructions[:]
         while len(constructions) > 0:
             for construction in list(constructions):
                 embedded_object = construction.construct(embedding, distinct_names)
@@ -92,11 +99,33 @@ class DiagramEmbedder:
                     pass
             else:
                 return None
+        return embedding
+    
+    def check_predicates(self, embedding: Embedding, predicates: List[Predicate]) -> bool:
+        for pred in predicates:
+            if embedding.evaluate_predicate(pred) != EmbeddedPredicateValue.Correct:
+                return False
+        else:
+            return True
 
-        if not self.check_distinct_objects(distinct_names, embedding):
+    def embed(self, proof: Proof) -> Optional[Embedding]:
+        objects = list(proof.assumption_objects.values())
+        separated_predicates = self.process_assumptions(proof.assumption_predicates)
+        constructions = self.sequence_assumptions(objects, separated_predicates)
+
+        if constructions is None:
             return None
 
-        return embedding
+        distinct_names: Mapping[str, List[str]] = self.get_distinct_names(proof)
+
+        for _ in range(EMBEDDING_ATTEMPTS):
+            embedding = self.embed_construction_sequence(constructions, distinct_names)
+            if embedding is None:
+                continue
+            if not self.check_predicates(embedding, proof.assumption_predicates):
+                continue
+            return embedding
+        return None
 
 
 def main():
@@ -104,6 +133,11 @@ def main():
 
     parser = argparse.ArgumentParser(description='Embeds problems in 2D Euclidean space.')
     parser.add_argument('path', help='The path of the problem file to embed.', type=Path)
+    parser.add_argument(
+        '--show',
+        help='Print the embedding when successful.',
+        action='store_true',
+    )
     parser.add_argument(
         '--overwrite',
         help='Overwrite the file with the proof when embedding is complete.',
@@ -125,13 +159,15 @@ def main():
     proof.embedding = embedding
 
     proof_text = proof.to_language_format()
+
+    if args.show:
+        print(proof_text)
+
     if args.overwrite:
         open(path, 'w').write(proof_text)
-    else:
-        print(proof_text)
-        
-    failed_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == False]
-    unknown_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == None]
+    
+    failed_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Incorrect]
+    unknown_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Undefined]
     
     print('Embedding successful.')
     if len(failed_predicates) > 0:

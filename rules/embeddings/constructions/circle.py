@@ -1,6 +1,6 @@
 from typing import Optional
 
-from ..embedded_objects import EmbeddedPoint, EmbeddedCircle
+from ..embedded_objects import EPSILON, EmbeddedPoint, EmbeddedCircle, EmbeddedScalar
 
 from .line_intersection import line_intersection
 from .parallels_and_perpendiculars import perpendicular_bisector
@@ -29,3 +29,13 @@ def circumcircle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedP
         return None
 
     return EmbeddedCircle(center, (point0 - center).length_squared())
+
+def circle_from_center_and_point(point0: EmbeddedPoint, point1: EmbeddedPoint) -> Optional[EmbeddedCircle]:
+    if point0.is_equal(point1):
+        return None
+    return EmbeddedCircle(point0, (point0 - point1).length_squared())
+
+def circle_from_center_and_radius(point: EmbeddedPoint, scalar: EmbeddedScalar) -> Optional[EmbeddedCircle]:
+    if scalar.value < EPSILON:
+        return None
+    return EmbeddedCircle(point, scalar.value ** 2)

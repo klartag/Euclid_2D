@@ -44,3 +44,7 @@ def power_of_a_point(point: EmbeddedPoint, circle: EmbeddedCircle) -> EmbeddedSc
 
 def radius(circle: EmbeddedCircle) -> EmbeddedScalar:
     return EmbeddedScalar(circle.radius_squared.sqrt())
+
+
+def log(scalar: EmbeddedScalar) -> Optional[EmbeddedScalar]:
+    return EmbeddedScalar(mp.log(scalar.value))

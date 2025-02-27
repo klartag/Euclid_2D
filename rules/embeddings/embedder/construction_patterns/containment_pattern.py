@@ -10,6 +10,7 @@ from ....predicates.implementations.in_predicate import InPredicate
 from ..embedded_constructions.embedded_construction import EmbeddedConstruction, InputArgs, Output
 
 from .construction_pattern import ConstructionPattern
+from .locus_patterns.implementations import LOCUS_PATTERNS
 
 C = TypeVar('C', bound=EmbeddedConstruction)
 
@@ -26,14 +27,10 @@ class ContainmentPattern[C](ConstructionPattern):
 
         containing_objects: List[GeoObject] = []
         for predicate in predicates:
-            if not isinstance(predicate, InPredicate):
+            locus = self.parse_containment_predicate(object_, predicate)
+            if locus is None:
                 return None
-            if predicate.components[0] != object_:
-                return None
-            for containing_object in predicate.components[1:]:
-                if containing_object.type == POINT:
-                    return None
-                containing_objects.append(containing_object)
+            containing_objects.append(locus)
 
         sorted_objects = []
 
@@ -50,3 +47,11 @@ class ContainmentPattern[C](ConstructionPattern):
             return None
 
         return self.construction_type(tuple(sorted_objects), object_.name, self.construction_method)
+
+    def parse_containment_predicate(self, object_: GeoObject, predicate: Predicate) -> Optional[GeoObject]:
+        for locus_pattern in LOCUS_PATTERNS:
+            locus = locus_pattern.match(object_, predicate)
+            if locus is not None:
+                return locus
+        else:
+            return None

@@ -196,6 +196,18 @@ line_circle_tangent_point:
   conclude:
     - P in l, c
 
+point_circle_tangent_line:
+  inputs:
+    - P: Point
+    - c: Circle
+  where:
+    - P in c
+  construct:
+    - l: Line
+  conclude:
+    - P in l
+    - tangent(l, c)
+
 #primitive
 line_circle_other_intersection: # We need one intersection so that the other intersection is known 
   inputs:

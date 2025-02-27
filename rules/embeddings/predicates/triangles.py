@@ -12,11 +12,11 @@ def isosceles_triangle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: Emb
 def congruent_without_orientation(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint, point4: EmbeddedPoint, point5: EmbeddedPoint) -> bool:
     if collinear(point0, point1, point2) or collinear(point3, point4, point5):
         return False
-    if abs((point0 - point1).length_squared() - (point3 - point4).length_squared()) < EPSILON**2:
+    if abs((point0 - point1).length_squared() - (point3 - point4).length_squared()) > EPSILON**2:
         return False
-    if abs((point1 - point2).length_squared() - (point4 - point5).length_squared()) < EPSILON**2:
+    if abs((point1 - point2).length_squared() - (point4 - point5).length_squared()) > EPSILON**2:
         return False
-    if abs((point2 - point0).length_squared() - (point5 - point3).length_squared()) < EPSILON**2:
+    if abs((point2 - point0).length_squared() - (point5 - point3).length_squared()) > EPSILON**2:
         return False
     return True
 

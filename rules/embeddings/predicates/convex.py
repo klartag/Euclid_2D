@@ -7,4 +7,4 @@ from .equality import identical
 def convex(*points: EmbeddedPoint) -> bool:
     if len(points) <= 3:
         return True
-    return identical([orientation(points[i - 2], points[i - 1], points[i]) for i in range(len(points))])
+    return identical(*[orientation(points[i - 2], points[i - 1], points[i]) for i in range(len(points))])

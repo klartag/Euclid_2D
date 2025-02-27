@@ -29,13 +29,15 @@ class ReverseContainmentPattern[C](ConstructionPattern):
         for predicate in predicates:
             if not isinstance(predicate, InPredicate):
                 return None
-            if predicate.components[-1] != object_:
+            if len(predicate.components) != 2:
                 return None
-            for contained_point in predicate.components[:-1]:
-                if contained_point.type == POINT:
-                    contained_points.append(contained_point)
-                else:
-                    return None
+            if predicate.components[0].type != POINT:
+                return None
+            if predicate.components[1] != object_:
+                return None
+            if object_ in predicate.components[0].involved_objects():
+                return None
+            contained_points.append(predicate.components[0])
                 
         if len(contained_points) != self.contained_point_count:
             return None

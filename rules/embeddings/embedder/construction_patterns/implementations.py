@@ -34,18 +34,21 @@ CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
     EmptyPattern(POINT, new_point),
     EmptyPattern(LINE, new_line),
     EmptyPattern(CIRCLE, new_circle),
+    ReverseContainmentPattern(1, LINE, ExplicitEmbeddedConstruction, line_on_point),
+    ReverseContainmentPattern(2, LINE, ExplicitEmbeddedConstruction, line),
+    ReverseContainmentPattern(3, CIRCLE, ExplicitEmbeddedConstruction, circumcircle),
+    SimpleSymmetricPredicatePattern(
+        ExplicitEmbeddedConstruction,
+        lambda line0, line1: None if line_intersection(line0, line1) is None else line_on_point(line_intersection(line0, line1)),
+        'concurrent'
+    ),
+] + [
+    ExplicitConstructionPattern(construction_name, construction_method)
+    for (construction_name, construction_method) in CONSTRUCTION_METHOD_DICTIONARY.items()
+] + [
     ContainmentPattern((LINE,), ExplicitEmbeddedConstruction, point_on_line),
     ContainmentPattern((CIRCLE,), ExplicitEmbeddedConstruction, point_on_circle),
     ContainmentPattern((LINE, LINE), ExplicitEmbeddedConstruction, line_intersection),
     ContainmentPattern((LINE, CIRCLE), OtherIntersectionEmbeddedConstruction, line_circle_other_intersection),
     ContainmentPattern((CIRCLE, CIRCLE), OtherIntersectionEmbeddedConstruction, circle_circle_other_intersection),
-    ReverseContainmentPattern(1, LINE, ExplicitEmbeddedConstruction, line_on_point),
-    ReverseContainmentPattern(2, LINE, ExplicitEmbeddedConstruction, line),
-    ReverseContainmentPattern(3, CIRCLE, ExplicitEmbeddedConstruction, circumcircle),
-    SimpleSymmetricPredicatePattern(ExplicitEmbeddedConstruction, lambda point0, point1, point2: None if circumcircle(point0, point1, point2) is None else point_on_circle(circumcircle(point0, point1, point2)), 'concyclic'),
-    SimpleSymmetricPredicatePattern(ExplicitEmbeddedConstruction, lambda point0, point1: None if line(point0, point1) is None else point_on_line(line(point0, point1)), 'collinear'),
-    SimpleSymmetricPredicatePattern(ExplicitEmbeddedConstruction, lambda line0, line1: None if line_intersection(line0, line1) is None else line_on_point(line_intersection(line0, line1)), 'concurrent'),
-] + [
-    ExplicitConstructionPattern(construction_name, construction_method)
-    for (construction_name, construction_method) in CONSTRUCTION_METHOD_DICTIONARY.items()
 ]

@@ -25,7 +25,7 @@ def isogonal_conjugate(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: Emb
     if bisector1 is None or bisector2 is None:
         return None
     
-    line1 = line(point2, reflect_point(point0, bisector1))
+    line1 = line(point1, reflect_point(point0, bisector1))
     line2 = line(point2, reflect_point(point0, bisector2))
     if line1 is None or line2 is None:
         return None

@@ -8,6 +8,10 @@ def collinear(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoin
     return (point1 - point0).is_proportional(point2 - point0)
 
 
+def not_collinear(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
+    return not collinear(point0, point1, point2)
+
+
 def between(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
     if not collinear(point0, point1, point2):
         return False

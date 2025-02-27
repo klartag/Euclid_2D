@@ -3,7 +3,7 @@ from typing import Optional
 from ..embedded_objects import EmbeddedPoint
 
 from .midpoint import midpoint
-from .circumcircle import circumcircle
+from .circle import circumcircle
 
 def nine_point_circle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> Optional[EmbeddedPoint]:
     midpoint0 = midpoint(point1, point2)
