@@ -1,18 +1,34 @@
-triangle_homothety:
+triangle_homothety_0:
   inputs:
     - A, B, C, A', B', C': Point
   where:
-    - A != A'
-    - B != B'
-    - C != C'
-    - not_collinear(A, B, C)
     - parallel(Line(A, B), Line(A', B'))
     - parallel(Line(B, C), Line(B', C'))
     - parallel(Line(C, A), Line(C', A'))
     - triangles_are_homothetic: concurrent(Line(A, A'), Line(B, B'), Line(C, C'))
+  where_embedding:
+    - A != A'
+    - B != B'
+    - C != C'
+    - not_collinear(A, B, C)
   conclude:
     - similar_triangles(A, B, C, A', B', C')
   possible_conclusions:
-    - distance(A, B) != distance(A', B') => triangles_are_homothetic
     - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == -90 mod 360 => triangles_are_homothetic
     - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == 90 mod 360 => triangles_are_homothetic
+
+triangle_homothety_1:
+  inputs:
+    - A, B, C, A', B', C': Point
+  where:
+    - parallel(Line(A, B), Line(A', B'))
+    - parallel(Line(B, C), Line(B', C'))
+    - parallel(Line(C, A), Line(C', A'))
+  where_embedding:
+    - A != A'
+    - B != B'
+    - C != C'
+    - not_collinear(A, B, C)
+    - distance(A, B) != distance(A', B')
+  conclude:
+    - concurrent(Line(A, A'), Line(B, B'), Line(C, C'))
