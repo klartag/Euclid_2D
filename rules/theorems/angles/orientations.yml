@@ -15,8 +15,9 @@ reverse_orientation:
   inputs:
     - A, B, C: Point
   where:
-    - not_collinear(A, B, C)
     - exists(orientation(A, B, C))
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - orientation(A, B, C) == - orientation(C, B, A) mod 360
   metadata: auto

@@ -1,13 +1,12 @@
 concyclic_sufficient_conditions:
   inputs:
     - A, B, C, D: Point
-  where:
+  where_embedding:
     - not_collinear(A, B, C)
+    - B != D
   possible_conclusions:
     - angle(A, B, C) == angle(A, D, C) mod 360 => concyclic(A, B, C, D)
     - angle(A, B, C) == angle(A, D, C) + 180 mod 360 => concyclic(A, B, C, D)
-  trivial_if_equal:
-    - [B, D]
   rank: 5
 
 angles_on_chord:
@@ -16,6 +15,7 @@ angles_on_chord:
     - c: Circle
   where:
     - A, B, C, D in c
+  where_embedding:
     - distinct(A, B, C, D)
   possible_conclusions:
     - orientation(A, C, B) == 90 mod 360 & orientation(A, D, B) == 90 mod 360 => angle(A, C, B) == angle(A, D, B) mod 360
@@ -44,10 +44,11 @@ angles_on_equal_chords:
     - c: Circle
   where:
     - A, B, C, A', B', C' in c
-    - distinct(A, B, C)
-    - distinct(A', B', C')
     # NOTE: Instead of requiring AC == A'C', we require A'C || AC', because it allows us to speak of orientation.
     - parallel(Line(A', C), Line(A, C'))
+  where_embedding:
+    - distinct(A, B, C)
+    - distinct(A', B', C')
   possible_conclusions:
     - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == 90 mod 360 => angle(A, B, C) == angle(A', B', C') mod 360
     - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == -90 mod 360 => angle(A, B, C) == angle(A', B', C') mod 360
@@ -63,8 +64,9 @@ angle_to_center:
     - c: Circle
   where:
     - A, B, C in c
-    - distinct(A, B, C)
     - exists(center(c))
+  where_embedding:
+    - distinct(A, B, C)
   conclude:
     - 2 * angle(A, B, C) == angle(A, center(c), C) mod 360
   rank: 4

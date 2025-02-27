@@ -5,8 +5,9 @@ power_of_a_point_definition:
   where:
     - A != B
     - A, B in c
-    - O not in c
     - collinear(O, A, B)
+  where_embedding:
+    - O not in c
   conclude:
     - log(power_of_a_point(O, c)) == log(distance(O, A)) + log(distance(O, B))
 
@@ -35,8 +36,9 @@ power_of_a_point_converse:
   where:
     - collinear(O, A, B)
     - collinear(O, C, D)
-    - Line(A, B) != Line(C, D)
     - log(distance(O, A)) + log(distance(O, B)) == log(distance(O, C)) + log(distance(O, D))
+  where_embedding:
+    - Line(A, B) != Line(C, D)
   possible_conclusions:
     - orientation(O, A, C) == 90 mod 360 & orientation(O, C, D) == 90 mod 360 => concyclic(A, B, C, D)
     - orientation(O, A, C) == -90 mod 360 & orientation(O, C, D) == -90 mod 360 => concyclic(A, B, C, D)
@@ -47,9 +49,10 @@ power_of_a_point_tangent_converse:
     - O, A, B, C: Point
   where:
     - collinear(O, A, B)
+    - log(distance(O, A)) + log(distance(O, B)) == 2 * log(distance(O, C))
+  where_embedding:
     - A != B
     - Line(O, A) != Line(O, C)
-    - log(distance(O, A)) + log(distance(O, B)) == 2 * log(distance(O, C))
   possible_conclusions:
     - orientation(O, A, C) == 90 mod 360 & orientation(O, B, C) == 90 mod 360 =>tangent(Line(O, C), Circle(A, B, C))
     - orientation(O, A, C) == -90 mod 360 & orientation(O, B, C) == -90 mod 360 =>tangent(Line(O, C), Circle(A, B, C))

@@ -4,37 +4,21 @@ identical_point:
   where:
     - equal: A == B
     - zero_distance: distance(A, B) == 0
+  where_embedding:
+    - A != B
   possible_conclusions:
     - equal <=> zero_distance
   rank: 3
-  trivial_if_equal:
-    - [A, B]
-
-different_points:
-  inputs:
-    - A, B: Point
-  where:
-    - non_equal: A != B
-    - nonzero_distance: distance(A, B) != 0
-  possible_conclusions:
-    - nonzero_distance => non_equal
-    - non_equal & exists(Line(A, B)) => nonzero_distance
-  rank: 1
 
 uniqueness_of_collinear_double_distance:
   inputs:
     - A, B, C, D: Point
   where:
-    - A != B
     - collinear(A, B, C)
     - distance(A, C) == distance(A, D)
     - distance(B, C) == distance(B, D)
+  where_embedding:
+    - distinct(A, B, C, D)
   conclude:
     - C == D
   rank: 3
-  trivial_if_equal:
-    - [A, C]
-    - [A, D]
-    - [B, C]
-    - [B, D]
-    - [C, D]

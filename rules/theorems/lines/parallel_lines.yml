@@ -27,7 +27,7 @@ parallel_and_intersecting:
 parallel_line_angles:
   inputs:
     - A, B, C, D: Point
-  where:
+  where_embedding:
     - Line(A, B) != Line(C, D)
   possible_conclusions:
     - angle(A, B, C) == angle(D, C, B) mod 360 => parallel(Line(A, B), Line(C, D))
@@ -37,9 +37,10 @@ parallel_line_angles_reverse:
   inputs:
     - A, B, C, D: Point
   where:
-    - Line(A, B) != Line(C, D)
     - exists(Line(B, C))
     - parallel(Line(A, B), Line(C, D))
+  where_embedding:
+    - Line(A, B) != Line(C, D)
   possible_conclusions:
     - orientation(A, B, C) == 90 mod 360 & orientation(D, C, B) == 90 mod 360 => angle(A, B, C) == angle(D, C, B) mod 360
     - orientation(A, B, C) == -90 mod 360 & orientation(D, C, B) == -90 mod 360 => angle(A, B, C) == angle(D, C, B) mod 360

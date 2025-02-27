@@ -4,8 +4,6 @@ congruent_triangle_basic_properties:
   where:
     - congruent_triangles(A, B, C, A', B', C')
   conclude:
-    - not_collinear(A, B, C)
-    - not_collinear(A', B', C')
     - distance(A, B) == distance(A', B')
     - distance(B, C) == distance(B', C')
     - distance(C, A) == distance(C', A')
@@ -17,10 +15,11 @@ sss_congruence:
   inputs:
     - A, B, C, A', B', C': Point
   where:
-    - not_collinear(A, B, C)
     - distance(A, B) == distance(A', B')
     - distance(B, C) == distance(B', C')
     - distance(C, A) == distance(C', A')
+  where_embedding:
+    - not_collinear(A, B, C)
   possible_conclusions:
     - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == 90 mod 360 => congruent_triangles(A, B, C, A', B', C')
     - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == -90 mod 360 => congruent_triangles(A, B, C, A', B', C')
@@ -31,10 +30,11 @@ sas_congruence:
   inputs:
     - A, B, C, A', B', C': Point
   where:
-    - not_collinear(A, B, C)
     - distance(A, B) == distance(A', B')
     - angle(A, B, C) == angle(A', B', C') mod 360
     - distance(B, C) == distance(B', C')
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - congruent_triangles(A, B, C, A', B', C')
   trivial_if_equal:
@@ -44,10 +44,11 @@ asa_congruence:
   inputs:
     - A, B, C, A', B', C': Point
   where:
-    - not_collinear(A, B, C)
     - angle(C, A, B) == angle(C', A', B') mod 360
     - distance(A, B) == distance(A', B')
     - angle(A, B, C) == angle(A', B', C') mod 360
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - congruent_triangles(A, B, C, A', B', C')
   trivial_if_equal:

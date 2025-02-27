@@ -3,32 +3,10 @@ between_imply_not_between:
     - A, B, C: Point
   where:
     - between(A, B, C)
+  where_embedding:
     - A != B
   conclude:
     - collinear_and_not_between(B, A, C)
-  rank: 2
-  metadata: auto
-
-between_implies_orientation:
-  inputs:
-    - O, A, B, C: Point
-  where:
-    - distinct(O, A, B, C)
-    - between(A, B, C)
-  conclude:
-    - orientation(O, A, B) == orientation(O, B, C) mod 360
-    - orientation(O, A, B) == orientation(O, A, C) mod 360
-  rank: 2
-  metadata: auto
-
-collinear_and_not_between_implies_orientation:
-  inputs:
-    - O, A, B, C: Point
-  where:
-    - distinct(O, A, B, C)
-    - collinear_and_not_between(A, B, C)
-  conclude:
-    - orientation(O, B, A) == orientation(O, B, C) mod 360
   rank: 2
   metadata: auto
 

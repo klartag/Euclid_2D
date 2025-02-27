@@ -1,15 +1,3 @@
-line_circle_intersection_has_at_most_two_points_0:
-  inputs:
-    - A, B, C: Point
-    - c: Circle
-  where:
-    - distinct(A, B, C)
-    - collinear(A, B, C)
-    - A, B in c
-  conclude:
-    - C not in c
-  metadata: auto
-
 line_circle_intersection_has_at_most_two_points_1:
   inputs:
     - A, B, C: Point
@@ -17,22 +5,10 @@ line_circle_intersection_has_at_most_two_points_1:
   where:
     - A, B, C in c
     - collinear(A, B, C)
+  where_embedding:
     - not_one_of(A, B, C)
   conclude:
     - B == C
-  metadata: auto
-
-circle_circle_intersection_has_at_most_two_points_0:
-  inputs:
-    - A, B, C: Point
-    - c, d: Circle
-  where:
-    - c != d
-    - distinct(A, B, C)
-    - A, B in c, d
-    - C in c
-  conclude:
-    - C not in d
   metadata: auto
 
 circle_circle_intersection_has_at_most_two_points_1:
@@ -40,8 +16,9 @@ circle_circle_intersection_has_at_most_two_points_1:
     - A, B, C: Point
     - c, d: Circle
   where:
-    - c != d
     - A, B, C in c, d
+  where_embedding:
+    - c != d
     - not_one_of(A, B, C)
   conclude:
     - B == C

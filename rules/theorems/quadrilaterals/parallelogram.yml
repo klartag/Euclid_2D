@@ -2,9 +2,10 @@ parallelogram_parallel_definition:
   inputs:
     - A, B, C, D: Point
   where:
-    - Line(A, B) != Line(C, D)
     - parallel(Line(A, B), Line(C, D))
     - parallel(Line(B, C), Line(D, A))
+  where_embedding:
+    - Line(A, B) != Line(C, D)
   conclude:
     - parallelogram(A, B, C, D)
 
@@ -12,11 +13,12 @@ parallelogram_side_definition:
   inputs:
     - A, B, C, D: Point
   where:
+    - distance(A, B) == distance(C, D)
+    - distance(B, C) == distance(D, A)
+  where_embedding:
     - distinct(A, B, C, D)
     - convex(A, B, C, D)
     - Line(A, B) != Line(C, D)
-    - distance(A, B) == distance(C, D)
-    - distance(B, C) == distance(D, A)
   conclude:
     - parallelogram(A, B, C, D)
 
@@ -24,10 +26,11 @@ parallelogram_parallel_side_definition:
   inputs:
     - A, B, C, D: Point
   where:
-    - Line(A, B) != Line(C, D)
-    - convex(A, B, C, D)
     - parallel(Line(A, B), Line(C, D))
     - distance(A, B) == distance(C, D)
+  where_embedding:
+    - Line(A, B) != Line(C, D)
+    - convex(A, B, C, D)
   conclude:
     - parallelogram(A, B, C, D)
 

@@ -3,6 +3,7 @@ collinear_definition:
   - A, B, C: Point
   where:
   - collinear(A, B, C)
+  where_embedding:
   - not_one_of(A, B, C)
   conclude:
   - B in Line(A, C)
@@ -18,14 +19,4 @@ in_imply_collinear:
   - A in Line(B, C)
   conclude:
   - collinear(A, B, C)
-  metadata: auto
-
-not_in_line_equivalent_to_not_collinear:
-  inputs:
-  - A, B, C: Point
-  where:
-  - not_in: A not in Line(B, C)
-  - not_collinear: not_collinear(A, B, C)
-  possible_conclusions:
-  - not_in <=> not_collinear & exists(Line(B, C))
   metadata: auto

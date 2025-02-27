@@ -3,12 +3,10 @@ between_imply_segment_sum:
     - A, B, C: Point
   where:
     - between(A, B, C)
+  where_embedding:
+    - distinct(A, B, C)
   conclude:
     - distance(A, B) + distance(B, C) == distance(A, C)
-  trivial_if_equal:
-    - [A, B]
-    - [B, C]
-    - [A, C]
 
 log_of_2_times_distance:
   inputs:

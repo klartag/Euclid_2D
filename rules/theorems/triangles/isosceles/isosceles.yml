@@ -20,7 +20,8 @@ isosceles_triangle_from_angles:
   inputs:
     - A, B, C: Point
   where:
-    - not_collinear(A, B, C)
     - angle(A, B, C) == angle(B, C, A) mod 360
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - isosceles_triangle(A, B, C)

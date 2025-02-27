@@ -31,9 +31,10 @@ perpendicular_bisector_sufficient_conditions:
   inputs:
     - A, B, X, Y: Point
   where:
-    - A != B
     - exists(Line(X, Y))
     - distance(A, X) == distance(B, X)
     - distance(A, Y) == distance(B, Y)
+  where_embedding:
+    - A != B
   conclude:
     - Line(X, Y) == perpendicular_bisector(A, B)

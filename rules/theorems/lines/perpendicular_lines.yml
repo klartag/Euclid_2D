@@ -40,9 +40,10 @@ altitude_definition:
     - A, B, C: Point
     - l: Line
   where:
-    - not_collinear(A, B, C)
     - A in l
     - perpendicular(l, Line(B, C))
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - l == altitude(A, B, C)
 

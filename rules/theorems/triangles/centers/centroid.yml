@@ -3,8 +3,9 @@ median_definition:
     - A, B, C: Point
     - l: Line
   where:
-    - not_collinear(A, B, C)
     - A, midpoint(B, C) in l
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - l == median(A, B, C)
   rank: 5

@@ -13,7 +13,7 @@ tangent_definition_from_perpendicularity:
 tangent_chord_angle:
   inputs:
     - A, B, C, D: Point
-  where:
+  where_embedding:
     - distinct(A, B, C, D)
     - not_collinear(A, B, C)
   possible_conclusions:
@@ -24,9 +24,10 @@ tangent_chord_angle_reverse:
   inputs:
     - A, B, C, D: Point
   where:
+    - tangent(Line(A, D), Circle(A, B, C))
+  where_embedding:
     - distinct(A, B, C, D)
     - not_collinear(A, B, C)
-    - tangent(Line(A, D), Circle(A, B, C))
   possible_conclusions:
     - orientation(B, C, A) == 90 mod 360 & orientation(B, A, D) == 90 mod 360 => angle(B, C, A) == angle(B, A, D) mod 360
     - orientation(B, C, A) == -90 mod 360 & orientation(B, A, D) == -90 mod 360 => angle(B, C, A) == angle(B, A, D) mod 360
@@ -69,6 +70,7 @@ at_most_two_tangents:
     - tangent(k, c)
     - tangent(l, c)
     - tangent(m, c)
+  where_embedding:
     - k != l
     - k != m
   conclude:
@@ -98,10 +100,11 @@ tangents_angle_bisector:
     - c: Circle
   where:
     - B, C in c
-    - B != C
     - tangent(Line(A, B), c)
     - tangent(Line(A, C), c)
     - exists(center(c))
+  where_embedding:
+    - B != C
   conclude:
     - angle(B, A, center(c)) == angle(center(c), A, C) mod 360
   rank: 5
