@@ -2,8 +2,6 @@ from typing import List
 
 from ....rule_utils import POINT, LINE, CIRCLE
 
-from ... import CONSTRUCTION_METHOD_DICTIONARY
-
 from ...method_dictionaries import (
     line_circle_other_intersection,
     circle_circle_other_intersection,
@@ -42,10 +40,7 @@ CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
         lambda line0, line1: line_on_point(line_intersection(line0, line1)),
         'concurrent'
     ),
-] + [
-    ExplicitConstructionPattern(construction_name, construction_method)
-    for (construction_name, construction_method) in CONSTRUCTION_METHOD_DICTIONARY.items()
-] + [
+    ExplicitConstructionPattern(),
     ContainmentPattern((LINE,), ExplicitEmbeddedConstruction, point_on_line),
     ContainmentPattern((CIRCLE,), ExplicitEmbeddedConstruction, point_on_circle),
     ContainmentPattern((LINE, LINE), ExplicitEmbeddedConstruction, line_intersection),
