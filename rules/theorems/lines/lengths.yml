@@ -8,13 +8,13 @@ between_imply_segment_sum:
   conclude:
     - distance(A, B) + distance(B, C) == distance(A, C)
 
-log_of_2_times_distance:
-  inputs:
-    - A, B, C, D: Point
-  where:
-    - distance(A, B) == 2 * distance(C, D)
-  conclude:
-    - log(distance(A, B)) == log(2 * distance(C, D))
+# log_of_2_times_distance:
+#   inputs:
+#     - A, B, C, D: Point
+#   where:
+#     - distance(A, B) == 2 * distance(C, D)
+#   conclude:
+#     - log(distance(A, B)) == log(2 * distance(C, D))
 
 # log_of_3_times_distance:
 #   inputs:
