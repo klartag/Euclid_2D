@@ -728,9 +728,10 @@ def main():
                 print(proof_text)
             
             counter = Counter([x.theorem_name for x in proof.steps if isinstance(x, TheoremStep)])
-            longest_name = max(map(len, counter.keys()))
-            for (name, count) in sorted(counter.items(), key=lambda x:x[1]):
-                print(f'{name:<{longest_name}}:', count)
+            if len(counter) > 0:
+                longest_name = max(map(len, counter.keys()))
+                for (name, count) in sorted(counter.items(), key=lambda x:x[1]):
+                    print(f'{name:<{longest_name}}:', count)
 
             if args.trim:
                 print('Running Trimmer...')

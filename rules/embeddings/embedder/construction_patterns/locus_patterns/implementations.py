@@ -25,10 +25,6 @@ LOCUS_PATTERNS: List[LocusPattern] = [
     SimplePredicateLocus(construction_generator('perpendicular_bisector'), 'isosceles_triangle', 0),
     SimplePredicateLocus(construction_generator('circle_from_center_and_point'), 'isosceles_triangle', [1, 2]),
     SimplePredicateConstructionLocus(
-        lambda radius, center: ConstructionObject.from_args('circle_from_center_and_radius', (center, radius)),
-        'equals', None, 'distance', None
-    ),
-    SimplePredicateConstructionLocus(
         construction_generator('perpendicular_line'),
         'perpendicular', None, 'Line', None
      ),
@@ -39,5 +35,17 @@ LOCUS_PATTERNS: List[LocusPattern] = [
     SimplePredicateConstructionLocus(
         construction_generator('circle_from_center_and_radius', (1, 0)),
         'equals', None, 'distance', None
-    )
+    ),
+    SimplePredicateConstructionLocus(
+        lambda point1, point2, angle: construct('Line', (point1, construct('rotate_point', (point1, point2, -angle)))),
+        'equals_mod_360', None, 'angle', 0
+    ),
+    SimplePredicateConstructionLocus(
+        construction_generator('circle_from_two_points_and_angle'),
+        'equals_mod_360', None, 'angle', 1
+    ),
+    SimplePredicateConstructionLocus(
+        lambda point0, point1, angle: construct('Line', (point1, construct('rotate_point', (point1, point0, angle)))),
+        'equals_mod_360', None, 'angle', 2
+    ),
 ]

@@ -1,13 +1,13 @@
 from mpmath import mpf
 from random import uniform
-from math import pi, sin, cos
+from math import sin, cos
 
-from ..embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle
+from ..embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, PI
 
 
 def new_point() -> EmbeddedPoint:
     radius = 10 * uniform(0, 1) ** 0.5
-    angle = 2 * pi * uniform(0, 1)
+    angle = 2 * PI * uniform(0, 1)
     return EmbeddedPoint(mpf(cos(radius * angle)), mpf(sin(radius * angle)))
 
 def new_line() -> EmbeddedLine:

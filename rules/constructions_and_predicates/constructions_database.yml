@@ -39,6 +39,16 @@ angle:
   conclude:
     - a == direction(B, C) - direction(B, A) mod 360
 
+rotate_point:
+  inputs:
+    - O, A: Point
+    - a: Angle
+  construct:
+    - A': Point
+  conclude:
+    - distance(O, A) == distance(O, A')
+    - angle(A, O, A') == a mod 360
+
 direction:
   inputs:
     - A, B: Point
@@ -93,6 +103,15 @@ Circle:
     - c: Circle
   conclude:
     - A, B, C in c
+
+circle_from_two_points_and_angle:
+  inputs:
+    - A, B: Point
+    - a: Angle
+  construct:
+    - c: Circle
+  conclude:
+    - A, B in c
 
 #primitive
 line_intersection:

@@ -27,3 +27,10 @@ nine_points_circle:
   - {'A, B, C': Point}
   preprocess: symmetric
   where: ['not_collinear(A, B, C)']
+rotate_point:
+  conclude: ["distance(O, A) == distance(O, A')", "angle(A, O, A') == a mod 360"]
+  construct:
+  - {A': Point}
+  inputs:
+  - {'O, A': Point}
+  - {a: Angle}

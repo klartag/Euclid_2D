@@ -3,6 +3,8 @@ from ..embedded_objects import EPSILON, EmbeddedPoint, EmbeddedCircle, EmbeddedS
 
 from .line_intersection import line_intersection
 from .parallels_and_perpendiculars import perpendicular_bisector
+from .rotation import rotate_point
+from .line import line
 
 
 def circumcenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedPoint:
@@ -31,3 +33,15 @@ def circle_from_center_and_radius(point: EmbeddedPoint, scalar: EmbeddedScalar) 
     if scalar.value < EPSILON:
         raise UndefinedEmbeddingError("Cannot create circle of radius zero.")
     return EmbeddedCircle(point, scalar.value ** 2)
+
+def circle_from_two_points_and_angle(point0: EmbeddedPoint, point1: EmbeddedPoint, angle: EmbeddedScalar) -> EmbeddedCircle:
+    if point0.is_equal(point1):
+        raise UndefinedEmbeddingError("Cannot create circle given two identical points")
+    if angle.value % 180 < EPSILON or (-angle.value) % 180 < EPSILON:
+        raise UndefinedEmbeddingError("Cannot create circle with arc of size 180 degrees")
+    base_angle = EmbeddedScalar(90 - angle.value / 2)
+    point_on_circle = line_intersection(
+        line(point0, rotate_point(point0, point1, base_angle)),
+        line(point1, rotate_point(point1, point0, -base_angle))
+    )
+    return circumcircle(point0, point1, point_on_circle)

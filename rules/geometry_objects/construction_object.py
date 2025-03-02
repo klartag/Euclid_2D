@@ -4,7 +4,7 @@ import math
 
 from ..predicates.global_predicates import get_constructions
 from ..symmetry import Symmetry
-from ..rule_utils import SCALAR, ProofCheckError, union, GeometryError
+from ..rule_utils import LITERAL, SCALAR, ANGLE, ProofCheckError, union, GeometryError
 
 from .geo_object import ONE, ZERO, GeoObject
 from .equation_object import EquationObject
@@ -55,7 +55,7 @@ class Construction:
         """
         Constructs an object using the given arguments.
         """
-        if len(args) != len(self.signature) or any(arg.type != sig.type for arg, sig in zip(args, self.signature)):
+        if len(args) != len(self.signature) or not all(arg.type == sig.type or (arg.type == LITERAL and sig.type in [SCALAR, ANGLE]) for arg, sig in zip(args, self.signature)):
             raise ProofCheckError(f'Construction {self.name} received illegal arguments: {args}')
 
         args = self.symmetry.canonical_order(args)

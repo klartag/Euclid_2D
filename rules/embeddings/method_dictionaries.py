@@ -4,7 +4,7 @@ from .embedded_objects import EmbeddedObject
 
 from .constructions.angle_bisectors import internal_angle_bisector, external_angle_bisector
 from .constructions.center import center
-from .constructions.circle import circumcenter, circumcircle, circle_from_center_and_point, circle_from_center_and_radius
+from .constructions.circle import circumcenter, circumcircle, circle_from_center_and_point, circle_from_center_and_radius, circle_from_two_points_and_angle
 from .constructions.circle_intersection import line_circle_other_intersection, circle_circle_other_intersection
 from .constructions.incenters import incenter, excenter, incircle, excircle
 from .constructions.isogonal_conjugate import isogonal_conjugate
@@ -18,6 +18,7 @@ from .constructions.parallels_and_perpendiculars import parallel_line, perpendic
 from .constructions.projection import project
 from .constructions.radical_axis import radical_axis
 from .constructions.reflection import reflect_point
+from .constructions.rotation import rotate_point
 from .constructions.scalars import angle, orientation, distance, direction, power_of_a_point, radius, log
 from .constructions.tangent import tangent_point, tangent_line
 
@@ -44,6 +45,7 @@ CONSTRUCTION_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject,
     'Circle': circumcircle,
     'circle_from_center_and_point': circle_from_center_and_point,
     'circle_from_center_and_radius': circle_from_center_and_radius,
+    'circle_from_two_points_and_angle': circle_from_two_points_and_angle,
     'circumcenter': circumcenter,
     'direction': direction,
     'distance': distance,
@@ -72,6 +74,7 @@ CONSTRUCTION_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject,
     'projection': project,
     'radical_axis': radical_axis,
     'radius': radius,
+    'rotate_point': rotate_point,
 }
 
 

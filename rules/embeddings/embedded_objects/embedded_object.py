@@ -5,6 +5,7 @@ from typing import Dict, Self
 
 mp.dps = 2000
 EPSILON = mpf('0.1') ** 20
+PI = mpf(mp.pi)
 
 
 class EmbeddedObject(ABC):
