@@ -43,7 +43,7 @@ class DiagramEmbedder:
             # Removing open predicates:
             if pred.is_open():
                 continue
-            # Splitting all "Line(A, B) == ;" nad "Circle(A, B, C) == c" predicates into pieces:
+            # Splitting all "Line(A, B) == l" and "Circle(A, B, C) == c" predicates into pieces:
             if pred.name == 'equals':
                 lhs, rhs = pred.components
                 if isinstance(rhs, ConstructionObject) and rhs.constructor.name in ['Line', 'Circle']:
