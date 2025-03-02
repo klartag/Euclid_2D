@@ -1,3 +1,4 @@
+from rules.embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from .geometry_objects.geo_object import GeoObject
 from .geometry_objects.parse import parse_geo_object
 from .geometry_trackers.geometry_tracker import GeometryTracker
@@ -25,7 +26,7 @@ class InteractivePredicateChecker:
                 except Exception as e0:
                     try:
                         geo_object = parse_geo_object(data, object_map)
-                        print(self.check_geometry_object(geo_object))
+                        self.print_geometry_object(geo_object)
                     except Exception as e1:
                         print(f'Failed to evaluate as either construction or predicate due to the following exceptions:')
                         print(e0)
@@ -39,9 +40,9 @@ class InteractivePredicateChecker:
         is_predicate_true_in_embedding = self.geometry_tracker.embedding_tracker.evaluate_predicate(predicate)
         return f'{is_predicate_proved} ({is_predicate_true_in_embedding.value} in embedding)'
 
-    def check_geometry_object(self, obj: GeoObject) -> str:
-        embedded_object = self.geometry_tracker.embedding_tracker.evaluate_object(obj)
-        if embedded_object is None:
-            return 'Failed to evaluate in embedding.'
-        else:
-            return 'Successfully evaluated in embedding.'
+    def print_geometry_object(self, obj: GeoObject) -> str:
+        try:
+            embedded_object = self.geometry_tracker.embedding_tracker.evaluate_object(obj)
+            print(embedded_object.to_str(4))
+        except UndefinedEmbeddingError:
+            print('Failed to evaluate in embedding.')

@@ -19,3 +19,6 @@ class EmbeddedObject(ABC):
 
     @abstractmethod
     def from_dict(data: dict) -> Self: ...
+    
+    @abstractmethod
+    def to_str(self, accuracy: int) -> str: ...

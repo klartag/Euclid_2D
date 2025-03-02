@@ -42,3 +42,6 @@ class EmbeddedScalar(EmbeddedObject):
     
     def from_dict(data: dict) -> Self:
         return EmbeddedScalar(mpf(data['value']))
+    
+    def to_str(self, accuracy: int) -> str:
+        return f'Scalar({round(self.value, accuracy)})'

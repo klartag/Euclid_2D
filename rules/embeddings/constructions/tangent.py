@@ -1,23 +1,20 @@
-from typing import Optional
-    
-from ..embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, EPSILON
+from ..undefined_embedding_error import UndefinedEmbeddingError
+from ..embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle
 
 from .projection import project
 from .parallels_and_perpendiculars import perpendicular_line
 from .line import line
 
 
-def tangent_point(line: EmbeddedLine, circle: EmbeddedCircle) -> Optional[EmbeddedPoint]:
+def tangent_point(line: EmbeddedLine, circle: EmbeddedCircle) -> EmbeddedPoint:
     projection = project(circle.center, line)
     if not circle.contains_point(projection):
-        return None
+        raise UndefinedEmbeddingError("Cannot calculate tangent point of line not tangent to the circle")
     return projection
 
 
-def tangent_line(point: EmbeddedPoint, circle: EmbeddedCircle) -> Optional[EmbeddedLine]:
+def tangent_line(point: EmbeddedPoint, circle: EmbeddedCircle) -> EmbeddedLine:
     if not circle.contains_point(point):
-        return None
+        raise UndefinedEmbeddingError("Cannot calculate tangent line from point not on the circle")
     center_line = line(point, circle.center)
-    if center_line is None:
-        return None
     return perpendicular_line(point, center_line)

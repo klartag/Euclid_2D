@@ -3,14 +3,12 @@ import itertools
 from pathlib import Path
 from typing import Dict, List, Mapping, Optional
 
-from rules.predicates.predicate_factory import predicate_from_args
-
+from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ...rule_utils import POINT
 from ...geometry_objects.geo_object import GeoObject
 from ...predicates.predicate import Predicate
 from ...predicates.implementations.distinct_predicate import DistinctPredicate
-from ...predicates.implementations.exists_predicate import ExistsPredicate
-from ...predicates.implementations.in_predicate import InPredicate
+from ...predicates.predicate_factory import predicate_from_args
 from ...proof import Proof
 
 from .. import Embedding
@@ -28,9 +26,12 @@ class DiagramEmbedder:
         self, object_: GeoObject, predicates_containing_object: List[Predicate]
     ) -> Optional[EmbeddedConstruction]:
         for pattern in CONSTRUCTION_PATTERNS:
-            construction = pattern.match(object_, predicates_containing_object)
-            if construction is not None:
-                return construction
+            try:
+                construction = pattern.match(object_, predicates_containing_object)
+                if construction is not None:
+                    return construction
+            except UndefinedEmbeddingError:
+                pass
         else:
             return None
     

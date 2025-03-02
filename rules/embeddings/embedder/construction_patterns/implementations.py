@@ -39,7 +39,7 @@ CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
     ReverseContainmentPattern(3, CIRCLE, ExplicitEmbeddedConstruction, circumcircle),
     SimpleSymmetricPredicatePattern(
         ExplicitEmbeddedConstruction,
-        lambda line0, line1: None if line_intersection(line0, line1) is None else line_on_point(line_intersection(line0, line1)),
+        lambda line0, line1: line_on_point(line_intersection(line0, line1)),
         'concurrent'
     ),
 ] + [

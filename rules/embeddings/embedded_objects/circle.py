@@ -34,3 +34,6 @@ class EmbeddedCircle(EmbeddedCurve):
 
     def from_dict(data: dict) -> Self:
         return EmbeddedCircle(EmbeddedPoint.from_dict(data['center']), mpf(data['radius_squared']))
+
+    def to_str(self, accuracy: int) -> str:
+        return f'Circle({self.center.to_str(accuracy)}, {round(self.radius_squared ** 0.5, accuracy)})'

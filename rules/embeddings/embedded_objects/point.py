@@ -63,3 +63,6 @@ class EmbeddedPoint(EmbeddedObject):
     
     def from_dict(data: dict) -> Self:
         return EmbeddedPoint(mpf(data['x']), mpf(data['y']))
+
+    def to_str(self, accuracy: int) -> str:
+        return f'Point({round(self.x, accuracy)}, {round(self.y, accuracy)})'

@@ -3,7 +3,7 @@ from typing import Optional
 from .....rule_utils import POINT
 from .....geometry_objects.geo_object import GeoObject
 from .....predicates.predicate import Predicate
-from ..... predicates.implementations.in_predicate import InPredicate
+from .....predicates.implementations.in_predicate import InPredicate
 
 from .locus_pattern_matcher import LocusPattern
 

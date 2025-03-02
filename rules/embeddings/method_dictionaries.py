@@ -35,7 +35,7 @@ from .predicates.tangent import tangent
 from .predicates.triangles import isosceles_triangle, congruent_triangles, anti_congruent_triangles, similar_triangles, anti_similar_triangles
 
 
-CONSTRUCTION_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject, ...]]], Optional[EmbeddedObject]]] = {
+CONSTRUCTION_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject, ...]]], EmbeddedObject]] = {
     'altitude': altitude,
     'angle': angle,
     'center': center,

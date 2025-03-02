@@ -40,3 +40,6 @@ class EmbeddedLine(EmbeddedCurve):
 
     def from_dict(data: dict) -> Self:
         return EmbeddedLine(EmbeddedPoint.from_dict(data['point']), EmbeddedPoint.from_dict(data['direction']))
+
+    def to_str(self, accuracy: int) -> str:
+        return f'Line({self.point.to_str(accuracy)}, {(self.point + self.direction).to_str(accuracy)})'

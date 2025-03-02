@@ -15,6 +15,7 @@ from .method_dictionaries import CONSTRUCTION_METHOD_DICTIONARY, PREDICATE_METHO
 
 from .embedded_objects import EmbeddedObject, EmbeddedScalar
 from .embedded_predicate_value import EmbeddedPredicateValue
+from .undefined_embedding_error import UndefinedEmbeddingError
 
 
 class Embedding:
@@ -50,7 +51,7 @@ class Embedding:
             copied_embedding[object_name] = embedded_object
         return copied_embedding
     
-    def evaluate_object(self, obj: GeoObject) -> Optional[EmbeddedObject]:
+    def evaluate_object(self, obj: GeoObject) -> EmbeddedObject:
         if obj.name in self.embedding:
             return self.embedding[obj.name]
         elif isinstance(obj, ConstructionObject):
@@ -60,41 +61,43 @@ class Embedding:
         elif obj.type == LITERAL:
             return EmbeddedScalar(mpf(obj.name))
         else:
-            return None
+            raise UndefinedEmbeddingError()
     
-    def evaluate_construction_object(self, obj: ConstructionObject) -> Optional[EmbeddedObject]:
+    def evaluate_construction_object(self, obj: ConstructionObject) -> EmbeddedObject:
         if obj.constructor.name not in CONSTRUCTION_METHOD_DICTIONARY:
-            return None
+            raise UndefinedEmbeddingError(f'Unknown construction name: {obj.constructor.name}')
         construction_method = CONSTRUCTION_METHOD_DICTIONARY[obj.constructor.name]
         embedded_parameters = []
         for component in obj.components:
             embedded_component = self.evaluate_object(component)
-            if embedded_component is None:
-                return
             embedded_parameters.append(embedded_component)
         return construction_method(*embedded_parameters)
 
-    def evaluate_equation_object(self, eqn: EquationObject) -> Optional[EmbeddedScalar]:
+    def evaluate_equation_object(self, eqn: EquationObject) -> EmbeddedScalar:
         lhs = self.evaluate_object(eqn.left)
         rhs = self.evaluate_object(eqn.right)
         
-        if not isinstance(lhs, EmbeddedScalar) or not isinstance(rhs, EmbeddedScalar):
-            return None
-        
+        if not isinstance(lhs, EmbeddedScalar):
+            raise UndefinedEmbeddingError(f"Cannot evaluate an arithmetic expression with {lhs}, as it is not a scalar.")
+
+        if not isinstance(rhs, EmbeddedScalar):
+            raise UndefinedEmbeddingError(f"Cannot evaluate an arithmetic expression with {rhs}, as it is not a scalar.")
+
         match eqn.op:
             case EqOp.ADD: return lhs + rhs
             case EqOp.SUB: return lhs - rhs
             case EqOp.MUL: return lhs * rhs
             case EqOp.DIV: return lhs / rhs
-            case _: return None
+            case _: raise UndefinedEmbeddingError(f"Cannot evaluate an arithmetic expression with {eqn.op} as an operator.")
 
     def evaluate_predicate(self, predicate: Predicate) -> EmbeddedPredicateValue:
         if predicate.name in PREDICATE_METHOD_DICTIONARY:
             predicate_method = PREDICATE_METHOD_DICTIONARY[predicate.name]
             embedded_parameters = []
             for component in predicate.components:
-                parameter = self.evaluate_object(component)
-                if parameter is None:
+                try:
+                    parameter = self.evaluate_object(component)
+                except UndefinedEmbeddingError:
                     return EmbeddedPredicateValue.Undefined
                 embedded_parameters.append(parameter)
             if predicate_method(*embedded_parameters):
