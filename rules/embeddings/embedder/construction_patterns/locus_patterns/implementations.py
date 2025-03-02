@@ -48,4 +48,8 @@ LOCUS_PATTERNS: List[LocusPattern] = [
         lambda point0, point1, angle: construct('Line', (point1, construct('rotate_point', (point1, point0, angle)))),
         'equals_mod_360', None, 'angle', 2
     ),
+    SimplePredicateConstructionLocus(
+        lambda point, line: line,
+        'equals', None, 'Line', None
+    ),
 ]
