@@ -1,3 +1,16 @@
+circle_from_center_and_point:
+  conclude: [A == center(c), B in c]
+  construct:
+  - {c: Circle}
+  inputs:
+  - {'A, B': Point}
+circle_from_center_and_radius:
+  conclude: [A == center(c), r == radius(c)]
+  construct:
+  - {c: Circle}
+  inputs:
+  - {A: Point}
+  - {r: Scalar}
 circumcenter:
   conclude: ['O == center(Circle(A, B, C))']
   construct:

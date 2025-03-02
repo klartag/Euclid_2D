@@ -33,7 +33,7 @@ LOCUS_PATTERNS: List[LocusPattern] = [
         'tangent', 0, 'Line', None
     ),
     SimplePredicateConstructionLocus(
-        construction_generator('circle_from_center_and_radius', (1, 0)),
+        construction_generator('circle_from_center_and_radius'),
         'equals', None, 'distance', None
     ),
     SimplePredicateConstructionLocus(

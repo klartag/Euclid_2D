@@ -104,6 +104,25 @@ Circle:
   conclude:
     - A, B, C in c
 
+circle_from_center_and_point:
+  inputs:
+    - A, B: Point
+  construct:
+    - c: Circle
+  conclude:
+    - A == center(c)
+    - B in c
+
+circle_from_center_and_radius:
+  inputs:
+    - A: Point
+    - r: Scalar
+  construct:
+    - c: Circle
+  conclude:
+    - A == center(c)
+    - r == radius(c)
+
 circle_from_two_points_and_angle:
   inputs:
     - A, B: Point

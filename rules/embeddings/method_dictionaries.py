@@ -112,4 +112,5 @@ PREDICATE_METHOD_DICTIONARY: Dict[str, Callable[[Unpack[Tuple[EmbeddedObject, ..
     'square': square,
     'tangent': tangent,
     'trapezoid': trapezoid,
+    'triangle': not_collinear,
 }
