@@ -1,5 +1,6 @@
-import math
+from mpmath import mpf
 from typing import Mapping
+from mpmath import mp
 
 from .eq_op import EqOp
 from .geo_object import ZERO, GeoObject, ONE
@@ -203,7 +204,7 @@ class EquationObject(GeoObject):
             val = self.as_literal()
             if (val is None) or (val == 0):
                 return None
-            return {ONE: math.log(val)}
+            return {ONE: mp.log(val)}
 
         left_factors = self.left.as_log_equation()
         right_factors = self.right.as_log_equation()
@@ -254,20 +255,20 @@ def __neg__(self) -> EquationObject:
 
 
 def __add__(self, other: GeoObject | int | float) -> EquationObject:
-    if isinstance(other, int) or isinstance(other, float):
+    if isinstance(other, int) or isinstance(other, float) or isinstance(other, mpf):
         other = GeoObject(str(other), LITERAL)
     
     return EquationObject(self, other, EqOp.ADD)
 
 
 def __sub__(self, other: GeoObject | int | float) -> EquationObject:
-    if isinstance(other, int) or isinstance(other, float):
+    if isinstance(other, int) or isinstance(other, float) or isinstance(other, mpf):
         other = GeoObject(str(other), LITERAL)
     return EquationObject(self, other, EqOp.SUB)
 
 
 def __mul__(self, other: GeoObject | int | float) -> EquationObject:
-    if isinstance(other, int) or isinstance(other, float):
+    if isinstance(other, int) or isinstance(other, float) or isinstance(other, mpf):
         other = GeoObject(str(other), LITERAL)
 
     return EquationObject(self, other, EqOp.MUL)
@@ -277,7 +278,7 @@ def __truediv__(self, other: GeoObject | int | float) -> 'EquationObject':
     """
     Attempts to divide the two equations.
     """
-    if isinstance(other, int) or isinstance(other, float):
+    if isinstance(other, int) or isinstance(other, float) or isinstance(other, mpf):
         other = GeoObject(str(other), LITERAL)
     return EquationObject(self, other, EqOp.DIV)
 

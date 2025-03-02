@@ -1,6 +1,5 @@
 from typing import TYPE_CHECKING, Mapping
-
-import math
+from mpmath import mp
 
 from ..predicates.global_predicates import get_constructions
 from ..symmetry import Symmetry
@@ -165,7 +164,7 @@ def as_log_equation(self) -> dict[GeoObject, float] | None:
     if (val := self.as_literal()) is not None:
         if val <= 0:
             return None
-        return {ONE: math.log(val)}
+        return {ONE: mp.log(val)}
     if self.type == SCALAR:
         return {ConstructionObject.from_args('log', (self,)): 1}
     return None
