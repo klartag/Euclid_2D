@@ -3,9 +3,11 @@ import itertools
 from pathlib import Path
 from typing import Dict, List, Mapping, Optional
 
+
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ...rule_utils import POINT
 from ...geometry_objects.geo_object import GeoObject
+from ...geometry_objects.construction_object import ConstructionObject
 from ...predicates.predicate import Predicate
 from ...predicates.implementations.distinct_predicate import DistinctPredicate
 from ...predicates.predicate_factory import predicate_from_args
@@ -41,6 +43,15 @@ class DiagramEmbedder:
             # Removing open predicates:
             if pred.is_open():
                 continue
+            # Splitting all "Line(A, B) == ;" nad "Circle(A, B, C) == c" predicates into pieces:
+            if pred.name == 'equals':
+                lhs, rhs = pred.components
+                if isinstance(rhs, ConstructionObject) and rhs.constructor.name in ['Line', 'Circle']:
+                    lhs, rhs = rhs, lhs
+                if isinstance(lhs, ConstructionObject) and lhs.constructor.name in ['Line', 'Circle']:
+                    for point in lhs.components:
+                        processed_predicates.append(predicate_from_args('in', (point, rhs)))
+                    continue
             # Splitting all `In` predicates into pieces:
             if pred.name == 'in':
                 point_indices = [i for i in range(len(pred.components)) if pred.components[i].type == POINT]
@@ -50,8 +61,8 @@ class DiagramEmbedder:
                         if i >= j:
                             return None
                         processed_predicates.append(predicate_from_args('in', (pred.components[i], pred.components[j])))
-            else:
-                processed_predicates.append(pred)
+                continue
+            processed_predicates.append(pred)
         return processed_predicates
 
     def sequence_assumptions(self, objects: List[GeoObject], predicates: List[Predicate]) -> Optional[List[EmbeddedConstruction]]:
