@@ -52,4 +52,8 @@ LOCUS_PATTERNS: List[LocusPattern] = [
         lambda point, line: line,
         'equals', None, 'Line', None
     ),
+    SimplePredicateConstructionLocus(
+        construction_generator('circle_from_center_and_point', (1, 0)),
+        'in', 1, 'perpendicular_bisector', None
+    ),
 ]
