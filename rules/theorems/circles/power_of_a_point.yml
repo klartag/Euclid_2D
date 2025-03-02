@@ -3,10 +3,10 @@ power_of_a_point_definition:
     - O, A, B: Point
     - c: Circle
   where:
-    - A != B
     - A, B in c
     - collinear(O, A, B)
   where_embedding:
+    - A != B
     - O not in c
   conclude:
     - log(power_of_a_point(O, c)) == log(distance(O, A)) + log(distance(O, B))

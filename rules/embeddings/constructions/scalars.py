@@ -39,7 +39,7 @@ def orientation(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPo
 
 
 def power_of_a_point(point: EmbeddedPoint, circle: EmbeddedCircle) -> EmbeddedScalar:
-    return EmbeddedScalar((point - circle.center).length_squared() - circle.radius_squared)
+    return EmbeddedScalar(abs((point - circle.center).length_squared() - circle.radius_squared))
 
 
 def radius(circle: EmbeddedCircle) -> EmbeddedScalar:

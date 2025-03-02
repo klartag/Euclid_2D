@@ -3,6 +3,8 @@ isosceles_triangle_properties:
     - A, B, C: Point
   where:
     - isosceles_triangle(A, B, C)
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - distance(A, B) == distance(A, C)
     - angle(A, B, C) == angle(B, C, A) mod 360
