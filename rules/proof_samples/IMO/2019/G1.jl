@@ -9,8 +9,8 @@ D == line_circle_other_intersection(A, Line(A, B), Gamma)
 E == line_circle_other_intersection(A, Line(A, C), Gamma)
 G == line_circle_other_intersection(F, Line(B, C), Gamma)
 between(B, F, G)
-l_F == tangent_from_point_in_circle(F, Circle(B, D, F))
-l_G == tangent_from_point_in_circle(G, Circle(C, E, G))
+l_F == point_circle_tangent_line(F, Circle(B, D, F))
+l_G == point_circle_tangent_line(G, Circle(C, E, G))
 T == line_intersection(l_F, l_G)
 
 Need to prove:

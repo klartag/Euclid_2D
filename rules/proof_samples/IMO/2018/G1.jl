@@ -2,7 +2,7 @@ Assumptions:
 A, B, C, D, E, F, G: Point
 Gamma: Circle
 distinct(A, B, C, D, E, F, G)
-acute_triangle(A, B, C)
+triangle(A, B, C)
 Gamma == Circle(A, B, C)
 between(A, D, B)
 between(A, E, C)
