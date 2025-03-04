@@ -27,7 +27,11 @@ LOCUS_PATTERNS: List[LocusPattern] = [
     SimplePredicateConstructionLocus(
         construction_generator('perpendicular_line'),
         'perpendicular', None, 'Line', None
-     ),
+    ),
+    SimplePredicateConstructionLocus(
+        construction_generator('parallel_line'),
+        'parallel', None, 'Line', None
+    ),
     SimplePredicateConstructionLocus(
         construction_generator('point_circle_tangent_line'),
         'tangent', 0, 'Line', None

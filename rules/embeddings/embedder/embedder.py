@@ -102,12 +102,13 @@ class DiagramEmbedder:
         constructions = constructions[:]
         while len(constructions) > 0:
             for construction in list(constructions):
-                embedded_object = construction.construct(embedding, distinct_names)
-                if embedded_object is not None:
-                    embedding[construction.output_name] = embedded_object
-                    constructions.remove(construction)
-                    break
-                else:
+                try:
+                    embedded_object = construction.construct(embedding, distinct_names)
+                    if embedded_object is not None:
+                        embedding[construction.output_name] = embedded_object
+                        constructions.remove(construction)
+                        break
+                except:
                     pass
             else:
                 return None
