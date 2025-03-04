@@ -359,8 +359,8 @@ class GeometryTracker:
 
         if isinstance(obj, ConstructionObject) and obj.name not in self.embedding_tracker:
             embedded_construction_object_options = self.embedding_tracker.evaluate_construction_object(obj)
-            if len(embedded_construction_object_options) > 0:
-                self.embedding_tracker[obj.name] = random.choice(embedded_construction_object_options)
+            if len(embedded_construction_object_options) == 1:
+                self.embedding_tracker[obj.name] = embedded_construction_object_options[0]
 
     def add_equal_angle(self, pred: Predicate, mod: int | None):
         """

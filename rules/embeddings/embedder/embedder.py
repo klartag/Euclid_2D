@@ -1,7 +1,7 @@
 from collections import defaultdict
 import itertools
 from pathlib import Path
-from typing import Dict, List, Mapping, Optional
+from typing import Dict, Iterator, List, Mapping, Optional, Tuple
 
 
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
@@ -14,6 +14,7 @@ from ...predicates.predicate_factory import predicate_from_args
 from ...proof import Proof
 
 from .. import Embedding
+from ..embedded_objects import EmbeddedObject
 from ..embedded_predicate_value import EmbeddedPredicateValue
 
 from .construction_patterns.implementations import CONSTRUCTION_PATTERNS
@@ -97,24 +98,29 @@ class DiagramEmbedder:
                     distinct_names[obj1.name].append(obj0.name)
         return distinct_names
     
-    def embed_construction_sequence(self, constructions: List[EmbeddedConstruction], distinct_names: Mapping[str, List[str]]) -> Optional[Embedding]:
-        embedding = Embedding()
-        constructions = constructions[:]
-        while len(constructions) > 0:
-            for construction in list(constructions):
-                try:
-                    embedded_object_options = construction.construct(embedding, distinct_names)
-                    ### TODO: What if there are multiple options?? What do???
-                    if len(embedded_object_options) > 0:
-                        embedding[construction.output_name] = embedded_object_options[0]
-                        constructions.remove(construction)
-                        break
-                except:
-                    pass
-            else:
-                return None
-        return embedding
+    def inner_embed_construction_sequence(self, partial_embedding: Embedding, constructions: List[EmbeddedConstruction], distinct_names: Mapping[str, List[str]]) -> Iterator[Embedding]:
+        if len(constructions) == 0:
+            yield partial_embedding.shallow_copy()
+            return
+        embedding = partial_embedding.shallow_copy()
+        try:
+            object_options = constructions[0].construct(embedding, distinct_names)
+        except UndefinedEmbeddingError:
+            return
+        for object_option in object_options:
+            embedding[constructions[0].output_name] = object_option
+            for inner_embedding in self.inner_embed_construction_sequence(embedding, constructions[1:], distinct_names):
+                yield inner_embedding
+
     
+    def embed_construction_sequence(self, constructions: List[EmbeddedConstruction], distinct_names: Mapping[str, List[str]]) -> Iterator[Embedding]:
+        return self.inner_embed_construction_sequence(
+            Embedding(),
+            constructions,
+            distinct_names
+        )
+
+
     def check_predicates(self, embedding: Embedding, predicates: List[Predicate]) -> bool:
         for pred in predicates:
             if embedding.evaluate_predicate(pred) != EmbeddedPredicateValue.Correct:
@@ -133,12 +139,9 @@ class DiagramEmbedder:
         distinct_names: Mapping[str, List[str]] = self.get_distinct_names(proof)
 
         for _ in range(EMBEDDING_ATTEMPTS):
-            embedding = self.embed_construction_sequence(constructions, distinct_names)
-            if embedding is None:
-                continue
-            if not self.check_predicates(embedding, proof.assumption_predicates):
-                continue
-            return embedding
+            for embedding in self.embed_construction_sequence(constructions, distinct_names):
+                if self.check_predicates(embedding, proof.assumption_predicates):
+                    return embedding
         return None
 
 

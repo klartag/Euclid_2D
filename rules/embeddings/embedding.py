@@ -31,6 +31,9 @@ class Embedding:
     def __getitem__(self, object_name: str) -> Optional[EmbeddedObject]:
         return self.embedding[object_name]
     
+    def __delitem__(self, object_name: str):
+        del self.embedding[object_name]
+    
     def __contains__(self, object_name: str) -> bool:
         return object_name in self.embedding
     

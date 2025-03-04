@@ -3,8 +3,8 @@ from typing import List
 from ....rule_utils import POINT, LINE, CIRCLE
 
 from ...method_dictionaries import (
-    line_circle_other_intersection,
-    circle_circle_other_intersection,
+    line_circle_intersection,
+    circle_circle_intersection,
     circumcircle,
     line,
     line_intersection,
@@ -25,7 +25,6 @@ from .simple_symmetric_predicate_pattern import SimpleSymmetricPredicatePattern
 from .empty_pattern import EmptyPattern
 
 from ..embedded_constructions.explicit_embedded_construction import ExplicitEmbeddedConstruction
-from ..embedded_constructions.other_intersection_embedded_construction import OtherIntersectionEmbeddedConstruction
 
 
 CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
@@ -44,6 +43,6 @@ CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
     ContainmentPattern((LINE,), ExplicitEmbeddedConstruction, point_on_line),
     ContainmentPattern((CIRCLE,), ExplicitEmbeddedConstruction, point_on_circle),
     ContainmentPattern((LINE, LINE), ExplicitEmbeddedConstruction, line_intersection),
-    ContainmentPattern((LINE, CIRCLE), OtherIntersectionEmbeddedConstruction, line_circle_other_intersection),
-    ContainmentPattern((CIRCLE, CIRCLE), OtherIntersectionEmbeddedConstruction, circle_circle_other_intersection),
+    ContainmentPattern((LINE, CIRCLE), ExplicitEmbeddedConstruction, line_circle_intersection),
+    ContainmentPattern((CIRCLE, CIRCLE), ExplicitEmbeddedConstruction, circle_circle_intersection),
 ]
