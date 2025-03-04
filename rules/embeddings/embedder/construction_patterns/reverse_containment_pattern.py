@@ -7,21 +7,33 @@ from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.implementations.in_predicate import InPredicate
 
-from ..embedded_constructions.embedded_construction import EmbeddedConstruction, InputArgs, Output
+from ...types import ConstructionMethod, ExtendedConstructionMethod, normalize_return_type
+
+from ..embedded_constructions.embedded_construction import EmbeddedConstruction
 
 from .construction_pattern import ConstructionPattern
 
-C = TypeVar('C', bound=EmbeddedConstruction)
 
-
-@dataclass
-class ReverseContainmentPattern[C](ConstructionPattern):
+class ReverseContainmentPattern(ConstructionPattern):
     contained_point_count: int
     return_type: str
-    construction_type: Type[C]
-    construction_method: Callable[[Unpack[InputArgs]], Output]
+    construction_type: Type[EmbeddedConstruction]
+    construction_method: ConstructionMethod
+    
+    def __init__(
+        self,
+        contained_point_count: int,
+        return_type: str,
+        construction_type: Type[EmbeddedConstruction],
+        construction_method: ExtendedConstructionMethod
+    ):
+        self.contained_point_count = contained_point_count
+        self.return_type = return_type
+        self.construction_type = construction_type
+        self.construction_method = normalize_return_type(construction_method)
 
-    def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[C]:
+
+    def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[EmbeddedConstruction]:
         if object_.type != self.return_type:
             return None
 

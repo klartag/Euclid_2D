@@ -7,20 +7,30 @@ from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.implementations.in_predicate import InPredicate
 
-from ..embedded_constructions.embedded_construction import EmbeddedConstruction, InputArgs, Output
+from ...types import ConstructionMethod, ExtendedConstructionMethod, normalize_return_type
+
+from ..embedded_constructions.embedded_construction import EmbeddedConstruction
 
 from .construction_pattern import ConstructionPattern
 
-C = TypeVar('C', bound=EmbeddedConstruction)
 
-
-@dataclass
-class SimpleSymmetricPredicatePattern[C](ConstructionPattern):
-    construction_type: Type[C]
-    construction_method: Callable[[Unpack[InputArgs]], Output]
+class SimpleSymmetricPredicatePattern(ConstructionPattern):
+    construction_type: Type[EmbeddedConstruction]
+    construction_method: ConstructionMethod
     predicate_name: str
+    
+    def __init__(
+        self,
+        construction_type: Type[EmbeddedConstruction],
+        construction_method: ExtendedConstructionMethod,
+        predicate_name: str
+    ):
+        self.construction_type = construction_type
+        self.construction_method = normalize_return_type(construction_method)
+        self.predicate_name = predicate_name
 
-    def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[C]:
+
+    def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[EmbeddedConstruction]:
         if len(predicates) != 1:
             return None
 

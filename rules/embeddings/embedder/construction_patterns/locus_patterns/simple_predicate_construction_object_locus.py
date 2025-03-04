@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from typing import Callable, Optional, Tuple, Unpack
 
-from rules.geometry_objects.construction_object import ConstructionObject
-
+from .....geometry_objects.construction_object import ConstructionObject
 from .....geometry_objects.geo_object import GeoObject
 from .....predicates.predicate import Predicate
 

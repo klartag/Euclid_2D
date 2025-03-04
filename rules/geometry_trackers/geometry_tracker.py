@@ -1,4 +1,5 @@
 import heapq
+import random
 
 from .linear_algebra_tracker import LinearAlgebraTracker
 
@@ -357,9 +358,9 @@ class GeometryTracker:
                 self.process_orientation(obj)
 
         if isinstance(obj, ConstructionObject) and obj.name not in self.embedding_tracker:
-            embedded_construction_object = self.embedding_tracker.evaluate_construction_object(obj)
-            if embedded_construction_object is not None:
-                self.embedding_tracker[obj.name] = embedded_construction_object
+            embedded_construction_object_options = self.embedding_tracker.evaluate_construction_object(obj)
+            if len(embedded_construction_object_options) > 0:
+                self.embedding_tracker[obj.name] = random.choice(embedded_construction_object_options)
 
     def add_equal_angle(self, pred: Predicate, mod: int | None):
         """

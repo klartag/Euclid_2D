@@ -1,4 +1,6 @@
-from rules.embeddings.undefined_embedding_error import UndefinedEmbeddingError
+from .embeddings.embedded_objects.embedded_object import EmbeddedObject
+from .embeddings.undefined_embedding_error import UndefinedEmbeddingError
+
 from .geometry_objects.geo_object import GeoObject
 from .geometry_objects.parse import parse_geo_object
 from .geometry_trackers.geometry_tracker import GeometryTracker
@@ -42,7 +44,14 @@ class InteractivePredicateChecker:
 
     def print_geometry_object(self, obj: GeoObject) -> str:
         try:
-            embedded_object = self.geometry_tracker.embedding_tracker.evaluate_object(obj)
-            print(embedded_object.to_str(4))
+            result = self.geometry_tracker.embedding_tracker.evaluate_object(obj)
+            if len(result) == 0:
+                raise UndefinedEmbeddingError()
+            elif len(result) == 1:
+                print(result[0].to_str(4))
+            else:
+                prefix_length = len(str(len(result) + 1))
+                for i, obj in enumerate(result):
+                    print(f'{i + 1:>{prefix_length}}: {obj.to_str(4)}')
         except UndefinedEmbeddingError:
             print('Failed to evaluate in embedding.')

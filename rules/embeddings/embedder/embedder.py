@@ -103,9 +103,10 @@ class DiagramEmbedder:
         while len(constructions) > 0:
             for construction in list(constructions):
                 try:
-                    embedded_object = construction.construct(embedding, distinct_names)
-                    if embedded_object is not None:
-                        embedding[construction.output_name] = embedded_object
+                    embedded_object_options = construction.construct(embedding, distinct_names)
+                    ### TODO: What if there are multiple options?? What do???
+                    if len(embedded_object_options) > 0:
+                        embedding[construction.output_name] = embedded_object_options[0]
                         constructions.remove(construction)
                         break
                 except:

@@ -2,26 +2,35 @@ from typing import Callable, Type, TypeVar, List, Optional, Tuple, Unpack
 from dataclasses import dataclass
 
 from ....rule_utils import POINT
-
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
-from ....predicates.implementations.in_predicate import InPredicate
 
-from ..embedded_constructions.embedded_construction import EmbeddedConstruction, InputArgs, Output
+from ...embedded_objects.embedded_object import EmbeddedObject
+from ...types import ConstructionMethod, ExtendedConstructionMethod, normalize_return_type
+
+from ..embedded_constructions.embedded_construction import EmbeddedConstruction
 
 from .construction_pattern import ConstructionPattern
 from .locus_patterns.implementations import LOCUS_PATTERNS
 
-C = TypeVar('C', bound=EmbeddedConstruction)
 
-
-@dataclass
-class ContainmentPattern[C](ConstructionPattern):
+class ContainmentPattern(ConstructionPattern):
     intersection_types: Tuple[str]
-    construction_type: Type[C]
-    construction_method: Callable[[Unpack[InputArgs]], Output]
+    construction_type: Type[EmbeddedConstruction]
+    construction_method: ConstructionMethod
 
-    def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[C]:
+
+    def __init__(
+        self,
+        intersection_types: Tuple[str],
+        construction_type: Type[EmbeddedConstruction],
+        construction_method: ExtendedConstructionMethod
+    ):
+        self.intersection_types = intersection_types
+        self.construction_type = construction_type
+        self.construction_method = normalize_return_type(construction_method)
+
+    def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[EmbeddedConstruction]:
         if object_.type != POINT:
             return None
 
