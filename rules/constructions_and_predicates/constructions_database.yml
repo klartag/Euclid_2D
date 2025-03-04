@@ -271,6 +271,25 @@ circle_circle_other_intersection: # We need one intersection so that the other i
   conclude:
     - Q in c, d
 
+#
+line_circle_intersection:
+  inputs:
+    - L: Line
+    - c: Circle
+  construct:
+    - P: Point
+  conclude:
+    - P in L, c
+
+circle_circle_intersection:
+  inputs:
+    - c, d: Circle
+  construct:
+    - P: Point
+  conclude:
+    - P in c, d
+
+
 #primitive
 internal_angle_bisector: #bisector trough the point B
   inputs:

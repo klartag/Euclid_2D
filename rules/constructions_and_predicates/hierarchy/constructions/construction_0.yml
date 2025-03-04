@@ -26,6 +26,12 @@ centroid:
   - {'A, B, C': Point}
   preprocess: symmetric
   where: ['not_collinear(A, B, C)']
+circle_circle_intersection:
+  conclude: ['P in c, d']
+  construct:
+  - {P: Point}
+  inputs:
+  - {'c, d': Circle}
 circle_circle_other_intersection:
   conclude: ['Q in c, d']
   construct:
@@ -71,6 +77,13 @@ isogonal_conjugate:
   preprocess: last_elements
   where: ['not_collinear(A, B, C)', 'not_collinear(P, A, B)', 'not_collinear(P, B,
       C)', 'not_collinear(P, A, C)']
+line_circle_intersection:
+  conclude: ['P in L, c']
+  construct:
+  - {P: Point}
+  inputs:
+  - {L: Line}
+  - {c: Circle}
 line_circle_other_intersection:
   conclude: ['Q in L, c']
   construct:
