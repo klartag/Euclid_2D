@@ -1,14 +1,13 @@
-from typing import Callable, Type, TypeVar, List, Optional, Tuple, Unpack
-from dataclasses import dataclass
+from typing import Type, List, Optional, Tuple
 
 from ....rule_utils import POINT
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 
-from ...embedded_objects.embedded_object import EmbeddedObject
 from ...types import ConstructionMethod, ExtendedConstructionMethod, normalize_return_type
 
 from ..embedded_constructions.embedded_construction import EmbeddedConstruction
+from ..embedded_geo_objects.embedded_geo_object import ExtendedGeoObject
 
 from .construction_pattern import ConstructionPattern
 from .locus_patterns.implementations import LOCUS_PATTERNS
@@ -34,14 +33,14 @@ class ContainmentPattern(ConstructionPattern):
         if object_.type != POINT:
             return None
 
-        containing_objects: List[GeoObject] = []
+        containing_objects: List[ExtendedGeoObject] = []
         for predicate in predicates:
             locus = self.parse_containment_predicate(object_, predicate)
             if locus is None:
                 return None
             containing_objects.append(locus)
 
-        sorted_objects = []
+        sorted_objects: List[ExtendedGeoObject] = []
 
         for intersection_type in self.intersection_types:
             for containing_object in list(containing_objects):
@@ -57,7 +56,7 @@ class ContainmentPattern(ConstructionPattern):
 
         return self.construction_type(tuple(sorted_objects), object_.name, self.construction_method)
 
-    def parse_containment_predicate(self, object_: GeoObject, predicate: Predicate) -> Optional[GeoObject]:
+    def parse_containment_predicate(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]:
         for locus_pattern in LOCUS_PATTERNS:
             locus = locus_pattern.match(object_, predicate)
             if locus is not None:

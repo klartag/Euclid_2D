@@ -14,7 +14,7 @@ from ..geometry_objects.eq_op import EqOp
 
 from .method_dictionaries import CONSTRUCTION_METHOD_DICTIONARY, PREDICATE_METHOD_DICTIONARY
 
-from .embedder.embedded_geo_objects.embedded_geo_object import EmbeddedGeoObject
+from .embedder.embedded_geo_objects.embedded_geo_object import EmbeddedGeoObject, ExtendedGeoObject
 from .embedded_objects import EmbeddedObject, EmbeddedScalar
 from .embedded_predicate_value import EmbeddedPredicateValue
 from .undefined_embedding_error import UndefinedEmbeddingError
@@ -56,7 +56,7 @@ class Embedding:
             copied_embedding[object_name] = embedded_object
         return copied_embedding
 
-    def evaluate_object(self, obj: GeoObject | EmbeddedGeoObject) -> Tuple[EmbeddedObject, ...]:
+    def evaluate_object(self, obj: ExtendedGeoObject) -> Tuple[EmbeddedObject, ...]:
         if isinstance(obj, EmbeddedGeoObject):
             return self.evaluate_embedded_geo_object(obj)
         elif obj.name in self.embedding:

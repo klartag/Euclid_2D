@@ -1,20 +1,22 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Callable, Optional, Sequence, Tuple, Unpack, Union
 
 from .....geometry_objects.geo_object import GeoObject
 from .....predicates.predicate import Predicate
 
+from ...embedded_geo_objects.embedded_geo_object import EmbeddedGeoObject, ExtendedGeoObject
+
 from .locus_pattern_matcher import LocusPattern
 
 
 @dataclass
 class UnpackingPredicateLocus(LocusPattern):
-    locus_construction_method: Callable[[Unpack[Tuple[GeoObject, ...]]], GeoObject]
+    locus_construction_method: Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], EmbeddedGeoObject]
     predicate_name: str
     parameter_index_options: Union[int, Sequence[int], None]
 
-    def match(self, object_: GeoObject, predicate: Predicate) -> Optional[GeoObject]:
+    def match(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]:
         for parameter_index in self.unpack_index_options(self.parameter_index_options, len(predicate.components)):
             locus = self.match_predicate_parameter_option(object_, predicate, parameter_index)
             if locus is not None:
@@ -30,4 +32,4 @@ class UnpackingPredicateLocus(LocusPattern):
             return [parameter_index_options] if parameter_index_options < component_count else []
 
     @abstractmethod
-    def match_predicate_parameter_option(self, object_: GeoObject, predicate: Predicate, parameter_index: int) -> Optional[GeoObject]: ...
+    def match_predicate_parameter_option(self, object_: GeoObject, predicate: Predicate, parameter_index: int) -> Optional[ExtendedGeoObject]: ...

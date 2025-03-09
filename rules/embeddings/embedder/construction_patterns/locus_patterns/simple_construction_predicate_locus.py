@@ -5,6 +5,8 @@ from .....geometry_objects.geo_object import GeoObject
 from .....geometry_objects.construction_object import ConstructionObject
 from .....predicates.predicate import Predicate
 
+from ...embedded_geo_objects.embedded_geo_object import ExtendedGeoObject
+
 from .unpacking_predicate_locus import UnpackingPredicateLocus
 
 
@@ -13,7 +15,7 @@ class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
     construction_name: str
     construction_index_options: Union[int, Sequence[int], None]
 
-    def match_predicate_parameter_option(self, object_: GeoObject, predicate: Predicate, parameter_index: int) -> Optional[GeoObject]:
+    def match_predicate_parameter_option(self, object_: GeoObject, predicate: Predicate, parameter_index: int) -> Optional[ExtendedGeoObject]:
         if predicate.name != self.predicate_name:
             return None
 
@@ -41,7 +43,7 @@ class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
         rest_of_predicate_components: List[GeoObject],
         construction_object: ConstructionObject,
         construction_index: int
-    ) -> Optional[GeoObject]:
+    ) -> Optional[ExtendedGeoObject]:
         if construction_object.constructor.name != self.construction_name:
             return None
         

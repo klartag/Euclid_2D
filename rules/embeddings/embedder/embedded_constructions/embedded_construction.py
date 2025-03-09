@@ -8,12 +8,12 @@ from ....geometry_objects.geo_object import GeoObject
 from ... import Embedding
 
 from ...embedded_objects.embedded_object import EmbeddedObject
-from ...embedder.embedded_geo_objects.embedded_geo_object import EmbeddedGeoObject
+from ...embedder.embedded_geo_objects.embedded_geo_object import ExtendedGeoObject
 
 
 @dataclass
 class EmbeddedConstruction(ABC):
-    input_objects: Tuple[GeoObject | EmbeddedGeoObject, ...]
+    input_objects: Tuple[ExtendedGeoObject, ...]
     output_name: str
 
     def get_parameters(self, partial_embedding: Embedding) -> Tuple[Tuple[EmbeddedObject, ...]]:

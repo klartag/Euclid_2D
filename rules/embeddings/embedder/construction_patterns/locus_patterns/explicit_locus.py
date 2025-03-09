@@ -5,11 +5,13 @@ from .....geometry_objects.geo_object import GeoObject
 from .....predicates.predicate import Predicate
 from .....predicates.implementations.in_predicate import InPredicate
 
+from ...embedded_geo_objects.embedded_geo_object import ExtendedGeoObject
+
 from .locus_pattern_matcher import LocusPattern
 
 
 class ExplicitLocus(LocusPattern):
-    def match(self, object_: GeoObject, predicate: Predicate) -> Optional[GeoObject]:
+    def match(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]:
         if not isinstance(predicate, InPredicate):
             return None
         if len(predicate.components) != 2:
