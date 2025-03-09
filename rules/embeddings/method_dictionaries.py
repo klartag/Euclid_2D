@@ -16,7 +16,6 @@ from .constructions.parallels_and_perpendiculars import parallel_line, perpendic
 from .constructions.projection import project
 from .constructions.radical_axis import radical_axis
 from .constructions.reflection import reflect_point
-from .constructions.rotation import rotate_point
 from .constructions.scalars import angle, orientation, distance, direction, power_of_a_point, radius, log
 from .constructions.tangent import tangent_point, tangent_line
 
@@ -71,7 +70,6 @@ _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ExtendedConstructionMethod] = 
     'projection': project,
     'radical_axis': radical_axis,
     'radius': radius,
-    'rotate_point': rotate_point,
 }
 
 

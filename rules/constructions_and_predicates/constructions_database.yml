@@ -39,16 +39,6 @@ angle:
   conclude:
     - a == direction(B, C) - direction(B, A) mod 360
 
-rotate_point:
-  inputs:
-    - O, A: Point
-    - a: Angle
-  construct:
-    - A': Point
-  conclude:
-    - distance(O, A) == distance(O, A')
-    - angle(A, O, A') == a mod 360
-
 direction:
   inputs:
     - A, B: Point
