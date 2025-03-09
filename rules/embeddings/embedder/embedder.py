@@ -19,7 +19,7 @@ from ..embedded_predicate_value import EmbeddedPredicateValue
 
 from .construction_patterns.implementations import CONSTRUCTION_PATTERNS
 from .embedded_constructions.embedded_construction import EmbeddedConstruction
-
+from .sequencing_preprocessor.sequencing_preprocessor import SequencingPreprocessor
 
 EMBEDDING_ATTEMPTS = 100
 
@@ -37,34 +37,6 @@ class DiagramEmbedder:
                 pass
         else:
             return None
-    
-    def process_assumptions(self, predicates: List[Predicate]) -> Optional[List[Predicate]]:
-        processed_predicates = []
-        for pred in predicates:
-            # Removing open predicates:
-            if pred.is_open():
-                continue
-            # Splitting all "Line(A, B) == l" and "Circle(A, B, C) == c" predicates into pieces:
-            if pred.name == 'equals':
-                lhs, rhs = pred.components
-                if isinstance(rhs, ConstructionObject) and rhs.constructor.name in ['Line', 'Circle']:
-                    lhs, rhs = rhs, lhs
-                if isinstance(lhs, ConstructionObject) and lhs.constructor.name in ['Line', 'Circle']:
-                    for point in lhs.components:
-                        processed_predicates.append(predicate_from_args('in', (point, rhs)))
-                    continue
-            # Splitting all `In` predicates into pieces:
-            if pred.name == 'in':
-                point_indices = [i for i in range(len(pred.components)) if pred.components[i].type == POINT]
-                curve_indices = [i for i in range(len(pred.components)) if pred.components[i].type != POINT]
-                for i in point_indices:
-                    for j in curve_indices:
-                        if i >= j:
-                            return None
-                        processed_predicates.append(predicate_from_args('in', (pred.components[i], pred.components[j])))
-                continue
-            processed_predicates.append(pred)
-        return processed_predicates
 
     def sequence_assumptions(self, objects: List[GeoObject], predicates: List[Predicate]) -> Optional[List[EmbeddedConstruction]]:
         constructions: List[EmbeddedConstruction] = []
@@ -130,8 +102,9 @@ class DiagramEmbedder:
 
     def embed(self, proof: Proof) -> Optional[Embedding]:
         objects = list(proof.assumption_objects.values())
-        separated_predicates = self.process_assumptions(proof.assumption_predicates)
-        constructions = self.sequence_assumptions(objects, separated_predicates)
+        preprocessor = SequencingPreprocessor()
+        processed_predicates = preprocessor.preprocess_assumptions(proof.assumption_predicates)
+        constructions = self.sequence_assumptions(objects, processed_predicates)
 
         if constructions is None:
             return None
