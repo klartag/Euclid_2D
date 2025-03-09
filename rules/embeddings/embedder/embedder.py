@@ -8,6 +8,8 @@ from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ...rule_utils import POINT
 from ...geometry_objects.geo_object import GeoObject
 from ...geometry_objects.construction_object import ConstructionObject
+from ...geometry_trackers.geometry_tracker import GeometryTracker
+from ...interactive_predicate_checker import InteractivePredicateChecker
 from ...predicates.predicate import Predicate
 from ...predicates.implementations.distinct_predicate import DistinctPredicate
 from ...predicates.predicate_factory import predicate_from_args
@@ -133,6 +135,11 @@ def main():
         help='Overwrite the file with the proof when embedding is complete.',
         action='store_true',
     )
+    parser.add_argument(
+        '--interactive',
+        help='Runs an interactive object and predicate evaluator if the embedding fails.',
+        action='store_true',
+    )
 
     args = parser.parse_args()
 
@@ -158,16 +165,23 @@ def main():
     
     failed_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Incorrect]
     unknown_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Undefined]
-    
+
     print('Embedding successful.')
     if len(failed_predicates) > 0:
         print('Incorrect target predicates:')
         for pred in failed_predicates:
             print(pred.to_language_format())
         print()
-        
+
     if len(unknown_predicates) > 0:
         print('Unknown target predicates:')
         for pred in unknown_predicates:
             print(pred.to_language_format())
         print()
+        
+    if len(failed_predicates) > 0 or len(unknown_predicates) > 0:
+        print('Beginning interactive session...')
+        geometry_tracker = GeometryTracker()
+        geometry_tracker.load_assumptions(proof)
+        geometry_tracker.load_embeds(proof)
+        InteractivePredicateChecker(geometry_tracker).run()
