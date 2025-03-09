@@ -32,10 +32,6 @@ LOCUS_PATTERNS: List[LocusPattern] = [
         'parallel', None, 'Line', None
     ),
     SimplePredicateConstructionLocus(
-        construction_generator('point_circle_tangent_line'),
-        'tangent', 0, 'Line', None
-    ),
-    SimplePredicateConstructionLocus(
         construction_generator('circle_from_center_and_radius'),
         'equals', None, 'distance', None
     ),
@@ -58,5 +54,9 @@ LOCUS_PATTERNS: List[LocusPattern] = [
     SimplePredicateConstructionLocus(
         construction_generator('circle_from_center_and_point', (1, 0)),
         'in', 1, 'perpendicular_bisector', None
+    ),
+    SimplePredicateConstructionLocus(
+        construction_generator('tangent_line'),
+        'tangent', None, 'Line', None
     ),
 ]
