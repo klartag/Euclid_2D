@@ -14,6 +14,7 @@ from ..geometry_objects.eq_op import EqOp
 
 from .method_dictionaries import CONSTRUCTION_METHOD_DICTIONARY, PREDICATE_METHOD_DICTIONARY
 
+from .embedder.embedded_geo_objects.embedded_geo_object import EmbeddedGeoObject
 from .embedded_objects import EmbeddedObject, EmbeddedScalar
 from .embedded_predicate_value import EmbeddedPredicateValue
 from .undefined_embedding_error import UndefinedEmbeddingError
@@ -54,9 +55,11 @@ class Embedding:
         for object_name, embedded_object in self.items():
             copied_embedding[object_name] = embedded_object
         return copied_embedding
-    
-    def evaluate_object(self, obj: GeoObject) -> Tuple[EmbeddedObject, ...]:
-        if obj.name in self.embedding:
+
+    def evaluate_object(self, obj: GeoObject | EmbeddedGeoObject) -> Tuple[EmbeddedObject, ...]:
+        if isinstance(obj, EmbeddedGeoObject):
+            return self.evaluate_embedded_geo_object(obj)
+        elif obj.name in self.embedding:
             return (self.embedding[obj.name],)
         elif isinstance(obj, ConstructionObject):
             return self.evaluate_construction_object(obj)
@@ -66,11 +69,19 @@ class Embedding:
             return (EmbeddedScalar(mpf(obj.name)),)
         else:
             raise UndefinedEmbeddingError()
-    
+
     def evaluate_construction_object(self, obj: ConstructionObject) -> Tuple[EmbeddedObject, ...]:
         if obj.constructor.name not in CONSTRUCTION_METHOD_DICTIONARY:
             raise UndefinedEmbeddingError(f'Unknown construction name: {obj.constructor.name}')
         construction_method = CONSTRUCTION_METHOD_DICTIONARY[obj.constructor.name]
+        embedded_parameter_options: List[Tuple[EmbeddedObject, ...]] = []
+        for component in obj.components:
+            parameter_options = self.evaluate_object(component)
+            embedded_parameter_options.append(parameter_options)
+        return tuple(itertools.chain(*[construction_method(*parameters) for parameters in itertools.product(*embedded_parameter_options)]))
+
+    def evaluate_embedded_geo_object(self, obj: EmbeddedGeoObject) -> Tuple[EmbeddedObject, ...]:
+        construction_method = obj.construction_method()
         embedded_parameter_options: List[Tuple[EmbeddedObject, ...]] = []
         for component in obj.components:
             parameter_options = self.evaluate_object(component)
