@@ -1,6 +1,5 @@
 from typing import List, Optional
 
-from .....rule_utils import POINT
 from .....predicates.predicate import Predicate
 from .....predicates.predicate_factory import predicate_from_args
 

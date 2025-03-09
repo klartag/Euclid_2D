@@ -1,6 +1,5 @@
 from typing import List, Optional, cast
 
-from .....rule_utils import POINT
 from .....geometry_objects.geo_object import GeoObject
 from .....geometry_objects.construction_object import ConstructionObject
 from .....predicates.predicate import Predicate
