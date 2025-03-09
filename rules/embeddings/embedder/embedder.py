@@ -21,7 +21,7 @@ from .construction_patterns.implementations import CONSTRUCTION_PATTERNS
 from .embedded_constructions.embedded_construction import EmbeddedConstruction
 
 
-EMBEDDING_ATTEMPTS = 1000
+EMBEDDING_ATTEMPTS = 100
 
 
 class DiagramEmbedder:
