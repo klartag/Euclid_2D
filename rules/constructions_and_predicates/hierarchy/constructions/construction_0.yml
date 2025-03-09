@@ -34,13 +34,6 @@ circle_circle_other_intersection:
   - {P: Point}
   - {'c, d': Circle}
   where: ['P in c, d']
-circle_from_two_points_and_angle:
-  conclude: ['A, B in c']
-  construct:
-  - {c: Circle}
-  inputs:
-  - {'A, B': Point}
-  - {a: Angle}
 distance:
   construct:
   - {d: Scalar}
