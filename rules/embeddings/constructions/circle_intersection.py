@@ -34,7 +34,7 @@ def circle_circle_other_intersection(
 def quadratic_equation_solutions(a: mpf, b: mpf, c: mpf) -> Tuple[mpf, ...]:
     determinant = b**2 - 4 * a * c
     if abs(determinant) < EPSILON ** 2:
-        return (-b / 2*a,)
+        return (-b / (2*a),)
     elif determinant < 0:
         raise UndefinedEmbeddingError("No solution was found for the quadratic equation.")
     else:
