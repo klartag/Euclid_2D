@@ -12,6 +12,6 @@ COLLINEAR_INEQUALITY_PREDICATE_NAMES = ['between', 'collinear_and_not_between']
 class CollinearInequalityRemover(PredicatePreprocessingPattern):
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name in COLLINEAR_INEQUALITY_PREDICATE_NAMES:
-            return predicate_from_args('collinear', [component.clone() for component in predicate.components])
+            return [predicate_from_args('collinear', [component.clone() for component in predicate.components])]
         else:
             return None
