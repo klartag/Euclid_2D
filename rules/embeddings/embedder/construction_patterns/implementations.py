@@ -2,9 +2,8 @@ from typing import List
 
 from ....rule_utils import POINT, LINE, CIRCLE
 
+from ...constructions.circle_intersection import line_circle_intersection, circle_circle_intersection
 from ...method_dictionaries import (
-    line_circle_intersection,
-    circle_circle_intersection,
     circumcircle,
     line,
     line_intersection,

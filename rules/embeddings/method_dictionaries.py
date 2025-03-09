@@ -3,7 +3,7 @@ from typing import Dict
 from .constructions.angle_bisectors import internal_angle_bisector, external_angle_bisector
 from .constructions.center import center
 from .constructions.circle import circumcenter, circumcircle, circle_from_center_and_point, circle_from_center_and_radius, circle_from_two_points_and_angle
-from .constructions.circle_intersection import line_circle_other_intersection, circle_circle_other_intersection, line_circle_intersection, circle_circle_intersection
+from .constructions.circle_intersection import line_circle_other_intersection, circle_circle_other_intersection
 from .constructions.incenters import incenter, excenter, incircle, excircle
 from .constructions.isogonal_conjugate import isogonal_conjugate
 from .constructions.line import line
@@ -78,10 +78,7 @@ _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ExtendedConstructionMethod] = 
 }
 
 
-CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ConstructionMethod]  = {
-    'line_circle_intersection': line_circle_intersection,
-    'circle_circle_intersection': circle_circle_intersection,
-}
+CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ConstructionMethod]  = { }
 
 CONSTRUCTION_METHOD_DICTIONARY.update({
     name: normalize_return_type(func)
