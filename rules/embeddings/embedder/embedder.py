@@ -72,28 +72,40 @@ class DiagramEmbedder:
                     distinct_names[obj1.name].append(obj0.name)
         return distinct_names
     
-    def inner_embed_construction_sequence(self, partial_embedding: Embedding, constructions: List[EmbeddedConstruction], distinct_names: Mapping[str, List[str]]) -> Iterator[Embedding]:
-        if len(constructions) == 0:
-            yield partial_embedding.shallow_copy()
-            return
-        embedding = partial_embedding.shallow_copy()
-        try:
-            object_options = constructions[0].construct(embedding, distinct_names)
-        except UndefinedEmbeddingError:
-            return
-        for object_option in object_options:
-            embedding[constructions[0].output_name] = object_option
-            for inner_embedding in self.inner_embed_construction_sequence(embedding, constructions[1:], distinct_names):
-                yield inner_embedding
-
-    
     def embed_construction_sequence(self, constructions: List[EmbeddedConstruction], distinct_names: Mapping[str, List[str]]) -> Iterator[Embedding]:
-        return self.inner_embed_construction_sequence(
-            Embedding(),
-            constructions,
-            distinct_names
-        )
-
+        stage = 0
+        construction_options: List[List[EmbeddedObject]] = []
+        embedding = Embedding()
+        while True:
+            if stage < 0:
+                return None
+            else:
+                if stage != len(construction_options):
+                    assert False
+                options: List[EmbeddedObject] = []
+                if stage < len(constructions):
+                    try:
+                        options = list(constructions[stage].construct(embedding, distinct_names))
+                    except UndefinedEmbeddingError:
+                        pass
+                else:
+                    yield embedding.shallow_copy()
+                # In this line, filter the options that don't fit * whatever * #
+                if len(options) > 0:
+                    embedding[constructions[stage].output_name] = options.pop()
+                    construction_options.append(options)
+                else:
+                    while stage > 0:
+                        stage -= 1
+                        if len(construction_options[stage]) == 0:
+                            del embedding[constructions[stage].output_name]
+                            del construction_options[stage]
+                        else:
+                            embedding[constructions[stage].output_name] = construction_options[stage].pop()
+                            break
+                    else:
+                        return
+                stage += 1
 
     def check_predicates(self, embedding: Embedding, predicates: List[Predicate]) -> bool:
         for pred in predicates:
