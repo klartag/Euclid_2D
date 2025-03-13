@@ -62,7 +62,7 @@ class DiagramEmbedder:
 
         return constructions
 
-    def embed_construction_sequence(self, constructions: List[EmbeddedConstruction]) -> Iterator[Embedding]:
+    def embed_construction_sequence(self, constructions: List[EmbeddedConstruction], predicates_by_step: List[List[Predicate]]) -> Iterator[Embedding]:
         stage = 0
         construction_options: List[List[EmbeddedObject]] = []
         embedding = Embedding()
@@ -70,8 +70,8 @@ class DiagramEmbedder:
             if stage < 0:
                 return None
             else:
-                if stage != len(construction_options):
-                    assert False
+                assert stage == len(construction_options)
+
                 options: List[EmbeddedObject] = []
                 if stage < len(constructions):
                     try:
@@ -80,7 +80,15 @@ class DiagramEmbedder:
                         pass
                 else:
                     yield embedding.shallow_copy()
-                # In this line, filter the options that don't fit * whatever * #
+                while len(options) > 0:
+                    embedding[constructions[stage].output_name] = options[-1]
+                    for predicate in predicates_by_step[stage]:
+                        if embedding.evaluate_predicate(predicate) != EmbeddedPredicateValue.Correct:
+                            options.pop()
+                            del embedding[constructions[stage].output_name]
+                            break
+                    else:
+                        break
                 if len(options) > 0:
                     embedding[constructions[stage].output_name] = options.pop()
                     construction_options.append(options)
@@ -110,13 +118,20 @@ class DiagramEmbedder:
         processed_predicates = preprocessor.preprocess_assumptions(proof.assumption_predicates)
         constructions = self.sequence_assumptions(objects, processed_predicates)
 
+
         if constructions is None:
             return None
 
+        predicates_by_step = [[] for i in range(len(constructions))]
+        name_to_stage = {construction.output_name: i for (i, construction) in enumerate(constructions)}
+        for predicate in proof.assumption_predicates:
+            involved_names = [obj.name for obj in predicate.involved_objects() if not isinstance(obj, ConstructionObject)]
+            stage = max([name_to_stage[name] for name in involved_names])
+            predicates_by_step[stage].append(predicate)
+
         for _ in range(EMBEDDING_ATTEMPTS):
-            for embedding in self.embed_construction_sequence(constructions):
-                if self.check_predicates(embedding, proof.assumption_predicates):
-                    return embedding
+            for embedding in self.embed_construction_sequence(constructions, predicates_by_step):
+                return embedding
         return None
 
 
