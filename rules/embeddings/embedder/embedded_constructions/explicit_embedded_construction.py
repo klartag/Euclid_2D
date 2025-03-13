@@ -22,8 +22,6 @@ class ExplicitEmbeddedConstruction(EmbeddedConstruction):
         self.output_name = output_name
         self.construction_method = construction_method
 
-    def construct(
-        self, partial_embedding: Embedding, distinct_names: Mapping[str, List[str]]
-    ) -> Tuple[EmbeddedObject, ...]:
+    def construct(self, partial_embedding: Embedding) -> Tuple[EmbeddedObject, ...]:
         parameter_options = self.get_parameters(partial_embedding)
         return tuple(itertools.chain(*[self.construction_method(*parameters) for parameters in parameter_options]))

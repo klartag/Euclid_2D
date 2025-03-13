@@ -20,6 +20,4 @@ class EmbeddedConstruction(ABC):
         return tuple(itertools.product(*[partial_embedding.evaluate_object(obj_) for obj_ in self.input_objects]))
 
     @abstractmethod
-    def construct(
-        self, partial_embedding: Embedding, distinct_names: Mapping[str, List[str]]
-    ) -> Tuple[EmbeddedObject, ...]: ...
+    def construct(self, partial_embedding: Embedding) -> Tuple[EmbeddedObject, ...]: ...

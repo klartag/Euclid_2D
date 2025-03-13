@@ -62,17 +62,7 @@ class DiagramEmbedder:
 
         return constructions
 
-    def get_distinct_names(self, proof: Proof) -> Mapping[str, List[str]]:
-        predicates = proof.assumption_predicates + proof.auxiliary_predicates
-        distinct_names: Dict[str, List[str]] = defaultdict(list)
-        for predicate in predicates:
-            if isinstance(predicate, DistinctPredicate):
-                for obj0, obj1 in itertools.combinations(predicate.components, 2):
-                    distinct_names[obj0.name].append(obj1.name)
-                    distinct_names[obj1.name].append(obj0.name)
-        return distinct_names
-    
-    def embed_construction_sequence(self, constructions: List[EmbeddedConstruction], distinct_names: Mapping[str, List[str]]) -> Iterator[Embedding]:
+    def embed_construction_sequence(self, constructions: List[EmbeddedConstruction]) -> Iterator[Embedding]:
         stage = 0
         construction_options: List[List[EmbeddedObject]] = []
         embedding = Embedding()
@@ -85,7 +75,7 @@ class DiagramEmbedder:
                 options: List[EmbeddedObject] = []
                 if stage < len(constructions):
                     try:
-                        options = list(constructions[stage].construct(embedding, distinct_names))
+                        options = list(constructions[stage].construct(embedding))
                     except UndefinedEmbeddingError:
                         pass
                 else:
@@ -123,10 +113,8 @@ class DiagramEmbedder:
         if constructions is None:
             return None
 
-        distinct_names: Mapping[str, List[str]] = self.get_distinct_names(proof)
-
         for _ in range(EMBEDDING_ATTEMPTS):
-            for embedding in self.embed_construction_sequence(constructions, distinct_names):
+            for embedding in self.embed_construction_sequence(constructions):
                 if self.check_predicates(embedding, proof.assumption_predicates):
                     return embedding
         return None
