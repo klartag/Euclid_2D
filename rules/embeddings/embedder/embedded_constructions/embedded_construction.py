@@ -1,9 +1,7 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import itertools
-from typing import List, Mapping, TypeVar, Tuple
-
-from ....geometry_objects.geo_object import GeoObject
+from typing import Tuple
 
 from ... import Embedding
 

@@ -42,13 +42,13 @@ class Embedding:
         return iter(self.embedding)
     
     def keys(self) -> KeysView[str]:
-        return self.embedding.keys()
+        return tuple([name for (name, obj) in self.embedding.items() if obj is not None])
     
-    def values(self) -> ValuesView[Optional[EmbeddedObject]]:
-        return self.embedding.values()
+    def values(self) -> Tuple[EmbeddedObject]:
+        return tuple([obj for obj in self.embedding.values() if obj is not None])
 
     def items(self) -> ItemsView[str, Optional[EmbeddedObject]]:
-        return self.embedding.items()
+        return tuple([(name, obj) for (name, obj) in self.embedding.items() if obj is not None])
 
     def shallow_copy(self) -> Self:
         copied_embedding = Embedding()
