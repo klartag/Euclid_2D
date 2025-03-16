@@ -21,7 +21,7 @@ from .embedded_constructions.embedded_construction import EmbeddedConstruction
 from .sequencing_preprocessor.sequencing_preprocessor import SequencingPreprocessor
 
 
-EMBEDDING_ATTEMPTS = 100
+EMBEDDING_ATTEMPTS = 5
 
 
 class DiagramEmbedder:
@@ -96,41 +96,34 @@ class DiagramEmbedder:
         while True:
             if stage < 0:
                 return None
+            elif stage == len(constructions):
+                yield embedding.shallow_copy()
+                stage -= 1
+            elif stage == len(construction_options):
+                options = []
+                try:
+                    options = list(constructions[stage].construct(embedding))
+                except UndefinedEmbeddingError:
+                    pass
+                construction_options.append(options)
+            elif len(construction_options[stage]) == 0:
+                del construction_options[stage]
+                stage -= 1
             else:
-                assert stage == len(construction_options)
-
-                options: List[EmbeddedObject] = []
-                if stage < len(constructions):
-                    try:
-                        options = list(constructions[stage].construct(embedding))
-                    except UndefinedEmbeddingError:
-                        pass
-                else:
-                    yield embedding.shallow_copy()
+                options = construction_options[stage]
                 while len(options) > 0:
-                    embedding[constructions[stage].output_name] = options[-1]
+                    embedding[constructions[stage].output_name] = options.pop()
                     for predicate in predicates_by_step[stage]:
                         if embedding.evaluate_predicate(predicate) != EmbeddedPredicateValue.Correct:
-                            options.pop()
                             del embedding[constructions[stage].output_name]
                             break
                     else:
                         break
-                if len(options) > 0:
-                    embedding[constructions[stage].output_name] = options.pop()
-                    construction_options.append(options)
+                if constructions[stage].output_name in embedding.keys():
+                    stage += 1
                 else:
-                    while stage > 0:
-                        stage -= 1
-                        if len(construction_options[stage]) == 0:
-                            del embedding[constructions[stage].output_name]
-                            del construction_options[stage]
-                        else:
-                            embedding[constructions[stage].output_name] = construction_options[stage].pop()
-                            break
-                    else:
-                        return
-                stage += 1
+                    del construction_options[stage]
+                    stage -= 1
 
     def check_predicates(self, embedding: Embedding, predicates: List[Predicate]) -> bool:
         for pred in predicates:
@@ -157,7 +150,7 @@ class DiagramEmbedder:
             stage = max([name_to_stage[name] for name in involved_names])
             predicates_by_step[stage].append(predicate)
 
-        for _ in range(EMBEDDING_ATTEMPTS):
+        for _ in tqdm(range(EMBEDDING_ATTEMPTS)):
             for embedding in self.embed_construction_sequence(constructions, predicates_by_step):
                 return embedding
         return None
