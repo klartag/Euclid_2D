@@ -13,3 +13,4 @@ linear_b.so
 **/linear_problem_generator/target
 
 rules/proof_samples/proof_fail.jl
+rules/rust_code/rustup-init.exe
