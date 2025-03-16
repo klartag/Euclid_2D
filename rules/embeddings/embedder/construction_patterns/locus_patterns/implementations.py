@@ -6,6 +6,7 @@ from .locus_pattern_matcher import LocusPattern
 from .explicit_locus import ExplicitLocus
 from .simple_predicate_locus import SimplePredicateLocus
 from .simple_construction_predicate_locus import SimplePredicateConstructionLocus
+from .equal_constructions_locus import EqualConstructionsLocus
 
 
 def construction_generator(construction_name: str, parameter_order: Optional[Tuple[int]]=None) -> Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], ExtendedGeoObject]:
@@ -59,4 +60,8 @@ LOCUS_PATTERNS: List[LocusPattern] = [
         construction_generator('tangent_line'),
         'tangent', None, 'Line', None
     ),
+    EqualConstructionsLocus(
+        construction_generator('perpendicular_bisector'),
+        'distance', None, 'distance', None
+    )
 ]

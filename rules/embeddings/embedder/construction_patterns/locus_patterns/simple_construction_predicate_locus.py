@@ -7,7 +7,7 @@ from .....predicates.predicate import Predicate
 
 from ...embedded_geo_objects.embedded_geo_object import ExtendedGeoObject
 
-from .unpacking_predicate_locus import UnpackingPredicateLocus
+from .unpacking_predicate_locus import UnpackingPredicateLocus, unpack_index_options
 
 
 @dataclass
@@ -28,7 +28,7 @@ class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
         if not isinstance(construction_object, ConstructionObject):
             return None
         
-        construction_index_options = self.unpack_index_options(self.construction_index_options, len(construction_object.components))
+        construction_index_options = unpack_index_options(self.construction_index_options, len(construction_object.components))
         for construction_index in construction_index_options:
             locus = self.match_predicate_construction_parameter_options(object_, rest_of_components, construction_object, construction_index)
             if locus is not None:
