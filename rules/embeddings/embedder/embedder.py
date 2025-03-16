@@ -19,6 +19,7 @@ from ..embedded_predicate_value import EmbeddedPredicateValue
 from .construction_patterns.implementations import CONSTRUCTION_PATTERNS
 from .embedded_constructions.embedded_construction import EmbeddedConstruction
 from .sequencing_preprocessor.sequencing_preprocessor import SequencingPreprocessor
+from .sequencing_preprocessor.implementations import INEQUALITY_REMOVAL_PATTERNS, SPLITTING_PATTERNS
 
 
 EMBEDDING_ATTEMPTS = 5
@@ -45,7 +46,7 @@ class DiagramEmbedder:
                 return True
             else:
                 raise
-            
+
     def remove_necessary_assumptions(self, assumptions: List[Predicate]) -> List[Predicate]:
         necessary_assumptions = []
         for assumption in tqdm(assumptions):
@@ -134,8 +135,8 @@ class DiagramEmbedder:
 
     def embed(self, proof: Proof) -> Optional[Embedding]:
         objects = list(proof.assumption_objects.values())
-        preprocessor = SequencingPreprocessor()
-        processed_predicates = preprocessor.preprocess_assumptions(proof.assumption_predicates)
+        split_predicates = SequencingPreprocessor(SPLITTING_PATTERNS).preprocess_assumptions(proof.assumption_predicates)
+        processed_predicates = SequencingPreprocessor(INEQUALITY_REMOVAL_PATTERNS).preprocess_assumptions(split_predicates)
         processed_predicates = self.remove_necessary_assumptions(processed_predicates)
         
         constructions = self.sequence_assumptions(objects, processed_predicates)
@@ -145,7 +146,7 @@ class DiagramEmbedder:
 
         predicates_by_step = [[] for i in range(len(constructions))]
         name_to_stage = {construction.output_name: i for (i, construction) in enumerate(constructions)}
-        for predicate in proof.assumption_predicates:
+        for predicate in split_predicates:
             involved_names = [obj.name for obj in predicate.involved_objects() if not isinstance(obj, ConstructionObject) and not obj.type == LITERAL]
             stage = max([name_to_stage[name] for name in involved_names])
             predicates_by_step[stage].append(predicate)
@@ -188,7 +189,7 @@ def main():
     if embedding is None:
         print('Embedding failed')
         return
-    
+
     proof.embedding = embedding
 
     proof_text = proof.to_language_format()

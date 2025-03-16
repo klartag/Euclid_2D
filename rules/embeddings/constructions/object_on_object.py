@@ -49,7 +49,8 @@ def point_on_line(objects: Sequence[EmbeddedObject], line: EmbeddedLine) -> Tupl
     if len(all_positions) > 0:
         max_position = max(all_positions)
         min_position = min(all_positions)
-        positions_on_line.extend([2 * max_position - min_position, 2 * min_position - max_position])
+        diff_position = max_position - min_position
+        positions_on_line.extend([max_position + diff_position * 10, min_position - diff_position * 10])
     positions_on_line = list(set(positions_on_line))
     positions_on_line.sort()
     

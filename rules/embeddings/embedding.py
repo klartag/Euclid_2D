@@ -1,5 +1,5 @@
 import itertools
-from typing import DefaultDict, Iterator, KeysView, List, Optional, ItemsView, Self, Tuple, ValuesView
+from typing import DefaultDict, Iterator, KeysView, List, Optional, ItemsView, Self, Tuple
 
 from mpmath import mpf
 from collections import defaultdict
@@ -7,7 +7,6 @@ from collections import defaultdict
 from ..rule_utils import LITERAL
 from ..predicates.predicate import Predicate
 
-from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.construction_object import ConstructionObject
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.eq_op import EqOp
@@ -138,3 +137,6 @@ class Embedding:
                 return EmbeddedPredicateValue.Incorrect
         else:
             raise Exception(f'Predicate {predicate.name} not recognized.')
+        
+    def to_str(self, accuracy: int) -> str:
+        return '\n'.join([f'{name} = {obj.to_str(accuracy)}' for (name, obj) in self.embedding.items()])

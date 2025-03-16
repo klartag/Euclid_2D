@@ -1,18 +1,18 @@
-from typing import List, Optional
-
-from ....geometry_objects.construction_object import ConstructionObject
+from typing import List
 
 from ....predicates.predicate import Predicate
-from ....predicates.predicate_factory import predicate_from_args
 
-from .implementations import PREPROCESSING_PATTERNS
+from .pattern import PredicatePreprocessingPattern
 
 
 class SequencingPreprocessor:
+    def __init__(self, patterns: List[PredicatePreprocessingPattern]):
+        self.patterns = patterns
+    
     def preprocess_assumptions(self, predicates: List[Predicate]) -> List[Predicate]:
         processed_predicates = []
         for predicate in predicates:
-            for preprocess_pattern in PREPROCESSING_PATTERNS:
+            for preprocess_pattern in self.patterns:
                 pattern_match_attempt = preprocess_pattern.try_match(predicate)
                 if pattern_match_attempt is not None:
                     processed_predicates.extend(pattern_match_attempt)
