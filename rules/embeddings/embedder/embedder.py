@@ -22,7 +22,7 @@ from .sequencing_preprocessor.sequencing_preprocessor import SequencingPreproces
 from .sequencing_preprocessor.implementations import INEQUALITY_REMOVAL_PATTERNS, SPLITTING_PATTERNS
 
 
-EMBEDDING_ATTEMPTS = 5
+EMBEDDING_ATTEMPTS = 50
 
 
 class DiagramEmbedder:
