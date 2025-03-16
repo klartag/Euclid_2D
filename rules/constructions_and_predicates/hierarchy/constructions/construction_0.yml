@@ -80,7 +80,6 @@ line_circle_tangent_point:
   inputs:
   - {l: Line}
   - {c: Circle}
-  where: ['tangent(l, c)']
 line_intersection:
   conclude: ['P in l, m']
   construct:

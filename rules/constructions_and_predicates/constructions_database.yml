@@ -189,8 +189,6 @@ line_circle_tangent_point:
   inputs:
     - l: Line
     - c: Circle
-  where:
-    - tangent(l, c)
   construct:
     - P: Point
   conclude:

@@ -1,6 +1,8 @@
 from pathlib import Path
 from typing import Iterator, List, Optional
+from tqdm import tqdm
 
+from ...rule_utils import LITERAL
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ...geometry_objects.geo_object import GeoObject
 from ...geometry_objects.construction_object import ConstructionObject
@@ -36,7 +38,7 @@ class DiagramEmbedder:
                 None, []
             )
             proof_gen = ProofGenerator(proof, actions_per_step=10000)
-            proof_gen.run(200)
+            proof_gen.run(1000)
             return False
         except ProofGeneratorError as e:
             if e.error in [ProofGeneratorErrorType.NoMoreSteps, ProofGeneratorErrorType.StepLimitReached]:
@@ -46,7 +48,7 @@ class DiagramEmbedder:
             
     def remove_necessary_assumptions(self, assumptions: List[Predicate]) -> List[Predicate]:
         necessary_assumptions = []
-        for assumption in assumptions:
+        for assumption in tqdm(assumptions):
             if self.is_assumption_necessary(assumption, necessary_assumptions):
                 necessary_assumptions.append(assumption)
         return necessary_assumptions
@@ -151,7 +153,7 @@ class DiagramEmbedder:
         predicates_by_step = [[] for i in range(len(constructions))]
         name_to_stage = {construction.output_name: i for (i, construction) in enumerate(constructions)}
         for predicate in proof.assumption_predicates:
-            involved_names = [obj.name for obj in predicate.involved_objects() if not isinstance(obj, ConstructionObject)]
+            involved_names = [obj.name for obj in predicate.involved_objects() if not isinstance(obj, ConstructionObject) and not obj.type == LITERAL]
             stage = max([name_to_stage[name] for name in involved_names])
             predicates_by_step[stage].append(predicate)
 

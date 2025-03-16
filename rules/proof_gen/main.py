@@ -100,7 +100,7 @@ def main():
                     print(proof_text)
                     
             print('Running Prover...')
-            proof = prove(proof, interactive=args.interactive)
+            proof = prove(proof, interactive=args.interactive, verbose=True)
             
             proof_text = proof.to_language_format()
             if args.overwrite:

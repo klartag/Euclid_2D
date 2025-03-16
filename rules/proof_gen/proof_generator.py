@@ -89,7 +89,6 @@ class ProofGenerator:
         self.target_objects = list(proof.target_objects.values())
         self.target_predicates = proof.target_predicates
         self.checker = ProofChecker(proof)
-        print('============ load the assumption =============')
         self.checker.geometry_tracker.load_assumptions(proof)
         self.verbose = verbose
         self.proof_steps = []
@@ -115,7 +114,8 @@ class ProofGenerator:
                 if self.verbose:
                     print(f'Step {i}')
                 if self.check_finished():
-                    print('Success!')
+                    if self.verbose:
+                        print('Success!')
                     return
                 if timeout is not None and time.process_time() - start_time > timeout:
                     raise ProofGeneratorError(ProofGeneratorErrorType.Timeout)
@@ -127,9 +127,11 @@ class ProofGenerator:
                     if isinstance(self.actions_per_step, int)
                     else self.actions_per_step(len(self.proof_steps))
                 )
-                print(f'=========== {i}th try of finding up to {actions_per_step} steps =========')
+                if self.verbose:
+                    print(f'=========== {i}th try of finding up to {actions_per_step} steps =========')
                 steps = self.find_steps(actions_per_step)
-                print(f'=========== found {len(steps)} steps =========')
+                if self.verbose:
+                    print(f'=========== found {len(steps)} steps =========')
                 if len(steps) == 0:
                     raise ProofGeneratorError(ProofGeneratorErrorType.NoMoreSteps)
                 for step in steps:
@@ -141,10 +143,6 @@ class ProofGenerator:
                             self.checker.add_step(obj_step)
                         case TheoremStep() as theo_step:
                             # Fixing the names of theorem objects.
-                            if self.verbose:
-                                print(
-                                    f'Adding theorem step {theo_step.theorem_name} on {theo_step.inputs}: {theo_step.result_predicates}'
-                                )
                             self.proof_steps.append(theo_step)
                             self.checker.add_step(theo_step)
                         case _:
@@ -597,16 +595,16 @@ def prove_all_assumptions(
             generate_random_proof(*arg)
 
 
-def prove(base: Proof, interactive: bool) -> Proof:
+def prove(base: Proof, interactive: bool, verbose: bool) -> Proof:
     if base.embedding is not None:
             collector = NonDegeneracyPrediateCollector()
             non_degenerecy_predicates = collector.collect(base.assumption_objects, base.embedding)
             base.auxiliary_predicates.extend(non_degenerecy_predicates)
 
-    proof_gen = ProofGenerator(base, actions_per_step=10000)
+    proof_gen = ProofGenerator(base, actions_per_step=10000, verbose=verbose)
 
     try:
-        proof_gen.run()
+        proof_gen.run(verbose)
         completed_proof = base.shallow_copy()
         completed_proof.steps = proof_gen.proof_steps
         return completed_proof

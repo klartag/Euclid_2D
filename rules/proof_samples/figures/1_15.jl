@@ -15,7 +15,6 @@ between(B, line_circle_tangent_point(Line(B, C), c), C)
 between(C, line_circle_tangent_point(Line(C, D), c), D)
 between(D, line_circle_tangent_point(Line(D, A), c), A)
 
-
 Need to prove:
 distance(A, B) + distance(C, D) == distance(B, C) + distance(D, A)
 
