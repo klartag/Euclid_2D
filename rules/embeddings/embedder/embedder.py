@@ -29,8 +29,7 @@ class DiagramEmbedder:
     def is_assumption_necessary(self, assumption: Predicate, assumptions: List[Predicate]) -> bool:
         try:
             objects = {
-                obj.name: obj for pred in assumptions for obj in pred.involved_objects()
-                if not isinstance(obj, ConstructionObject)
+                obj.name: obj for pred in assumptions + [assumption] for obj in pred.involved_objects()
             }
             proof = Proof(
                 objects, objects,
