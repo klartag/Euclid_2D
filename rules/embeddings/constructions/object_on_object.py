@@ -1,10 +1,12 @@
 from typing import Sequence, Tuple
-from mpmath import mp, mpf
+from mpmath import mp
 from random import uniform
 
 from ..embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, EmbeddedObject
+from ..predicates.tangent import tangent
 
 from .new_object import new_point
+from .projection import project
 
 def line_on_point(objects: Sequence[EmbeddedObject], point: EmbeddedPoint) -> Tuple[EmbeddedLine]:
     # TODO: Return multiple lines dep. on which lines already exist through the point.
@@ -36,7 +38,9 @@ def point_on_circle(objects: Sequence[EmbeddedObject], circle: EmbeddedCircle) -
     return tuple([circle.center + EmbeddedPoint(mp.cos(angle), mp.sin(angle)).scale(circle.radius_squared ** 0.5) for angle in result_angles])
 
 def point_on_line(objects: Sequence[EmbeddedObject], line: EmbeddedLine) -> Tuple[EmbeddedPoint]:
-    points = [point for point in objects if isinstance(point, EmbeddedPoint)]
+    points = [point for point in objects if isinstance(point, EmbeddedPoint)] \
+        + [project(circle.center, line) for circle in objects if isinstance(circle, EmbeddedCircle) and tangent(line, circle)]
+    
     points_on_line = [point for point in points if line.contains_point(point)]
 
     all_positions = [line.direction.scalar_product(point - line.point) / line.direction.length_squared() for point in points]

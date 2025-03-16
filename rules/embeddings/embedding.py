@@ -123,7 +123,13 @@ class Embedding:
                     embedded_parameter_options.append(parameter_options)
                 except UndefinedEmbeddingError:
                     return EmbeddedPredicateValue.Undefined
-            results = [predicate_method(*parameters) for parameters in itertools.product(*embedded_parameter_options)]
+            
+            results = []
+            for parameters in itertools.product(*embedded_parameter_options):
+                try:
+                    results.append(predicate_method(*parameters))
+                except UndefinedEmbeddingError:
+                    results.append(EmbeddedPredicateValue.Undefined)
             if all(results):
                 return EmbeddedPredicateValue.Correct
             else:

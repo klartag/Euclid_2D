@@ -15,4 +15,5 @@ def normalize_return_type(func: ExtendedConstructionMethod) -> ConstructionMetho
             return (construction_result,)
         else:
             return construction_result
+    wrapper.__name__ = f'normalized_{func.__name__}'
     return wrapper

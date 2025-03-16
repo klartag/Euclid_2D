@@ -23,3 +23,10 @@ class ExplicitEmbeddedConstruction(EmbeddedConstruction):
     def construct(self, partial_embedding: Embedding) -> Tuple[EmbeddedObject, ...]:
         parameter_options = self.get_parameters(partial_embedding)
         return tuple(itertools.chain(*[self.construction_method(*parameters) for parameters in parameter_options]))
+
+    def __repr__(self) -> str:
+        type_name = type(self).__name__
+        super_repr = super().__repr__()
+        base_parameters = super_repr[super_repr.index('(') + 1: super_repr.rindex(')')]
+        method_parameter = f'construction_method={repr(self.construction_method.__name__)}'
+        return f'{type_name}({method_parameter}, {base_parameters})'

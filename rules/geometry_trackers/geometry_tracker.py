@@ -1,5 +1,7 @@
 import heapq
-import random
+from typing import Optional
+
+from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
 
 from .linear_algebra_tracker import LinearAlgebraTracker
 
@@ -121,7 +123,7 @@ class GeometryTracker:
 
     numeric_tracker: NumericTracker
     """Tracks 2D embeddings of the geometric configurations."""
-    embedding_tracker: Embedding
+    embedding_tracker: Optional[Embedding]
     """A new numeric tracker to track 2D embeddings of the geometric configurations."""
 
     def __init__(self):
@@ -131,6 +133,7 @@ class GeometryTracker:
 
         self._predicates = set()
         self._asserted_predicates = set()
+        self.embedding_tracker = None
 
         self.get_object(ONE, ADD_CFG)
 
@@ -138,7 +141,6 @@ class GeometryTracker:
 
         self.numeric_tracker = NumericTracker(NUMERIC_PRECISION)
 
-        self.embedding_tracker = Embedding()
 
     def load_embeds(self, proof: Proof):
         """
@@ -357,10 +359,13 @@ class GeometryTracker:
             case rule_utils.ORIENTATION:
                 self.process_orientation(obj)
 
-        if isinstance(obj, ConstructionObject) and obj.name not in self.embedding_tracker:
-            embedded_construction_object_options = self.embedding_tracker.evaluate_construction_object(obj)
-            if len(embedded_construction_object_options) == 1:
-                self.embedding_tracker[obj.name] = embedded_construction_object_options[0]
+        if self.embedding_tracker is not None and isinstance(obj, ConstructionObject) and obj.name not in self.embedding_tracker:
+            try:
+                embedded_construction_object_options = self.embedding_tracker.evaluate_construction_object(obj)
+                if len(embedded_construction_object_options) == 1:
+                    self.embedding_tracker[obj.name] = embedded_construction_object_options[0]
+            except UndefinedEmbeddingError:
+                pass
 
     def add_equal_angle(self, pred: Predicate, mod: int | None):
         """

@@ -1,10 +1,7 @@
-import argparse
 import sys
 
-from .proof import Proof
 from .proof_checker import main as proof_checker_main
-from .proof_gen.proof_generator import validate_main as proof_validator_main
-from .proof_gen.proof_generator import main as proof_generator_main
+from .proof_gen.main import validate_main as proof_validator_main, main as proof_generator_main
 from .trimmers.old_trimmer import main as old_trimmer_main
 from .embeddings.embedder.embedder import main as embedder_main
 from .trimmers.trimmer import main as trimmer_main

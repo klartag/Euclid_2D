@@ -19,3 +19,7 @@ class EmbeddedConstruction(ABC):
 
     @abstractmethod
     def construct(self, partial_embedding: Embedding) -> Tuple[EmbeddedObject, ...]: ...
+
+    def __repr__(self):
+        type_name = type(self).__name__
+        return f'{type_name}(output_name={self.output_name}, input_objects={self.input_objects})'

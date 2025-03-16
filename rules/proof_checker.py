@@ -231,12 +231,15 @@ class ProofChecker:
                 substituded_pred = pred.substitute(substitutions)
                 if not self.geometry_tracker.contains_predicate(substituded_pred, config=ADD_NO_TRUST_CFG):
                     return f'In step {step}, required predicate {substituded_pred} is not satisfied.\n{pred.name} {pred.name == "equals"}'
-                pred_value = self.geometry_tracker.embedding_tracker.evaluate_predicate(substituded_pred)
-                if pred_value == EmbeddedPredicateValue.Incorrect:
-                    return f'In step {step}, required predicate {substituded_pred} is not satisfied in the embedding.\n{pred.name} {pred.name == "equals"}'
-                elif pred_value == EmbeddedPredicateValue.Undefined:
-                    return f'In step {step}, required predicate {substituded_pred} is undefined in the embedding.\n{pred.name} {pred.name == "equals"}'
+                if self.geometry_tracker.embedding_tracker is not None:
+                    pred_value = self.geometry_tracker.embedding_tracker.evaluate_predicate(substituded_pred)
+                    if pred_value == EmbeddedPredicateValue.Incorrect:
+                        return f'In step {step}, required predicate {substituded_pred} is not satisfied in the embedding.\n{pred.name} {pred.name == "equals"}'
+                    elif pred_value == EmbeddedPredicateValue.Undefined:
+                        return f'In step {step}, required predicate {substituded_pred} is undefined in the embedding.\n{pred.name} {pred.name == "equals"}'
             for pred in theorem.required_embedding_predicates:
+                if self.geometry_tracker.embedding_tracker is None:
+                    return f'In step {step}, there are required embedding predicates, but there is no embedding!'
                 substituded_pred = pred.substitute(substitutions)
                 pred_value = self.geometry_tracker.embedding_tracker.evaluate_predicate(substituded_pred)
                 if pred_value != EmbeddedPredicateValue.Correct:
@@ -249,9 +252,10 @@ class ProofChecker:
 
         for result_predicate in theorem.result_predicates:
             pred = result_predicate.substitute(substitutions)
-            pred_value = self.geometry_tracker.embedding_tracker.evaluate_predicate(pred)
-            if pred_value == EmbeddedPredicateValue.Incorrect:
-                return f'In step {step}, result predicate {pred} is not satisfied in the embedding.\n{pred.name} {pred.name == "equals"}'
+            if self.geometry_tracker.embedding_tracker is not None:
+                pred_value = self.geometry_tracker.embedding_tracker.evaluate_predicate(pred)
+                if pred_value == EmbeddedPredicateValue.Incorrect:
+                    return f'In step {step}, result predicate {pred} is not satisfied in the embedding.\n{pred.name} {pred.name == "equals"}'
             for obj in pred.involved_objects():
                 predicate = predicate_from_args('exists', (obj,))
                 self.geometry_tracker.add_predicate(predicate, ADD_CFG, 'Marking a processed object as existing')

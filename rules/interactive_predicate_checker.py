@@ -39,19 +39,25 @@ class InteractivePredicateChecker:
     
     def check_predicate(self, predicate: Predicate) -> str:
         is_predicate_proved = self.geometry_tracker.contains_predicate(predicate)
+        if self.geometry_tracker.embedding_tracker is None:
+            return f'{is_predicate_proved}'
+
         is_predicate_true_in_embedding = self.geometry_tracker.embedding_tracker.evaluate_predicate(predicate)
         return f'{is_predicate_proved} ({is_predicate_true_in_embedding.value} in embedding)'
 
     def print_geometry_object(self, obj: GeoObject) -> str:
-        try:
-            result = self.geometry_tracker.embedding_tracker.evaluate_object(obj)
-            if len(result) == 0:
-                raise UndefinedEmbeddingError()
-            elif len(result) == 1:
-                print(result[0].to_str(4))
-            else:
-                prefix_length = len(str(len(result) + 1))
-                for i, obj in enumerate(result):
-                    print(f'{i + 1:>{prefix_length}}: {obj.to_str(4)}')
-        except UndefinedEmbeddingError:
-            print('Failed to evaluate in embedding.')
+        if self.geometry_tracker.embedding_tracker is None:
+            print('Failed to evaluate.')
+        else:
+            try:
+                result = self.geometry_tracker.embedding_tracker.evaluate_object(obj)
+                if len(result) == 0:
+                    raise UndefinedEmbeddingError()
+                elif len(result) == 1:
+                    print(result[0].to_str(4))
+                else:
+                    prefix_length = len(str(len(result) + 1))
+                    for i, obj in enumerate(result):
+                        print(f'{i + 1:>{prefix_length}}: {obj.to_str(4)}')
+            except UndefinedEmbeddingError:
+                print('Failed to evaluate in embedding.')

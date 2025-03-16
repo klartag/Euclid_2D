@@ -1,19 +1,14 @@
-from collections import defaultdict
-import itertools
 from pathlib import Path
-from typing import Dict, Iterator, List, Mapping, Optional, Tuple
-
+from typing import Iterator, List, Optional
 
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
-from ...rule_utils import POINT
 from ...geometry_objects.geo_object import GeoObject
 from ...geometry_objects.construction_object import ConstructionObject
 from ...geometry_trackers.geometry_tracker import GeometryTracker
 from ...interactive_predicate_checker import InteractivePredicateChecker
 from ...predicates.predicate import Predicate
-from ...predicates.implementations.distinct_predicate import DistinctPredicate
-from ...predicates.predicate_factory import predicate_from_args
 from ...proof import Proof
+from ...proof_gen.proof_generator import ProofGenerator, ProofGeneratorError, ProofGeneratorErrorType
 
 from .. import Embedding
 from ..embedded_objects import EmbeddedObject
@@ -23,10 +18,39 @@ from .construction_patterns.implementations import CONSTRUCTION_PATTERNS
 from .embedded_constructions.embedded_construction import EmbeddedConstruction
 from .sequencing_preprocessor.sequencing_preprocessor import SequencingPreprocessor
 
+
 EMBEDDING_ATTEMPTS = 100
 
 
 class DiagramEmbedder:
+    def is_assumption_necessary(self, assumption: Predicate, assumptions: List[Predicate]) -> bool:
+        try:
+            objects = {
+                obj.name: obj for pred in assumptions for obj in pred.involved_objects()
+                if not isinstance(obj, ConstructionObject)
+            }
+            proof = Proof(
+                objects, objects,
+                assumptions, [],
+                {}, [assumption],
+                None, []
+            )
+            proof_gen = ProofGenerator(proof, actions_per_step=10000)
+            proof_gen.run(200)
+            return False
+        except ProofGeneratorError as e:
+            if e.error in [ProofGeneratorErrorType.NoMoreSteps, ProofGeneratorErrorType.StepLimitReached]:
+                return True
+            else:
+                raise
+            
+    def remove_necessary_assumptions(self, assumptions: List[Predicate]) -> List[Predicate]:
+        necessary_assumptions = []
+        for assumption in assumptions:
+            if self.is_assumption_necessary(assumption, necessary_assumptions):
+                necessary_assumptions.append(assumption)
+        return necessary_assumptions
+
     def try_sequence_object(
         self, object_: GeoObject, predicates_containing_object: List[Predicate]
     ) -> Optional[EmbeddedConstruction]:
@@ -41,6 +65,7 @@ class DiagramEmbedder:
             return None
 
     def sequence_assumptions(self, objects: List[GeoObject], predicates: List[Predicate]) -> Optional[List[EmbeddedConstruction]]:
+        predicates = predicates[:]
         constructions: List[EmbeddedConstruction] = []
 
         while len(objects) > 0:
@@ -116,8 +141,9 @@ class DiagramEmbedder:
         objects = list(proof.assumption_objects.values())
         preprocessor = SequencingPreprocessor()
         processed_predicates = preprocessor.preprocess_assumptions(proof.assumption_predicates)
+        processed_predicates = self.remove_necessary_assumptions(processed_predicates)
+        
         constructions = self.sequence_assumptions(objects, processed_predicates)
-
 
         if constructions is None:
             return None
