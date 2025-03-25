@@ -8,7 +8,7 @@ isosceles_triangle_altitude:
     - angle_bisector_exists: exists(internal_angle_bisector(B, A, C))
     - perpendicular_bisector_exists: exists(perpendicular_bisector(B, C))
     - axis_of_symmetry: identical(perpendicular_line(A, Line(B, C)), perpendicular_bisector(B, C), internal_angle_bisector(B, A, C))
-  where-embedding:
+  where_embedding:
     - not_collinear(A, B, C)
   possible_conclusions:
     - median_exists => axis_of_symmetry
