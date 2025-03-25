@@ -21,15 +21,11 @@ from util import BASE_PATH
 
 
 # Problems from Yoel Geva
-GEVA_PROBLEM_NAMES = [
-    'geva/p288_1.jl',
-    'geva/p292_4.jl',
-    'geva/p301_8.jl'
-]
+GEVA_PROBLEM_NAMES = ['geva/p288_1.jl', 'geva/p292_4.jl', 'geva/p301_8.jl']
 
 # Problems from the Geometry in Figures book
 FIGURES_PROBLEM_NAMES = [
-     # Chapter 1
+    # Chapter 1
     'figures/1_1.jl',
     'figures/1_3.jl',
     'figures/1_4.jl',
@@ -75,6 +71,7 @@ IMO_PROBLEM_NAMES = [
     'IMO/2022/G5.jl',
 ]
 
+
 @pytest.fixture(autouse=True)
 def load_constructions_and_macros_for_tests():
     load_constructions_and_macros()
@@ -97,7 +94,8 @@ def test_check_proof(problem_name: str):
 
 @pytest.mark.parametrize(
     "problem_name",
-    GEVA_PROBLEM_NAMES + [
+    GEVA_PROBLEM_NAMES
+    + [
         # Some problems from the Geometry in Figures book
         'figures/1_1.jl',
         'figures/1_3.jl',

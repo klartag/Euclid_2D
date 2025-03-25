@@ -127,6 +127,6 @@ def assert_problem_embedding_possible(problem_name: str):
 
     embedding = diagram_embedder.embed(proof)
     assert embedding is not None
-    
+
     for target_predicate in proof.target_predicates:
         assert embedding.evaluate_predicate(target_predicate) == EmbeddedPredicateValue.Correct
