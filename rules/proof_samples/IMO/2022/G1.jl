@@ -18,9 +18,7 @@ orientation(A, B, T) == orientation(E, A, T)
 distance(B, C) == distance(D, E)
 distance(T, B) == distance(T, D)
 distance(T, C) == distance(T, E)
-
-exists(Line(T, E), Line(T, B))
-angle(A, B, T) == angle(T, E, A)
+angle(A, B, T) == angle(T, E, A) mod 360
 
 P == line_intersection(Line(A, B), Line(C, D))
 Q == line_intersection(Line(A, B), Line(C, T))
@@ -30,17 +28,6 @@ S == line_intersection(Line(A, E), Line(D, T))
 
 between(P, B, A, Q)
 between(R, E, A, S)
-
-between(D, T, S)  # This follows from convexity, which is not completely implemented.
-between(C, T, Q)  # This follows from convexity, which is not completely implemented.
-
-triangle(T, E, A)
-triangle(T, A, B)
-
-#exists(Line(C, Q))
-exists(Line(D, Q))
-exists(Line(S, Q))
-#exists(Line(P, Q))
 
 Need to prove:
 concyclic(R, Q, S, P)

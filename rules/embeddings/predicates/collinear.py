@@ -1,6 +1,8 @@
+from typing import Tuple
 from mpmath import mpf
 
 from ..embedded_objects import EmbeddedPoint, EPSILON
+
 
 def collinear(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
     if point0.is_equal(point1) or point0.is_equal(point2):
@@ -12,11 +14,16 @@ def not_collinear(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: Embedded
     return not collinear(point0, point1, point2)
 
 
-def between(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
-    if not collinear(point0, point1, point2):
-        return False
-    
-    return is_scalar_between(point0.x, point1.x, point2.x) and is_scalar_between(point0.y, point1.y, point2.y)
+def between(*points: Tuple[EmbeddedPoint, ...]) -> bool:
+    for i in range(len(points) - 2):
+        point0, point1, point2 = points[i : i + 3]
+        if not collinear(point0, point1, point2):
+            return False
+        if not is_scalar_between(point0.x, point1.x, point2.x):
+            return False
+        if not is_scalar_between(point0.y, point1.y, point2.y):
+            return False
+    return True
 
 
 def collinear_and_not_between(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
