@@ -15,3 +15,8 @@ Need to prove:
 distance(A, X) * distance(C, X) == distance(B, X) * distance(D, X)
 
 Proof:
+By in_imply_collinear on X, A, C we get collinear(A, C, X)
+By in_imply_collinear on X, B, D we get collinear(B, D, X)
+By concyclic_definition_0 on A, C, B, D we get D in Circle(A, B, C)
+By power_of_a_point_definition on X, C, A, Circle(A, B, C) we get log(distance(C, X)) + log(distance(A, X)) == log(power_of_a_point(X, Circle(A, B, C)))
+By power_of_a_point_definition on X, D, B, Circle(A, B, C) we get log(distance(D, X)) + log(distance(B, X)) == log(power_of_a_point(X, Circle(A, B, C)))

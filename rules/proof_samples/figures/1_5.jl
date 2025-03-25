@@ -11,6 +11,8 @@ C := {"x": "0.995616432639979154972462817581809053258052239290654930914986594503
 D := {"x": "0.1296535867725955581963859231109381653368473052978515625", "y": "0.54268059233018417497618202105513773858547210693359375"}
 
 Need to prove:
-angle(A, B, C) + angle(C, D, A) == 180 mod 360
+180 == angle(A, B, C) + angle(C, D, A) mod 360
 
 Proof:
+By concyclic_definition_0 on B, A, C, D we get D in Circle(A, B, C)
+By angles_on_chord_v3 on C, A, B, D, Circle(A, B, C) we get angle(C, B, A) == angle(C, D, A) + 180 mod 360

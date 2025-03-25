@@ -2,9 +2,9 @@ Assumptions:
 A, B, C, D, E, O: Point
 distinct(A, B, C, D, E, O)
 not_collinear(A, B, C)
-collinear(A, D, B)
-collinear(A, E, C)
-concyclic(B, C, E, D)
+collinear(A, B, D)
+collinear(A, C, E)
+concyclic(B, C, D, E)
 O == center(Circle(A, D, E))
 
 Embedding:
@@ -19,3 +19,19 @@ Need to prove:
 perpendicular(Line(A, O), Line(B, C))
 
 Proof:
+By circle_radius_v0_r on E, Circle(A, D, E) we get radius(Circle(A, D, E)) == distance(E, center(Circle(A, D, E)))
+By circle_radius_v0_r on A, Circle(A, D, E) we get radius(Circle(A, D, E)) == distance(A, center(Circle(A, D, E)))
+By concyclic_definition_0 on B, D, C, E we get E in Circle(B, C, D)
+By angle_to_center on E, A, D, Circle(A, D, E) we get 2 * angle(E, A, D) == angle(E, center(Circle(A, D, E)), D) mod 360
+By angle_to_center on A, E, D, Circle(A, D, E) we get 2 * angle(A, E, D) == angle(A, center(Circle(A, D, E)), D) mod 360
+By same_angle_v2 on A, B, D, O we get angle(B, A, O) == angle(D, A, O) + 180 mod 360
+By same_angle_v0 on B, A, D, C we get angle(A, B, C) == angle(D, B, C) mod 360
+By collinear_definition on E, C, A we get C in Line(A, E), A in Line(C, E), Line(A, E) == Line(C, E), 0 == 2 * angle(C, E, A) mod 360
+By angles_on_chord_v0 on D, C, B, E, Circle(B, C, D) we get angle(D, B, C) == angle(D, E, C) mod 360
+By reverse_direction on B, A we get 180 == direction(B, A) - direction(A, B) mod 360
+By reverse_direction on A, E we get 180 == direction(A, E) - direction(E, A) mod 360
+By reverse_direction on B, C we get 180 == direction(B, C) - direction(C, B) mod 360
+By reverse_direction on A, O we get 180 == direction(A, O) - direction(O, A) mod 360
+By reverse_direction on O, E we get 180 == direction(O, E) - direction(E, O) mod 360
+By isosceles_triangle_properties on O, E, A we get distance(A, O) == distance(E, O), angle(E, A, O) == angle(O, E, A) mod 360
+By perpendicular_direction_conditions_v0 on C, B, O, A we get perpendicular(Line(A, O), Line(B, C))

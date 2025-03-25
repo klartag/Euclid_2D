@@ -19,3 +19,28 @@ Need to prove:
 collinear(D, E, F)
 
 Proof:
+By line_definition on F, A, Line(A, B) we get Line(A, B) == Line(A, F)
+By line_definition on E, C, Line(A, C) we get Line(A, C) == Line(C, E)
+By line_definition on D, P, perpendicular_line(P, Line(B, C)) we get Line(D, P) == perpendicular_line(P, Line(B, C))
+By line_definition on B, D, Line(B, C) we get Line(B, C) == Line(B, D)
+By line_definition on E, P, perpendicular_line(P, Line(A, C)) we get Line(E, P) == perpendicular_line(P, Line(A, C))
+By line_definition on P, F, perpendicular_line(P, Line(A, B)) we get Line(F, P) == perpendicular_line(P, Line(A, B))
+By in_imply_collinear on E, A, C we get collinear(A, C, E)
+By in_imply_collinear on F, B, A we get collinear(A, B, F)
+By in_imply_collinear on D, C, B we get collinear(B, C, D)
+By angles_on_chord_v0 on C, P, B, A, Circle(A, B, C) we get angle(C, A, P) == angle(C, B, P) mod 360
+By same_angle_v0 on B, D, C, P we get angle(C, B, P) == angle(D, B, P) mod 360
+By same_angle_v0 on A, E, C, P we get angle(C, A, P) == angle(E, A, P) mod 360
+By same_angle_v3 on E, C, A, P we get angle(C, E, P) == angle(A, E, P) + 180 mod 360
+By same_angle_v0 on F, B, A, P we get angle(A, F, P) == angle(B, F, P) mod 360
+By perpendicular_angle_conditions_v0 on B, D, P we get angle(B, D, P) == orientation(B, D, P) mod 360
+By perpendicular_angle_conditions_v0 on C, E, P we get angle(C, E, P) == orientation(C, E, P) mod 360
+By perpendicular_angle_conditions_v0 on P, F, A we get angle(P, F, A) == orientation(A, P, F) mod 360
+By concyclic_sufficient_conditions_v1 on P, F, A, E we get concyclic(A, E, F, P)
+By concyclic_sufficient_conditions_v1 on P, D, B, F we get concyclic(B, D, F, P)
+By aa_similarity on P, B, D, P, A, E we get similar_triangles(A, E, P, B, D, P)
+By concyclic_definition_0 on F, B, D, P we get P in Circle(B, D, F)
+By concyclic_definition_0 on E, F, A, P we get P in Circle(A, E, F)
+By angles_on_chord_v1 on E, A, P, F, Circle(A, E, F) we get angle(E, F, A) == angle(E, P, A) mod 360
+By angles_on_chord_v0 on B, D, F, P, Circle(B, D, F) we get angle(B, F, D) == angle(B, P, D) mod 360
+By same_angle_converse_v0 on F, E, D, P we get collinear(D, E, F)

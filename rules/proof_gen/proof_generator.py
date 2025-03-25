@@ -299,7 +299,7 @@ class ProofGenerator:
 
     def should_skip_theorem_step(self, theorem_step: TheoremStep) -> bool:
         theorem = Theorem.all_theorems()[theorem_step.theorem_name]
-        
+
         if len(theorem.required_embedding_predicates) > 0 and self.checker.geometry_tracker.embedding_tracker is None:
             return True
         for predicate in theorem.required_embedding_predicates:
@@ -597,14 +597,14 @@ def prove_all_assumptions(
 
 def prove(base: Proof, interactive: bool, verbose: bool) -> Proof:
     if base.embedding is not None:
-            collector = NonDegeneracyPrediateCollector()
-            non_degenerecy_predicates = collector.collect(base.assumption_objects, base.embedding)
-            base.auxiliary_predicates.extend(non_degenerecy_predicates)
+        collector = NonDegeneracyPrediateCollector()
+        non_degenerecy_predicates = collector.collect(base.assumption_objects, base.embedding)
+        base.auxiliary_predicates.extend(non_degenerecy_predicates)
 
     proof_gen = ProofGenerator(base, actions_per_step=10000, verbose=verbose)
 
     try:
-        proof_gen.run(verbose)
+        proof_gen.run()
         completed_proof = base.shallow_copy()
         completed_proof.steps = proof_gen.proof_steps
         return completed_proof

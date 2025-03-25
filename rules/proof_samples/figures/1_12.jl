@@ -21,3 +21,39 @@ Need to prove:
 concyclic(W, X, Y, Z)
 
 Proof:
+By line_definition on A, X, Line(X, Y) we get Line(A, X) == Line(X, Y)
+By line_definition on X, D, Line(W, X) we get Line(D, X) == Line(W, X)
+By line_definition on Y, B, Line(Y, Z) we get Line(B, Y) == Line(Y, Z)
+By line_definition on W, C, Line(W, Z) we get Line(C, W) == Line(W, Z)
+By in_imply_collinear on B, Y, Z we get collinear(B, Y, Z)
+By in_imply_collinear on A, Y, X we get collinear(A, X, Y)
+By in_imply_collinear on C, W, Z we get collinear(C, W, Z)
+By in_imply_collinear on D, X, W we get collinear(D, W, X)
+By same_angle_v1 on Y, Z, B, X we get angle(B, Y, X) == angle(Z, Y, X) mod 360
+By same_angle_v1 on Z, C, W, B we get angle(C, Z, B) == angle(W, Z, B) mod 360
+By same_angle_v0 on Y, X, A, B we get angle(A, Y, B) == angle(X, Y, B) mod 360
+By same_angle_v3 on Z, B, Y, W we get angle(B, Z, W) == angle(Y, Z, W) + 180 mod 360
+By same_angle_v1 on B, Y, Z, C we get angle(Y, B, C) == angle(Z, B, C) mod 360
+By same_angle_v1 on W, Z, C, X we get angle(C, W, X) == angle(Z, W, X) mod 360
+By same_angle_v0 on D, W, X, A we get angle(W, D, A) == angle(X, D, A) mod 360
+By same_angle_v0 on W, X, D, C we get angle(D, W, C) == angle(X, W, C) mod 360
+By same_angle_v2 on A, Y, X, D we get angle(Y, A, D) == angle(X, A, D) + 180 mod 360
+By same_angle_v0 on X, A, Y, D we get angle(A, X, D) == angle(Y, X, D) mod 360
+By internal_angle_bisector_definition_v0 on D, W, B, C we get angle(D, C, W) == angle(W, C, B) mod 360
+By internal_angle_bisector_definition_v0 on C, X, A, D we get angle(C, D, X) == angle(X, D, A) mod 360
+By internal_angle_bisector_definition_v0 on D, X, B, A we get angle(D, A, X) == angle(X, A, B) mod 360
+By internal_angle_bisector_definition_v0 on A, Y, C, B we get angle(A, B, Y) == angle(Y, B, C) mod 360
+By reverse_direction on X, Y we get 180 == direction(X, Y) - direction(Y, X) mod 360
+By reverse_direction on B, Z we get 180 == direction(B, Z) - direction(Z, B) mod 360
+By reverse_direction on A, Y we get 180 == direction(A, Y) - direction(Y, A) mod 360
+By reverse_direction on B, A we get 180 == direction(B, A) - direction(A, B) mod 360
+By reverse_direction on W, Z we get 180 == direction(W, Z) - direction(Z, W) mod 360
+By reverse_direction on W, D we get 180 == direction(W, D) - direction(D, W) mod 360
+By reverse_direction on Y, B we get 180 == direction(Y, B) - direction(B, Y) mod 360
+By reverse_direction on X, D we get 180 == direction(X, D) - direction(D, X) mod 360
+By reverse_direction on C, D we get 180 == direction(C, D) - direction(D, C) mod 360
+By reverse_direction on B, C we get 180 == direction(B, C) - direction(C, B) mod 360
+By reverse_direction on W, C we get 180 == direction(W, C) - direction(C, W) mod 360
+By reverse_direction on D, A we get 180 == direction(D, A) - direction(A, D) mod 360
+By divide_by_2_mod_180_v2 on A, X, D, Y, Z, C we get angle(A, X, D) == angle(Y, Z, C) + 180 mod 360
+By concyclic_sufficient_conditions_v0 on Z, W, X, Y we get concyclic(W, X, Y, Z)

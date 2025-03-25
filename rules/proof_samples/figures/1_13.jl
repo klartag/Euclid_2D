@@ -22,3 +22,24 @@ Need to prove:
 concyclic(B, C, Y, Z)
 
 Proof:
+By line_definition on Y, X, Line(W, X) we get Line(W, X) == Line(X, Y)
+By in_imply_collinear on Z, C, A we get collinear(A, C, Z)
+By in_imply_collinear on Y, X, W we get collinear(W, X, Y)
+By in_imply_collinear on Y, B, A we get collinear(A, B, Y)
+By angles_on_chord_v2 on A, C, X, B, c we get angle(A, X, C) == angle(A, B, C) + 180 mod 360
+By angles_on_chord_v1 on X, C, B, W, c we get angle(X, B, C) == angle(X, W, C) mod 360
+By angles_on_chord_v1 on W, A, C, X, c we get angle(W, C, A) == angle(W, X, A) mod 360
+By angles_on_chord_v1 on B, X, C, W, c we get angle(B, C, X) == angle(B, W, X) mod 360
+By angles_on_chord_v2 on C, A, W, X, c we get angle(C, W, A) == angle(C, X, A) + 180 mod 360
+By angles_on_chord_v0 on A, B, C, W, c we get angle(A, C, B) == angle(A, W, B) mod 360
+By angles_on_chord_v3 on W, X, C, B, c we get angle(W, C, X) == angle(W, B, X) + 180 mod 360
+By isosceles_triangle_properties on A, W, X we get distance(A, W) == distance(A, X), angle(A, W, X) == angle(W, X, A) mod 360
+By same_angle_v0 on C, A, Z, B we get angle(A, C, B) == angle(Z, C, B) mod 360
+By same_angle_v0 on A, Y, B, X we get angle(B, A, X) == angle(Y, A, X) mod 360
+By same_angle_v2 on W, X, Y, B we get angle(X, W, B) == angle(Y, W, B) + 180 mod 360
+By in_imply_collinear on Z, X, Y we get collinear(X, Y, Z)
+By same_angle_v1 on Y, A, B, Z we get angle(A, Y, Z) == angle(B, Y, Z) mod 360
+By same_angle_v0 on Y, X, W, A we get angle(W, Y, A) == angle(X, Y, A) mod 360
+By same_angle_v0 on Y, Z, X, A we get angle(X, Y, A) == angle(Z, Y, A) mod 360
+By aa_anti_similarity on W, B, A, Y, W, A we get anti_similar_triangles(A, B, W, A, W, Y)
+By concyclic_sufficient_conditions_v0 on B, Y, Z, C we get concyclic(B, C, Y, Z)

@@ -22,3 +22,19 @@ Need to prove:
 perpendicular(Line(X, Z), Line(Y, Z))
 
 Proof:
+By concyclic_definition_0 on B, C, A, D we get D in Circle(A, B, C)
+By internal_angle_bisector_definition_v0 on D, Z, A, X we get angle(D, X, Z) == angle(Z, X, A) mod 360
+By internal_angle_bisector_definition_v0 on D, Z, C, Y we get angle(D, Y, Z) == angle(Z, Y, C) mod 360
+By between_implies_angles on Y, D, A we get 180 == angle(Y, D, A) mod 360, 0 == angle(D, A, Y) mod 360, 0 == angle(A, Y, D) mod 360
+By between_implies_angles on B, C, Y we get 180 == angle(B, C, Y) mod 360, 0 == angle(C, Y, B) mod 360, 0 == angle(Y, B, C) mod 360
+By between_implies_angles on C, D, X we get 180 == angle(C, D, X) mod 360, 0 == angle(D, X, C) mod 360, 0 == angle(X, C, D) mod 360
+By between_implies_angles on B, A, X we get 180 == angle(B, A, X) mod 360, 0 == angle(A, X, B) mod 360, 0 == angle(X, B, A) mod 360
+By angles_on_chord_v2 on A, C, B, D, Circle(A, B, C) we get angle(A, B, C) == angle(A, D, C) + 180 mod 360
+By reverse_direction on C, B we get 180 == direction(C, B) - direction(B, C) mod 360
+By reverse_direction on D, X we get 180 == direction(D, X) - direction(X, D) mod 360
+By reverse_direction on Y, C we get 180 == direction(Y, C) - direction(C, Y) mod 360
+By reverse_direction on Y, D we get 180 == direction(Y, D) - direction(D, Y) mod 360
+By reverse_direction on B, X we get 180 == direction(B, X) - direction(X, B) mod 360
+By reverse_direction on Y, Z we get 180 == direction(Y, Z) - direction(Z, Y) mod 360
+By reverse_direction on X, Z we get 180 == direction(X, Z) - direction(Z, X) mod 360
+By perpendicular_direction_conditions_v0 on Z, X, Z, Y we get perpendicular(Line(X, Z), Line(Y, Z))

@@ -21,3 +21,25 @@ Need to prove:
 collinear(D, E, F)
 
 Proof:
+By in_imply_collinear on D, C, B we get collinear(B, C, D)
+By in_imply_collinear on F, A, B we get collinear(A, B, F)
+By in_imply_collinear on E, C, A we get collinear(A, C, E)
+By angles_on_chord_v1 on C, P, B, A, Circle(A, B, C) we get angle(C, A, P) == angle(C, B, P) mod 360
+By reverse_direction on F, A we get 180 == direction(F, A) - direction(A, F) mod 360
+By reverse_direction on F, P we get 180 == direction(F, P) - direction(P, F) mod 360
+By angles_on_chord_v0 on B, P, A, C, Circle(A, B, C) we get angle(B, A, P) == angle(B, C, P) mod 360
+By angles_on_chord_v1 on B, A, C, P, Circle(A, B, C) we get angle(B, C, A) == angle(B, P, A) mod 360
+By same_angle_v2 on A, B, F, P we get angle(B, A, P) == angle(F, A, P) + 180 mod 360
+By same_angle_v2 on C, A, E, B we get angle(A, C, B) == angle(E, C, B) + 180 mod 360
+By same_angle_v0 on D, B, C, P we get angle(B, D, P) == angle(C, D, P) mod 360
+By same_angle_v0 on F, A, B, P we get angle(A, F, P) == angle(B, F, P) mod 360
+By reverse_direction on C, A we get 180 == direction(C, A) - direction(A, C) mod 360
+By reverse_direction on B, C we get 180 == direction(B, C) - direction(C, B) mod 360
+By reverse_direction on P, B we get 180 == direction(P, B) - direction(B, P) mod 360
+By concyclic_sufficient_conditions_v0 on P, F, B, D we get concyclic(B, D, F, P)
+By concyclic_sufficient_conditions_v0 on C, E, P, D we get concyclic(C, D, E, P)
+By concyclic_definition_0 on F, B, D, P we get P in Circle(B, D, F)
+By concyclic_definition_0 on D, E, C, P we get P in Circle(C, D, E)
+By angles_on_chord_v0 on P, E, D, C, Circle(C, D, E) we get angle(P, C, E) == angle(P, D, E) mod 360
+By angles_on_chord_v1 on B, F, P, D, Circle(B, D, F) we get angle(B, D, F) == angle(B, P, F) mod 360
+By same_angle_converse_v1 on D, E, F, P we get collinear(D, E, F)

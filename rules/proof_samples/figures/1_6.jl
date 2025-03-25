@@ -15,3 +15,7 @@ Need to prove:
 angle(B, A, D) == angle(D, A, C) mod 360
 
 Proof:
+By concyclic_definition_0 on C, A, B, D we get D in Circle(A, B, C)
+By isosceles_triangle_properties on D, C, B we get distance(B, D) == distance(C, D), angle(C, B, D) == angle(D, C, B) mod 360
+By angles_on_chord_v1 on B, D, A, C, Circle(A, B, C) we get angle(B, A, D) == angle(B, C, D) mod 360
+By angles_on_chord_v0 on C, D, A, B, Circle(A, B, C) we get angle(C, A, D) == angle(C, B, D) mod 360

@@ -21,3 +21,14 @@ Need to prove:
 concyclic(C, D, E, O)
 
 Proof:
+By probably_between_and_collinear_implies_between on C, A, E we get between(C, A, E)
+By probably_between_and_collinear_implies_between on B, A, F we get between(B, A, F)
+By probably_between_and_collinear_implies_between on B, C, D we get between(B, C, D)
+By concyclic_definition_0 on F, B, D, O we get O in Circle(B, D, F)
+By concyclic_definition_0 on A, E, F, O we get O in Circle(A, E, F)
+By angles_on_chord_v1 on A, O, F, E, Circle(A, E, F) we get angle(A, E, O) == angle(A, F, O) mod 360
+By angles_on_chord_v0 on O, B, D, F, Circle(B, D, F) we get angle(O, D, B) == angle(O, F, B) mod 360
+By between_implies_angles on C, A, E we get 180 == angle(C, A, E) mod 360, 0 == angle(A, E, C) mod 360, 0 == angle(E, C, A) mod 360
+By between_implies_angles on B, A, F we get 180 == angle(B, A, F) mod 360, 0 == angle(A, F, B) mod 360, 0 == angle(F, B, A) mod 360
+By between_implies_angles on B, C, D we get 180 == angle(B, C, D) mod 360, 0 == angle(C, D, B) mod 360, 0 == angle(D, B, C) mod 360
+By concyclic_sufficient_conditions_v0 on O, E, C, D we get concyclic(C, D, E, O)
