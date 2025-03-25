@@ -538,3 +538,31 @@ def main():
     path = Proof.get_full_proof_path(args.path)
     check_proof(path, verbose=args.v, interactive=args.interactive)
     print(f't={time.perf_counter() - t0}')
+
+
+def interactive_main():
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Loads a proof into the Interactive Predicate Checker.')
+    parser.add_argument('path', help='The path of the problem file to load.', type=Path)
+    parser.add_argument('-v', help='Prints debug information', action='store_true')
+
+    args = parser.parse_args()
+
+    path = Proof.get_full_proof_path(args.path)
+
+    proof = Proof.parse(path.open().read())
+
+    if proof.embedding is not None:
+        collector = NonDegeneracyPrediateCollector()
+        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
+        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
+
+    checker = ProofChecker(proof)
+    try:
+        checker.check(False)
+        print(f'Successfully loaded proof steps.')
+    except ProofCheckError as e:
+        print(f'Stopped due to {e}.')
+    print('Beginning interactive session...')
+    InteractivePredicateChecker(checker.geometry_tracker).run()
