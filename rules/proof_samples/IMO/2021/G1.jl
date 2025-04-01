@@ -10,9 +10,6 @@ collinear(A, B, P)
 collinear(A, B, P)
 collinear(D, P, Q)
 collinear(C, P, R)
-exists(Line(A, R))
-exists(Line(C, Q))
-exists(Line(Q, R))
 
 Embedding:
 P := {"x": "6.962919185168885860548471100628376007080078125", "y": "2.724707125057439949245008392608724534511566162109375"}
