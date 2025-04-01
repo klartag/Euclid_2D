@@ -2,9 +2,7 @@ Assumptions:
 A, B, C, P, Q, M, N, X: Point
 distinct(A, B, C, P, Q, M, N)
 
-angle(A, B, C) < 90 mod 360
-angle(B, C, A) < 90 mod 360
-angle(C, A, B) < 90 mod 360
+acute_triangle(A, B, C)
 
 between(B, P, C)
 between(B, Q, C)

@@ -1,3 +1,8 @@
+acute_triangle:
+  conclude: [self]
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
 collinear:
   conclude: [self]
   inputs:

@@ -2,9 +2,7 @@ Assumptions:
 A, B, C, G, H, I, J: Point
 distinct(A, B, C, G, H, I, J)
 
-angle(A, B, C) < 90 mod 360
-angle(B, C, A) < 90 mod 360
-angle(C, A, B) < 90 mod 360
+acute_triangle(A, B, C)
 
 H == orthocenter(A, B, C)
 parallelogram(A, B, G, H)

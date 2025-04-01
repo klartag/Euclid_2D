@@ -3,9 +3,7 @@ A, B, C, H, A0, B0, C0, A1, B1, C1, A2, B2, C2: Point
 wa, wb, wc: Circle
 distinct(A, B, C, H, A0, B0, C0, A1, B1, C1, A2, B2, C2)
 
-angle(A, B, C) < 90 mod 360
-angle(B, C, A) < 90 mod 360
-angle(C, A, B) < 90 mod 360
+acute_triangle(A, B, C)
 
 H == orthocenter(A, B, C)
 A0 == midpoint(B, C)

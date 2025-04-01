@@ -3,9 +3,7 @@ A, B, C, D, E, F, G: Point
 w: Circle
 distinct(A, B, C, D, E, F, G)
 
-angle(A, B, C) < 90 mod 360
-angle(B, C, A) < 90 mod 360
-angle(C, A, B) < 90 mod 360
+acute_triangle(A, B, C)
 
 w == Circle(A, B, C)
 

@@ -3,9 +3,7 @@ A, B, C, H, W, M, N, X, Y: Point
 c, d: Circle
 distinct(A, B, C, H, W, M, N, X, Y)
 
-angle(A, B, C) < 90 mod 360
-angle(B, C, A) < 90 mod 360
-angle(C, A, B) < 90 mod 360
+acute_triangle(A, B, C)
 
 H == orthocenter(A, B, C)
 between(B, W, C)

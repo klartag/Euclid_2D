@@ -2,7 +2,13 @@ from typing import Dict
 
 from .constructions.angle_bisectors import internal_angle_bisector, external_angle_bisector
 from .constructions.center import center
-from .constructions.circle import circumcenter, circumcircle, circle_from_center_and_point, circle_from_center_and_radius, circle_from_two_points_and_angle
+from .constructions.circle import (
+    circumcenter,
+    circumcircle,
+    circle_from_center_and_point,
+    circle_from_center_and_radius,
+    circle_from_two_points_and_angle,
+)
 from .constructions.circle_intersection import line_circle_other_intersection, circle_circle_other_intersection
 from .constructions.incenters import incenter, excenter, incircle, excircle
 from .constructions.isogonal_conjugate import isogonal_conjugate
@@ -12,7 +18,13 @@ from .constructions.midpoint import midpoint, median, centroid
 from .constructions.new_object import new_point, new_line, new_circle
 from .constructions.nine_point_circle import nine_point_circle
 from .constructions.object_on_object import point_on_line, line_on_point, point_on_circle
-from .constructions.parallels_and_perpendiculars import parallel_line, perpendicular_line, perpendicular_bisector, altitude, orthocenter
+from .constructions.parallels_and_perpendiculars import (
+    parallel_line,
+    perpendicular_line,
+    perpendicular_bisector,
+    altitude,
+    orthocenter,
+)
 from .constructions.projection import project
 from .constructions.radical_axis import radical_axis
 from .constructions.reflection import reflect_point
@@ -30,7 +42,14 @@ from .predicates.exists import exists
 from .predicates.line_relations import parallel, perpendicular
 from .predicates.quadrilaterals import trapezoid, isosceles_trapezoid, parallelogram, rhombus, rectangle, square
 from .predicates.tangent import tangent
-from .predicates.triangles import isosceles_triangle, congruent_triangles, anti_congruent_triangles, similar_triangles, anti_similar_triangles
+from .predicates.triangles import (
+    acute_triangle,
+    isosceles_triangle,
+    congruent_triangles,
+    anti_congruent_triangles,
+    similar_triangles,
+    anti_similar_triangles,
+)
 
 from .types import ConstructionMethod, ExtendedConstructionMethod, PredicateMethod, normalize_return_type
 
@@ -73,15 +92,15 @@ _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ExtendedConstructionMethod] = 
 }
 
 
-CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ConstructionMethod]  = { }
+CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ConstructionMethod] = {}
 
-CONSTRUCTION_METHOD_DICTIONARY.update({
-    name: normalize_return_type(func)
-    for name, func in _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY.items()
-})
+CONSTRUCTION_METHOD_DICTIONARY.update(
+    {name: normalize_return_type(func) for name, func in _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY.items()}
+)
 
 
 PREDICATE_METHOD_DICTIONARY: Dict[str, PredicateMethod] = {
+    'acute_triangle': acute_triangle,
     'anti_congruent_triangles': anti_congruent_triangles,
     'anti_similar_triangles': anti_similar_triangles,
     'between': between,

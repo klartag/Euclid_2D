@@ -1,7 +1,20 @@
 from ..embedded_objects import EmbeddedPoint, EPSILON
-from ..constructions.scalars import orientation
+from ..constructions.scalars import orientation, angle
 
 from .collinear import collinear
+
+
+def acute_triangle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
+    if collinear(point0, point1, point2):
+        return False
+    if abs(angle(point0, point1, point2).value) >= 90:
+        return False
+    if abs(angle(point1, point2, point0).value) >= 90:
+        return False
+    if abs(angle(point2, point0, point1).value) >= 90:
+        return False
+    return True
+
 
 def isosceles_triangle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
     if collinear(point0, point1, point2):
@@ -9,7 +22,14 @@ def isosceles_triangle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: Emb
     return abs((point0 - point1).length_squared() - (point0 - point2).length_squared()) < EPSILON**2
 
 
-def congruent_without_orientation(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint, point4: EmbeddedPoint, point5: EmbeddedPoint) -> bool:
+def congruent_without_orientation(
+    point0: EmbeddedPoint,
+    point1: EmbeddedPoint,
+    point2: EmbeddedPoint,
+    point3: EmbeddedPoint,
+    point4: EmbeddedPoint,
+    point5: EmbeddedPoint,
+) -> bool:
     if collinear(point0, point1, point2) or collinear(point3, point4, point5):
         return False
     if abs((point0 - point1).length_squared() - (point3 - point4).length_squared()) > EPSILON**2:
@@ -21,19 +41,40 @@ def congruent_without_orientation(point0: EmbeddedPoint, point1: EmbeddedPoint, 
     return True
 
 
-def congruent_triangles(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint, point4: EmbeddedPoint, point5: EmbeddedPoint) -> bool:
+def congruent_triangles(
+    point0: EmbeddedPoint,
+    point1: EmbeddedPoint,
+    point2: EmbeddedPoint,
+    point3: EmbeddedPoint,
+    point4: EmbeddedPoint,
+    point5: EmbeddedPoint,
+) -> bool:
     if not congruent_without_orientation(point0, point1, point2, point3, point4, point5):
         return False
     return orientation(point0, point1, point2).is_equal(orientation(point3, point4, point5))
 
 
-def anti_congruent_triangles(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint, point4: EmbeddedPoint, point5: EmbeddedPoint) -> bool:
+def anti_congruent_triangles(
+    point0: EmbeddedPoint,
+    point1: EmbeddedPoint,
+    point2: EmbeddedPoint,
+    point3: EmbeddedPoint,
+    point4: EmbeddedPoint,
+    point5: EmbeddedPoint,
+) -> bool:
     if not congruent_without_orientation(point0, point1, point2, point3, point4, point5):
         return False
     return not orientation(point0, point1, point2).is_equal(orientation(point3, point4, point5))
 
 
-def similar_without_orientation(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint, point4: EmbeddedPoint, point5: EmbeddedPoint) -> bool:
+def similar_without_orientation(
+    point0: EmbeddedPoint,
+    point1: EmbeddedPoint,
+    point2: EmbeddedPoint,
+    point3: EmbeddedPoint,
+    point4: EmbeddedPoint,
+    point5: EmbeddedPoint,
+) -> bool:
     if collinear(point0, point1, point2) or collinear(point3, point4, point5):
         return False
     ratio0 = (point0 - point1).length_squared() / (point3 - point4).length_squared()
@@ -42,13 +83,27 @@ def similar_without_orientation(point0: EmbeddedPoint, point1: EmbeddedPoint, po
     return abs(ratio0 - ratio1) < EPSILON and abs(ratio1 - ratio2) < EPSILON
 
 
-def similar_triangles(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint, point4: EmbeddedPoint, point5: EmbeddedPoint) -> bool:
+def similar_triangles(
+    point0: EmbeddedPoint,
+    point1: EmbeddedPoint,
+    point2: EmbeddedPoint,
+    point3: EmbeddedPoint,
+    point4: EmbeddedPoint,
+    point5: EmbeddedPoint,
+) -> bool:
     if not similar_without_orientation(point0, point1, point2, point3, point4, point5):
         return False
     return orientation(point0, point1, point2).is_equal(orientation(point3, point4, point5))
 
 
-def anti_similar_triangles(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint, point4: EmbeddedPoint, point5: EmbeddedPoint) -> bool:
+def anti_similar_triangles(
+    point0: EmbeddedPoint,
+    point1: EmbeddedPoint,
+    point2: EmbeddedPoint,
+    point3: EmbeddedPoint,
+    point4: EmbeddedPoint,
+    point5: EmbeddedPoint,
+) -> bool:
     if not similar_without_orientation(point0, point1, point2, point3, point4, point5):
         return False
     return not orientation(point0, point1, point2).is_equal(orientation(point3, point4, point5))

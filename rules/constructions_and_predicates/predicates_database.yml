@@ -1,3 +1,10 @@
+acute_triangle:
+  inputs:
+  - A, B, C: Point
+  preprocess: symmetric
+  conclude:
+    - self
+
 triangle:
   inputs:
   - A, B, C: Point
