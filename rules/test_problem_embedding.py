@@ -13,7 +13,7 @@ from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 from .pred_config import load_constructions_and_macros
 from .proof import Proof
 
-from .test_proofs import GEVA_PROBLEM_NAMES, FIGURES_PROBLEM_NAMES, IMO_PROBLEM_NAMES
+from .test_proofs import GEVA_PROBLEM_NAMES, FIGURES_PROBLEM_NAMES, IMO_SHORTLIST_PROBLEMS
 
 from util import BASE_PATH
 
@@ -114,7 +114,7 @@ def test_linear_problem_embedding(problem_id: str):
 
 @pytest.mark.parametrize(
     "problem_name",
-    GEVA_PROBLEM_NAMES + FIGURES_PROBLEM_NAMES + IMO_PROBLEM_NAMES,
+    GEVA_PROBLEM_NAMES + FIGURES_PROBLEM_NAMES + IMO_SHORTLIST_PROBLEMS,
 )
 def test_difficult_problem_embedding(problem_name: str):
     assert_problem_embedding_possible(problem_name)

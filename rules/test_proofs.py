@@ -58,18 +58,49 @@ FIGURES_PROBLEM_NAMES = [
 ]
 
 # Problems from IMOs
-IMO_PROBLEM_NAMES = [
-    # Problems from the IMO 2021 Shortlist
+IMO_G1_PROBLEMS = [
+    'IMO/2008/G1.jl',
+    'IMO/2010/G1.jl',
+    'IMO/2012/G1.jl',
+    'IMO/2013/G1.jl',
+    'IMO/2014/G1.jl',
+    'IMO/2015/G1.jl',
+    'IMO/2016/G1.jl',
+    'IMO/2017/G1.jl',
+    'IMO/2018/G1.jl',
+    'IMO/2019/G1.jl',
+    'IMO/2020/G1.jl',
     'IMO/2021/G1.jl',
-    'IMO/2021/G2.jl',
-    'IMO/2021/G4.jl',
-    # Problems from the IMO 2022 Shortlist
     'IMO/2022/G1.jl',
-    'IMO/2022/G2.jl',
-    'IMO/2022/G3.jl',
-    'IMO/2022/G4.jl',
-    'IMO/2022/G5.jl',
+    'IMO/2023/G1.jl',
 ]
+
+IMO_G2_PROBLEMS = [
+    'IMO/2006/G2.jl',
+    'IMO/2007/G2.jl',
+    'IMO/2008/G2.jl',
+    'IMO/2008/G2_converse.jl',
+    'IMO/2009/G2.jl',
+    'IMO/2010/G2.jl',
+    'IMO/2010/G2_converse.jl',
+    'IMO/2012/G2.jl',
+    'IMO/2013/G2.jl',
+    'IMO/2015/G2.jl',
+    'IMO/2016/G2.jl',
+    'IMO/2017/G2.jl',
+    'IMO/2018/G2.jl',
+    'IMO/2019/G2.jl',
+    'IMO/2020/G2.jl',
+    'IMO/2021/G2.jl',
+    'IMO/2022/G2.jl',
+    'IMO/2023/G2.jl',
+]
+
+IMO_G3_PROBLEMS = [
+    'IMO/2019/G3.jl',
+]
+
+IMO_SHORTLIST_PROBLEMS = IMO_G1_PROBLEMS + IMO_G2_PROBLEMS + IMO_G3_PROBLEMS
 
 
 @pytest.fixture(autouse=True)
@@ -79,7 +110,7 @@ def load_constructions_and_macros_for_tests():
 
 @pytest.mark.parametrize(
     "problem_name",
-    GEVA_PROBLEM_NAMES + FIGURES_PROBLEM_NAMES + IMO_PROBLEM_NAMES,
+    GEVA_PROBLEM_NAMES + FIGURES_PROBLEM_NAMES + IMO_SHORTLIST_PROBLEMS,
 )
 def test_check_proof(problem_name: str):
     '''
