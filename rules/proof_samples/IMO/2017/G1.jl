@@ -9,6 +9,6 @@ angle(E, A, B) == angle(B, C, D) mod 360
 angle(E, D, C) == angle(C, B, A) mod 360
 
 Need to prove:
-concurrent(altitude(E, Line(B, C)), Line(A, C), Line(B, D))
+concurrent(altitude(E, B, C), Line(A, C), Line(B, D))
 
 Proof:

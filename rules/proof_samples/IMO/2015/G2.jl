@@ -5,7 +5,7 @@ g, w: Circle
 distinct(A, B, C, D, E, F, G, K, L, O, X)
 
 w == Circle(A, B, C)
-o == center(w)
+O == center(w)
 
 center(g) == A
 D, E in g, Line(B, C)

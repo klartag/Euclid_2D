@@ -22,7 +22,7 @@ Q in Line(S, P)
 distance(P, Q) == r
 between(S, P, Q)
 
-E == line_intersection(altitude(A, Line(C, Q)), altitude(B, Line(D, Q)))
+E == line_intersection(altitude(A, C, Q), altitude(B, D, Q))
 
 Need to prove:
 E in o
