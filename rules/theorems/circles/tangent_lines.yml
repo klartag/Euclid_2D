@@ -13,6 +13,8 @@ tangent_definition_from_perpendicularity:
 tangent_chord_angle:
   inputs:
     - A, B, C, D: Point
+  where:
+    - exists(Circle(A, B, C))
   where_embedding:
     - distinct(A, B, C, D)
     - not_collinear(A, B, C)
