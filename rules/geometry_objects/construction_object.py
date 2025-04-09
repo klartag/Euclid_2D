@@ -54,7 +54,10 @@ class Construction:
         """
         Constructs an object using the given arguments.
         """
-        if len(args) != len(self.signature) or not all(arg.type == sig.type or (arg.type == LITERAL and sig.type in [SCALAR, ANGLE]) for arg, sig in zip(args, self.signature)):
+        if len(args) != len(self.signature) or not all(
+            arg.type == sig.type or (arg.type == LITERAL and sig.type in [SCALAR, ANGLE])
+            for arg, sig in zip(args, self.signature)
+        ):
             raise ProofCheckError(f'Construction {self.name} received illegal arguments: {args}')
 
         args = self.symmetry.canonical_order(args)
@@ -82,6 +85,7 @@ class ConstructionObject(GeoObject):
         self.constructor = constructor
         self.components = components
         self.id = id or hash(self.name)
+        self.depth = max([component.depth for component in components]) + 1
 
     def substitute(self, replacements: Mapping[GeoObject, GeoObject], ignore_self=False) -> GeoObject:
         if self in replacements and not ignore_self:

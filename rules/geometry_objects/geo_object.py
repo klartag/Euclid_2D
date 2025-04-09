@@ -11,15 +11,17 @@ ID = 0
 
 
 class GeoObject:
-    __slots__ = 'name', 'type', 'id'
+    __slots__ = 'name', 'type', 'id', 'depth'
     name: str
     type: str
     id: int
+    depth: int
 
     def __init__(self, name, type, id: int | None = None) -> None:
         self.name = name
         self.type = type
         self.id = id or hash((self.name, self.type))
+        self.depth = 1
 
     def substitute(self, replacements: 'Mapping[GeoObject, GeoObject]', ignore_self=False) -> 'GeoObject':
         """
@@ -44,16 +46,16 @@ class GeoObject:
         return GeoObject(self.name, self.type, self.id)
 
     def __lt__(self, other: 'GeoObject') -> bool:
-        return (len(self.name), self.name) < (len(other.name), other.name)
+        return (self.depth, len(self.name), self.name) < (other.depth, len(other.name), other.name)
 
     def __le__(self, other: 'GeoObject') -> bool:
-        return (len(self.name), self.name) <= (len(other.name), other.name)
+        return (self.depth, len(self.name), self.name) <= (other.depth, len(other.name), other.name)
 
     def __gt__(self, other: 'GeoObject') -> bool:
-        return (len(self.name), self.name) > (len(other.name), other.name)
+        return (self.depth, len(self.name), self.name) > (other.depth, len(other.name), other.name)
 
     def __ge__(self, other: 'GeoObject') -> bool:
-        return (len(self.name), self.name) >= (len(other.name), other.name)
+        return (self.depth, len(self.name), self.name) >= (other.depth, len(other.name), other.name)
 
     def as_literal(self) -> float | None:
         if self.type == LITERAL:
