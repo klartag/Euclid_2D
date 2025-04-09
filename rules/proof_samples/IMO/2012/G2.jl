@@ -22,3 +22,1431 @@ Need to prove:
 concyclic(D, F, G, H)
 
 Proof:
+By line_definition on A, midpoint(E, H), Line(A, D) we get Line(A, D) == Line(A, midpoint(E, H))
+By line_definition on F, midpoint(E, H), Line(A, D) we get Line(A, D) == Line(F, midpoint(E, H))
+By line_definition on E, A, Line(A, C) we get Line(A, C) == Line(A, E)
+By line_definition on D, F, Line(A, D) we get Line(A, D) == Line(D, F)
+By line_definition on D, midpoint(E, H), Line(A, D) we get Line(A, D) == Line(D, midpoint(E, H))
+By line_definition on B, F, Line(B, C) we get Line(B, C) == Line(B, F)
+By line_definition on F, A, Line(A, D) we get Line(A, D) == Line(A, F)
+By line_definition on C, E, Line(A, C) we get Line(A, C) == Line(C, E)
+By line_definition on F, C, Line(B, C) we get Line(B, C) == Line(C, F)
+By line_definition on B, E, Line(B, D) we get Line(B, D) == Line(B, E)
+By line_definition on D, E, Line(B, D) we get Line(B, D) == Line(D, E)
+By median_definition on D, E, H, Line(A, D) we get Line(A, D) == median(D, E, H)
+By median_definition on F, H, E, Line(A, D) we get Line(A, D) == median(F, E, H)
+By line_intersection_definition on E, Line(B, D), Line(C, E) we get E == line_intersection(Line(B, D), Line(C, E))
+By line_intersection_definition on D, Line(A, D), Line(B, D) we get D == line_intersection(Line(A, D), Line(B, D))
+By line_intersection_definition on D, Line(A, D), Line(D, E) we get D == line_intersection(Line(A, D), Line(D, E))
+By line_intersection_definition on C, Line(A, C), Line(B, C) we get C == line_intersection(Line(A, C), Line(B, C))
+By line_intersection_definition on B, Line(B, D), Line(B, C) we get B == line_intersection(Line(B, C), Line(B, D))
+By line_intersection_definition on E, Line(E, H), Line(D, E) we get E == line_intersection(Line(D, E), Line(E, H))
+By perpendicular_line_definition on E, Line(E, H), Line(A, D) we get Line(E, H) == perpendicular_line(E, Line(A, D))
+By median_definition on A, H, E, Line(A, D) we get Line(A, D) == median(A, E, H)
+By line_intersection_definition on C, Line(C, G), Line(B, C) we get C == line_intersection(Line(B, C), Line(C, G))
+By line_intersection_definition on D, Line(D, G), Line(A, D) we get D == line_intersection(Line(A, D), Line(D, G))
+By perpendicular_line_definition on F, Line(A, D), Line(E, H) we get Line(A, D) == perpendicular_line(F, Line(E, H))
+By line_intersection_definition on G, Line(D, G), Line(C, G) we get G == line_intersection(Line(C, G), Line(D, G))
+By line_intersection_definition on C, Line(C, E), Line(B, C) we get C == line_intersection(Line(B, C), Line(C, E))
+By line_intersection_definition on E, Line(D, E), Line(A, C) we get E == line_intersection(Line(A, C), Line(D, E))
+By line_intersection_definition on E, Line(E, H), Line(B, D) we get E == line_intersection(Line(B, D), Line(E, H))
+By line_intersection_definition on D, Line(B, D), Line(D, G) we get D == line_intersection(Line(B, D), Line(D, G))
+By line_intersection_definition on D, Line(D, E), Line(D, G) we get D == line_intersection(Line(D, E), Line(D, G))
+By line_intersection_definition on C, Line(C, E), Line(C, G) we get C == line_intersection(Line(C, E), Line(C, G))
+By perpendicular_line_definition on A, Line(A, D), Line(E, H) we get Line(A, D) == perpendicular_line(A, Line(E, H))
+By line_intersection_definition on E, Line(B, D), Line(A, C) we get E == line_intersection(Line(A, C), Line(B, D))
+By line_intersection_definition on F, Line(A, D), Line(B, C) we get F == line_intersection(Line(A, D), Line(B, C))
+By perpendicular_line_definition on D, Line(A, D), Line(E, H) we get Line(A, D) == perpendicular_line(D, Line(E, H))
+By line_intersection_definition on E, Line(E, H), Line(C, E) we get E == line_intersection(Line(C, E), Line(E, H))
+By line_intersection_definition on E, Line(C, E), Line(D, E) we get E == line_intersection(Line(C, E), Line(D, E))
+By line_intersection_definition on C, Line(C, G), Line(A, C) we get C == line_intersection(Line(A, C), Line(C, G))
+By perpendicular_line_definition on H, Line(E, H), Line(A, D) we get Line(E, H) == perpendicular_line(H, Line(A, D))
+By line_intersection_definition on A, Line(A, D), Line(A, C) we get A == line_intersection(Line(A, C), Line(A, D))
+By line_intersection_definition on E, Line(E, H), Line(A, C) we get E == line_intersection(Line(A, C), Line(E, H))
+By between_imply_not_between on H, midpoint(E, H), E we get collinear_and_not_between(E, H, midpoint(E, H))
+By parallel_line_definition on C, Line(C, G), Line(D, E) we get Line(C, G) == parallel_line(C, Line(D, E))
+By between_imply_not_between on E, midpoint(E, H), H we get collinear_and_not_between(H, E, midpoint(E, H))
+By parallel_line_definition on D, Line(D, G), Line(C, E) we get Line(D, G) == parallel_line(D, Line(C, E))
+By parallel_line_definition on G, Line(D, G), Line(C, E) we get Line(D, G) == parallel_line(G, Line(C, E))
+By parallel_line_definition on E, Line(C, E), Line(D, G) we get Line(C, E) == parallel_line(E, Line(D, G))
+By parallel_line_definition on E, Line(D, E), Line(C, G) we get Line(D, E) == parallel_line(E, Line(C, G))
+By parallel_line_definition on C, Line(C, E), Line(D, G) we get Line(C, E) == parallel_line(C, Line(D, G))
+By parallel_line_definition on G, Line(C, G), Line(D, E) we get Line(C, G) == parallel_line(G, Line(D, E))
+By parallel_line_definition on D, Line(D, E), Line(C, G) we get Line(D, E) == parallel_line(D, Line(C, G))
+By in_imply_collinear on F, B, C we get collinear(B, C, F)
+By parallel_line_angles_reverse_v3 on E, C, G, D we get angle(E, C, G) == angle(D, G, C) + 180 mod 360
+By in_imply_collinear on midpoint(E, H), A, D we get collinear(A, D, midpoint(E, H))
+By in_imply_collinear on E, B, D we get collinear(B, D, E)
+By in_imply_collinear on E, A, C we get collinear(A, C, E)
+By point_on_perpendicular_bisector on E, H, F, Line(A, D) we get distance(E, F) == distance(F, H)
+By in_imply_collinear on F, A, D we get collinear(A, D, F)
+By parallel_line_angles_reverse_v2 on G, C, E, D we get angle(G, C, E) == angle(D, E, C) + 180 mod 360
+By reverse_direction on C, E we get 180 == direction(C, E) - direction(E, C) mod 360
+By parallel_line_angles_reverse_v2 on C, E, D, G we get angle(C, E, D) == angle(G, D, E) + 180 mod 360
+By reverse_direction on C, G we get 180 == direction(C, G) - direction(G, C) mod 360
+By reverse_direction on D, G we get 180 == direction(D, G) - direction(G, D) mod 360
+By parallel_line_angles_reverse_v3 on C, G, D, E we get angle(C, G, D) == angle(E, D, G) + 180 mod 360
+By parallel_line_angles_reverse_v2 on D, G, C, E we get angle(D, G, C) == angle(E, C, G) + 180 mod 360
+By parallel_line_angles_reverse_v3 on D, E, C, G we get angle(D, E, C) == angle(G, C, E) + 180 mod 360
+By reverse_direction on E, D we get 180 == direction(E, D) - direction(D, E) mod 360
+By parallel_line_angles_reverse_v3 on G, D, E, C we get angle(G, D, E) == angle(C, E, D) + 180 mod 360
+By point_on_perpendicular_bisector on E, H, A, Line(A, D) we get distance(A, E) == distance(A, H)
+By parallel_line_angles_reverse_v2 on E, D, G, C we get angle(E, D, G) == angle(C, G, D) + 180 mod 360
+By point_on_perpendicular_bisector on E, H, D, Line(A, D) we get distance(D, E) == distance(D, H)
+By reverse_direction on E, C we get 180 == direction(E, C) - direction(C, E) mod 360
+By reverse_direction on D, E we get 180 == direction(D, E) - direction(E, D) mod 360
+By reverse_direction on G, C we get 180 == direction(G, C) - direction(C, G) mod 360
+By reverse_direction on G, D we get 180 == direction(G, D) - direction(D, G) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, E, H we get 180 == 2 * direction(D, A) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, E, H we get 180 == 2 * direction(A, D) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, H, E we get 180 == 2 * direction(D, A) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, A, D we get 180 == 2 * direction(H, E) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, D, A we get 180 == 2 * direction(E, H) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, H, E we get 180 == 2 * direction(A, D) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, D, A we get 180 == 2 * direction(H, E) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, A, D we get 180 == 2 * direction(E, H) - 2 * direction(A, D) mod 360
+By concyclic_definition_0 on B, C, D, A we get A in Circle(B, C, D)
+By concyclic_definition_0 on C, D, A, B we get B in Circle(A, C, D)
+By concyclic_definition_0 on B, D, A, C we get C in Circle(A, B, D)
+By concyclic_definition_0 on B, A, C, D we get D in Circle(A, B, C)
+By perpendicular_lines_draw_intersection on Line(E, H), Line(A, D) we get exists(line_intersection(Line(A, D), Line(E, H)))
+By perpendicular_bisector_properties on E, H we get perpendicular(Line(E, H), perpendicular_bisector(E, H)), midpoint(E, H) == line_intersection(Line(E, H), perpendicular_bisector(E, H))
+By altitude_definition on F, E, H, Line(A, D) we get Line(A, D) == altitude(F, E, H)
+By collinear_definition on H, midpoint(E, H), E we get midpoint(E, H) in Line(E, H), E in Line(H, midpoint(E, H)), Line(E, H) == Line(H, midpoint(E, H)), 0 == 2 * angle(midpoint(E, H), H, E) mod 360
+By collinear_definition on E, midpoint(E, H), H we get midpoint(E, H) in Line(E, H), H in Line(E, midpoint(E, H)), Line(E, H) == Line(E, midpoint(E, H)), 0 == 2 * angle(midpoint(E, H), E, H) mod 360
+By concyclic_definition_1 on A, C, D, B we get Circle(A, C, D) == Circle(B, C, D)
+By concyclic_definition_1 on C, D, B, A we get Circle(A, B, D) == Circle(B, C, D)
+By sas_congruence on C, E, D, D, G, C we get congruent_triangles(C, D, E, D, C, G)
+By concyclic_definition_1 on B, A, C, D we get Circle(A, B, C) == Circle(A, C, D)
+By altitude_definition on E, A, D, Line(E, H) we get Line(E, H) == altitude(E, A, D)
+By sas_congruence on G, C, E, E, D, G we get congruent_triangles(C, E, G, D, G, E)
+By concyclic_definition_1 on B, D, A, C we get Circle(A, B, D) == Circle(A, C, D)
+By sas_congruence on E, D, G, G, C, E we get congruent_triangles(C, E, G, D, G, E)
+By altitude_definition on H, D, A, Line(E, H) we get Line(E, H) == altitude(H, A, D)
+By sas_congruence on E, C, G, G, D, E we get congruent_triangles(C, E, G, D, G, E)
+By concyclic_definition_1 on D, C, B, A we get Circle(A, B, C) == Circle(B, C, D)
+By log_of_2_times_distance on E, H, midpoint(E, H), H we get log(distance(E, H)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(H, midpoint(E, H)))
+By altitude_definition on A, E, H, Line(A, D) we get Line(A, D) == altitude(A, E, H)
+By sas_congruence on D, E, C, C, G, D we get congruent_triangles(C, D, E, D, C, G)
+By altitude_definition on D, E, H, Line(A, D) we get Line(A, D) == altitude(D, E, H)
+By sas_congruence on C, G, D, D, E, C we get congruent_triangles(C, D, E, D, C, G)
+By sas_congruence on D, G, C, C, E, D we get congruent_triangles(C, D, E, D, C, G)
+By collinear_definition on H, E, midpoint(E, H) we get E in Line(H, midpoint(E, H)), midpoint(E, H) in Line(E, H), Line(E, H) == Line(H, midpoint(E, H)), 0 == 2 * angle(E, H, midpoint(E, H)) mod 360
+By collinear_definition on midpoint(E, H), H, E we get H in Line(E, midpoint(E, H)), E in Line(H, midpoint(E, H)), Line(E, midpoint(E, H)) == Line(H, midpoint(E, H)), 0 == 2 * angle(H, midpoint(E, H), E) mod 360
+By concyclic_definition_1 on D, A, B, C we get Circle(A, B, C) == Circle(A, B, D)
+By log_of_2_times_distance on H, E, E, midpoint(E, H) we get log(distance(E, H)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(E, midpoint(E, H)))
+By collinear_definition on E, H, midpoint(E, H) we get H in Line(E, midpoint(E, H)), midpoint(E, H) in Line(E, H), Line(E, H) == Line(E, midpoint(E, H)), 0 == 2 * angle(H, E, midpoint(E, H)) mod 360
+By sas_congruence on G, D, E, E, C, G we get congruent_triangles(C, E, G, D, G, E)
+By collinear_definition on midpoint(E, H), E, H we get E in Line(H, midpoint(E, H)), H in Line(E, midpoint(E, H)), Line(E, midpoint(E, H)) == Line(H, midpoint(E, H)), 0 == 2 * angle(E, midpoint(E, H), H) mod 360
+By between_implies_angles on E, midpoint(E, H), H we get 180 == angle(E, midpoint(E, H), H) mod 360, 0 == angle(midpoint(E, H), H, E) mod 360, 0 == angle(H, E, midpoint(E, H)) mod 360
+By between_implies_angles on H, midpoint(E, H), E we get 180 == angle(H, midpoint(E, H), E) mod 360, 0 == angle(midpoint(E, H), E, H) mod 360, 0 == angle(E, H, midpoint(E, H)) mod 360
+By concurrent_sufficient_conditions on Line(E, H), Line(A, C), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(E, H))
+By concurrent_sufficient_conditions on Line(C, G), Line(A, C), Line(B, C) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(C, G), Line(A, C) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(C, G), Line(B, C) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, D), Line(E, H) we get concurrent(Line(A, C), Line(B, D), Line(E, H))
+By concurrent_sufficient_conditions on Line(B, C), Line(A, C), Line(C, G) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(E, H), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(D, G), Line(B, D) we get concurrent(Line(A, D), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(B, C), Line(A, C) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(B, D), Line(A, D) we get concurrent(Line(A, D), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(A, D), Line(B, D) we get concurrent(Line(A, D), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, C), Line(E, H) we get concurrent(Line(A, C), Line(B, D), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(B, D), Line(D, G) we get concurrent(Line(A, D), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, D), Line(D, G) we get concurrent(Line(A, D), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, H), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(B, D), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(E, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, G), Line(A, D) we get concurrent(Line(A, D), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, C), Line(C, G) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By line_intersection_definition on G, Line(E, G), Line(C, G) we get G == line_intersection(Line(C, G), Line(E, G))
+By line_intersection_definition on E, Line(E, G), Line(A, C) we get E == line_intersection(Line(A, C), Line(E, G))
+By line_intersection_definition on E, Line(E, H), Line(E, G) we get E == line_intersection(Line(E, G), Line(E, H))
+By line_intersection_definition on E, Line(E, G), Line(B, D) we get E == line_intersection(Line(B, D), Line(E, G))
+By line_intersection_definition on C, Line(C, G), Line(C, D) we get C == line_intersection(Line(C, D), Line(C, G))
+By line_intersection_definition on G, Line(E, G), Line(D, G) we get G == line_intersection(Line(D, G), Line(E, G))
+By line_intersection_definition on D, Line(D, G), Line(C, D) we get D == line_intersection(Line(C, D), Line(D, G))
+By line_intersection_definition on C, Line(C, D), Line(B, C) we get C == line_intersection(Line(B, C), Line(C, D))
+By line_intersection_definition on C, Line(A, C), Line(C, D) we get C == line_intersection(Line(A, C), Line(C, D))
+By line_intersection_definition on D, Line(A, D), Line(C, D) we get D == line_intersection(Line(A, D), Line(C, D))
+By line_intersection_definition on D, Line(B, D), Line(C, D) we get D == line_intersection(Line(B, D), Line(C, D))
+By perpendicular_line_definition on midpoint(E, H), Line(E, H), Line(A, D) we get Line(E, H) == perpendicular_line(midpoint(E, H), Line(A, D))
+By projection_definition on H, midpoint(E, H), Line(A, D) we get midpoint(E, H) == projection(H, Line(A, D))
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, D, A we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, midpoint(E, H), E we get 180 == 2 * direction(A, D) - 2 * direction(midpoint(E, H), E) mod 360
+By projection_definition on A, midpoint(E, H), Line(E, H) we get midpoint(E, H) == projection(A, Line(E, H))
+By projection_definition on E, midpoint(E, H), Line(A, D) we get midpoint(E, H) == projection(E, Line(A, D))
+By projection_definition on F, midpoint(E, H), Line(E, H) we get midpoint(E, H) == projection(F, Line(E, H))
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, A, D we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, A, D we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, midpoint(E, H), H we get 180 == 2 * direction(D, A) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, midpoint(E, H), H we get 180 == 2 * direction(A, D) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, D, A we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, midpoint(E, H), E we get 180 == 2 * direction(D, A) - 2 * direction(midpoint(E, H), E) mod 360
+By projection_definition on D, midpoint(E, H), Line(E, H) we get midpoint(E, H) == projection(D, Line(E, H))
+By parallel_line_definition on B, Line(B, D), Line(C, G) we get Line(B, D) == parallel_line(B, Line(C, G))
+By parallel_line_definition on A, Line(A, C), Line(D, G) we get Line(A, C) == parallel_line(A, Line(D, G))
+By angles_on_chord_v3 on D, B, A, C, Circle(A, B, C) we get angle(D, A, B) == angle(D, C, B) + 180 mod 360
+By angles_on_chord_v2 on B, D, A, C, Circle(A, B, C) we get angle(B, A, D) == angle(B, C, D) + 180 mod 360
+By same_angle_v3 on E, B, D, C we get angle(B, E, C) == angle(D, E, C) + 180 mod 360
+By angles_on_chord_v2 on D, B, C, A, Circle(A, B, C) we get angle(D, C, B) == angle(D, A, B) + 180 mod 360
+By angles_on_chord_v3 on C, A, D, B, Circle(A, B, C) we get angle(C, D, A) == angle(C, B, A) + 180 mod 360
+By angles_on_chord_v2 on A, C, D, B, Circle(A, B, C) we get angle(A, D, C) == angle(A, B, C) + 180 mod 360
+By angles_on_chord_v2 on C, A, B, D, Circle(A, B, C) we get angle(C, B, A) == angle(C, D, A) + 180 mod 360
+By angles_on_chord_v3 on A, C, B, D, Circle(A, B, C) we get angle(A, B, C) == angle(A, D, C) + 180 mod 360
+By angles_on_chord_v3 on B, D, C, A, Circle(A, B, C) we get angle(B, C, D) == angle(B, A, D) + 180 mod 360
+By same_angle_v1 on D, E, B, A we get angle(B, D, A) == angle(E, D, A) mod 360
+By same_angle_v1 on C, A, E, D we get angle(A, C, D) == angle(E, C, D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, D, F we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(D, F) mod 360
+By same_angle_v0 on D, A, F, G we get angle(A, D, G) == angle(F, D, G) mod 360
+By same_angle_v3 on E, C, A, D we get angle(C, E, D) == angle(A, E, D) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), F, A we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(F, A) mod 360
+By same_angle_v1 on C, E, A, G we get angle(A, C, G) == angle(E, C, G) mod 360
+By same_angle_v0 on D, B, E, G we get angle(B, D, G) == angle(E, D, G) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), midpoint(E, H), D we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(midpoint(E, H), D) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, A, midpoint(E, H) we get 180 == 2 * direction(E, H) - 2 * direction(A, midpoint(E, H)) mod 360
+By same_angle_v2 on E, D, B, H we get angle(D, E, H) == angle(B, E, H) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), F, midpoint(E, H) we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(F, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(E, H), midpoint(E, H), E we get 180 == 2 * direction(D, midpoint(E, H)) - 2 * direction(midpoint(E, H), E) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, E, midpoint(E, H) we get 180 == 2 * direction(F, D) - 2 * direction(E, midpoint(E, H)) mod 360
+By same_angle_v2 on E, B, D, G we get angle(B, E, G) == angle(D, E, G) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), A, midpoint(E, H) we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(A, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), F, midpoint(E, H), H we get 180 == 2 * direction(midpoint(E, H), F) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, H, E we get 180 == 2 * direction(F, D) - 2 * direction(H, E) mod 360
+By same_angle_v0 on D, A, F, C we get angle(A, D, C) == angle(F, D, C) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), F, H, E we get 180 == 2 * direction(midpoint(E, H), F) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, D, midpoint(E, H) we get 180 == 2 * direction(H, E) - 2 * direction(D, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, E, midpoint(E, H) we get 180 == 2 * direction(F, A) - 2 * direction(E, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, midpoint(E, H), E we get 180 == 2 * direction(F, D) - 2 * direction(midpoint(E, H), E) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), D, H, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), D) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), D, F we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(D, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, midpoint(E, H), H, E we get 180 == 2 * direction(F, midpoint(E, H)) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, H, E we get 180 == 2 * direction(A, F) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, A, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(A, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, D, F we get 180 == 2 * direction(H, E) - 2 * direction(D, F) mod 360
+By same_angle_v0 on D, F, A, E we get angle(A, D, E) == angle(F, D, E) mod 360
+By in_imply_collinear on D, F, midpoint(E, H) we get collinear(D, F, midpoint(E, H))
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, D, F we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(D, F) mod 360
+By perpendicular_direction_conditions_v0_r on A, midpoint(E, H), H, E we get 180 == 2 * direction(A, midpoint(E, H)) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, midpoint(E, H), D we get 180 == 2 * direction(E, H) - 2 * direction(midpoint(E, H), D) mod 360
+By same_angle_v2 on E, C, A, G we get angle(C, E, G) == angle(A, E, G) + 180 mod 360
+By same_angle_v0 on D, B, E, C we get angle(B, D, C) == angle(E, D, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, F, A we get 180 == 2 * direction(E, H) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, F, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(F, midpoint(E, H)) mod 360
+By same_angle_v3 on E, A, C, H we get angle(A, E, H) == angle(C, E, H) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on F, midpoint(E, H), H, midpoint(E, H) we get 180 == 2 * direction(F, midpoint(E, H)) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, H, midpoint(E, H) we get 180 == 2 * direction(A, F) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, F, A we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), A, H, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), A) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(E, H), E, midpoint(E, H) we get 180 == 2 * direction(D, midpoint(E, H)) - 2 * direction(E, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, midpoint(E, H), F we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(midpoint(E, H), F) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, E, midpoint(E, H) we get 180 == 2 * direction(A, F) - 2 * direction(E, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on A, midpoint(E, H), midpoint(E, H), H we get 180 == 2 * direction(A, midpoint(E, H)) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, F, A we get 180 == 2 * direction(H, E) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), D, midpoint(E, H), H we get 180 == 2 * direction(midpoint(E, H), D) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on A, midpoint(E, H), E, H we get 180 == 2 * direction(A, midpoint(E, H)) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, midpoint(E, H), A we get 180 == 2 * direction(H, E) - 2 * direction(midpoint(E, H), A) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, F, D we get 180 == 2 * direction(E, H) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, A, F we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), D, F we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(D, F) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), F, D we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), F, A we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, F, D we get 180 == 2 * direction(H, E) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, E, H we get 180 == 2 * direction(F, A) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, F, A we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, F, midpoint(E, H) we get 180 == 2 * direction(E, H) - 2 * direction(F, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, H, E we get 180 == 2 * direction(D, F) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), D, E, H we get 180 == 2 * direction(midpoint(E, H), D) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(E, H), H, E we get 180 == 2 * direction(D, midpoint(E, H)) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), midpoint(E, H), F we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(midpoint(E, H), F) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, H, midpoint(E, H) we get 180 == 2 * direction(F, D) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on F, midpoint(E, H), midpoint(E, H), H we get 180 == 2 * direction(F, midpoint(E, H)) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on F, midpoint(E, H), E, H we get 180 == 2 * direction(F, midpoint(E, H)) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, midpoint(E, H), F we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(midpoint(E, H), F) mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), midpoint(E, H), F we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(midpoint(E, H), F) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), A, midpoint(E, H), E we get 180 == 2 * direction(midpoint(E, H), A) - 2 * direction(midpoint(E, H), E) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, midpoint(E, H), H we get 180 == 2 * direction(F, A) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, midpoint(E, H), F we get 180 == 2 * direction(H, E) - 2 * direction(midpoint(E, H), F) mod 360
+By perpendicular_direction_conditions_v0_r on A, midpoint(E, H), midpoint(E, H), E we get 180 == 2 * direction(A, midpoint(E, H)) - 2 * direction(midpoint(E, H), E) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, A, F we get 180 == 2 * direction(E, H) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), D, E, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), D) - 2 * direction(E, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, D, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(D, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, midpoint(E, H), E we get 180 == 2 * direction(A, F) - 2 * direction(midpoint(E, H), E) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, midpoint(E, H), F we get 180 == 2 * direction(E, H) - 2 * direction(midpoint(E, H), F) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), A, F we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, E, midpoint(E, H) we get 180 == 2 * direction(D, F) - 2 * direction(E, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, E, H we get 180 == 2 * direction(D, F) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, midpoint(E, H), D we get 180 == 2 * direction(H, E) - 2 * direction(midpoint(E, H), D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, A, F we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, F, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(F, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), F, H, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), F) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, D, F we get 180 == 2 * direction(E, H) - 2 * direction(D, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), D, midpoint(E, H) we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(D, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, midpoint(E, H), E we get 180 == 2 * direction(D, F) - 2 * direction(midpoint(E, H), E) mod 360
+By perpendicular_direction_conditions_v0_r on A, midpoint(E, H), H, midpoint(E, H) we get 180 == 2 * direction(A, midpoint(E, H)) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(E, H), E, H we get 180 == 2 * direction(D, midpoint(E, H)) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, D, midpoint(E, H) we get 180 == 2 * direction(E, H) - 2 * direction(D, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on F, midpoint(E, H), midpoint(E, H), E we get 180 == 2 * direction(F, midpoint(E, H)) - 2 * direction(midpoint(E, H), E) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, A, midpoint(E, H) we get 180 == 2 * direction(H, E) - 2 * direction(A, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on E, H, midpoint(E, H), A we get 180 == 2 * direction(E, H) - 2 * direction(midpoint(E, H), A) mod 360
+By perpendicular_direction_conditions_v0_r on F, midpoint(E, H), E, midpoint(E, H) we get 180 == 2 * direction(F, midpoint(E, H)) - 2 * direction(E, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), midpoint(E, H), D we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(midpoint(E, H), D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), F, E, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), F) - 2 * direction(E, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, midpoint(E, H), A we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(midpoint(E, H), A) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, H, midpoint(E, H) we get 180 == 2 * direction(D, F) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, midpoint(E, H), D we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(midpoint(E, H), D) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, E, H we get 180 == 2 * direction(A, F) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(E, H), midpoint(E, H), H we get 180 == 2 * direction(D, midpoint(E, H)) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, F, D we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(E, H), H, midpoint(E, H) we get 180 == 2 * direction(D, midpoint(E, H)) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, midpoint(E, H), H we get 180 == 2 * direction(D, F) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, F, midpoint(E, H) we get 180 == 2 * direction(H, E) - 2 * direction(F, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, F, D we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), F, midpoint(E, H) we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(F, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, midpoint(E, H), A we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(midpoint(E, H), A) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), A, E, H we get 180 == 2 * direction(midpoint(E, H), A) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), D, midpoint(E, H), E we get 180 == 2 * direction(midpoint(E, H), D) - 2 * direction(midpoint(E, H), E) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, midpoint(E, H), E we get 180 == 2 * direction(F, A) - 2 * direction(midpoint(E, H), E) mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), A, F we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, E, H we get 180 == 2 * direction(F, D) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, D, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(D, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), D, H, E we get 180 == 2 * direction(midpoint(E, H), D) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), F, D we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on H, E, A, F we get 180 == 2 * direction(H, E) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, midpoint(E, H), H we get 180 == 2 * direction(F, D) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), A, E, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), A) - 2 * direction(E, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on A, midpoint(E, H), E, midpoint(E, H) we get 180 == 2 * direction(A, midpoint(E, H)) - 2 * direction(E, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), A, midpoint(E, H), H we get 180 == 2 * direction(midpoint(E, H), A) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), H, midpoint(E, H), D we get 180 == 2 * direction(midpoint(E, H), H) - 2 * direction(midpoint(E, H), D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), A, H, E we get 180 == 2 * direction(midpoint(E, H), A) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), D, midpoint(E, H) we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(D, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, midpoint(E, H), H we get 180 == 2 * direction(A, F) - 2 * direction(midpoint(E, H), H) mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), midpoint(E, H), A we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(midpoint(E, H), A) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, H, midpoint(E, H) we get 180 == 2 * direction(F, A) - 2 * direction(H, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, H, E we get 180 == 2 * direction(F, A) - 2 * direction(H, E) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(E, H), midpoint(E, H), A we get 180 == 2 * direction(H, midpoint(E, H)) - 2 * direction(midpoint(E, H), A) mod 360
+By perpendicular_direction_conditions_v0_r on E, midpoint(E, H), A, midpoint(E, H) we get 180 == 2 * direction(E, midpoint(E, H)) - 2 * direction(A, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), F, E, H we get 180 == 2 * direction(midpoint(E, H), F) - 2 * direction(E, H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), E, A, midpoint(E, H) we get 180 == 2 * direction(midpoint(E, H), E) - 2 * direction(A, midpoint(E, H)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(E, H), F, midpoint(E, H), E we get 180 == 2 * direction(midpoint(E, H), F) - 2 * direction(midpoint(E, H), E) mod 360
+By probably_between_and_collinear_implies_between on D, E, B we get between(B, E, D)
+By probably_between_and_collinear_implies_between on C, E, A we get between(A, E, C)
+By probably_between_and_collinear_implies_between on F, B, C we get between(C, B, F)
+By probably_between_and_collinear_implies_between on D, A, F we get between(D, A, F)
+By in_imply_collinear on A, midpoint(E, H), F we get collinear(A, F, midpoint(E, H))
+By reverse_direction on H, midpoint(E, H) we get 180 == direction(H, midpoint(E, H)) - direction(midpoint(E, H), H) mod 360
+By reverse_direction on H, E we get 180 == direction(H, E) - direction(E, H) mod 360
+By reverse_direction on A, D we get 180 == direction(A, D) - direction(D, A) mod 360
+By reverse_direction on D, A we get 180 == direction(D, A) - direction(A, D) mod 360
+By reverse_direction on E, H we get 180 == direction(E, H) - direction(H, E) mod 360
+By reverse_direction on midpoint(E, H), E we get 180 == direction(midpoint(E, H), E) - direction(E, midpoint(E, H)) mod 360
+By reverse_direction on midpoint(E, H), H we get 180 == direction(midpoint(E, H), H) - direction(H, midpoint(E, H)) mod 360
+By reverse_direction on E, midpoint(E, H) we get 180 == direction(E, midpoint(E, H)) - direction(midpoint(E, H), E) mod 360
+By angles_on_chord_v0 on B, C, A, D, Circle(A, B, C) we get angle(B, A, C) == angle(B, D, C) mod 360
+By angles_on_chord_v1 on C, B, D, A, Circle(A, B, C) we get angle(C, A, B) == angle(C, D, B) mod 360
+By angles_on_chord_v0 on D, A, C, B, Circle(A, B, C) we get angle(D, B, A) == angle(D, C, A) mod 360
+By angles_on_chord_v0 on C, D, B, A, Circle(A, B, C) we get angle(C, A, D) == angle(C, B, D) mod 360
+By angles_on_chord_v0 on A, B, C, D, Circle(A, B, C) we get angle(A, C, B) == angle(A, D, B) mod 360
+By angles_on_chord_v1 on D, C, B, A, Circle(A, B, C) we get angle(D, A, C) == angle(D, B, C) mod 360
+By angles_on_chord_v1 on A, D, C, B, Circle(A, B, C) we get angle(A, B, D) == angle(A, C, D) mod 360
+By angles_on_chord_v1 on B, A, D, C, Circle(A, B, C) we get angle(B, C, A) == angle(B, D, A) mod 360
+By same_angle_v3 on A, F, D, E we get angle(F, A, E) == angle(D, A, E) + 180 mod 360
+By same_angle_v0 on C, E, A, F we get angle(A, C, F) == angle(E, C, F) mod 360
+By same_angle_v3 on A, F, D, C we get angle(F, A, C) == angle(D, A, C) + 180 mod 360
+By same_angle_v1 on D, E, B, F we get angle(B, D, F) == angle(E, D, F) mod 360
+By same_angle_v1 on C, B, F, E we get angle(B, C, E) == angle(F, C, E) mod 360
+By same_angle_v0 on C, E, A, B we get angle(A, C, B) == angle(E, C, B) mod 360
+By same_angle_v3 on E, D, B, A we get angle(D, E, A) == angle(B, E, A) + 180 mod 360
+By same_angle_v1 on C, F, B, D we get angle(B, C, D) == angle(F, C, D) mod 360
+By same_angle_v0 on A, E, C, D we get angle(C, A, D) == angle(E, A, D) mod 360
+By same_angle_v3 on E, A, C, B we get angle(A, E, B) == angle(C, E, B) + 180 mod 360
+By same_angle_v1 on C, F, B, G we get angle(B, C, G) == angle(F, C, G) mod 360
+By power_of_a_point_on_circle on C, Circle(A, B, C) we get 0 == power_of_a_point(C, Circle(A, B, C))
+By same_angle_v0 on D, A, F, B we get angle(A, D, B) == angle(F, D, B) mod 360
+By parallel_line_angles_reverse_v3 on A, E, G, D we get angle(A, E, G) == angle(D, G, E) + 180 mod 360
+By parallel_line_angles_reverse_v3 on G, D, A, C we get angle(G, D, A) == angle(C, A, D) + 180 mod 360
+By parallel_line_angles_reverse_v1 on G, D, E, A we get angle(A, E, D) == angle(G, D, E) mod 360
+By collinear_definition on E, B, D we get B in Line(D, E), D in Line(B, E), Line(B, E) == Line(D, E), 0 == 2 * angle(B, E, D) mod 360
+By parallel_line_angles_reverse_v2 on B, E, G, C we get angle(B, E, G) == angle(C, G, E) + 180 mod 360
+By parallel_line_angles_reverse_v2 on D, G, C, A we get angle(D, G, C) == angle(A, C, G) + 180 mod 360
+By parallel_line_angles_reverse_v2 on B, D, G, C we get angle(B, D, G) == angle(C, G, D) + 180 mod 360
+By power_of_a_point_in_circle on A, Circle(A, B, C) we get 0 == power_of_a_point(A, Circle(A, B, C))
+By collinear_definition on E, C, A we get C in Line(A, E), A in Line(C, E), Line(A, E) == Line(C, E), 0 == 2 * angle(C, E, A) mod 360
+By parallel_line_angles_reverse_v0 on B, E, C, G we get angle(B, E, C) == angle(G, C, E) mod 360
+By parallel_line_angles_reverse_v0 on B, D, C, G we get angle(B, D, C) == angle(G, C, D) mod 360
+By parallel_line_angles_reverse_v1 on A, C, D, G we get angle(A, C, D) == angle(G, D, C) mod 360
+By internal_angle_bisector_definition_v0_r on E, midpoint(E, H), E, H we get internal_angle_bisector(E, H, E) == Line(H, midpoint(E, H))
+By parallel_line_angles_reverse_v2 on C, A, D, G we get angle(C, A, D) == angle(G, D, A) + 180 mod 360
+By parallel_line_angles_reverse_v3 on C, G, D, B we get angle(C, G, D) == angle(B, D, G) + 180 mod 360
+By collinear_definition on A, midpoint(E, H), D we get midpoint(E, H) in Line(A, D), D in Line(A, midpoint(E, H)), Line(A, D) == Line(A, midpoint(E, H)), 0 == 2 * angle(midpoint(E, H), A, D) mod 360
+By parallel_line_angles_reverse_v2 on D, G, E, A we get angle(D, G, E) == angle(A, E, G) + 180 mod 360
+By isosceles_triangle_properties on D, E, H we get distance(D, E) == distance(D, H), angle(D, E, H) == angle(E, H, D) mod 360
+By parallel_line_angles_reverse_v3 on G, D, A, E we get angle(G, D, A) == angle(E, A, D) + 180 mod 360
+By collinear_definition on C, E, A we get E in Line(A, C), A in Line(C, E), Line(A, C) == Line(C, E), 0 == 2 * angle(E, C, A) mod 360
+By parallel_line_angles_reverse_v3 on C, G, E, B we get angle(C, G, E) == angle(B, E, G) + 180 mod 360
+By parallel_line_angles_reverse_v2 on E, A, D, G we get angle(E, A, D) == angle(G, D, A) + 180 mod 360
+By collinear_definition on D, midpoint(E, H), A we get midpoint(E, H) in Line(A, D), A in Line(D, midpoint(E, H)), Line(A, D) == Line(D, midpoint(E, H)), 0 == 2 * angle(midpoint(E, H), D, A) mod 360
+By collinear_definition on C, A, E we get A in Line(C, E), E in Line(A, C), Line(A, C) == Line(C, E), 0 == 2 * angle(A, C, E) mod 360
+By perpendicular_angle_conditions_v0 on A, midpoint(E, H), H we get angle(A, midpoint(E, H), H) == orientation(A, midpoint(E, H), H) mod 360
+By perpendicular_angle_conditions_v0 on D, midpoint(E, H), E we get angle(D, midpoint(E, H), E) == orientation(D, midpoint(E, H), E) mod 360
+By power_of_a_point_in_circle on B, Circle(A, B, C) we get 0 == power_of_a_point(B, Circle(A, B, C))
+By internal_angle_bisector_definition_v0_r on midpoint(E, H), E, midpoint(E, H), H we get Line(E, H) == internal_angle_bisector(midpoint(E, H), H, midpoint(E, H))
+By collinear_definition on A, D, midpoint(E, H) we get D in Line(A, midpoint(E, H)), midpoint(E, H) in Line(A, D), Line(A, D) == Line(A, midpoint(E, H)), 0 == 2 * angle(D, A, midpoint(E, H)) mod 360
+By collinear_definition on A, D, F we get D in Line(A, F), F in Line(A, D), Line(A, D) == Line(A, F), 0 == 2 * angle(D, A, F) mod 360
+By power_of_a_point_in_circle on D, Circle(A, B, C) we get 0 == power_of_a_point(D, Circle(A, B, C))
+By perpendicular_angle_conditions_v0 on F, midpoint(E, H), E we get angle(F, midpoint(E, H), E) == orientation(E, F, midpoint(E, H)) mod 360
+By parallel_line_angles_reverse_v3 on A, C, G, D we get angle(A, C, G) == angle(D, G, C) + 180 mod 360
+By isosceles_triangle_altitude_v1 on F, H, E we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, F, H), perpendicular_line(F, Line(E, H)))
+By perpendicular_angle_conditions_v0 on A, midpoint(E, H), E we get angle(A, midpoint(E, H), E) == orientation(A, midpoint(E, H), E) mod 360
+By perpendicular_angle_conditions_v0 on H, midpoint(E, H), A we get angle(H, midpoint(E, H), A) == orientation(A, H, midpoint(E, H)) mod 360
+By perpendicular_angle_conditions_v0 on D, midpoint(E, H), H we get angle(D, midpoint(E, H), H) == orientation(D, midpoint(E, H), H) mod 360
+By collinear_definition on D, F, A we get F in Line(A, D), A in Line(D, F), Line(A, D) == Line(D, F), 0 == 2 * angle(F, D, A) mod 360
+By isosceles_triangle_altitude_v3 on D, E, H we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, D, H), perpendicular_line(D, Line(E, H)))
+By perpendicular_angle_conditions_v0 on F, midpoint(E, H), H we get angle(F, midpoint(E, H), H) == orientation(F, midpoint(E, H), H) mod 360
+By isosceles_triangle_altitude_v1 on A, E, H we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, A, H), perpendicular_line(A, Line(E, H)))
+By isosceles_triangle_properties on D, H, E we get distance(D, E) == distance(D, H), angle(D, H, E) == angle(H, E, D) mod 360
+By collinear_definition on E, D, B we get D in Line(B, E), B in Line(D, E), Line(B, E) == Line(D, E), 0 == 2 * angle(D, E, B) mod 360
+By collinear_definition on D, E, B we get E in Line(B, D), B in Line(D, E), Line(B, D) == Line(D, E), 0 == 2 * angle(E, D, B) mod 360
+By collinear_definition on D, A, midpoint(E, H) we get A in Line(D, midpoint(E, H)), midpoint(E, H) in Line(A, D), Line(A, D) == Line(D, midpoint(E, H)), 0 == 2 * angle(A, D, midpoint(E, H)) mod 360
+By perpendicular_angle_conditions_v0 on E, midpoint(E, H), F we get angle(E, midpoint(E, H), F) == orientation(E, midpoint(E, H), F) mod 360
+By collinear_definition on A, F, D we get F in Line(A, D), D in Line(A, F), Line(A, D) == Line(A, F), 0 == 2 * angle(F, A, D) mod 360
+By isosceles_triangle_altitude_v0 on D, E, H we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, D, H), perpendicular_line(D, Line(E, H)))
+By perpendicular_angle_conditions_v0 on E, midpoint(E, H), D we get angle(E, midpoint(E, H), D) == orientation(D, E, midpoint(E, H)) mod 360
+By internal_angle_bisector_definition_v0_r on midpoint(E, H), H, midpoint(E, H), E we get Line(E, H) == internal_angle_bisector(midpoint(E, H), E, midpoint(E, H))
+By perpendicular_angle_conditions_v0 on H, midpoint(E, H), F we get angle(H, midpoint(E, H), F) == orientation(F, H, midpoint(E, H)) mod 360
+By collinear_definition on E, A, C we get A in Line(C, E), C in Line(A, E), Line(A, E) == Line(C, E), 0 == 2 * angle(A, E, C) mod 360
+By internal_angle_bisector_definition_v0_r on E, H, E, midpoint(E, H) we get Line(H, midpoint(E, H)) == internal_angle_bisector(E, midpoint(E, H), E)
+By collinear_definition on D, B, E we get B in Line(D, E), E in Line(B, D), Line(B, D) == Line(D, E), 0 == 2 * angle(B, D, E) mod 360
+By internal_angle_bisector_definition_v0_r on H, E, H, midpoint(E, H) we get Line(E, midpoint(E, H)) == internal_angle_bisector(H, midpoint(E, H), H)
+By perpendicular_angle_conditions_v0 on E, midpoint(E, H), A we get angle(E, midpoint(E, H), A) == orientation(A, E, midpoint(E, H)) mod 360
+By collinear_definition on D, A, F we get A in Line(D, F), F in Line(A, D), Line(A, D) == Line(D, F), 0 == 2 * angle(A, D, F) mod 360
+By internal_angle_bisector_definition_v0_r on H, midpoint(E, H), H, E we get internal_angle_bisector(H, E, H) == Line(E, midpoint(E, H))
+By perpendicular_angle_conditions_v0 on H, midpoint(E, H), D we get angle(H, midpoint(E, H), D) == orientation(D, H, midpoint(E, H)) mod 360
+By isosceles_triangle_altitude_v3 on F, H, E we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, F, H), perpendicular_line(F, Line(E, H)))
+By isosceles_triangle_altitude_v3 on A, E, H we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, A, H), perpendicular_line(A, Line(E, H)))
+By isosceles_triangle_altitude_v1 on D, E, H we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, D, H), perpendicular_line(D, Line(E, H)))
+By isosceles_triangle_altitude_v3 on F, E, H we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, F, H), perpendicular_line(F, Line(E, H)))
+By isosceles_triangle_altitude_v3 on A, H, E we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, A, H), perpendicular_line(A, Line(E, H)))
+By isosceles_triangle_altitude_v1 on D, H, E we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, D, H), perpendicular_line(D, Line(E, H)))
+By isosceles_triangle_altitude_v0 on A, E, H we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, A, H), perpendicular_line(A, Line(E, H)))
+By isosceles_triangle_altitude_v0 on D, H, E we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, D, H), perpendicular_line(D, Line(E, H)))
+By isosceles_triangle_altitude_v0 on F, E, H we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, F, H), perpendicular_line(F, Line(E, H)))
+By isosceles_triangle_altitude_v3 on D, H, E we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, D, H), perpendicular_line(D, Line(E, H)))
+By isosceles_triangle_altitude_v1 on A, H, E we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, A, H), perpendicular_line(A, Line(E, H)))
+By isosceles_triangle_altitude_v0 on F, H, E we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, F, H), perpendicular_line(F, Line(E, H)))
+By isosceles_triangle_altitude_v0 on A, H, E we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, A, H), perpendicular_line(A, Line(E, H)))
+By isosceles_triangle_altitude_v1 on F, E, H we get identical(perpendicular_bisector(E, H), internal_angle_bisector(E, F, H), perpendicular_line(F, Line(E, H)))
+By same_angle_v1 on F, A, D, C we get angle(A, F, C) == angle(D, F, C) mod 360
+By same_angle_v3 on B, C, F, E we get angle(C, B, E) == angle(F, B, E) + 180 mod 360
+By same_angle_v1 on C, F, B, A we get angle(B, C, A) == angle(F, C, A) mod 360
+By same_angle_v1 on B, E, D, C we get angle(D, B, C) == angle(E, B, C) mod 360
+By same_angle_v1 on F, D, A, B we get angle(A, F, B) == angle(D, F, B) mod 360
+By same_angle_v3 on B, C, F, D we get angle(C, B, D) == angle(F, B, D) + 180 mod 360
+By same_angle_v0 on B, D, E, F we get angle(D, B, F) == angle(E, B, F) mod 360
+By same_angle_v0 on F, C, B, D we get angle(B, F, D) == angle(C, F, D) mod 360
+By same_angle_v1 on A, C, E, F we get angle(C, A, F) == angle(E, A, F) mod 360
+By same_angle_v0 on F, B, C, A we get angle(B, F, A) == angle(C, F, A) mod 360
+By altitude_definition on E, F, D, Line(E, H) we get Line(E, H) == altitude(E, D, F)
+By altitude_definition on D, midpoint(E, H), E, Line(A, D) we get Line(A, D) == altitude(D, E, midpoint(E, H))
+By sss_anti_congruence_v1 on E, D, H, H, D, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v0 on E, H, D, H, E, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v1 on E, D, H, H, D, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v1 on D, H, E, D, E, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By altitude_definition on H, midpoint(E, H), A, Line(E, H) we get Line(E, H) == altitude(H, A, midpoint(E, H))
+By sss_anti_congruence_v0 on E, H, D, H, E, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By collinear_definition on F, B, C we get B in Line(C, F), C in Line(B, F), Line(B, F) == Line(C, F), 0 == 2 * angle(B, F, C) mod 360
+By altitude_definition on A, E, midpoint(E, H), Line(A, D) we get Line(A, D) == altitude(A, E, midpoint(E, H))
+By collinear_definition on F, A, D we get A in Line(D, F), D in Line(A, F), Line(A, F) == Line(D, F), 0 == 2 * angle(A, F, D) mod 360
+By sss_anti_congruence_v1 on E, D, H, H, D, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By altitude_definition on E, midpoint(E, H), A, Line(E, H) we get Line(E, H) == altitude(E, A, midpoint(E, H))
+By sss_anti_congruence_v1 on D, H, E, D, E, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v0 on D, E, H, D, H, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v1 on D, H, E, D, E, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v0 on D, E, H, D, H, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By altitude_definition on F, midpoint(E, H), E, Line(A, D) we get Line(A, D) == altitude(F, E, midpoint(E, H))
+By sss_anti_congruence_v0 on D, E, H, D, H, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By altitude_definition on A, midpoint(E, H), H, Line(A, D) we get Line(A, D) == altitude(A, H, midpoint(E, H))
+By collinear_definition on B, E, D we get E in Line(B, D), D in Line(B, E), Line(B, D) == Line(B, E), 0 == 2 * angle(E, B, D) mod 360
+By altitude_definition on E, A, F, Line(E, H) we get Line(E, H) == altitude(E, A, F)
+By sss_anti_congruence_v0 on D, E, H, D, H, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By altitude_definition on H, F, midpoint(E, H), Line(E, H) we get Line(E, H) == altitude(H, F, midpoint(E, H))
+By sss_anti_congruence_v0 on H, D, E, E, D, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v1 on H, E, D, E, H, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By altitude_definition on H, A, F, Line(E, H) we get Line(E, H) == altitude(H, A, F)
+By altitude_definition on E, midpoint(E, H), F, Line(E, H) we get Line(E, H) == altitude(E, F, midpoint(E, H))
+By sss_anti_congruence_v0 on E, H, D, H, E, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v1 on H, E, D, E, H, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By collinear_definition on C, B, F we get B in Line(C, F), F in Line(B, C), Line(B, C) == Line(C, F), 0 == 2 * angle(B, C, F) mod 360
+By collinear_definition on B, F, C we get F in Line(B, C), C in Line(B, F), Line(B, C) == Line(B, F), 0 == 2 * angle(F, B, C) mod 360
+By sss_anti_congruence_v1 on H, E, D, E, H, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By collinear_definition on C, F, B we get F in Line(B, C), B in Line(C, F), Line(B, C) == Line(C, F), 0 == 2 * angle(F, C, B) mod 360
+By collinear_definition on F, D, A we get D in Line(A, F), A in Line(D, F), Line(A, F) == Line(D, F), 0 == 2 * angle(D, F, A) mod 360
+By isosceles_triangle_properties on F, E, H we get distance(E, F) == distance(F, H), angle(E, H, F) == angle(F, E, H) mod 360
+By sss_anti_congruence_v0 on H, D, E, E, D, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By altitude_definition on H, F, D, Line(E, H) we get Line(E, H) == altitude(H, D, F)
+By sss_anti_congruence_v1 on E, D, H, H, D, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By isosceles_triangle_properties on F, H, E we get distance(E, F) == distance(F, H), angle(F, H, E) == angle(H, E, F) mod 360
+By altitude_definition on D, H, midpoint(E, H), Line(A, D) we get Line(A, D) == altitude(D, H, midpoint(E, H))
+By sss_anti_congruence_v1 on D, H, E, D, E, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By collinear_definition on A, E, C we get E in Line(A, C), C in Line(A, E), Line(A, C) == Line(A, E), 0 == 2 * angle(E, A, C) mod 360
+By collinear_definition on A, C, E we get C in Line(A, E), E in Line(A, C), Line(A, C) == Line(A, E), 0 == 2 * angle(C, A, E) mod 360
+By sss_anti_congruence_v0 on E, H, D, H, E, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v0 on H, D, E, E, D, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v1 on D, H, E, D, E, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By collinear_definition on midpoint(E, H), A, D we get A in Line(D, midpoint(E, H)), D in Line(A, midpoint(E, H)), Line(A, midpoint(E, H)) == Line(D, midpoint(E, H)), 0 == 2 * angle(A, midpoint(E, H), D) mod 360
+By collinear_definition on B, C, F we get C in Line(B, F), F in Line(B, C), Line(B, C) == Line(B, F), 0 == 2 * angle(C, B, F) mod 360
+By sss_anti_congruence_v0 on D, E, H, D, H, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v1 on H, E, D, E, H, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v0 on H, D, E, E, D, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v1 on E, D, H, H, D, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v0 on E, H, D, H, E, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By altitude_definition on H, D, midpoint(E, H), Line(E, H) we get Line(E, H) == altitude(H, D, midpoint(E, H))
+By sss_anti_congruence_v1 on E, D, H, H, D, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By isosceles_triangle_properties on A, H, E we get distance(A, E) == distance(A, H), angle(A, H, E) == angle(H, E, A) mod 360
+By collinear_definition on midpoint(E, H), D, A we get D in Line(A, midpoint(E, H)), A in Line(D, midpoint(E, H)), Line(A, midpoint(E, H)) == Line(D, midpoint(E, H)), 0 == 2 * angle(D, midpoint(E, H), A) mod 360
+By sss_anti_congruence_v1 on D, H, E, D, E, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By isosceles_triangle_properties on A, E, H we get distance(A, E) == distance(A, H), angle(A, E, H) == angle(E, H, A) mod 360
+By altitude_definition on E, midpoint(E, H), D, Line(E, H) we get Line(E, H) == altitude(E, D, midpoint(E, H))
+By sss_anti_congruence_v0 on E, H, D, H, E, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By altitude_definition on F, midpoint(E, H), H, Line(A, D) we get Line(A, D) == altitude(F, H, midpoint(E, H))
+By sss_anti_congruence_v0 on H, D, E, E, D, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By collinear_definition on F, C, B we get C in Line(B, F), B in Line(C, F), Line(B, F) == Line(C, F), 0 == 2 * angle(C, F, B) mod 360
+By sss_anti_congruence_v0 on D, E, H, D, H, E we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v1 on H, E, D, E, H, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By collinear_definition on B, D, E we get D in Line(B, E), E in Line(B, D), Line(B, D) == Line(B, E), 0 == 2 * angle(D, B, E) mod 360
+By sss_anti_congruence_v1 on H, E, D, E, H, D we get anti_congruent_triangles(D, E, H, D, H, E)
+By sss_anti_congruence_v0 on H, D, E, E, D, H we get anti_congruent_triangles(D, E, H, D, H, E)
+By parallel_line_angles_reverse_v2 on G, C, B, E we get angle(G, C, B) == angle(E, B, C) + 180 mod 360
+By parallel_line_angles_reverse_v3 on D, B, C, G we get angle(D, B, C) == angle(G, C, B) + 180 mod 360
+By parallel_line_angles_reverse_v3 on E, B, C, G we get angle(E, B, C) == angle(G, C, B) + 180 mod 360
+By parallel_line_angles_reverse_v2 on G, C, B, D we get angle(G, C, B) == angle(D, B, C) + 180 mod 360
+By sss_anti_congruence_v0 on H, E, F, E, H, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on F, E, H, F, H, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on H, A, E, E, A, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on H, F, E, E, F, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on H, E, A, E, H, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on H, A, E, E, A, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on E, H, F, H, E, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on F, H, E, F, E, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on E, H, A, H, E, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on E, A, H, H, A, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on H, A, E, E, A, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on H, A, E, E, A, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on E, H, F, H, E, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on H, A, E, E, A, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on F, H, E, F, E, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on F, E, H, F, H, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on E, A, H, H, A, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on A, E, H, A, H, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on A, E, H, A, H, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on E, F, H, H, F, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By power_of_a_point_definition on F, A, D, Circle(A, B, C) we get log(distance(A, F)) + log(distance(D, F)) == log(power_of_a_point(F, Circle(A, B, C)))
+By sss_anti_congruence_v0 on E, F, H, H, F, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on E, H, A, H, E, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on F, E, H, F, H, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on E, H, A, H, E, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on A, H, E, A, E, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on E, H, A, H, E, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on H, F, E, E, F, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on A, E, H, A, H, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on H, E, F, E, H, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on H, E, F, E, H, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on F, H, E, F, E, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By power_of_a_point_definition on F, C, B, Circle(A, B, C) we get log(distance(C, F)) + log(distance(B, F)) == log(power_of_a_point(F, Circle(A, B, C)))
+By sss_anti_congruence_v1 on E, A, H, H, A, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on H, F, E, E, F, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on E, F, H, H, F, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on H, E, F, E, H, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By power_of_a_point_definition on E, B, D, Circle(A, B, C) we get log(distance(B, E)) + log(distance(D, E)) == log(power_of_a_point(E, Circle(A, B, C)))
+By sss_anti_congruence_v0 on F, H, E, F, E, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on E, A, H, H, A, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on H, F, E, E, F, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on E, A, H, H, A, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on H, E, F, E, H, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on E, A, H, H, A, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on E, H, F, H, E, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on H, E, A, E, H, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on E, F, H, H, F, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on E, H, F, H, E, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on E, F, H, H, F, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on A, H, E, A, E, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on A, H, E, A, E, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on H, A, E, E, A, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on A, H, E, A, E, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on E, H, F, H, E, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on E, H, A, H, E, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on H, E, A, E, H, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By power_of_a_point_definition on midpoint(E, H), A, D, Circle(A, B, C) we get log(power_of_a_point(midpoint(E, H), Circle(A, B, C))) == log(distance(A, midpoint(E, H))) + log(distance(D, midpoint(E, H)))
+By sss_anti_congruence_v0 on H, E, F, E, H, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on H, F, E, E, F, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on A, H, E, A, E, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on H, F, E, E, F, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on A, E, H, A, H, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on A, H, E, A, E, H we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on H, E, A, E, H, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on F, E, H, F, H, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on F, H, E, F, E, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on H, E, A, E, H, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on F, E, H, F, H, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on E, F, H, H, F, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on F, E, H, F, H, E we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on A, E, H, A, H, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v1 on H, E, A, E, H, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on A, E, H, A, H, E we get anti_congruent_triangles(A, E, H, A, H, E)
+By sss_anti_congruence_v0 on F, H, E, F, E, H we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v1 on E, H, F, H, E, F we get anti_congruent_triangles(E, F, H, H, F, E)
+By sss_anti_congruence_v0 on E, H, A, H, E, A we get anti_congruent_triangles(A, E, H, A, H, E)
+By power_of_a_point_definition on E, A, C, Circle(A, B, C) we get log(distance(A, E)) + log(distance(C, E)) == log(power_of_a_point(E, Circle(A, B, C)))
+By similar_triangle_basic_properties on C, G, D, D, E, C we get angle(C, G, D) == angle(D, E, C) mod 360, angle(E, C, D) == angle(G, D, C) mod 360, angle(C, D, E) == angle(D, C, G) mod 360, log(distance(C, G)) + log(distance(C, E)) == log(distance(D, E)) + log(distance(D, G)), log(distance(C, E)) + log(distance(C, D)) == log(distance(D, G)) + log(distance(C, D)), log(distance(C, D)) + log(distance(C, G)) == log(distance(C, D)) + log(distance(D, E))
+By similar_triangle_basic_properties on E, G, C, G, E, D we get angle(E, G, C) == angle(G, E, D) mod 360, angle(E, D, G) == angle(G, C, E) mod 360, angle(C, E, G) == angle(D, G, E) mod 360, log(distance(E, G)) + log(distance(C, G)) == log(distance(E, G)) + log(distance(D, E)), log(distance(C, G)) + log(distance(D, G)) == log(distance(D, E)) + log(distance(C, E)), log(distance(C, E)) + log(distance(E, G)) == log(distance(D, G)) + log(distance(E, G))
+By similar_triangle_basic_properties on D, E, G, C, G, E we get angle(C, G, E) == angle(D, E, G) mod 360, angle(E, G, D) == angle(G, E, C) mod 360, angle(E, C, G) == angle(G, D, E) mod 360, log(distance(C, G)) + log(distance(E, G)) == log(distance(D, E)) + log(distance(E, G)), log(distance(E, G)) + log(distance(C, E)) == log(distance(E, G)) + log(distance(D, G)), log(distance(C, E)) + log(distance(D, E)) == log(distance(D, G)) + log(distance(C, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(B, D), Line(A, D) we get concurrent(Line(A, D), Line(B, D), Line(C, D))
+By concurrent_sufficient_conditions on Line(E, H), Line(E, G), Line(A, C) we get concurrent(Line(A, C), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(B, C), Line(C, D), Line(A, C) we get concurrent(Line(A, C), Line(B, C), Line(C, D))
+By concurrent_sufficient_conditions on Line(D, G), Line(B, D), Line(C, D) we get concurrent(Line(B, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(C, D), Line(C, G) we get concurrent(Line(B, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, D), Line(D, G), Line(C, D) we get concurrent(Line(A, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(D, G), Line(B, D) we get concurrent(Line(B, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, D), Line(C, D) we get concurrent(Line(A, D), Line(B, D), Line(C, D))
+By concurrent_sufficient_conditions on Line(A, D), Line(C, D), Line(D, G) we get concurrent(Line(A, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(C, D), Line(A, D) we get concurrent(Line(A, D), Line(B, D), Line(C, D))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, D), Line(E, G) we get concurrent(Line(A, C), Line(B, D), Line(E, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, G), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(A, C), Line(C, D) we get concurrent(Line(A, C), Line(B, C), Line(C, D))
+By concurrent_sufficient_conditions on Line(E, G), Line(A, C), Line(E, H) we get concurrent(Line(A, C), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(C, D), Line(B, D), Line(D, G) we get concurrent(Line(B, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(A, D), Line(B, D), Line(C, D) we get concurrent(Line(A, D), Line(B, D), Line(C, D))
+By concurrent_sufficient_conditions on Line(E, G), Line(B, D), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(E, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(E, G), Line(C, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, G), Line(C, D) we get concurrent(Line(B, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(E, H), Line(E, G), Line(B, D) we get concurrent(Line(B, D), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(C, D), Line(B, C), Line(C, G) we get concurrent(Line(B, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(B, C), Line(C, D) we get concurrent(Line(B, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, H), Line(E, G) we get concurrent(Line(A, C), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(C, D), Line(B, C), Line(A, C) we get concurrent(Line(A, C), Line(B, C), Line(C, D))
+By concurrent_sufficient_conditions on Line(E, H), Line(B, D), Line(E, G) we get concurrent(Line(B, D), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(C, D), Line(D, G) we get concurrent(Line(B, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(A, C), Line(C, D) we get concurrent(Line(A, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(A, D), Line(D, G) we get concurrent(Line(A, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(E, H), Line(A, C), Line(E, G) we get concurrent(Line(A, C), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, G), Line(A, D), Line(C, D) we get concurrent(Line(A, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(E, G), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(E, G))
+By concurrent_sufficient_conditions on Line(E, G), Line(E, H), Line(B, D) we get concurrent(Line(B, D), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(C, D), Line(C, G) we get concurrent(Line(A, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(A, C), Line(B, C) we get concurrent(Line(A, C), Line(B, C), Line(C, D))
+By concurrent_sufficient_conditions on Line(E, G), Line(C, G), Line(D, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(E, G), Line(E, H), Line(A, C) we get concurrent(Line(A, C), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, G), Line(C, D), Line(B, D) we get concurrent(Line(B, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, C), Line(C, D) we get concurrent(Line(A, C), Line(B, C), Line(C, D))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, G), Line(E, H) we get concurrent(Line(A, C), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(C, G), Line(C, D), Line(B, C) we get concurrent(Line(B, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(D, G), Line(A, D) we get concurrent(Line(A, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(E, G), Line(D, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(C, G), Line(E, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(C, G), Line(C, D) we get concurrent(Line(A, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(A, D), Line(B, D) we get concurrent(Line(A, D), Line(B, D), Line(C, D))
+By concurrent_sufficient_conditions on Line(A, C), Line(C, D), Line(B, C) we get concurrent(Line(A, C), Line(B, C), Line(C, D))
+By concurrent_sufficient_conditions on Line(E, G), Line(B, D), Line(E, H) we get concurrent(Line(B, D), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, G), Line(A, C), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(E, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(C, G), Line(B, C) we get concurrent(Line(B, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(C, G), Line(C, D) we get concurrent(Line(B, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(C, D), Line(A, D) we get concurrent(Line(A, D), Line(C, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(A, C), Line(C, G) we get concurrent(Line(A, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, D), Line(C, D), Line(B, D) we get concurrent(Line(A, D), Line(B, D), Line(C, D))
+By concurrent_sufficient_conditions on Line(B, D), Line(E, G), Line(E, H) we get concurrent(Line(B, D), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(C, G), Line(D, G), Line(E, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(E, G), Line(D, G), Line(C, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(C, D), Line(A, C) we get concurrent(Line(A, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, C), Line(E, G) we get concurrent(Line(A, C), Line(B, D), Line(E, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(C, G), Line(A, C) we get concurrent(Line(A, C), Line(C, D), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(E, H), Line(E, G) we get concurrent(Line(B, D), Line(E, G), Line(E, H))
+By line_intersection_definition on A, Line(A, C), Line(A, H) we get A == line_intersection(Line(A, C), Line(A, H))
+By line_intersection_definition on F, Line(B, C), Line(F, H) we get F == line_intersection(Line(B, C), Line(F, H))
+By line_intersection_definition on H, Line(E, H), Line(A, H) we get H == line_intersection(Line(A, H), Line(E, H))
+By line_intersection_definition on A, Line(A, B), Line(A, H) we get A == line_intersection(Line(A, B), Line(A, H))
+By line_intersection_definition on B, Line(A, B), Line(B, D) we get B == line_intersection(Line(A, B), Line(B, D))
+By line_intersection_definition on D, Line(C, D), Line(D, H) we get D == line_intersection(Line(C, D), Line(D, H))
+By line_intersection_definition on A, Line(A, B), Line(A, D) we get A == line_intersection(Line(A, B), Line(A, D))
+By line_intersection_definition on B, Line(A, B), Line(B, C) we get B == line_intersection(Line(A, B), Line(B, C))
+By line_intersection_definition on F, Line(B, C), Line(E, F) we get F == line_intersection(Line(B, C), Line(E, F))
+By line_intersection_definition on H, Line(D, H), Line(E, H) we get H == line_intersection(Line(D, H), Line(E, H))
+By line_intersection_definition on H, Line(F, H), Line(E, H) we get H == line_intersection(Line(E, H), Line(F, H))
+By line_intersection_definition on F, Line(E, F), Line(F, H) we get F == line_intersection(Line(E, F), Line(F, H))
+By line_intersection_definition on A, Line(A, C), Line(A, B) we get A == line_intersection(Line(A, B), Line(A, C))
+By line_intersection_definition on H, Line(D, H), Line(F, H) we get H == line_intersection(Line(D, H), Line(F, H))
+By line_intersection_definition on D, Line(D, H), Line(D, G) we get D == line_intersection(Line(D, G), Line(D, H))
+By line_intersection_definition on H, Line(F, H), Line(A, H) we get H == line_intersection(Line(A, H), Line(F, H))
+By line_intersection_definition on E, Line(B, D), Line(E, F) we get E == line_intersection(Line(B, D), Line(E, F))
+By line_intersection_definition on E, Line(A, C), Line(E, F) we get E == line_intersection(Line(A, C), Line(E, F))
+By line_intersection_definition on H, Line(A, H), Line(D, H) we get H == line_intersection(Line(A, H), Line(D, H))
+By line_intersection_definition on D, Line(D, H), Line(B, D) we get D == line_intersection(Line(B, D), Line(D, H))
+By line_intersection_definition on F, Line(E, F), Line(A, D) we get F == line_intersection(Line(A, D), Line(E, F))
+By line_intersection_definition on A, Line(A, H), Line(A, D) we get A == line_intersection(Line(A, D), Line(A, H))
+By line_intersection_definition on D, Line(A, D), Line(D, H) we get D == line_intersection(Line(A, D), Line(D, H))
+By line_intersection_definition on E, Line(E, F), Line(E, H) we get E == line_intersection(Line(E, F), Line(E, H))
+By line_intersection_definition on F, Line(A, D), Line(F, H) we get F == line_intersection(Line(A, D), Line(F, H))
+By line_intersection_definition on E, Line(E, G), Line(E, F) we get E == line_intersection(Line(E, F), Line(E, G))
+By same_angle_v1 on D, E, B, H we get angle(B, D, H) == angle(E, D, H) mod 360
+By same_angle_v1 on A, C, E, H we get angle(C, A, H) == angle(E, A, H) mod 360
+By same_angle_v1 on F, A, D, E we get angle(A, F, E) == angle(D, F, E) mod 360
+By same_angle_v0 on F, C, B, H we get angle(B, F, H) == angle(C, F, H) mod 360
+By same_angle_v2 on A, F, D, B we get angle(F, A, B) == angle(D, A, B) + 180 mod 360
+By same_angle_v0 on B, E, D, A we get angle(D, B, A) == angle(E, B, A) mod 360
+By same_angle_v3 on B, C, F, A we get angle(C, B, A) == angle(F, B, A) + 180 mod 360
+By same_angle_v3 on A, D, F, H we get angle(D, A, H) == angle(F, A, H) + 180 mod 360
+By same_angle_v3 on E, A, C, F we get angle(A, E, F) == angle(C, E, F) + 180 mod 360
+By same_angle_v3 on E, D, B, F we get angle(D, E, F) == angle(B, E, F) + 180 mod 360
+By same_angle_v0 on F, C, B, E we get angle(B, F, E) == angle(C, F, E) mod 360
+By same_angle_v0 on F, A, D, H we get angle(A, F, H) == angle(D, F, H) mod 360
+By same_angle_v1 on D, F, A, H we get angle(A, D, H) == angle(F, D, H) mod 360
+By same_angle_v1 on A, E, C, B we get angle(C, A, B) == angle(E, A, B) mod 360
+By between_imply_not_between on C, E, A we get collinear_and_not_between(A, C, E)
+By between_imply_not_between on D, A, F we get collinear_and_not_between(A, D, F)
+By between_imply_not_between on D, E, B we get collinear_and_not_between(B, D, E)
+By between_imply_not_between on A, E, C we get collinear_and_not_between(C, A, E)
+By between_imply_not_between on F, B, C we get collinear_and_not_between(B, F, C)
+By between_imply_not_between on B, E, D we get collinear_and_not_between(D, B, E)
+By between_imply_not_between on C, B, F we get collinear_and_not_between(B, C, F)
+By between_imply_not_between on F, A, D we get collinear_and_not_between(A, F, D)
+By internal_angle_bisector_definition_v0 on H, midpoint(E, H), E, D we get angle(H, D, midpoint(E, H)) == angle(midpoint(E, H), D, E) mod 360
+By sss_anti_congruence_v0 on E, F, D, H, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By between_imply_segment_sum on D, E, B we get distance(B, D) == distance(D, E) + distance(B, E)
+By reverse_direction on B, E we get 180 == direction(B, E) - direction(E, B) mod 360
+By between_imply_segment_sum on F, B, C we get distance(C, F) == distance(B, F) + distance(B, C)
+By sas_anti_similarity on C, E, D, B, E, A we get anti_similar_triangles(A, B, E, D, C, E)
+By sas_anti_similarity on D, midpoint(E, H), E, D, midpoint(E, H), H we get anti_similar_triangles(D, E, midpoint(E, H), D, H, midpoint(E, H))
+By sss_anti_congruence_v1 on E, D, F, H, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on F, E, A, F, H, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By reverse_direction on F, midpoint(E, H) we get 180 == direction(F, midpoint(E, H)) - direction(midpoint(E, H), F) mod 360
+By sss_anti_congruence_v0 on E, F, D, H, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on E, A, F, H, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on A, F, H, A, F, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on E, D, F, H, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on E, F, A, H, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_congruence on D, midpoint(E, H), E, D, midpoint(E, H), H we get anti_congruent_triangles(D, E, midpoint(E, H), D, H, midpoint(E, H))
+By sss_anti_congruence_v0 on E, F, A, H, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, H, A, F, E, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By reverse_direction on F, E we get 180 == direction(F, E) - direction(E, F) mod 360
+By internal_angle_bisector_definition_v0 on H, A, E, F we get angle(A, F, E) == angle(H, F, A) mod 360
+By reverse_direction on C, B we get 180 == direction(C, B) - direction(B, C) mod 360
+By sss_anti_congruence_v0 on D, F, H, D, F, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on H, A, F, E, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on A, F, E, A, F, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on D, F, E, D, F, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on H, D we get 180 == direction(H, D) - direction(D, H) mod 360
+By sas_anti_congruence on D, midpoint(E, H), H, D, midpoint(E, H), E we get anti_congruent_triangles(D, E, midpoint(E, H), D, H, midpoint(E, H))
+By between_imply_segment_sum on D, A, F we get distance(D, F) == distance(A, D) + distance(A, F)
+By internal_angle_bisector_definition_v0 on H, D, E, F we get angle(D, F, E) == angle(H, F, D) mod 360
+By sss_anti_congruence_v1 on E, D, F, H, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on A, midpoint(E, H) we get 180 == direction(A, midpoint(E, H)) - direction(midpoint(E, H), A) mod 360
+By internal_angle_bisector_definition_v0 on E, midpoint(E, H), H, D we get angle(E, D, midpoint(E, H)) == angle(midpoint(E, H), D, H) mod 360
+By reverse_direction on B, D we get 180 == direction(B, D) - direction(D, B) mod 360
+By internal_angle_bisector_definition_v0 on E, midpoint(E, H), H, F we get angle(E, F, midpoint(E, H)) == angle(midpoint(E, H), F, H) mod 360
+By sss_anti_congruence_v0 on A, E, F, A, H, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on E, F, D, H, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on F, A, H, F, A, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, H, D, F, E, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sas_anti_congruence on H, midpoint(E, H), D, E, midpoint(E, H), D we get anti_congruent_triangles(D, E, midpoint(E, H), D, H, midpoint(E, H))
+By collinear_definition on midpoint(E, H), D, F we get D in Line(F, midpoint(E, H)), F in Line(D, midpoint(E, H)), Line(D, midpoint(E, H)) == Line(F, midpoint(E, H)), 0 == 2 * angle(D, midpoint(E, H), F) mod 360
+By sss_anti_congruence_v1 on D, F, E, D, F, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on F, D, E, F, D, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on F, H we get 180 == direction(F, H) - direction(H, F) mod 360
+By sas_anti_similarity on E, midpoint(E, H), D, H, midpoint(E, H), D we get anti_similar_triangles(D, E, midpoint(E, H), D, H, midpoint(E, H))
+By sss_anti_congruence_v0 on H, A, F, E, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By reverse_direction on A, F we get 180 == direction(A, F) - direction(F, A) mod 360
+By between_imply_segment_sum on C, E, A we get distance(A, C) == distance(C, E) + distance(A, E)
+By reverse_direction on F, A we get 180 == direction(F, A) - direction(A, F) mod 360
+By sss_anti_congruence_v1 on A, F, E, A, F, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By reverse_direction on F, B we get 180 == direction(F, B) - direction(B, F) mod 360
+By sss_anti_congruence_v1 on F, E, A, F, H, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_similarity on D, G, C, B, E, A we get anti_similar_triangles(A, B, E, C, D, G)
+By sas_anti_similarity on B, E, A, D, G, C we get anti_similar_triangles(A, B, E, C, D, G)
+By sss_anti_congruence_v1 on A, H, F, A, E, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By reverse_direction on D, B we get 180 == direction(D, B) - direction(B, D) mod 360
+By sss_anti_congruence_v0 on E, F, A, H, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on F, E, D, F, H, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on D, H, F, D, E, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on B, F we get 180 == direction(B, F) - direction(F, B) mod 360
+By sss_anti_congruence_v1 on F, D, H, F, D, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By internal_angle_bisector_definition_v0 on E, F, H, A we get angle(E, A, F) == angle(F, A, H) mod 360
+By sas_anti_similarity on D, F, C, B, F, A we get anti_similar_triangles(A, B, F, C, D, F)
+By sss_anti_congruence_v1 on F, E, D, F, H, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on F, D, H, F, D, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on F, E, A, F, H, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By reverse_direction on H, A we get 180 == direction(H, A) - direction(A, H) mod 360
+By sas_anti_congruence on E, midpoint(E, H), A, H, midpoint(E, H), A we get anti_congruent_triangles(A, E, midpoint(E, H), A, H, midpoint(E, H))
+By sss_anti_congruence_v0 on F, D, E, F, D, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By sas_anti_similarity on E, midpoint(E, H), A, H, midpoint(E, H), A we get anti_similar_triangles(A, E, midpoint(E, H), A, H, midpoint(E, H))
+By sss_anti_congruence_v0 on E, F, D, H, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on D, H, F, D, E, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on C, F we get 180 == direction(C, F) - direction(F, C) mod 360
+By sss_anti_congruence_v0 on A, F, H, A, F, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on H, F, D, E, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on midpoint(E, H), F we get 180 == direction(midpoint(E, H), F) - direction(F, midpoint(E, H)) mod 360
+By sss_anti_congruence_v0 on F, D, E, F, D, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on F, E, D, F, H, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By collinear_definition on D, midpoint(E, H), F we get midpoint(E, H) in Line(D, F), F in Line(D, midpoint(E, H)), Line(D, F) == Line(D, midpoint(E, H)), 0 == 2 * angle(midpoint(E, H), D, F) mod 360
+By sss_anti_congruence_v1 on H, F, A, E, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on A, F, E, A, F, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By reverse_direction on E, B we get 180 == direction(E, B) - direction(B, E) mod 360
+By sss_anti_congruence_v1 on A, F, E, A, F, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, A, E, F, A, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on H, F, D, E, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on H, F, A, E, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on F, E, A, F, H, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By collinear_definition on midpoint(E, H), F, A we get F in Line(A, midpoint(E, H)), A in Line(F, midpoint(E, H)), Line(A, midpoint(E, H)) == Line(F, midpoint(E, H)), 0 == 2 * angle(F, midpoint(E, H), A) mod 360
+By internal_angle_bisector_definition_v0 on H, D, E, A we get angle(D, A, E) == angle(H, A, D) mod 360
+By sss_anti_congruence_v1 on H, F, D, E, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on H, A, F, E, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By internal_angle_bisector_definition_v0 on E, F, H, D we get angle(E, D, F) == angle(F, D, H) mod 360
+By sss_anti_congruence_v1 on D, F, E, D, F, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By sas_anti_congruence on E, midpoint(E, H), D, H, midpoint(E, H), D we get anti_congruent_triangles(D, E, midpoint(E, H), D, H, midpoint(E, H))
+By sss_anti_congruence_v1 on E, D, F, H, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on D, H we get 180 == direction(D, H) - direction(H, D) mod 360
+By sss_anti_congruence_v1 on H, F, A, E, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on F, A, H, F, A, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on H, D, F, E, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on F, A, H, F, A, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_congruence on H, midpoint(E, H), A, E, midpoint(E, H), A we get anti_congruent_triangles(A, E, midpoint(E, H), A, H, midpoint(E, H))
+By sss_anti_congruence_v1 on H, F, D, E, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on H, F, D, E, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on F, E, D, F, H, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on A, H we get 180 == direction(A, H) - direction(H, A) mod 360
+By sss_anti_congruence_v1 on D, F, E, D, F, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on D, H, F, D, E, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on B, C we get 180 == direction(B, C) - direction(C, B) mod 360
+By sss_anti_congruence_v0 on F, D, E, F, D, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on D, F, H, D, F, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on D, F, E, D, F, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By collinear_definition on D, F, midpoint(E, H) we get F in Line(D, midpoint(E, H)), midpoint(E, H) in Line(D, F), Line(D, F) == Line(D, midpoint(E, H)), 0 == 2 * angle(F, D, midpoint(E, H)) mod 360
+By sss_anti_congruence_v0 on A, E, F, A, H, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, H, D, F, E, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on F, E, A, F, H, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on D, E, F, D, H, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By internal_angle_bisector_definition_v0 on H, A, E, D we get angle(A, D, E) == angle(H, D, A) mod 360
+By sss_anti_congruence_v1 on E, A, F, H, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on D, F, H, D, F, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sas_anti_similarity on B, F, A, D, F, C we get anti_similar_triangles(A, B, F, C, D, F)
+By collinear_definition on F, midpoint(E, H), A we get midpoint(E, H) in Line(A, F), A in Line(F, midpoint(E, H)), Line(A, F) == Line(F, midpoint(E, H)), 0 == 2 * angle(midpoint(E, H), F, A) mod 360
+By sss_anti_congruence_v1 on E, A, F, H, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, A, E, F, A, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By reverse_direction on midpoint(E, H), A we get 180 == direction(midpoint(E, H), A) - direction(A, midpoint(E, H)) mod 360
+By sss_anti_congruence_v1 on D, H, F, D, E, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on H, D, F, E, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on F, A, E, F, A, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_similarity on A, midpoint(E, H), H, A, midpoint(E, H), E we get anti_similar_triangles(A, E, midpoint(E, H), A, H, midpoint(E, H))
+By sss_anti_congruence_v1 on F, A, H, F, A, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_similarity on A, E, B, D, E, C we get anti_similar_triangles(A, B, E, D, C, E)
+By sss_anti_congruence_v0 on D, E, F, D, H, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By collinear_definition on F, midpoint(E, H), D we get midpoint(E, H) in Line(D, F), D in Line(F, midpoint(E, H)), Line(D, F) == Line(F, midpoint(E, H)), 0 == 2 * angle(midpoint(E, H), F, D) mod 360
+By collinear_definition on A, F, midpoint(E, H) we get F in Line(A, midpoint(E, H)), midpoint(E, H) in Line(A, F), Line(A, F) == Line(A, midpoint(E, H)), 0 == 2 * angle(F, A, midpoint(E, H)) mod 360
+By sss_anti_congruence_v0 on D, F, H, D, F, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on F, D we get 180 == direction(F, D) - direction(D, F) mod 360
+By sss_anti_congruence_v0 on H, A, F, E, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, A, E, F, A, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on F, A, H, F, A, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on E, F, A, H, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on H, F, A, E, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on A, F, H, A, F, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, H, D, F, E, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on B, A we get 180 == direction(B, A) - direction(A, B) mod 360
+By sss_anti_congruence_v0 on F, D, E, F, D, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on D, E, F, D, H, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By internal_angle_bisector_definition_v0 on H, F, E, A we get angle(F, A, E) == angle(H, A, F) mod 360
+By sss_anti_congruence_v1 on D, H, F, D, E, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By internal_angle_bisector_definition_v0 on E, D, H, A we get angle(D, A, H) == angle(E, A, D) mod 360
+By sss_anti_congruence_v0 on H, D, F, E, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on F, H, D, F, E, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on D, E, F, D, H, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on D, midpoint(E, H) we get 180 == direction(D, midpoint(E, H)) - direction(midpoint(E, H), D) mod 360
+By sss_anti_congruence_v0 on D, E, F, D, H, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By collinear_definition on midpoint(E, H), F, D we get F in Line(D, midpoint(E, H)), D in Line(F, midpoint(E, H)), Line(D, midpoint(E, H)) == Line(F, midpoint(E, H)), 0 == 2 * angle(F, midpoint(E, H), D) mod 360
+By sss_anti_congruence_v0 on A, E, F, A, H, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on E, F, D, H, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on A, B we get 180 == direction(A, B) - direction(B, A) mod 360
+By sss_anti_congruence_v1 on E, A, F, H, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, H, D, F, E, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By internal_angle_bisector_definition_v0 on H, F, E, D we get angle(F, D, E) == angle(H, D, F) mod 360
+By sss_anti_congruence_v0 on F, H, A, F, E, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on A, F, E, A, F, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on F, A, H, F, A, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on H, D, F, E, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sas_anti_similarity on C, G, D, A, E, B we get anti_similar_triangles(A, B, E, C, D, G)
+By sss_anti_congruence_v1 on A, H, F, A, E, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on E, F, A, H, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on H, F, A, E, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By internal_angle_bisector_definition_v0 on H, midpoint(E, H), E, A we get angle(H, A, midpoint(E, H)) == angle(midpoint(E, H), A, E) mod 360
+By collinear_definition on F, A, midpoint(E, H) we get A in Line(F, midpoint(E, H)), midpoint(E, H) in Line(A, F), Line(A, F) == Line(F, midpoint(E, H)), 0 == 2 * angle(A, F, midpoint(E, H)) mod 360
+By sss_anti_congruence_v0 on H, D, F, E, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on D, F we get 180 == direction(D, F) - direction(F, D) mod 360
+By sss_anti_congruence_v0 on E, F, A, H, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_similarity on A, E, B, C, G, D we get anti_similar_triangles(A, B, E, C, D, G)
+By reverse_direction on E, F we get 180 == direction(E, F) - direction(F, E) mod 360
+By sss_anti_congruence_v0 on F, H, A, F, E, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on H, D, F, E, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By collinear_definition on F, D, midpoint(E, H) we get D in Line(F, midpoint(E, H)), midpoint(E, H) in Line(D, F), Line(D, F) == Line(F, midpoint(E, H)), 0 == 2 * angle(D, F, midpoint(E, H)) mod 360
+By sss_anti_congruence_v0 on D, F, H, D, F, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on H, F, A, E, F, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on F, E, D, F, H, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By internal_angle_bisector_definition_v0 on E, A, H, D we get angle(A, D, H) == angle(E, D, A) mod 360
+By reverse_direction on F, C we get 180 == direction(F, C) - direction(C, F) mod 360
+By collinear_definition on A, midpoint(E, H), F we get midpoint(E, H) in Line(A, F), F in Line(A, midpoint(E, H)), Line(A, F) == Line(A, midpoint(E, H)), 0 == 2 * angle(midpoint(E, H), A, F) mod 360
+By sss_anti_congruence_v0 on D, F, H, D, F, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on E, D, F, H, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sas_anti_similarity on D, E, C, A, E, B we get anti_similar_triangles(A, B, E, D, C, E)
+By sss_anti_congruence_v0 on H, A, F, E, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By reverse_direction on H, F we get 180 == direction(H, F) - direction(F, H) mod 360
+By sss_anti_congruence_v0 on A, F, H, A, F, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By internal_angle_bisector_definition_v0 on H, midpoint(E, H), E, F we get angle(H, F, midpoint(E, H)) == angle(midpoint(E, H), F, E) mod 360
+By sss_anti_congruence_v1 on F, D, H, F, D, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on A, H, F, A, E, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on A, F, H, A, F, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on A, E, F, A, H, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on A, H, F, A, E, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_congruence on A, midpoint(E, H), H, A, midpoint(E, H), E we get anti_congruent_triangles(A, E, midpoint(E, H), A, H, midpoint(E, H))
+By sss_anti_congruence_v1 on D, H, F, D, E, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on E, F, D, H, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on E, A, F, H, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, H, A, F, E, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, H, A, F, E, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on A, H, F, A, E, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, A, E, F, A, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on D, F, E, D, F, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By sas_anti_similarity on A, F, B, C, F, D we get anti_similar_triangles(A, B, F, C, D, F)
+By sss_anti_congruence_v1 on F, E, D, F, H, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on H, A, F, E, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By internal_angle_bisector_definition_v0 on E, D, H, F we get angle(D, F, H) == angle(E, F, D) mod 360
+By internal_angle_bisector_definition_v0 on E, A, H, F we get angle(A, F, H) == angle(E, F, A) mod 360
+By collinear_definition on midpoint(E, H), A, F we get A in Line(F, midpoint(E, H)), F in Line(A, midpoint(E, H)), Line(A, midpoint(E, H)) == Line(F, midpoint(E, H)), 0 == 2 * angle(A, midpoint(E, H), F) mod 360
+By sss_anti_congruence_v1 on H, F, D, E, F, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sas_anti_similarity on H, midpoint(E, H), A, E, midpoint(E, H), A we get anti_similar_triangles(A, E, midpoint(E, H), A, H, midpoint(E, H))
+By sss_anti_congruence_v0 on F, H, D, F, E, D we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on F, A, E, F, A, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_similarity on A, midpoint(E, H), E, A, midpoint(E, H), H we get anti_similar_triangles(A, E, midpoint(E, H), A, H, midpoint(E, H))
+By sas_anti_congruence on A, midpoint(E, H), E, A, midpoint(E, H), H we get anti_congruent_triangles(A, E, midpoint(E, H), A, H, midpoint(E, H))
+By sss_anti_congruence_v0 on F, H, A, F, E, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on A, F, E, A, F, H we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_similarity on C, F, D, A, F, B we get anti_similar_triangles(A, B, F, C, D, F)
+By sss_anti_congruence_v1 on F, D, H, F, D, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sas_anti_similarity on D, midpoint(E, H), H, D, midpoint(E, H), E we get anti_similar_triangles(D, E, midpoint(E, H), D, H, midpoint(E, H))
+By sss_anti_congruence_v1 on F, E, A, F, H, A we get anti_congruent_triangles(A, E, F, A, H, F)
+By internal_angle_bisector_definition_v0 on E, midpoint(E, H), H, A we get angle(E, A, midpoint(E, H)) == angle(midpoint(E, H), A, H) mod 360
+By sss_anti_congruence_v1 on F, D, H, F, D, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on D, E, F, D, H, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v1 on E, A, F, H, A, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on A, H, F, A, E, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_similarity on B, E, A, C, E, D we get anti_similar_triangles(A, B, E, D, C, E)
+By sss_anti_congruence_v1 on E, D, F, H, D, F we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on A, E, F, A, H, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sas_anti_similarity on H, midpoint(E, H), D, E, midpoint(E, H), D we get anti_similar_triangles(D, E, midpoint(E, H), D, H, midpoint(E, H))
+By sss_anti_congruence_v0 on A, F, H, A, F, E we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v1 on F, D, H, F, D, E we get anti_congruent_triangles(D, E, F, D, H, F)
+By sss_anti_congruence_v0 on A, E, F, A, H, F we get anti_congruent_triangles(A, E, F, A, H, F)
+By sss_anti_congruence_v0 on F, D, E, F, D, H we get anti_congruent_triangles(D, E, F, D, H, F)
+By reverse_direction on midpoint(E, H), D we get 180 == direction(midpoint(E, H), D) - direction(D, midpoint(E, H)) mod 360
+By internal_angle_bisector_definition_v0_r on H, A, E, midpoint(E, H) we get Line(A, midpoint(E, H)) == internal_angle_bisector(E, midpoint(E, H), H)
+By external_angle_bisector_definition_v0_r on E, A, E, midpoint(E, H) we get Line(A, midpoint(E, H)) == external_angle_bisector(E, midpoint(E, H), E)
+By external_angle_bisector_definition_v0_r on F, E, F, midpoint(E, H) we get Line(E, midpoint(E, H)) == external_angle_bisector(F, midpoint(E, H), F)
+By external_angle_bisector_definition_v0_r on F, H, F, midpoint(E, H) we get Line(H, midpoint(E, H)) == external_angle_bisector(F, midpoint(E, H), F)
+By internal_angle_bisector_definition_v0_r on H, F, E, midpoint(E, H) we get Line(F, midpoint(E, H)) == internal_angle_bisector(E, midpoint(E, H), H)
+By external_angle_bisector_definition_v0_r on H, D, H, midpoint(E, H) we get Line(D, midpoint(E, H)) == external_angle_bisector(H, midpoint(E, H), H)
+By external_angle_bisector_definition_v0_r on H, F, H, midpoint(E, H) we get Line(F, midpoint(E, H)) == external_angle_bisector(H, midpoint(E, H), H)
+By external_angle_bisector_definition_v0_r on E, F, E, midpoint(E, H) we get Line(F, midpoint(E, H)) == external_angle_bisector(E, midpoint(E, H), E)
+By external_angle_bisector_definition_v0_r on D, H, D, midpoint(E, H) we get Line(H, midpoint(E, H)) == external_angle_bisector(D, midpoint(E, H), D)
+By internal_angle_bisector_definition_v0_r on F, A, F, D we get Line(A, D) == internal_angle_bisector(F, D, F)
+By external_angle_bisector_definition_v0_r on A, E, A, midpoint(E, H) we get Line(E, midpoint(E, H)) == external_angle_bisector(A, midpoint(E, H), A)
+By internal_angle_bisector_definition_v0_r on A, D, A, F we get Line(D, F) == internal_angle_bisector(A, F, A)
+By external_angle_bisector_definition_v0_r on E, D, E, midpoint(E, H) we get Line(D, midpoint(E, H)) == external_angle_bisector(E, midpoint(E, H), E)
+By anti_similar_triangle_basic_properties on E, A, H, H, A, E we get angle(E, A, H) == 0 - angle(H, A, E) mod 360, angle(A, H, E) == 0 - angle(A, E, H) mod 360, angle(H, E, A) == 0 - angle(E, H, A) mod 360, log(distance(A, E)) + log(distance(A, E)) == log(distance(A, H)) + log(distance(A, H)), log(distance(A, E)) + log(distance(E, H)) == log(distance(A, H)) + log(distance(E, H)), log(distance(E, H)) + log(distance(A, E)) == log(distance(E, H)) + log(distance(A, H))
+By internal_angle_bisector_definition_v0_r on A, D, A, midpoint(E, H) we get Line(D, midpoint(E, H)) == internal_angle_bisector(A, midpoint(E, H), A)
+By internal_angle_bisector_definition_v0_r on E, B, E, D we get Line(B, D) == internal_angle_bisector(E, D, E)
+By external_angle_bisector_definition_v0_r on D, E, D, midpoint(E, H) we get Line(E, midpoint(E, H)) == external_angle_bisector(D, midpoint(E, H), D)
+By internal_angle_bisector_definition_v0_r on midpoint(E, H), A, midpoint(E, H), D we get Line(A, D) == internal_angle_bisector(midpoint(E, H), D, midpoint(E, H))
+By internal_angle_bisector_definition_v0_r on E, D, E, B we get Line(B, D) == internal_angle_bisector(E, B, E)
+By external_angle_bisector_definition_v0_r on H, A, H, midpoint(E, H) we get Line(A, midpoint(E, H)) == external_angle_bisector(H, midpoint(E, H), H)
+By internal_angle_bisector_definition_v0_r on C, F, C, B we get Line(B, F) == internal_angle_bisector(C, B, C)
+By internal_angle_bisector_definition_v0_r on E, C, E, A we get Line(A, C) == internal_angle_bisector(E, A, E)
+By external_angle_bisector_definition_v0_r on A, H, A, midpoint(E, H) we get Line(H, midpoint(E, H)) == external_angle_bisector(A, midpoint(E, H), A)
+By internal_angle_bisector_definition_v0_r on B, C, B, F we get Line(C, F) == internal_angle_bisector(B, F, B)
+By internal_angle_bisector_definition_v0_r on F, C, F, B we get Line(B, C) == internal_angle_bisector(F, B, F)
+By internal_angle_bisector_definition_v0_r on H, D, E, midpoint(E, H) we get Line(D, midpoint(E, H)) == internal_angle_bisector(E, midpoint(E, H), H)
+By internal_angle_bisector_definition_v0_r on D, midpoint(E, H), D, A we get internal_angle_bisector(D, A, D) == Line(A, midpoint(E, H))
+By internal_angle_bisector_definition_v0_r on D, B, D, E we get Line(B, E) == internal_angle_bisector(D, E, D)
+By anti_similar_triangle_basic_properties on D, E, H, D, H, E we get angle(D, E, H) == 0 - angle(D, H, E) mod 360, angle(E, H, D) == 0 - angle(H, E, D) mod 360, angle(H, D, E) == 0 - angle(E, D, H) mod 360, log(distance(D, E)) + log(distance(E, H)) == log(distance(D, H)) + log(distance(E, H)), log(distance(E, H)) + log(distance(D, E)) == log(distance(E, H)) + log(distance(D, H)), log(distance(D, E)) + log(distance(D, E)) == log(distance(D, H)) + log(distance(D, H))
+By internal_angle_bisector_definition_v0_r on A, E, A, C we get Line(C, E) == internal_angle_bisector(A, C, A)
+By internal_angle_bisector_definition_v0_r on D, A, D, F we get Line(A, F) == internal_angle_bisector(D, F, D)
+By internal_angle_bisector_definition_v0_r on C, B, C, F we get Line(B, F) == internal_angle_bisector(C, F, C)
+By internal_angle_bisector_definition_v0_r on D, F, D, A we get Line(A, F) == internal_angle_bisector(D, A, D)
+By internal_angle_bisector_definition_v0_r on E, A, E, C we get Line(A, C) == internal_angle_bisector(E, C, E)
+By internal_angle_bisector_definition_v0_r on D, A, D, midpoint(E, H) we get Line(A, midpoint(E, H)) == internal_angle_bisector(D, midpoint(E, H), D)
+By internal_angle_bisector_definition_v0_r on midpoint(E, H), D, midpoint(E, H), A we get Line(A, D) == internal_angle_bisector(midpoint(E, H), A, midpoint(E, H))
+By internal_angle_bisector_definition_v0_r on A, C, A, E we get Line(C, E) == internal_angle_bisector(A, E, A)
+By internal_angle_bisector_definition_v0_r on C, A, C, E we get Line(A, E) == internal_angle_bisector(C, E, C)
+By internal_angle_bisector_definition_v0_r on A, midpoint(E, H), A, D we get internal_angle_bisector(A, D, A) == Line(D, midpoint(E, H))
+By internal_angle_bisector_definition_v0_r on B, D, B, E we get Line(D, E) == internal_angle_bisector(B, E, B)
+By internal_angle_bisector_definition_v0_r on A, F, A, D we get Line(D, F) == internal_angle_bisector(A, D, A)
+By internal_angle_bisector_definition_v0_r on F, D, F, A we get Line(A, D) == internal_angle_bisector(F, A, F)
+By internal_angle_bisector_definition_v0_r on D, E, D, B we get Line(B, E) == internal_angle_bisector(D, B, D)
+By internal_angle_bisector_definition_v0_r on F, B, F, C we get Line(B, C) == internal_angle_bisector(F, C, F)
+By internal_angle_bisector_definition_v0_r on C, E, C, A we get Line(A, E) == internal_angle_bisector(C, A, C)
+By internal_angle_bisector_definition_v0_r on B, E, B, D we get Line(D, E) == internal_angle_bisector(B, D, B)
+By internal_angle_bisector_definition_v0_r on B, F, B, C we get Line(C, F) == internal_angle_bisector(B, C, B)
+By anti_similar_triangle_basic_properties on C, E, B, D, E, A we get angle(C, E, B) == 0 - angle(D, E, A) mod 360, angle(E, B, C) == 0 - angle(E, A, D) mod 360, angle(B, C, E) == 0 - angle(A, D, E) mod 360, log(distance(C, E)) + log(distance(A, E)) == log(distance(D, E)) + log(distance(B, E)), log(distance(A, E)) + log(distance(B, C)) == log(distance(B, E)) + log(distance(A, D)), log(distance(A, D)) + log(distance(C, E)) == log(distance(B, C)) + log(distance(D, E))
+By anti_similar_triangle_basic_properties on F, D, B, F, C, A we get angle(F, D, B) == 0 - angle(F, C, A) mod 360, angle(D, B, F) == 0 - angle(C, A, F) mod 360, angle(B, F, D) == 0 - angle(A, F, C) mod 360, log(distance(C, F)) + log(distance(B, D)) == log(distance(D, F)) + log(distance(A, C)), log(distance(A, C)) + log(distance(B, F)) == log(distance(B, D)) + log(distance(A, F)), log(distance(A, F)) + log(distance(D, F)) == log(distance(B, F)) + log(distance(C, F))
+By anti_similar_triangle_basic_properties on C, B, E, D, A, E we get angle(C, B, E) == 0 - angle(D, A, E) mod 360, angle(B, E, C) == 0 - angle(A, E, D) mod 360, angle(E, C, B) == 0 - angle(E, D, A) mod 360, log(distance(A, D)) + log(distance(B, E)) == log(distance(B, C)) + log(distance(A, E)), log(distance(A, E)) + log(distance(C, E)) == log(distance(B, E)) + log(distance(D, E)), log(distance(C, E)) + log(distance(A, D)) == log(distance(D, E)) + log(distance(B, C))
+By anti_similar_triangle_basic_properties on F, A, C, F, B, D we get angle(F, A, C) == 0 - angle(F, B, D) mod 360, angle(A, C, F) == 0 - angle(B, D, F) mod 360, angle(C, F, A) == 0 - angle(D, F, B) mod 360, log(distance(A, F)) + log(distance(B, D)) == log(distance(B, F)) + log(distance(A, C)), log(distance(A, C)) + log(distance(D, F)) == log(distance(B, D)) + log(distance(C, F)), log(distance(C, F)) + log(distance(B, F)) == log(distance(D, F)) + log(distance(A, F))
+By anti_similar_triangle_basic_properties on E, F, H, H, F, E we get angle(E, F, H) == 0 - angle(H, F, E) mod 360, angle(F, H, E) == 0 - angle(F, E, H) mod 360, angle(H, E, F) == 0 - angle(E, H, F) mod 360, log(distance(E, F)) + log(distance(E, F)) == log(distance(F, H)) + log(distance(F, H)), log(distance(E, F)) + log(distance(E, H)) == log(distance(F, H)) + log(distance(E, H)), log(distance(E, H)) + log(distance(E, F)) == log(distance(E, H)) + log(distance(F, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(B, D), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(E, F))
+By concurrent_sufficient_conditions on Line(D, H), Line(C, D), Line(A, D) we get concurrent(Line(A, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(A, C), Line(A, B) we get concurrent(Line(A, B), Line(A, C), Line(A, D))
+By concurrent_sufficient_conditions on Line(D, H), Line(B, D), Line(C, D) we get concurrent(Line(B, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(F, H), Line(E, H), Line(D, H) we get concurrent(Line(D, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(A, H), Line(D, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, G), Line(E, F), Line(A, C) we get concurrent(Line(A, C), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, H), Line(A, D) we get concurrent(Line(A, D), Line(B, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(C, D), Line(D, H), Line(B, D) we get concurrent(Line(B, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(D, H), Line(D, G) we get concurrent(Line(A, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, G), Line(B, D) we get concurrent(Line(B, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(B, D), Line(E, G) we get concurrent(Line(B, D), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(F, H), Line(A, H), Line(D, H) we get concurrent(Line(A, H), Line(D, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(F, H), Line(B, C) we get concurrent(Line(A, D), Line(B, C), Line(F, H))
+By concurrent_sufficient_conditions on Line(F, H), Line(A, H), Line(E, H) we get concurrent(Line(A, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, B), Line(B, D), Line(B, C) we get concurrent(Line(A, B), Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(A, D), Line(D, H), Line(B, D) we get concurrent(Line(A, D), Line(B, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(F, H), Line(E, H), Line(A, H) we get concurrent(Line(A, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, F), Line(E, H) we get concurrent(Line(A, C), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, F), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, H), Line(D, H), Line(E, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, D), Line(E, F) we get concurrent(Line(A, C), Line(B, D), Line(E, F))
+By concurrent_sufficient_conditions on Line(E, H), Line(F, H), Line(D, H) we get concurrent(Line(D, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(B, C), Line(A, D) we get concurrent(Line(A, D), Line(B, C), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, B), Line(A, C) we get concurrent(Line(A, B), Line(A, C), Line(A, H))
+By concurrent_sufficient_conditions on Line(C, D), Line(B, D), Line(D, H) we get concurrent(Line(B, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, C), Line(A, B) we get concurrent(Line(A, B), Line(A, C), Line(A, H))
+By concurrent_sufficient_conditions on Line(E, G), Line(E, H), Line(E, F) we get concurrent(Line(E, F), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(A, H), Line(F, H) we get concurrent(Line(A, H), Line(D, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(E, F), Line(F, H) we get concurrent(Line(A, D), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(A, D), Line(B, C) we get concurrent(Line(A, D), Line(B, C), Line(E, F))
+By concurrent_sufficient_conditions on Line(F, H), Line(D, H), Line(E, H) we get concurrent(Line(D, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(B, D), Line(E, F) we get concurrent(Line(B, D), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(C, D), Line(D, G), Line(D, H) we get concurrent(Line(C, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(B, C), Line(F, H) we get concurrent(Line(A, D), Line(B, C), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(E, F), Line(B, C) we get concurrent(Line(A, D), Line(B, C), Line(E, F))
+By concurrent_sufficient_conditions on Line(D, H), Line(A, D), Line(C, D) we get concurrent(Line(A, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(A, B), Line(A, D) we get concurrent(Line(A, B), Line(A, C), Line(A, D))
+By concurrent_sufficient_conditions on Line(D, G), Line(A, D), Line(D, H) we get concurrent(Line(A, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(F, H), Line(A, D), Line(E, F) we get concurrent(Line(A, D), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(A, H), Line(A, D) we get concurrent(Line(A, C), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(E, F), Line(E, H) we get concurrent(Line(B, D), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(B, C), Line(F, H) we get concurrent(Line(B, C), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(C, D), Line(D, G) we get concurrent(Line(C, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(E, G), Line(E, F) we get concurrent(Line(B, D), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(A, D), Line(D, G), Line(D, H) we get concurrent(Line(A, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(E, G), Line(B, D) we get concurrent(Line(B, D), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(F, H), Line(B, C), Line(E, F) we get concurrent(Line(B, C), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(A, H), Line(A, B) we get concurrent(Line(A, B), Line(A, C), Line(A, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(B, C), Line(A, B) we get concurrent(Line(A, B), Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(E, H), Line(D, H), Line(A, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, H), Line(D, G) we get concurrent(Line(B, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(A, C), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(E, F))
+By concurrent_sufficient_conditions on Line(D, H), Line(B, D), Line(A, D) we get concurrent(Line(A, D), Line(B, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, H), Line(C, D) we get concurrent(Line(B, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(B, C), Line(F, H), Line(E, F) we get concurrent(Line(B, C), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(F, H), Line(B, C), Line(A, D) we get concurrent(Line(A, D), Line(B, C), Line(F, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, C), Line(E, F) we get concurrent(Line(A, C), Line(B, D), Line(E, F))
+By concurrent_sufficient_conditions on Line(E, F), Line(A, C), Line(E, G) we get concurrent(Line(A, C), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(A, D), Line(B, C), Line(E, F) we get concurrent(Line(A, D), Line(B, C), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, B), Line(A, D), Line(A, H) we get concurrent(Line(A, B), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(F, H), Line(E, H) we get concurrent(Line(D, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(A, D), Line(A, B) we get concurrent(Line(A, B), Line(A, C), Line(A, D))
+By concurrent_sufficient_conditions on Line(B, C), Line(B, D), Line(A, B) we get concurrent(Line(A, B), Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(E, H), Line(F, H), Line(A, H) we get concurrent(Line(A, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(F, H), Line(A, D), Line(B, C) we get concurrent(Line(A, D), Line(B, C), Line(F, H))
+By concurrent_sufficient_conditions on Line(D, G), Line(B, D), Line(D, H) we get concurrent(Line(B, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(B, C), Line(F, H), Line(A, D) we get concurrent(Line(A, D), Line(B, C), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(A, H), Line(A, B) we get concurrent(Line(A, B), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, G), Line(C, D) we get concurrent(Line(C, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(E, G), Line(A, C) we get concurrent(Line(A, C), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(E, F), Line(A, D) we get concurrent(Line(A, D), Line(B, C), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, D), Line(F, H), Line(E, F) we get concurrent(Line(A, D), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(C, D), Line(A, D), Line(D, H) we get concurrent(Line(A, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, F), Line(E, G) we get concurrent(Line(A, C), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(A, B), Line(B, C), Line(B, D) we get concurrent(Line(A, B), Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(F, H), Line(E, F), Line(B, C) we get concurrent(Line(B, C), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(A, B), Line(A, C) we get concurrent(Line(A, B), Line(A, C), Line(A, D))
+By concurrent_sufficient_conditions on Line(A, D), Line(D, H), Line(C, D) we get concurrent(Line(A, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, G), Line(D, H) we get concurrent(Line(B, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, B), Line(B, C) we get concurrent(Line(A, B), Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, C), Line(A, D) we get concurrent(Line(A, C), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(E, G), Line(E, H) we get concurrent(Line(E, F), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(A, D), Line(D, G) we get concurrent(Line(A, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(C, D), Line(D, H), Line(A, D) we get concurrent(Line(A, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(E, G), Line(E, F), Line(B, D) we get concurrent(Line(B, D), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(A, D), Line(C, D), Line(D, H) we get concurrent(Line(A, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(A, H), Line(E, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, B), Line(A, D), Line(A, C) we get concurrent(Line(A, B), Line(A, C), Line(A, D))
+By concurrent_sufficient_conditions on Line(E, F), Line(A, D), Line(F, H) we get concurrent(Line(A, D), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, D), Line(A, C) we get concurrent(Line(A, C), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, G), Line(A, D) we get concurrent(Line(A, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, B), Line(A, H), Line(A, C) we get concurrent(Line(A, B), Line(A, C), Line(A, H))
+By concurrent_sufficient_conditions on Line(B, C), Line(A, B), Line(B, D) we get concurrent(Line(A, B), Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(D, H), Line(B, D), Line(D, G) we get concurrent(Line(B, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(A, D), Line(A, H) we get concurrent(Line(A, C), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, D), Line(A, B) we get concurrent(Line(A, B), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(E, H), Line(A, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(A, B), Line(A, H) we get concurrent(Line(A, B), Line(A, C), Line(A, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(D, H), Line(F, H) we get concurrent(Line(A, H), Line(D, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(D, H), Line(F, H) we get concurrent(Line(D, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(A, C), Line(A, H) we get concurrent(Line(A, C), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, H), Line(C, D) we get concurrent(Line(C, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(E, H), Line(F, H) we get concurrent(Line(D, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(B, D), Line(D, H) we get concurrent(Line(A, D), Line(B, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(E, F), Line(A, C) we get concurrent(Line(A, C), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, B), Line(A, C), Line(A, D) we get concurrent(Line(A, B), Line(A, C), Line(A, D))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, H), Line(E, F) we get concurrent(Line(A, C), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, H), Line(A, D) we get concurrent(Line(A, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(B, D), Line(E, H) we get concurrent(Line(B, D), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(E, H), Line(A, C) we get concurrent(Line(A, C), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, G), Line(A, C), Line(E, F) we get concurrent(Line(A, C), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(C, D), Line(D, H), Line(D, G) we get concurrent(Line(C, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(B, C), Line(E, F), Line(F, H) we get concurrent(Line(B, C), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(A, C), Line(E, F) we get concurrent(Line(A, C), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, G), Line(B, D), Line(E, F) we get concurrent(Line(B, D), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(E, H), Line(E, F) we get concurrent(Line(B, D), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, G), Line(E, F), Line(E, H) we get concurrent(Line(E, F), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(F, H), Line(E, F), Line(A, D) we get concurrent(Line(A, D), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, D), Line(D, H) we get concurrent(Line(A, D), Line(B, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(A, H), Line(A, C) we get concurrent(Line(A, C), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(B, C), Line(A, D), Line(F, H) we get concurrent(Line(A, D), Line(B, C), Line(F, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(E, H), Line(B, D) we get concurrent(Line(B, D), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(E, H), Line(E, G) we get concurrent(Line(E, F), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, G), Line(C, D), Line(D, H) we get concurrent(Line(C, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(F, H), Line(D, H) we get concurrent(Line(A, H), Line(D, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(B, C), Line(A, D), Line(E, F) we get concurrent(Line(A, D), Line(B, C), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, H), Line(F, H), Line(E, H) we get concurrent(Line(A, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(A, D), Line(B, D) we get concurrent(Line(A, D), Line(B, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, D), Line(A, B), Line(A, H) we get concurrent(Line(A, B), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(E, G), Line(E, F) we get concurrent(Line(E, F), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(F, H), Line(A, D) we get concurrent(Line(A, D), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(E, F), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, B), Line(A, C), Line(A, H) we get concurrent(Line(A, B), Line(A, C), Line(A, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(E, F), Line(E, G) we get concurrent(Line(B, D), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(E, H), Line(E, F), Line(B, D) we get concurrent(Line(B, D), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(F, H), Line(B, C) we get concurrent(Line(B, C), Line(E, F), Line(F, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(C, D), Line(B, D) we get concurrent(Line(B, D), Line(C, D), Line(D, H))
+By concurrent_sufficient_conditions on Line(F, H), Line(D, H), Line(A, H) we get concurrent(Line(A, H), Line(D, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, G), Line(E, F) we get concurrent(Line(A, C), Line(E, F), Line(E, G))
+By concurrent_sufficient_conditions on Line(A, H), Line(E, H), Line(F, H) we get concurrent(Line(A, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(E, H), Line(D, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(A, H), Line(F, H) we get concurrent(Line(A, H), Line(E, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, B), Line(A, H), Line(A, D) we get concurrent(Line(A, B), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(E, F), Line(A, C), Line(E, H) we get concurrent(Line(A, C), Line(E, F), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, H), Line(B, D) we get concurrent(Line(B, D), Line(D, G), Line(D, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(E, F), Line(E, G) we get concurrent(Line(E, F), Line(E, G), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(F, H), Line(A, H) we get concurrent(Line(A, H), Line(D, H), Line(F, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, B), Line(A, D) we get concurrent(Line(A, B), Line(A, D), Line(A, H))
+By concurrent_sufficient_conditions on Line(B, D), Line(C, D), Line(D, H) we get concurrent(Line(B, D), Line(C, D), Line(D, H))
+By sss_anti_similarity_v1 on H, A, D, E, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on D, E, A, D, H, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on E, D, A, H, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on D, H, A, D, E, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on E, A, D, H, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sas_similarity on A, D, H, B, C, E we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on B, E, C, A, H, D we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on E, C, B, H, D, A we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on H, D, A, E, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on D, E, A, D, H, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on D, A, E, D, A, H we get anti_similar_triangles(A, D, E, A, D, H)
+By aa_anti_similarity on H, D, A, E, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sas_anti_similarity on H, D, A, E, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on A, E, D, A, H, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, D, H, A, D, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on E, C, B, H, D, A we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on H, A, D, E, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on D, H, A, D, E, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on E, B, C, H, A, D we get similar_triangles(A, D, H, B, C, E)
+By sas_anti_similarity on A, D, E, A, D, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on H, D, A, E, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on H, D, A, E, C, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on D, A, H, D, A, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on D, A, E, D, A, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sas_similarity on E, C, B, H, D, A we get similar_triangles(A, D, H, B, C, E)
+By aa_anti_similarity on E, D, A, H, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on D, H, A, D, E, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By aa_similarity on E, B, C, H, A, D we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v1 on E, D, A, H, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on D, H, A, D, E, A we get anti_similar_triangles(A, D, E, A, D, H)
+By aa_similarity on H, D, A, E, C, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on A, H, D, A, E, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on E, D, A, H, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on H, D, A, E, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on E, C, B, H, D, A we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on A, H, D, B, E, C we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on D, A, H, D, A, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on D, E, A, D, H, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on C, E, B, D, H, A we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on D, H, A, D, E, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on B, C, E, A, D, H we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on D, E, A, D, H, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on E, C, B, H, D, A we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on B, E, C, A, H, D we get similar_triangles(A, D, H, B, C, E)
+By sas_anti_congruence on D, A, H, D, A, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on D, E, A, D, H, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on E, B, C, H, A, D we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on D, A, E, D, A, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on H, A, D, E, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on A, D, H, B, C, E we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on H, D, A, E, C, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on A, E, D, A, H, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on H, A, D, E, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on D, E, A, D, H, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on H, A, D, E, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on D, E, A, D, H, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sas_anti_similarity on D, A, E, D, A, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on E, A, D, H, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on D, H, A, D, E, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on C, B, E, D, A, H we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on A, D, H, B, C, E we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v1 on E, D, A, H, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sas_similarity on H, D, A, E, C, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v1 on D, H, A, D, E, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on A, H, D, A, E, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on D, A, H, C, B, E we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on B, C, E, A, D, H we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on D, A, H, C, B, E we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on E, A, D, H, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sas_anti_similarity on H, A, D, E, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on H, D, A, E, C, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on D, A, H, D, A, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on A, D, H, A, D, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on A, D, E, A, D, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on E, B, C, H, A, D we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on E, D, A, H, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sas_anti_congruence on H, A, D, E, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on A, H, D, A, E, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on D, H, A, D, E, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on B, E, C, A, H, D we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on D, E, A, D, H, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on A, H, D, A, E, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on A, H, D, A, E, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on B, E, C, A, H, D we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on A, H, D, A, E, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on D, H, A, C, E, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on D, A, H, D, A, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on A, E, D, A, H, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on A, D, E, A, D, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on E, C, B, H, D, A we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on A, H, D, A, E, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By aa_anti_similarity on H, A, D, E, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on E, A, D, H, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on E, D, A, H, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on A, D, H, B, C, E we get similar_triangles(A, D, H, B, C, E)
+By sas_anti_congruence on E, D, A, H, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on A, D, H, A, D, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on C, E, B, D, H, A we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on A, H, D, B, E, C we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on A, H, D, B, E, C we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on A, D, H, A, D, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on D, A, H, D, A, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By aa_anti_similarity on E, A, D, H, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on E, C, B, H, D, A we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on B, C, E, A, D, H we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v1 on D, A, E, D, A, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By aa_anti_similarity on E, midpoint(E, H), F, H, midpoint(E, H), F we get anti_similar_triangles(E, F, midpoint(E, H), H, F, midpoint(E, H))
+By sss_similarity_v1 on A, D, H, B, C, E we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on H, A, D, E, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on A, D, E, A, D, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on C, B, E, D, A, H we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v1 on E, D, A, H, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on D, A, H, D, A, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on D, A, H, D, A, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, E, D, A, H, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, D, H, A, D, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on D, H, A, D, E, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on D, A, H, D, A, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on E, A, D, H, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on C, E, B, D, H, A we get similar_triangles(A, D, H, B, C, E)
+By sas_anti_similarity on A, D, H, A, D, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on E, A, D, H, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on H, A, D, E, B, C we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on H, D, A, E, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on C, B, E, D, A, H we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on A, D, H, B, C, E we get similar_triangles(A, D, H, B, C, E)
+By sas_anti_congruence on A, D, H, A, D, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sas_anti_similarity on D, A, H, D, A, E we get anti_similar_triangles(A, D, E, A, D, H)
+By asa_anti_congruence on A, D, E, A, D, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on H, A, D, E, B, C we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on H, D, A, E, C, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on H, A, D, E, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on A, H, D, B, E, C we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v1 on D, A, E, D, A, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on D, H, A, C, E, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on D, A, E, D, A, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on A, D, E, A, D, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, E, D, A, H, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on E, B, C, H, A, D we get similar_triangles(A, D, H, B, C, E)
+By sas_anti_similarity on E, A, D, H, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on E, D, A, H, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on A, H, D, B, E, C we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on H, D, A, E, C, B we get similar_triangles(A, D, H, B, C, E)
+By sas_anti_congruence on A, D, E, A, D, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, D, H, A, D, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sas_anti_similarity on E, D, A, H, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on C, B, E, D, A, H we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on C, E, B, D, H, A we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on H, D, A, E, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, E, D, A, H, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on D, H, A, C, E, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on D, E, A, D, H, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on H, D, A, E, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on D, A, H, C, B, E we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on E, A, D, H, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on A, D, E, A, D, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on H, D, A, E, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sas_similarity on C, B, E, D, A, H we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on D, A, H, C, B, E we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on A, D, E, A, D, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on H, D, A, E, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on H, D, A, E, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on D, H, A, D, E, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on A, E, D, A, H, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on H, D, A, E, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on H, A, D, E, B, C we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on D, A, E, D, A, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on D, H, A, C, E, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on E, D, A, H, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sas_similarity on D, A, H, C, B, E we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on E, D, A, H, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By asa_anti_congruence on D, A, E, D, A, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on E, A, D, H, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on E, B, C, H, A, D we get similar_triangles(A, D, H, B, C, E)
+By asa_anti_congruence on A, D, H, A, D, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on A, D, H, A, D, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on E, A, D, H, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sas_anti_congruence on H, D, A, E, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on A, H, D, A, E, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on A, H, D, A, E, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on D, A, E, D, A, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on A, D, E, A, D, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on D, H, A, D, E, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on E, A, D, H, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By aa_anti_similarity on H, F, midpoint(E, H), E, F, midpoint(E, H) we get anti_similar_triangles(E, F, midpoint(E, H), H, F, midpoint(E, H))
+By sss_anti_congruence_v1 on D, A, E, D, A, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, D, H, A, D, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on B, E, C, A, H, D we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on A, D, H, A, D, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sas_similarity on B, C, E, A, D, H we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on A, D, E, A, D, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on D, A, H, D, A, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on A, D, E, A, D, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on D, A, H, D, A, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on C, B, E, D, A, H we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on A, H, D, A, E, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on D, E, A, D, H, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, E, D, A, H, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on H, A, D, E, B, C we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on H, D, A, E, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on D, A, H, C, B, E we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on H, A, D, E, B, C we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on E, A, D, H, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on H, A, D, E, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on H, A, D, E, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on D, E, A, D, H, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on H, A, D, E, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on A, H, D, B, E, C we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on D, A, H, D, A, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on B, C, E, A, D, H we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on D, A, E, D, A, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on E, D, A, H, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on E, D, A, H, D, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on B, C, E, A, D, H we get similar_triangles(A, D, H, B, C, E)
+By aa_anti_similarity on H, midpoint(E, H), F, E, midpoint(E, H), F we get anti_similar_triangles(E, F, midpoint(E, H), H, F, midpoint(E, H))
+By sss_anti_similarity_v1 on A, E, D, A, H, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sas_similarity on E, B, C, H, A, D we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on A, E, D, A, H, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, E, D, A, H, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on C, B, E, D, A, H we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on A, H, D, A, E, D we get anti_similar_triangles(A, D, E, A, D, H)
+By asa_anti_congruence on D, A, H, D, A, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on A, H, D, A, E, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v1 on A, D, H, A, D, E we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_similarity_v0 on E, A, D, H, A, D we get anti_similar_triangles(A, D, E, A, D, H)
+By sas_similarity on H, A, D, E, B, C we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v1 on A, D, H, A, D, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By sas_anti_congruence on E, A, D, H, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By aa_anti_similarity on E, F, midpoint(E, H), H, F, midpoint(E, H) we get anti_similar_triangles(E, F, midpoint(E, H), H, F, midpoint(E, H))
+By sss_anti_congruence_v1 on H, A, D, E, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on A, D, H, B, C, E we get similar_triangles(A, D, H, B, C, E)
+By sas_anti_congruence on D, A, E, D, A, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on H, D, A, E, D, A we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, E, D, A, H, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on A, D, E, A, D, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on C, E, B, D, H, A we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v1 on D, H, A, D, E, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on A, D, H, A, D, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By aa_similarity on H, A, D, E, B, C we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on D, A, H, C, B, E we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on C, E, B, D, H, A we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on D, H, A, C, E, B we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on D, H, A, C, E, B we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on D, E, A, D, H, A we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on H, A, D, E, A, D we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v1 on H, A, D, E, B, C we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v0 on H, D, A, E, C, B we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on B, C, E, A, D, H we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v0 on A, D, E, A, D, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_similarity_v0 on B, E, C, A, H, D we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_similarity_v0 on A, D, E, A, D, H we get anti_similar_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v1 on D, A, E, D, A, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By aa_similarity on E, C, B, H, D, A we get similar_triangles(A, D, H, B, C, E)
+By sss_similarity_v1 on E, B, C, H, A, D we get similar_triangles(A, D, H, B, C, E)
+By sss_anti_congruence_v1 on D, A, E, D, A, H we get anti_congruent_triangles(A, D, E, A, D, H)
+By sss_anti_congruence_v0 on D, A, H, D, A, E we get anti_congruent_triangles(A, D, E, A, D, H)
+By internal_angle_bisector_definition_v0_r on F, midpoint(E, H), A, D we get internal_angle_bisector(A, D, F) == Line(D, midpoint(E, H))
+By anti_similar_triangle_basic_properties on A, E, B, D, E, C we get angle(A, E, B) == 0 - angle(D, E, C) mod 360, angle(E, B, A) == 0 - angle(E, C, D) mod 360, angle(B, A, E) == 0 - angle(C, D, E) mod 360, log(distance(A, E)) + log(distance(C, E)) == log(distance(D, E)) + log(distance(B, E)), log(distance(B, E)) + log(distance(C, D)) == log(distance(C, E)) + log(distance(A, B)), log(distance(A, B)) + log(distance(D, E)) == log(distance(C, D)) + log(distance(A, E))
+By internal_angle_bisector_definition_v0_r on midpoint(E, H), D, midpoint(E, H), F we get Line(D, F) == internal_angle_bisector(midpoint(E, H), F, midpoint(E, H))
+By anti_similar_triangle_basic_properties on A, B, F, C, D, F we get angle(A, B, F) == 0 - angle(C, D, F) mod 360, angle(B, F, A) == 0 - angle(D, F, C) mod 360, angle(F, A, B) == 0 - angle(F, C, D) mod 360, log(distance(A, B)) + log(distance(D, F)) == log(distance(C, D)) + log(distance(B, F)), log(distance(B, F)) + log(distance(C, F)) == log(distance(D, F)) + log(distance(A, F)), log(distance(A, F)) + log(distance(C, D)) == log(distance(C, F)) + log(distance(A, B))
+By internal_angle_bisector_definition_v0_r on C, D, H, A we get Line(A, D) == internal_angle_bisector(C, A, H)
+By internal_angle_bisector_definition_v0_r on C, F, H, A we get Line(A, F) == internal_angle_bisector(C, A, H)
+By anti_similar_triangle_basic_properties on F, D, C, F, B, A we get angle(F, D, C) == 0 - angle(F, B, A) mod 360, angle(D, C, F) == 0 - angle(B, A, F) mod 360, angle(C, F, D) == 0 - angle(A, F, B) mod 360, log(distance(B, F)) + log(distance(C, D)) == log(distance(D, F)) + log(distance(A, B)), log(distance(A, B)) + log(distance(C, F)) == log(distance(C, D)) + log(distance(A, F)), log(distance(A, F)) + log(distance(D, F)) == log(distance(C, F)) + log(distance(B, F))
+By external_angle_bisector_definition_v0_r on F, midpoint(E, H), D, A we get external_angle_bisector(D, A, F) == Line(A, midpoint(E, H))
+By anti_similar_triangle_basic_properties on G, D, C, E, B, A we get angle(G, D, C) == 0 - angle(E, B, A) mod 360, angle(D, C, G) == 0 - angle(B, A, E) mod 360, angle(C, G, D) == 0 - angle(A, E, B) mod 360, log(distance(B, E)) + log(distance(C, D)) == log(distance(D, G)) + log(distance(A, B)), log(distance(A, B)) + log(distance(C, G)) == log(distance(C, D)) + log(distance(A, E)), log(distance(A, E)) + log(distance(D, G)) == log(distance(C, G)) + log(distance(B, E))
+By anti_similar_triangle_basic_properties on B, E, A, D, G, C we get angle(B, E, A) == 0 - angle(D, G, C) mod 360, angle(E, A, B) == 0 - angle(G, C, D) mod 360, angle(A, B, E) == 0 - angle(C, D, G) mod 360, log(distance(B, E)) + log(distance(C, G)) == log(distance(D, G)) + log(distance(A, E)), log(distance(A, E)) + log(distance(C, D)) == log(distance(C, G)) + log(distance(A, B)), log(distance(A, B)) + log(distance(D, G)) == log(distance(C, D)) + log(distance(B, E))
+By internal_angle_bisector_definition_v0_r on D, midpoint(E, H), A, F we get internal_angle_bisector(A, F, D) == Line(F, midpoint(E, H))
+By internal_angle_bisector_definition_v0_r on H, F, B, D we get Line(D, F) == internal_angle_bisector(B, D, H)
+By anti_similar_triangle_basic_properties on A, B, E, D, C, E we get angle(A, B, E) == 0 - angle(D, C, E) mod 360, angle(B, E, A) == 0 - angle(C, E, D) mod 360, angle(E, A, B) == 0 - angle(E, D, C) mod 360, log(distance(A, B)) + log(distance(C, E)) == log(distance(C, D)) + log(distance(B, E)), log(distance(B, E)) + log(distance(D, E)) == log(distance(C, E)) + log(distance(A, E)), log(distance(A, E)) + log(distance(C, D)) == log(distance(D, E)) + log(distance(A, B))
+By internal_angle_bisector_definition_v0_r on F, D, F, midpoint(E, H) we get Line(D, midpoint(E, H)) == internal_angle_bisector(F, midpoint(E, H), F)
+By internal_angle_bisector_definition_v0_r on F, A, F, midpoint(E, H) we get Line(A, midpoint(E, H)) == internal_angle_bisector(F, midpoint(E, H), F)
+By internal_angle_bisector_definition_v0_r on H, A, B, D we get Line(A, D) == internal_angle_bisector(B, D, H)
+By internal_angle_bisector_definition_v0_r on midpoint(E, H), A, midpoint(E, H), F we get Line(A, F) == internal_angle_bisector(midpoint(E, H), F, midpoint(E, H))
+By internal_angle_bisector_definition_v0 on H, midpoint(E, H), B, D we get angle(H, D, midpoint(E, H)) == angle(midpoint(E, H), D, B) mod 360
+By internal_angle_bisector_definition_v0 on H, midpoint(E, H), C, A we get angle(H, A, midpoint(E, H)) == angle(midpoint(E, H), A, C) mod 360
+By internal_angle_bisector_definition_v0 on C, midpoint(E, H), H, A we get angle(C, A, midpoint(E, H)) == angle(midpoint(E, H), A, H) mod 360
+By internal_angle_bisector_definition_v0 on B, midpoint(E, H), H, D we get angle(B, D, midpoint(E, H)) == angle(midpoint(E, H), D, H) mod 360
+By anti_similar_triangle_basic_properties on F, H, midpoint(E, H), F, E, midpoint(E, H) we get angle(F, H, midpoint(E, H)) == 0 - angle(F, E, midpoint(E, H)) mod 360, angle(H, midpoint(E, H), F) == 0 - angle(E, midpoint(E, H), F) mod 360, angle(midpoint(E, H), F, H) == 0 - angle(midpoint(E, H), F, E) mod 360, log(distance(E, F)) + log(distance(H, midpoint(E, H))) == log(distance(F, H)) + log(distance(E, midpoint(E, H))), log(distance(E, midpoint(E, H))) + log(distance(F, midpoint(E, H))) == log(distance(H, midpoint(E, H))) + log(distance(F, midpoint(E, H))), log(distance(F, midpoint(E, H))) + log(distance(E, F)) == log(distance(F, midpoint(E, H))) + log(distance(F, H))
+By sas_anti_similarity on E, B, F, G, D, F we get anti_similar_triangles(B, E, F, D, G, F)
+By sas_anti_similarity on G, D, F, E, B, F we get anti_similar_triangles(B, E, F, D, G, F)
+By sas_similarity on F, A, H, F, C, G we get similar_triangles(A, F, H, C, F, G)
+By sas_anti_similarity on E, A, F, G, C, F we get anti_similar_triangles(A, E, F, C, G, F)
+By sas_anti_similarity on F, A, E, F, C, G we get anti_similar_triangles(A, E, F, C, G, F)
+By sas_anti_similarity on F, B, E, F, D, G we get anti_similar_triangles(B, E, F, D, G, F)
+By sas_similarity on G, C, F, H, A, F we get similar_triangles(A, F, H, C, F, G)
+By sas_similarity on H, A, F, G, C, F we get similar_triangles(A, F, H, C, F, G)
+By sas_anti_similarity on F, C, G, F, A, E we get anti_similar_triangles(A, E, F, C, G, F)
+By sas_anti_similarity on F, D, G, F, B, E we get anti_similar_triangles(B, E, F, D, G, F)
+By sas_anti_similarity on G, C, F, E, A, F we get anti_similar_triangles(A, E, F, C, G, F)
+By sas_similarity on F, C, G, F, A, H we get similar_triangles(A, F, H, C, F, G)
+By concyclic_sufficient_conditions_v1 on D, H, F, G we get concyclic(D, F, G, H)
+By line_intersection_definition on F, Line(E, F), Line(F, G) we get F == line_intersection(Line(E, F), Line(F, G))
+By line_intersection_definition on F, Line(A, D), Line(F, G) we get F == line_intersection(Line(A, D), Line(F, G))
+By line_intersection_definition on F, Line(F, G), Line(F, H) we get F == line_intersection(Line(F, G), Line(F, H))
+By line_intersection_definition on G, Line(F, G), Line(C, G) we get G == line_intersection(Line(C, G), Line(F, G))
+By line_intersection_definition on F, Line(F, G), Line(B, C) we get F == line_intersection(Line(B, C), Line(F, G))
+By line_intersection_definition on G, Line(D, G), Line(F, G) we get G == line_intersection(Line(D, G), Line(F, G))
+By line_intersection_definition on G, Line(E, G), Line(F, G) we get G == line_intersection(Line(E, G), Line(F, G))
+By same_angle_v1 on F, D, A, G we get angle(A, F, G) == angle(D, F, G) mod 360
+By same_angle_v0 on F, C, B, G we get angle(B, F, G) == angle(C, F, G) mod 360
+By anti_similar_triangle_basic_properties on G, C, F, E, A, F we get angle(G, C, F) == 0 - angle(E, A, F) mod 360, angle(C, F, G) == 0 - angle(A, F, E) mod 360, angle(F, G, C) == 0 - angle(F, E, A) mod 360, log(distance(A, E)) + log(distance(C, F)) == log(distance(C, G)) + log(distance(A, F)), log(distance(A, F)) + log(distance(F, G)) == log(distance(C, F)) + log(distance(E, F)), log(distance(E, F)) + log(distance(C, G)) == log(distance(F, G)) + log(distance(A, E))
+By similar_triangle_basic_properties on C, G, F, A, H, F we get angle(A, H, F) == angle(C, G, F) mod 360, angle(G, F, C) == angle(H, F, A) mod 360, angle(F, A, H) == angle(F, C, G) mod 360, log(distance(A, H)) + log(distance(F, G)) == log(distance(C, G)) + log(distance(F, H)), log(distance(F, G)) + log(distance(A, F)) == log(distance(F, H)) + log(distance(C, F)), log(distance(A, F)) + log(distance(C, G)) == log(distance(C, F)) + log(distance(A, H))
+By anti_similar_triangle_basic_properties on F, D, G, F, B, E we get angle(F, D, G) == 0 - angle(F, B, E) mod 360, angle(D, G, F) == 0 - angle(B, E, F) mod 360, angle(G, F, D) == 0 - angle(E, F, B) mod 360, log(distance(B, F)) + log(distance(D, G)) == log(distance(D, F)) + log(distance(B, E)), log(distance(B, E)) + log(distance(F, G)) == log(distance(D, G)) + log(distance(E, F)), log(distance(E, F)) + log(distance(D, F)) == log(distance(F, G)) + log(distance(B, F))
+By anti_similar_triangle_basic_properties on G, F, C, E, F, A we get angle(G, F, C) == 0 - angle(E, F, A) mod 360, angle(F, C, G) == 0 - angle(F, A, E) mod 360, angle(C, G, F) == 0 - angle(A, E, F) mod 360, log(distance(E, F)) + log(distance(C, F)) == log(distance(F, G)) + log(distance(A, F)), log(distance(A, F)) + log(distance(C, G)) == log(distance(C, F)) + log(distance(A, E)), log(distance(A, E)) + log(distance(F, G)) == log(distance(C, G)) + log(distance(E, F))
+By anti_similar_triangle_basic_properties on G, D, F, E, B, F we get angle(G, D, F) == 0 - angle(E, B, F) mod 360, angle(D, F, G) == 0 - angle(B, F, E) mod 360, angle(F, G, D) == 0 - angle(F, E, B) mod 360, log(distance(B, E)) + log(distance(D, F)) == log(distance(D, G)) + log(distance(B, F)), log(distance(B, F)) + log(distance(F, G)) == log(distance(D, F)) + log(distance(E, F)), log(distance(E, F)) + log(distance(D, G)) == log(distance(F, G)) + log(distance(B, E))

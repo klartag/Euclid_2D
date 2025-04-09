@@ -46,3 +46,4283 @@ Need to prove:
 concyclic(A, D, J, K)
 
 Proof:
+By line_definition on G, D, i we get i == Line(D, G)
+By line_definition on B, G, j we get j == Line(B, G)
+By line_definition on D, K, l we get l == Line(D, K)
+By line_definition on J, C, k we get k == Line(C, J)
+By line_definition on D, B, g we get g == Line(B, D)
+By line_definition on K, I, l we get l == Line(I, K)
+By line_definition on B, F, f we get f == Line(B, F)
+By line_definition on E, G, j we get j == Line(E, G)
+By line_definition on A, G, i we get i == Line(A, G)
+By line_definition on J, F, k we get k == Line(F, J)
+By line_definition on E, B, perpendicular_line(B, h) we get Line(B, E) == perpendicular_line(B, h)
+By line_definition on F, A, f we get f == Line(A, F)
+By line_definition on A, E, h we get h == Line(A, E)
+By line_definition on D, A, perpendicular_line(A, g) we get Line(A, D) == perpendicular_line(A, g)
+By line_definition on K, C, k we get k == Line(C, K)
+By line_definition on C, F, perpendicular_line(C, f) we get Line(C, F) == perpendicular_line(C, f)
+By line_definition on K, J, k we get k == Line(J, K)
+By line_definition on C, D, g we get g == Line(C, D)
+By line_definition on F, K, k we get k == Line(F, K)
+By line_definition on E, C, h we get h == Line(C, E)
+By line_intersection_definition on B, f, j we get B == line_intersection(f, j)
+By line_intersection_definition on C, h, perpendicular_line(C, f) we get C == line_intersection(h, perpendicular_line(C, f))
+By median_definition on D, C, A, l we get l == median(D, A, C)
+By line_intersection_definition on A, perpendicular_line(A, g), h we get A == line_intersection(h, perpendicular_line(A, g))
+By circle_definition on H, I, J, c we get c == Circle(H, I, J)
+By line_intersection_definition on B, perpendicular_line(B, h), g we get B == line_intersection(g, perpendicular_line(B, h))
+By line_intersection_definition on A, i, f we get A == line_intersection(f, i)
+By line_intersection_definition on C, h, g we get C == line_intersection(g, h)
+By line_intersection_definition on C, g, k we get C == line_intersection(g, k)
+By line_intersection_definition on B, perpendicular_line(B, h), f we get B == line_intersection(f, perpendicular_line(B, h))
+By perpendicular_line_definition on B, f, perpendicular_line(C, f) we get f == perpendicular_line(B, perpendicular_line(C, f))
+By line_intersection_definition on A, perpendicular_line(A, g), f we get A == line_intersection(f, perpendicular_line(A, g))
+By circle_definition on A, H, J, c we get c == Circle(A, H, J)
+By circle_definition on J, I, A, c we get c == Circle(A, I, J)
+By perpendicular_line_definition on D, g, perpendicular_line(A, g) we get g == perpendicular_line(D, perpendicular_line(A, g))
+By line_intersection_definition on D, g, l we get D == line_intersection(g, l)
+By line_intersection_definition on B, g, j we get B == line_intersection(g, j)
+By line_intersection_definition on E, h, j we get E == line_intersection(h, j)
+By line_intersection_definition on A, h, f we get A == line_intersection(f, h)
+By line_intersection_definition on C, perpendicular_line(C, f), g we get C == line_intersection(g, perpendicular_line(C, f))
+By perpendicular_line_definition on A, h, perpendicular_line(B, h) we get h == perpendicular_line(A, perpendicular_line(B, h))
+By perpendicular_line_definition on F, perpendicular_line(C, f), f we get perpendicular_line(C, f) == perpendicular_line(F, f)
+By line_intersection_definition on D, i, g we get D == line_intersection(g, i)
+By perpendicular_line_definition on F, f, perpendicular_line(C, f) we get f == perpendicular_line(F, perpendicular_line(C, f))
+By line_intersection_definition on D, perpendicular_line(A, g), l we get D == line_intersection(l, perpendicular_line(A, g))
+By perpendicular_line_definition on C, g, perpendicular_line(A, g) we get g == perpendicular_line(C, perpendicular_line(A, g))
+By line_intersection_definition on F, f, k we get F == line_intersection(f, k)
+By perpendicular_line_definition on B, g, perpendicular_line(A, g) we get g == perpendicular_line(B, perpendicular_line(A, g))
+By line_intersection_definition on C, k, h we get C == line_intersection(h, k)
+By line_intersection_definition on D, l, i we get D == line_intersection(i, l)
+By line_intersection_definition on A, h, i we get A == line_intersection(h, i)
+By perpendicular_line_definition on A, f, perpendicular_line(C, f) we get f == perpendicular_line(A, perpendicular_line(C, f))
+By median_definition on K, A, C, l we get l == median(K, A, C)
+By perpendicular_line_definition on D, perpendicular_line(A, g), g we get perpendicular_line(A, g) == perpendicular_line(D, g)
+By perpendicular_line_definition on E, h, perpendicular_line(B, h) we get h == perpendicular_line(E, perpendicular_line(B, h))
+By line_intersection_definition on B, f, g we get B == line_intersection(f, g)
+By perpendicular_line_definition on C, h, perpendicular_line(B, h) we get h == perpendicular_line(C, perpendicular_line(B, h))
+By perpendicular_line_definition on E, perpendicular_line(B, h), h we get perpendicular_line(B, h) == perpendicular_line(E, h)
+By line_uniqueness on A, D, perpendicular_line(A, g), i we get i == perpendicular_line(A, g)
+By line_uniqueness on F, C, perpendicular_line(C, f), k we get k == perpendicular_line(C, f)
+By line_uniqueness on B, E, j, perpendicular_line(B, h) we get j == perpendicular_line(B, h)
+By between_imply_not_between on C, I, A we get collinear_and_not_between(A, C, I)
+By between_imply_not_between on A, I, C we get collinear_and_not_between(C, A, I)
+By between_imply_not_between on C, H, G we get collinear_and_not_between(G, C, H)
+By between_imply_not_between on G, H, C we get collinear_and_not_between(C, G, H)
+By in_imply_collinear on D, B, C we get collinear(B, C, D)
+By in_imply_collinear on G, D, A we get collinear(A, D, G)
+By in_imply_collinear on K, C, F we get collinear(C, F, K)
+By in_imply_collinear on J, C, F we get collinear(C, F, J)
+By in_imply_collinear on G, E, B we get collinear(B, E, G)
+By in_imply_collinear on E, A, C we get collinear(A, C, E)
+By in_imply_collinear on K, I, D we get collinear(D, I, K)
+By in_imply_collinear on F, A, B we get collinear(A, B, F)
+By in_imply_concyclic on H, A, I, J we get concyclic(A, H, I, J)
+By power_of_a_point_on_circle on I, c we get 0 == power_of_a_point(I, c)
+By angles_on_chord_v1 on H, I, A, J, c we get angle(H, A, I) == angle(H, J, I) mod 360
+By angles_on_chord_v0 on H, J, I, A, c we get angle(H, A, J) == angle(H, I, J) mod 360
+By power_of_a_point_on_circle on A, c we get 0 == power_of_a_point(A, c)
+By power_of_a_point_in_circle on H, c we get 0 == power_of_a_point(H, c)
+By angles_on_chord_v1 on A, J, H, I, c we get angle(A, H, J) == angle(A, I, J) mod 360
+By power_of_a_point_in_circle on J, c we get 0 == power_of_a_point(J, c)
+By angles_on_chord_v1 on J, H, I, A, c we get angle(J, A, H) == angle(J, I, H) mod 360
+By angles_on_chord_v2 on I, J, A, H, c we get angle(I, A, J) == angle(I, H, J) + 180 mod 360
+By angles_on_chord_v3 on I, J, H, A, c we get angle(I, H, J) == angle(I, A, J) + 180 mod 360
+By angles_on_chord_v1 on I, A, H, J, c we get angle(I, H, A) == angle(I, J, A) mod 360
+By angles_on_chord_v3 on J, I, A, H, c we get angle(J, A, I) == angle(J, H, I) + 180 mod 360
+By angles_on_chord_v3 on H, A, J, I, c we get angle(H, J, A) == angle(H, I, A) + 180 mod 360
+By angles_on_chord_v0 on J, A, H, I, c we get angle(J, H, A) == angle(J, I, A) mod 360
+By angles_on_chord_v2 on J, I, H, A, c we get angle(J, H, I) == angle(J, A, I) + 180 mod 360
+By angles_on_chord_v0 on I, H, A, J, c we get angle(I, A, H) == angle(I, J, H) mod 360
+By angles_on_chord_v0 on A, I, J, H, c we get angle(A, H, I) == angle(A, J, I) mod 360
+By angles_on_chord_v2 on H, A, I, J, c we get angle(H, I, A) == angle(H, J, A) + 180 mod 360
+By angles_on_chord_v2 on A, H, J, I, c we get angle(A, J, H) == angle(A, I, H) + 180 mod 360
+By angles_on_chord_v3 on A, H, I, J, c we get angle(A, I, H) == angle(A, J, H) + 180 mod 360
+By same_angle_v0 on A, C, I, B we get angle(C, A, B) == angle(I, A, B) mod 360
+By same_angle_v1 on C, H, G, B we get angle(G, C, B) == angle(H, C, B) mod 360
+By same_angle_v1 on C, I, A, F we get angle(A, C, F) == angle(I, C, F) mod 360
+By same_angle_v0 on C, G, H, A we get angle(G, C, A) == angle(H, C, A) mod 360
+By same_angle_v1 on C, A, I, B we get angle(A, C, B) == angle(I, C, B) mod 360
+By same_angle_v2 on I, C, A, D we get angle(C, I, D) == angle(A, I, D) + 180 mod 360
+By same_angle_v0 on A, I, C, D we get angle(C, A, D) == angle(I, A, D) mod 360
+By altitude_definition on A, C, B, perpendicular_line(A, g) we get altitude(A, B, C) == perpendicular_line(A, g)
+By collinear_definition on H, G, C we get G in Line(C, H), C in Line(G, H), Line(C, H) == Line(G, H), 0 == 2 * angle(G, H, C) mod 360
+By log_of_2_times_distance on G, C, C, H we get log(distance(C, G)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(C, H))
+By collinear_definition on C, A, I we get A in Line(C, I), I in Line(A, C), Line(A, C) == Line(C, I), 0 == 2 * angle(A, C, I) mod 360
+By altitude_definition on B, A, C, perpendicular_line(B, h) we get altitude(B, A, C) == perpendicular_line(B, h)
+By log_of_2_times_distance on G, C, G, H we get log(distance(C, G)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(G, H))
+By collinear_definition on A, I, C we get I in Line(A, C), C in Line(A, I), Line(A, C) == Line(A, I), 0 == 2 * angle(I, A, C) mod 360
+By log_of_2_times_distance on A, C, I, C we get log(distance(A, C)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(C, I))
+By collinear_definition on A, C, I we get C in Line(A, I), I in Line(A, C), Line(A, C) == Line(A, I), 0 == 2 * angle(C, A, I) mod 360
+By log_of_2_times_distance on C, A, A, I we get log(distance(A, C)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(A, I))
+By collinear_definition on I, A, C we get A in Line(C, I), C in Line(A, I), Line(A, I) == Line(C, I), 0 == 2 * angle(A, I, C) mod 360
+By collinear_definition on H, C, G we get C in Line(G, H), G in Line(C, H), Line(C, H) == Line(G, H), 0 == 2 * angle(C, H, G) mod 360
+By collinear_definition on C, I, A we get I in Line(A, C), A in Line(C, I), Line(A, C) == Line(C, I), 0 == 2 * angle(I, C, A) mod 360
+By collinear_definition on C, G, H we get G in Line(C, H), H in Line(C, G), Line(C, G) == Line(C, H), 0 == 2 * angle(G, C, H) mod 360
+By collinear_definition on G, H, C we get H in Line(C, G), C in Line(G, H), Line(C, G) == Line(G, H), 0 == 2 * angle(H, G, C) mod 360
+By altitude_definition on C, B, A, perpendicular_line(C, f) we get altitude(C, A, B) == perpendicular_line(C, f)
+By collinear_definition on I, C, A we get C in Line(A, I), A in Line(C, I), Line(A, I) == Line(C, I), 0 == 2 * angle(C, I, A) mod 360
+By collinear_definition on C, H, G we get H in Line(C, G), G in Line(C, H), Line(C, G) == Line(C, H), 0 == 2 * angle(H, C, G) mod 360
+By collinear_definition on G, C, H we get C in Line(G, H), H in Line(C, G), Line(C, G) == Line(G, H), 0 == 2 * angle(C, G, H) mod 360
+By power_of_a_point_definition on C, A, I, c we get log(power_of_a_point(C, c)) == log(distance(A, C)) + log(distance(C, I))
+By between_implies_angles on A, I, C we get 180 == angle(A, I, C) mod 360, 0 == angle(I, C, A) mod 360, 0 == angle(C, A, I) mod 360
+By between_implies_angles on G, H, C we get 180 == angle(G, H, C) mod 360, 0 == angle(H, C, G) mod 360, 0 == angle(C, G, H) mod 360
+By between_implies_angles on C, I, A we get 180 == angle(C, I, A) mod 360, 0 == angle(I, A, C) mod 360, 0 == angle(A, C, I) mod 360
+By between_implies_angles on C, H, G we get 180 == angle(C, H, G) mod 360, 0 == angle(H, G, C) mod 360, 0 == angle(G, C, H) mod 360
+By line_definition on E, I, h we get h == Line(E, I)
+By line_intersection_definition on I, Line(I, J), Line(H, I) we get I == line_intersection(Line(H, I), Line(I, J))
+By median_definition on A, C, G, Line(A, H) we get Line(A, H) == median(A, C, G)
+By line_intersection_definition on I, Line(I, J), h we get I == line_intersection(h, Line(I, J))
+By line_intersection_definition on J, Line(I, J), Line(A, J) we get J == line_intersection(Line(A, J), Line(I, J))
+By line_intersection_definition on G, i, Line(C, G) we get G == line_intersection(i, Line(C, G))
+By line_intersection_definition on A, Line(A, H), f we get A == line_intersection(f, Line(A, H))
+By line_intersection_definition on I, Line(H, I), h we get I == line_intersection(h, Line(H, I))
+By line_intersection_definition on I, l, h we get I == line_intersection(h, l)
+By line_intersection_definition on I, l, Line(I, J) we get I == line_intersection(l, Line(I, J))
+By line_intersection_definition on A, Line(A, J), i we get A == line_intersection(i, Line(A, J))
+By median_definition on I, G, C, Line(H, I) we get Line(H, I) == median(I, C, G)
+By orthocenter_concurrency on A, C, B we get orthocenter(A, B, C) in altitude(A, B, C), orthocenter(A, B, C) in altitude(C, A, B), orthocenter(A, B, C) in altitude(B, A, C)
+By line_intersection_definition on A, Line(A, H), Line(A, J) we get A == line_intersection(Line(A, H), Line(A, J))
+By line_intersection_definition on H, Line(A, H), Line(H, J) we get H == line_intersection(Line(A, H), Line(H, J))
+By line_intersection_definition on I, l, Line(H, I) we get I == line_intersection(l, Line(H, I))
+By line_intersection_definition on J, Line(H, J), Line(A, J) we get J == line_intersection(Line(A, J), Line(H, J))
+By line_intersection_definition on A, h, Line(A, H) we get A == line_intersection(h, Line(A, H))
+By median_definition on J, C, A, Line(I, J) we get Line(I, J) == median(J, A, C)
+By line_intersection_definition on A, i, Line(A, H) we get A == line_intersection(i, Line(A, H))
+By line_intersection_definition on J, Line(I, J), k we get J == line_intersection(k, Line(I, J))
+By median_definition on H, C, A, Line(H, I) we get Line(H, I) == median(H, A, C)
+By line_intersection_definition on H, Line(H, I), Line(H, J) we get H == line_intersection(Line(H, I), Line(H, J))
+By perpendicular_line_definition on J, k, f we get k == perpendicular_line(J, f)
+By line_intersection_definition on H, Line(H, I), Line(C, G) we get H == line_intersection(Line(C, G), Line(H, I))
+By line_intersection_definition on H, Line(C, G), Line(A, H) we get H == line_intersection(Line(A, H), Line(C, G))
+By line_intersection_definition on A, f, Line(A, J) we get A == line_intersection(f, Line(A, J))
+By line_intersection_definition on J, k, Line(A, J) we get J == line_intersection(k, Line(A, J))
+By line_intersection_definition on H, Line(A, H), Line(H, I) we get H == line_intersection(Line(A, H), Line(H, I))
+By perpendicular_line_definition on I, h, j we get h == perpendicular_line(I, j)
+By perpendicular_line_definition on G, i, g we get i == perpendicular_line(G, g)
+By line_intersection_definition on A, h, Line(A, J) we get A == line_intersection(h, Line(A, J))
+By line_intersection_definition on G, Line(C, G), j we get G == line_intersection(j, Line(C, G))
+By line_intersection_definition on J, Line(I, J), Line(H, J) we get J == line_intersection(Line(H, J), Line(I, J))
+By line_intersection_definition on C, Line(C, G), g we get C == line_intersection(g, Line(C, G))
+By line_intersection_definition on C, h, Line(C, G) we get C == line_intersection(h, Line(C, G))
+By perpendicular_line_definition on G, j, h we get j == perpendicular_line(G, h)
+By perpendicular_line_definition on K, k, f we get k == perpendicular_line(K, f)
+By same_angle_v2 on H, G, C, I we get angle(G, H, I) == angle(C, H, I) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on C, F, A, B we get 180 == 2 * direction(C, F) - 2 * direction(A, B) mod 360
+By same_angle_v0 on C, G, H, I we get angle(G, C, I) == angle(H, C, I) mod 360
+By same_angle_v2 on I, C, A, J we get angle(C, I, J) == angle(A, I, J) + 180 mod 360
+By same_angle_v3 on H, G, C, A we get angle(G, H, A) == angle(C, H, A) + 180 mod 360
+By projection_definition on B, D, i we get D == projection(B, i)
+By perpendicular_direction_conditions_v0_r on A, D, C, B we get 180 == 2 * direction(A, D) - 2 * direction(C, B) mod 360
+By same_angle_v1 on C, I, A, G we get angle(A, C, G) == angle(I, C, G) mod 360
+By same_angle_v1 on C, A, I, H we get angle(A, C, H) == angle(I, C, H) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, C, F we get 180 == 2 * direction(A, B) - 2 * direction(C, F) mod 360
+By same_angle_v3 on I, C, A, H we get angle(C, I, H) == angle(A, I, H) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on C, B, A, D we get 180 == 2 * direction(C, B) - 2 * direction(A, D) mod 360
+By projection_definition on C, E, j we get E == projection(C, j)
+By same_angle_v0 on A, I, C, H we get angle(C, A, H) == angle(I, A, H) mod 360
+By same_angle_v0 on A, C, I, J we get angle(C, A, J) == angle(I, A, J) mod 360
+By projection_definition on C, D, i we get D == projection(C, i)
+By projection_definition on B, F, k we get F == projection(B, k)
+By projection_definition on A, E, j we get E == projection(A, j)
+By projection_definition on A, F, k we get F == projection(A, k)
+By perpendicular_direction_conditions_v0_r on B, E, C, A we get 180 == 2 * direction(B, E) - 2 * direction(C, A) mod 360
+By same_angle_v1 on C, F, J, B we get angle(F, C, B) == angle(J, C, B) mod 360
+By same_angle_v1 on I, K, D, H we get angle(D, I, H) == angle(K, I, H) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, D, B we get 180 == 2 * direction(A, D) - 2 * direction(D, B) mod 360
+By same_angle_v1 on A, D, G, H we get angle(D, A, H) == angle(G, A, H) mod 360
+By same_angle_v1 on A, B, F, D we get angle(B, A, D) == angle(F, A, D) mod 360
+By same_angle_v0 on A, C, E, H we get angle(C, A, H) == angle(E, A, H) mod 360
+By same_angle_v0 on G, H, C, D we get angle(C, G, D) == angle(H, G, D) mod 360
+By perpendicular_direction_conditions_v0_r on C, I, B, E we get 180 == 2 * direction(C, I) - 2 * direction(B, E) mod 360
+By same_angle_v0 on C, K, F, I we get angle(F, C, I) == angle(K, C, I) mod 360
+By same_angle_v2 on I, C, A, K we get angle(C, I, K) == angle(A, I, K) + 180 mod 360
+By same_angle_v1 on C, I, A, K we get angle(A, C, K) == angle(I, C, K) mod 360
+By same_angle_v0 on A, D, G, B we get angle(D, A, B) == angle(G, A, B) mod 360
+By same_angle_v0 on C, D, B, F we get angle(B, C, F) == angle(D, C, F) mod 360
+By same_angle_v0 on C, B, D, G we get angle(B, C, G) == angle(D, C, G) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, J, F we get 180 == 2 * direction(A, B) - 2 * direction(J, F) mod 360
+By same_angle_v1 on A, B, F, C we get angle(B, A, C) == angle(F, A, C) mod 360
+By probably_between_and_collinear_implies_between on C, F, J we get between(C, F, J)
+By same_angle_v1 on C, E, A, H we get angle(A, C, H) == angle(E, C, H) mod 360
+By same_angle_v1 on G, H, C, A we get angle(C, G, A) == angle(H, G, A) mod 360
+By same_angle_v1 on C, G, H, D we get angle(G, C, D) == angle(H, C, D) mod 360
+By same_angle_v1 on A, D, G, I we get angle(D, A, I) == angle(G, A, I) mod 360
+By perpendicular_direction_conditions_v0_r on A, C, G, B we get 180 == 2 * direction(A, C) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, I, E, B we get 180 == 2 * direction(A, I) - 2 * direction(E, B) mod 360
+By same_angle_v0 on A, B, F, J we get angle(B, A, J) == angle(F, A, J) mod 360
+By same_angle_v1 on C, A, E, F we get angle(A, C, F) == angle(E, C, F) mod 360
+By probably_between_and_collinear_implies_between on B, D, C we get between(B, D, C)
+By perpendicular_direction_conditions_v0_r on B, G, A, C we get 180 == 2 * direction(B, G) - 2 * direction(A, C) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, I, A we get 180 == 2 * direction(G, E) - 2 * direction(I, A) mod 360
+By same_angle_v1 on C, F, K, B we get angle(F, C, B) == angle(K, C, B) mod 360
+By same_angle_v1 on G, H, C, E we get angle(C, G, E) == angle(H, G, E) mod 360
+By same_angle_v0 on A, E, C, J we get angle(C, A, J) == angle(E, A, J) mod 360
+By perpendicular_direction_conditions_v0_r on C, A, B, G we get 180 == 2 * direction(C, A) - 2 * direction(B, G) mod 360
+By probably_between_and_collinear_implies_between on B, F, A we get between(A, F, B)
+By perpendicular_direction_conditions_v0_r on I, C, E, G we get 180 == 2 * direction(I, C) - 2 * direction(E, G) mod 360
+By same_angle_v0 on C, K, F, A we get angle(F, C, A) == angle(K, C, A) mod 360
+By same_angle_v0 on A, I, C, G we get angle(C, A, G) == angle(I, A, G) mod 360
+By same_angle_v0 on C, B, D, H we get angle(B, C, H) == angle(D, C, H) mod 360
+By same_angle_v0 on A, G, D, J we get angle(D, A, J) == angle(G, A, J) mod 360
+By same_angle_v0 on C, F, J, A we get angle(F, C, A) == angle(J, C, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, C, D we get 180 == 2 * direction(A, D) - 2 * direction(C, D) mod 360
+By perpendicular_direction_conditions_v0_r on C, A, E, B we get 180 == 2 * direction(C, A) - 2 * direction(E, B) mod 360
+By same_angle_v0 on C, D, B, A we get angle(B, C, A) == angle(D, C, A) mod 360
+By same_angle_v1 on C, E, A, G we get angle(A, C, G) == angle(E, C, G) mod 360
+By same_angle_v1 on C, A, E, B we get angle(A, C, B) == angle(E, C, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, A, I we get 180 == 2 * direction(G, B) - 2 * direction(A, I) mod 360
+By same_angle_v0 on A, C, E, D we get angle(C, A, D) == angle(E, A, D) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, F, B we get 180 == 2 * direction(C, F) - 2 * direction(F, B) mod 360
+By same_angle_v0 on A, C, E, B we get angle(C, A, B) == angle(E, A, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, A, I we get 180 == 2 * direction(B, E) - 2 * direction(A, I) mod 360
+By same_angle_v0 on I, K, D, A we get angle(D, I, A) == angle(K, I, A) mod 360
+By same_angle_v1 on A, F, B, I we get angle(B, A, I) == angle(F, A, I) mod 360
+By projection_definition on K, F, f we get F == projection(K, f)
+By same_angle_v0 on A, I, C, F we get angle(C, A, F) == angle(I, A, F) mod 360
+By same_angle_v0 on G, C, H, B we get angle(C, G, B) == angle(H, G, B) mod 360
+By same_angle_v1 on C, A, I, J we get angle(A, C, J) == angle(I, C, J) mod 360
+By same_angle_v1 on I, K, D, C we get angle(D, I, C) == angle(K, I, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, I, C we get 180 == 2 * direction(E, B) - 2 * direction(I, C) mod 360
+By same_angle_v1 on A, F, B, H we get angle(B, A, H) == angle(F, A, H) mod 360
+By perpendicular_direction_conditions_v0_r on C, B, D, G we get 180 == 2 * direction(C, B) - 2 * direction(D, G) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, A, D we get 180 == 2 * direction(D, B) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, J, K we get 180 == 2 * direction(A, B) - 2 * direction(J, K) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, C, F we get 180 == 2 * direction(B, F) - 2 * direction(C, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, A, I we get 180 == 2 * direction(E, G) - 2 * direction(A, I) mod 360
+By same_angle_v0 on C, F, J, I we get angle(F, C, I) == angle(J, C, I) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, B, A we get 180 == 2 * direction(C, F) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, C, I we get 180 == 2 * direction(B, G) - 2 * direction(C, I) mod 360
+By same_angle_v1 on C, A, I, D we get angle(A, C, D) == angle(I, C, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, I, E, G we get 180 == 2 * direction(A, I) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on J, F, A, B we get 180 == 2 * direction(J, F) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, A, I we get 180 == 2 * direction(B, G) - 2 * direction(A, I) mod 360
+By same_angle_v0 on C, H, G, E we get angle(G, C, E) == angle(H, C, E) mod 360
+By probably_between_and_collinear_implies_between on A, E, C we get between(A, E, C)
+By perpendicular_direction_conditions_v0_r on F, J, A, B we get 180 == 2 * direction(F, J) - 2 * direction(A, B) mod 360
+By same_angle_v0 on I, D, K, J we get angle(D, I, J) == angle(K, I, J) mod 360
+By perpendicular_direction_conditions_v0_r on I, C, B, E we get 180 == 2 * direction(I, C) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, F, K we get 180 == 2 * direction(A, B) - 2 * direction(F, K) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, F, A we get 180 == 2 * direction(C, F) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, C, J we get 180 == 2 * direction(A, B) - 2 * direction(C, J) mod 360
+By same_angle_v0 on C, D, B, I we get angle(B, C, I) == angle(D, C, I) mod 360
+By perpendicular_direction_conditions_v0_r on J, C, A, B we get 180 == 2 * direction(J, C) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, B, D we get 180 == 2 * direction(A, D) - 2 * direction(B, D) mod 360
+By perpendicular_direction_conditions_v0_r on I, C, G, B we get 180 == 2 * direction(I, C) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, A, G, E we get 180 == 2 * direction(C, A) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on C, I, G, B we get 180 == 2 * direction(C, I) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, A, G, B we get 180 == 2 * direction(C, A) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, A, C we get 180 == 2 * direction(G, E) - 2 * direction(A, C) mod 360
+By same_angle_v1 on A, D, G, C we get angle(D, A, C) == angle(G, A, C) mod 360
+By perpendicular_direction_conditions_v0_r on K, F, A, B we get 180 == 2 * direction(K, F) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on I, A, G, B we get 180 == 2 * direction(I, A) - 2 * direction(G, B) mod 360
+By in_imply_collinear on E, C, I we get collinear(C, E, I)
+By perpendicular_direction_conditions_v0_r on G, B, C, A we get 180 == 2 * direction(G, B) - 2 * direction(C, A) mod 360
+By projection_definition on G, D, g we get D == projection(G, g)
+By perpendicular_direction_conditions_v0_r on E, G, C, A we get 180 == 2 * direction(E, G) - 2 * direction(C, A) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, I, A we get 180 == 2 * direction(E, B) - 2 * direction(I, A) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, A, C we get 180 == 2 * direction(E, G) - 2 * direction(A, C) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, I, A we get 180 == 2 * direction(B, E) - 2 * direction(I, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, C, A we get 180 == 2 * direction(B, G) - 2 * direction(C, A) mod 360
+By perpendicular_direction_conditions_v0_r on I, A, E, B we get 180 == 2 * direction(I, A) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, I, C we get 180 == 2 * direction(G, B) - 2 * direction(I, C) mod 360
+By perpendicular_direction_conditions_v0_r on C, A, E, G we get 180 == 2 * direction(C, A) - 2 * direction(E, G) mod 360
+By projection_definition on G, E, h we get E == projection(G, h)
+By perpendicular_direction_conditions_v0_r on G, D, C, B we get 180 == 2 * direction(G, D) - 2 * direction(C, B) mod 360
+By perpendicular_direction_conditions_v0_r on I, A, B, G we get 180 == 2 * direction(I, A) - 2 * direction(B, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, C, A we get 180 == 2 * direction(G, E) - 2 * direction(C, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, J, C we get 180 == 2 * direction(A, B) - 2 * direction(J, C) mod 360
+By perpendicular_direction_conditions_v0_r on I, A, E, G we get 180 == 2 * direction(I, A) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, D, C we get 180 == 2 * direction(A, D) - 2 * direction(D, C) mod 360
+By perpendicular_direction_conditions_v0_r on I, C, B, G we get 180 == 2 * direction(I, C) - 2 * direction(B, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, I, C we get 180 == 2 * direction(G, E) - 2 * direction(I, C) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, A, D we get 180 == 2 * direction(C, D) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, B, C we get 180 == 2 * direction(A, D) - 2 * direction(B, C) mod 360
+By perpendicular_direction_conditions_v0_r on C, I, B, G we get 180 == 2 * direction(C, I) - 2 * direction(B, G) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, I, A we get 180 == 2 * direction(E, G) - 2 * direction(I, A) mod 360
+By perpendicular_direction_conditions_v0_r on I, C, E, B we get 180 == 2 * direction(I, C) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, C, E, B we get 180 == 2 * direction(A, C) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, C, F we get 180 == 2 * direction(A, F) - 2 * direction(C, F) mod 360
+By probably_between_and_collinear_implies_between on D, K, I we get between(D, K, I)
+By perpendicular_direction_conditions_v0_r on F, C, A, B we get 180 == 2 * direction(F, C) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, A, C, B we get 180 == 2 * direction(G, A) - 2 * direction(C, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, C, E, G we get 180 == 2 * direction(A, C) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, A, D we get 180 == 2 * direction(B, C) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on D, G, C, B we get 180 == 2 * direction(D, G) - 2 * direction(C, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, B, G, A we get 180 == 2 * direction(C, B) - 2 * direction(G, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, F, J we get 180 == 2 * direction(A, B) - 2 * direction(F, J) mod 360
+By perpendicular_direction_conditions_v0_r on D, C, A, D we get 180 == 2 * direction(D, C) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, A, C we get 180 == 2 * direction(E, B) - 2 * direction(A, C) mod 360
+By perpendicular_direction_conditions_v0_r on I, A, G, E we get 180 == 2 * direction(I, A) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on K, C, A, B we get 180 == 2 * direction(K, C) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, A, B, E we get 180 == 2 * direction(C, A) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on A, I, G, B we get 180 == 2 * direction(A, I) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, C, I we get 180 == 2 * direction(G, E) - 2 * direction(C, I) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, C, F we get 180 == 2 * direction(F, A) - 2 * direction(C, F) mod 360
+By perpendicular_direction_conditions_v0_r on C, I, E, G we get 180 == 2 * direction(C, I) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, A, I we get 180 == 2 * direction(E, B) - 2 * direction(A, I) mod 360
+By perpendicular_direction_conditions_v0_r on C, I, G, E we get 180 == 2 * direction(C, I) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, A, C we get 180 == 2 * direction(B, E) - 2 * direction(A, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, C, B, E we get 180 == 2 * direction(A, C) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, I, C we get 180 == 2 * direction(E, G) - 2 * direction(I, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, F, C we get 180 == 2 * direction(A, B) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on C, B, A, G we get 180 == 2 * direction(C, B) - 2 * direction(A, G) mod 360
+By perpendicular_direction_conditions_v0_r on I, A, B, E we get 180 == 2 * direction(I, A) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on A, I, B, G we get 180 == 2 * direction(A, I) - 2 * direction(B, G) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, K, J we get 180 == 2 * direction(A, B) - 2 * direction(K, J) mod 360
+By perpendicular_direction_conditions_v0_r on C, J, A, B we get 180 == 2 * direction(C, J) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, A, C we get 180 == 2 * direction(G, B) - 2 * direction(A, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, I, B, E we get 180 == 2 * direction(A, I) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on C, I, E, B we get 180 == 2 * direction(C, I) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, G, C, B we get 180 == 2 * direction(A, G) - 2 * direction(C, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, B, D, A we get 180 == 2 * direction(C, B) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, K, A, B we get 180 == 2 * direction(C, K) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, C, I we get 180 == 2 * direction(B, E) - 2 * direction(C, I) mod 360
+By perpendicular_direction_conditions_v0_r on C, B, G, D we get 180 == 2 * direction(C, B) - 2 * direction(G, D) mod 360
+By in_imply_collinear on K, J, C we get collinear(C, J, K)
+By perpendicular_direction_conditions_v0_r on A, C, B, G we get 180 == 2 * direction(A, C) - 2 * direction(B, G) mod 360
+By in_imply_collinear on E, A, I we get collinear(A, E, I)
+By perpendicular_direction_conditions_v0_r on I, C, G, E we get 180 == 2 * direction(I, C) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on A, C, G, E we get 180 == 2 * direction(A, C) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, I, A we get 180 == 2 * direction(B, G) - 2 * direction(I, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, A, F we get 180 == 2 * direction(C, F) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, K, A, B we get 180 == 2 * direction(F, K) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, C, F we get 180 == 2 * direction(F, B) - 2 * direction(C, F) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, B, F we get 180 == 2 * direction(C, F) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on A, I, G, E we get 180 == 2 * direction(A, I) - 2 * direction(G, E) mod 360
+By projection_definition on J, F, f we get F == projection(J, f)
+By perpendicular_direction_conditions_v0_r on K, J, A, B we get 180 == 2 * direction(K, J) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, C, K we get 180 == 2 * direction(A, B) - 2 * direction(C, K) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, A, I we get 180 == 2 * direction(G, E) - 2 * direction(A, I) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, C, I we get 180 == 2 * direction(G, B) - 2 * direction(C, I) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, C, I we get 180 == 2 * direction(E, B) - 2 * direction(C, I) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, A, D we get 180 == 2 * direction(B, D) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, K, C we get 180 == 2 * direction(A, B) - 2 * direction(K, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, C, A we get 180 == 2 * direction(E, B) - 2 * direction(C, A) mod 360
+By perpendicular_direction_conditions_v0_r on J, K, A, B we get 180 == 2 * direction(J, K) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, I, C we get 180 == 2 * direction(B, E) - 2 * direction(I, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, C, I we get 180 == 2 * direction(E, G) - 2 * direction(C, I) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, I, A we get 180 == 2 * direction(G, B) - 2 * direction(I, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, C, F we get 180 == 2 * direction(B, A) - 2 * direction(C, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, I, C we get 180 == 2 * direction(B, G) - 2 * direction(I, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, K, F we get 180 == 2 * direction(A, B) - 2 * direction(K, F) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, C, B we get 180 == 2 * direction(D, A) - 2 * direction(C, B) mod 360
+By probably_between_and_collinear_implies_between on D, G, A we get between(A, G, D)
+By in_imply_collinear on J, F, K we get collinear(F, J, K)
+By probably_between_and_collinear_implies_between on F, K, C we get between(C, K, F)
+By probably_between_and_collinear_implies_between on E, G, B we get between(B, G, E)
+By reverse_direction on J, H we get 180 == direction(J, H) - direction(H, J) mod 360
+By reverse_direction on I, A we get 180 == direction(I, A) - direction(A, I) mod 360
+By reverse_direction on A, J we get 180 == direction(A, J) - direction(J, A) mod 360
+By reverse_direction on C, H we get 180 == direction(C, H) - direction(H, C) mod 360
+By reverse_direction on I, H we get 180 == direction(I, H) - direction(H, I) mod 360
+By reverse_direction on J, I we get 180 == direction(J, I) - direction(I, J) mod 360
+By reverse_direction on I, C we get 180 == direction(I, C) - direction(C, I) mod 360
+By reverse_direction on A, I we get 180 == direction(A, I) - direction(I, A) mod 360
+By reverse_direction on J, A we get 180 == direction(J, A) - direction(A, J) mod 360
+By reverse_direction on C, I we get 180 == direction(C, I) - direction(I, C) mod 360
+By reverse_direction on A, C we get 180 == direction(A, C) - direction(C, A) mod 360
+By reverse_direction on H, A we get 180 == direction(H, A) - direction(A, H) mod 360
+By reverse_direction on H, I we get 180 == direction(H, I) - direction(I, H) mod 360
+By reverse_direction on C, G we get 180 == direction(C, G) - direction(G, C) mod 360
+By reverse_direction on H, J we get 180 == direction(H, J) - direction(J, H) mod 360
+By reverse_direction on I, J we get 180 == direction(I, J) - direction(J, I) mod 360
+By reverse_direction on C, A we get 180 == direction(C, A) - direction(A, C) mod 360
+By reverse_direction on H, C we get 180 == direction(H, C) - direction(C, H) mod 360
+By reverse_direction on G, H we get 180 == direction(G, H) - direction(H, G) mod 360
+By reverse_direction on A, H we get 180 == direction(A, H) - direction(H, A) mod 360
+By reverse_direction on H, G we get 180 == direction(H, G) - direction(G, H) mod 360
+By reverse_direction on G, C we get 180 == direction(G, C) - direction(C, G) mod 360
+By perpendicular_direction_conditions_v0_r on D, C, D, G we get 180 == 2 * direction(D, C) - 2 * direction(D, G) mod 360
+By same_angle_v0 on C, D, B, K we get angle(B, C, K) == angle(D, C, K) mod 360
+By same_angle_v3 on G, A, D, H we get angle(A, G, H) == angle(D, G, H) + 180 mod 360
+By same_angle_v0 on A, C, E, G we get angle(C, A, G) == angle(E, A, G) mod 360
+By same_angle_v1 on A, B, F, G we get angle(B, A, G) == angle(F, A, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, K, F, B we get 180 == 2 * direction(F, K) - 2 * direction(F, B) mod 360
+By same_angle_v0 on A, E, C, F we get angle(C, A, F) == angle(E, A, F) mod 360
+By same_angle_v0 on C, B, D, E we get angle(B, C, E) == angle(D, C, E) mod 360
+By perpendicular_direction_conditions_v0_r on F, K, F, A we get 180 == 2 * direction(F, K) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on K, J, B, F we get 180 == 2 * direction(K, J) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on D, C, A, G we get 180 == 2 * direction(D, C) - 2 * direction(A, G) mod 360
+By perpendicular_direction_conditions_v0_r on J, K, B, A we get 180 == 2 * direction(J, K) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on K, J, B, A we get 180 == 2 * direction(K, J) - 2 * direction(B, A) mod 360
+By same_angle_v1 on J, F, C, A we get angle(C, J, A) == angle(F, J, A) mod 360
+By perpendicular_direction_conditions_v0_r on K, F, F, B we get 180 == 2 * direction(K, F) - 2 * direction(F, B) mod 360
+By same_angle_v1 on C, A, E, J we get angle(A, C, J) == angle(E, C, J) mod 360
+By same_angle_v1 on C, E, A, K we get angle(A, C, K) == angle(E, C, K) mod 360
+By perpendicular_direction_conditions_v0_r on C, K, F, A we get 180 == 2 * direction(C, K) - 2 * direction(F, A) mod 360
+By same_angle_v1 on A, B, F, E we get angle(B, A, E) == angle(F, A, E) mod 360
+By same_angle_v0 on C, K, F, E we get angle(F, C, E) == angle(K, C, E) mod 360
+By same_angle_v1 on C, F, K, D we get angle(F, C, D) == angle(K, C, D) mod 360
+By same_angle_v1 on A, D, G, E we get angle(D, A, E) == angle(G, A, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, A, G, E we get 180 == 2 * direction(E, A) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, D, C we get 180 == 2 * direction(D, A) - 2 * direction(D, C) mod 360
+By perpendicular_direction_conditions_v0_r on G, A, D, C we get 180 == 2 * direction(G, A) - 2 * direction(D, C) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, J, C we get 180 == 2 * direction(B, A) - 2 * direction(J, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, C, E we get 180 == 2 * direction(E, G) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on J, K, A, F we get 180 == 2 * direction(J, K) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on D, C, D, A we get 180 == 2 * direction(D, C) - 2 * direction(D, A) mod 360
+By same_angle_v1 on C, J, F, D we get angle(F, C, D) == angle(J, C, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, J, K we get 180 == 2 * direction(A, F) - 2 * direction(J, K) mod 360
+By perpendicular_direction_conditions_v0_r on C, K, B, A we get 180 == 2 * direction(C, K) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, D, A we get 180 == 2 * direction(B, D) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, A, E we get 180 == 2 * direction(E, B) - 2 * direction(A, E) mod 360
+By perpendicular_direction_conditions_v0_r on C, K, F, B we get 180 == 2 * direction(C, K) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, K, A, F we get 180 == 2 * direction(F, K) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, B, E we get 180 == 2 * direction(C, E) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on D, G, D, C we get 180 == 2 * direction(D, G) - 2 * direction(D, C) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, C, D we get 180 == 2 * direction(D, A) - 2 * direction(C, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, G, C, D we get 180 == 2 * direction(A, G) - 2 * direction(C, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, E, G, B we get 180 == 2 * direction(A, E) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, K, A, F we get 180 == 2 * direction(C, K) - 2 * direction(A, F) mod 360
+By same_angle_v0 on A, D, G, F we get angle(D, A, F) == angle(G, A, F) mod 360
+By same_angle_v3 on G, E, B, C we get angle(E, G, C) == angle(B, G, C) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on F, B, J, C we get 180 == 2 * direction(F, B) - 2 * direction(J, C) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, K, F we get 180 == 2 * direction(B, A) - 2 * direction(K, F) mod 360
+By perpendicular_direction_conditions_v0_r on J, F, F, B we get 180 == 2 * direction(J, F) - 2 * direction(F, B) mod 360
+By same_angle_v1 on J, C, F, I we get angle(C, J, I) == angle(F, J, I) mod 360
+By perpendicular_direction_conditions_v0_r on F, K, B, A we get 180 == 2 * direction(F, K) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, F, B we get 180 == 2 * direction(F, C) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, K, F we get 180 == 2 * direction(B, F) - 2 * direction(K, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, J, F, A we get 180 == 2 * direction(F, J) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, J, F we get 180 == 2 * direction(B, F) - 2 * direction(J, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, C, K we get 180 == 2 * direction(B, A) - 2 * direction(C, K) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, C, J we get 180 == 2 * direction(F, A) - 2 * direction(C, J) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, G, E we get 180 == 2 * direction(C, E) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, C, K we get 180 == 2 * direction(F, A) - 2 * direction(C, K) mod 360
+By same_angle_v0 on C, D, B, J we get angle(B, C, J) == angle(D, C, J) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, G, D we get 180 == 2 * direction(C, D) - 2 * direction(G, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, E, G, E we get 180 == 2 * direction(A, E) - 2 * direction(G, E) mod 360
+By same_angle_v2 on G, A, D, C we get angle(A, G, C) == angle(D, G, C) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on E, C, E, B we get 180 == 2 * direction(E, C) - 2 * direction(E, B) mod 360
+By same_angle_v1 on C, E, A, D we get angle(A, C, D) == angle(E, C, D) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, E, G we get 180 == 2 * direction(C, E) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on J, K, F, B we get 180 == 2 * direction(J, K) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on J, F, F, A we get 180 == 2 * direction(J, F) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, J, F, A we get 180 == 2 * direction(C, J) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, A, G we get 180 == 2 * direction(B, D) - 2 * direction(A, G) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, A, G we get 180 == 2 * direction(D, B) - 2 * direction(A, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, E, A we get 180 == 2 * direction(G, B) - 2 * direction(E, A) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, G, D we get 180 == 2 * direction(D, B) - 2 * direction(G, D) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, J, F we get 180 == 2 * direction(F, A) - 2 * direction(J, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, C, J we get 180 == 2 * direction(B, A) - 2 * direction(C, J) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, C, J we get 180 == 2 * direction(B, F) - 2 * direction(C, J) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, D, A we get 180 == 2 * direction(B, C) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, K, J we get 180 == 2 * direction(F, B) - 2 * direction(K, J) mod 360
+By same_angle_v0 on C, F, J, E we get angle(F, C, E) == angle(J, C, E) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, F, C we get 180 == 2 * direction(A, F) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, C, J we get 180 == 2 * direction(F, B) - 2 * direction(C, J) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, K, J we get 180 == 2 * direction(A, F) - 2 * direction(K, J) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, C, E we get 180 == 2 * direction(B, G) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on A, G, B, D we get 180 == 2 * direction(A, G) - 2 * direction(B, D) mod 360
+By same_angle_v2 on G, E, B, H we get angle(E, G, H) == angle(B, G, H) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on G, B, C, E we get 180 == 2 * direction(G, B) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, D, G we get 180 == 2 * direction(B, C) - 2 * direction(D, G) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, G, B we get 180 == 2 * direction(E, C) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, K, J we get 180 == 2 * direction(B, F) - 2 * direction(K, J) mod 360
+By perpendicular_direction_conditions_v0_r on E, A, G, B we get 180 == 2 * direction(E, A) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, A, C, D we get 180 == 2 * direction(G, A) - 2 * direction(C, D) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, E, A we get 180 == 2 * direction(B, E) - 2 * direction(E, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, J, K we get 180 == 2 * direction(B, A) - 2 * direction(J, K) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, G, A we get 180 == 2 * direction(B, D) - 2 * direction(G, A) mod 360
+By perpendicular_direction_conditions_v0_r on J, C, F, A we get 180 == 2 * direction(J, C) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, E, B, E we get 180 == 2 * direction(A, E) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on G, A, B, C we get 180 == 2 * direction(G, A) - 2 * direction(B, C) mod 360
+By perpendicular_direction_conditions_v0_r on K, F, B, F we get 180 == 2 * direction(K, F) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, C, E we get 180 == 2 * direction(B, E) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, G, D we get 180 == 2 * direction(B, D) - 2 * direction(G, D) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, A, E we get 180 == 2 * direction(G, E) - 2 * direction(A, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, A, G we get 180 == 2 * direction(B, C) - 2 * direction(A, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, F, J we get 180 == 2 * direction(F, B) - 2 * direction(F, J) mod 360
+By perpendicular_direction_conditions_v0_r on G, A, D, B we get 180 == 2 * direction(G, A) - 2 * direction(D, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, D, A we get 180 == 2 * direction(C, D) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on J, C, A, F we get 180 == 2 * direction(J, C) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on J, C, F, B we get 180 == 2 * direction(J, C) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, K, C we get 180 == 2 * direction(F, B) - 2 * direction(K, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, E, G we get 180 == 2 * direction(E, C) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on A, G, D, B we get 180 == 2 * direction(A, G) - 2 * direction(D, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, F, K we get 180 == 2 * direction(B, A) - 2 * direction(F, K) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, K, J we get 180 == 2 * direction(F, A) - 2 * direction(K, J) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, C, K we get 180 == 2 * direction(B, F) - 2 * direction(C, K) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, C, J we get 180 == 2 * direction(A, F) - 2 * direction(C, J) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, J, F we get 180 == 2 * direction(B, A) - 2 * direction(J, F) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, J, F we get 180 == 2 * direction(A, F) - 2 * direction(J, F) mod 360
+By perpendicular_direction_conditions_v0_r on K, F, F, A we get 180 == 2 * direction(K, F) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, K, B, F we get 180 == 2 * direction(F, K) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, A, G we get 180 == 2 * direction(C, D) - 2 * direction(A, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, D, B, C we get 180 == 2 * direction(G, D) - 2 * direction(B, C) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, B, A we get 180 == 2 * direction(F, C) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on J, F, B, A we get 180 == 2 * direction(J, F) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, J, F, B we get 180 == 2 * direction(F, J) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on E, A, E, G we get 180 == 2 * direction(E, A) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, F, C we get 180 == 2 * direction(B, A) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on J, F, B, F we get 180 == 2 * direction(J, F) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, J, B, F we get 180 == 2 * direction(F, J) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, G, A we get 180 == 2 * direction(D, B) - 2 * direction(G, A) mod 360
+By perpendicular_direction_conditions_v0_r on K, C, F, A we get 180 == 2 * direction(K, C) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on G, D, D, B we get 180 == 2 * direction(G, D) - 2 * direction(D, B) mod 360
+By perpendicular_direction_conditions_v0_r on K, C, B, F we get 180 == 2 * direction(K, C) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on K, F, A, F we get 180 == 2 * direction(K, F) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, G, A we get 180 == 2 * direction(B, C) - 2 * direction(G, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, E, B, G we get 180 == 2 * direction(A, E) - 2 * direction(B, G) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, F, K we get 180 == 2 * direction(B, F) - 2 * direction(F, K) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, G, E we get 180 == 2 * direction(E, C) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, K, J we get 180 == 2 * direction(B, A) - 2 * direction(K, J) mod 360
+By perpendicular_direction_conditions_v0_r on D, G, C, D we get 180 == 2 * direction(D, G) - 2 * direction(C, D) mod 360
+By perpendicular_direction_conditions_v0_r on K, J, F, A we get 180 == 2 * direction(K, J) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, A, F we get 180 == 2 * direction(F, C) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on G, D, B, D we get 180 == 2 * direction(G, D) - 2 * direction(B, D) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, B, E we get 180 == 2 * direction(E, C) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, K, C we get 180 == 2 * direction(B, F) - 2 * direction(K, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, K, C we get 180 == 2 * direction(A, F) - 2 * direction(K, C) mod 360
+By perpendicular_direction_conditions_v0_r on K, J, F, B we get 180 == 2 * direction(K, J) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on D, G, D, B we get 180 == 2 * direction(D, G) - 2 * direction(D, B) mod 360
+By perpendicular_direction_conditions_v0_r on D, G, B, C we get 180 == 2 * direction(D, G) - 2 * direction(B, C) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, A, E we get 180 == 2 * direction(B, E) - 2 * direction(A, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, J, C we get 180 == 2 * direction(B, F) - 2 * direction(J, C) mod 360
+By perpendicular_direction_conditions_v0_r on J, C, B, A we get 180 == 2 * direction(J, C) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, J, F we get 180 == 2 * direction(F, B) - 2 * direction(J, F) mod 360
+By perpendicular_direction_conditions_v0_r on G, A, B, D we get 180 == 2 * direction(G, A) - 2 * direction(B, D) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, E, C we get 180 == 2 * direction(G, E) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, B, C we get 180 == 2 * direction(D, A) - 2 * direction(B, C) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, K, C we get 180 == 2 * direction(F, A) - 2 * direction(K, C) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, A, E we get 180 == 2 * direction(G, B) - 2 * direction(A, E) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, F, C we get 180 == 2 * direction(F, B) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, C, K we get 180 == 2 * direction(F, B) - 2 * direction(C, K) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, E, C we get 180 == 2 * direction(B, G) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, F, K we get 180 == 2 * direction(F, A) - 2 * direction(F, K) mod 360
+By perpendicular_direction_conditions_v0_r on D, G, B, D we get 180 == 2 * direction(D, G) - 2 * direction(B, D) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, F, J we get 180 == 2 * direction(B, A) - 2 * direction(F, J) mod 360
+By perpendicular_direction_conditions_v0_r on J, K, F, A we get 180 == 2 * direction(J, K) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, D, B we get 180 == 2 * direction(D, A) - 2 * direction(D, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, F, C we get 180 == 2 * direction(B, F) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on K, F, B, A we get 180 == 2 * direction(K, F) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, K, C we get 180 == 2 * direction(B, A) - 2 * direction(K, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, A, E we get 180 == 2 * direction(E, G) - 2 * direction(A, E) mod 360
+By perpendicular_direction_conditions_v0_r on F, J, B, A we get 180 == 2 * direction(F, J) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, F, C we get 180 == 2 * direction(F, A) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, C, K we get 180 == 2 * direction(A, F) - 2 * direction(C, K) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, C, E we get 180 == 2 * direction(G, E) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, E, C we get 180 == 2 * direction(E, G) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, K, F we get 180 == 2 * direction(A, F) - 2 * direction(K, F) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, G, A we get 180 == 2 * direction(C, D) - 2 * direction(G, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, A, E we get 180 == 2 * direction(B, G) - 2 * direction(A, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, A, E, B we get 180 == 2 * direction(E, A) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on J, K, B, F we get 180 == 2 * direction(J, K) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, C, E we get 180 == 2 * direction(E, B) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, D, G we get 180 == 2 * direction(D, B) - 2 * direction(D, G) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, J, C we get 180 == 2 * direction(A, F) - 2 * direction(J, C) mod 360
+By perpendicular_direction_conditions_v0_r on D, C, G, A we get 180 == 2 * direction(D, C) - 2 * direction(G, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, G, B we get 180 == 2 * direction(C, E) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on K, C, B, A we get 180 == 2 * direction(K, C) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on E, A, B, E we get 180 == 2 * direction(E, A) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, F, J we get 180 == 2 * direction(F, A) - 2 * direction(F, J) mod 360
+By perpendicular_direction_conditions_v0_r on J, C, B, F we get 180 == 2 * direction(J, C) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, E, C we get 180 == 2 * direction(E, B) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, B, G we get 180 == 2 * direction(E, C) - 2 * direction(B, G) mod 360
+By perpendicular_direction_conditions_v0_r on K, C, A, F we get 180 == 2 * direction(K, C) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, E, A we get 180 == 2 * direction(E, B) - 2 * direction(E, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, J, K we get 180 == 2 * direction(F, B) - 2 * direction(J, K) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, D, A we get 180 == 2 * direction(D, B) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, D, G we get 180 == 2 * direction(C, D) - 2 * direction(D, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, K, F we get 180 == 2 * direction(F, A) - 2 * direction(K, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, G, D we get 180 == 2 * direction(B, C) - 2 * direction(G, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, F, K we get 180 == 2 * direction(A, F) - 2 * direction(F, K) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, F, K we get 180 == 2 * direction(F, B) - 2 * direction(F, K) mod 360
+By perpendicular_direction_conditions_v0_r on C, J, A, F we get 180 == 2 * direction(C, J) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, B, D we get 180 == 2 * direction(D, A) - 2 * direction(B, D) mod 360
+By perpendicular_direction_conditions_v0_r on G, D, C, D we get 180 == 2 * direction(G, D) - 2 * direction(C, D) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, E, C we get 180 == 2 * direction(B, E) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on C, J, B, F we get 180 == 2 * direction(C, J) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, B, F we get 180 == 2 * direction(F, C) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on K, C, F, B we get 180 == 2 * direction(K, C) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, J, F, B we get 180 == 2 * direction(C, J) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, E, A we get 180 == 2 * direction(E, G) - 2 * direction(E, A) mod 360
+By perpendicular_direction_conditions_v0_r on J, F, A, F we get 180 == 2 * direction(J, F) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, A, B, G we get 180 == 2 * direction(E, A) - 2 * direction(B, G) mod 360
+By perpendicular_direction_conditions_v0_r on D, C, G, D we get 180 == 2 * direction(D, C) - 2 * direction(G, D) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, J, C we get 180 == 2 * direction(F, A) - 2 * direction(J, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, E, E, B we get 180 == 2 * direction(A, E) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, F, A we get 180 == 2 * direction(F, C) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, K, B, F we get 180 == 2 * direction(C, K) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, J, K we get 180 == 2 * direction(B, F) - 2 * direction(J, K) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, F, J we get 180 == 2 * direction(B, F) - 2 * direction(F, J) mod 360
+By perpendicular_direction_conditions_v0_r on F, J, A, F we get 180 == 2 * direction(F, J) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on A, G, D, C we get 180 == 2 * direction(A, G) - 2 * direction(D, C) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, K, F we get 180 == 2 * direction(F, B) - 2 * direction(K, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, D, G we get 180 == 2 * direction(B, D) - 2 * direction(D, G) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, E, B we get 180 == 2 * direction(C, E) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, B, G we get 180 == 2 * direction(C, E) - 2 * direction(B, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, E, A we get 180 == 2 * direction(G, E) - 2 * direction(E, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, J, K we get 180 == 2 * direction(F, A) - 2 * direction(J, K) mod 360
+By perpendicular_direction_conditions_v0_r on K, J, A, F we get 180 == 2 * direction(K, J) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on A, E, E, G we get 180 == 2 * direction(A, E) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, E, A we get 180 == 2 * direction(B, G) - 2 * direction(E, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, F, J we get 180 == 2 * direction(A, F) - 2 * direction(F, J) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, E, C we get 180 == 2 * direction(G, B) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on G, D, D, C we get 180 == 2 * direction(G, D) - 2 * direction(D, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, G, B, C we get 180 == 2 * direction(A, G) - 2 * direction(B, C) mod 360
+By perpendicular_direction_conditions_v0_r on C, J, B, A we get 180 == 2 * direction(C, J) - 2 * direction(B, A) mod 360
+By collinear_definition on C, D, B we get D in Line(B, C), B in Line(C, D), Line(B, C) == Line(C, D), 0 == 2 * angle(D, C, B) mod 360
+By collinear_definition on C, A, E we get A in Line(C, E), E in Line(A, C), Line(A, C) == Line(C, E), 0 == 2 * angle(A, C, E) mod 360
+By reverse_direction on C, B we get 180 == direction(C, B) - direction(B, C) mod 360
+By internal_angle_bisector_definition_v0_r on C, H, C, G we get Line(G, H) == internal_angle_bisector(C, G, C)
+By internal_angle_bisector_definition_v0_r on H, G, H, C we get Line(C, G) == internal_angle_bisector(H, C, H)
+By reverse_direction on C, F we get 180 == direction(C, F) - direction(F, C) mod 360
+By collinear_definition on C, J, F we get J in Line(C, F), F in Line(C, J), Line(C, F) == Line(C, J), 0 == 2 * angle(J, C, F) mod 360
+By collinear_definition on C, K, F we get K in Line(C, F), F in Line(C, K), Line(C, F) == Line(C, K), 0 == 2 * angle(K, C, F) mod 360
+By internal_angle_bisector_definition_v0_r on G, C, G, H we get Line(C, H) == internal_angle_bisector(G, H, G)
+By collinear_definition on C, F, J we get F in Line(C, J), J in Line(C, F), Line(C, F) == Line(C, J), 0 == 2 * angle(F, C, J) mod 360
+By collinear_definition on I, D, K we get D in Line(I, K), K in Line(D, I), Line(D, I) == Line(I, K), 0 == 2 * angle(D, I, K) mod 360
+By internal_angle_bisector_definition_v0_r on A, I, A, C we get Line(C, I) == internal_angle_bisector(A, C, A)
+By collinear_definition on A, B, F we get B in Line(A, F), F in Line(A, B), Line(A, B) == Line(A, F), 0 == 2 * angle(B, A, F) mod 360
+By collinear_definition on A, C, E we get C in Line(A, E), E in Line(A, C), Line(A, C) == Line(A, E), 0 == 2 * angle(C, A, E) mod 360
+By internal_angle_bisector_definition_v0_r on A, C, A, I we get Line(C, I) == internal_angle_bisector(A, I, A)
+By collinear_definition on I, K, D we get K in Line(D, I), D in Line(I, K), Line(D, I) == Line(I, K), 0 == 2 * angle(K, I, D) mod 360
+By collinear_definition on C, E, A we get E in Line(A, C), A in Line(C, E), Line(A, C) == Line(C, E), 0 == 2 * angle(E, C, A) mod 360
+By internal_angle_bisector_definition_v0_r on C, A, C, I we get Line(A, I) == internal_angle_bisector(C, I, C)
+By collinear_definition on C, F, K we get F in Line(C, K), K in Line(C, F), Line(C, F) == Line(C, K), 0 == 2 * angle(F, C, K) mod 360
+By collinear_definition on A, D, G we get D in Line(A, G), G in Line(A, D), Line(A, D) == Line(A, G), 0 == 2 * angle(D, A, G) mod 360
+By collinear_definition on A, G, D we get G in Line(A, D), D in Line(A, G), Line(A, D) == Line(A, G), 0 == 2 * angle(G, A, D) mod 360
+By internal_angle_bisector_definition_v0_r on C, I, C, A we get Line(A, I) == internal_angle_bisector(C, A, C)
+By internal_angle_bisector_definition_v0_r on I, A, I, C we get Line(A, C) == internal_angle_bisector(I, C, I)
+By internal_angle_bisector_definition_v0_r on I, C, I, A we get Line(A, C) == internal_angle_bisector(I, A, I)
+By internal_angle_bisector_definition_v0_r on G, H, G, C we get Line(C, H) == internal_angle_bisector(G, C, G)
+By collinear_definition on C, B, D we get B in Line(C, D), D in Line(B, C), Line(B, C) == Line(C, D), 0 == 2 * angle(B, C, D) mod 360
+By collinear_definition on A, E, C we get E in Line(A, C), C in Line(A, E), Line(A, C) == Line(A, E), 0 == 2 * angle(E, A, C) mod 360
+By collinear_definition on A, F, B we get F in Line(A, B), B in Line(A, F), Line(A, B) == Line(A, F), 0 == 2 * angle(F, A, B) mod 360
+By reverse_direction on A, B we get 180 == direction(A, B) - direction(B, A) mod 360
+By reverse_direction on I, D we get 180 == direction(I, D) - direction(D, I) mod 360
+By internal_angle_bisector_definition_v0_r on C, G, C, H we get Line(G, H) == internal_angle_bisector(C, H, C)
+By internal_angle_bisector_definition_v0_r on H, C, H, G we get Line(C, G) == internal_angle_bisector(H, G, H)
+By reverse_direction on A, D we get 180 == direction(A, D) - direction(D, A) mod 360
+By same_angle_v2 on D, B, C, G we get angle(B, D, G) == angle(C, D, G) + 180 mod 360
+By same_angle_v2 on G, A, D, E we get angle(A, G, E) == angle(D, G, E) + 180 mod 360
+By same_angle_v3 on F, A, B, K we get angle(A, F, K) == angle(B, F, K) + 180 mod 360
+By same_angle_v3 on F, J, C, A we get angle(J, F, A) == angle(C, F, A) + 180 mod 360
+By same_angle_v3 on F, C, J, B we get angle(C, F, B) == angle(J, F, B) + 180 mod 360
+By same_angle_v1 on B, D, C, E we get angle(C, B, E) == angle(D, B, E) mod 360
+By same_angle_v3 on G, B, E, A we get angle(B, G, A) == angle(E, G, A) + 180 mod 360
+By same_angle_v1 on B, E, G, F we get angle(E, B, F) == angle(G, B, F) mod 360
+By same_angle_v1 on D, K, I, A we get angle(I, D, A) == angle(K, D, A) mod 360
+By same_angle_v0 on B, A, F, G we get angle(A, B, G) == angle(F, B, G) mod 360
+By same_angle_v2 on G, E, B, D we get angle(E, G, D) == angle(B, G, D) + 180 mod 360
+By same_angle_v3 on K, I, D, C we get angle(I, K, C) == angle(D, K, C) + 180 mod 360
+By same_angle_v1 on D, K, I, B we get angle(I, D, B) == angle(K, D, B) mod 360
+By same_angle_v0 on B, E, G, D we get angle(E, B, D) == angle(G, B, D) mod 360
+By same_angle_v0 on B, G, E, C we get angle(E, B, C) == angle(G, B, C) mod 360
+By same_angle_v2 on K, F, C, I we get angle(F, K, I) == angle(C, K, I) + 180 mod 360
+By same_angle_v1 on B, C, D, F we get angle(C, B, F) == angle(D, B, F) mod 360
+By same_angle_v3 on K, D, I, J we get angle(D, K, J) == angle(I, K, J) + 180 mod 360
+By same_angle_v2 on F, B, A, J we get angle(B, F, J) == angle(A, F, J) + 180 mod 360
+By same_angle_v1 on D, G, A, B we get angle(A, D, B) == angle(G, D, B) mod 360
+By same_angle_v1 on E, G, B, C we get angle(B, E, C) == angle(G, E, C) mod 360
+By same_angle_v3 on K, D, I, F we get angle(D, K, F) == angle(I, K, F) + 180 mod 360
+By same_angle_v0 on B, F, A, C we get angle(A, B, C) == angle(F, B, C) mod 360
+By same_angle_v0 on B, F, A, D we get angle(A, B, D) == angle(F, B, D) mod 360
+By same_angle_v2 on D, B, C, A we get angle(B, D, A) == angle(C, D, A) + 180 mod 360
+By same_angle_v1 on B, D, C, A we get angle(C, B, A) == angle(D, B, A) mod 360
+By same_angle_v0 on D, A, G, K we get angle(A, D, K) == angle(G, D, K) mod 360
+By same_angle_v0 on B, A, F, E we get angle(A, B, E) == angle(F, B, E) mod 360
+By same_angle_v3 on F, A, B, C we get angle(A, F, C) == angle(B, F, C) + 180 mod 360
+By same_angle_v1 on B, E, G, A we get angle(E, B, A) == angle(G, B, A) mod 360
+By same_angle_v3 on K, C, F, D we get angle(C, K, D) == angle(F, K, D) + 180 mod 360
+By same_angle_v3 on D, B, C, I we get angle(B, D, I) == angle(C, D, I) + 180 mod 360
+By same_angle_v2 on E, C, A, B we get angle(C, E, B) == angle(A, E, B) + 180 mod 360
+By same_angle_v1 on D, I, K, G we get angle(I, D, G) == angle(K, D, G) mod 360
+By same_angle_v1 on B, C, D, G we get angle(C, B, G) == angle(D, B, G) mod 360
+By same_angle_v0 on D, G, A, I we get angle(A, D, I) == angle(G, D, I) mod 360
+By same_angle_v2 on D, B, C, K we get angle(B, D, K) == angle(C, D, K) + 180 mod 360
+By same_angle_v1 on F, C, K, A we get angle(C, F, A) == angle(K, F, A) mod 360
+By same_angle_v3 on E, C, A, G we get angle(C, E, G) == angle(A, E, G) + 180 mod 360
+By same_angle_v0 on D, K, I, C we get angle(I, D, C) == angle(K, D, C) mod 360
+By same_angle_v0 on F, C, K, B we get angle(C, F, B) == angle(K, F, B) mod 360
+By same_angle_v0 on E, G, B, A we get angle(B, E, A) == angle(G, E, A) mod 360
+By same_angle_v2 on G, D, A, B we get angle(D, G, B) == angle(A, G, B) + 180 mod 360
+By same_angle_v0 on D, A, G, C we get angle(A, D, C) == angle(G, D, C) mod 360
+By altitude_definition on B, K, F, f we get f == altitude(B, F, K)
+By perpendicular_angle_conditions_v0 on C, F, A we get angle(C, F, A) == orientation(A, C, F) mod 360
+By altitude_definition on B, C, F, f we get f == altitude(B, C, F)
+By perpendicular_angle_conditions_v0 on C, D, G we get angle(C, D, G) == orientation(C, D, G) mod 360
+By altitude_definition on B, C, J, f we get f == altitude(B, C, J)
+By altitude_definition on J, F, B, k we get k == altitude(J, B, F)
+By altitude_definition on A, B, D, i we get i == altitude(A, B, D)
+By altitude_definition on C, E, B, h we get h == altitude(C, B, E)
+By collinear_definition on B, D, C we get D in Line(B, C), C in Line(B, D), Line(B, C) == Line(B, D), 0 == 2 * angle(D, B, C) mod 360
+By altitude_definition on B, G, D, g we get g == altitude(B, D, G)
+By perpendicular_angle_conditions_v0 on A, F, K we get angle(A, F, K) == orientation(A, F, K) mod 360
+By altitude_definition on C, G, B, h we get h == altitude(C, B, G)
+By collinear_definition on B, A, F we get A in Line(B, F), F in Line(A, B), Line(A, B) == Line(B, F), 0 == 2 * angle(A, B, F) mod 360
+By altitude_definition on G, C, A, j we get j == altitude(G, A, C)
+By collinear_definition on G, D, A we get D in Line(A, G), A in Line(D, G), Line(A, G) == Line(D, G), 0 == 2 * angle(D, G, A) mod 360
+By collinear_definition on D, A, G we get A in Line(D, G), G in Line(A, D), Line(A, D) == Line(D, G), 0 == 2 * angle(A, D, G) mod 360
+By altitude_definition on I, G, B, h we get h == altitude(I, B, G)
+By collinear_definition on B, C, D we get C in Line(B, D), D in Line(B, C), Line(B, C) == Line(B, D), 0 == 2 * angle(C, B, D) mod 360
+By altitude_definition on A, J, K, f we get f == altitude(A, J, K)
+By altitude_definition on A, C, D, i we get i == altitude(A, C, D)
+By collinear_definition on D, C, B we get C in Line(B, D), B in Line(C, D), Line(B, D) == Line(C, D), 0 == 2 * angle(C, D, B) mod 360
+By altitude_definition on B, C, I, j we get j == altitude(B, C, I)
+By collinear_definition on D, K, I we get K in Line(D, I), I in Line(D, K), Line(D, I) == Line(D, K), 0 == 2 * angle(K, D, I) mod 360
+By altitude_definition on J, A, B, k we get k == altitude(J, A, B)
+By altitude_definition on A, K, C, f we get f == altitude(A, C, K)
+By perpendicular_angle_conditions_v0 on K, F, A we get angle(K, F, A) == orientation(A, K, F) mod 360
+By altitude_definition on A, C, J, f we get f == altitude(A, C, J)
+By altitude_definition on K, B, F, k we get k == altitude(K, B, F)
+By collinear_definition on D, I, K we get I in Line(D, K), K in Line(D, I), Line(D, I) == Line(D, K), 0 == 2 * angle(I, D, K) mod 360
+By altitude_definition on B, A, D, g we get g == altitude(B, A, D)
+By perpendicular_angle_conditions_v0 on C, D, A we get angle(C, D, A) == orientation(A, C, D) mod 360
+By altitude_definition on G, E, A, j we get j == altitude(G, A, E)
+By perpendicular_angle_conditions_v0 on J, F, B we get angle(J, F, B) == orientation(B, J, F) mod 360
+By altitude_definition on I, E, B, h we get h == altitude(I, B, E)
+By altitude_definition on B, J, F, f we get f == altitude(B, F, J)
+By altitude_definition on A, F, K, f we get f == altitude(A, F, K)
+By altitude_definition on B, E, A, j we get j == altitude(B, A, E)
+By altitude_definition on K, B, A, k we get k == altitude(K, A, B)
+By perpendicular_angle_conditions_v0 on A, E, G we get angle(A, E, G) == orientation(A, E, G) mod 360
+By perpendicular_angle_conditions_v0 on G, D, C we get angle(G, D, C) == orientation(C, G, D) mod 360
+By altitude_definition on A, E, G, h we get h == altitude(A, E, G)
+By altitude_definition on B, K, C, f we get f == altitude(B, C, K)
+By altitude_definition on G, A, I, j we get j == altitude(G, A, I)
+By altitude_definition on B, E, C, j we get j == altitude(B, C, E)
+By collinear_definition on G, E, B we get E in Line(B, G), B in Line(E, G), Line(B, G) == Line(E, G), 0 == 2 * angle(E, G, B) mod 360
+By altitude_definition on A, F, J, f we get f == altitude(A, F, J)
+By perpendicular_angle_conditions_v0 on B, F, K we get angle(B, F, K) == orientation(B, F, K) mod 360
+By altitude_definition on G, C, I, j we get j == altitude(G, C, I)
+By altitude_definition on G, C, D, i we get i == altitude(G, C, D)
+By collinear_definition on F, B, A we get B in Line(A, F), A in Line(B, F), Line(A, F) == Line(B, F), 0 == 2 * angle(B, F, A) mod 360
+By altitude_definition on I, E, G, h we get h == altitude(I, E, G)
+By perpendicular_angle_conditions_v0 on K, F, B we get angle(K, F, B) == orientation(B, K, F) mod 360
+By collinear_definition on F, C, K we get C in Line(F, K), K in Line(C, F), Line(C, F) == Line(F, K), 0 == 2 * angle(C, F, K) mod 360
+By collinear_definition on B, F, A we get F in Line(A, B), A in Line(B, F), Line(A, B) == Line(B, F), 0 == 2 * angle(F, B, A) mod 360
+By collinear_definition on E, B, G we get B in Line(E, G), G in Line(B, E), Line(B, E) == Line(E, G), 0 == 2 * angle(B, E, G) mod 360
+By perpendicular_angle_conditions_v0 on G, D, B we get angle(G, D, B) == orientation(B, G, D) mod 360
+By collinear_definition on D, G, A we get G in Line(A, D), A in Line(D, G), Line(A, D) == Line(D, G), 0 == 2 * angle(G, D, A) mod 360
+By perpendicular_angle_conditions_v0 on C, F, B we get angle(C, F, B) == orientation(B, C, F) mod 360
+By perpendicular_angle_conditions_v0 on B, E, C we get angle(B, E, C) == orientation(B, E, C) mod 360
+By altitude_definition on J, F, A, k we get k == altitude(J, A, F)
+By altitude_definition on G, B, C, i we get i == altitude(G, B, C)
+By perpendicular_angle_conditions_v0 on C, E, G we get angle(C, E, G) == orientation(C, E, G) mod 360
+By altitude_definition on G, D, B, i we get i == altitude(G, B, D)
+By perpendicular_angle_conditions_v0 on B, E, A we get angle(B, E, A) == orientation(A, B, E) mod 360
+By altitude_definition on K, F, A, k we get k == altitude(K, A, F)
+By perpendicular_angle_conditions_v0 on B, F, C we get angle(B, F, C) == orientation(B, F, C) mod 360
+By perpendicular_angle_conditions_v0 on J, F, A we get angle(J, F, A) == orientation(A, J, F) mod 360
+By altitude_definition on C, B, F, k we get k == altitude(C, B, F)
+By altitude_definition on A, C, F, f we get f == altitude(A, C, F)
+By collinear_definition on G, B, E we get B in Line(E, G), E in Line(B, G), Line(B, G) == Line(E, G), 0 == 2 * angle(B, G, E) mod 360
+By altitude_definition on C, G, A, g we get g == altitude(C, A, G)
+By collinear_definition on F, K, C we get K in Line(C, F), C in Line(F, K), Line(C, F) == Line(F, K), 0 == 2 * angle(K, F, C) mod 360
+By collinear_definition on E, A, C we get A in Line(C, E), C in Line(A, E), Line(A, E) == Line(C, E), 0 == 2 * angle(A, E, C) mod 360
+By perpendicular_angle_conditions_v0 on G, E, C we get angle(G, E, C) == orientation(C, G, E) mod 360
+By perpendicular_angle_conditions_v0 on A, F, J we get angle(A, F, J) == orientation(A, F, J) mod 360
+By altitude_definition on B, I, A, j we get j == altitude(B, A, I)
+By perpendicular_angle_conditions_v0 on B, F, J we get angle(B, F, J) == orientation(B, F, J) mod 360
+By perpendicular_angle_conditions_v0 on A, D, C we get angle(A, D, C) == orientation(A, D, C) mod 360
+By perpendicular_angle_conditions_v0 on C, E, B we get angle(C, E, B) == orientation(B, C, E) mod 360
+By perpendicular_angle_conditions_v0 on A, D, B we get angle(A, D, B) == orientation(A, D, B) mod 360
+By altitude_definition on C, A, F, k we get k == altitude(C, A, F)
+By altitude_definition on A, G, B, h we get h == altitude(A, B, G)
+By perpendicular_angle_conditions_v0 on A, E, B we get angle(A, E, B) == orientation(A, E, B) mod 360
+By collinear_definition on F, J, C we get J in Line(C, F), C in Line(F, J), Line(C, F) == Line(F, J), 0 == 2 * angle(J, F, C) mod 360
+By collinear_definition on E, G, B we get G in Line(B, E), B in Line(E, G), Line(B, E) == Line(E, G), 0 == 2 * angle(G, E, B) mod 360
+By collinear_definition on K, F, C we get F in Line(C, K), C in Line(F, K), Line(C, K) == Line(F, K), 0 == 2 * angle(F, K, C) mod 360
+By altitude_definition on B, K, J, f we get f == altitude(B, J, K)
+By altitude_definition on C, E, G, h we get h == altitude(C, E, G)
+By collinear_definition on E, C, A we get C in Line(A, E), A in Line(C, E), Line(A, E) == Line(C, E), 0 == 2 * angle(C, E, A) mod 360
+By collinear_definition on B, E, G we get E in Line(B, G), G in Line(B, E), Line(B, E) == Line(B, G), 0 == 2 * angle(E, B, G) mod 360
+By altitude_definition on A, B, E, h we get h == altitude(A, B, E)
+By altitude_definition on G, C, E, j we get j == altitude(G, C, E)
+By collinear_definition on K, D, I we get D in Line(I, K), I in Line(D, K), Line(D, K) == Line(I, K), 0 == 2 * angle(D, K, I) mod 360
+By collinear_definition on J, C, F we get C in Line(F, J), F in Line(C, J), Line(C, J) == Line(F, J), 0 == 2 * angle(C, J, F) mod 360
+By collinear_definition on G, A, D we get A in Line(D, G), D in Line(A, G), Line(A, G) == Line(D, G), 0 == 2 * angle(A, G, D) mod 360
+By collinear_definition on K, I, D we get I in Line(D, K), D in Line(I, K), Line(D, K) == Line(I, K), 0 == 2 * angle(I, K, D) mod 360
+By collinear_definition on K, C, F we get C in Line(F, K), F in Line(C, K), Line(C, K) == Line(F, K), 0 == 2 * angle(C, K, F) mod 360
+By perpendicular_angle_conditions_v0 on B, D, G we get angle(B, D, G) == orientation(B, D, G) mod 360
+By altitude_definition on B, G, A, g we get g == altitude(B, A, G)
+By perpendicular_angle_conditions_v0 on G, E, A we get angle(G, E, A) == orientation(A, G, E) mod 360
+By collinear_definition on J, F, C we get F in Line(C, J), C in Line(F, J), Line(C, J) == Line(F, J), 0 == 2 * angle(F, J, C) mod 360
+By collinear_definition on F, C, J we get C in Line(F, J), J in Line(C, F), Line(C, F) == Line(F, J), 0 == 2 * angle(C, F, J) mod 360
+By collinear_definition on B, G, E we get G in Line(B, E), E in Line(B, G), Line(B, E) == Line(B, G), 0 == 2 * angle(G, B, E) mod 360
+By altitude_definition on C, D, A, g we get g == altitude(C, A, D)
+By perpendicular_angle_conditions_v0 on A, F, C we get angle(A, F, C) == orientation(A, F, C) mod 360
+By altitude_definition on C, G, D, g we get g == altitude(C, D, G)
+By perpendicular_angle_conditions_v0 on B, D, A we get angle(B, D, A) == orientation(A, B, D) mod 360
+By collinear_definition on F, A, B we get A in Line(B, F), B in Line(A, F), Line(A, F) == Line(B, F), 0 == 2 * angle(A, F, B) mod 360
+By collinear_definition on D, B, C we get B in Line(C, D), C in Line(B, D), Line(B, D) == Line(C, D), 0 == 2 * angle(B, D, C) mod 360
+By right_triangle_circumcenter_v1 on C, F, A we get midpoint(A, C) == circumcenter(A, C, F)
+By right_triangle_circumcenter_v1 on A, D, C we get midpoint(A, C) == circumcenter(A, C, D)
+By right_triangle_circumcenter_v1 on C, E, G we get midpoint(C, G) == circumcenter(C, E, G)
+By right_triangle_circumcenter_v1 on G, D, C we get midpoint(C, G) == circumcenter(C, D, G)
+By concurrent_sufficient_conditions on h, Line(I, J), Line(H, I) we get concurrent(h, Line(H, I), Line(I, J))
+By line_intersection_definition on orthocenter(A, B, C), j, i we get orthocenter(A, B, C) == line_intersection(i, j)
+By concyclic_sufficient_conditions_v0 on A, F, C, D we get concyclic(A, C, D, F)
+By concurrent_sufficient_conditions on Line(A, J), i, Line(A, H) we get concurrent(i, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on Line(A, H), Line(H, I), Line(H, J) we get concurrent(Line(A, H), Line(H, I), Line(H, J))
+By concurrent_sufficient_conditions on g, h, Line(C, G) we get concurrent(g, h, Line(C, G))
+By concurrent_sufficient_conditions on Line(A, J), f, i we get concurrent(f, i, Line(A, J))
+By concurrent_sufficient_conditions on Line(A, J), f, Line(A, H) we get concurrent(f, Line(A, H), Line(A, J))
+By line_definition on K, orthocenter(A, B, C), k we get k == Line(K, orthocenter(A, B, C))
+By concurrent_sufficient_conditions on h, Line(H, I), l we get concurrent(h, l, Line(H, I))
+By concurrent_sufficient_conditions on Line(H, I), Line(C, G), Line(A, H) we get concurrent(Line(A, H), Line(C, G), Line(H, I))
+By concurrent_sufficient_conditions on Line(I, J), Line(H, J), Line(A, J) we get concurrent(Line(A, J), Line(H, J), Line(I, J))
+By line_definition on J, orthocenter(A, B, C), k we get k == Line(J, orthocenter(A, B, C))
+By concurrent_sufficient_conditions on h, f, Line(A, H) we get concurrent(f, h, Line(A, H))
+By concurrent_sufficient_conditions on f, Line(A, J), h we get concurrent(f, h, Line(A, J))
+By concyclic_sufficient_conditions_v1 on C, D, G, E we get concyclic(C, D, E, G)
+By concurrent_sufficient_conditions on h, i, Line(A, H) we get concurrent(h, i, Line(A, H))
+By concurrent_sufficient_conditions on h, Line(A, J), Line(A, H) we get concurrent(h, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on Line(I, J), l, h we get concurrent(h, l, Line(I, J))
+By concurrent_sufficient_conditions on g, Line(C, G), h we get concurrent(g, h, Line(C, G))
+By concurrent_sufficient_conditions on i, Line(A, J), Line(A, H) we get concurrent(i, Line(A, H), Line(A, J))
+By line_definition on orthocenter(A, B, C), F, k we get k == Line(F, orthocenter(A, B, C))
+By concurrent_sufficient_conditions on k, Line(I, J), Line(A, J) we get concurrent(k, Line(A, J), Line(I, J))
+By concurrent_sufficient_conditions on Line(I, J), Line(A, J), k we get concurrent(k, Line(A, J), Line(I, J))
+By concurrent_sufficient_conditions on Line(A, J), f, h we get concurrent(f, h, Line(A, J))
+By line_definition on A, orthocenter(A, B, C), i we get i == Line(A, orthocenter(A, B, C))
+By concurrent_sufficient_conditions on Line(H, I), l, Line(I, J) we get concurrent(l, Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on i, j, Line(C, G) we get concurrent(i, j, Line(C, G))
+By concurrent_sufficient_conditions on h, l, Line(I, J) we get concurrent(h, l, Line(I, J))
+By concurrent_sufficient_conditions on Line(I, J), Line(H, I), l we get concurrent(l, Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on l, Line(H, I), Line(I, J) we get concurrent(l, Line(H, I), Line(I, J))
+By concyclic_sufficient_conditions_v0 on B, E, A, D we get concyclic(A, B, D, E)
+By concurrent_sufficient_conditions on l, Line(H, I), h we get concurrent(h, l, Line(H, I))
+By concurrent_sufficient_conditions on Line(H, J), Line(I, J), Line(A, J) we get concurrent(Line(A, J), Line(H, J), Line(I, J))
+By concurrent_sufficient_conditions on Line(A, J), k, Line(I, J) we get concurrent(k, Line(A, J), Line(I, J))
+By concurrent_sufficient_conditions on i, h, Line(A, H) we get concurrent(h, i, Line(A, H))
+By concurrent_sufficient_conditions on f, Line(A, H), h we get concurrent(f, h, Line(A, H))
+By concurrent_sufficient_conditions on i, f, Line(A, H) we get concurrent(f, i, Line(A, H))
+By concurrent_sufficient_conditions on Line(A, J), i, h we get concurrent(h, i, Line(A, J))
+By concurrent_sufficient_conditions on h, Line(A, H), f we get concurrent(f, h, Line(A, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, J), i we get concurrent(i, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on j, i, Line(C, G) we get concurrent(i, j, Line(C, G))
+By concurrent_sufficient_conditions on f, h, Line(A, J) we get concurrent(f, h, Line(A, J))
+By line_definition on orthocenter(A, B, C), C, k we get k == Line(C, orthocenter(A, B, C))
+By concurrent_sufficient_conditions on Line(C, G), h, g we get concurrent(g, h, Line(C, G))
+By concyclic_sufficient_conditions_v0 on C, E, B, F we get concyclic(B, C, E, F)
+By concurrent_sufficient_conditions on Line(A, H), f, i we get concurrent(f, i, Line(A, H))
+By concurrent_sufficient_conditions on h, i, Line(A, J) we get concurrent(h, i, Line(A, J))
+By concurrent_sufficient_conditions on i, Line(A, H), h we get concurrent(h, i, Line(A, H))
+By concurrent_sufficient_conditions on Line(A, J), Line(I, J), k we get concurrent(k, Line(A, J), Line(I, J))
+By concurrent_sufficient_conditions on Line(C, G), j, i we get concurrent(i, j, Line(C, G))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, J), h we get concurrent(h, Line(A, H), Line(A, J))
+By line_definition on E, orthocenter(A, B, C), j we get j == Line(E, orthocenter(A, B, C))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, J), f we get concurrent(f, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on Line(H, I), Line(I, J), h we get concurrent(h, Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(A, J), Line(A, H), i we get concurrent(i, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on Line(C, G), g, h we get concurrent(g, h, Line(C, G))
+By concurrent_sufficient_conditions on Line(C, G), i, j we get concurrent(i, j, Line(C, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(H, I), Line(A, H) we get concurrent(Line(A, H), Line(C, G), Line(H, I))
+By concurrent_sufficient_conditions on Line(I, J), Line(H, I), h we get concurrent(h, Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on f, i, Line(A, J) we get concurrent(f, i, Line(A, J))
+By concurrent_sufficient_conditions on Line(A, H), h, i we get concurrent(h, i, Line(A, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(H, J), Line(H, I) we get concurrent(Line(A, H), Line(H, I), Line(H, J))
+By concurrent_sufficient_conditions on Line(A, J), Line(H, J), Line(I, J) we get concurrent(Line(A, J), Line(H, J), Line(I, J))
+By concurrent_sufficient_conditions on Line(C, G), Line(A, H), Line(H, I) we get concurrent(Line(A, H), Line(C, G), Line(H, I))
+By concurrent_sufficient_conditions on Line(H, I), Line(A, H), Line(H, J) we get concurrent(Line(A, H), Line(H, I), Line(H, J))
+By concurrent_sufficient_conditions on l, Line(I, J), h we get concurrent(h, l, Line(I, J))
+By concurrent_sufficient_conditions on Line(I, J), h, l we get concurrent(h, l, Line(I, J))
+By concurrent_sufficient_conditions on i, h, Line(A, J) we get concurrent(h, i, Line(A, J))
+By concurrent_sufficient_conditions on Line(A, H), h, Line(A, J) we get concurrent(h, Line(A, H), Line(A, J))
+By line_definition on D, orthocenter(A, B, C), i we get i == Line(D, orthocenter(A, B, C))
+By concurrent_sufficient_conditions on Line(H, I), Line(H, J), Line(A, H) we get concurrent(Line(A, H), Line(H, I), Line(H, J))
+By concurrent_sufficient_conditions on l, Line(I, J), Line(H, I) we get concurrent(l, Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on h, l, Line(H, I) we get concurrent(h, l, Line(H, I))
+By concurrent_sufficient_conditions on Line(A, H), i, Line(A, J) we get concurrent(i, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on h, g, Line(C, G) we get concurrent(g, h, Line(C, G))
+By concurrent_sufficient_conditions on Line(A, H), f, Line(A, J) we get concurrent(f, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on Line(I, J), Line(A, J), Line(H, J) we get concurrent(Line(A, J), Line(H, J), Line(I, J))
+By concurrent_sufficient_conditions on Line(A, J), h, i we get concurrent(h, i, Line(A, J))
+By concurrent_sufficient_conditions on i, Line(A, H), f we get concurrent(f, i, Line(A, H))
+By concurrent_sufficient_conditions on f, i, Line(A, H) we get concurrent(f, i, Line(A, H))
+By concurrent_sufficient_conditions on Line(A, J), h, f we get concurrent(f, h, Line(A, J))
+By concurrent_sufficient_conditions on Line(A, J), Line(I, J), Line(H, J) we get concurrent(Line(A, J), Line(H, J), Line(I, J))
+By concurrent_sufficient_conditions on h, Line(C, G), g we get concurrent(g, h, Line(C, G))
+By concurrent_sufficient_conditions on k, Line(A, J), Line(I, J) we get concurrent(k, Line(A, J), Line(I, J))
+By concurrent_sufficient_conditions on f, Line(A, J), Line(A, H) we get concurrent(f, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on Line(H, J), Line(H, I), Line(A, H) we get concurrent(Line(A, H), Line(H, I), Line(H, J))
+By concurrent_sufficient_conditions on l, h, Line(I, J) we get concurrent(h, l, Line(I, J))
+By concurrent_sufficient_conditions on l, h, Line(H, I) we get concurrent(h, l, Line(H, I))
+By concurrent_sufficient_conditions on i, Line(A, J), f we get concurrent(f, i, Line(A, J))
+By concurrent_sufficient_conditions on Line(H, I), Line(A, H), Line(C, G) we get concurrent(Line(A, H), Line(C, G), Line(H, I))
+By concurrent_sufficient_conditions on j, Line(C, G), i we get concurrent(i, j, Line(C, G))
+By concurrent_sufficient_conditions on h, Line(A, H), i we get concurrent(h, i, Line(A, H))
+By concurrent_sufficient_conditions on f, Line(A, H), i we get concurrent(f, i, Line(A, H))
+By concurrent_sufficient_conditions on Line(I, J), k, Line(A, J) we get concurrent(k, Line(A, J), Line(I, J))
+By concurrent_sufficient_conditions on Line(A, J), i, f we get concurrent(f, i, Line(A, J))
+By concurrent_sufficient_conditions on Line(H, I), h, Line(I, J) we get concurrent(h, Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on h, Line(H, I), Line(I, J) we get concurrent(h, Line(H, I), Line(I, J))
+By line_definition on B, orthocenter(A, B, C), j we get j == Line(B, orthocenter(A, B, C))
+By concurrent_sufficient_conditions on f, h, Line(A, H) we get concurrent(f, h, Line(A, H))
+By concurrent_sufficient_conditions on Line(H, J), Line(A, H), Line(H, I) we get concurrent(Line(A, H), Line(H, I), Line(H, J))
+By concurrent_sufficient_conditions on Line(A, H), Line(H, I), Line(C, G) we get concurrent(Line(A, H), Line(C, G), Line(H, I))
+By concurrent_sufficient_conditions on Line(A, H), i, h we get concurrent(h, i, Line(A, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(C, G), Line(H, I) we get concurrent(Line(A, H), Line(C, G), Line(H, I))
+By concurrent_sufficient_conditions on Line(A, J), Line(A, H), h we get concurrent(h, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on h, Line(I, J), l we get concurrent(h, l, Line(I, J))
+By concurrent_sufficient_conditions on h, Line(A, H), Line(A, J) we get concurrent(h, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on Line(H, I), l, h we get concurrent(h, l, Line(H, I))
+By concurrent_sufficient_conditions on Line(A, H), f, h we get concurrent(f, h, Line(A, H))
+By concurrent_sufficient_conditions on f, Line(A, H), Line(A, J) we get concurrent(f, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on i, f, Line(A, J) we get concurrent(f, i, Line(A, J))
+By concurrent_sufficient_conditions on i, Line(A, H), Line(A, J) we get concurrent(i, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on Line(H, J), Line(A, J), Line(I, J) we get concurrent(Line(A, J), Line(H, J), Line(I, J))
+By concurrent_sufficient_conditions on Line(I, J), l, Line(H, I) we get concurrent(l, Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(A, H), i, f we get concurrent(f, i, Line(A, H))
+By concurrent_sufficient_conditions on i, Line(A, J), h we get concurrent(h, i, Line(A, J))
+By concurrent_sufficient_conditions on Line(H, I), h, l we get concurrent(h, l, Line(H, I))
+By concurrent_sufficient_conditions on Line(A, J), Line(A, H), f we get concurrent(f, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on h, f, Line(A, J) we get concurrent(f, h, Line(A, J))
+By concurrent_sufficient_conditions on Line(A, J), h, Line(A, H) we get concurrent(h, Line(A, H), Line(A, J))
+By concurrent_sufficient_conditions on h, Line(A, J), i we get concurrent(h, i, Line(A, J))
+By concurrent_sufficient_conditions on Line(H, I), Line(I, J), l we get concurrent(l, Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(A, H), h, f we get concurrent(f, h, Line(A, H))
+By concurrent_sufficient_conditions on Line(I, J), h, Line(H, I) we get concurrent(h, Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on i, Line(C, G), j we get concurrent(i, j, Line(C, G))
+By concurrent_sufficient_conditions on h, Line(A, J), f we get concurrent(f, h, Line(A, J))
+By concurrent_sufficient_conditions on f, Line(A, J), i we get concurrent(f, i, Line(A, J))
+By radical_axis_of_intersecting_circles_v0 on D, C, Circle(C, D, G), Circle(A, C, D) we get Line(C, D) == radical_axis(Circle(A, C, D), Circle(C, D, G))
+By line_intersection_definition on orthocenter(A, B, C), i, k we get orthocenter(A, B, C) == line_intersection(i, k)
+By perpendicular_line_definition on orthocenter(A, B, C), i, g we get i == perpendicular_line(orthocenter(A, B, C), g)
+By perpendicular_line_definition on orthocenter(A, B, C), j, h we get j == perpendicular_line(orthocenter(A, B, C), h)
+By perpendicular_line_definition on orthocenter(A, B, C), k, f we get k == perpendicular_line(orthocenter(A, B, C), f)
+By line_intersection_definition on orthocenter(A, B, C), k, j we get orthocenter(A, B, C) == line_intersection(j, k)
+By line_unique_intersection on i, j, orthocenter(A, B, C), G we get G == orthocenter(A, B, C)
+By same_angle_v1 on J, F, K, I we get angle(F, J, I) == angle(K, J, I) mod 360
+By projection_definition on I, E, j we get E == projection(I, j)
+By same_angle_v3 on K, C, J, D we get angle(C, K, D) == angle(J, K, D) + 180 mod 360
+By same_angle_v0 on K, F, J, I we get angle(F, K, I) == angle(J, K, I) mod 360
+By same_angle_v1 on J, C, K, A we get angle(C, J, A) == angle(K, J, A) mod 360
+By same_angle_v1 on J, C, K, I we get angle(C, J, I) == angle(K, J, I) mod 360
+By same_angle_v1 on J, K, F, A we get angle(F, J, A) == angle(K, J, A) mod 360
+By between_imply_not_between on A, G, D we get collinear_and_not_between(D, A, G)
+By same_angle_v1 on K, F, J, D we get angle(F, K, D) == angle(J, K, D) mod 360
+By same_angle_v2 on K, J, C, I we get angle(J, K, I) == angle(C, K, I) + 180 mod 360
+By between_imply_not_between on D, G, A we get collinear_and_not_between(A, D, G)
+By between_imply_not_between on B, D, C we get collinear_and_not_between(C, B, D)
+By between_imply_not_between on A, E, C we get collinear_and_not_between(C, A, E)
+By between_imply_not_between on B, G, E we get collinear_and_not_between(E, B, G)
+By between_imply_not_between on F, K, C we get collinear_and_not_between(C, F, K)
+By between_imply_not_between on D, K, I we get collinear_and_not_between(I, D, K)
+By between_imply_not_between on C, F, J we get collinear_and_not_between(F, C, J)
+By between_imply_not_between on J, F, C we get collinear_and_not_between(C, J, F)
+By between_imply_not_between on B, F, A we get collinear_and_not_between(A, B, F)
+By circle_radius_v0_r on A, Circle(A, C, D) we get radius(Circle(A, C, D)) == distance(A, center(Circle(A, C, D)))
+By between_imply_not_between on C, D, B we get collinear_and_not_between(B, C, D)
+By between_imply_not_between on C, K, F we get collinear_and_not_between(F, C, K)
+By between_imply_not_between on A, F, B we get collinear_and_not_between(B, A, F)
+By between_imply_not_between on I, K, D we get collinear_and_not_between(D, I, K)
+By between_imply_not_between on C, E, A we get collinear_and_not_between(A, C, E)
+By between_imply_not_between on E, G, B we get collinear_and_not_between(B, E, G)
+By circle_radius_v0_r on A, Circle(A, C, F) we get radius(Circle(A, C, F)) == distance(A, center(Circle(A, C, F)))
+By circle_radius_v0_r on C, Circle(C, E, G) we get radius(Circle(C, E, G)) == distance(C, center(Circle(C, E, G)))
+By circle_radius_v0_r on D, Circle(C, D, G) we get radius(Circle(C, D, G)) == distance(D, center(Circle(C, D, G)))
+By circle_radius_v0_r on C, Circle(C, D, G) we get radius(Circle(C, D, G)) == distance(C, center(Circle(C, D, G)))
+By circle_radius_v0_r on D, Circle(A, C, D) we get radius(Circle(A, C, D)) == distance(D, center(Circle(A, C, D)))
+By circle_radius_v0_r on C, Circle(A, C, D) we get radius(Circle(A, C, D)) == distance(C, center(Circle(A, C, D)))
+By circle_radius_v0_r on G, Circle(C, D, G) we get radius(Circle(C, D, G)) == distance(G, center(Circle(C, D, G)))
+By circle_radius_v0_r on E, Circle(C, E, G) we get radius(Circle(C, E, G)) == distance(E, center(Circle(C, E, G)))
+By circle_radius_v0_r on F, Circle(A, C, F) we get radius(Circle(A, C, F)) == distance(F, center(Circle(A, C, F)))
+By circle_radius_v0_r on G, Circle(C, E, G) we get radius(Circle(C, E, G)) == distance(G, center(Circle(C, E, G)))
+By circle_radius_v0_r on C, Circle(A, C, F) we get radius(Circle(A, C, F)) == distance(C, center(Circle(A, C, F)))
+By angle_to_center on G, C, E, Circle(C, E, G) we get 2 * angle(G, C, E) == angle(G, center(Circle(C, E, G)), E) mod 360
+By angle_to_center on G, C, D, Circle(C, D, G) we get 2 * angle(G, C, D) == angle(G, center(Circle(C, D, G)), D) mod 360
+By angle_to_center on F, A, C, Circle(A, C, F) we get 2 * angle(F, A, C) == angle(F, center(Circle(A, C, F)), C) mod 360
+By angle_to_center on C, G, E, Circle(C, E, G) we get 2 * angle(C, G, E) == angle(C, center(Circle(C, E, G)), E) mod 360
+By angle_to_center on F, C, A, Circle(A, C, F) we get 2 * angle(F, C, A) == angle(F, center(Circle(A, C, F)), A) mod 360
+By same_angle_v1 on I, A, E, D we get angle(A, I, D) == angle(E, I, D) mod 360
+By perpendicular_direction_conditions_v0_r on I, E, G, B we get 180 == 2 * direction(I, E) - 2 * direction(G, B) mod 360
+By angle_to_center on D, C, A, Circle(A, C, D) we get 2 * angle(D, C, A) == angle(D, center(Circle(A, C, D)), A) mod 360
+By angle_to_center on D, G, C, Circle(C, D, G) we get 2 * angle(D, G, C) == angle(D, center(Circle(C, D, G)), C) mod 360
+By angle_to_center on A, C, F, Circle(A, C, F) we get 2 * angle(A, C, F) == angle(A, center(Circle(A, C, F)), F) mod 360
+By angle_to_center on C, A, D, Circle(A, C, D) we get 2 * angle(C, A, D) == angle(C, center(Circle(A, C, D)), D) mod 360
+By angle_to_center on E, C, G, Circle(C, E, G) we get 2 * angle(E, C, G) == angle(E, center(Circle(C, E, G)), G) mod 360
+By same_angle_v3 on E, I, A, G we get angle(I, E, G) == angle(A, E, G) + 180 mod 360
+By angle_to_center on E, G, C, Circle(C, E, G) we get 2 * angle(E, G, C) == angle(E, center(Circle(C, E, G)), C) mod 360
+By angle_to_center on A, C, D, Circle(A, C, D) we get 2 * angle(A, C, D) == angle(A, center(Circle(A, C, D)), D) mod 360
+By angle_to_center on C, A, F, Circle(A, C, F) we get 2 * angle(C, A, F) == angle(C, center(Circle(A, C, F)), F) mod 360
+By angle_to_center on D, A, C, Circle(A, C, D) we get 2 * angle(D, A, C) == angle(D, center(Circle(A, C, D)), C) mod 360
+By angle_to_center on C, G, D, Circle(C, D, G) we get 2 * angle(C, G, D) == angle(C, center(Circle(C, D, G)), D) mod 360
+By angle_to_center on D, C, G, Circle(C, D, G) we get 2 * angle(D, C, G) == angle(D, center(Circle(C, D, G)), G) mod 360
+By same_angle_v1 on I, E, A, K we get angle(A, I, K) == angle(E, I, K) mod 360
+By same_angle_v2 on E, I, A, B we get angle(I, E, B) == angle(A, E, B) + 180 mod 360
+By same_angle_v0 on E, I, C, G we get angle(C, E, G) == angle(I, E, G) mod 360
+By same_angle_v2 on I, C, E, K we get angle(C, I, K) == angle(E, I, K) + 180 mod 360
+By same_angle_v1 on I, E, A, H we get angle(A, I, H) == angle(E, I, H) mod 360
+By same_angle_v0 on I, K, D, E we get angle(D, I, E) == angle(K, I, E) mod 360
+By same_angle_v0 on E, C, I, B we get angle(C, E, B) == angle(I, E, B) mod 360
+By same_angle_v2 on I, C, E, H we get angle(C, I, H) == angle(E, I, H) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on B, E, E, I we get 180 == 2 * direction(B, E) - 2 * direction(E, I) mod 360
+By perpendicular_direction_conditions_v0_r on E, I, G, E we get 180 == 2 * direction(E, I) - 2 * direction(G, E) mod 360
+By same_angle_v1 on I, E, A, J we get angle(A, I, J) == angle(E, I, J) mod 360
+By same_angle_v2 on I, C, E, D we get angle(C, I, D) == angle(E, I, D) + 180 mod 360
+By same_angle_v2 on I, C, E, J we get angle(C, I, J) == angle(E, I, J) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on I, E, G, E we get 180 == 2 * direction(I, E) - 2 * direction(G, E) mod 360
+By in_imply_collinear on orthocenter(A, B, C), F, J we get collinear(F, J, orthocenter(A, B, C))
+By perpendicular_direction_conditions_v0_r on E, I, E, G we get 180 == 2 * direction(E, I) - 2 * direction(E, G) mod 360
+By between_imply_segment_sum on C, F, J we get distance(C, J) == distance(C, F) + distance(F, J)
+By perpendicular_direction_conditions_v0_r on E, B, I, E we get 180 == 2 * direction(E, B) - 2 * direction(I, E) mod 360
+By same_angle_v1 on E, B, G, I we get angle(B, E, I) == angle(G, E, I) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, E, I we get 180 == 2 * direction(E, B) - 2 * direction(E, I) mod 360
+By divide_by_2_mod_180_v0 on A, B, E, J, C, A we get angle(A, B, E) == angle(J, C, A) mod 360
+By perpendicular_direction_conditions_v0_r on I, E, E, B we get 180 == 2 * direction(I, E) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on I, E, B, G we get 180 == 2 * direction(I, E) - 2 * direction(B, G) mod 360
+By divide_by_2_mod_180_v2 on D, C, A, A, G, B we get angle(D, C, A) == angle(A, G, B) + 180 mod 360
+By divide_by_2_mod_180_v1 on I, C, K, E, B, A we get angle(E, B, A) == angle(I, C, K) mod 360
+By orthocenter_concurrency on B, A, G we get orthocenter(A, B, G) in altitude(B, A, G), orthocenter(A, B, G) in altitude(A, B, G), orthocenter(A, B, G) in altitude(G, A, B)
+By perpendicular_direction_conditions_v0_r on G, E, E, I we get 180 == 2 * direction(G, E) - 2 * direction(E, I) mod 360
+By divide_by_2_mod_180_v1 on E, C, J, G, B, F we get angle(E, C, J) == angle(G, B, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, I, E, B we get 180 == 2 * direction(E, I) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, I, E we get 180 == 2 * direction(E, G) - 2 * direction(I, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, E, I we get 180 == 2 * direction(B, G) - 2 * direction(E, I) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, E, I we get 180 == 2 * direction(G, B) - 2 * direction(E, I) mod 360
+By perpendicular_direction_conditions_v0_r on B, G, I, E we get 180 == 2 * direction(B, G) - 2 * direction(I, E) mod 360
+By perpendicular_direction_conditions_v0_r on G, B, I, E we get 180 == 2 * direction(G, B) - 2 * direction(I, E) mod 360
+By probably_between_and_collinear_implies_between on I, E, A we get between(A, E, I)
+By orthocenter_concurrency on C, G, B we get orthocenter(B, C, G) in altitude(C, B, G), orthocenter(B, C, G) in altitude(G, B, C), orthocenter(B, C, G) in altitude(B, C, G)
+By divide_by_2_mod_180_v1 on E, B, A, A, C, F we get angle(A, C, F) == angle(E, B, A) mod 360
+By divide_by_2_mod_180_v1 on A, C, B, E, G, A we get angle(A, C, B) == angle(E, G, A) mod 360
+By perpendicular_direction_conditions_v0_r on E, I, B, E we get 180 == 2 * direction(E, I) - 2 * direction(B, E) mod 360
+By in_imply_collinear on orthocenter(A, B, C), A, G we get collinear(A, G, orthocenter(A, B, C))
+By perpendicular_direction_conditions_v0_r on G, E, I, E we get 180 == 2 * direction(G, E) - 2 * direction(I, E) mod 360
+By orthocenter_concurrency on G, C, A we get orthocenter(A, C, G) in altitude(G, A, C), orthocenter(A, C, G) in altitude(C, A, G), orthocenter(A, C, G) in altitude(A, C, G)
+By divide_by_2_mod_180_v1 on G, A, C, D, B, E we get angle(D, B, E) == angle(G, A, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, E, I we get 180 == 2 * direction(E, G) - 2 * direction(E, I) mod 360
+By divide_by_2_mod_180_v0 on F, C, E, A, B, G we get angle(A, B, G) == angle(F, C, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, I, B, G we get 180 == 2 * direction(E, I) - 2 * direction(B, G) mod 360
+By perpendicular_direction_conditions_v0_r on I, E, B, E we get 180 == 2 * direction(I, E) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on I, E, E, G we get 180 == 2 * direction(I, E) - 2 * direction(E, G) mod 360
+By divide_by_2_mod_180_v1 on D, B, G, D, A, I we get angle(D, A, I) == angle(D, B, G) mod 360
+By in_imply_collinear on orthocenter(A, B, C), G, D we get collinear(D, G, orthocenter(A, B, C))
+By perpendicular_direction_conditions_v0_r on E, I, G, B we get 180 == 2 * direction(E, I) - 2 * direction(G, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, I, E we get 180 == 2 * direction(B, E) - 2 * direction(I, E) mod 360
+By divide_by_2_mod_180_v0 on D, A, B, B, C, K we get angle(B, C, K) == angle(D, A, B) mod 360
+By divide_by_2_mod_180_v0 on F, B, E, F, C, I we get angle(F, B, E) == angle(F, C, I) mod 360
+By divide_by_2_mod_180_v0 on B, C, F, D, A, F we get angle(B, C, F) == angle(D, A, F) mod 360
+By divide_by_2_mod_180_v0 on F, B, E, K, C, E we get angle(F, B, E) == angle(K, C, E) mod 360
+By divide_by_2_mod_180_v0 on A, B, E, F, C, E we get angle(A, B, E) == angle(F, C, E) mod 360
+By probably_between_and_collinear_implies_between on K, F, J we get between(J, F, K)
+By divide_by_2_mod_180_v0 on C, A, G, G, B, C we get angle(C, A, G) == angle(G, B, C) mod 360
+By divide_by_2_mod_180_v0 on J, C, E, F, B, G we get angle(F, B, G) == angle(J, C, E) mod 360
+By divide_by_2_mod_180_v1 on F, C, B, B, A, D we get angle(B, A, D) == angle(F, C, B) mod 360
+By probably_between_and_collinear_implies_between on C, I, E we get between(C, I, E)
+By divide_by_2_mod_180_v1 on I, C, D, E, G, A we get angle(E, G, A) == angle(I, C, D) mod 360
+By divide_by_2_mod_180_v0 on C, A, D, G, B, C we get angle(C, A, D) == angle(G, B, C) mod 360
+By divide_by_2_mod_180_v0 on I, A, D, G, B, C we get angle(G, B, C) == angle(I, A, D) mod 360
+By divide_by_2_mod_180_v3 on D, K, C, D, K, J we get angle(D, K, C) == angle(D, K, J) + 180 mod 360
+By divide_by_2_mod_180_v0 on E, B, C, I, A, D we get angle(E, B, C) == angle(I, A, D) mod 360
+By divide_by_2_mod_180_v1 on E, C, K, G, B, A we get angle(E, C, K) == angle(G, B, A) mod 360
+By divide_by_2_mod_180_v1 on B, A, G, K, C, B we get angle(B, A, G) == angle(K, C, B) mod 360
+By divide_by_2_mod_180_v3 on F, K, D, J, K, I we get angle(F, K, D) == angle(J, K, I) + 180 mod 360
+By divide_by_2_mod_180_v0 on G, A, B, B, C, J we get angle(B, C, J) == angle(G, A, B) mod 360
+By probably_between_and_collinear_implies_between on J, K, C we get between(C, K, J)
+By divide_by_2_mod_180_v0 on D, A, F, D, C, J we get angle(D, A, F) == angle(D, C, J) mod 360
+By divide_by_2_mod_180_v1 on E, G, A, E, C, D we get angle(E, C, D) == angle(E, G, A) mod 360
+By divide_by_2_mod_180_v0 on A, B, E, F, C, I we get angle(A, B, E) == angle(F, C, I) mod 360
+By divide_by_2_mod_180_v0 on I, A, D, E, B, D we get angle(E, B, D) == angle(I, A, D) mod 360
+By divide_by_2_mod_180_v1 on G, A, E, D, B, E we get angle(D, B, E) == angle(G, A, E) mod 360
+By divide_by_2_mod_180_v3 on A, G, B, D, C, I we get angle(A, G, B) == angle(D, C, I) + 180 mod 360
+By in_imply_collinear on orthocenter(A, B, C), A, D we get collinear(A, D, orthocenter(A, B, C))
+By divide_by_2_mod_180_v2 on E, G, D, E, C, B we get angle(E, G, D) == angle(E, C, B) + 180 mod 360
+By divide_by_2_mod_180_v0 on J, K, I, C, K, D we get angle(C, K, D) == angle(J, K, I) mod 360
+By in_imply_collinear on orthocenter(A, B, C), E, B we get collinear(B, E, orthocenter(A, B, C))
+By divide_by_2_mod_180_v0 on F, B, G, J, C, I we get angle(F, B, G) == angle(J, C, I) mod 360
+By divide_by_2_mod_180_v0 on E, B, C, C, A, G we get angle(C, A, G) == angle(E, B, C) mod 360
+By divide_by_2_mod_180_v0 on J, C, E, A, B, G we get angle(A, B, G) == angle(J, C, E) mod 360
+By divide_by_2_mod_180_v0 on A, B, G, J, C, A we get angle(A, B, G) == angle(J, C, A) mod 360
+By divide_by_2_mod_180_v0 on E, B, C, C, A, D we get angle(C, A, D) == angle(E, B, C) mod 360
+By divide_by_2_mod_180_v0 on I, A, D, G, B, D we get angle(G, B, D) == angle(I, A, D) mod 360
+By divide_by_2_mod_180_v0 on A, G, E, B, C, E we get angle(A, G, E) == angle(B, C, E) mod 360
+By divide_by_2_mod_180_v1 on C, B, E, G, A, I we get angle(C, B, E) == angle(G, A, I) mod 360
+By divide_by_2_mod_180_v1 on D, A, I, C, B, E we get angle(C, B, E) == angle(D, A, I) mod 360
+By divide_by_2_mod_180_v1 on F, C, B, B, A, G we get angle(B, A, G) == angle(F, C, B) mod 360
+By divide_by_2_mod_180_v0 on F, B, E, J, C, A we get angle(F, B, E) == angle(J, C, A) mod 360
+By divide_by_2_mod_180_v0 on K, C, I, A, B, E we get angle(A, B, E) == angle(K, C, I) mod 360
+By divide_by_2_mod_180_v1 on G, B, F, A, C, F we get angle(A, C, F) == angle(G, B, F) mod 360
+By divide_by_2_mod_180_v1 on K, C, D, F, A, D we get angle(F, A, D) == angle(K, C, D) mod 360
+By divide_by_2_mod_180_v1 on C, B, G, G, A, C we get angle(C, B, G) == angle(G, A, C) mod 360
+By divide_by_2_mod_180_v1 on D, B, G, D, A, C we get angle(D, A, C) == angle(D, B, G) mod 360
+By reverse_direction on G, E we get 180 == direction(G, E) - direction(E, G) mod 360
+By divide_by_2_mod_180_v1 on D, A, E, C, B, G we get angle(C, B, G) == angle(D, A, E) mod 360
+By divide_by_2_mod_180_v1 on E, G, A, A, C, D we get angle(A, C, D) == angle(E, G, A) mod 360
+By divide_by_2_mod_180_v0 on B, C, A, D, G, B we get angle(B, C, A) == angle(D, G, B) mod 360
+By in_imply_collinear on orthocenter(A, B, C), C, J we get collinear(C, J, orthocenter(A, B, C))
+By divide_by_2_mod_180_v0 on B, C, F, D, A, B we get angle(B, C, F) == angle(D, A, B) mod 360
+By divide_by_2_mod_180_v2 on F, K, I, J, K, D we get angle(F, K, I) == angle(J, K, D) + 180 mod 360
+By divide_by_2_mod_180_v1 on D, A, E, D, B, E we get angle(D, A, E) == angle(D, B, E) mod 360
+By divide_by_2_mod_180_v1 on G, B, A, I, C, F we get angle(G, B, A) == angle(I, C, F) mod 360
+By divide_by_2_mod_180_v1 on I, C, J, E, B, A we get angle(E, B, A) == angle(I, C, J) mod 360
+By divide_by_2_mod_180_v1 on G, A, C, C, B, E we get angle(C, B, E) == angle(G, A, C) mod 360
+By divide_by_2_mod_180_v0 on G, B, C, I, A, G we get angle(G, B, C) == angle(I, A, G) mod 360
+By aa_anti_similarity on C, B, E, G, B, D we get anti_similar_triangles(B, C, E, B, G, D)
+By divide_by_2_mod_180_v1 on G, B, F, I, C, J we get angle(G, B, F) == angle(I, C, J) mod 360
+By divide_by_2_mod_180_v1 on J, K, D, C, K, I we get angle(C, K, I) == angle(J, K, D) mod 360
+By divide_by_2_mod_180_v0 on D, C, A, D, G, B we get angle(D, C, A) == angle(D, G, B) mod 360
+By divide_by_2_mod_180_v1 on J, C, D, F, A, D we get angle(F, A, D) == angle(J, C, D) mod 360
+By divide_by_2_mod_180_v2 on D, K, J, I, K, F we get angle(D, K, J) == angle(I, K, F) + 180 mod 360
+By divide_by_2_mod_180_v0 on B, C, A, A, G, E we get angle(A, G, E) == angle(B, C, A) mod 360
+By reverse_direction on J, K we get 180 == direction(J, K) - direction(K, J) mod 360
+By divide_by_2_mod_180_v0 on D, K, J, I, K, C we get angle(D, K, J) == angle(I, K, C) mod 360
+By divide_by_2_mod_180_v0 on D, C, K, D, A, B we get angle(D, A, B) == angle(D, C, K) mod 360
+By divide_by_2_mod_180_v1 on B, G, D, I, C, D we get angle(B, G, D) == angle(I, C, D) mod 360
+By in_imply_collinear on orthocenter(A, B, C), C, K we get collinear(C, K, orthocenter(A, B, C))
+By divide_by_2_mod_180_v3 on A, C, B, B, G, A we get angle(A, C, B) == angle(B, G, A) + 180 mod 360
+By divide_by_2_mod_180_v0 on J, C, I, F, B, E we get angle(F, B, E) == angle(J, C, I) mod 360
+By divide_by_2_mod_180_v0 on F, B, E, J, C, E we get angle(F, B, E) == angle(J, C, E) mod 360
+By divide_by_2_mod_180_v0 on D, C, J, D, A, B we get angle(D, A, B) == angle(D, C, J) mod 360
+By in_imply_collinear on orthocenter(A, B, C), J, K we get collinear(J, K, orthocenter(A, B, C))
+By divide_by_2_mod_180_v1 on G, B, F, I, C, F we get angle(G, B, F) == angle(I, C, F) mod 360
+By divide_by_2_mod_180_v2 on B, C, I, A, G, B we get angle(B, C, I) == angle(A, G, B) + 180 mod 360
+By divide_by_2_mod_180_v1 on B, A, D, K, C, B we get angle(B, A, D) == angle(K, C, B) mod 360
+By divide_by_2_mod_180_v0 on B, C, I, A, G, E we get angle(A, G, E) == angle(B, C, I) mod 360
+By divide_by_2_mod_180_v0 on G, B, D, C, A, D we get angle(C, A, D) == angle(G, B, D) mod 360
+By divide_by_2_mod_180_v1 on E, B, F, E, C, F we get angle(E, B, F) == angle(E, C, F) mod 360
+By divide_by_2_mod_180_v1 on D, A, C, C, B, E we get angle(C, B, E) == angle(D, A, C) mod 360
+By divide_by_2_mod_180_v1 on G, B, A, I, C, K we get angle(G, B, A) == angle(I, C, K) mod 360
+By divide_by_2_mod_180_v0 on B, C, K, G, A, F we get angle(B, C, K) == angle(G, A, F) mod 360
+By divide_by_2_mod_180_v1 on K, C, B, F, A, G we get angle(F, A, G) == angle(K, C, B) mod 360
+By between_imply_segment_sum on E, G, B we get distance(B, E) == distance(E, G) + distance(B, G)
+By divide_by_2_mod_180_v1 on J, C, D, B, A, D we get angle(B, A, D) == angle(J, C, D) mod 360
+By reverse_direction on K, I we get 180 == direction(K, I) - direction(I, K) mod 360
+By divide_by_2_mod_180_v0 on J, C, A, F, B, G we get angle(F, B, G) == angle(J, C, A) mod 360
+By divide_by_2_mod_180_v1 on J, C, D, B, A, G we get angle(B, A, G) == angle(J, C, D) mod 360
+By divide_by_2_mod_180_v1 on G, B, F, I, C, K we get angle(G, B, F) == angle(I, C, K) mod 360
+By divide_by_2_mod_180_v0 on K, C, I, A, B, G we get angle(A, B, G) == angle(K, C, I) mod 360
+By divide_by_2_mod_180_v0 on D, K, F, D, K, J we get angle(D, K, F) == angle(D, K, J) mod 360
+By in_imply_collinear on orthocenter(A, B, C), F, C we get collinear(C, F, orthocenter(A, B, C))
+By divide_by_2_mod_180_v3 on I, K, F, D, K, J we get angle(I, K, F) == angle(D, K, J) + 180 mod 360
+By divide_by_2_mod_180_v3 on I, C, D, B, G, A we get angle(I, C, D) == angle(B, G, A) + 180 mod 360
+By divide_by_2_mod_180_v0 on F, B, G, K, C, A we get angle(F, B, G) == angle(K, C, A) mod 360
+By divide_by_2_mod_180_v3 on E, C, B, B, G, A we get angle(E, C, B) == angle(B, G, A) + 180 mod 360
+By divide_by_2_mod_180_v1 on B, G, D, A, C, D we get angle(A, C, D) == angle(B, G, D) mod 360
+By divide_by_2_mod_180_v0 on F, C, A, A, B, E we get angle(A, B, E) == angle(F, C, A) mod 360
+By in_imply_collinear on orthocenter(A, B, C), F, K we get collinear(F, K, orthocenter(A, B, C))
+By divide_by_2_mod_180_v0 on K, C, I, F, B, G we get angle(F, B, G) == angle(K, C, I) mod 360
+By divide_by_2_mod_180_v0 on G, A, F, B, C, F we get angle(B, C, F) == angle(G, A, F) mod 360
+By divide_by_2_mod_180_v3 on E, C, D, E, G, D we get angle(E, C, D) == angle(E, G, D) + 180 mod 360
+By divide_by_2_mod_180_v2 on D, C, E, D, G, E we get angle(D, C, E) == angle(D, G, E) + 180 mod 360
+By divide_by_2_mod_180_v0 on E, B, C, E, A, D we get angle(E, A, D) == angle(E, B, C) mod 360
+By divide_by_2_mod_180_v1 on E, B, A, A, C, J we get angle(A, C, J) == angle(E, B, A) mod 360
+By divide_by_2_mod_180_v2 on D, K, F, I, K, J we get angle(D, K, F) == angle(I, K, J) + 180 mod 360
+By divide_by_2_mod_180_v0 on D, C, F, D, A, F we get angle(D, A, F) == angle(D, C, F) mod 360
+By divide_by_2_mod_180_v1 on E, C, K, G, B, F we get angle(E, C, K) == angle(G, B, F) mod 360
+By divide_by_2_mod_180_v0 on G, B, D, E, A, G we get angle(E, A, G) == angle(G, B, D) mod 360
+By divide_by_2_mod_180_v1 on K, C, D, B, A, G we get angle(B, A, G) == angle(K, C, D) mod 360
+By divide_by_2_mod_180_v1 on E, B, A, I, C, F we get angle(E, B, A) == angle(I, C, F) mod 360
+By divide_by_2_mod_180_v1 on A, C, F, G, B, A we get angle(A, C, F) == angle(G, B, A) mod 360
+By divide_by_2_mod_180_v1 on E, C, F, G, B, A we get angle(E, C, F) == angle(G, B, A) mod 360
+By aa_anti_similarity on B, D, G, A, E, G we get anti_similar_triangles(A, E, G, B, D, G)
+By divide_by_2_mod_180_v1 on G, B, F, A, C, J we get angle(A, C, J) == angle(G, B, F) mod 360
+By divide_by_2_mod_180_v3 on A, G, B, B, C, I we get angle(A, G, B) == angle(B, C, I) + 180 mod 360
+By divide_by_2_mod_180_v0 on C, A, G, G, B, D we get angle(C, A, G) == angle(G, B, D) mod 360
+By divide_by_2_mod_180_v0 on A, G, E, D, C, I we get angle(A, G, E) == angle(D, C, I) mod 360
+By divide_by_2_mod_180_v1 on A, C, B, B, G, D we get angle(A, C, B) == angle(B, G, D) mod 360
+By divide_by_2_mod_180_v1 on G, B, A, A, C, J we get angle(A, C, J) == angle(G, B, A) mod 360
+By divide_by_2_mod_180_v3 on D, G, E, B, C, A we get angle(D, G, E) == angle(B, C, A) + 180 mod 360
+By divide_by_2_mod_180_v0 on D, A, B, D, C, F we get angle(D, A, B) == angle(D, C, F) mod 360
+By divide_by_2_mod_180_v0 on D, C, J, G, A, F we get angle(D, C, J) == angle(G, A, F) mod 360
+By divide_by_2_mod_180_v3 on D, G, E, D, C, A we get angle(D, G, E) == angle(D, C, A) + 180 mod 360
+By in_imply_collinear on orthocenter(A, B, C), G, B we get collinear(B, G, orthocenter(A, B, C))
+By divide_by_2_mod_180_v1 on F, A, D, F, C, D we get angle(F, A, D) == angle(F, C, D) mod 360
+By divide_by_2_mod_180_v2 on D, C, I, A, G, B we get angle(D, C, I) == angle(A, G, B) + 180 mod 360
+By divide_by_2_mod_180_v1 on G, B, F, E, C, F we get angle(E, C, F) == angle(G, B, F) mod 360
+By divide_by_2_mod_180_v1 on E, B, F, I, C, J we get angle(E, B, F) == angle(I, C, J) mod 360
+By divide_by_2_mod_180_v0 on A, B, G, J, C, I we get angle(A, B, G) == angle(J, C, I) mod 360
+By divide_by_2_mod_180_v1 on D, A, I, C, B, G we get angle(C, B, G) == angle(D, A, I) mod 360
+By divide_by_2_mod_180_v2 on B, G, A, I, C, D we get angle(B, G, A) == angle(I, C, D) + 180 mod 360
+By divide_by_2_mod_180_v0 on D, A, B, B, C, J we get angle(B, C, J) == angle(D, A, B) mod 360
+By divide_by_2_mod_180_v2 on D, K, J, D, K, C we get angle(D, K, J) == angle(D, K, C) + 180 mod 360
+By divide_by_2_mod_180_v1 on I, K, F, I, K, J we get angle(I, K, F) == angle(I, K, J) mod 360
+By divide_by_2_mod_180_v1 on E, B, F, I, C, F we get angle(E, B, F) == angle(I, C, F) mod 360
+By divide_by_2_mod_180_v3 on A, C, D, E, G, D we get angle(A, C, D) == angle(E, G, D) + 180 mod 360
+By divide_by_2_mod_180_v0 on K, C, E, A, B, G we get angle(A, B, G) == angle(K, C, E) mod 360
+By divide_by_2_mod_180_v0 on B, C, I, D, G, B we get angle(B, C, I) == angle(D, G, B) mod 360
+By divide_by_2_mod_180_v1 on I, C, B, B, G, D we get angle(B, G, D) == angle(I, C, B) mod 360
+By divide_by_2_mod_180_v0 on G, A, B, B, C, K we get angle(B, C, K) == angle(G, A, B) mod 360
+By divide_by_2_mod_180_v1 on B, A, D, K, C, D we get angle(B, A, D) == angle(K, C, D) mod 360
+By in_imply_collinear on orthocenter(A, B, C), G, E we get collinear(E, G, orthocenter(A, B, C))
+By divide_by_2_mod_180_v0 on K, C, A, A, B, G we get angle(A, B, G) == angle(K, C, A) mod 360
+By divide_by_2_mod_180_v1 on E, C, K, E, B, F we get angle(E, B, F) == angle(E, C, K) mod 360
+By aa_anti_similarity on G, A, E, C, A, D we get anti_similar_triangles(A, C, D, A, G, E)
+By divide_by_2_mod_180_v0 on D, G, B, B, C, E we get angle(B, C, E) == angle(D, G, B) mod 360
+By divide_by_2_mod_180_v1 on G, A, I, D, B, E we get angle(D, B, E) == angle(G, A, I) mod 360
+By divide_by_2_mod_180_v0 on I, A, G, G, B, D we get angle(G, B, D) == angle(I, A, G) mod 360
+By divide_by_2_mod_180_v3 on E, C, D, B, G, A we get angle(E, C, D) == angle(B, G, A) + 180 mod 360
+By divide_by_2_mod_180_v1 on E, B, F, A, C, F we get angle(A, C, F) == angle(E, B, F) mod 360
+By divide_by_2_mod_180_v3 on A, C, B, E, G, D we get angle(A, C, B) == angle(E, G, D) + 180 mod 360
+By divide_by_2_mod_180_v0 on F, C, I, F, B, G we get angle(F, B, G) == angle(F, C, I) mod 360
+By divide_by_2_mod_180_v1 on C, B, G, D, A, C we get angle(C, B, G) == angle(D, A, C) mod 360
+By divide_by_2_mod_180_v0 on E, B, D, E, A, D we get angle(E, A, D) == angle(E, B, D) mod 360
+By divide_by_2_mod_180_v1 on E, G, A, E, C, B we get angle(E, C, B) == angle(E, G, A) mod 360
+By divide_by_2_mod_180_v2 on B, G, A, A, C, D we get angle(B, G, A) == angle(A, C, D) + 180 mod 360
+By collinear_definition on C, E, I we get E in Line(C, I), I in Line(C, E), Line(C, E) == Line(C, I), 0 == 2 * angle(E, C, I) mod 360
+By divide_by_2_mod_180_v1 on D, B, G, D, A, E we get angle(D, A, E) == angle(D, B, G) mod 360
+By divide_by_2_mod_180_v1 on B, A, D, J, C, B we get angle(B, A, D) == angle(J, C, B) mod 360
+By reverse_direction on B, F we get 180 == direction(B, F) - direction(F, B) mod 360
+By aa_anti_similarity on C, F, B, A, D, B we get anti_similar_triangles(A, B, D, C, B, F)
+By divide_by_2_mod_180_v1 on I, C, J, G, B, A we get angle(G, B, A) == angle(I, C, J) mod 360
+By divide_by_2_mod_180_v1 on F, C, B, F, A, D we get angle(F, A, D) == angle(F, C, B) mod 360
+By divide_by_2_mod_180_v1 on C, B, G, G, A, E we get angle(C, B, G) == angle(G, A, E) mod 360
+By divide_by_2_mod_180_v2 on E, G, D, A, C, D we get angle(E, G, D) == angle(A, C, D) + 180 mod 360
+By divide_by_2_mod_180_v0 on D, C, K, D, A, F we get angle(D, A, F) == angle(D, C, K) mod 360
+By divide_by_2_mod_180_v1 on A, C, K, G, B, A we get angle(A, C, K) == angle(G, B, A) mod 360
+By divide_by_2_mod_180_v0 on C, A, G, E, B, D we get angle(C, A, G) == angle(E, B, D) mod 360
+By divide_by_2_mod_180_v1 on B, A, G, F, C, D we get angle(B, A, G) == angle(F, C, D) mod 360
+By divide_by_2_mod_180_v0 on F, C, I, A, B, G we get angle(A, B, G) == angle(F, C, I) mod 360
+By divide_by_2_mod_180_v0 on F, B, G, K, C, E we get angle(F, B, G) == angle(K, C, E) mod 360
+By divide_by_2_mod_180_v0 on F, B, E, F, C, E we get angle(F, B, E) == angle(F, C, E) mod 360
+By divide_by_2_mod_180_v0 on A, B, E, J, C, E we get angle(A, B, E) == angle(J, C, E) mod 360
+By reverse_direction on A, E we get 180 == direction(A, E) - direction(E, A) mod 360
+By reverse_direction on F, A we get 180 == direction(F, A) - direction(A, F) mod 360
+By divide_by_2_mod_180_v1 on A, C, K, G, B, F we get angle(A, C, K) == angle(G, B, F) mod 360
+By divide_by_2_mod_180_v1 on E, B, F, E, C, J we get angle(E, B, F) == angle(E, C, J) mod 360
+By divide_by_2_mod_180_v1 on E, B, A, E, C, K we get angle(E, B, A) == angle(E, C, K) mod 360
+By divide_by_2_mod_180_v0 on E, B, C, E, A, G we get angle(E, A, G) == angle(E, B, C) mod 360
+By divide_by_2_mod_180_v0 on G, A, F, D, C, K we get angle(D, C, K) == angle(G, A, F) mod 360
+By divide_by_2_mod_180_v0 on B, C, F, G, A, B we get angle(B, C, F) == angle(G, A, B) mod 360
+By divide_by_2_mod_180_v1 on I, C, K, E, B, F we get angle(E, B, F) == angle(I, C, K) mod 360
+By divide_by_2_mod_180_v3 on A, G, B, D, C, E we get angle(A, G, B) == angle(D, C, E) + 180 mod 360
+By divide_by_2_mod_180_v0 on G, B, D, E, A, D we get angle(E, A, D) == angle(G, B, D) mod 360
+By divide_by_2_mod_180_v1 on E, C, F, E, B, A we get angle(E, B, A) == angle(E, C, F) mod 360
+By divide_by_2_mod_180_v0 on A, B, E, K, C, A we get angle(A, B, E) == angle(K, C, A) mod 360
+By divide_by_2_mod_180_v1 on E, B, F, A, C, K we get angle(A, C, K) == angle(E, B, F) mod 360
+By divide_by_2_mod_180_v1 on D, K, C, I, K, J we get angle(D, K, C) == angle(I, K, J) mod 360
+By divide_by_2_mod_180_v1 on D, A, I, D, B, E we get angle(D, A, I) == angle(D, B, E) mod 360
+By divide_by_2_mod_180_v0 on F, B, G, F, C, E we get angle(F, B, G) == angle(F, C, E) mod 360
+By divide_by_2_mod_180_v1 on C, B, G, G, A, I we get angle(C, B, G) == angle(G, A, I) mod 360
+By divide_by_2_mod_180_v3 on I, K, J, D, K, F we get angle(I, K, J) == angle(D, K, F) + 180 mod 360
+By divide_by_2_mod_180_v1 on E, C, B, B, G, D we get angle(B, G, D) == angle(E, C, B) mod 360
+By divide_by_2_mod_180_v2 on D, C, A, D, G, E we get angle(D, C, A) == angle(D, G, E) + 180 mod 360
+By divide_by_2_mod_180_v2 on E, G, D, I, C, B we get angle(E, G, D) == angle(I, C, B) + 180 mod 360
+By divide_by_2_mod_180_v1 on F, C, D, F, A, G we get angle(F, A, G) == angle(F, C, D) mod 360
+By collinear_definition on F, K, J we get K in Line(F, J), J in Line(F, K), Line(F, J) == Line(F, K), 0 == 2 * angle(K, F, J) mod 360
+By divide_by_2_mod_180_v0 on D, G, B, D, C, I we get angle(D, C, I) == angle(D, G, B) mod 360
+By divide_by_2_mod_180_v0 on D, G, B, D, C, E we get angle(D, C, E) == angle(D, G, B) mod 360
+By divide_by_2_mod_180_v1 on E, B, A, E, C, J we get angle(E, B, A) == angle(E, C, J) mod 360
+By divide_by_2_mod_180_v2 on B, C, A, A, G, B we get angle(B, C, A) == angle(A, G, B) + 180 mod 360
+By divide_by_2_mod_180_v0 on D, C, J, G, A, B we get angle(D, C, J) == angle(G, A, B) mod 360
+By reverse_direction on E, B we get 180 == direction(E, B) - direction(B, E) mod 360
+By reverse_direction on F, B we get 180 == direction(F, B) - direction(B, F) mod 360
+By divide_by_2_mod_180_v0 on I, A, G, E, B, D we get angle(E, B, D) == angle(I, A, G) mod 360
+By divide_by_2_mod_180_v0 on G, A, B, D, C, F we get angle(D, C, F) == angle(G, A, B) mod 360
+By divide_by_2_mod_180_v0 on K, C, E, A, B, E we get angle(A, B, E) == angle(K, C, E) mod 360
+By divide_by_2_mod_180_v1 on B, G, D, E, C, D we get angle(B, G, D) == angle(E, C, D) mod 360
+By divide_by_2_mod_180_v1 on C, B, E, D, A, E we get angle(C, B, E) == angle(D, A, E) mod 360
+By sas_similarity on A, C, G, I, C, H we get similar_triangles(A, C, G, I, C, H)
+By divide_by_2_mod_180_v1 on A, C, K, E, B, A we get angle(A, C, K) == angle(E, B, A) mod 360
+By divide_by_2_mod_180_v1 on B, A, G, J, C, B we get angle(B, A, G) == angle(J, C, B) mod 360
+By divide_by_2_mod_180_v2 on B, G, A, I, C, B we get angle(B, G, A) == angle(I, C, B) + 180 mod 360
+By divide_by_2_mod_180_v3 on I, C, B, B, G, A we get angle(I, C, B) == angle(B, G, A) + 180 mod 360
+By divide_by_2_mod_180_v2 on D, C, E, A, G, B we get angle(D, C, E) == angle(A, G, B) + 180 mod 360
+By divide_by_2_mod_180_v1 on F, A, D, J, C, B we get angle(F, A, D) == angle(J, C, B) mod 360
+By divide_by_2_mod_180_v1 on E, C, J, G, B, A we get angle(E, C, J) == angle(G, B, A) mod 360
+By divide_by_2_mod_180_v1 on I, C, B, E, G, A we get angle(E, G, A) == angle(I, C, B) mod 360
+By divide_by_2_mod_180_v0 on F, B, E, K, C, I we get angle(F, B, E) == angle(K, C, I) mod 360
+By divide_by_2_mod_180_v1 on D, B, G, G, A, E we get angle(D, B, G) == angle(G, A, E) mod 360
+By divide_by_2_mod_180_v3 on A, C, D, B, G, A we get angle(A, C, D) == angle(B, G, A) + 180 mod 360
+By divide_by_2_mod_180_v1 on B, A, D, F, C, D we get angle(B, A, D) == angle(F, C, D) mod 360
+By reverse_direction on E, C we get 180 == direction(E, C) - direction(C, E) mod 360
+By divide_by_2_mod_180_v3 on I, C, B, E, G, D we get angle(I, C, B) == angle(E, G, D) + 180 mod 360
+By divide_by_2_mod_180_v2 on I, K, C, I, K, J we get angle(I, K, C) == angle(I, K, J) + 180 mod 360
+By divide_by_2_mod_180_v1 on F, A, G, J, C, D we get angle(F, A, G) == angle(J, C, D) mod 360
+By divide_by_2_mod_180_v0 on D, A, F, B, C, K we get angle(B, C, K) == angle(D, A, F) mod 360
+By divide_by_2_mod_180_v1 on D, B, G, G, A, C we get angle(D, B, G) == angle(G, A, C) mod 360
+By divide_by_2_mod_180_v0 on C, A, D, E, B, D we get angle(C, A, D) == angle(E, B, D) mod 360
+By divide_by_2_mod_180_v2 on E, G, D, A, C, B we get angle(E, G, D) == angle(A, C, B) + 180 mod 360
+By divide_by_2_mod_180_v3 on D, G, E, B, C, E we get angle(D, G, E) == angle(B, C, E) + 180 mod 360
+By collinear_definition on J, K, C we get K in Line(C, J), C in Line(J, K), Line(C, J) == Line(J, K), 0 == 2 * angle(K, J, C) mod 360
+By divide_by_2_mod_180_v2 on B, G, A, E, C, D we get angle(B, G, A) == angle(E, C, D) + 180 mod 360
+By divide_by_2_mod_180_v2 on E, G, D, I, C, D we get angle(E, G, D) == angle(I, C, D) + 180 mod 360
+By divide_by_2_mod_180_v1 on F, A, G, F, C, B we get angle(F, A, G) == angle(F, C, B) mod 360
+By divide_by_2_mod_180_v1 on K, C, D, F, A, G we get angle(F, A, G) == angle(K, C, D) mod 360
+By divide_by_2_mod_180_v0 on D, C, E, A, G, E we get angle(A, G, E) == angle(D, C, E) mod 360
+By reverse_direction on K, C we get 180 == direction(K, C) - direction(C, K) mod 360
+By divide_by_2_mod_180_v2 on B, G, A, E, C, B we get angle(B, G, A) == angle(E, C, B) + 180 mod 360
+By divide_by_2_mod_180_v0 on E, A, G, E, B, D we get angle(E, A, G) == angle(E, B, D) mod 360
+By divide_by_2_mod_180_v2 on J, K, I, F, K, D we get angle(J, K, I) == angle(F, K, D) + 180 mod 360
+By divide_by_2_mod_180_v1 on F, A, D, K, C, B we get angle(F, A, D) == angle(K, C, B) mod 360
+By collinear_definition on A, I, E we get I in Line(A, E), E in Line(A, I), Line(A, E) == Line(A, I), 0 == 2 * angle(I, A, E) mod 360
+By divide_by_2_mod_180_v0 on F, C, A, F, B, G we get angle(F, B, G) == angle(F, C, A) mod 360
+By divide_by_2_mod_180_v0 on D, C, F, G, A, F we get angle(D, C, F) == angle(G, A, F) mod 360
+By divide_by_2_mod_180_v0 on G, B, C, E, A, D we get angle(E, A, D) == angle(G, B, C) mod 360
+By divide_by_2_mod_180_v0 on F, C, A, A, B, G we get angle(A, B, G) == angle(F, C, A) mod 360
+By divide_by_2_mod_180_v2 on B, C, E, A, G, B we get angle(B, C, E) == angle(A, G, B) + 180 mod 360
+By divide_by_2_mod_180_v3 on A, G, B, B, C, E we get angle(A, G, B) == angle(B, C, E) + 180 mod 360
+By divide_by_2_mod_180_v3 on I, K, J, I, K, C we get angle(I, K, J) == angle(I, K, C) + 180 mod 360
+By divide_by_2_mod_180_v0 on G, B, C, E, A, G we get angle(E, A, G) == angle(G, B, C) mod 360
+By divide_by_2_mod_180_v3 on D, G, E, D, C, I we get angle(D, G, E) == angle(D, C, I) + 180 mod 360
+By divide_by_2_mod_180_v0 on I, A, G, E, B, C we get angle(E, B, C) == angle(I, A, G) mod 360
+By divide_by_2_mod_180_v0 on A, B, E, J, C, I we get angle(A, B, E) == angle(J, C, I) mod 360
+By reverse_direction on K, D we get 180 == direction(K, D) - direction(D, K) mod 360
+By divide_by_2_mod_180_v1 on G, A, E, C, B, E we get angle(C, B, E) == angle(G, A, E) mod 360
+By divide_by_2_mod_180_v3 on J, K, D, C, K, D we get angle(J, K, D) == angle(C, K, D) + 180 mod 360
+By divide_by_2_mod_180_v3 on A, G, B, B, C, A we get angle(A, G, B) == angle(B, C, A) + 180 mod 360
+By divide_by_2_mod_180_v0 on F, B, E, K, C, A we get angle(F, B, E) == angle(K, C, A) mod 360
+By divide_by_2_mod_180_v2 on D, C, I, D, G, E we get angle(D, C, I) == angle(D, G, E) + 180 mod 360
+By between_imply_segment_sum on A, E, C we get distance(A, C) == distance(A, E) + distance(C, E)
+By divide_by_2_mod_180_v1 on E, B, F, A, C, J we get angle(A, C, J) == angle(E, B, F) mod 360
+By divide_by_2_mod_180_v0 on F, C, A, F, B, E we get angle(F, B, E) == angle(F, C, A) mod 360
+By divide_by_2_mod_180_v0 on G, A, F, B, C, J we get angle(B, C, J) == angle(G, A, F) mod 360
+By aa_anti_similarity on A, G, E, B, G, D we get anti_similar_triangles(A, E, G, B, D, G)
+By reverse_direction on K, J we get 180 == direction(K, J) - direction(J, K) mod 360
+By divide_by_2_mod_180_v0 on B, C, J, D, A, F we get angle(B, C, J) == angle(D, A, F) mod 360
+By divide_by_2_mod_180_v1 on D, B, G, G, A, I we get angle(D, B, G) == angle(G, A, I) mod 360
+By divide_by_2_mod_180_v2 on E, G, D, E, C, D we get angle(E, G, D) == angle(E, C, D) + 180 mod 360
+By reverse_direction on A, F we get 180 == direction(A, F) - direction(F, A) mod 360
+By divide_by_2_mod_180_v3 on A, G, B, D, C, A we get angle(A, G, B) == angle(D, C, A) + 180 mod 360
+By divide_by_2_mod_180_v0 on A, G, E, D, C, A we get angle(A, G, E) == angle(D, C, A) mod 360
+By collinear_definition on A, E, I we get E in Line(A, I), I in Line(A, E), Line(A, E) == Line(A, I), 0 == 2 * angle(E, A, I) mod 360
+By divide_by_2_mod_180_v3 on E, C, B, E, G, D we get angle(E, C, B) == angle(E, G, D) + 180 mod 360
+By divide_by_2_mod_180_v2 on B, G, A, A, C, B we get angle(B, G, A) == angle(A, C, B) + 180 mod 360
+By divide_by_2_mod_180_v1 on D, A, C, D, B, E we get angle(D, A, C) == angle(D, B, E) mod 360
+By internal_angle_bisector_definition_v0 on I, E, I, C we get angle(E, C, I) == angle(I, C, E) mod 360
+By reverse_direction on B, D we get 180 == direction(B, D) - direction(D, B) mod 360
+By divide_by_2_mod_180_v3 on J, K, D, F, K, I we get angle(J, K, D) == angle(F, K, I) + 180 mod 360
+By divide_by_2_mod_180_v3 on D, G, E, D, C, E we get angle(D, G, E) == angle(D, C, E) + 180 mod 360
+By between_imply_segment_sum on B, F, A we get distance(A, B) == distance(B, F) + distance(A, F)
+By collinear_definition on J, K, F we get K in Line(F, J), F in Line(J, K), Line(F, J) == Line(J, K), 0 == 2 * angle(K, J, F) mod 360
+By divide_by_2_mod_180_v1 on J, C, B, F, A, G we get angle(F, A, G) == angle(J, C, B) mod 360
+By between_imply_segment_sum on C, D, B we get distance(B, C) == distance(C, D) + distance(B, D)
+By divide_by_2_mod_180_v2 on B, C, I, D, G, E we get angle(B, C, I) == angle(D, G, E) + 180 mod 360
+By between_imply_segment_sum on D, G, A we get distance(A, D) == distance(D, G) + distance(A, G)
+By reverse_direction on F, J we get 180 == direction(F, J) - direction(J, F) mod 360
+By aa_anti_similarity on G, B, D, C, B, E we get anti_similar_triangles(B, C, E, B, G, D)
+By aa_anti_similarity on A, C, D, B, C, E we get anti_similar_triangles(A, C, D, B, C, E)
+By divide_by_2_mod_180_v2 on B, C, A, D, G, E we get angle(B, C, A) == angle(D, G, E) + 180 mod 360
+By divide_by_2_mod_180_v3 on D, G, E, B, C, I we get angle(D, G, E) == angle(B, C, I) + 180 mod 360
+By divide_by_2_mod_180_v0 on G, A, B, D, C, K we get angle(D, C, K) == angle(G, A, B) mod 360
+By collinear_definition on J, C, K we get C in Line(J, K), K in Line(C, J), Line(C, J) == Line(J, K), 0 == 2 * angle(C, J, K) mod 360
+By divide_by_2_mod_180_v3 on I, C, D, E, G, D we get angle(I, C, D) == angle(E, G, D) + 180 mod 360
+By divide_by_2_mod_180_v2 on B, C, E, D, G, E we get angle(B, C, E) == angle(D, G, E) + 180 mod 360
+By aa_anti_similarity on B, A, E, C, A, F we get anti_similar_triangles(A, B, E, A, C, F)
+By reverse_direction on J, C we get 180 == direction(J, C) - direction(C, J) mod 360
+By reverse_direction on D, K we get 180 == direction(D, K) - direction(K, D) mod 360
+By reverse_direction on A, G we get 180 == direction(A, G) - direction(G, A) mod 360
+By reverse_direction on E, A we get 180 == direction(E, A) - direction(A, E) mod 360
+By reverse_direction on E, G we get 180 == direction(E, G) - direction(G, E) mod 360
+By collinear_definition on K, J, F we get J in Line(F, K), F in Line(J, K), Line(F, K) == Line(J, K), 0 == 2 * angle(J, K, F) mod 360
+By between_imply_segment_sum on C, K, F we get distance(C, F) == distance(C, K) + distance(F, K)
+By aa_anti_similarity on G, D, B, C, E, B we get anti_similar_triangles(B, C, E, B, G, D)
+By reverse_direction on C, E we get 180 == direction(C, E) - direction(E, C) mod 360
+By aa_anti_similarity on A, E, G, B, D, G we get anti_similar_triangles(A, E, G, B, D, G)
+By aa_anti_similarity on B, E, A, C, F, A we get anti_similar_triangles(A, B, E, A, C, F)
+By internal_angle_bisector_definition_v0 on I, E, I, A we get angle(E, A, I) == angle(I, A, E) mod 360
+By reverse_direction on G, D we get 180 == direction(G, D) - direction(D, G) mod 360
+By divide_by_2_mod_180_v3 on C, K, I, J, K, I we get angle(C, K, I) == angle(J, K, I) + 180 mod 360
+By sas_similarity on G, C, A, H, C, I we get similar_triangles(A, C, G, I, C, H)
+By reverse_direction on K, F we get 180 == direction(K, F) - direction(F, K) mod 360
+By reverse_direction on D, C we get 180 == direction(D, C) - direction(C, D) mod 360
+By between_imply_segment_sum on D, K, I we get distance(D, I) == distance(D, K) + distance(I, K)
+By reverse_direction on J, F we get 180 == direction(J, F) - direction(F, J) mod 360
+By collinear_definition on C, I, E we get I in Line(C, E), E in Line(C, I), Line(C, E) == Line(C, I), 0 == 2 * angle(I, C, E) mod 360
+By collinear_definition on K, C, J we get C in Line(J, K), J in Line(C, K), Line(C, K) == Line(J, K), 0 == 2 * angle(C, K, J) mod 360
+By reverse_direction on G, B we get 180 == direction(G, B) - direction(B, G) mod 360
+By reverse_direction on D, B we get 180 == direction(D, B) - direction(B, D) mod 360
+By collinear_definition on J, F, K we get F in Line(J, K), K in Line(F, J), Line(F, J) == Line(J, K), 0 == 2 * angle(F, J, K) mod 360
+By reverse_direction on C, K we get 180 == direction(C, K) - direction(K, C) mod 360
+By aa_anti_similarity on B, C, E, A, C, D we get anti_similar_triangles(A, C, D, B, C, E)
+By aa_anti_similarity on C, F, A, B, E, A we get anti_similar_triangles(A, B, E, A, C, F)
+By sas_similarity on H, C, I, G, C, A we get similar_triangles(A, C, G, I, C, H)
+By aa_anti_similarity on A, D, C, B, E, C we get anti_similar_triangles(A, C, D, B, C, E)
+By aa_anti_similarity on C, D, A, G, E, A we get anti_similar_triangles(A, C, D, A, G, E)
+By reverse_direction on B, E we get 180 == direction(B, E) - direction(E, B) mod 360
+By aa_anti_similarity on A, D, B, C, F, B we get anti_similar_triangles(A, B, D, C, B, F)
+By reverse_direction on I, K we get 180 == direction(I, K) - direction(K, I) mod 360
+By aa_anti_similarity on C, A, F, B, A, E we get anti_similar_triangles(A, B, E, A, C, F)
+By collinear_definition on C, J, K we get J in Line(C, K), K in Line(C, J), Line(C, J) == Line(C, K), 0 == 2 * angle(J, C, K) mod 360
+By aa_anti_similarity on B, E, C, A, D, C we get anti_similar_triangles(A, C, D, B, C, E)
+By reverse_direction on G, A we get 180 == direction(G, A) - direction(A, G) mod 360
+By collinear_definition on F, J, K we get J in Line(F, K), K in Line(F, J), Line(F, J) == Line(F, K), 0 == 2 * angle(J, F, K) mod 360
+By aa_anti_similarity on C, B, F, A, B, D we get anti_similar_triangles(A, B, D, C, B, F)
+By aa_anti_similarity on B, G, D, A, G, E we get anti_similar_triangles(A, E, G, B, D, G)
+By reverse_direction on C, J we get 180 == direction(C, J) - direction(J, C) mod 360
+By reverse_direction on D, G we get 180 == direction(D, G) - direction(G, D) mod 360
+By sas_similarity on I, C, H, A, C, G we get similar_triangles(A, C, G, I, C, H)
+By reverse_direction on C, D we get 180 == direction(C, D) - direction(D, C) mod 360
+By reverse_direction on B, G we get 180 == direction(B, G) - direction(G, B) mod 360
+By collinear_definition on K, F, J we get F in Line(J, K), J in Line(F, K), Line(F, K) == Line(J, K), 0 == 2 * angle(F, K, J) mod 360
+By aa_anti_similarity on C, A, D, G, A, E we get anti_similar_triangles(A, C, D, A, G, E)
+By collinear_definition on K, J, C we get J in Line(C, K), C in Line(J, K), Line(C, K) == Line(J, K), 0 == 2 * angle(J, K, C) mod 360
+By aa_anti_similarity on G, E, A, C, D, A we get anti_similar_triangles(A, C, D, A, G, E)
+By aa_anti_similarity on A, B, D, C, B, F we get anti_similar_triangles(A, B, D, C, B, F)
+By collinear_definition on C, K, J we get K in Line(C, J), J in Line(C, K), Line(C, J) == Line(C, K), 0 == 2 * angle(K, C, J) mod 360
+By aa_anti_similarity on C, E, B, G, D, B we get anti_similar_triangles(B, C, E, B, G, D)
+By reverse_direction on F, K we get 180 == direction(F, K) - direction(K, F) mod 360
+By power_of_a_point_in_circle on G, Circle(C, D, G) we get 0 == power_of_a_point(G, Circle(C, D, G))
+By external_angle_bisector_definition_v0_r on B, C, B, F we get Line(C, F) == external_angle_bisector(B, F, B)
+By external_angle_bisector_definition_v0_r on J, C, K, F we get Line(C, F) == external_angle_bisector(J, F, K)
+By external_angle_bisector_definition_v0_r on A, C, G, D we get Line(C, D) == external_angle_bisector(A, D, G)
+By collinear_definition on I, C, E we get C in Line(E, I), E in Line(C, I), Line(C, I) == Line(E, I), 0 == 2 * angle(C, I, E) mod 360
+By internal_angle_bisector_definition_v0_r on C, A, C, E we get Line(A, E) == internal_angle_bisector(C, E, C)
+By external_angle_bisector_definition_v0_r on A, B, G, D we get Line(B, D) == external_angle_bisector(A, D, G)
+By internal_angle_bisector_definition_v0_r on C, G, B, D we get Line(D, G) == internal_angle_bisector(B, D, C)
+By internal_angle_bisector_definition_v0_r on E, G, E, B we get Line(B, G) == internal_angle_bisector(E, B, E)
+By external_angle_bisector_definition_v0_r on A, B, A, D we get Line(B, D) == external_angle_bisector(A, D, A)
+By perpendicular_angle_conditions_v0 on G, E, I we get angle(G, E, I) == orientation(E, I, G) mod 360
+By external_angle_bisector_definition_v0_r on K, B, C, F we get Line(B, F) == external_angle_bisector(C, F, K)
+By external_angle_bisector_definition_v0_r on C, G, C, D we get Line(D, G) == external_angle_bisector(C, D, C)
+By internal_angle_bisector_definition_v0_r on C, B, C, D we get Line(B, D) == internal_angle_bisector(C, D, C)
+By internal_angle_bisector_definition_v0_r on B, E, B, G we get Line(E, G) == internal_angle_bisector(B, G, B)
+By external_angle_bisector_definition_v0_r on B, A, G, E we get Line(A, E) == external_angle_bisector(B, E, G)
+By external_angle_bisector_definition_v0_r on A, C, A, F we get Line(C, F) == external_angle_bisector(A, F, A)
+By external_angle_bisector_definition_v0_r on A, K, A, F we get Line(F, K) == external_angle_bisector(A, F, A)
+By external_angle_bisector_definition_v0_r on B, A, B, E we get Line(A, E) == external_angle_bisector(B, E, B)
+By external_angle_bisector_definition_v0_r on G, C, G, D we get Line(C, D) == external_angle_bisector(G, D, G)
+By internal_angle_bisector_definition_v0_r on A, B, A, F we get Line(B, F) == internal_angle_bisector(A, F, A)
+By external_angle_bisector_definition_v0_r on C, B, C, F we get Line(B, F) == external_angle_bisector(C, F, C)
+By external_angle_bisector_definition_v0_r on B, G, B, D we get Line(D, G) == external_angle_bisector(B, D, B)
+By external_angle_bisector_definition_v0_r on A, C, A, D we get Line(C, D) == external_angle_bisector(A, D, A)
+By internal_angle_bisector_definition_v0_r on F, C, F, J we get Line(C, J) == internal_angle_bisector(F, J, F)
+By external_angle_bisector_definition_v0_r on G, A, G, E we get Line(A, E) == external_angle_bisector(G, E, G)
+By collinear_definition on E, I, C we get I in Line(C, E), C in Line(E, I), Line(C, E) == Line(E, I), 0 == 2 * angle(I, E, C) mod 360
+By external_angle_bisector_definition_v0_r on A, J, A, F we get Line(F, J) == external_angle_bisector(A, F, A)
+By external_angle_bisector_definition_v0_r on A, G, A, E we get Line(E, G) == external_angle_bisector(A, E, A)
+By external_angle_bisector_definition_v0_r on G, C, G, E we get Line(C, E) == external_angle_bisector(G, E, G)
+By internal_angle_bisector_definition_v0 on A, E, A, I we get angle(A, I, E) == angle(E, I, A) mod 360
+By internal_angle_bisector_definition_v0_r on B, G, B, E we get Line(E, G) == internal_angle_bisector(B, E, B)
+By internal_angle_bisector_definition_v0_r on C, B, A, E we get Line(B, E) == internal_angle_bisector(A, E, C)
+By external_angle_bisector_definition_v0_r on C, A, C, D we get Line(A, D) == external_angle_bisector(C, D, C)
+By external_angle_bisector_definition_v0_r on B, C, B, E we get Line(C, E) == external_angle_bisector(B, E, B)
+By internal_angle_bisector_definition_v0_r on J, A, K, F we get Line(A, F) == internal_angle_bisector(J, F, K)
+By external_angle_bisector_definition_v0_r on C, B, C, E we get Line(B, E) == external_angle_bisector(C, E, C)
+By internal_angle_bisector_definition_v0_r on J, A, C, F we get Line(A, F) == internal_angle_bisector(C, F, J)
+By internal_angle_bisector_definition_v0_r on I, D, I, K we get Line(D, K) == internal_angle_bisector(I, K, I)
+By external_angle_bisector_definition_v0_r on C, A, C, F we get Line(A, F) == external_angle_bisector(C, F, C)
+By internal_angle_bisector_definition_v0_r on A, F, A, B we get Line(B, F) == internal_angle_bisector(A, B, A)
+By internal_angle_bisector_definition_v0_r on J, C, J, F we get Line(C, F) == internal_angle_bisector(J, F, J)
+By internal_angle_bisector_definition_v0_r on K, D, K, I we get Line(D, I) == internal_angle_bisector(K, I, K)
+By external_angle_bisector_definition_v0_r on K, A, C, F we get Line(A, F) == external_angle_bisector(C, F, K)
+By external_angle_bisector_definition_v0_r on J, B, J, F we get Line(B, F) == external_angle_bisector(J, F, J)
+By external_angle_bisector_definition_v0_r on B, J, B, F we get Line(F, J) == external_angle_bisector(B, F, B)
+By external_angle_bisector_definition_v0_r on B, C, G, E we get Line(C, E) == external_angle_bisector(B, E, G)
+By power_of_a_point_in_circle on A, Circle(A, C, D) we get 0 == power_of_a_point(A, Circle(A, C, D))
+By external_angle_bisector_definition_v0_r on K, A, K, F we get Line(A, F) == external_angle_bisector(K, F, K)
+By power_of_a_point_on_circle on C, Circle(A, C, D) we get 0 == power_of_a_point(C, Circle(A, C, D))
+By internal_angle_bisector_definition_v0_r on D, K, D, I we get Line(I, K) == internal_angle_bisector(D, I, D)
+By internal_angle_bisector_definition_v0_r on K, F, K, C we get Line(C, F) == internal_angle_bisector(K, C, K)
+By internal_angle_bisector_definition_v0_r on C, K, C, F we get Line(F, K) == internal_angle_bisector(C, F, C)
+By internal_angle_bisector_definition_v0_r on I, K, I, D we get Line(D, K) == internal_angle_bisector(I, D, I)
+By internal_angle_bisector_definition_v0_r on K, C, K, F we get Line(C, F) == internal_angle_bisector(K, F, K)
+By external_angle_bisector_definition_v0_r on B, A, B, D we get Line(A, D) == external_angle_bisector(B, D, B)
+By power_of_a_point_in_circle on E, Circle(C, E, G) we get 0 == power_of_a_point(E, Circle(C, E, G))
+By internal_angle_bisector_definition_v0_r on J, B, K, F we get Line(B, F) == internal_angle_bisector(J, F, K)
+By external_angle_bisector_definition_v0_r on C, G, C, E we get Line(E, G) == external_angle_bisector(C, E, C)
+By internal_angle_bisector_definition_v0_r on D, G, D, A we get Line(A, G) == internal_angle_bisector(D, A, D)
+By internal_angle_bisector_definition_v0_r on F, B, F, A we get Line(A, B) == internal_angle_bisector(F, A, F)
+By internal_angle_bisector_definition_v0_r on C, F, C, J we get Line(F, J) == internal_angle_bisector(C, J, C)
+By collinear_definition on I, E, A we get E in Line(A, I), A in Line(E, I), Line(A, I) == Line(E, I), 0 == 2 * angle(E, I, A) mod 360
+By internal_angle_bisector_definition_v0_r on C, D, C, B we get Line(B, D) == internal_angle_bisector(C, B, C)
+By internal_angle_bisector_definition_v0_r on F, K, F, C we get Line(C, K) == internal_angle_bisector(F, C, F)
+By internal_angle_bisector_definition_v0_r on A, G, A, D we get Line(D, G) == internal_angle_bisector(A, D, A)
+By internal_angle_bisector_definition_v0_r on F, J, F, C we get Line(C, J) == internal_angle_bisector(F, C, F)
+By perpendicular_angle_conditions_v0 on I, E, G we get angle(I, E, G) == orientation(E, G, I) mod 360
+By power_of_a_point_in_circle on F, Circle(A, C, F) we get 0 == power_of_a_point(F, Circle(A, C, F))
+By internal_angle_bisector_definition_v0_r on E, C, I, A we get Line(A, C) == internal_angle_bisector(E, A, I)
+By power_of_a_point_on_circle on C, Circle(C, E, G) we get 0 == power_of_a_point(C, Circle(C, E, G))
+By external_angle_bisector_definition_v0_r on A, B, A, E we get Line(B, E) == external_angle_bisector(A, E, A)
+By external_angle_bisector_definition_v0_r on K, B, K, F we get Line(B, F) == external_angle_bisector(K, F, K)
+By power_of_a_point_in_circle on D, Circle(A, C, D) we get 0 == power_of_a_point(D, Circle(A, C, D))
+By collinear_definition on I, E, C we get E in Line(C, I), C in Line(E, I), Line(C, I) == Line(E, I), 0 == 2 * angle(E, I, C) mod 360
+By internal_angle_bisector_definition_v0_r on B, C, A, F we get Line(C, F) == internal_angle_bisector(A, F, B)
+By external_angle_bisector_definition_v0_r on B, K, B, F we get Line(F, K) == external_angle_bisector(B, F, B)
+By internal_angle_bisector_definition_v0_r on J, F, K, C we get Line(C, F) == internal_angle_bisector(J, C, K)
+By internal_angle_bisector_definition_v0_r on K, I, K, D we get Line(D, I) == internal_angle_bisector(K, D, K)
+By internal_angle_bisector_definition_v0_r on B, K, A, F we get Line(F, K) == internal_angle_bisector(A, F, B)
+By internal_angle_bisector_definition_v0_r on G, D, G, A we get Line(A, D) == internal_angle_bisector(G, A, G)
+By internal_angle_bisector_definition_v0_r on E, A, I, C we get Line(A, C) == internal_angle_bisector(E, C, I)
+By internal_angle_bisector_definition_v0_r on B, F, B, A we get Line(A, F) == internal_angle_bisector(B, A, B)
+By collinear_definition on I, A, E we get A in Line(E, I), E in Line(A, I), Line(A, I) == Line(E, I), 0 == 2 * angle(A, I, E) mod 360
+By internal_angle_bisector_definition_v0_r on D, I, D, K we get Line(I, K) == internal_angle_bisector(D, K, D)
+By internal_angle_bisector_definition_v0_r on G, A, G, D we get Line(A, D) == internal_angle_bisector(G, D, G)
+By internal_angle_bisector_definition_v0_r on D, A, D, G we get Line(A, G) == internal_angle_bisector(D, G, D)
+By internal_angle_bisector_definition_v0_r on A, G, C, E we get Line(E, G) == internal_angle_bisector(A, E, C)
+By internal_angle_bisector_definition_v0_r on J, B, C, F we get Line(B, F) == internal_angle_bisector(C, F, J)
+By external_angle_bisector_definition_v0_r on J, A, J, F we get Line(A, F) == external_angle_bisector(J, F, J)
+By internal_angle_bisector_definition_v0_r on C, A, B, D we get Line(A, D) == internal_angle_bisector(B, D, C)
+By internal_angle_bisector_definition_v0_r on E, C, E, A we get Line(A, C) == internal_angle_bisector(E, A, E)
+By internal_angle_bisector_definition_v0_r on C, J, C, F we get Line(F, J) == internal_angle_bisector(C, F, C)
+By internal_angle_bisector_definition_v0_r on B, A, B, F we get Line(A, F) == internal_angle_bisector(B, F, B)
+By internal_angle_bisector_definition_v0_r on F, C, F, K we get Line(C, K) == internal_angle_bisector(F, K, F)
+By power_of_a_point_on_circle on D, Circle(C, D, G) we get 0 == power_of_a_point(D, Circle(C, D, G))
+By internal_angle_bisector_definition_v0_r on A, J, B, F we get Line(F, J) == internal_angle_bisector(A, F, B)
+By internal_angle_bisector_definition_v0_r on B, C, B, D we get Line(C, D) == internal_angle_bisector(B, D, B)
+By external_angle_bisector_definition_v0_r on G, B, G, D we get Line(B, D) == external_angle_bisector(G, D, G)
+By power_of_a_point_in_circle on C, Circle(C, D, G) we get 0 == power_of_a_point(C, Circle(C, D, G))
+By internal_angle_bisector_definition_v0_r on G, E, G, B we get Line(B, E) == internal_angle_bisector(G, B, G)
+By power_of_a_point_on_circle on G, Circle(C, E, G) we get 0 == power_of_a_point(G, Circle(C, E, G))
+By internal_angle_bisector_definition_v0_r on G, B, G, E we get Line(B, E) == internal_angle_bisector(G, E, G)
+By internal_angle_bisector_definition_v0_r on D, C, D, B we get Line(B, C) == internal_angle_bisector(D, B, D)
+By collinear_definition on E, C, I we get C in Line(E, I), I in Line(C, E), Line(C, E) == Line(E, I), 0 == 2 * angle(C, E, I) mod 360
+By internal_angle_bisector_definition_v0_r on F, A, F, B we get Line(A, B) == internal_angle_bisector(F, B, F)
+By internal_angle_bisector_definition_v0_r on A, D, A, G we get Line(D, G) == internal_angle_bisector(A, G, A)
+By internal_angle_bisector_definition_v0_r on D, B, D, C we get Line(B, C) == internal_angle_bisector(D, C, D)
+By power_of_a_point_in_circle on A, Circle(A, C, F) we get 0 == power_of_a_point(A, Circle(A, C, F))
+By internal_angle_bisector_definition_v0_r on A, C, A, E we get Line(C, E) == internal_angle_bisector(A, E, A)
+By collinear_definition on E, A, I we get A in Line(E, I), I in Line(A, E), Line(A, E) == Line(E, I), 0 == 2 * angle(A, E, I) mod 360
+By internal_angle_bisector_definition_v0_r on E, A, E, C we get Line(A, C) == internal_angle_bisector(E, C, E)
+By collinear_definition on E, I, A we get I in Line(A, E), A in Line(E, I), Line(A, E) == Line(E, I), 0 == 2 * angle(I, E, A) mod 360
+By internal_angle_bisector_definition_v0_r on J, F, J, C we get Line(C, F) == internal_angle_bisector(J, C, J)
+By internal_angle_bisector_definition_v0_r on B, D, B, C we get Line(C, D) == internal_angle_bisector(B, C, B)
+By power_of_a_point_on_circle on C, Circle(A, C, F) we get 0 == power_of_a_point(C, Circle(A, C, F))
+By perpendicular_angle_conditions_v0 on I, E, B we get angle(I, E, B) == orientation(B, I, E) mod 360
+By internal_angle_bisector_definition_v0 on C, E, C, I we get angle(C, I, E) == angle(E, I, C) mod 360
+By internal_angle_bisector_definition_v0_r on E, B, E, G we get Line(B, G) == internal_angle_bisector(E, G, E)
+By perpendicular_angle_conditions_v0 on B, E, I we get angle(B, E, I) == orientation(B, E, I) mod 360
+By internal_angle_bisector_definition_v0_r on C, F, C, K we get Line(F, K) == internal_angle_bisector(C, K, C)
+By altitude_definition on orthocenter(A, B, C), E, I, j we get j == altitude(orthocenter(A, B, C), E, I)
+By altitude_definition on orthocenter(A, B, C), E, A, j we get j == altitude(orthocenter(A, B, C), A, E)
+By power_of_a_point_definition on I, C, A, Circle(A, C, F) we get log(distance(C, I)) + log(distance(A, I)) == log(power_of_a_point(I, Circle(A, C, F)))
+By altitude_definition on orthocenter(A, B, C), B, F, k we get k == altitude(orthocenter(A, B, C), B, F)
+By altitude_definition on orthocenter(A, B, C), I, A, j we get j == altitude(orthocenter(A, B, C), A, I)
+By altitude_definition on orthocenter(A, B, C), D, B, i we get i == altitude(orthocenter(A, B, C), B, D)
+By altitude_definition on B, E, I, j we get j == altitude(B, E, I)
+By power_of_a_point_definition on H, G, C, Circle(C, D, G) we get log(distance(G, H)) + log(distance(C, H)) == log(power_of_a_point(H, Circle(C, D, G)))
+By altitude_definition on orthocenter(A, B, C), E, C, j we get j == altitude(orthocenter(A, B, C), C, E)
+By altitude_definition on G, E, I, j we get j == altitude(G, E, I)
+By power_of_a_point_definition on H, C, G, Circle(C, E, G) we get log(distance(C, H)) + log(distance(G, H)) == log(power_of_a_point(H, Circle(C, E, G)))
+By altitude_definition on orthocenter(A, B, C), A, B, k we get k == altitude(orthocenter(A, B, C), A, B)
+By altitude_definition on orthocenter(A, B, C), C, B, i we get i == altitude(orthocenter(A, B, C), B, C)
+By altitude_definition on orthocenter(A, B, C), D, C, i we get i == altitude(orthocenter(A, B, C), C, D)
+By altitude_definition on orthocenter(A, B, C), C, I, j we get j == altitude(orthocenter(A, B, C), C, I)
+By altitude_definition on orthocenter(A, B, C), A, C, j we get j == altitude(orthocenter(A, B, C), A, C)
+By power_of_a_point_definition on I, A, C, Circle(A, C, D) we get log(distance(A, I)) + log(distance(C, I)) == log(power_of_a_point(I, Circle(A, C, D)))
+By altitude_definition on orthocenter(A, B, C), F, A, k we get k == altitude(orthocenter(A, B, C), A, F)
+By power_of_a_point_definition on I, E, C, Circle(C, E, G) we get log(distance(E, I)) + log(distance(C, I)) == log(power_of_a_point(I, Circle(C, E, G)))
+By power_of_a_point_definition on A, C, E, Circle(C, E, G) we get log(distance(A, C)) + log(distance(A, E)) == log(power_of_a_point(A, Circle(C, E, G)))
+By power_of_a_point_definition on B, A, F, Circle(A, C, F) we get log(distance(A, B)) + log(distance(B, F)) == log(power_of_a_point(B, Circle(A, C, F)))
+By power_of_a_point_definition on E, A, I, c we get log(power_of_a_point(E, c)) == log(distance(A, E)) + log(distance(E, I))
+By power_of_a_point_definition on G, A, D, Circle(A, C, D) we get log(distance(A, G)) + log(distance(D, G)) == log(power_of_a_point(G, Circle(A, C, D)))
+By power_of_a_point_definition on B, C, D, Circle(A, C, D) we get log(distance(B, C)) + log(distance(B, D)) == log(power_of_a_point(B, Circle(A, C, D)))
+By power_of_a_point_definition on K, F, C, Circle(A, C, F) we get log(distance(F, K)) + log(distance(C, K)) == log(power_of_a_point(K, Circle(A, C, F)))
+By power_of_a_point_definition on B, D, C, Circle(C, D, G) we get log(distance(B, D)) + log(distance(B, C)) == log(power_of_a_point(B, Circle(C, D, G)))
+By power_of_a_point_definition on E, C, A, Circle(A, C, F) we get log(distance(C, E)) + log(distance(A, E)) == log(power_of_a_point(E, Circle(A, C, F)))
+By power_of_a_point_definition on B, G, E, Circle(C, E, G) we get log(distance(B, G)) + log(distance(B, E)) == log(power_of_a_point(B, Circle(C, E, G)))
+By power_of_a_point_definition on J, C, F, Circle(A, C, F) we get log(distance(C, J)) + log(distance(F, J)) == log(power_of_a_point(J, Circle(A, C, F)))
+By power_of_a_point_definition on A, D, G, Circle(C, D, G) we get log(distance(A, D)) + log(distance(A, G)) == log(power_of_a_point(A, Circle(C, D, G)))
+By power_of_a_point_definition on E, A, C, Circle(A, C, D) we get log(distance(A, E)) + log(distance(C, E)) == log(power_of_a_point(E, Circle(A, C, D)))
+By line_definition on orthocenter(B, C, G), orthocenter(A, C, G), f we get f == Line(orthocenter(A, C, G), orthocenter(B, C, G))
+By line_definition on A, orthocenter(A, B, G), h we get h == Line(A, orthocenter(A, B, G))
+By line_definition on G, orthocenter(A, C, G), j we get j == Line(G, orthocenter(A, C, G))
+By line_definition on orthocenter(A, B, G), K, k we get k == Line(K, orthocenter(A, B, G))
+By line_definition on J, H, k we get k == Line(H, J)
+By line_definition on orthocenter(B, C, G), orthocenter(A, B, G), h we get h == Line(orthocenter(A, B, G), orthocenter(B, C, G))
+By line_intersection_definition on orthocenter(A, B, G), k, h we get orthocenter(A, B, G) == line_intersection(h, k)
+By line_definition on G, orthocenter(A, B, G), k we get k == Line(G, orthocenter(A, B, G))
+By line_definition on I, orthocenter(A, B, G), h we get h == Line(I, orthocenter(A, B, G))
+By line_intersection_definition on orthocenter(A, B, G), g, h we get orthocenter(A, B, G) == line_intersection(g, h)
+By line_intersection_definition on orthocenter(B, C, G), i, h we get orthocenter(B, C, G) == line_intersection(h, i)
+By line_intersection_definition on orthocenter(A, B, G), g, k we get orthocenter(A, B, G) == line_intersection(g, k)
+By line_intersection_definition on orthocenter(B, C, G), h, f we get orthocenter(B, C, G) == line_intersection(f, h)
+By line_definition on A, orthocenter(A, C, G), f we get f == Line(A, orthocenter(A, C, G))
+By line_definition on orthocenter(B, C, G), C, h we get h == Line(C, orthocenter(B, C, G))
+By line_definition on orthocenter(B, C, G), B, f we get f == Line(B, orthocenter(B, C, G))
+By line_definition on D, orthocenter(B, C, G), i we get i == Line(D, orthocenter(B, C, G))
+By line_intersection_definition on orthocenter(B, C, G), i, f we get orthocenter(B, C, G) == line_intersection(f, i)
+By line_intersection_definition on orthocenter(A, C, G), g, j we get orthocenter(A, C, G) == line_intersection(g, j)
+By line_definition on H, F, k we get k == Line(F, H)
+By line_definition on J, orthocenter(A, B, G), k we get k == Line(J, orthocenter(A, B, G))
+By line_definition on K, H, k we get k == Line(H, K)
+By line_definition on orthocenter(B, C, G), I, h we get h == Line(I, orthocenter(B, C, G))
+By line_definition on C, orthocenter(A, C, G), g we get g == Line(C, orthocenter(A, C, G))
+By line_intersection_definition on orthocenter(A, C, G), f, g we get orthocenter(A, C, G) == line_intersection(f, g)
+By line_definition on orthocenter(A, B, G), D, g we get g == Line(D, orthocenter(A, B, G))
+By radical_axis_is_perpendicular_to_center_line on g, Circle(A, C, D), Circle(C, D, G) we get perpendicular(g, Line(center(Circle(A, C, D)), center(Circle(C, D, G))))
+By line_definition on E, orthocenter(B, C, G), h we get h == Line(E, orthocenter(B, C, G))
+By line_definition on E, orthocenter(A, B, G), h we get h == Line(E, orthocenter(A, B, G))
+By line_definition on H, orthocenter(A, B, G), k we get k == Line(H, orthocenter(A, B, G))
+By line_definition on G, orthocenter(B, C, G), i we get i == Line(G, orthocenter(B, C, G))
+By line_definition on orthocenter(A, B, G), orthocenter(A, C, G), g we get g == Line(orthocenter(A, B, G), orthocenter(A, C, G))
+By line_definition on F, orthocenter(B, C, G), f we get f == Line(F, orthocenter(B, C, G))
+By line_definition on E, orthocenter(A, C, G), j we get j == Line(E, orthocenter(A, C, G))
+By line_intersection_definition on orthocenter(A, C, G), f, j we get orthocenter(A, C, G) == line_intersection(f, j)
+By line_definition on F, orthocenter(A, B, G), k we get k == Line(F, orthocenter(A, B, G))
+By line_definition on orthocenter(A, B, G), B, g we get g == Line(B, orthocenter(A, B, G))
+By line_definition on orthocenter(A, C, G), D, g we get g == Line(D, orthocenter(A, C, G))
+By line_definition on F, orthocenter(A, C, G), f we get f == Line(F, orthocenter(A, C, G))
+By median_definition on F, A, C, Line(F, I) we get Line(F, I) == median(F, A, C)
+By line_intersection_definition on H, Line(D, H), Line(E, H) we get H == line_intersection(Line(D, H), Line(E, H))
+By line_intersection_definition on E, j, Line(E, H) we get E == line_intersection(j, Line(E, H))
+By perpendicular_line_definition on orthocenter(B, C, G), h, j we get h == perpendicular_line(orthocenter(B, C, G), j)
+By line_intersection_definition on D, l, Line(D, H) we get D == line_intersection(l, Line(D, H))
+By perpendicular_line_definition on orthocenter(A, B, G), g, i we get g == perpendicular_line(orthocenter(A, B, G), i)
+By perpendicular_line_definition on H, k, f we get k == perpendicular_line(H, f)
+By line_intersection_definition on H, Line(H, I), Line(D, H) we get H == line_intersection(Line(D, H), Line(H, I))
+By line_intersection_definition on H, k, Line(D, H) we get H == line_intersection(k, Line(D, H))
+By line_intersection_definition on H, Line(E, H), Line(A, H) we get H == line_intersection(Line(A, H), Line(E, H))
+By line_intersection_definition on F, Line(F, I), k we get F == line_intersection(k, Line(F, I))
+By perpendicular_line_definition on orthocenter(A, C, G), f, k we get f == perpendicular_line(orthocenter(A, C, G), k)
+By perpendicular_line_definition on orthocenter(A, B, G), h, j we get h == perpendicular_line(orthocenter(A, B, G), j)
+By median_definition on D, G, C, Line(D, H) we get Line(D, H) == median(D, C, G)
+By line_intersection_definition on H, Line(E, H), Line(H, J) we get H == line_intersection(Line(E, H), Line(H, J))
+By line_intersection_definition on D, i, Line(D, H) we get D == line_intersection(i, Line(D, H))
+By line_intersection_definition on I, h, Line(F, I) we get I == line_intersection(h, Line(F, I))
+By line_intersection_definition on I, Line(F, I), l we get I == line_intersection(l, Line(F, I))
+By line_intersection_definition on H, Line(A, H), Line(D, H) we get H == line_intersection(Line(A, H), Line(D, H))
+By perpendicular_line_definition on orthocenter(B, C, G), i, g we get i == perpendicular_line(orthocenter(B, C, G), g)
+By line_intersection_definition on H, Line(D, H), Line(H, J) we get H == line_intersection(Line(D, H), Line(H, J))
+By line_intersection_definition on E, Line(E, H), h we get E == line_intersection(h, Line(E, H))
+By line_intersection_definition on D, g, Line(D, H) we get D == line_intersection(g, Line(D, H))
+By line_intersection_definition on H, k, Line(E, H) we get H == line_intersection(k, Line(E, H))
+By line_intersection_definition on I, Line(F, I), Line(I, J) we get I == line_intersection(Line(F, I), Line(I, J))
+By perpendicular_line_definition on orthocenter(A, C, G), g, i we get g == perpendicular_line(orthocenter(A, C, G), i)
+By perpendicular_line_definition on orthocenter(A, B, G), k, f we get k == perpendicular_line(orthocenter(A, B, G), f)
+By line_intersection_definition on I, Line(F, I), Line(H, I) we get I == line_intersection(Line(F, I), Line(H, I))
+By line_intersection_definition on F, f, Line(F, I) we get F == line_intersection(f, Line(F, I))
+By median_definition on E, C, G, Line(E, H) we get Line(E, H) == median(E, C, G)
+By line_intersection_definition on H, Line(E, H), Line(H, I) we get H == line_intersection(Line(E, H), Line(H, I))
+By perpendicular_line_definition on orthocenter(B, C, G), f, k we get f == perpendicular_line(orthocenter(B, C, G), k)
+By perpendicular_line_definition on orthocenter(A, C, G), j, h we get j == perpendicular_line(orthocenter(A, C, G), h)
+By line_unique_intersection on f, i, A, orthocenter(B, C, G) we get A == orthocenter(B, C, G)
+By line_unique_intersection on h, g, C, orthocenter(A, B, G) we get C == orthocenter(A, B, G)
+By line_unique_intersection on g, j, orthocenter(A, C, G), B we get B == orthocenter(A, C, G)
+By circle_radius_v0 on D, Circle(C, E, G) we get D in Circle(C, E, G)
+By circle_radius_v0 on D, Circle(A, C, F) we get D in Circle(A, C, F)
+By circle_radius_v0 on F, Circle(A, C, D) we get F in Circle(A, C, D)
+By circle_radius_v0 on E, Circle(C, D, G) we get E in Circle(C, D, G)
+By perpendicular_direction_conditions_v0_r on F, A, H, C we get 180 == 2 * direction(F, A) - 2 * direction(H, C) mod 360
+By perpendicular_direction_conditions_v0 on B, D, H, I we get perpendicular(Line(B, D), Line(H, I))
+By same_angle_v1 on C, F, G, D we get angle(F, C, D) == angle(G, C, D) mod 360
+By same_angle_v0 on C, F, G, E we get angle(F, C, E) == angle(G, C, E) mod 360
+By same_angle_v0 on C, G, J, A we get angle(G, C, A) == angle(J, C, A) mod 360
+By same_angle_v0 on C, F, G, A we get angle(F, C, A) == angle(G, C, A) mod 360
+By same_angle_v1 on C, K, G, D we get angle(G, C, D) == angle(K, C, D) mod 360
+By same_angle_v1 on C, G, F, B we get angle(F, C, B) == angle(G, C, B) mod 360
+By same_angle_v1 on C, J, G, D we get angle(G, C, D) == angle(J, C, D) mod 360
+By perpendicular_direction_conditions_v0 on D, C, H, I we get perpendicular(Line(C, D), Line(H, I))
+By same_angle_v0 on C, J, G, I we get angle(G, C, I) == angle(J, C, I) mod 360
+By same_angle_v0 on C, K, G, A we get angle(G, C, A) == angle(K, C, A) mod 360
+By same_angle_v1 on C, G, J, B we get angle(G, C, B) == angle(J, C, B) mod 360
+By same_angle_v0 on C, K, G, I we get angle(G, C, I) == angle(K, C, I) mod 360
+By same_angle_v0 on C, K, G, E we get angle(G, C, E) == angle(K, C, E) mod 360
+By perpendicular_direction_conditions_v0_r on C, H, B, A we get 180 == 2 * direction(C, H) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0 on I, H, B, C we get perpendicular(Line(B, C), Line(H, I))
+By same_angle_v0 on C, G, F, I we get angle(F, C, I) == angle(G, C, I) mod 360
+By same_angle_v3 on I, C, E, F we get angle(C, I, F) == angle(E, I, F) + 180 mod 360
+By same_angle_v0 on I, D, K, F we get angle(D, I, F) == angle(K, I, F) mod 360
+By same_angle_v1 on C, G, K, B we get angle(G, C, B) == angle(K, C, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, C, H we get 180 == 2 * direction(A, B) - 2 * direction(C, H) mod 360
+By perpendicular_direction_conditions_v0_r on G, C, B, A we get 180 == 2 * direction(G, C) - 2 * direction(B, A) mod 360
+By same_angle_v1 on I, A, E, F we get angle(A, I, F) == angle(E, I, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, G, C we get 180 == 2 * direction(B, F) - 2 * direction(G, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, H, C we get 180 == 2 * direction(A, B) - 2 * direction(H, C) mod 360
+By same_angle_v0 on C, J, G, E we get angle(G, C, E) == angle(J, C, E) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, H, G we get 180 == 2 * direction(F, A) - 2 * direction(H, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, H, B, F we get 180 == 2 * direction(G, H) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, C, G we get 180 == 2 * direction(A, B) - 2 * direction(C, G) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, C, G we get 180 == 2 * direction(B, F) - 2 * direction(C, G) mod 360
+By between_imply_not_between on J, K, C we get collinear_and_not_between(C, J, K)
+By perpendicular_direction_conditions_v0_r on B, A, H, C we get 180 == 2 * direction(B, A) - 2 * direction(H, C) mod 360
+By perpendicular_direction_conditions_v0_r on H, G, B, A we get 180 == 2 * direction(H, G) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on H, C, A, F we get 180 == 2 * direction(H, C) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, G, H we get 180 == 2 * direction(B, A) - 2 * direction(G, H) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, C, H we get 180 == 2 * direction(B, A) - 2 * direction(C, H) mod 360
+By perpendicular_direction_conditions_v0_r on C, H, B, F we get 180 == 2 * direction(C, H) - 2 * direction(B, F) mod 360
+By projection_definition on G, F, f we get F == projection(G, f)
+By perpendicular_direction_conditions_v0_r on B, F, H, G we get 180 == 2 * direction(B, F) - 2 * direction(H, G) mod 360
+By perpendicular_direction_conditions_v0_r on H, C, B, F we get 180 == 2 * direction(H, C) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, G, C we get 180 == 2 * direction(F, B) - 2 * direction(G, C) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, C, G we get 180 == 2 * direction(F, B) - 2 * direction(C, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, C, H we get 180 == 2 * direction(F, A) - 2 * direction(C, H) mod 360
+By perpendicular_direction_conditions_v0_r on H, G, F, A we get 180 == 2 * direction(H, G) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, G, B, A we get 180 == 2 * direction(C, G) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, H, A, B we get 180 == 2 * direction(C, H) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, C, G we get 180 == 2 * direction(F, A) - 2 * direction(C, G) mod 360
+By perpendicular_direction_conditions_v0_r on H, C, F, B we get 180 == 2 * direction(H, C) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, G, C we get 180 == 2 * direction(A, F) - 2 * direction(G, C) mod 360
+By perpendicular_direction_conditions_v0_r on C, H, F, A we get 180 == 2 * direction(C, H) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on H, G, A, B we get 180 == 2 * direction(H, G) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, C, B, F we get 180 == 2 * direction(G, C) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, C, H we get 180 == 2 * direction(B, F) - 2 * direction(C, H) mod 360
+By perpendicular_direction_conditions_v0_r on H, G, F, B we get 180 == 2 * direction(H, G) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, G, C we get 180 == 2 * direction(A, B) - 2 * direction(G, C) mod 360
+By perpendicular_direction_conditions_v0_r on G, H, A, F we get 180 == 2 * direction(G, H) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, H, G we get 180 == 2 * direction(A, B) - 2 * direction(H, G) mod 360
+By perpendicular_direction_conditions_v0_r on H, G, A, F we get 180 == 2 * direction(H, G) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, H, C we get 180 == 2 * direction(F, B) - 2 * direction(H, C) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, H, C we get 180 == 2 * direction(B, F) - 2 * direction(H, C) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, G, H we get 180 == 2 * direction(A, F) - 2 * direction(G, H) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, H, G we get 180 == 2 * direction(B, A) - 2 * direction(H, G) mod 360
+By perpendicular_direction_conditions_v0_r on H, G, B, F we get 180 == 2 * direction(H, G) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on C, G, F, B we get 180 == 2 * direction(C, G) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, H, B, A we get 180 == 2 * direction(G, H) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, G, B, F we get 180 == 2 * direction(C, G) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on C, G, A, F we get 180 == 2 * direction(C, G) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, G, H we get 180 == 2 * direction(F, A) - 2 * direction(G, H) mod 360
+By perpendicular_direction_conditions_v0_r on C, H, A, F we get 180 == 2 * direction(C, H) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on C, H, F, B we get 180 == 2 * direction(C, H) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, C, G we get 180 == 2 * direction(A, F) - 2 * direction(C, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, C, F, B we get 180 == 2 * direction(G, C) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on H, C, A, B we get 180 == 2 * direction(H, C) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, G, A, B we get 180 == 2 * direction(C, G) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, H, F, B we get 180 == 2 * direction(G, H) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, H, A, B we get 180 == 2 * direction(G, H) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, C, H we get 180 == 2 * direction(A, F) - 2 * direction(C, H) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, G, H we get 180 == 2 * direction(F, B) - 2 * direction(G, H) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, H, G we get 180 == 2 * direction(A, F) - 2 * direction(H, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, C, H we get 180 == 2 * direction(F, B) - 2 * direction(C, H) mod 360
+By perpendicular_direction_conditions_v0_r on G, C, A, B we get 180 == 2 * direction(G, C) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, C, G we get 180 == 2 * direction(B, A) - 2 * direction(C, G) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, H, C we get 180 == 2 * direction(A, F) - 2 * direction(H, C) mod 360
+By perpendicular_direction_conditions_v0_r on G, C, A, F we get 180 == 2 * direction(G, C) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on G, C, F, A we get 180 == 2 * direction(G, C) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on C, G, F, A we get 180 == 2 * direction(C, G) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, G, H we get 180 == 2 * direction(A, B) - 2 * direction(G, H) mod 360
+By perpendicular_direction_conditions_v0_r on G, H, F, A we get 180 == 2 * direction(G, H) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, H, G we get 180 == 2 * direction(F, B) - 2 * direction(H, G) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, G, C we get 180 == 2 * direction(B, A) - 2 * direction(G, C) mod 360
+By perpendicular_direction_conditions_v0_r on H, C, B, A we get 180 == 2 * direction(H, C) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, G, H we get 180 == 2 * direction(B, F) - 2 * direction(G, H) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, G, C we get 180 == 2 * direction(F, A) - 2 * direction(G, C) mod 360
+By perpendicular_direction_conditions_v0_r on H, C, F, A we get 180 == 2 * direction(H, C) - 2 * direction(F, A) mod 360
+By between_imply_not_between on C, K, J we get collinear_and_not_between(J, C, K)
+By between_imply_not_between on A, E, I we get collinear_and_not_between(E, A, I)
+By between_imply_not_between on I, E, A we get collinear_and_not_between(A, I, E)
+By between_imply_not_between on K, F, J we get collinear_and_not_between(F, K, J)
+By between_imply_not_between on J, F, K we get collinear_and_not_between(F, J, K)
+By between_imply_not_between on C, I, E we get collinear_and_not_between(E, C, I)
+By between_imply_not_between on E, I, C we get collinear_and_not_between(C, E, I)
+By circle_by_three_points_and_center on H, D, G, E we get H == center(Circle(D, E, G))
+By circle_by_three_points_and_center on I, A, D, F we get I == center(Circle(A, D, F))
+By circle_by_three_points_and_center on I, F, C, D we get I == center(Circle(C, D, F))
+By circle_by_three_points_and_center on H, D, C, E we get H == center(Circle(C, D, E))
+By same_angle_v1 on G, C, K, A we get angle(C, G, A) == angle(K, G, A) mod 360
+By same_angle_v0 on K, J, G, I we get angle(G, K, I) == angle(J, K, I) mod 360
+By same_angle_v1 on F, K, C, I we get angle(C, F, I) == angle(K, F, I) mod 360
+By same_angle_v2 on G, J, C, E we get angle(J, G, E) == angle(C, G, E) + 180 mod 360
+By same_angle_v0 on D, I, K, H we get angle(I, D, H) == angle(K, D, H) mod 360
+By same_angle_v0 on K, G, F, I we get angle(F, K, I) == angle(G, K, I) mod 360
+By same_angle_v2 on G, D, A, J we get angle(D, G, J) == angle(A, G, J) + 180 mod 360
+By same_angle_v1 on J, C, G, A we get angle(C, J, A) == angle(G, J, A) mod 360
+By same_angle_v1 on J, G, K, A we get angle(G, J, A) == angle(K, J, A) mod 360
+By same_angle_v2 on G, J, C, A we get angle(J, G, A) == angle(C, G, A) + 180 mod 360
+By same_angle_v2 on G, B, E, J we get angle(B, G, J) == angle(E, G, J) + 180 mod 360
+By same_angle_v2 on K, D, I, G we get angle(D, K, G) == angle(I, K, G) + 180 mod 360
+By same_angle_v3 on G, F, C, A we get angle(F, G, A) == angle(C, G, A) + 180 mod 360
+By same_angle_v2 on E, C, A, H we get angle(C, E, H) == angle(A, E, H) + 180 mod 360
+By same_angle_v0 on G, C, K, B we get angle(C, G, B) == angle(K, G, B) mod 360
+By same_angle_v0 on F, C, G, B we get angle(C, F, B) == angle(G, F, B) mod 360
+By same_angle_v2 on G, E, B, K we get angle(E, G, K) == angle(B, G, K) + 180 mod 360
+By same_angle_v2 on G, C, J, D we get angle(C, G, D) == angle(J, G, D) + 180 mod 360
+By same_angle_v1 on G, K, C, E we get angle(C, G, E) == angle(K, G, E) mod 360
+By same_angle_v2 on G, C, F, B we get angle(C, G, B) == angle(F, G, B) + 180 mod 360
+By same_angle_v1 on E, G, B, H we get angle(B, E, H) == angle(G, E, H) mod 360
+By perpendicular_direction_conditions_v0_r on G, K, F, B we get 180 == 2 * direction(G, K) - 2 * direction(F, B) mod 360
+By same_angle_v3 on F, J, C, I we get angle(J, F, I) == angle(C, F, I) + 180 mod 360
+By same_angle_v1 on F, G, K, A we get angle(G, F, A) == angle(K, F, A) mod 360
+By same_angle_v0 on F, K, G, B we get angle(G, F, B) == angle(K, F, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, J, F, B we get 180 == 2 * direction(G, J) - 2 * direction(F, B) mod 360
+By same_angle_v3 on K, G, C, I we get angle(G, K, I) == angle(C, K, I) + 180 mod 360
+By same_angle_v1 on J, F, G, I we get angle(F, J, I) == angle(G, J, I) mod 360
+By same_angle_v2 on F, J, K, I we get angle(J, F, I) == angle(K, F, I) + 180 mod 360
+By same_angle_v3 on E, I, A, H we get angle(I, E, H) == angle(A, E, H) + 180 mod 360
+By same_angle_v2 on F, G, J, B we get angle(G, F, B) == angle(J, F, B) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on B, F, J, G we get 180 == 2 * direction(B, F) - 2 * direction(J, G) mod 360
+By same_angle_v3 on F, J, G, A we get angle(J, F, A) == angle(G, F, A) + 180 mod 360
+By same_angle_v1 on F, G, C, A we get angle(C, F, A) == angle(G, F, A) mod 360
+By same_angle_v0 on D, A, G, H we get angle(A, D, H) == angle(G, D, H) mod 360
+By same_angle_v1 on K, G, J, D we get angle(G, K, D) == angle(J, K, D) mod 360
+By same_angle_v2 on G, A, D, K we get angle(A, G, K) == angle(D, G, K) + 180 mod 360
+By same_angle_v3 on G, B, E, F we get angle(B, G, F) == angle(E, G, F) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on G, K, A, F we get 180 == 2 * direction(G, K) - 2 * direction(A, F) mod 360
+By same_angle_v1 on J, G, C, I we get angle(C, J, I) == angle(G, J, I) mod 360
+By same_angle_v1 on K, G, F, D we get angle(F, K, D) == angle(G, K, D) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, F, A we get 180 == 2 * direction(G, F) - 2 * direction(F, A) mod 360
+By same_angle_v2 on G, C, J, B we get angle(C, G, B) == angle(J, G, B) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on A, B, J, G we get 180 == 2 * direction(A, B) - 2 * direction(J, G) mod 360
+By same_angle_v0 on E, C, I, H we get angle(C, E, H) == angle(I, E, H) mod 360
+By same_angle_v2 on K, C, G, D we get angle(C, K, D) == angle(G, K, D) + 180 mod 360
+By same_angle_v3 on F, A, B, I we get angle(A, F, I) == angle(B, F, I) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on A, F, J, G we get 180 == 2 * direction(A, F) - 2 * direction(J, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, J, B, A we get 180 == 2 * direction(G, J) - 2 * direction(B, A) mod 360
+By same_angle_v2 on G, D, A, F we get angle(D, G, F) == angle(A, G, F) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on F, B, K, G we get 180 == 2 * direction(F, B) - 2 * direction(K, G) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, F, G we get 180 == 2 * direction(A, F) - 2 * direction(F, G) mod 360
+By same_angle_v1 on J, K, G, I we get angle(G, J, I) == angle(K, J, I) mod 360
+By same_angle_v2 on G, C, F, D we get angle(C, G, D) == angle(F, G, D) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on A, B, K, G we get 180 == 2 * direction(A, B) - 2 * direction(K, G) mod 360
+By same_angle_v0 on G, K, C, D we get angle(C, G, D) == angle(K, G, D) mod 360
+By in_imply_collinear on orthocenter(A, C, G), F, A we get collinear(A, F, orthocenter(A, C, G))
+By perpendicular_direction_conditions_v0_r on A, F, G, K we get 180 == 2 * direction(A, F) - 2 * direction(G, K) mod 360
+By same_angle_v1 on J, F, G, A we get angle(F, J, A) == angle(G, J, A) mod 360
+By same_angle_v3 on F, A, B, G we get angle(A, F, G) == angle(B, F, G) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on F, G, A, B we get 180 == 2 * direction(F, G) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, G, F we get 180 == 2 * direction(F, A) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on K, G, B, F we get 180 == 2 * direction(K, G) - 2 * direction(B, F) mod 360
+By same_angle_v2 on G, F, C, E we get angle(F, G, E) == angle(C, G, E) + 180 mod 360
+By in_imply_collinear on J, G, H we get collinear(G, H, J)
+By in_imply_collinear on orthocenter(B, C, G), E, C we get collinear(C, E, orthocenter(B, C, G))
+By perpendicular_direction_conditions_v0_r on B, F, G, J we get 180 == 2 * direction(B, F) - 2 * direction(G, J) mod 360
+By in_imply_collinear on F, G, H we get collinear(F, G, H)
+By perpendicular_direction_conditions_v0_r on J, G, B, F we get 180 == 2 * direction(J, G) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on K, G, A, B we get 180 == 2 * direction(K, G) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on K, G, F, A we get 180 == 2 * direction(K, G) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, G, F we get 180 == 2 * direction(B, F) - 2 * direction(G, F) mod 360
+By probably_between_and_collinear_implies_between on K, G, F we get between(F, G, K)
+By same_angle_v3 on D, B, C, H we get angle(B, D, H) == angle(C, D, H) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on K, G, B, A we get 180 == 2 * direction(K, G) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, G, F we get 180 == 2 * direction(B, A) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on G, K, B, A we get 180 == 2 * direction(G, K) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, B, A we get 180 == 2 * direction(G, F) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, J, G we get 180 == 2 * direction(F, B) - 2 * direction(J, G) mod 360
+By perpendicular_direction_conditions_v0_r on K, G, A, F we get 180 == 2 * direction(K, G) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, J, G we get 180 == 2 * direction(F, A) - 2 * direction(J, G) mod 360
+By perpendicular_direction_conditions_v0_r on J, G, A, B we get 180 == 2 * direction(J, G) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, F, A we get 180 == 2 * direction(F, G) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, K, G we get 180 == 2 * direction(F, A) - 2 * direction(K, G) mod 360
+By perpendicular_direction_conditions_v0_r on J, G, F, B we get 180 == 2 * direction(J, G) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, F, B we get 180 == 2 * direction(G, F) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, F, B we get 180 == 2 * direction(F, G) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, K, G we get 180 == 2 * direction(B, F) - 2 * direction(K, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, G, F we get 180 == 2 * direction(F, B) - 2 * direction(G, F) mod 360
+By in_imply_collinear on orthocenter(A, C, G), B, A we get collinear(A, B, orthocenter(A, C, G))
+By perpendicular_direction_conditions_v0_r on A, B, G, J we get 180 == 2 * direction(A, B) - 2 * direction(G, J) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, G, J we get 180 == 2 * direction(A, F) - 2 * direction(G, J) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, K, G we get 180 == 2 * direction(A, F) - 2 * direction(K, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, G, J we get 180 == 2 * direction(F, B) - 2 * direction(G, J) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, F, G we get 180 == 2 * direction(A, B) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, F, G we get 180 == 2 * direction(F, B) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, J, B, F we get 180 == 2 * direction(G, J) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on G, J, F, A we get 180 == 2 * direction(G, J) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, G, K we get 180 == 2 * direction(A, B) - 2 * direction(G, K) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, B, A we get 180 == 2 * direction(F, G) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, A, B we get 180 == 2 * direction(G, F) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, B, F we get 180 == 2 * direction(F, G) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on J, G, A, F we get 180 == 2 * direction(J, G) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, F, G we get 180 == 2 * direction(F, A) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, A, F we get 180 == 2 * direction(G, F) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, G, K we get 180 == 2 * direction(B, A) - 2 * direction(G, K) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, G, F we get 180 == 2 * direction(A, F) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, A, F we get 180 == 2 * direction(F, G) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, B, F we get 180 == 2 * direction(G, F) - 2 * direction(B, F) mod 360
+By in_imply_collinear on orthocenter(A, B, G), F, J we get collinear(F, J, orthocenter(A, B, G))
+By in_imply_collinear on H, K, F we get collinear(F, H, K)
+By perpendicular_direction_conditions_v0_r on G, K, B, F we get 180 == 2 * direction(G, K) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, G, F we get 180 == 2 * direction(A, B) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, F, G we get 180 == 2 * direction(B, A) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, G, J we get 180 == 2 * direction(F, A) - 2 * direction(G, J) mod 360
+By perpendicular_direction_conditions_v0_r on J, G, B, A we get 180 == 2 * direction(J, G) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, J, G we get 180 == 2 * direction(B, A) - 2 * direction(J, G) mod 360
+By perpendicular_direction_conditions_v0_r on J, G, F, A we get 180 == 2 * direction(J, G) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, G, K we get 180 == 2 * direction(F, A) - 2 * direction(G, K) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, G, K we get 180 == 2 * direction(B, F) - 2 * direction(G, K) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, G, K we get 180 == 2 * direction(F, B) - 2 * direction(G, K) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, G, J we get 180 == 2 * direction(B, A) - 2 * direction(G, J) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, F, G we get 180 == 2 * direction(B, F) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on K, G, F, B we get 180 == 2 * direction(K, G) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on G, J, A, B we get 180 == 2 * direction(G, J) - 2 * direction(A, B) mod 360
+By probably_between_and_collinear_implies_between on C, G, J we get between(C, G, J)
+By in_imply_collinear on orthocenter(A, B, G), G, F we get collinear(F, G, orthocenter(A, B, G))
+By perpendicular_direction_conditions_v0_r on B, A, K, G we get 180 == 2 * direction(B, A) - 2 * direction(K, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, K, F, A we get 180 == 2 * direction(G, K) - 2 * direction(F, A) mod 360
+By in_imply_collinear on H, K, C we get collinear(C, H, K)
+By perpendicular_direction_conditions_v0_r on G, J, A, F we get 180 == 2 * direction(G, J) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on G, K, A, B we get 180 == 2 * direction(G, K) - 2 * direction(A, B) mod 360
+By in_imply_collinear on orthocenter(B, C, G), A, D we get collinear(A, D, orthocenter(B, C, G))
+By probably_between_and_collinear_implies_between on G, F, J we get between(G, F, J)
+By between_imply_segment_sum on C, I, E we get distance(C, E) == distance(C, I) + distance(E, I)
+By in_imply_collinear on K, H, G we get collinear(G, H, K)
+By in_imply_collinear on H, F, C we get collinear(C, F, H)
+By in_imply_collinear on orthocenter(A, C, G), F, B we get collinear(B, F, orthocenter(A, C, G))
+By in_imply_collinear on orthocenter(A, B, G), A, I we get collinear(A, I, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(A, B, G), E, A we get collinear(A, E, orthocenter(A, B, G))
+By probably_between_and_collinear_implies_between on C, G, F we get between(C, G, F)
+By in_imply_collinear on orthocenter(A, B, G), K, G we get collinear(G, K, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(A, B, G), D, C we get collinear(C, D, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(A, B, G), G, C we get collinear(C, G, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(A, B, G), C, K we get collinear(C, K, orthocenter(A, B, G))
+By probably_between_and_collinear_implies_between on J, G, K we get between(J, G, K)
+By in_imply_collinear on orthocenter(B, C, G), B, F we get collinear(B, F, orthocenter(B, C, G))
+By in_imply_collinear on orthocenter(B, C, G), B, A we get collinear(A, B, orthocenter(B, C, G))
+By in_imply_collinear on orthocenter(A, C, G), E, G we get collinear(E, G, orthocenter(A, C, G))
+By in_imply_collinear on orthocenter(A, B, G), B, D we get collinear(B, D, orthocenter(A, B, G))
+By probably_between_and_collinear_implies_between on C, K, G we get between(C, K, G)
+By in_imply_collinear on orthocenter(A, B, G), C, B we get collinear(B, C, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(B, C, G), E, A we get collinear(A, E, orthocenter(B, C, G))
+By concyclic_definition_1 on F, C, A, D we get Circle(A, C, D) == Circle(A, C, F)
+By in_imply_collinear on orthocenter(B, C, G), A, G we get collinear(A, G, orthocenter(B, C, G))
+By in_imply_collinear on orthocenter(A, B, G), H, C we get collinear(C, H, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(A, C, G), D, B we get collinear(B, D, orthocenter(A, C, G))
+By in_imply_collinear on orthocenter(A, B, G), F, C we get collinear(C, F, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(B, C, G), A, C we get collinear(A, C, orthocenter(B, C, G))
+By in_imply_collinear on orthocenter(B, C, G), C, I we get collinear(C, I, orthocenter(B, C, G))
+By in_imply_collinear on orthocenter(B, C, G), E, I we get collinear(E, I, orthocenter(B, C, G))
+By in_imply_collinear on orthocenter(A, B, G), C, A we get collinear(A, C, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(A, C, G), C, B we get collinear(B, C, orthocenter(A, C, G))
+By in_imply_collinear on orthocenter(A, C, G), D, C we get collinear(C, D, orthocenter(A, C, G))
+By in_imply_collinear on orthocenter(A, C, G), G, B we get collinear(B, G, orthocenter(A, C, G))
+By in_imply_collinear on orthocenter(A, B, G), J, K we get collinear(J, K, orthocenter(A, B, G))
+By internal_angle_bisector_definition_v0 on G, K, G, C we get angle(G, C, K) == angle(K, C, G) mod 360
+By in_imply_collinear on orthocenter(A, C, G), E, B we get collinear(B, E, orthocenter(A, C, G))
+By in_imply_collinear on orthocenter(A, B, G), C, I we get collinear(C, I, orthocenter(A, B, G))
+By collinear_definition on C, G, J we get G in Line(C, J), J in Line(C, G), Line(C, G) == Line(C, J), 0 == 2 * angle(G, C, J) mod 360
+By in_imply_collinear on orthocenter(A, B, G), E, I we get collinear(E, I, orthocenter(A, B, G))
+By in_imply_collinear on J, H, C we get collinear(C, H, J)
+By in_imply_collinear on orthocenter(B, C, G), A, F we get collinear(A, F, orthocenter(B, C, G))
+By internal_angle_bisector_definition_v0 on J, G, K, C we get angle(G, C, K) == angle(J, C, G) mod 360
+By in_imply_collinear on H, K, J we get collinear(H, J, K)
+By in_imply_collinear on orthocenter(B, C, G), D, G we get collinear(D, G, orthocenter(B, C, G))
+By in_imply_collinear on orthocenter(A, B, G), E, C we get collinear(C, E, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(B, C, G), A, I we get collinear(A, I, orthocenter(B, C, G))
+By in_imply_collinear on orthocenter(A, B, G), J, G we get collinear(G, J, orthocenter(A, B, G))
+By collinear_definition on C, G, K we get G in Line(C, K), K in Line(C, G), Line(C, G) == Line(C, K), 0 == 2 * angle(G, C, K) mod 360
+By parallel_line_angles_v1 on I, H, G, A we get parallel(Line(A, G), Line(H, I))
+By internal_angle_bisector_definition_v0 on H, J, H, C we get angle(H, C, J) == angle(J, C, H) mod 360
+By in_imply_collinear on orthocenter(A, B, G), H, G we get collinear(G, H, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(A, B, G), K, F we get collinear(F, K, orthocenter(A, B, G))
+By in_imply_collinear on orthocenter(A, B, G), C, J we get collinear(C, J, orthocenter(A, B, G))
+By internal_angle_bisector_definition_v0 on K, H, K, C we get angle(H, C, K) == angle(K, C, H) mod 360
+By in_imply_collinear on H, F, J we get collinear(F, H, J)
+By anti_similar_triangle_basic_properties on G, B, D, C, B, E we get angle(G, B, D) == 0 - angle(C, B, E) mod 360, angle(B, D, G) == 0 - angle(B, E, C) mod 360, angle(D, G, B) == 0 - angle(E, C, B) mod 360, log(distance(B, C)) + log(distance(B, D)) == log(distance(B, G)) + log(distance(B, E)), log(distance(B, D)) + log(distance(C, E)) == log(distance(B, E)) + log(distance(D, G)), log(distance(C, E)) + log(distance(B, G)) == log(distance(D, G)) + log(distance(B, C))
+By anti_similar_triangle_basic_properties on E, B, C, D, B, G we get angle(E, B, C) == 0 - angle(D, B, G) mod 360, angle(B, C, E) == 0 - angle(B, G, D) mod 360, angle(C, E, B) == 0 - angle(G, D, B) mod 360, log(distance(B, D)) + log(distance(B, C)) == log(distance(B, E)) + log(distance(B, G)), log(distance(B, C)) + log(distance(D, G)) == log(distance(B, G)) + log(distance(C, E)), log(distance(C, E)) + log(distance(B, D)) == log(distance(D, G)) + log(distance(B, E))
+By concyclic_definition_1 on E, G, C, D we get Circle(C, D, G) == Circle(C, E, G)
+By internal_angle_bisector_definition_v0 on J, H, K, C we get angle(H, C, K) == angle(J, C, H) mod 360
+By between_imply_segment_sum on C, K, J we get distance(C, J) == distance(C, K) + distance(J, K)
+By collinear_definition on C, K, G we get K in Line(C, G), G in Line(C, K), Line(C, G) == Line(C, K), 0 == 2 * angle(K, C, G) mod 360
+By between_imply_segment_sum on K, F, J we get distance(J, K) == distance(F, K) + distance(F, J)
+By internal_angle_bisector_definition_v0 on J, G, J, C we get angle(G, C, J) == angle(J, C, G) mod 360
+By internal_angle_bisector_definition_v0 on K, G, J, C we get angle(G, C, J) == angle(K, C, G) mod 360
+By collinear_definition on C, G, F we get G in Line(C, F), F in Line(C, G), Line(C, F) == Line(C, G), 0 == 2 * angle(G, C, F) mod 360
+By internal_angle_bisector_definition_v0 on H, F, H, C we get angle(F, C, H) == angle(H, C, F) mod 360
+By parallel_line_angles_v0 on I, H, G, D we get parallel(Line(D, G), Line(H, I))
+By between_imply_segment_sum on I, E, A we get distance(A, I) == distance(E, I) + distance(A, E)
+By internal_angle_bisector_definition_v0 on K, H, J, C we get angle(H, C, J) == angle(K, C, H) mod 360
+By parallel_line_angles_v1 on D, A, I, H we get parallel(Line(A, D), Line(H, I))
+By internal_angle_bisector_definition_v0 on G, F, G, C we get angle(F, C, G) == angle(G, C, F) mod 360
+By collinear_definition on C, F, G we get F in Line(C, G), G in Line(C, F), Line(C, F) == Line(C, G), 0 == 2 * angle(F, C, G) mod 360
+By collinear_definition on C, J, G we get J in Line(C, G), G in Line(C, J), Line(C, G) == Line(C, J), 0 == 2 * angle(J, C, G) mod 360
+By same_angle_v1 on G, F, J, D we get angle(F, G, D) == angle(J, G, D) mod 360
+By same_angle_v3 on G, K, F, B we get angle(K, G, B) == angle(F, G, B) + 180 mod 360
+By same_angle_v2 on G, J, K, A we get angle(J, G, A) == angle(K, G, A) + 180 mod 360
+By same_angle_v3 on G, J, K, E we get angle(J, G, E) == angle(K, G, E) + 180 mod 360
+By same_angle_v2 on G, F, K, A we get angle(F, G, A) == angle(K, G, A) + 180 mod 360
+By same_angle_v2 on G, K, F, D we get angle(K, G, D) == angle(F, G, D) + 180 mod 360
+By same_angle_v3 on G, K, J, D we get angle(K, G, D) == angle(J, G, D) + 180 mod 360
+By same_angle_v1 on F, C, G, I we get angle(C, F, I) == angle(G, F, I) mod 360
+By same_angle_v1 on F, K, G, I we get angle(G, F, I) == angle(K, F, I) mod 360
+By same_angle_v2 on G, K, J, B we get angle(K, G, B) == angle(J, G, B) + 180 mod 360
+By same_angle_v3 on G, F, K, E we get angle(F, G, E) == angle(K, G, E) + 180 mod 360
+By same_angle_v0 on G, J, F, A we get angle(F, G, A) == angle(J, G, A) mod 360
+By same_angle_v0 on G, F, J, E we get angle(F, G, E) == angle(J, G, E) mod 360
+By same_angle_v2 on F, J, G, I we get angle(J, F, I) == angle(G, F, I) + 180 mod 360
+By same_angle_v1 on G, J, F, B we get angle(F, G, B) == angle(J, G, B) mod 360
+By sss_anti_congruence_v1 on D, H, C, C, H, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By internal_angle_bisector_definition_v0_r on D, H, C, I we get Line(H, I) == internal_angle_bisector(C, I, D)
+By sss_anti_congruence_v0 on E, H, C, C, H, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on C, E, H, E, C, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on D, H, G, G, H, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By sas_anti_congruence on D, H, G, G, H, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By external_angle_bisector_definition_v0_r on A, H, K, I we get Line(H, I) == external_angle_bisector(A, I, K)
+By external_angle_bisector_definition_v0_r on J, F, C, K we get Line(F, K) == external_angle_bisector(C, K, J)
+By sss_anti_congruence_v0 on H, E, G, H, G, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on C, H, E, E, H, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on I, F, C, I, C, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By internal_angle_bisector_definition_v0 on C, K, C, G we get angle(C, G, K) == angle(K, G, C) mod 360
+By sas_anti_congruence on C, H, E, E, H, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By external_angle_bisector_definition_v0_r on E, A, C, I we get Line(A, I) == external_angle_bisector(C, I, E)
+By external_angle_bisector_definition_v0_r on E, H, K, I we get Line(H, I) == external_angle_bisector(E, I, K)
+By collinear_definition on K, G, F we get G in Line(F, K), F in Line(G, K), Line(F, K) == Line(G, K), 0 == 2 * angle(G, K, F) mod 360
+By concyclic_definition_0 on F, D, C, A we get A in Circle(C, D, F)
+By concyclic_definition_0 on A, E, B, D we get D in Circle(A, B, E)
+By sas_anti_congruence on G, H, D, D, H, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By anti_similar_triangle_basic_properties on B, C, F, B, A, D we get angle(B, C, F) == 0 - angle(B, A, D) mod 360, angle(C, F, B) == 0 - angle(A, D, B) mod 360, angle(F, B, C) == 0 - angle(D, B, A) mod 360, log(distance(A, B)) + log(distance(C, F)) == log(distance(B, C)) + log(distance(A, D)), log(distance(A, D)) + log(distance(B, F)) == log(distance(C, F)) + log(distance(B, D)), log(distance(B, D)) + log(distance(B, C)) == log(distance(B, F)) + log(distance(A, B))
+By anti_similar_triangle_basic_properties on I, A, D, I, D, A we get angle(I, A, D) == 0 - angle(I, D, A) mod 360, angle(A, D, I) == 0 - angle(D, A, I) mod 360, angle(D, I, A) == 0 - angle(A, I, D) mod 360, log(distance(A, I)) + log(distance(A, D)) == log(distance(D, I)) + log(distance(A, D)), log(distance(A, D)) + log(distance(A, I)) == log(distance(A, D)) + log(distance(D, I)), log(distance(A, I)) + log(distance(A, I)) == log(distance(D, I)) + log(distance(D, I))
+By anti_similar_triangle_basic_properties on B, F, C, B, D, A we get angle(B, F, C) == 0 - angle(B, D, A) mod 360, angle(F, C, B) == 0 - angle(D, A, B) mod 360, angle(C, B, F) == 0 - angle(A, B, D) mod 360, log(distance(B, D)) + log(distance(C, F)) == log(distance(B, F)) + log(distance(A, D)), log(distance(A, D)) + log(distance(B, C)) == log(distance(C, F)) + log(distance(A, B)), log(distance(A, B)) + log(distance(B, F)) == log(distance(B, C)) + log(distance(B, D))
+By sss_anti_congruence_v0 on C, I, F, F, I, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By similar_triangle_basic_properties on A, D, C, B, D, G we get angle(A, D, C) == angle(B, D, G) mod 360, angle(D, C, A) == angle(D, G, B) mod 360, angle(C, A, D) == angle(G, B, D) mod 360, log(distance(A, D)) + log(distance(D, G)) == log(distance(B, D)) + log(distance(C, D)), log(distance(C, D)) + log(distance(B, G)) == log(distance(D, G)) + log(distance(A, C)), log(distance(A, C)) + log(distance(B, D)) == log(distance(B, G)) + log(distance(A, D))
+By sss_anti_congruence_v0 on F, C, I, C, F, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By anti_similar_triangle_basic_properties on E, B, C, D, A, C we get angle(E, B, C) == 0 - angle(D, A, C) mod 360, angle(B, C, E) == 0 - angle(A, C, D) mod 360, angle(C, E, B) == 0 - angle(C, D, A) mod 360, log(distance(A, D)) + log(distance(B, C)) == log(distance(B, E)) + log(distance(A, C)), log(distance(A, C)) + log(distance(C, E)) == log(distance(B, C)) + log(distance(C, D)), log(distance(C, D)) + log(distance(B, E)) == log(distance(C, E)) + log(distance(A, D))
+By concyclic_definition_0 on D, B, E, A we get A in Circle(B, D, E)
+By concyclic_definition_0 on C, B, F, E we get E in Circle(B, C, F)
+By concyclic_definition_0 on C, E, D, G we get G in Circle(C, D, E)
+By internal_angle_bisector_definition_v0 on C, J, C, G we get angle(C, G, J) == angle(J, G, C) mod 360
+By sss_anti_congruence_v1 on E, H, G, G, H, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By concyclic_definition_1 on A, C, F, D we get Circle(A, C, F) == Circle(C, D, F)
+By sss_anti_congruence_v0 on A, F, I, F, A, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By concyclic_definition_1 on F, D, A, C we get Circle(A, C, D) == Circle(A, D, F)
+By external_angle_bisector_definition_v0_r on A, H, D, I we get Line(H, I) == external_angle_bisector(A, I, D)
+By external_angle_bisector_definition_v0_r on I, B, I, E we get Line(B, E) == external_angle_bisector(I, E, I)
+By external_angle_bisector_definition_v0_r on D, H, E, I we get Line(H, I) == external_angle_bisector(D, I, E)
+By sss_anti_congruence_v1 on A, I, F, F, I, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By external_angle_bisector_definition_v0_r on C, I, A, E we get Line(E, I) == external_angle_bisector(A, E, C)
+By anti_similar_triangle_basic_properties on C, B, E, C, A, D we get angle(C, B, E) == 0 - angle(C, A, D) mod 360, angle(B, E, C) == 0 - angle(A, D, C) mod 360, angle(E, C, B) == 0 - angle(D, C, A) mod 360, log(distance(A, C)) + log(distance(B, E)) == log(distance(B, C)) + log(distance(A, D)), log(distance(A, D)) + log(distance(C, E)) == log(distance(B, E)) + log(distance(C, D)), log(distance(C, D)) + log(distance(B, C)) == log(distance(C, E)) + log(distance(A, C))
+By external_angle_bisector_definition_v0 on J, G, K, F we get 180 == angle(J, F, G) + angle(K, F, G) mod 360
+By sss_anti_congruence_v0 on I, A, F, I, F, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on H, C, D, H, D, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By concyclic_definition_1 on D, G, E, C we get Circle(C, E, G) == Circle(D, E, G)
+By concyclic_definition_0 on E, C, B, F we get F in Circle(B, C, E)
+By sss_anti_congruence_v1 on D, G, H, G, D, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By anti_similar_triangle_basic_properties on D, B, G, E, A, G we get angle(D, B, G) == 0 - angle(E, A, G) mod 360, angle(B, G, D) == 0 - angle(A, G, E) mod 360, angle(G, D, B) == 0 - angle(G, E, A) mod 360, log(distance(A, E)) + log(distance(B, G)) == log(distance(B, D)) + log(distance(A, G)), log(distance(A, G)) + log(distance(D, G)) == log(distance(B, G)) + log(distance(E, G)), log(distance(D, G)) + log(distance(A, E)) == log(distance(E, G)) + log(distance(B, D))
+By internal_angle_bisector_definition_v0 on H, K, H, G we get angle(H, G, K) == angle(K, G, H) mod 360
+By external_angle_bisector_definition_v0_r on J, K, C, F we get Line(F, K) == external_angle_bisector(C, F, J)
+By external_angle_bisector_definition_v0_r on C, G, I, E we get Line(E, G) == external_angle_bisector(C, E, I)
+By sss_anti_congruence_v0 on D, H, G, G, H, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on F, I, A, A, I, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By external_angle_bisector_definition_v0_r on I, B, C, E we get Line(B, E) == external_angle_bisector(C, E, I)
+By sss_anti_congruence_v1 on C, D, H, D, C, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on H, E, G, H, G, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By concyclic_definition_1 on C, D, G, E we get Circle(C, D, G) == Circle(D, E, G)
+By sss_anti_congruence_v0 on G, D, H, D, G, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By similar_triangle_basic_properties on E, G, A, E, C, B we get angle(E, C, B) == angle(E, G, A) mod 360, angle(C, B, E) == angle(G, A, E) mod 360, angle(A, E, G) == angle(B, E, C) mod 360, log(distance(C, E)) + log(distance(A, G)) == log(distance(E, G)) + log(distance(B, C)), log(distance(A, G)) + log(distance(B, E)) == log(distance(B, C)) + log(distance(A, E)), log(distance(A, E)) + log(distance(C, E)) == log(distance(B, E)) + log(distance(E, G))
+By sss_anti_congruence_v0 on A, F, I, F, A, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By concyclic_definition_1 on F, C, D, A we get Circle(A, C, D) == Circle(C, D, F)
+By sss_anti_congruence_v0 on A, F, I, F, A, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By sas_anti_congruence on F, I, C, C, I, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By internal_angle_bisector_definition_v0 on C, G, C, K we get angle(C, K, G) == angle(G, K, C) mod 360
+By sss_anti_congruence_v0 on F, I, A, A, I, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on H, D, G, H, G, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By external_angle_bisector_definition_v0_r on F, J, C, K we get Line(J, K) == external_angle_bisector(C, K, F)
+By concyclic_definition_1 on G, C, D, E we get Circle(C, D, E) == Circle(C, D, G)
+By sss_anti_congruence_v0 on A, F, I, F, A, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By log_of_2_times_distance on A, C, I, F we get log(distance(A, C)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(F, I))
+By internal_angle_bisector_definition_v0 on C, F, C, G we get angle(C, G, F) == angle(F, G, C) mod 360
+By sss_anti_congruence_v0 on D, C, H, C, D, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on G, H, E, E, H, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By concyclic_definition_0 on E, A, D, B we get B in Circle(A, D, E)
+By collinear_definition on F, G, K we get G in Line(F, K), K in Line(F, G), Line(F, G) == Line(F, K), 0 == 2 * angle(G, F, K) mod 360
+By sss_anti_congruence_v0 on D, H, G, G, H, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on F, C, I, C, F, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on F, A, I, A, F, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By reverse_direction on H, D we get 180 == direction(H, D) - direction(D, H) mod 360
+By internal_angle_bisector_definition_v0_r on I, B, A, E we get Line(B, E) == internal_angle_bisector(A, E, I)
+By sss_anti_congruence_v0 on D, H, G, G, H, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By external_angle_bisector_definition_v0_r on I, C, A, E we get Line(C, E) == external_angle_bisector(A, E, I)
+By sss_anti_congruence_v1 on A, I, F, F, I, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By external_angle_bisector_definition_v0_r on C, E, A, I we get Line(E, I) == external_angle_bisector(A, I, C)
+By sss_anti_congruence_v0 on D, C, H, C, D, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on E, H, G, G, H, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v0 on C, H, D, D, H, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By internal_angle_bisector_definition_v0_r on C, H, K, I we get Line(H, I) == internal_angle_bisector(C, I, K)
+By sss_anti_congruence_v1 on F, A, I, A, F, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on H, G, E, H, E, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By internal_angle_bisector_definition_v0_r on E, I, C, A we get Line(A, I) == internal_angle_bisector(C, A, E)
+By sss_anti_congruence_v1 on C, H, E, E, H, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By concyclic_definition_0 on G, D, E, C we get C in Circle(D, E, G)
+By sss_anti_congruence_v0 on H, G, D, H, D, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on I, F, A, I, A, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on E, H, C, C, H, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By internal_angle_bisector_definition_v0_r on I, C, I, E we get Line(C, E) == internal_angle_bisector(I, E, I)
+By collinear_definition on F, J, G we get J in Line(F, G), G in Line(F, J), Line(F, G) == Line(F, J), 0 == 2 * angle(J, F, G) mod 360
+By sss_anti_congruence_v0 on I, A, F, I, F, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By perpendicular_angle_conditions_v0 on G, F, A we get angle(G, F, A) == orientation(A, G, F) mod 360
+By external_angle_bisector_definition_v0_r on I, G, I, E we get Line(E, G) == external_angle_bisector(I, E, I)
+By sss_anti_congruence_v1 on C, F, I, F, C, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on C, D, H, D, C, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on D, G, H, G, D, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on F, C, I, C, F, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By sas_anti_congruence on E, H, G, G, H, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on G, H, D, D, H, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on A, I, F, F, I, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on G, D, H, D, G, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By internal_angle_bisector_definition_v0_r on F, J, K, C we get Line(C, J) == internal_angle_bisector(F, C, K)
+By concyclic_definition_0 on A, D, B, E we get E in Circle(A, B, D)
+By similar_triangle_basic_properties on G, D, B, C, D, A we get angle(C, D, A) == angle(G, D, B) mod 360, angle(D, A, C) == angle(D, B, G) mod 360, angle(A, C, D) == angle(B, G, D) mod 360, log(distance(C, D)) + log(distance(B, D)) == log(distance(D, G)) + log(distance(A, D)), log(distance(A, D)) + log(distance(B, G)) == log(distance(B, D)) + log(distance(A, C)), log(distance(A, C)) + log(distance(D, G)) == log(distance(B, G)) + log(distance(C, D))
+By external_angle_bisector_definition_v0 on A, G, A, F we get 180 == angle(A, F, G) + angle(A, F, G) mod 360
+By sss_anti_congruence_v1 on F, I, C, C, I, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v0 on H, D, C, H, C, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By concyclic_definition_0 on B, F, E, C we get C in Circle(B, E, F)
+By sss_anti_congruence_v0 on E, G, H, G, E, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on I, C, F, I, F, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By sas_anti_congruence on C, I, F, F, I, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v0 on H, E, G, H, G, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on G, H, D, D, H, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on G, E, H, E, G, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By collinear_definition on K, F, G we get F in Line(G, K), G in Line(F, K), Line(F, K) == Line(G, K), 0 == 2 * angle(F, K, G) mod 360
+By internal_angle_bisector_definition_v0_r on J, C, J, K we get Line(C, K) == internal_angle_bisector(J, K, J)
+By isosceles_triangle_properties on I, F, A we get distance(A, I) == distance(F, I), angle(F, A, I) == angle(I, F, A) mod 360
+By collinear_definition on J, K, G we get K in Line(G, J), G in Line(J, K), Line(G, J) == Line(J, K), 0 == 2 * angle(K, J, G) mod 360
+By sss_anti_congruence_v1 on C, D, H, D, C, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on E, H, G, G, H, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on C, H, E, E, H, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By internal_angle_bisector_definition_v0_r on I, E, A, C we get Line(C, E) == internal_angle_bisector(A, C, I)
+By collinear_definition on F, G, J we get G in Line(F, J), J in Line(F, G), Line(F, G) == Line(F, J), 0 == 2 * angle(G, F, J) mod 360
+By sss_anti_congruence_v0 on H, C, E, H, E, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on C, E, H, E, C, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By similar_triangle_basic_properties on C, I, H, C, A, G we get angle(C, A, G) == angle(C, I, H) mod 360, angle(A, G, C) == angle(I, H, C) mod 360, angle(G, C, A) == angle(H, C, I) mod 360, log(distance(A, C)) + log(distance(H, I)) == log(distance(C, I)) + log(distance(A, G)), log(distance(A, G)) + log(distance(C, H)) == log(distance(H, I)) + log(distance(C, G)), log(distance(C, G)) + log(distance(C, I)) == log(distance(C, H)) + log(distance(A, C))
+By log_of_2_times_distance on C, G, H, E we get log(distance(C, G)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(E, H))
+By collinear_definition on J, G, C we get G in Line(C, J), C in Line(G, J), Line(C, J) == Line(G, J), 0 == 2 * angle(G, J, C) mod 360
+By sss_anti_congruence_v0 on I, F, C, I, C, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on I, F, A, I, A, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on H, C, D, H, D, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By similar_triangle_basic_properties on A, G, E, B, C, E we get angle(A, G, E) == angle(B, C, E) mod 360, angle(C, E, B) == angle(G, E, A) mod 360, angle(E, A, G) == angle(E, B, C) mod 360, log(distance(A, G)) + log(distance(C, E)) == log(distance(B, C)) + log(distance(E, G)), log(distance(C, E)) + log(distance(A, E)) == log(distance(E, G)) + log(distance(B, E)), log(distance(A, E)) + log(distance(B, C)) == log(distance(B, E)) + log(distance(A, G))
+By sss_anti_congruence_v0 on D, C, H, C, D, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on H, E, G, H, G, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By log_of_2_times_distance on C, A, I, D we get log(distance(A, C)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(D, I))
+By sss_anti_congruence_v1 on E, H, G, G, H, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v0 on E, H, C, C, H, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By concyclic_definition_1 on C, F, A, D we get Circle(A, C, F) == Circle(A, D, F)
+By isosceles_triangle_properties on H, D, G we get distance(D, H) == distance(G, H), angle(D, G, H) == angle(H, D, G) mod 360
+By sss_anti_congruence_v0 on C, H, D, D, H, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on E, C, H, C, E, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on D, H, G, G, H, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on C, E, H, E, C, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on H, D, C, H, C, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on G, E, H, E, G, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v0 on G, H, E, E, H, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v0 on I, A, F, I, F, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on H, D, G, H, G, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By concyclic_definition_0 on A, D, F, C we get C in Circle(A, D, F)
+By sss_anti_congruence_v1 on G, H, D, D, H, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on G, H, D, D, H, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on H, D, C, H, C, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By internal_angle_bisector_definition_v0_r on F, C, J, K we get Line(C, K) == internal_angle_bisector(F, K, J)
+By collinear_definition on J, F, G we get F in Line(G, J), G in Line(F, J), Line(F, J) == Line(G, J), 0 == 2 * angle(F, J, G) mod 360
+By internal_angle_bisector_definition_v0 on H, F, H, G we get angle(F, G, H) == angle(H, G, F) mod 360
+By sss_anti_congruence_v0 on C, I, F, F, I, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By anti_similar_triangle_basic_properties on D, G, B, E, G, A we get angle(D, G, B) == 0 - angle(E, G, A) mod 360, angle(G, B, D) == 0 - angle(G, A, E) mod 360, angle(B, D, G) == 0 - angle(A, E, G) mod 360, log(distance(D, G)) + log(distance(A, G)) == log(distance(E, G)) + log(distance(B, G)), log(distance(A, G)) + log(distance(B, D)) == log(distance(B, G)) + log(distance(A, E)), log(distance(A, E)) + log(distance(D, G)) == log(distance(B, D)) + log(distance(E, G))
+By isosceles_triangle_properties on H, C, D we get distance(C, H) == distance(D, H), angle(C, D, H) == angle(H, C, D) mod 360
+By sss_anti_congruence_v1 on H, E, C, H, C, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on G, E, H, E, G, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By similar_triangle_basic_properties on C, G, A, C, H, I we get angle(C, G, A) == angle(C, H, I) mod 360, angle(G, A, C) == angle(H, I, C) mod 360, angle(A, C, G) == angle(I, C, H) mod 360, log(distance(C, G)) + log(distance(H, I)) == log(distance(C, H)) + log(distance(A, G)), log(distance(A, G)) + log(distance(C, I)) == log(distance(H, I)) + log(distance(A, C)), log(distance(A, C)) + log(distance(C, H)) == log(distance(C, I)) + log(distance(C, G))
+By sss_anti_congruence_v1 on I, F, A, I, A, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on I, F, C, I, C, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on H, D, G, H, G, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By reverse_direction on I, F we get 180 == direction(I, F) - direction(F, I) mod 360
+By sss_anti_congruence_v0 on H, C, E, H, E, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By isosceles_triangle_properties on H, E, C we get distance(C, H) == distance(E, H), angle(E, C, H) == angle(H, E, C) mod 360
+By isosceles_triangle_properties on I, F, C we get distance(C, I) == distance(F, I), angle(F, C, I) == angle(I, F, C) mod 360
+By sss_anti_congruence_v1 on H, E, C, H, C, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on H, E, C, H, C, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on H, G, E, H, E, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on G, H, D, D, H, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on H, G, E, H, E, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on I, F, A, I, A, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on D, C, H, C, D, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By internal_angle_bisector_definition_v0_r on C, A, I, E we get Line(A, E) == internal_angle_bisector(C, E, I)
+By sss_anti_congruence_v1 on E, C, H, C, E, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on G, D, H, D, G, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on E, H, C, C, H, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on H, G, D, H, D, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By perpendicular_angle_conditions_v0 on A, F, G we get angle(A, F, G) == orientation(A, F, G) mod 360
+By sss_anti_congruence_v0 on F, I, A, A, I, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on F, I, C, C, I, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By concyclic_definition_0 on E, C, F, B we get B in Circle(C, E, F)
+By sss_anti_congruence_v1 on F, A, I, A, F, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on I, F, A, I, A, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By collinear_definition on F, K, G we get K in Line(F, G), G in Line(F, K), Line(F, G) == Line(F, K), 0 == 2 * angle(K, F, G) mod 360
+By sss_anti_congruence_v0 on A, F, I, F, A, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By internal_angle_bisector_definition_v0_r on J, F, J, K we get Line(F, K) == internal_angle_bisector(J, K, J)
+By sss_anti_congruence_v0 on H, C, E, H, E, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on C, D, H, D, C, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By internal_angle_bisector_definition_v0_r on K, C, F, J we get Line(C, J) == internal_angle_bisector(F, J, K)
+By sss_anti_congruence_v1 on H, E, C, H, C, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on E, H, G, G, H, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By concyclic_definition_1 on G, C, E, D we get Circle(C, D, E) == Circle(C, E, G)
+By internal_angle_bisector_definition_v0_r on E, I, A, C we get Line(C, I) == internal_angle_bisector(A, C, E)
+By sss_anti_congruence_v0 on C, H, D, D, H, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on C, E, H, E, C, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By radical_axis_definition_v0_r on C, Circle(A, C, F), Circle(C, E, G) we get C in radical_axis(Circle(A, C, F), Circle(C, E, G))
+By radical_axis_definition_v0_r on C, Circle(A, C, D), Circle(C, E, G) we get C in radical_axis(Circle(A, C, D), Circle(C, E, G))
+By external_angle_bisector_definition_v0 on B, G, B, F we get 180 == angle(B, F, G) + angle(B, F, G) mod 360
+By sss_anti_congruence_v1 on H, G, E, H, E, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By collinear_definition on G, C, F we get C in Line(F, G), F in Line(C, G), Line(C, G) == Line(F, G), 0 == 2 * angle(C, G, F) mod 360
+By sss_anti_congruence_v0 on H, E, G, H, G, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on G, H, D, D, H, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By internal_angle_bisector_definition_v0_r on F, K, C, J we get Line(J, K) == internal_angle_bisector(C, J, F)
+By sss_anti_congruence_v0 on I, F, C, I, C, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on C, F, I, F, C, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By collinear_definition on G, J, C we get J in Line(C, G), C in Line(G, J), Line(C, G) == Line(G, J), 0 == 2 * angle(J, G, C) mod 360
+By sss_anti_congruence_v0 on H, C, E, H, E, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on F, I, C, C, I, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on H, C, D, H, D, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on H, G, D, H, D, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on F, I, C, C, I, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By internal_angle_bisector_definition_v0 on K, G, K, F we get angle(G, F, K) == angle(K, F, G) mod 360
+By sss_anti_congruence_v1 on H, G, E, H, E, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By internal_angle_bisector_definition_v0_r on F, K, J, C we get Line(C, K) == internal_angle_bisector(F, C, J)
+By sss_anti_congruence_v1 on G, E, H, E, G, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By internal_angle_bisector_definition_v0_r on E, A, E, I we get Line(A, I) == internal_angle_bisector(E, I, E)
+By sss_anti_congruence_v1 on F, A, I, A, F, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By internal_angle_bisector_definition_v0_r on K, J, C, F we get Line(F, J) == internal_angle_bisector(C, F, K)
+By sss_anti_congruence_v0 on G, D, H, D, G, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By isosceles_triangle_properties on H, G, D we get distance(D, H) == distance(G, H), angle(G, D, H) == angle(H, G, D) mod 360
+By sss_anti_congruence_v1 on A, I, F, F, I, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on I, A, F, I, F, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on I, A, F, I, F, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on F, I, C, C, I, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By internal_angle_bisector_definition_v0 on A, G, B, F we get angle(A, F, G) == angle(G, F, B) mod 360
+By sss_anti_congruence_v0 on C, H, D, D, H, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on C, I, F, F, I, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on I, C, F, I, F, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By collinear_definition on K, C, G we get C in Line(G, K), G in Line(C, K), Line(C, K) == Line(G, K), 0 == 2 * angle(C, K, G) mod 360
+By collinear_definition on F, C, G we get C in Line(F, G), G in Line(C, F), Line(C, F) == Line(F, G), 0 == 2 * angle(C, F, G) mod 360
+By radical_axis_definition_v0_r on C, Circle(C, D, G), Circle(A, C, F) we get C in radical_axis(Circle(A, C, F), Circle(C, D, G))
+By collinear_definition on K, G, C we get G in Line(C, K), C in Line(G, K), Line(C, K) == Line(G, K), 0 == 2 * angle(G, K, C) mod 360
+By sss_anti_congruence_v0 on E, G, H, G, E, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v0 on C, I, F, F, I, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on H, C, D, H, D, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on C, H, E, E, H, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By isosceles_triangle_properties on I, C, F we get distance(C, I) == distance(F, I), angle(C, F, I) == angle(I, C, F) mod 360
+By sss_anti_congruence_v1 on H, C, D, H, D, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on D, H, C, C, H, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By radical_axis_definition_v0_r on A, c, Circle(A, C, F) we get A in radical_axis(c, Circle(A, C, F))
+By sss_anti_congruence_v1 on E, C, H, C, E, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By perpendicular_angle_conditions_v0 on G, F, B we get angle(G, F, B) == orientation(B, G, F) mod 360
+By sss_anti_congruence_v0 on H, E, G, H, G, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By internal_angle_bisector_definition_v0_r on A, C, E, I we get Line(C, I) == internal_angle_bisector(A, I, E)
+By sss_anti_congruence_v1 on D, G, H, G, D, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on H, C, D, H, D, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on G, H, E, E, H, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on H, E, C, H, C, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on I, F, C, I, C, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By internal_angle_bisector_definition_v0_r on E, C, E, I we get Line(C, I) == internal_angle_bisector(E, I, E)
+By collinear_definition on G, C, J we get C in Line(G, J), J in Line(C, G), Line(C, G) == Line(G, J), 0 == 2 * angle(C, G, J) mod 360
+By sss_anti_congruence_v0 on E, G, H, G, E, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on C, H, E, E, H, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By radical_axis_definition_v0_r on A, Circle(A, C, D), c we get A in radical_axis(c, Circle(A, C, D))
+By sss_anti_congruence_v1 on G, E, H, E, G, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on F, I, C, C, I, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By collinear_definition on G, K, C we get K in Line(C, G), C in Line(G, K), Line(C, G) == Line(G, K), 0 == 2 * angle(K, G, C) mod 360
+By sss_anti_congruence_v1 on C, F, I, F, C, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on D, H, C, C, H, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on H, D, G, H, G, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on C, F, I, F, C, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v0 on C, H, D, D, H, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on E, C, H, C, E, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By internal_angle_bisector_definition_v0 on C, G, C, F we get angle(C, F, G) == angle(G, F, C) mod 360
+By sss_anti_congruence_v1 on C, F, I, F, C, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v0 on H, C, E, H, E, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By collinear_definition on J, C, G we get C in Line(G, J), G in Line(C, J), Line(C, J) == Line(G, J), 0 == 2 * angle(C, J, G) mod 360
+By sss_anti_congruence_v0 on E, H, C, C, H, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on G, H, E, E, H, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v0 on H, D, C, H, C, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By internal_angle_bisector_definition_v0 on H, J, H, G we get angle(H, G, J) == angle(J, G, H) mod 360
+By sss_anti_congruence_v0 on F, I, A, A, I, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on G, D, H, D, G, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By internal_angle_bisector_definition_v0_r on K, F, C, J we get Line(F, J) == internal_angle_bisector(C, J, K)
+By isosceles_triangle_properties on I, A, F we get distance(A, I) == distance(F, I), angle(A, F, I) == angle(I, A, F) mod 360
+By sss_anti_congruence_v0 on F, I, A, A, I, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By internal_angle_bisector_definition_v0_r on A, G, I, E we get Line(E, G) == internal_angle_bisector(A, E, I)
+By sss_anti_congruence_v0 on H, D, C, H, C, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on A, I, F, F, I, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on C, H, D, D, H, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on D, H, C, C, H, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on I, C, F, I, F, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By collinear_definition on G, C, K we get C in Line(G, K), K in Line(C, G), Line(C, G) == Line(G, K), 0 == 2 * angle(C, G, K) mod 360
+By sss_anti_congruence_v0 on C, I, F, F, I, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on C, D, H, D, C, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on D, G, H, G, D, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By sas_anti_congruence on E, H, C, C, H, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sas_anti_congruence on G, H, E, E, H, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By collinear_definition on F, G, C we get G in Line(C, F), C in Line(F, G), Line(C, F) == Line(F, G), 0 == 2 * angle(G, F, C) mod 360
+By internal_angle_bisector_definition_v0_r on I, A, I, E we get Line(A, E) == internal_angle_bisector(I, E, I)
+By sss_anti_congruence_v0 on E, G, H, G, E, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on D, G, H, G, D, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By internal_angle_bisector_definition_v0 on F, G, F, K we get angle(F, K, G) == angle(G, K, F) mod 360
+By sss_anti_congruence_v0 on E, G, H, G, E, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on H, G, E, H, E, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By perpendicular_angle_conditions_v0 on B, F, G we get angle(B, F, G) == orientation(B, F, G) mod 360
+By sss_anti_congruence_v0 on I, F, C, I, C, F we get anti_congruent_triangles(C, F, I, F, C, I)
+By internal_angle_bisector_definition_v0_r on C, E, I, A we get Line(A, E) == internal_angle_bisector(C, A, I)
+By sss_anti_congruence_v1 on C, D, H, D, C, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By isosceles_triangle_properties on H, D, C we get distance(C, H) == distance(D, H), angle(D, C, H) == angle(H, D, C) mod 360
+By sss_anti_congruence_v1 on H, E, C, H, C, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v0 on H, C, E, H, E, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By collinear_definition on J, G, K we get G in Line(J, K), K in Line(G, J), Line(G, J) == Line(J, K), 0 == 2 * angle(G, J, K) mod 360
+By sss_anti_congruence_v0 on F, C, I, C, F, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v0 on D, H, G, G, H, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on C, H, E, E, H, C we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on I, F, A, I, A, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By isosceles_triangle_properties on H, E, G we get distance(E, H) == distance(G, H), angle(E, G, H) == angle(H, E, G) mod 360
+By sss_anti_congruence_v1 on C, F, I, F, C, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v0 on D, C, H, C, D, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on G, D, H, D, G, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on H, D, C, H, C, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By internal_angle_bisector_definition_v0_r on K, C, K, J we get Line(C, J) == internal_angle_bisector(K, J, K)
+By internal_angle_bisector_definition_v0_r on K, F, K, J we get Line(F, J) == internal_angle_bisector(K, J, K)
+By sss_anti_congruence_v0 on H, G, D, H, D, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sas_anti_congruence on A, I, F, F, I, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on F, A, I, A, F, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on I, C, F, I, F, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on E, C, H, C, E, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on A, I, F, F, I, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By internal_angle_bisector_definition_v0 on C, G, C, J we get angle(C, J, G) == angle(G, J, C) mod 360
+By sss_anti_congruence_v1 on D, H, C, C, H, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v1 on F, A, I, A, F, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v1 on I, C, F, I, F, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on E, C, H, C, E, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on H, D, G, H, G, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on D, C, H, C, D, H we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on C, I, F, F, I, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v0 on H, G, D, H, D, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v1 on E, H, G, G, H, E we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v1 on D, G, H, G, D, H we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on F, I, A, A, I, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By collinear_definition on K, J, G we get J in Line(G, K), G in Line(J, K), Line(G, K) == Line(J, K), 0 == 2 * angle(J, K, G) mod 360
+By collinear_definition on J, G, F we get G in Line(F, J), F in Line(G, J), Line(F, J) == Line(G, J), 0 == 2 * angle(G, J, F) mod 360
+By sss_anti_congruence_v0 on E, H, C, C, H, E we get anti_congruent_triangles(C, E, H, E, C, H)
+By isosceles_triangle_properties on H, G, E we get distance(E, H) == distance(G, H), angle(G, E, H) == angle(H, G, E) mod 360
+By sas_anti_congruence on C, H, D, D, H, C we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on F, C, I, C, F, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By isosceles_triangle_properties on H, C, E we get distance(C, H) == distance(E, H), angle(C, E, H) == angle(H, C, E) mod 360
+By sas_anti_congruence on D, H, C, C, H, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on F, C, I, C, F, I we get anti_congruent_triangles(C, F, I, F, C, I)
+By sss_anti_congruence_v1 on H, D, G, H, G, D we get anti_congruent_triangles(D, G, H, G, D, H)
+By collinear_definition on K, G, J we get G in Line(J, K), J in Line(G, K), Line(G, K) == Line(J, K), 0 == 2 * angle(G, K, J) mod 360
+By sss_anti_congruence_v1 on I, C, F, I, F, C we get anti_congruent_triangles(C, F, I, F, C, I)
+By internal_angle_bisector_definition_v0 on B, G, A, F we get angle(B, F, G) == angle(G, F, A) mod 360
+By collinear_definition on G, F, C we get F in Line(C, G), C in Line(F, G), Line(C, G) == Line(F, G), 0 == 2 * angle(F, G, C) mod 360
+By sss_anti_congruence_v1 on G, E, H, E, G, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By reverse_direction on H, E we get 180 == direction(H, E) - direction(E, H) mod 360
+By sss_anti_congruence_v0 on H, G, D, H, D, G we get anti_congruent_triangles(D, G, H, G, D, H)
+By sss_anti_congruence_v0 on C, E, H, E, C, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By sas_anti_congruence on F, I, A, A, I, F we get anti_congruent_triangles(A, F, I, F, A, I)
+By internal_angle_bisector_definition_v0 on J, G, J, F we get angle(G, F, J) == angle(J, F, G) mod 360
+By internal_angle_bisector_definition_v0 on F, G, F, J we get angle(F, J, G) == angle(G, J, F) mod 360
+By sss_anti_congruence_v0 on A, F, I, F, A, I we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on I, A, F, I, F, A we get anti_congruent_triangles(A, F, I, F, A, I)
+By sss_anti_congruence_v0 on E, G, H, G, E, H we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v0 on C, E, H, E, C, H we get anti_congruent_triangles(C, E, H, E, C, H)
+By sss_anti_congruence_v1 on D, H, C, C, H, D we get anti_congruent_triangles(C, D, H, D, C, H)
+By sss_anti_congruence_v0 on G, H, E, E, H, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By sss_anti_congruence_v0 on G, H, E, E, H, G we get anti_congruent_triangles(E, G, H, G, E, H)
+By log_of_2_times_distance on G, C, D, H we get log(distance(C, G)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(D, H))
+By collinear_definition on G, J, F we get J in Line(F, G), F in Line(G, J), Line(F, G) == Line(G, J), 0 == 2 * angle(J, G, F) mod 360
+By altitude_definition on orthocenter(B, C, G), C, D, i we get i == altitude(orthocenter(B, C, G), C, D)
+By altitude_definition on orthocenter(B, C, G), C, K, f we get f == altitude(orthocenter(B, C, G), C, K)
+By concyclic_definition_1 on B, D, A, E we get Circle(A, B, D) == Circle(A, D, E)
+By concyclic_definition_1 on C, B, E, F we get Circle(B, C, E) == Circle(B, E, F)
+By concyclic_definition_1 on B, E, A, D we get Circle(A, B, E) == Circle(A, D, E)
+By altitude_definition on orthocenter(B, C, G), B, E, h we get h == altitude(orthocenter(B, C, G), B, E)
+By altitude_definition on A, F, G, f we get f == altitude(A, F, G)
+By altitude_definition on orthocenter(B, C, G), F, C, f we get f == altitude(orthocenter(B, C, G), C, F)
+By anti_similar_triangle_basic_properties on E, A, B, F, A, C we get angle(E, A, B) == 0 - angle(F, A, C) mod 360, angle(A, B, E) == 0 - angle(A, C, F) mod 360, angle(B, E, A) == 0 - angle(C, F, A) mod 360, log(distance(A, E)) + log(distance(A, C)) == log(distance(A, F)) + log(distance(A, B)), log(distance(A, B)) + log(distance(C, F)) == log(distance(A, C)) + log(distance(B, E)), log(distance(B, E)) + log(distance(A, F)) == log(distance(C, F)) + log(distance(A, E))
+By concyclic_definition_1 on E, B, C, F we get Circle(B, C, E) == Circle(B, C, F)
+By altitude_definition on orthocenter(B, C, G), G, F, f we get f == altitude(orthocenter(B, C, G), F, G)
+By anti_similar_triangle_basic_properties on I, D, C, I, C, D we get angle(I, D, C) == 0 - angle(I, C, D) mod 360, angle(D, C, I) == 0 - angle(C, D, I) mod 360, angle(C, I, D) == 0 - angle(D, I, C) mod 360, log(distance(C, I)) + log(distance(C, D)) == log(distance(D, I)) + log(distance(C, D)), log(distance(C, D)) + log(distance(C, I)) == log(distance(C, D)) + log(distance(D, I)), log(distance(C, I)) + log(distance(C, I)) == log(distance(D, I)) + log(distance(D, I))
+By altitude_definition on orthocenter(A, B, G), A, B, k we get k == altitude(orthocenter(A, B, G), A, B)
+By altitude_definition on orthocenter(B, C, G), G, J, f we get f == altitude(orthocenter(B, C, G), G, J)
+By altitude_definition on orthocenter(A, B, G), B, G, h we get h == altitude(orthocenter(A, B, G), B, G)
+By altitude_definition on orthocenter(B, C, G), G, K, f we get f == altitude(orthocenter(B, C, G), G, K)
+By altitude_definition on H, F, A, k we get k == altitude(H, A, F)
+By altitude_definition on orthocenter(A, C, G), G, F, f we get f == altitude(orthocenter(A, C, G), F, G)
+By altitude_definition on orthocenter(B, C, G), K, F, f we get f == altitude(orthocenter(B, C, G), F, K)
+By concyclic_definition_1 on C, F, D, A we get Circle(A, D, F) == Circle(C, D, F)
+By anti_similar_triangle_basic_properties on A, E, G, A, D, C we get angle(A, E, G) == 0 - angle(A, D, C) mod 360, angle(E, G, A) == 0 - angle(D, C, A) mod 360, angle(G, A, E) == 0 - angle(C, A, D) mod 360, log(distance(A, D)) + log(distance(E, G)) == log(distance(A, E)) + log(distance(C, D)), log(distance(C, D)) + log(distance(A, G)) == log(distance(E, G)) + log(distance(A, C)), log(distance(A, C)) + log(distance(A, E)) == log(distance(A, G)) + log(distance(A, D))
+By altitude_definition on orthocenter(B, C, G), G, H, f we get f == altitude(orthocenter(B, C, G), G, H)
+By altitude_definition on B, G, H, f we get f == altitude(B, G, H)
+By concyclic_definition_1 on A, B, D, E we get Circle(A, B, D) == Circle(B, D, E)
+By concyclic_definition_1 on A, D, E, B we get Circle(A, D, E) == Circle(B, D, E)
+By altitude_definition on B, K, G, f we get f == altitude(B, G, K)
+By altitude_definition on orthocenter(A, C, G), E, C, j we get j == altitude(orthocenter(A, C, G), C, E)
+By altitude_definition on orthocenter(B, C, G), C, J, f we get f == altitude(orthocenter(B, C, G), C, J)
+By altitude_definition on orthocenter(B, C, G), E, G, h we get h == altitude(orthocenter(B, C, G), E, G)
+By altitude_definition on orthocenter(A, C, G), J, G, f we get f == altitude(orthocenter(A, C, G), G, J)
+By collinear_definition on G, F, K we get F in Line(G, K), K in Line(F, G), Line(F, G) == Line(G, K), 0 == 2 * angle(F, G, K) mod 360
+By concyclic_definition_1 on F, E, C, B we get Circle(B, C, E) == Circle(C, E, F)
+By collinear_definition on G, K, F we get K in Line(F, G), F in Line(G, K), Line(F, G) == Line(G, K), 0 == 2 * angle(K, G, F) mod 360
+By altitude_definition on orthocenter(A, C, G), K, C, f we get f == altitude(orthocenter(A, C, G), C, K)
+By anti_similar_triangle_basic_properties on D, A, C, E, A, G we get angle(D, A, C) == 0 - angle(E, A, G) mod 360, angle(A, C, D) == 0 - angle(A, G, E) mod 360, angle(C, D, A) == 0 - angle(G, E, A) mod 360, log(distance(A, D)) + log(distance(A, G)) == log(distance(A, E)) + log(distance(A, C)), log(distance(A, C)) + log(distance(E, G)) == log(distance(A, G)) + log(distance(C, D)), log(distance(C, D)) + log(distance(A, E)) == log(distance(E, G)) + log(distance(A, D))
+By altitude_definition on orthocenter(B, C, G), B, G, h we get h == altitude(orthocenter(B, C, G), B, G)
+By altitude_definition on orthocenter(B, C, G), H, C, f we get f == altitude(orthocenter(B, C, G), C, H)
+By altitude_definition on A, G, K, f we get f == altitude(A, G, K)
+By altitude_definition on orthocenter(A, C, G), J, C, f we get f == altitude(orthocenter(A, C, G), C, J)
+By altitude_definition on orthocenter(A, C, G), H, C, f we get f == altitude(orthocenter(A, C, G), C, H)
+By concyclic_definition_1 on E, F, C, B we get Circle(B, C, F) == Circle(C, E, F)
+By altitude_definition on orthocenter(A, C, G), G, C, f we get f == altitude(orthocenter(A, C, G), C, G)
+By altitude_definition on orthocenter(B, C, G), G, C, f we get f == altitude(orthocenter(B, C, G), C, G)
+By anti_similar_triangle_basic_properties on B, A, E, C, A, F we get angle(B, A, E) == 0 - angle(C, A, F) mod 360, angle(A, E, B) == 0 - angle(A, F, C) mod 360, angle(E, B, A) == 0 - angle(F, C, A) mod 360, log(distance(A, B)) + log(distance(A, F)) == log(distance(A, C)) + log(distance(A, E)), log(distance(A, E)) + log(distance(C, F)) == log(distance(A, F)) + log(distance(B, E)), log(distance(B, E)) + log(distance(A, C)) == log(distance(C, F)) + log(distance(A, B))
+By altitude_definition on B, F, G, f we get f == altitude(B, F, G)
+By altitude_definition on orthocenter(A, C, G), K, G, f we get f == altitude(orthocenter(A, C, G), G, K)
+By altitude_definition on orthocenter(A, C, G), G, H, f we get f == altitude(orthocenter(A, C, G), G, H)
+By altitude_definition on A, G, J, f we get f == altitude(A, G, J)
+By concyclic_definition_1 on C, E, F, B we get Circle(B, E, F) == Circle(C, E, F)
+By altitude_definition on orthocenter(A, C, G), J, K, f we get f == altitude(orthocenter(A, C, G), J, K)
+By altitude_definition on orthocenter(A, B, G), A, F, k we get k == altitude(orthocenter(A, B, G), A, F)
+By concyclic_definition_1 on G, D, E, C we get Circle(C, D, E) == Circle(D, E, G)
+By altitude_definition on orthocenter(B, C, G), J, K, f we get f == altitude(orthocenter(B, C, G), J, K)
+By collinear_definition on G, F, J we get F in Line(G, J), J in Line(F, G), Line(F, G) == Line(G, J), 0 == 2 * angle(F, G, J) mod 360
+By altitude_definition on orthocenter(A, C, G), G, D, g we get g == altitude(orthocenter(A, C, G), D, G)
+By concyclic_definition_1 on C, B, F, E we get Circle(B, C, F) == Circle(B, E, F)
+By altitude_definition on orthocenter(A, C, G), C, A, j we get j == altitude(orthocenter(A, C, G), A, C)
+By concyclic_definition_1 on E, A, B, D we get Circle(A, B, D) == Circle(A, B, E)
+By altitude_definition on orthocenter(A, B, G), G, E, h we get h == altitude(orthocenter(A, B, G), E, G)
+By altitude_definition on orthocenter(A, C, G), A, D, g we get g == altitude(orthocenter(A, C, G), A, D)
+By altitude_definition on orthocenter(B, C, G), B, C, i we get i == altitude(orthocenter(B, C, G), B, C)
+By altitude_definition on A, H, G, f we get f == altitude(A, G, H)
+By concyclic_definition_1 on D, E, B, A we get Circle(A, B, E) == Circle(B, D, E)
+By altitude_definition on orthocenter(A, B, G), B, E, h we get h == altitude(orthocenter(A, B, G), B, E)
+By altitude_definition on B, G, J, f we get f == altitude(B, G, J)
+By altitude_definition on orthocenter(A, C, G), E, A, j we get j == altitude(orthocenter(A, C, G), A, E)
+By altitude_definition on orthocenter(A, B, G), D, G, g we get g == altitude(orthocenter(A, B, G), D, G)
+By altitude_definition on orthocenter(A, C, G), I, A, j we get j == altitude(orthocenter(A, C, G), A, I)
+By altitude_definition on A, C, H, f we get f == altitude(A, C, H)
+By altitude_definition on orthocenter(A, B, G), A, D, g we get g == altitude(orthocenter(A, B, G), A, D)
+By collinear_definition on G, J, K we get J in Line(G, K), K in Line(G, J), Line(G, J) == Line(G, K), 0 == 2 * angle(J, G, K) mod 360
+By altitude_definition on H, B, A, k we get k == altitude(H, A, B)
+By altitude_definition on orthocenter(A, C, G), I, E, j we get j == altitude(orthocenter(A, C, G), E, I)
+By altitude_definition on B, C, H, f we get f == altitude(B, C, H)
+By altitude_definition on orthocenter(B, C, G), D, B, i we get i == altitude(orthocenter(B, C, G), B, D)
+By altitude_definition on orthocenter(A, C, G), F, J, f we get f == altitude(orthocenter(A, C, G), F, J)
+By altitude_definition on orthocenter(B, C, G), F, J, f we get f == altitude(orthocenter(B, C, G), F, J)
+By radical_axis_definition_v0 on orthocenter(A, B, G), Circle(A, C, D), Circle(C, D, G) we get power_of_a_point(orthocenter(A, B, G), Circle(A, C, D)) == power_of_a_point(orthocenter(A, B, G), Circle(C, D, G))
+By altitude_definition on orthocenter(A, C, G), F, K, f we get f == altitude(orthocenter(A, C, G), F, K)
+By altitude_definition on orthocenter(A, B, G), B, F, k we get k == altitude(orthocenter(A, B, G), B, F)
+By altitude_definition on H, B, F, k we get k == altitude(H, B, F)
+By altitude_definition on orthocenter(A, C, G), C, I, j we get j == altitude(orthocenter(A, C, G), C, I)
+By radical_axis_definition_v0 on orthocenter(A, C, G), Circle(A, C, D), Circle(C, D, G) we get power_of_a_point(orthocenter(A, C, G), Circle(A, C, D)) == power_of_a_point(orthocenter(A, C, G), Circle(C, D, G))
+By altitude_definition on orthocenter(A, C, G), G, A, g we get g == altitude(orthocenter(A, C, G), A, G)
+By altitude_definition on orthocenter(A, C, G), C, F, f we get f == altitude(orthocenter(A, C, G), C, F)
+By collinear_definition on G, K, J we get K in Line(G, J), J in Line(G, K), Line(G, J) == Line(G, K), 0 == 2 * angle(K, G, J) mod 360
+By altitude_definition on orthocenter(A, B, G), G, A, g we get g == altitude(orthocenter(A, B, G), A, G)
+By power_of_a_point_definition on J, C, G, Circle(C, E, G) we get log(distance(C, J)) + log(distance(G, J)) == log(power_of_a_point(J, Circle(C, E, G)))
+By power_of_a_point_definition on K, G, C, Circle(C, E, G) we get log(distance(G, K)) + log(distance(C, K)) == log(power_of_a_point(K, Circle(C, E, G)))
+By power_of_a_point_definition on J, C, G, Circle(C, D, G) we get log(distance(C, J)) + log(distance(G, J)) == log(power_of_a_point(J, Circle(C, D, G)))
+By perpendicular_bisector_sufficient_conditions on D, C, H, I we get Line(H, I) == perpendicular_bisector(C, D)
+By power_of_a_point_definition on G, F, C, Circle(A, C, F) we get log(distance(F, G)) + log(distance(C, G)) == log(power_of_a_point(G, Circle(A, C, F)))
+By isosceles_triangle_properties on I, D, F we get distance(D, I) == distance(F, I), angle(D, F, I) == angle(I, D, F) mod 360
+By isosceles_triangle_properties on I, F, D we get distance(D, I) == distance(F, I), angle(F, D, I) == angle(I, F, D) mod 360
+By power_of_a_point_definition on K, C, G, Circle(C, D, G) we get log(distance(C, K)) + log(distance(G, K)) == log(power_of_a_point(K, Circle(C, D, G)))
+By isosceles_triangle_properties on H, D, E we get distance(D, H) == distance(E, H), angle(D, E, H) == angle(H, D, E) mod 360
+By isosceles_triangle_properties on H, E, D we get distance(D, H) == distance(E, H), angle(E, D, H) == angle(H, E, D) mod 360
+By power_of_a_point_definition on F, C, G, Circle(C, D, G) we get log(distance(C, F)) + log(distance(F, G)) == log(power_of_a_point(F, Circle(C, D, G)))
+By power_of_a_point_definition on F, C, G, Circle(C, E, G) we get log(distance(C, F)) + log(distance(F, G)) == log(power_of_a_point(F, Circle(C, E, G)))
+By concurrent_sufficient_conditions on h, Line(F, I), Line(H, I) we get concurrent(h, Line(F, I), Line(H, I))
+By concyclic_sufficient_conditions_v1 on F, A, E, G we get concyclic(A, E, F, G)
+By concurrent_sufficient_conditions on Line(F, I), h, Line(H, I) we get concurrent(h, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on Line(H, I), Line(E, H), Line(D, H) we get concurrent(Line(D, H), Line(E, H), Line(H, I))
+By concyclic_sufficient_conditions_v1 on F, B, D, G we get concyclic(B, D, F, G)
+By concurrent_sufficient_conditions on i, Line(D, H), l we get concurrent(i, l, Line(D, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(D, H), Line(E, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(F, I), h, Line(I, J) we get concurrent(h, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(H, I), Line(F, I), Line(I, J) we get concurrent(Line(F, I), Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(A, H), Line(E, H), Line(D, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(H, I), Line(F, I), l we get concurrent(l, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on k, Line(F, I), f we get concurrent(f, k, Line(F, I))
+By line_definition on I, midpoint(C, D), Line(H, I) we get Line(H, I) == Line(I, midpoint(C, D))
+By concurrent_sufficient_conditions on Line(E, H), j, h we get concurrent(h, j, Line(E, H))
+By concurrent_sufficient_conditions on k, Line(E, H), Line(A, H) we get concurrent(k, Line(A, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(H, I), Line(E, H) we get concurrent(Line(A, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(A, H), Line(D, H), Line(H, I) we get concurrent(Line(A, H), Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(E, H), Line(A, H), k we get concurrent(k, Line(A, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(H, I), Line(E, H), k we get concurrent(k, Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(H, I), Line(D, H), Line(A, H) we get concurrent(Line(A, H), Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(A, H), Line(H, I), Line(D, H) we get concurrent(Line(A, H), Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(F, I), Line(H, I), l we get concurrent(l, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on Line(I, J), Line(F, I), l we get concurrent(l, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on l, Line(F, I), h we get concurrent(h, l, Line(F, I))
+By concurrent_sufficient_conditions on Line(D, H), Line(E, H), k we get concurrent(k, Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on h, Line(E, H), j we get concurrent(h, j, Line(E, H))
+By concurrent_sufficient_conditions on i, Line(D, H), g we get concurrent(g, i, Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), i, g we get concurrent(g, i, Line(D, H))
+By concurrent_sufficient_conditions on Line(F, I), k, f we get concurrent(f, k, Line(F, I))
+By concurrent_sufficient_conditions on Line(H, I), Line(E, H), Line(A, H) we get concurrent(Line(A, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(F, I), Line(I, J), l we get concurrent(l, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on l, g, Line(D, H) we get concurrent(g, l, Line(D, H))
+By concurrent_sufficient_conditions on Line(H, I), Line(D, H), Line(E, H) we get concurrent(Line(D, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on g, Line(D, H), i we get concurrent(g, i, Line(D, H))
+By concyclic_sufficient_conditions_v0 on I, E, H, D we get concyclic(D, E, H, I)
+By concurrent_sufficient_conditions on f, Line(F, I), k we get concurrent(f, k, Line(F, I))
+By concurrent_sufficient_conditions on Line(D, H), Line(H, I), Line(E, H) we get concurrent(Line(D, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(D, H), Line(H, I), k we get concurrent(k, Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(A, H), k, Line(D, H) we get concurrent(k, Line(A, H), Line(D, H))
+By concurrent_sufficient_conditions on Line(F, I), l, Line(H, I) we get concurrent(l, Line(F, I), Line(H, I))
+By line_definition on H, midpoint(C, D), Line(H, I) we get Line(H, I) == Line(H, midpoint(C, D))
+By concurrent_sufficient_conditions on l, Line(F, I), Line(H, I) we get concurrent(l, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on Line(H, I), Line(A, H), Line(E, H) we get concurrent(Line(A, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(I, J), Line(F, I), Line(H, I) we get concurrent(Line(F, I), Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(I, J), Line(H, I), Line(F, I) we get concurrent(Line(F, I), Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(E, H), Line(D, H), k we get concurrent(k, Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on l, h, Line(F, I) we get concurrent(h, l, Line(F, I))
+By concurrent_sufficient_conditions on h, Line(H, I), Line(F, I) we get concurrent(h, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on Line(A, H), Line(D, H), k we get concurrent(k, Line(A, H), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(E, H), Line(H, I) we get concurrent(Line(A, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on h, j, Line(E, H) we get concurrent(h, j, Line(E, H))
+By concurrent_sufficient_conditions on Line(I, J), h, Line(F, I) we get concurrent(h, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(D, H), k, Line(A, H) we get concurrent(k, Line(A, H), Line(D, H))
+By concurrent_sufficient_conditions on Line(F, I), l, h we get concurrent(h, l, Line(F, I))
+By concurrent_sufficient_conditions on Line(D, H), l, i we get concurrent(i, l, Line(D, H))
+By concurrent_sufficient_conditions on k, Line(A, H), Line(E, H) we get concurrent(k, Line(A, H), Line(E, H))
+By concurrent_sufficient_conditions on l, Line(D, H), i we get concurrent(i, l, Line(D, H))
+By concurrent_sufficient_conditions on l, Line(H, I), Line(F, I) we get concurrent(l, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on k, Line(D, H), Line(H, I) we get concurrent(k, Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(F, I), Line(H, I), h we get concurrent(h, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on g, l, Line(D, H) we get concurrent(g, l, Line(D, H))
+By concurrent_sufficient_conditions on Line(E, H), k, Line(H, I) we get concurrent(k, Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(A, H), k, Line(E, H) we get concurrent(k, Line(A, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(F, I), l, Line(I, J) we get concurrent(l, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(E, H), k, Line(A, H) we get concurrent(k, Line(A, H), Line(E, H))
+By concurrent_sufficient_conditions on g, i, Line(D, H) we get concurrent(g, i, Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), g, i we get concurrent(g, i, Line(D, H))
+By concurrent_sufficient_conditions on Line(F, I), Line(H, I), Line(I, J) we get concurrent(Line(F, I), Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(D, H), i, l we get concurrent(i, l, Line(D, H))
+By concurrent_sufficient_conditions on Line(E, H), k, Line(D, H) we get concurrent(k, Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(A, H), k we get concurrent(k, Line(A, H), Line(D, H))
+By concurrent_sufficient_conditions on k, Line(D, H), Line(A, H) we get concurrent(k, Line(A, H), Line(D, H))
+By concurrent_sufficient_conditions on k, Line(A, H), Line(D, H) we get concurrent(k, Line(A, H), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(H, I), Line(A, H) we get concurrent(Line(A, H), Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(D, H), k, Line(E, H) we get concurrent(k, Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(F, I), h, l we get concurrent(h, l, Line(F, I))
+By concurrent_sufficient_conditions on i, g, Line(D, H) we get concurrent(g, i, Line(D, H))
+By concurrent_sufficient_conditions on Line(F, I), Line(I, J), Line(H, I) we get concurrent(Line(F, I), Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(F, I), f, k we get concurrent(f, k, Line(F, I))
+By concurrent_sufficient_conditions on Line(H, I), l, Line(F, I) we get concurrent(l, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on Line(E, H), Line(D, H), Line(A, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on h, Line(I, J), Line(F, I) we get concurrent(h, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(E, H), Line(H, I), Line(D, H) we get concurrent(Line(D, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on f, k, Line(F, I) we get concurrent(f, k, Line(F, I))
+By concurrent_sufficient_conditions on Line(H, I), Line(A, H), Line(D, H) we get concurrent(Line(A, H), Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on k, Line(D, H), Line(E, H) we get concurrent(k, Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(H, I), h, Line(F, I) we get concurrent(h, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on Line(D, H), Line(E, H), Line(A, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(A, H), Line(E, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(H, I), Line(F, I), h we get concurrent(h, Line(F, I), Line(H, I))
+By concurrent_sufficient_conditions on i, l, Line(D, H) we get concurrent(i, l, Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(E, H), Line(H, I) we get concurrent(Line(D, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(H, I), Line(I, J), Line(F, I) we get concurrent(Line(F, I), Line(H, I), Line(I, J))
+By concurrent_sufficient_conditions on h, Line(F, I), Line(I, J) we get concurrent(h, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(E, H), Line(H, I), Line(A, H) we get concurrent(Line(A, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on g, Line(D, H), l we get concurrent(g, l, Line(D, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(A, H), Line(D, H) we get concurrent(Line(A, H), Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on l, Line(I, J), Line(F, I) we get concurrent(l, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(H, I), k, Line(D, H) we get concurrent(k, Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on k, Line(E, H), Line(H, I) we get concurrent(k, Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on k, f, Line(F, I) we get concurrent(f, k, Line(F, I))
+By concurrent_sufficient_conditions on j, h, Line(E, H) we get concurrent(h, j, Line(E, H))
+By concurrent_sufficient_conditions on Line(E, H), h, j we get concurrent(h, j, Line(E, H))
+By concurrent_sufficient_conditions on l, i, Line(D, H) we get concurrent(i, l, Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), k, Line(H, I) we get concurrent(k, Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on l, Line(D, H), g we get concurrent(g, l, Line(D, H))
+By concurrent_sufficient_conditions on j, Line(E, H), h we get concurrent(h, j, Line(E, H))
+By concurrent_sufficient_conditions on Line(E, H), Line(D, H), Line(H, I) we get concurrent(Line(D, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(E, H), Line(H, I), k we get concurrent(k, Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(D, H), l, g we get concurrent(g, l, Line(D, H))
+By concurrent_sufficient_conditions on l, Line(F, I), Line(I, J) we get concurrent(l, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(E, H), Line(A, H), Line(H, I) we get concurrent(Line(A, H), Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(H, I), k, Line(E, H) we get concurrent(k, Line(E, H), Line(H, I))
+By concurrent_sufficient_conditions on h, l, Line(F, I) we get concurrent(h, l, Line(F, I))
+By concurrent_sufficient_conditions on Line(I, J), l, Line(F, I) we get concurrent(l, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on h, Line(F, I), l we get concurrent(h, l, Line(F, I))
+By concurrent_sufficient_conditions on Line(D, H), Line(A, H), Line(H, I) we get concurrent(Line(A, H), Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(I, J), Line(F, I), h we get concurrent(h, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on Line(D, H), g, l we get concurrent(g, l, Line(D, H))
+By concurrent_sufficient_conditions on Line(A, H), Line(E, H), k we get concurrent(k, Line(A, H), Line(E, H))
+By concurrent_sufficient_conditions on k, Line(E, H), Line(D, H) we get concurrent(k, Line(D, H), Line(E, H))
+By concurrent_sufficient_conditions on Line(H, I), Line(D, H), k we get concurrent(k, Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on k, Line(H, I), Line(D, H) we get concurrent(k, Line(D, H), Line(H, I))
+By concurrent_sufficient_conditions on Line(F, I), Line(I, J), h we get concurrent(h, Line(F, I), Line(I, J))
+By concurrent_sufficient_conditions on k, Line(H, I), Line(E, H) we get concurrent(k, Line(E, H), Line(H, I))
+By angles_on_chord_v1 on E, A, D, B, Circle(A, B, D) we get angle(E, B, A) == angle(E, D, A) mod 360
+By angles_on_chord_v3 on E, B, D, A, Circle(A, B, D) we get angle(E, D, B) == angle(E, A, B) + 180 mod 360
+By angles_on_chord_v2 on D, A, C, F, Circle(A, C, D) we get angle(D, C, A) == angle(D, F, A) + 180 mod 360
+By angles_on_chord_v0 on F, A, C, D, Circle(A, C, D) we get angle(F, C, A) == angle(F, D, A) mod 360
+By angles_on_chord_v1 on D, C, F, A, Circle(A, C, D) we get angle(D, A, C) == angle(D, F, C) mod 360
+By angles_on_chord_v3 on B, E, A, D, Circle(A, B, D) we get angle(B, A, E) == angle(B, D, E) + 180 mod 360
+By angles_on_chord_v2 on A, D, F, C, Circle(A, C, D) we get angle(A, F, D) == angle(A, C, D) + 180 mod 360
+By angles_on_chord_v1 on B, D, E, A, Circle(A, B, D) we get angle(B, A, D) == angle(B, E, D) mod 360
+By angles_on_chord_v3 on A, D, C, F, Circle(A, C, D) we get angle(A, C, D) == angle(A, F, D) + 180 mod 360
+By angles_on_chord_v3 on F, C, A, D, Circle(A, C, D) we get angle(F, A, C) == angle(F, D, C) + 180 mod 360
+By angles_on_chord_v2 on A, D, B, E, Circle(A, B, D) we get angle(A, B, D) == angle(A, E, D) + 180 mod 360
+By angles_on_chord_v3 on C, F, D, A, Circle(A, C, D) we get angle(C, D, F) == angle(C, A, F) + 180 mod 360
+By angles_on_chord_v2 on C, F, A, D, Circle(A, C, D) we get angle(C, A, F) == angle(C, D, F) + 180 mod 360
+By angles_on_chord_v0 on C, D, G, E, Circle(C, D, E) we get angle(C, E, D) == angle(C, G, D) mod 360
+By angles_on_chord_v0 on C, D, A, F, Circle(A, C, D) we get angle(C, A, D) == angle(C, F, D) mod 360
+By angles_on_chord_v1 on G, D, E, C, Circle(C, D, E) we get angle(G, C, D) == angle(G, E, D) mod 360
+By angles_on_chord_v1 on E, G, D, C, Circle(C, D, E) we get angle(E, C, G) == angle(E, D, G) mod 360
+By angles_on_chord_v0 on E, C, G, D, Circle(C, D, E) we get angle(E, D, C) == angle(E, G, C) mod 360
+By angles_on_chord_v0 on D, B, A, E, Circle(A, B, D) we get angle(D, A, B) == angle(D, E, B) mod 360
+By angles_on_chord_v1 on A, F, D, C, Circle(A, C, D) we get angle(A, C, F) == angle(A, D, F) mod 360
+By angles_on_chord_v1 on D, C, G, E, Circle(C, D, E) we get angle(D, E, C) == angle(D, G, C) mod 360
+By angles_on_chord_v3 on D, A, B, E, Circle(A, B, D) we get angle(D, B, A) == angle(D, E, A) + 180 mod 360
+By angles_on_chord_v0 on A, E, B, D, Circle(A, B, D) we get angle(A, B, E) == angle(A, D, E) mod 360
+By angles_on_chord_v0 on D, G, E, C, Circle(C, D, E) we get angle(D, C, G) == angle(D, E, G) mod 360
+By angles_on_chord_v2 on D, A, E, B, Circle(A, B, D) we get angle(D, E, A) == angle(D, B, A) + 180 mod 360
+By angles_on_chord_v3 on A, D, E, B, Circle(A, B, D) we get angle(A, E, D) == angle(A, B, D) + 180 mod 360
+By angles_on_chord_v2 on B, E, D, A, Circle(A, B, D) we get angle(B, D, E) == angle(B, A, E) + 180 mod 360
+By angles_on_chord_v1 on C, E, G, D, Circle(C, D, E) we get angle(C, D, E) == angle(C, G, E) mod 360
+By angles_on_chord_v0 on G, E, D, C, Circle(C, D, E) we get angle(G, C, E) == angle(G, D, E) mod 360
+By angles_on_chord_v2 on E, B, A, D, Circle(A, B, D) we get angle(E, A, B) == angle(E, D, B) + 180 mod 360
+By angles_on_chord_v3 on D, A, F, C, Circle(A, C, D) we get angle(D, F, A) == angle(D, C, A) + 180 mod 360
+By angles_on_chord_v2 on F, C, D, A, Circle(A, C, D) we get angle(F, D, C) == angle(F, A, C) + 180 mod 360
+By median_definition on H, D, C, Line(H, I) we get Line(H, I) == median(H, C, D)
+By line_intersection_definition on E, Line(D, E), h we get E == line_intersection(h, Line(D, E))
+By median_definition on midpoint(C, D), C, A, Line(H, I) we get Line(H, I) == median(midpoint(C, D), A, C)
+By line_intersection_definition on A, h, radical_axis(c, Circle(A, C, D)) we get A == line_intersection(h, radical_axis(c, Circle(A, C, D)))
+By line_intersection_definition on A, f, radical_axis(c, Circle(A, C, D)) we get A == line_intersection(f, radical_axis(c, Circle(A, C, D)))
+By radical_axis_of_intersecting_circles_v0 on D, E, Circle(A, B, D), Circle(C, D, E) we get Line(D, E) == radical_axis(Circle(A, B, D), Circle(C, D, E))
+By radical_axis_of_intersecting_circles_v0 on E, B, Circle(B, C, E), Circle(A, B, D) we get Line(B, E) == radical_axis(Circle(A, B, D), Circle(B, C, E))
+By perpendicular_line_definition on H, Line(H, I), g we get Line(H, I) == perpendicular_line(H, g)
+By line_intersection_definition on D, Line(D, F), g we get D == line_intersection(g, Line(D, F))
+By line_intersection_definition on A, radical_axis(c, Circle(A, C, D)), Line(A, H) we get A == line_intersection(Line(A, H), radical_axis(c, Circle(A, C, D)))
+By line_intersection_definition on D, Line(D, F), l we get D == line_intersection(l, Line(D, F))
+By perpendicular_line_definition on C, g, Line(H, I) we get g == perpendicular_line(C, Line(H, I))
+By line_intersection_definition on A, i, radical_axis(c, Circle(A, C, D)) we get A == line_intersection(i, radical_axis(c, Circle(A, C, D)))
+By median_definition on I, D, C, Line(H, I) we get Line(H, I) == median(I, C, D)
+By line_intersection_definition on E, Line(E, H), Line(D, E) we get E == line_intersection(Line(D, E), Line(E, H))
+By radical_axis_of_intersecting_circles_v0 on C, E, Circle(C, D, E), Circle(B, C, E) we get Line(C, E) == radical_axis(Circle(B, C, E), Circle(C, D, E))
+By perpendicular_line_definition on I, Line(H, I), g we get Line(H, I) == perpendicular_line(I, g)
+By median_definition on midpoint(C, D), C, G, Line(H, I) we get Line(H, I) == median(midpoint(C, D), C, G)
+By radical_axis_of_intersecting_circles_v0 on F, C, Circle(A, C, D), Circle(B, C, E) we get Line(C, F) == radical_axis(Circle(A, C, D), Circle(B, C, E))
+By line_intersection_definition on F, Line(D, F), Line(F, I) we get F == line_intersection(Line(D, F), Line(F, I))
+By line_intersection_definition on F, Line(D, F), f we get F == line_intersection(f, Line(D, F))
+By line_intersection_definition on A, radical_axis(c, Circle(A, C, D)), Line(A, J) we get A == line_intersection(Line(A, J), radical_axis(c, Circle(A, C, D)))
+By line_intersection_definition on D, Line(D, E), g we get D == line_intersection(g, Line(D, E))
+By line_intersection_definition on E, j, Line(D, E) we get E == line_intersection(j, Line(D, E))
+By line_intersection_definition on D, Line(D, E), Line(D, F) we get D == line_intersection(Line(D, E), Line(D, F))
+By line_intersection_definition on F, Line(D, F), k we get F == line_intersection(k, Line(D, F))
+By radical_axis_of_intersecting_circles_v0 on A, D, Circle(A, C, D), Circle(A, B, D) we get Line(A, D) == radical_axis(Circle(A, B, D), Circle(A, C, D))
+By line_intersection_definition on D, Line(D, H), Line(D, E) we get D == line_intersection(Line(D, E), Line(D, H))
+By perpendicular_line_definition on B, g, Line(H, I) we get g == perpendicular_line(B, Line(H, I))
+By line_intersection_definition on D, Line(D, F), i we get D == line_intersection(i, Line(D, F))
+By line_intersection_definition on D, i, Line(D, E) we get D == line_intersection(i, Line(D, E))
+By line_intersection_definition on D, Line(D, F), Line(D, H) we get D == line_intersection(Line(D, F), Line(D, H))
+By perpendicular_line_definition on D, g, Line(H, I) we get g == perpendicular_line(D, Line(H, I))
+By line_intersection_definition on D, Line(D, E), l we get D == line_intersection(l, Line(D, E))
+By angles_on_chord_v3 on F, C, E, B, Circle(B, C, E) we get angle(F, E, C) == angle(F, B, C) + 180 mod 360
+By angles_on_chord_v0 on E, C, F, B, Circle(B, C, E) we get angle(E, B, C) == angle(E, F, C) mod 360
+By angles_on_chord_v2 on C, F, E, B, Circle(B, C, E) we get angle(C, E, F) == angle(C, B, F) + 180 mod 360
+By angles_on_chord_v2 on E, B, F, C, Circle(B, C, E) we get angle(E, F, B) == angle(E, C, B) + 180 mod 360
+By angles_on_chord_v0 on B, F, C, E, Circle(B, C, E) we get angle(B, C, F) == angle(B, E, F) mod 360
+By angles_on_chord_v1 on C, E, F, B, Circle(B, C, E) we get angle(C, B, E) == angle(C, F, E) mod 360
+By angles_on_chord_v3 on E, B, C, F, Circle(B, C, E) we get angle(E, C, B) == angle(E, F, B) + 180 mod 360
+By angles_on_chord_v1 on F, B, E, C, Circle(B, C, E) we get angle(F, C, B) == angle(F, E, B) mod 360
+By angles_on_chord_v2 on B, E, C, F, Circle(B, C, E) we get angle(B, C, E) == angle(B, F, E) + 180 mod 360
+By angles_on_chord_v3 on C, F, B, E, Circle(B, C, E) we get angle(C, B, F) == angle(C, E, F) + 180 mod 360
+By angles_on_chord_v2 on F, C, B, E, Circle(B, C, E) we get angle(F, B, C) == angle(F, E, C) + 180 mod 360
+By angles_on_chord_v3 on B, E, F, C, Circle(B, C, E) we get angle(B, F, E) == angle(B, C, E) + 180 mod 360
+By same_angle_v3 on D, B, C, E we get angle(B, D, E) == angle(C, D, E) + 180 mod 360
+By same_angle_v2 on F, K, J, D we get angle(K, F, D) == angle(J, F, D) + 180 mod 360
+By same_angle_v3 on H, J, C, E we get angle(J, H, E) == angle(C, H, E) + 180 mod 360
+By same_angle_v1 on D, G, A, F we get angle(A, D, F) == angle(G, D, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, H, J we get 180 == 2 * direction(B, F) - 2 * direction(H, J) mod 360
+By same_angle_v0 on F, K, C, D we get angle(C, F, D) == angle(K, F, D) mod 360
+By projection_definition on H, F, f we get F == projection(H, f)
+By same_angle_v1 on J, H, F, I we get angle(F, J, I) == angle(H, J, I) mod 360
+By same_angle_v1 on D, I, K, F we get angle(I, D, F) == angle(K, D, F) mod 360
+By same_angle_v0 on H, J, G, E we get angle(G, H, E) == angle(J, H, E) mod 360
+By same_angle_v3 on E, I, A, D we get angle(I, E, D) == angle(A, E, D) + 180 mod 360
+By same_angle_v2 on F, C, J, D we get angle(C, F, D) == angle(J, F, D) + 180 mod 360
+By same_angle_v1 on D, I, K, E we get angle(I, D, E) == angle(K, D, E) mod 360
+By same_angle_v2 on F, A, B, D we get angle(A, F, D) == angle(B, F, D) + 180 mod 360
+By same_angle_v0 on E, C, I, D we get angle(C, E, D) == angle(I, E, D) mod 360
+By same_angle_v1 on J, H, K, A we get angle(H, J, A) == angle(K, J, A) mod 360
+By same_angle_v3 on F, G, J, D we get angle(G, F, D) == angle(J, F, D) + 180 mod 360
+By same_angle_v1 on E, B, G, D we get angle(B, E, D) == angle(G, E, D) mod 360
+By same_angle_v0 on D, G, A, E we get angle(A, D, E) == angle(G, D, E) mod 360
+By same_angle_v0 on F, K, G, D we get angle(G, F, D) == angle(K, F, D) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, J, H we get 180 == 2 * direction(F, B) - 2 * direction(J, H) mod 360
+By same_angle_v0 on H, J, G, A we get angle(G, H, A) == angle(J, H, A) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, H, J we get 180 == 2 * direction(B, A) - 2 * direction(H, J) mod 360
+By same_angle_v1 on J, H, C, I we get angle(C, J, I) == angle(H, J, I) mod 360
+By perpendicular_direction_conditions_v0_r on J, H, F, B we get 180 == 2 * direction(J, H) - 2 * direction(F, B) mod 360
+By same_angle_v0 on F, G, C, D we get angle(C, F, D) == angle(G, F, D) mod 360
+By same_angle_v1 on J, C, H, A we get angle(C, J, A) == angle(H, J, A) mod 360
+By same_angle_v3 on H, C, J, D we get angle(C, H, D) == angle(J, H, D) + 180 mod 360
+By same_angle_v3 on D, B, C, F we get angle(B, D, F) == angle(C, D, F) + 180 mod 360
+By same_angle_v0 on H, J, G, I we get angle(G, H, I) == angle(J, H, I) mod 360
+By perpendicular_direction_conditions_v0_r on H, J, A, F we get 180 == 2 * direction(H, J) - 2 * direction(A, F) mod 360
+By same_angle_v1 on H, J, G, D we get angle(G, H, D) == angle(J, H, D) mod 360
+By same_angle_v1 on J, H, G, A we get angle(G, J, A) == angle(H, J, A) mod 360
+By same_angle_v3 on H, J, C, A we get angle(J, H, A) == angle(C, H, A) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on J, H, F, A we get 180 == 2 * direction(J, H) - 2 * direction(F, A) mod 360
+By same_angle_v3 on E, C, A, D we get angle(C, E, D) == angle(A, E, D) + 180 mod 360
+By same_angle_v2 on H, J, C, I we get angle(J, H, I) == angle(C, H, I) + 180 mod 360
+By same_angle_v1 on J, H, F, A we get angle(F, J, A) == angle(H, J, A) mod 360
+By same_angle_v1 on J, H, K, I we get angle(H, J, I) == angle(K, J, I) mod 360
+By between_imply_not_between on J, F, G we get collinear_and_not_between(F, J, G)
+By perpendicular_direction_conditions_v0_r on B, F, J, H we get 180 == 2 * direction(B, F) - 2 * direction(J, H) mod 360
+By perpendicular_direction_conditions_v0_r on H, J, B, A we get 180 == 2 * direction(H, J) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on J, H, B, A we get 180 == 2 * direction(J, H) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, H, J we get 180 == 2 * direction(F, B) - 2 * direction(H, J) mod 360
+By perpendicular_direction_conditions_v0_r on H, J, A, B we get 180 == 2 * direction(H, J) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, J, H we get 180 == 2 * direction(F, A) - 2 * direction(J, H) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, H, J we get 180 == 2 * direction(A, B) - 2 * direction(H, J) mod 360
+By perpendicular_direction_conditions_v0_r on H, J, F, A we get 180 == 2 * direction(H, J) - 2 * direction(F, A) mod 360
+By same_angle_v1 on J, H, G, I we get angle(G, J, I) == angle(H, J, I) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, J, H we get 180 == 2 * direction(B, A) - 2 * direction(J, H) mod 360
+By perpendicular_direction_conditions_v0_r on J, H, B, F we get 180 == 2 * direction(J, H) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, J, H we get 180 == 2 * direction(A, B) - 2 * direction(J, H) mod 360
+By perpendicular_direction_conditions_v0_r on A, F, J, H we get 180 == 2 * direction(A, F) - 2 * direction(J, H) mod 360
+By perpendicular_direction_conditions_v0_r on J, H, A, F we get 180 == 2 * direction(J, H) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on H, J, F, B we get 180 == 2 * direction(H, J) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on H, J, B, F we get 180 == 2 * direction(H, J) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on J, H, A, B we get 180 == 2 * direction(J, H) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, H, J we get 180 == 2 * direction(F, A) - 2 * direction(H, J) mod 360
+By between_imply_not_between on F, G, K we get collinear_and_not_between(G, F, K)
+By perpendicular_direction_conditions_v0_r on A, F, H, J we get 180 == 2 * direction(A, F) - 2 * direction(H, J) mod 360
+By between_imply_not_between on C, G, J we get collinear_and_not_between(G, C, J)
+By between_imply_not_between on G, F, J we get collinear_and_not_between(F, G, J)
+By between_imply_not_between on C, K, G we get collinear_and_not_between(G, C, K)
+By between_imply_not_between on J, G, K we get collinear_and_not_between(G, J, K)
+By between_imply_not_between on C, G, F we get collinear_and_not_between(F, C, G)
+By between_imply_not_between on F, G, C we get collinear_and_not_between(C, F, G)
+By parallel_line_definition on midpoint(C, D), Line(H, I), i we get Line(H, I) == parallel_line(midpoint(C, D), i)
+By between_imply_not_between on K, G, F we get collinear_and_not_between(F, K, G)
+By between_imply_not_between on C, midpoint(C, D), D we get collinear_and_not_between(D, C, midpoint(C, D))
+By between_imply_not_between on J, G, C we get collinear_and_not_between(C, J, G)
+By between_imply_not_between on K, G, J we get collinear_and_not_between(G, K, J)
+By between_imply_not_between on G, K, C we get collinear_and_not_between(C, G, K)
+By between_imply_not_between on D, midpoint(C, D), C we get collinear_and_not_between(C, D, midpoint(C, D))
+By parallel_line_definition on H, Line(H, I), i we get Line(H, I) == parallel_line(H, i)
+By circle_radius_v0_r on J, c we get radius(c) == distance(J, center(c))
+By parallel_line_definition on G, i, Line(H, I) we get i == parallel_line(G, Line(H, I))
+By circle_radius_v0_r on A, c we get radius(c) == distance(A, center(c))
+By parallel_line_definition on A, i, Line(H, I) we get i == parallel_line(A, Line(H, I))
+By parallel_line_definition on I, Line(H, I), i we get Line(H, I) == parallel_line(I, i)
+By circle_radius_v0_r on H, c we get radius(c) == distance(H, center(c))
+By circle_radius_v0_r on I, c we get radius(c) == distance(I, center(c))
+By parallel_line_definition on D, i, Line(H, I) we get i == parallel_line(D, Line(H, I))
+By same_angle_v3 on H, F, C, E we get angle(F, H, E) == angle(C, H, E) + 180 mod 360
+By same_angle_v2 on K, H, G, D we get angle(H, K, D) == angle(G, K, D) + 180 mod 360
+By same_angle_v0 on H, F, J, I we get angle(F, H, I) == angle(J, H, I) mod 360
+By angle_to_center on A, H, J, c we get 2 * angle(A, H, J) == angle(A, center(c), J) mod 360
+By angle_to_center on F, D, A, Circle(A, C, D) we get 2 * angle(F, D, A) == angle(F, center(Circle(A, C, D)), A) mod 360
+By angle_to_center on J, I, A, c we get 2 * angle(J, I, A) == angle(J, center(c), A) mod 360
+By same_angle_v0 on H, J, F, A we get angle(F, H, A) == angle(J, H, A) mod 360
+By angle_to_center on C, F, D, Circle(A, C, D) we get 2 * angle(C, F, D) == angle(C, center(Circle(A, C, D)), D) mod 360
+By angle_to_center on A, D, F, Circle(A, C, D) we get 2 * angle(A, D, F) == angle(A, center(Circle(A, C, D)), F) mod 360
+By angle_to_center on D, F, A, Circle(A, C, D) we get 2 * angle(D, F, A) == angle(D, center(Circle(A, C, D)), A) mod 360
+By angle_to_center on E, G, D, Circle(C, D, E) we get 2 * angle(E, G, D) == angle(E, center(Circle(C, D, E)), D) mod 360
+By angle_to_center on E, D, G, Circle(C, D, E) we get 2 * angle(E, D, G) == angle(E, center(Circle(C, D, E)), G) mod 360
+By angle_to_center on F, D, C, Circle(A, C, D) we get 2 * angle(F, D, C) == angle(F, center(Circle(A, C, D)), C) mod 360
+By angle_to_center on H, A, I, c we get 2 * angle(H, A, I) == angle(H, center(c), I) mod 360
+By angle_to_center on H, A, J, c we get 2 * angle(H, A, J) == angle(H, center(c), J) mod 360
+By same_angle_v1 on H, K, J, D we get angle(J, H, D) == angle(K, H, D) mod 360
+By angle_to_center on H, I, A, c we get 2 * angle(H, I, A) == angle(H, center(c), A) mod 360
+By angle_to_center on J, H, I, c we get 2 * angle(J, H, I) == angle(J, center(c), I) mod 360
+By angle_to_center on C, D, F, Circle(A, C, D) we get 2 * angle(C, D, F) == angle(C, center(Circle(A, C, D)), F) mod 360
+By angle_to_center on J, I, H, c we get 2 * angle(J, I, H) == angle(J, center(c), H) mod 360
+By angle_to_center on A, I, J, c we get 2 * angle(A, I, J) == angle(A, center(c), J) mod 360
+By angle_to_center on A, H, I, c we get 2 * angle(A, H, I) == angle(A, center(c), I) mod 360
+By angle_to_center on I, J, A, c we get 2 * angle(I, J, A) == angle(I, center(c), A) mod 360
+By angle_to_center on A, F, D, Circle(A, C, D) we get 2 * angle(A, F, D) == angle(A, center(Circle(A, C, D)), D) mod 360
+By angle_to_center on I, H, A, c we get 2 * angle(I, H, A) == angle(I, center(c), A) mod 360
+By angle_to_center on D, E, C, Circle(C, D, E) we get 2 * angle(D, E, C) == angle(D, center(Circle(C, D, E)), C) mod 360
+By angle_to_center on G, E, D, Circle(C, D, E) we get 2 * angle(G, E, D) == angle(G, center(Circle(C, D, E)), D) mod 360
+By angle_to_center on G, D, E, Circle(C, D, E) we get 2 * angle(G, D, E) == angle(G, center(Circle(C, D, E)), E) mod 360
+By angle_to_center on H, J, A, c we get 2 * angle(H, J, A) == angle(H, center(c), A) mod 360
+By angle_to_center on A, J, H, c we get 2 * angle(A, J, H) == angle(A, center(c), H) mod 360
+By angle_to_center on D, F, C, Circle(A, C, D) we get 2 * angle(D, F, C) == angle(D, center(Circle(A, C, D)), C) mod 360
+By angle_to_center on J, A, H, c we get 2 * angle(J, A, H) == angle(J, center(c), H) mod 360
+By angle_to_center on E, D, C, Circle(C, D, E) we get 2 * angle(E, D, C) == angle(E, center(Circle(C, D, E)), C) mod 360
+By angle_to_center on D, E, G, Circle(C, D, E) we get 2 * angle(D, E, G) == angle(D, center(Circle(C, D, E)), G) mod 360
+By angle_to_center on E, C, D, Circle(C, D, E) we get 2 * angle(E, C, D) == angle(E, center(Circle(C, D, E)), D) mod 360
+By angle_to_center on J, A, I, c we get 2 * angle(J, A, I) == angle(J, center(c), I) mod 360
+By angle_to_center on I, J, H, c we get 2 * angle(I, J, H) == angle(I, center(c), H) mod 360
+By angle_to_center on I, H, J, c we get 2 * angle(I, H, J) == angle(I, center(c), J) mod 360
+By angle_to_center on H, J, I, c we get 2 * angle(H, J, I) == angle(H, center(c), I) mod 360
+By same_angle_v0 on F, G, H, B we get angle(G, F, B) == angle(H, F, B) mod 360
+By angle_to_center on A, I, H, c we get 2 * angle(A, I, H) == angle(A, center(c), H) mod 360
+By angle_to_center on A, J, I, c we get 2 * angle(A, J, I) == angle(A, center(c), I) mod 360
+By angle_to_center on D, C, E, Circle(C, D, E) we get 2 * angle(D, C, E) == angle(D, center(Circle(C, D, E)), E) mod 360
+By angle_to_center on I, A, J, c we get 2 * angle(I, A, J) == angle(I, center(c), J) mod 360
+By angle_to_center on C, E, D, Circle(C, D, E) we get 2 * angle(C, E, D) == angle(C, center(Circle(C, D, E)), D) mod 360
+By angle_to_center on J, H, A, c we get 2 * angle(J, H, A) == angle(J, center(c), A) mod 360
+By angle_to_center on I, A, H, c we get 2 * angle(I, A, H) == angle(I, center(c), H) mod 360
+By angle_to_center on H, I, J, c we get 2 * angle(H, I, J) == angle(H, center(c), J) mod 360
+By angle_to_center on D, G, E, Circle(C, D, E) we get 2 * angle(D, G, E) == angle(D, center(Circle(C, D, E)), E) mod 360
+By same_angle_v0 on H, K, J, I we get angle(J, H, I) == angle(K, H, I) mod 360
+By angle_to_center on C, D, E, Circle(C, D, E) we get 2 * angle(C, D, E) == angle(C, center(Circle(C, D, E)), E) mod 360
+By same_angle_v2 on K, G, H, I we get angle(G, K, I) == angle(H, K, I) + 180 mod 360
+By same_angle_v0 on H, K, G, A we get angle(G, H, A) == angle(K, H, A) mod 360
+By same_angle_v3 on H, C, K, D we get angle(C, H, D) == angle(K, H, D) + 180 mod 360
+By same_angle_v1 on H, G, F, D we get angle(F, H, D) == angle(G, H, D) mod 360
+By same_angle_v3 on F, H, J, B we get angle(H, F, B) == angle(J, F, B) + 180 mod 360
+By same_angle_v0 on H, G, F, E we get angle(F, H, E) == angle(G, H, E) mod 360
+By same_angle_v2 on H, K, C, A we get angle(K, H, A) == angle(C, H, A) + 180 mod 360
+By same_angle_v0 on K, H, C, D we get angle(C, K, D) == angle(H, K, D) mod 360
+By same_angle_v0 on F, H, C, D we get angle(C, F, D) == angle(H, F, D) mod 360
+By same_angle_v0 on H, G, F, I we get angle(F, H, I) == angle(G, H, I) mod 360
+By same_angle_v0 on H, K, J, A we get angle(J, H, A) == angle(K, H, A) mod 360
+By same_angle_v3 on H, F, C, I we get angle(F, H, I) == angle(C, H, I) + 180 mod 360
+By same_angle_v3 on K, I, D, H we get angle(I, K, H) == angle(D, K, H) + 180 mod 360
+By same_angle_v3 on F, J, H, I we get angle(J, F, I) == angle(H, F, I) + 180 mod 360
+By same_angle_v2 on K, F, H, I we get angle(F, K, I) == angle(H, K, I) + 180 mod 360
+By same_angle_v1 on F, K, H, A we get angle(H, F, A) == angle(K, F, A) mod 360
+By same_angle_v2 on F, J, H, A we get angle(J, F, A) == angle(H, F, A) + 180 mod 360
+By same_angle_v0 on F, H, K, B we get angle(H, F, B) == angle(K, F, B) mod 360
+By same_angle_v1 on F, G, H, I we get angle(G, F, I) == angle(H, F, I) mod 360
+By same_angle_v1 on F, H, C, A we get angle(C, F, A) == angle(H, F, A) mod 360
+By same_angle_v1 on F, H, G, A we get angle(G, F, A) == angle(H, F, A) mod 360
+By perpendicular_direction_conditions_v0_r on H, K, A, B we get 180 == 2 * direction(H, K) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on K, H, A, F we get 180 == 2 * direction(K, H) - 2 * direction(A, F) mod 360
+By same_angle_v3 on H, F, C, A we get angle(F, H, A) == angle(C, H, A) + 180 mod 360
+By same_angle_v1 on H, G, K, D we get angle(G, H, D) == angle(K, H, D) mod 360
+By perpendicular_direction_conditions_v0_r on K, H, F, A we get 180 == 2 * direction(K, H) - 2 * direction(F, A) mod 360
+By same_angle_v1 on K, H, C, I we get angle(C, K, I) == angle(H, K, I) mod 360
+By same_angle_v0 on H, K, G, I we get angle(G, H, I) == angle(K, H, I) mod 360
+By same_angle_v2 on F, A, B, H we get angle(A, F, H) == angle(B, F, H) + 180 mod 360
+By same_angle_v2 on K, H, J, D we get angle(H, K, D) == angle(J, K, D) + 180 mod 360
+By same_angle_v0 on H, F, J, E we get angle(F, H, E) == angle(J, H, E) mod 360
+By same_angle_v1 on F, K, H, I we get angle(H, F, I) == angle(K, F, I) mod 360
+By probably_between_and_collinear_implies_between on H, F, J we get between(H, F, J)
+By same_angle_v0 on F, H, K, D we get angle(H, F, D) == angle(K, F, D) mod 360
+By same_angle_v1 on F, H, C, I we get angle(C, F, I) == angle(H, F, I) mod 360
+By same_angle_v2 on K, J, H, I we get angle(J, K, I) == angle(H, K, I) + 180 mod 360
+By same_angle_v0 on H, G, K, E we get angle(G, H, E) == angle(K, H, E) mod 360
+By anti_similar_triangle_basic_properties on C, G, E, B, G, F we get angle(C, G, E) == 0 - angle(B, G, F) mod 360, angle(G, E, C) == 0 - angle(G, F, B) mod 360, angle(E, C, G) == 0 - angle(F, B, G) mod 360, log(distance(B, G)) + log(distance(E, G)) == log(distance(C, G)) + log(distance(F, G)), log(distance(E, G)) + log(distance(B, F)) == log(distance(F, G)) + log(distance(C, E)), log(distance(B, F)) + log(distance(C, G)) == log(distance(C, E)) + log(distance(B, G))
+By same_angle_v0 on F, G, H, D we get angle(G, F, D) == angle(H, F, D) mod 360
+By same_angle_v3 on H, C, F, D we get angle(C, H, D) == angle(F, H, D) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on A, F, H, F we get 180 == 2 * direction(A, F) - 2 * direction(H, F) mod 360
+By same_angle_v0 on F, C, H, B we get angle(C, F, B) == angle(H, F, B) mod 360
+By same_angle_v2 on H, K, C, I we get angle(K, H, I) == angle(C, H, I) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on H, F, A, B we get 180 == 2 * direction(H, F) - 2 * direction(A, B) mod 360
+By same_angle_v1 on H, J, F, D we get angle(F, H, D) == angle(J, H, D) mod 360
+By same_angle_v0 on H, G, F, A we get angle(F, H, A) == angle(G, H, A) mod 360
+By same_angle_v2 on K, H, F, D we get angle(H, K, D) == angle(F, K, D) + 180 mod 360
+By same_angle_v0 on H, J, K, E we get angle(J, H, E) == angle(K, H, E) mod 360
+By same_angle_v2 on F, H, J, D we get angle(H, F, D) == angle(J, F, D) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on A, F, K, H we get 180 == 2 * direction(A, F) - 2 * direction(K, H) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, H, K we get 180 == 2 * direction(A, B) - 2 * direction(H, K) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, F, H we get 180 == 2 * direction(F, A) - 2 * direction(F, H) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, K, H we get 180 == 2 * direction(F, B) - 2 * direction(K, H) mod 360
+By sss_anti_similarity_v0 on C, A, G, D, I, H we get anti_similar_triangles(A, C, G, I, D, H)
+By perpendicular_direction_conditions_v0_r on K, H, B, F we get 180 == 2 * direction(K, H) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, F, H we get 180 == 2 * direction(F, B) - 2 * direction(F, H) mod 360
+By perpendicular_direction_conditions_v0_r on H, F, F, B we get 180 == 2 * direction(H, F) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, H, F we get 180 == 2 * direction(B, A) - 2 * direction(H, F) mod 360
+By perpendicular_direction_conditions_v0_r on H, F, A, F we get 180 == 2 * direction(H, F) - 2 * direction(A, F) mod 360
+By probably_between_and_collinear_implies_between on H, K, F we get between(F, K, H)
+By perpendicular_direction_conditions_v0_r on A, F, H, K we get 180 == 2 * direction(A, F) - 2 * direction(H, K) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, K, H we get 180 == 2 * direction(F, A) - 2 * direction(K, H) mod 360
+By perpendicular_direction_conditions_v0_r on K, H, A, B we get 180 == 2 * direction(K, H) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, H, F we get 180 == 2 * direction(A, B) - 2 * direction(H, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, F, H we get 180 == 2 * direction(B, F) - 2 * direction(F, H) mod 360
+By perpendicular_direction_conditions_v0_r on H, K, B, F we get 180 == 2 * direction(H, K) - 2 * direction(B, F) mod 360
+By same_angle_v3 on H, K, C, E we get angle(K, H, E) == angle(C, H, E) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on F, B, H, F we get 180 == 2 * direction(F, B) - 2 * direction(H, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, H, B, A we get 180 == 2 * direction(F, H) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, H, F, A we get 180 == 2 * direction(F, H) - 2 * direction(F, A) mod 360
+By probably_between_and_collinear_implies_between on H, G, J we get between(H, G, J)
+By perpendicular_direction_conditions_v0_r on H, F, B, A we get 180 == 2 * direction(H, F) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, H, A, B we get 180 == 2 * direction(F, H) - 2 * direction(A, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, A, H, K we get 180 == 2 * direction(F, A) - 2 * direction(H, K) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, H, F we get 180 == 2 * direction(B, F) - 2 * direction(H, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, H, K we get 180 == 2 * direction(B, F) - 2 * direction(H, K) mod 360
+By perpendicular_direction_conditions_v0_r on H, K, F, B we get 180 == 2 * direction(H, K) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, H, K we get 180 == 2 * direction(B, A) - 2 * direction(H, K) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, F, H we get 180 == 2 * direction(A, B) - 2 * direction(F, H) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, K, H we get 180 == 2 * direction(B, A) - 2 * direction(K, H) mod 360
+By perpendicular_direction_conditions_v0_r on F, H, F, B we get 180 == 2 * direction(F, H) - 2 * direction(F, B) mod 360
+By aa_anti_similarity on G, C, A, H, D, I we get anti_similar_triangles(A, C, G, I, D, H)
+By perpendicular_direction_conditions_v0_r on F, A, H, F we get 180 == 2 * direction(F, A) - 2 * direction(H, F) mod 360
+By perpendicular_direction_conditions_v0_r on H, K, A, F we get 180 == 2 * direction(H, K) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, H, K we get 180 == 2 * direction(F, B) - 2 * direction(H, K) mod 360
+By perpendicular_direction_conditions_v0_r on H, K, F, A we get 180 == 2 * direction(H, K) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, H, B, F we get 180 == 2 * direction(F, H) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on H, F, F, A we get 180 == 2 * direction(H, F) - 2 * direction(F, A) mod 360
+By perpendicular_direction_conditions_v0_r on A, B, K, H we get 180 == 2 * direction(A, B) - 2 * direction(K, H) mod 360
+By perpendicular_direction_conditions_v0_r on B, A, F, H we get 180 == 2 * direction(B, A) - 2 * direction(F, H) mod 360
+By perpendicular_direction_conditions_v0_r on H, F, B, F we get 180 == 2 * direction(H, F) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on K, H, F, B we get 180 == 2 * direction(K, H) - 2 * direction(F, B) mod 360
+By sss_anti_similarity_v1 on H, D, I, H, C, I we get anti_similar_triangles(C, H, I, D, H, I)
+By perpendicular_direction_conditions_v0_r on K, H, B, A we get 180 == 2 * direction(K, H) - 2 * direction(B, A) mod 360
+By perpendicular_direction_conditions_v0_r on F, H, A, F we get 180 == 2 * direction(F, H) - 2 * direction(A, F) mod 360
+By perpendicular_direction_conditions_v0_r on H, K, B, A we get 180 == 2 * direction(H, K) - 2 * direction(B, A) mod 360
+By probably_between_and_collinear_implies_between on C, H, K we get between(C, H, K)
+By perpendicular_direction_conditions_v0_r on A, F, F, H we get 180 == 2 * direction(A, F) - 2 * direction(F, H) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, K, H we get 180 == 2 * direction(B, F) - 2 * direction(K, H) mod 360
+By internal_angle_bisector_definition_v0 on F, H, C, J we get angle(F, J, H) == angle(H, J, C) mod 360
+By sss_anti_similarity_v0 on C, I, H, D, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By probably_between_and_collinear_implies_between on C, H, J we get between(C, H, J)
+By probably_between_and_collinear_implies_between on F, G, H we get between(F, G, H)
+By probably_between_and_collinear_implies_between on G, K, H we get between(G, K, H)
+By probably_between_and_collinear_implies_between on J, K, H we get between(H, K, J)
+By sss_anti_similarity_v0 on I, D, H, A, C, G we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v0 on I, D, H, I, C, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By similar_triangle_basic_properties on B, A, D, G, C, D we get angle(B, A, D) == angle(G, C, D) mod 360, angle(A, D, B) == angle(C, D, G) mod 360, angle(D, B, A) == angle(D, G, C) mod 360, log(distance(A, B)) + log(distance(C, D)) == log(distance(C, G)) + log(distance(A, D)), log(distance(A, D)) + log(distance(D, G)) == log(distance(C, D)) + log(distance(B, D)), log(distance(B, D)) + log(distance(C, G)) == log(distance(D, G)) + log(distance(A, B))
+By sss_anti_congruence_v0 on H, C, I, H, D, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on H, I, C, H, I, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on D, I, H, C, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By tangent_chord_angle_v0 on E, B, A, H we get tangent(Line(E, H), Circle(A, B, E))
+By sss_anti_similarity_v0 on H, I, D, H, I, C we get anti_similar_triangles(C, H, I, D, H, I)
+By anti_similar_triangle_basic_properties on C, G, D, C, B, F we get angle(C, G, D) == 0 - angle(C, B, F) mod 360, angle(G, D, C) == 0 - angle(B, F, C) mod 360, angle(D, C, G) == 0 - angle(F, C, B) mod 360, log(distance(B, C)) + log(distance(D, G)) == log(distance(C, G)) + log(distance(B, F)), log(distance(B, F)) + log(distance(C, D)) == log(distance(D, G)) + log(distance(C, F)), log(distance(C, D)) + log(distance(B, C)) == log(distance(C, F)) + log(distance(C, G))
+By internal_angle_bisector_definition_v0 on C, J, C, H we get angle(C, H, J) == angle(J, H, C) mod 360
+By sss_anti_congruence_v1 on C, H, I, D, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By similar_triangle_basic_properties on B, F, C, G, F, A we get angle(B, F, C) == angle(G, F, A) mod 360, angle(F, A, G) == angle(F, C, B) mod 360, angle(A, G, F) == angle(C, B, F) mod 360, log(distance(B, F)) + log(distance(A, F)) == log(distance(F, G)) + log(distance(C, F)), log(distance(A, F)) + log(distance(B, C)) == log(distance(C, F)) + log(distance(A, G)), log(distance(A, G)) + log(distance(B, F)) == log(distance(B, C)) + log(distance(F, G))
+By between_imply_segment_sum on C, G, F we get distance(C, F) == distance(C, G) + distance(F, G)
+By probably_between_and_collinear_implies_between on C, H, F we get between(C, H, F)
+By sas_anti_similarity on H, I, C, H, I, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on I, H, C, I, H, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By anti_similar_triangle_basic_properties on I, F, C, H, E, C we get angle(I, F, C) == 0 - angle(H, E, C) mod 360, angle(F, C, I) == 0 - angle(E, C, H) mod 360, angle(C, I, F) == 0 - angle(C, H, E) mod 360, log(distance(E, H)) + log(distance(C, F)) == log(distance(F, I)) + log(distance(C, E)), log(distance(C, E)) + log(distance(C, I)) == log(distance(C, F)) + log(distance(C, H)), log(distance(C, H)) + log(distance(F, I)) == log(distance(C, I)) + log(distance(E, H))
+By tangent_chord_angle_v1 on D, B, A, H we get tangent(Line(D, H), Circle(A, B, D))
+By sas_anti_similarity on I, H, C, F, G, D we get anti_similar_triangles(C, H, I, D, G, F)
+By sss_anti_congruence_v1 on I, H, D, I, H, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By anti_similar_triangle_basic_properties on E, G, H, F, A, I we get angle(E, G, H) == 0 - angle(F, A, I) mod 360, angle(G, H, E) == 0 - angle(A, I, F) mod 360, angle(H, E, G) == 0 - angle(I, F, A) mod 360, log(distance(A, F)) + log(distance(G, H)) == log(distance(E, G)) + log(distance(A, I)), log(distance(A, I)) + log(distance(E, H)) == log(distance(G, H)) + log(distance(F, I)), log(distance(E, H)) + log(distance(A, F)) == log(distance(F, I)) + log(distance(E, G))
+By in_imply_collinear on midpoint(C, D), I, H we get collinear(H, I, midpoint(C, D))
+By parallel_line_angles_reverse_v2 on G, D, H, I we get angle(G, D, H) == angle(I, H, D) + 180 mod 360
+By collinear_definition on H, G, J we get G in Line(H, J), J in Line(G, H), Line(G, H) == Line(H, J), 0 == 2 * angle(G, H, J) mod 360
+By similar_triangle_basic_properties on C, G, D, A, B, D we get angle(A, B, D) == angle(C, G, D) mod 360, angle(B, D, A) == angle(G, D, C) mod 360, angle(D, A, B) == angle(D, C, G) mod 360, log(distance(A, B)) + log(distance(D, G)) == log(distance(C, G)) + log(distance(B, D)), log(distance(B, D)) + log(distance(C, D)) == log(distance(D, G)) + log(distance(A, D)), log(distance(A, D)) + log(distance(C, G)) == log(distance(C, D)) + log(distance(A, B))
+By sss_anti_congruence_v1 on I, H, D, I, H, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on H, C, I, H, D, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By aa_anti_similarity on H, D, I, G, C, A we get anti_similar_triangles(A, C, G, I, D, H)
+By between_imply_segment_sum on G, F, J we get distance(G, J) == distance(F, G) + distance(F, J)
+By sss_anti_similarity_v0 on C, I, H, D, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By parallel_line_angles_reverse_v3 on I, H, D, A we get angle(I, H, D) == angle(A, D, H) + 180 mod 360
+By similar_triangle_basic_properties on G, C, E, A, B, E we get angle(A, B, E) == angle(G, C, E) mod 360, angle(B, E, A) == angle(C, E, G) mod 360, angle(E, A, B) == angle(E, G, C) mod 360, log(distance(A, B)) + log(distance(C, E)) == log(distance(C, G)) + log(distance(B, E)), log(distance(B, E)) + log(distance(E, G)) == log(distance(C, E)) + log(distance(A, E)), log(distance(A, E)) + log(distance(C, G)) == log(distance(E, G)) + log(distance(A, B))
+By anti_similar_triangle_basic_properties on G, C, E, A, C, F we get angle(G, C, E) == 0 - angle(A, C, F) mod 360, angle(C, E, G) == 0 - angle(C, F, A) mod 360, angle(E, G, C) == 0 - angle(F, A, C) mod 360, log(distance(A, C)) + log(distance(C, E)) == log(distance(C, G)) + log(distance(C, F)), log(distance(C, E)) + log(distance(A, F)) == log(distance(C, F)) + log(distance(E, G)), log(distance(A, F)) + log(distance(C, G)) == log(distance(E, G)) + log(distance(A, C))
+By collinear_definition on H, C, J we get C in Line(H, J), J in Line(C, H), Line(C, H) == Line(H, J), 0 == 2 * angle(C, H, J) mod 360
+By internal_angle_bisector_definition_v0 on F, H, K, J we get angle(F, J, H) == angle(H, J, K) mod 360
+By sss_anti_similarity_v1 on H, D, I, G, C, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on H, I, D, H, I, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on I, C, H, I, D, H we get anti_similar_triangles(C, H, I, D, H, I)
+By anti_similar_triangle_basic_properties on B, F, G, C, E, G we get angle(B, F, G) == 0 - angle(C, E, G) mod 360, angle(F, G, B) == 0 - angle(E, G, C) mod 360, angle(G, B, F) == 0 - angle(G, C, E) mod 360, log(distance(B, F)) + log(distance(E, G)) == log(distance(C, E)) + log(distance(F, G)), log(distance(E, G)) + log(distance(B, G)) == log(distance(F, G)) + log(distance(C, G)), log(distance(B, G)) + log(distance(C, E)) == log(distance(C, G)) + log(distance(B, F))
+By similar_triangle_basic_properties on F, A, I, G, E, H we get angle(F, A, I) == angle(G, E, H) mod 360, angle(A, I, F) == angle(E, H, G) mod 360, angle(H, G, E) == angle(I, F, A) mod 360, log(distance(A, F)) + log(distance(E, H)) == log(distance(E, G)) + log(distance(A, I)), log(distance(A, I)) + log(distance(G, H)) == log(distance(E, H)) + log(distance(F, I)), log(distance(F, I)) + log(distance(E, G)) == log(distance(G, H)) + log(distance(A, F))
+By sss_anti_congruence_v0 on I, H, C, I, H, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on D, I, H, C, A, G we get anti_similar_triangles(A, C, G, I, D, H)
+By similar_triangle_basic_properties on F, C, A, F, B, G we get angle(F, B, G) == angle(F, C, A) mod 360, angle(B, G, F) == angle(C, A, F) mod 360, angle(A, F, C) == angle(G, F, B) mod 360, log(distance(B, F)) + log(distance(A, C)) == log(distance(C, F)) + log(distance(B, G)), log(distance(A, C)) + log(distance(F, G)) == log(distance(B, G)) + log(distance(A, F)), log(distance(A, F)) + log(distance(B, F)) == log(distance(F, G)) + log(distance(C, F))
+By sas_anti_similarity on A, C, B, D, C, E we get anti_similar_triangles(A, B, C, D, E, C)
+By sas_anti_similarity on C, A, G, D, I, H we get anti_similar_triangles(A, C, G, I, D, H)
+By internal_angle_bisector_definition_v0 on K, H, C, J we get angle(H, J, C) == angle(K, J, H) mod 360
+By reverse_direction on E, D we get 180 == direction(E, D) - direction(D, E) mod 360
+By sss_anti_congruence_v0 on I, H, C, I, H, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on D, I, H, C, A, G we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on D, I, H, C, A, G we get anti_similar_triangles(A, C, G, I, D, H)
+By anti_similar_triangle_basic_properties on H, G, E, I, A, F we get angle(H, G, E) == 0 - angle(I, A, F) mod 360, angle(G, E, H) == 0 - angle(A, F, I) mod 360, angle(E, H, G) == 0 - angle(F, I, A) mod 360, log(distance(A, I)) + log(distance(E, G)) == log(distance(G, H)) + log(distance(A, F)), log(distance(A, F)) + log(distance(E, H)) == log(distance(E, G)) + log(distance(F, I)), log(distance(E, H)) + log(distance(A, I)) == log(distance(F, I)) + log(distance(G, H))
+By sss_anti_congruence_v1 on I, C, H, I, D, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By internal_angle_bisector_definition_v0 on K, H, K, J we get angle(H, J, K) == angle(K, J, H) mod 360
+By anti_similar_triangle_basic_properties on A, B, D, A, G, F we get angle(A, B, D) == 0 - angle(A, G, F) mod 360, angle(B, D, A) == 0 - angle(G, F, A) mod 360, angle(D, A, B) == 0 - angle(F, A, G) mod 360, log(distance(A, B)) + log(distance(F, G)) == log(distance(A, G)) + log(distance(B, D)), log(distance(B, D)) + log(distance(A, F)) == log(distance(F, G)) + log(distance(A, D)), log(distance(A, D)) + log(distance(A, G)) == log(distance(A, F)) + log(distance(A, B))
+By sss_anti_similarity_v0 on H, C, I, H, D, I we get anti_similar_triangles(C, H, I, D, H, I)
+By similar_triangle_basic_properties on A, E, B, G, E, C we get angle(A, E, B) == angle(G, E, C) mod 360, angle(E, B, A) == angle(E, C, G) mod 360, angle(B, A, E) == angle(C, G, E) mod 360, log(distance(A, E)) + log(distance(C, E)) == log(distance(E, G)) + log(distance(B, E)), log(distance(B, E)) + log(distance(C, G)) == log(distance(C, E)) + log(distance(A, B)), log(distance(A, B)) + log(distance(E, G)) == log(distance(C, G)) + log(distance(A, E))
+By anti_similar_triangle_basic_properties on C, E, H, C, F, I we get angle(C, E, H) == 0 - angle(C, F, I) mod 360, angle(E, H, C) == 0 - angle(F, I, C) mod 360, angle(H, C, E) == 0 - angle(I, C, F) mod 360, log(distance(C, E)) + log(distance(F, I)) == log(distance(C, F)) + log(distance(E, H)), log(distance(E, H)) + log(distance(C, I)) == log(distance(F, I)) + log(distance(C, H)), log(distance(C, H)) + log(distance(C, F)) == log(distance(C, I)) + log(distance(C, E))
+By sss_anti_similarity_v1 on I, H, D, I, H, C we get anti_similar_triangles(C, H, I, D, H, I)
+By anti_similar_triangle_basic_properties on C, F, B, C, D, G we get angle(C, F, B) == 0 - angle(C, D, G) mod 360, angle(F, B, C) == 0 - angle(D, G, C) mod 360, angle(B, C, F) == 0 - angle(G, C, D) mod 360, log(distance(C, D)) + log(distance(B, F)) == log(distance(C, F)) + log(distance(D, G)), log(distance(B, F)) + log(distance(C, G)) == log(distance(D, G)) + log(distance(B, C)), log(distance(B, C)) + log(distance(C, D)) == log(distance(C, G)) + log(distance(C, F))
+By sss_anti_similarity_v0 on H, C, I, H, D, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on D, I, H, C, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By collinear_definition on J, H, F we get H in Line(F, J), F in Line(H, J), Line(F, J) == Line(H, J), 0 == 2 * angle(H, J, F) mod 360
+By sas_similarity on G, H, D, F, I, D we get similar_triangles(D, F, I, D, G, H)
+By sss_anti_congruence_v1 on D, I, H, C, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By similar_triangle_basic_properties on E, C, H, C, F, I we get angle(C, F, I) == angle(E, C, H) mod 360, angle(C, H, E) == angle(F, I, C) mod 360, angle(H, E, C) == angle(I, C, F) mod 360, log(distance(C, E)) + log(distance(F, I)) == log(distance(C, F)) + log(distance(C, H)), log(distance(C, H)) + log(distance(C, I)) == log(distance(F, I)) + log(distance(E, H)), log(distance(C, I)) + log(distance(C, E)) == log(distance(E, H)) + log(distance(C, F))
+By sss_anti_similarity_v1 on H, I, C, H, I, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, I, D, G, A, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on G, B, C, D, B, E we get anti_similar_triangles(B, C, G, B, E, D)
+By parallel_line_angles_reverse_v2 on A, D, H, I we get angle(A, D, H) == angle(I, H, D) + 180 mod 360
+By sas_anti_similarity on D, C, E, A, C, B we get anti_similar_triangles(A, B, C, D, E, C)
+By between_imply_segment_sum on K, G, F we get distance(F, K) == distance(G, K) + distance(F, G)
+By sss_anti_similarity_v0 on I, H, C, I, H, D we get anti_similar_triangles(C, H, I, D, H, I)
+By internal_angle_bisector_definition_v0 on C, H, C, J we get angle(C, J, H) == angle(H, J, C) mod 360
+By similar_triangle_basic_properties on G, H, E, F, I, A we get angle(F, I, A) == angle(G, H, E) mod 360, angle(H, E, G) == angle(I, A, F) mod 360, angle(A, F, I) == angle(E, G, H) mod 360, log(distance(F, I)) + log(distance(E, H)) == log(distance(G, H)) + log(distance(A, I)), log(distance(A, I)) + log(distance(E, G)) == log(distance(E, H)) + log(distance(A, F)), log(distance(A, F)) + log(distance(G, H)) == log(distance(E, G)) + log(distance(F, I))
+By sss_anti_similarity_v1 on A, C, G, I, D, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on D, H, I, C, G, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on H, I, D, H, I, C we get anti_similar_triangles(C, H, I, D, H, I)
+By anti_similar_triangle_basic_properties on G, A, F, B, A, D we get angle(G, A, F) == 0 - angle(B, A, D) mod 360, angle(A, F, G) == 0 - angle(A, D, B) mod 360, angle(F, G, A) == 0 - angle(D, B, A) mod 360, log(distance(A, B)) + log(distance(A, F)) == log(distance(A, G)) + log(distance(A, D)), log(distance(A, D)) + log(distance(F, G)) == log(distance(A, F)) + log(distance(B, D)), log(distance(B, D)) + log(distance(A, G)) == log(distance(F, G)) + log(distance(A, B))
+By sss_anti_similarity_v0 on C, A, G, D, I, H we get anti_similar_triangles(A, C, G, I, D, H)
+By anti_similar_triangle_basic_properties on G, A, F, G, C, D we get angle(G, A, F) == 0 - angle(G, C, D) mod 360, angle(A, F, G) == 0 - angle(C, D, G) mod 360, angle(F, G, A) == 0 - angle(D, G, C) mod 360, log(distance(A, G)) + log(distance(C, D)) == log(distance(C, G)) + log(distance(A, F)), log(distance(A, F)) + log(distance(D, G)) == log(distance(C, D)) + log(distance(F, G)), log(distance(D, G)) + log(distance(A, G)) == log(distance(F, G)) + log(distance(C, G))
+By sss_anti_similarity_v0 on C, I, H, D, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on I, D, H, I, C, H we get anti_similar_triangles(C, H, I, D, H, I)
+By anti_similar_triangle_basic_properties on F, B, G, E, B, A we get angle(F, B, G) == 0 - angle(E, B, A) mod 360, angle(B, G, F) == 0 - angle(B, A, E) mod 360, angle(G, F, B) == 0 - angle(A, E, B) mod 360, log(distance(B, E)) + log(distance(B, G)) == log(distance(B, F)) + log(distance(A, B)), log(distance(A, B)) + log(distance(F, G)) == log(distance(B, G)) + log(distance(A, E)), log(distance(A, E)) + log(distance(B, F)) == log(distance(F, G)) + log(distance(B, E))
+By anti_similar_triangle_basic_properties on G, D, C, G, F, A we get angle(G, D, C) == 0 - angle(G, F, A) mod 360, angle(D, C, G) == 0 - angle(F, A, G) mod 360, angle(C, G, D) == 0 - angle(A, G, F) mod 360, log(distance(D, G)) + log(distance(A, F)) == log(distance(F, G)) + log(distance(C, D)), log(distance(A, F)) + log(distance(C, G)) == log(distance(C, D)) + log(distance(A, G)), log(distance(A, G)) + log(distance(D, G)) == log(distance(C, G)) + log(distance(F, G))
+By sss_anti_congruence_v0 on H, I, D, H, I, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_congruence on H, C, I, H, D, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on G, C, A, H, D, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on D, I, H, C, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By anti_similar_triangle_basic_properties on A, F, C, G, E, C we get angle(A, F, C) == 0 - angle(G, E, C) mod 360, angle(F, C, A) == 0 - angle(E, C, G) mod 360, angle(C, A, F) == 0 - angle(C, G, E) mod 360, log(distance(A, F)) + log(distance(C, E)) == log(distance(E, G)) + log(distance(C, F)), log(distance(C, E)) + log(distance(A, C)) == log(distance(C, F)) + log(distance(C, G)), log(distance(A, C)) + log(distance(E, G)) == log(distance(C, G)) + log(distance(A, F))
+By sas_anti_similarity on G, A, C, E, A, D we get anti_similar_triangles(A, C, G, A, D, E)
+By sas_anti_similarity on D, I, F, G, H, D we get anti_similar_triangles(D, F, I, G, D, H)
+By similar_triangle_basic_properties on I, F, C, H, C, E we get angle(H, C, E) == angle(I, F, C) mod 360, angle(C, E, H) == angle(F, C, I) mod 360, angle(C, I, F) == angle(E, H, C) mod 360, log(distance(C, H)) + log(distance(C, F)) == log(distance(F, I)) + log(distance(C, E)), log(distance(C, E)) + log(distance(C, I)) == log(distance(C, F)) + log(distance(E, H)), log(distance(C, I)) + log(distance(C, H)) == log(distance(E, H)) + log(distance(F, I))
+By sss_anti_similarity_v0 on D, H, I, C, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on H, C, I, H, D, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on H, I, D, H, I, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on D, G, E, B, G, A we get anti_similar_triangles(A, B, G, E, D, G)
+By internal_angle_bisector_definition_v0 on C, H, F, J we get angle(C, J, H) == angle(H, J, F) mod 360
+By sss_anti_congruence_v0 on D, H, I, C, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By anti_similar_triangle_basic_properties on B, E, A, B, F, G we get angle(B, E, A) == 0 - angle(B, F, G) mod 360, angle(E, A, B) == 0 - angle(F, G, B) mod 360, angle(A, B, E) == 0 - angle(G, B, F) mod 360, log(distance(B, E)) + log(distance(F, G)) == log(distance(B, F)) + log(distance(A, E)), log(distance(A, E)) + log(distance(B, G)) == log(distance(F, G)) + log(distance(A, B)), log(distance(A, B)) + log(distance(B, F)) == log(distance(B, G)) + log(distance(B, E))
+By sss_anti_congruence_v1 on H, D, I, H, C, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on H, D, I, G, C, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v0 on D, H, I, C, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on H, D, I, H, C, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on E, G, D, A, G, B we get anti_similar_triangles(A, B, G, E, D, G)
+By sss_anti_similarity_v1 on D, I, H, C, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on C, A, G, D, I, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on A, G, B, E, G, D we get anti_similar_triangles(A, B, G, E, D, G)
+By sss_anti_congruence_v1 on I, C, H, I, D, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on D, A, E, C, I, H we get anti_similar_triangles(A, D, E, I, C, H)
+By sas_similarity on F, I, D, G, H, D we get similar_triangles(D, F, I, D, G, H)
+By sss_anti_similarity_v0 on I, D, H, I, C, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on C, I, H, D, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_congruence on H, D, I, H, C, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_congruence on C, I, H, D, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on I, D, H, I, C, H we get anti_similar_triangles(C, H, I, D, H, I)
+By aa_anti_similarity on H, D, I, H, C, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on H, I, D, H, I, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on C, H, I, D, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on H, D, I, H, C, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_similarity on D, I, H, D, A, E we get similar_triangles(A, D, E, I, D, H)
+By sss_anti_similarity_v0 on D, H, I, C, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on H, I, C, H, I, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on E, A, D, G, A, C we get anti_similar_triangles(A, C, G, A, D, E)
+By sss_anti_similarity_v0 on C, I, H, D, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By asa_anti_congruence on I, C, H, I, D, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on C, I, H, D, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on C, H, I, D, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on I, D, H, A, C, G we get anti_similar_triangles(A, C, G, I, D, H)
+By aa_anti_similarity on H, E, D, H, D, E we get anti_similar_triangles(D, E, H, E, D, H)
+By sss_anti_congruence_v1 on I, C, H, I, D, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By collinear_definition on J, F, H we get F in Line(H, J), H in Line(F, J), Line(F, J) == Line(H, J), 0 == 2 * angle(F, J, H) mod 360
+By internal_angle_bisector_definition_v0 on G, J, G, H we get angle(G, H, J) == angle(J, H, G) mod 360
+By sas_similarity on D, A, E, D, I, H we get similar_triangles(A, D, E, I, D, H)
+By between_imply_segment_sum on J, G, C we get distance(C, J) == distance(G, J) + distance(C, G)
+By sas_anti_similarity on D, G, F, C, G, A we get anti_similar_triangles(A, C, G, F, D, G)
+By sss_anti_congruence_v1 on H, D, I, H, C, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on D, I, H, C, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on I, C, H, I, D, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By similar_triangle_basic_properties on C, F, A, B, F, G we get angle(B, F, G) == angle(C, F, A) mod 360, angle(F, A, C) == angle(F, G, B) mod 360, angle(A, C, F) == angle(G, B, F) mod 360, log(distance(B, F)) + log(distance(A, F)) == log(distance(C, F)) + log(distance(F, G)), log(distance(A, F)) + log(distance(B, G)) == log(distance(F, G)) + log(distance(A, C)), log(distance(A, C)) + log(distance(B, F)) == log(distance(B, G)) + log(distance(C, F))
+By sas_anti_similarity on E, B, D, C, B, G we get anti_similar_triangles(B, C, G, B, E, D)
+By parallel_line_angles_reverse_v3 on I, H, D, G we get angle(I, H, D) == angle(G, D, H) + 180 mod 360
+By sss_anti_similarity_v0 on H, I, D, G, A, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on I, H, C, I, H, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on H, I, C, H, I, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_congruence on D, I, H, C, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on A, C, G, I, D, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on D, I, H, C, A, G we get anti_similar_triangles(A, C, G, I, D, H)
+By collinear_definition on J, C, H we get C in Line(H, J), H in Line(C, J), Line(C, J) == Line(H, J), 0 == 2 * angle(C, J, H) mod 360
+By sss_anti_congruence_v1 on I, H, D, I, H, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_congruence on I, C, H, I, D, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, C, I, H, D, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on D, H, I, C, G, A we get anti_similar_triangles(A, C, G, I, D, H)
+By collinear_definition on J, H, G we get H in Line(G, J), G in Line(H, J), Line(G, J) == Line(H, J), 0 == 2 * angle(H, J, G) mod 360
+By reverse_direction on D, F we get 180 == direction(D, F) - direction(F, D) mod 360
+By sss_anti_similarity_v0 on H, I, D, H, I, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on D, I, H, C, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on B, C, A, E, C, D we get anti_similar_triangles(A, B, C, D, E, C)
+By sss_anti_similarity_v1 on I, H, D, I, H, C we get anti_similar_triangles(C, H, I, D, H, I)
+By asa_anti_congruence on D, I, H, C, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, C, I, H, D, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on D, A, E, C, A, G we get anti_similar_triangles(A, C, G, A, D, E)
+By sss_anti_similarity_v1 on H, I, C, H, I, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on D, I, H, C, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on G, A, C, H, I, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on D, I, H, C, A, G we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_similarity on D, H, G, D, I, F we get similar_triangles(D, F, I, D, G, H)
+By sss_anti_congruence_v0 on C, I, H, D, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By internal_angle_bisector_definition_v0 on K, H, F, J we get angle(H, J, F) == angle(K, J, H) mod 360
+By sss_anti_congruence_v1 on D, I, H, C, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on A, G, C, I, H, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on C, G, A, D, H, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v0 on I, H, C, I, H, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, I, D, G, A, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on I, H, C, I, H, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on H, I, C, H, I, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on G, A, C, H, I, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on I, H, D, A, G, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on G, A, C, H, I, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v1 on H, I, C, H, I, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on C, H, I, D, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on I, H, C, I, H, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on A, C, G, I, D, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on I, D, H, A, C, G we get anti_similar_triangles(A, C, G, I, D, H)
+By reverse_direction on D, E we get 180 == direction(D, E) - direction(E, D) mod 360
+By sas_anti_similarity on E, A, D, H, I, C we get anti_similar_triangles(A, D, E, I, C, H)
+By sss_anti_congruence_v0 on C, I, H, D, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, H, D, I, H, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, H, D, A, G, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on D, I, H, C, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By internal_angle_bisector_definition_v0 on C, H, K, J we get angle(C, J, H) == angle(H, J, K) mod 360
+By sss_anti_similarity_v1 on I, H, D, I, H, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on G, A, C, H, I, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v1 on I, C, H, I, D, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, C, H, I, D, H we get anti_similar_triangles(C, H, I, D, H, I)
+By collinear_definition on J, K, H we get K in Line(H, J), H in Line(J, K), Line(H, J) == Line(J, K), 0 == 2 * angle(K, J, H) mod 360
+By sss_anti_congruence_v0 on C, I, H, D, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on A, G, C, I, H, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on B, G, A, D, G, E we get anti_similar_triangles(A, B, G, E, D, G)
+By sss_anti_similarity_v0 on C, A, G, D, I, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on D, H, I, C, G, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on G, A, B, F, A, D we get anti_similar_triangles(A, B, G, A, D, F)
+By sss_anti_similarity_v0 on G, C, A, H, D, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on C, I, H, D, A, E we get anti_similar_triangles(A, D, E, I, C, H)
+By sss_anti_congruence_v0 on H, C, I, H, D, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on D, H, I, C, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_congruence on H, I, C, H, I, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on C, G, A, D, H, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on C, I, H, D, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on I, H, D, I, H, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on D, G, F, C, H, I we get anti_similar_triangles(C, H, I, D, G, F)
+By sss_anti_congruence_v0 on I, H, C, I, H, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on D, H, I, C, G, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on D, H, I, C, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By aa_anti_similarity on G, A, C, H, I, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v1 on H, I, C, H, I, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, C, H, I, D, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on C, G, A, D, G, F we get anti_similar_triangles(A, C, G, F, D, G)
+By sss_anti_congruence_v1 on D, I, H, C, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on D, H, I, C, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on I, D, H, I, C, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on A, G, C, I, H, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on D, I, H, C, A, G we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on I, H, D, A, G, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v0 on H, C, I, H, D, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, I, D, G, A, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on A, C, G, I, D, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on H, D, I, G, C, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on C, H, I, D, G, F we get anti_similar_triangles(C, H, I, D, G, F)
+By sss_anti_congruence_v0 on D, H, I, C, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on C, A, G, D, I, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on H, D, I, G, C, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on D, H, I, C, G, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on G, A, C, H, I, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on D, B, F, A, B, C we get anti_similar_triangles(A, B, C, D, B, F)
+By sas_anti_similarity on D, H, G, F, I, D we get anti_similar_triangles(D, F, I, G, D, H)
+By sss_anti_similarity_v1 on C, H, I, D, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on H, C, I, H, D, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, I, D, G, A, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on A, C, G, I, D, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on H, D, I, G, C, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on H, I, D, G, A, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on C, A, G, D, A, E we get anti_similar_triangles(A, C, G, A, D, E)
+By collinear_definition on J, H, K we get H in Line(J, K), K in Line(H, J), Line(H, J) == Line(J, K), 0 == 2 * angle(H, J, K) mod 360
+By sss_anti_congruence_v0 on H, I, D, H, I, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on G, C, A, H, D, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on H, D, I, G, C, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v0 on I, D, H, I, C, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on I, D, H, I, C, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on A, G, C, I, H, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on F, B, D, C, B, A we get anti_similar_triangles(A, B, C, D, B, F)
+By aa_anti_similarity on H, I, D, G, A, C we get anti_similar_triangles(A, C, G, I, D, H)
+By asa_anti_congruence on C, I, H, D, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on I, D, H, A, C, G we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on I, H, D, I, H, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on H, I, C, H, I, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on B, A, G, D, A, F we get anti_similar_triangles(A, B, G, A, D, F)
+By sas_anti_similarity on F, G, D, A, G, C we get anti_similar_triangles(A, C, G, F, D, G)
+By sss_anti_similarity_v0 on I, H, C, I, H, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on D, A, F, B, A, G we get anti_similar_triangles(A, B, G, A, D, F)
+By sss_anti_congruence_v1 on C, H, I, D, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on C, I, H, D, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on I, D, H, A, C, G we get anti_similar_triangles(A, C, G, I, D, H)
+By collinear_definition on H, J, G we get J in Line(G, H), G in Line(H, J), Line(G, H) == Line(H, J), 0 == 2 * angle(J, H, G) mod 360
+By sss_anti_congruence_v1 on I, H, D, I, H, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By between_imply_segment_sum on C, K, G we get distance(C, G) == distance(C, K) + distance(G, K)
+By sss_anti_similarity_v0 on G, C, A, H, D, I we get anti_similar_triangles(A, C, G, I, D, H)
+By asa_anti_congruence on I, D, H, I, C, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on H, D, I, G, C, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_similarity on E, A, D, H, I, D we get similar_triangles(A, D, E, I, D, H)
+By sss_anti_similarity_v1 on I, H, D, A, G, C we get anti_similar_triangles(A, C, G, I, D, H)
+By internal_angle_bisector_definition_v0 on F, H, F, J we get angle(F, J, H) == angle(H, J, F) mod 360
+By sss_anti_similarity_v1 on H, D, I, H, C, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on H, I, C, H, I, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on D, B, E, G, B, C we get anti_similar_triangles(B, C, G, B, E, D)
+By sss_anti_similarity_v0 on I, D, H, I, C, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on H, D, I, H, C, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on D, H, I, C, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on I, D, H, A, C, G we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v1 on C, H, I, D, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on H, I, C, E, A, D we get anti_similar_triangles(A, D, E, I, C, H)
+By aa_anti_similarity on H, D, E, H, E, D we get anti_similar_triangles(D, E, H, E, D, H)
+By aa_anti_similarity on H, I, C, H, I, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on C, B, G, E, B, D we get anti_similar_triangles(B, C, G, B, E, D)
+By between_imply_segment_sum on J, G, K we get distance(J, K) == distance(G, J) + distance(G, K)
+By sss_anti_congruence_v0 on I, H, C, I, H, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on C, A, G, D, I, H we get anti_similar_triangles(A, C, G, I, D, H)
+By aa_anti_similarity on H, I, D, H, I, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, C, H, I, D, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_similarity on H, I, D, E, A, D we get similar_triangles(A, D, E, I, D, H)
+By sss_anti_similarity_v0 on I, H, C, I, H, D we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, C, I, H, D, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, C, I, H, D, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, I, D, H, I, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on G, C, A, H, D, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v1 on H, I, C, H, I, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By reverse_direction on F, D we get 180 == direction(F, D) - direction(D, F) mod 360
+By sss_anti_congruence_v1 on H, D, I, H, C, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on I, D, H, I, C, H we get anti_similar_triangles(C, H, I, D, H, I)
+By collinear_definition on H, J, C we get J in Line(C, H), C in Line(H, J), Line(C, H) == Line(H, J), 0 == 2 * angle(J, H, C) mod 360
+By sas_anti_similarity on F, I, D, D, H, G we get anti_similar_triangles(D, F, I, G, D, H)
+By sas_anti_similarity on F, G, D, I, H, C we get anti_similar_triangles(C, H, I, D, G, F)
+By sss_anti_congruence_v0 on C, I, H, D, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on D, H, I, C, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, I, D, H, I, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on I, D, H, I, C, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on F, A, D, G, A, B we get anti_similar_triangles(A, B, G, A, D, F)
+By sss_anti_congruence_v0 on I, D, H, I, C, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on I, D, H, A, C, G we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on I, D, H, I, C, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on H, D, I, H, C, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_similarity on D, I, F, D, H, G we get similar_triangles(D, F, I, D, G, H)
+By sas_anti_similarity on D, I, H, C, A, G we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on C, H, I, D, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on D, H, I, C, G, A we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on I, H, D, A, G, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on C, G, A, D, H, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v0 on H, I, D, H, I, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on A, C, G, I, D, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v1 on H, I, C, H, I, D we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on D, H, I, C, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_congruence on H, I, D, H, I, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on H, I, D, H, I, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, C, H, I, D, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, C, H, I, D, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on C, B, A, F, B, D we get anti_similar_triangles(A, B, C, D, B, F)
+By sss_anti_congruence_v1 on C, H, I, D, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on H, D, I, H, C, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v1 on I, C, H, I, D, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on D, I, H, C, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, H, D, I, H, C we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on H, D, I, H, C, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on H, D, I, H, C, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on G, C, A, H, D, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on D, H, I, C, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on A, G, C, I, H, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v0 on G, C, A, H, D, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on H, C, I, H, D, I we get anti_similar_triangles(C, H, I, D, H, I)
+By collinear_definition on J, H, C we get H in Line(C, J), C in Line(H, J), Line(C, J) == Line(H, J), 0 == 2 * angle(H, J, C) mod 360
+By sss_anti_similarity_v1 on C, G, A, D, H, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on H, D, I, H, C, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on G, A, C, H, I, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sas_anti_similarity on E, C, D, B, C, A we get anti_similar_triangles(A, B, C, D, E, C)
+By sas_anti_congruence on I, D, H, I, C, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on G, A, C, H, I, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on C, H, I, D, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, C, H, I, D, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on I, H, D, A, G, C we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on C, G, A, D, H, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v1 on C, H, I, D, H, I we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_congruence_v0 on I, D, H, I, C, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on G, H, D, D, I, F we get anti_similar_triangles(D, F, I, G, D, H)
+By sss_anti_congruence_v0 on H, I, D, H, I, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v1 on C, G, A, D, H, I we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on A, C, G, I, D, H we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_congruence_v1 on I, H, D, I, H, C we get anti_congruent_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on A, G, C, F, G, D we get anti_similar_triangles(A, C, G, F, D, G)
+By sas_anti_similarity on A, B, C, D, B, F we get anti_similar_triangles(A, B, C, D, B, F)
+By sss_anti_congruence_v1 on D, I, H, C, I, H we get anti_congruent_triangles(C, H, I, D, H, I)
+By collinear_definition on J, G, H we get G in Line(H, J), H in Line(G, J), Line(G, J) == Line(H, J), 0 == 2 * angle(G, J, H) mod 360
+By sas_anti_similarity on H, I, D, G, A, C we get anti_similar_triangles(A, C, G, I, D, H)
+By aa_anti_similarity on H, C, I, H, D, I we get anti_similar_triangles(C, H, I, D, H, I)
+By sas_anti_similarity on C, I, H, D, I, H we get anti_similar_triangles(C, H, I, D, H, I)
+By sss_anti_similarity_v0 on A, G, C, I, H, D we get anti_similar_triangles(A, C, G, I, D, H)
+By sss_anti_similarity_v1 on C, H, I, D, H, I we get anti_similar_triangles(C, H, I, D, H, I)
+By power_of_a_point_definition on C, J, H, c we get log(power_of_a_point(C, c)) == log(distance(C, J)) + log(distance(C, H))
+By same_angle_v1 on H, F, K, D we get angle(F, H, D) == angle(K, H, D) mod 360
+By same_angle_v0 on H, F, K, E we get angle(F, H, E) == angle(K, H, E) mod 360
+By same_angle_v0 on H, K, F, A we get angle(F, H, A) == angle(K, H, A) mod 360
+By same_angle_v0 on H, F, K, I we get angle(F, H, I) == angle(K, H, I) mod 360
+By external_angle_bisector_definition_v0_r on C, K, J, G we get Line(G, K) == external_angle_bisector(C, G, J)
+By power_of_a_point_in_circle on A, Circle(A, B, D) we get 0 == power_of_a_point(A, Circle(A, B, D))
+By external_angle_bisector_definition_v0_r on K, C, F, G we get Line(C, G) == external_angle_bisector(F, G, K)
+By internal_angle_bisector_definition_v0_r on C, H, K, G we get Line(G, H) == internal_angle_bisector(C, G, K)
+By internal_angle_bisector_definition_v0_r on G, H, K, C we get Line(C, H) == internal_angle_bisector(G, C, K)
+By external_angle_bisector_definition_v0_r on F, J, K, G we get Line(G, J) == external_angle_bisector(F, G, K)
+By external_angle_bisector_definition_v0_r on F, H, C, G we get Line(G, H) == external_angle_bisector(C, G, F)
+By internal_angle_bisector_definition_v0_r on F, J, H, C we get Line(C, J) == internal_angle_bisector(F, C, H)
+By internal_angle_bisector_definition_v0_r on G, K, J, C we get Line(C, K) == internal_angle_bisector(G, C, J)
+By isosceles_triangle_altitude_v3 on I, D, C we get identical(perpendicular_bisector(C, D), internal_angle_bisector(C, I, D), perpendicular_line(I, Line(C, D)))
+By external_angle_bisector_definition_v0 on B, H, B, F we get 180 == angle(B, F, H) + angle(B, F, H) mod 360
+By external_angle_bisector_definition_v0_r on G, B, G, F we get Line(B, F) == external_angle_bisector(G, F, G)
+By internal_angle_bisector_definition_v0 on G, F, G, H we get angle(F, H, G) == angle(G, H, F) mod 360
+By external_angle_bisector_definition_v0_r on C, J, F, G we get Line(G, J) == external_angle_bisector(C, G, F)
+By power_of_a_point_on_circle on B, Circle(A, B, D) we get 0 == power_of_a_point(B, Circle(A, B, D))
+By external_angle_bisector_definition_v0_r on G, J, C, K we get Line(J, K) == external_angle_bisector(C, K, G)
+By external_angle_bisector_definition_v0_r on J, K, G, F we get Line(F, K) == external_angle_bisector(G, F, J)
+By external_angle_bisector_definition_v0_r on F, K, H, G we get Line(G, K) == external_angle_bisector(F, G, H)
+By internal_angle_bisector_definition_v0_r on G, C, G, J we get Line(C, J) == internal_angle_bisector(G, J, G)
+By external_angle_bisector_definition_v0_r on G, B, K, F we get Line(B, F) == external_angle_bisector(G, F, K)
+By internal_angle_bisector_definition_v0_r on C, J, K, G we get Line(G, J) == internal_angle_bisector(C, G, K)
+By external_angle_bisector_definition_v0_r on J, C, K, G we get Line(C, G) == external_angle_bisector(J, G, K)
+By power_of_a_point_in_circle on B, Circle(B, C, E) we get 0 == power_of_a_point(B, Circle(B, C, E))
+By external_angle_bisector_definition_v0 on F, H, C, K we get 180 == angle(F, K, H) + angle(C, K, H) mod 360
+By external_angle_bisector_definition_v0_r on C, B, G, F we get Line(B, F) == external_angle_bisector(C, F, G)
+By internal_angle_bisector_definition_v0_r on K, F, H, C we get Line(C, F) == internal_angle_bisector(H, C, K)
+By external_angle_bisector_definition_v0_r on F, H, K, G we get Line(G, H) == external_angle_bisector(F, G, K)
+By log_of_2_times_distance on D, C, C, midpoint(C, D) we get log(distance(C, D)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(C, midpoint(C, D)))
+By internal_angle_bisector_definition_v0_r on F, K, F, G we get Line(G, K) == internal_angle_bisector(F, G, F)
+By internal_angle_bisector_definition_v0_r on J, C, F, G we get Line(C, G) == internal_angle_bisector(F, G, J)
+By internal_angle_bisector_definition_v0_r on G, C, F, K we get Line(C, K) == internal_angle_bisector(F, K, G)
+By external_angle_bisector_definition_v0_r on H, C, J, G we get Line(C, G) == external_angle_bisector(H, G, J)
+By external_angle_bisector_definition_v0_r on F, J, H, G we get Line(G, J) == external_angle_bisector(F, G, H)
+By internal_angle_bisector_definition_v0_r on K, F, G, J we get Line(F, J) == internal_angle_bisector(G, J, K)
+By collinear_definition on C, midpoint(C, D), D we get midpoint(C, D) in Line(C, D), D in Line(C, midpoint(C, D)), Line(C, D) == Line(C, midpoint(C, D)), 0 == 2 * angle(midpoint(C, D), C, D) mod 360
+By collinear_definition on H, K, J we get K in Line(H, J), J in Line(H, K), Line(H, J) == Line(H, K), 0 == 2 * angle(K, H, J) mod 360
+By external_angle_bisector_definition_v0_r on K, F, J, G we get Line(F, G) == external_angle_bisector(J, G, K)
+By external_angle_bisector_definition_v0_r on J, F, H, G we get Line(F, G) == external_angle_bisector(H, G, J)
+By internal_angle_bisector_definition_v0_r on G, K, G, F we get Line(F, K) == internal_angle_bisector(G, F, G)
+By external_angle_bisector_definition_v0_r on K, A, G, F we get Line(A, F) == external_angle_bisector(G, F, K)
+By external_angle_bisector_definition_v0_r on C, F, J, G we get Line(F, G) == external_angle_bisector(C, G, J)
+By external_angle_bisector_definition_v0_r on C, A, G, F we get Line(A, F) == external_angle_bisector(C, F, G)
+By internal_angle_bisector_definition_v0_r on H, J, G, C we get Line(C, J) == internal_angle_bisector(G, C, H)
+By internal_angle_bisector_definition_v0 on C, H, K, F we get angle(C, F, H) == angle(H, F, K) mod 360
+By internal_angle_bisector_definition_v0_r on J, H, J, G we get Line(G, H) == internal_angle_bisector(J, G, J)
+By external_angle_bisector_definition_v0_r on J, H, K, G we get Line(G, H) == external_angle_bisector(J, G, K)
+By perpendicular_angle_conditions_v0 on B, F, H we get angle(B, F, H) == orientation(B, F, H) mod 360
+By external_angle_bisector_definition_v0_r on F, K, C, G we get Line(G, K) == external_angle_bisector(C, G, F)
+By internal_angle_bisector_definition_v0_r on H, F, K, G we get Line(F, G) == internal_angle_bisector(H, G, K)
+By collinear_definition on F, J, H we get J in Line(F, H), H in Line(F, J), Line(F, H) == Line(F, J), 0 == 2 * angle(J, F, H) mod 360
+By external_angle_bisector_definition_v0_r on H, C, F, G we get Line(C, G) == external_angle_bisector(F, G, H)
+By internal_angle_bisector_definition_v0 on C, H, C, K we get angle(C, K, H) == angle(H, K, C) mod 360
+By internal_angle_bisector_definition_v0_r on H, J, C, G we get Line(G, J) == internal_angle_bisector(C, G, H)
+By internal_angle_bisector_definition_v0_r on C, F, K, G we get Line(F, G) == internal_angle_bisector(C, G, K)
+By internal_angle_bisector_definition_v0_r on C, F, H, G we get Line(F, G) == internal_angle_bisector(C, G, H)
+By internal_angle_bisector_definition_v0_r on G, J, F, K we get Line(J, K) == internal_angle_bisector(F, K, G)
+By internal_angle_bisector_definition_v0_r on G, C, K, J we get Line(C, J) == internal_angle_bisector(G, J, K)
+By external_angle_bisector_definition_v0_r on G, A, G, F we get Line(A, F) == external_angle_bisector(G, F, G)
+By internal_angle_bisector_definition_v0 on A, H, B, F we get angle(A, F, H) == angle(H, F, B) mod 360
+By internal_angle_bisector_definition_v0_r on G, K, C, F we get Line(F, K) == internal_angle_bisector(C, F, G)
+By collinear_definition on F, H, C we get H in Line(C, F), C in Line(F, H), Line(C, F) == Line(F, H), 0 == 2 * angle(H, F, C) mod 360
+By external_angle_bisector_definition_v0_r on G, F, C, K we get Line(F, K) == external_angle_bisector(C, K, G)
+By external_angle_bisector_definition_v0_r on G, C, J, F we get Line(C, F) == external_angle_bisector(G, F, J)
+By power_of_a_point_on_circle on F, Circle(B, C, E) we get 0 == power_of_a_point(F, Circle(B, C, E))
+By internal_angle_bisector_definition_v0_r on K, G, H, C we get Line(C, G) == internal_angle_bisector(H, C, K)
+By internal_angle_bisector_definition_v0_r on K, C, H, G we get Line(C, G) == internal_angle_bisector(H, G, K)
+By internal_angle_bisector_definition_v0_r on F, C, G, J we get Line(C, J) == internal_angle_bisector(F, J, G)
+By collinear_definition on K, C, H we get C in Line(H, K), H in Line(C, K), Line(C, K) == Line(H, K), 0 == 2 * angle(C, K, H) mod 360
+By internal_angle_bisector_definition_v0_r on G, J, C, F we get Line(F, J) == internal_angle_bisector(C, F, G)
+By internal_angle_bisector_definition_v0_r on K, C, K, G we get Line(C, G) == internal_angle_bisector(K, G, K)
+By collinear_definition on H, F, C we get F in Line(C, H), C in Line(F, H), Line(C, H) == Line(F, H), 0 == 2 * angle(F, H, C) mod 360
+By external_angle_bisector_definition_v0_r on J, K, H, G we get Line(G, K) == external_angle_bisector(H, G, J)
+By internal_angle_bisector_definition_v0_r on F, H, F, G we get Line(G, H) == internal_angle_bisector(F, G, F)
+By collinear_definition on F, H, K we get H in Line(F, K), K in Line(F, H), Line(F, H) == Line(F, K), 0 == 2 * angle(H, F, K) mod 360
+By collinear_definition on F, H, G we get H in Line(F, G), G in Line(F, H), Line(F, G) == Line(F, H), 0 == 2 * angle(H, F, G) mod 360
+By internal_angle_bisector_definition_v0 on C, K, C, H we get angle(C, H, K) == angle(K, H, C) mod 360
+By internal_angle_bisector_definition_v0_r on K, F, G, C we get Line(C, F) == internal_angle_bisector(G, C, K)
+By internal_angle_bisector_definition_v0_r on K, J, H, C we get Line(C, J) == internal_angle_bisector(H, C, K)
+By internal_angle_bisector_definition_v0_r on G, J, G, F we get Line(F, J) == internal_angle_bisector(G, F, G)
+By internal_angle_bisector_definition_v0_r on G, C, G, K we get Line(C, K) == internal_angle_bisector(G, K, G)
+By collinear_definition on H, K, G we get K in Line(G, H), G in Line(H, K), Line(G, H) == Line(H, K), 0 == 2 * angle(K, H, G) mod 360
+By internal_angle_bisector_definition_v0_r on G, H, F, C we get Line(C, H) == internal_angle_bisector(F, C, G)
+By external_angle_bisector_definition_v0 on C, H, J, F we get 180 == angle(C, F, H) + angle(J, F, H) mod 360
+By log_of_2_times_distance on C, D, D, midpoint(C, D) we get log(distance(C, D)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(D, midpoint(C, D)))
+By perpendicular_angle_conditions_v0 on H, F, A we get angle(H, F, A) == orientation(A, H, F) mod 360
+By collinear_definition on H, F, G we get F in Line(G, H), G in Line(F, H), Line(F, H) == Line(G, H), 0 == 2 * angle(F, H, G) mod 360
+By external_angle_bisector_definition_v0_r on C, H, J, G we get Line(G, H) == external_angle_bisector(C, G, J)
+By anti_similar_triangle_basic_properties on F, I, D, D, I, F we get angle(F, I, D) == 0 - angle(D, I, F) mod 360, angle(I, D, F) == 0 - angle(I, F, D) mod 360, angle(D, F, I) == 0 - angle(F, D, I) mod 360, log(distance(D, I)) + log(distance(D, I)) == log(distance(F, I)) + log(distance(F, I)), log(distance(D, I)) + log(distance(D, F)) == log(distance(F, I)) + log(distance(D, F)), log(distance(D, F)) + log(distance(D, I)) == log(distance(D, F)) + log(distance(F, I))
+By collinear_definition on F, H, J we get H in Line(F, J), J in Line(F, H), Line(F, H) == Line(F, J), 0 == 2 * angle(H, F, J) mod 360
+By internal_angle_bisector_definition_v0_r on G, J, K, F we get Line(F, J) == internal_angle_bisector(G, F, K)
+By internal_angle_bisector_definition_v0_r on K, H, K, G we get Line(G, H) == internal_angle_bisector(K, G, K)
+By internal_angle_bisector_definition_v0_r on K, C, G, F we get Line(C, F) == internal_angle_bisector(G, F, K)
+By internal_angle_bisector_definition_v0_r on J, B, G, F we get Line(B, F) == internal_angle_bisector(G, F, J)
+By power_of_a_point_on_circle on E, Circle(A, B, D) we get 0 == power_of_a_point(E, Circle(A, B, D))
+By collinear_definition on H, C, K we get C in Line(H, K), K in Line(C, H), Line(C, H) == Line(H, K), 0 == 2 * angle(C, H, K) mod 360
+By collinear_definition on H, G, F we get G in Line(F, H), F in Line(G, H), Line(F, H) == Line(G, H), 0 == 2 * angle(G, H, F) mod 360
+By internal_angle_bisector_definition_v0_r on K, F, K, G we get Line(F, G) == internal_angle_bisector(K, G, K)
+By internal_angle_bisector_definition_v0 on J, H, F, K we get angle(H, K, F) == angle(J, K, H) mod 360
+By internal_angle_bisector_definition_v0_r on J, G, H, C we get Line(C, G) == internal_angle_bisector(H, C, J)
+By power_of_a_point_on_circle on D, Circle(A, B, D) we get 0 == power_of_a_point(D, Circle(A, B, D))
+By internal_angle_bisector_definition_v0_r on G, F, J, K we get Line(F, K) == internal_angle_bisector(G, K, J)
+By internal_angle_bisector_definition_v0_r on K, J, K, G we get Line(G, J) == internal_angle_bisector(K, G, K)
+By internal_angle_bisector_definition_v0_r on G, F, H, C we get Line(C, F) == internal_angle_bisector(G, C, H)
+By internal_angle_bisector_definition_v0 on K, H, K, F we get angle(H, F, K) == angle(K, F, H) mod 360
+By internal_angle_bisector_definition_v0_r on G, K, F, J we get Line(J, K) == internal_angle_bisector(F, J, G)
+By power_of_a_point_in_circle on E, Circle(B, C, E) we get 0 == power_of_a_point(E, Circle(B, C, E))
+By internal_angle_bisector_definition_v0 on C, H, C, F we get angle(C, F, H) == angle(H, F, C) mod 360
+By internal_angle_bisector_definition_v0_r on J, K, J, G we get Line(G, K) == internal_angle_bisector(J, G, J)
+By internal_angle_bisector_definition_v0 on C, F, C, H we get angle(C, H, F) == angle(F, H, C) mod 360
+By internal_angle_bisector_definition_v0_r on G, H, J, C we get Line(C, H) == internal_angle_bisector(G, C, J)
+By internal_angle_bisector_definition_v0_r on C, K, G, J we get Line(J, K) == internal_angle_bisector(C, J, G)
+By collinear_definition on H, C, F we get C in Line(F, H), F in Line(C, H), Line(C, H) == Line(F, H), 0 == 2 * angle(C, H, F) mod 360
+By internal_angle_bisector_definition_v0_r on J, H, F, G we get Line(G, H) == internal_angle_bisector(F, G, J)
+By collinear_definition on F, C, H we get C in Line(F, H), H in Line(C, F), Line(C, F) == Line(F, H), 0 == 2 * angle(C, F, H) mod 360
+By internal_angle_bisector_definition_v0_r on G, F, G, K we get Line(F, K) == internal_angle_bisector(G, K, G)
+By collinear_definition on K, H, G we get H in Line(G, K), G in Line(H, K), Line(G, K) == Line(H, K), 0 == 2 * angle(H, K, G) mod 360
+By internal_angle_bisector_definition_v0_r on G, J, G, K we get Line(J, K) == internal_angle_bisector(G, K, G)
+By internal_angle_bisector_definition_v0_r on J, F, H, C we get Line(C, F) == internal_angle_bisector(H, C, J)
+By internal_angle_bisector_definition_v0_r on F, K, H, C we get Line(C, K) == internal_angle_bisector(F, C, H)
+By internal_angle_bisector_definition_v0_r on F, K, G, C we get Line(C, K) == internal_angle_bisector(F, C, G)
+By collinear_definition on K, H, C we get H in Line(C, K), C in Line(H, K), Line(C, K) == Line(H, K), 0 == 2 * angle(H, K, C) mod 360
+By internal_angle_bisector_definition_v0_r on G, A, J, F we get Line(A, F) == internal_angle_bisector(G, F, J)
+By internal_angle_bisector_definition_v0_r on K, J, G, C we get Line(C, J) == internal_angle_bisector(G, C, K)
+By external_angle_bisector_definition_v0 on K, H, J, F we get 180 == angle(K, F, H) + angle(J, F, H) mod 360
+By internal_angle_bisector_definition_v0_r on G, F, G, J we get Line(F, J) == internal_angle_bisector(G, J, G)
+By isosceles_triangle_midpoint on I, D, C we get midpoint(C, D) in median(I, C, D)
+By collinear_definition on K, H, F we get H in Line(F, K), F in Line(H, K), Line(F, K) == Line(H, K), 0 == 2 * angle(H, K, F) mod 360
+By internal_angle_bisector_definition_v0_r on F, K, J, G we get Line(G, K) == internal_angle_bisector(F, G, J)
+By internal_angle_bisector_definition_v0_r on G, F, J, C we get Line(C, F) == internal_angle_bisector(G, C, J)
+By internal_angle_bisector_definition_v0 on J, H, J, F we get angle(H, F, J) == angle(J, F, H) mod 360
+By internal_angle_bisector_definition_v0_r on F, C, F, G we get Line(C, G) == internal_angle_bisector(F, G, F)
+By internal_angle_bisector_definition_v0_r on F, G, H, C we get Line(C, G) == internal_angle_bisector(F, C, H)
+By external_angle_bisector_definition_v0 on C, H, J, K we get 180 == angle(C, K, H) + angle(J, K, H) mod 360
+By internal_angle_bisector_definition_v0_r on H, J, K, G we get Line(G, J) == internal_angle_bisector(H, G, K)
+By perpendicular_angle_conditions_v0 on H, F, B we get angle(H, F, B) == orientation(B, H, F) mod 360
+By collinear_definition on H, K, C we get K in Line(C, H), C in Line(H, K), Line(C, H) == Line(H, K), 0 == 2 * angle(K, H, C) mod 360
+By internal_angle_bisector_definition_v0 on G, K, G, H we get angle(G, H, K) == angle(K, H, G) mod 360
+By internal_angle_bisector_definition_v0_r on G, C, J, K we get Line(C, K) == internal_angle_bisector(G, K, J)
+By collinear_definition on D, midpoint(C, D), C we get midpoint(C, D) in Line(C, D), C in Line(D, midpoint(C, D)), Line(C, D) == Line(D, midpoint(C, D)), 0 == 2 * angle(midpoint(C, D), D, C) mod 360
+By internal_angle_bisector_definition_v0_r on H, K, G, C we get Line(C, K) == internal_angle_bisector(G, C, H)
+By internal_angle_bisector_definition_v0_r on J, C, J, G we get Line(C, G) == internal_angle_bisector(J, G, J)
+By internal_angle_bisector_definition_v0 on F, H, F, K we get angle(F, K, H) == angle(H, K, F) mod 360
+By collinear_definition on K, H, J we get H in Line(J, K), J in Line(H, K), Line(H, K) == Line(J, K), 0 == 2 * angle(H, K, J) mod 360
+By internal_angle_bisector_definition_v0_r on C, F, G, J we get Line(F, J) == internal_angle_bisector(C, J, G)
+By internal_angle_bisector_definition_v0_r on H, K, C, G we get Line(G, K) == internal_angle_bisector(C, G, H)
+By isosceles_triangle_midpoint on H, C, D we get midpoint(C, D) in median(H, C, D)
+By external_angle_bisector_definition_v0 on A, H, A, F we get 180 == angle(A, F, H) + angle(A, F, H) mod 360
+By internal_angle_bisector_definition_v0_r on G, C, G, F we get Line(C, F) == internal_angle_bisector(G, F, G)
+By collinear_definition on D, C, midpoint(C, D) we get C in Line(D, midpoint(C, D)), midpoint(C, D) in Line(C, D), Line(C, D) == Line(D, midpoint(C, D)), 0 == 2 * angle(C, D, midpoint(C, D)) mod 360
+By internal_angle_bisector_definition_v0_r on F, J, G, C we get Line(C, J) == internal_angle_bisector(F, C, G)
+By collinear_definition on H, G, K we get G in Line(H, K), K in Line(G, H), Line(G, H) == Line(H, K), 0 == 2 * angle(G, H, K) mod 360
+By perpendicular_bisector_properties on C, D we get perpendicular(Line(C, D), perpendicular_bisector(C, D)), midpoint(C, D) == line_intersection(Line(C, D), perpendicular_bisector(C, D))
+By power_of_a_point_in_circle on C, Circle(B, C, E) we get 0 == power_of_a_point(C, Circle(B, C, E))
+By internal_angle_bisector_definition_v0 on B, H, A, F we get angle(B, F, H) == angle(H, F, A) mod 360
+By internal_angle_bisector_definition_v0_r on J, F, J, G we get Line(F, G) == internal_angle_bisector(J, G, J)
+By collinear_definition on F, K, H we get K in Line(F, H), H in Line(F, K), Line(F, H) == Line(F, K), 0 == 2 * angle(K, F, H) mod 360
+By internal_angle_bisector_definition_v0_r on F, J, F, G we get Line(G, J) == internal_angle_bisector(F, G, F)
+By collinear_definition on C, D, midpoint(C, D) we get D in Line(C, midpoint(C, D)), midpoint(C, D) in Line(C, D), Line(C, D) == Line(C, midpoint(C, D)), 0 == 2 * angle(D, C, midpoint(C, D)) mod 360
+By collinear_definition on F, G, H we get G in Line(F, H), H in Line(F, G), Line(F, G) == Line(F, H), 0 == 2 * angle(G, F, H) mod 360
+By internal_angle_bisector_definition_v0 on J, H, J, K we get angle(H, K, J) == angle(J, K, H) mod 360
+By collinear_definition on H, J, K we get J in Line(H, K), K in Line(H, J), Line(H, J) == Line(H, K), 0 == 2 * angle(J, H, K) mod 360
+By internal_angle_bisector_definition_v0_r on J, K, H, C we get Line(C, K) == internal_angle_bisector(H, C, J)
+By perpendicular_angle_conditions_v0 on A, F, H we get angle(A, F, H) == orientation(A, F, H) mod 360
+By collinear_definition on K, F, H we get F in Line(H, K), H in Line(F, K), Line(F, K) == Line(H, K), 0 == 2 * angle(F, K, H) mod 360
+By internal_angle_bisector_definition_v0 on F, H, J, K we get angle(F, K, H) == angle(H, K, J) mod 360
+By internal_angle_bisector_definition_v0_r on G, K, G, J we get Line(J, K) == internal_angle_bisector(G, J, G)
+By collinear_definition on K, G, H we get G in Line(H, K), H in Line(G, K), Line(G, K) == Line(H, K), 0 == 2 * angle(G, K, H) mod 360
+By internal_angle_bisector_definition_v0 on K, H, C, F we get angle(H, F, C) == angle(K, F, H) mod 360
+By collinear_definition on K, J, H we get J in Line(H, K), H in Line(J, K), Line(H, K) == Line(J, K), 0 == 2 * angle(J, K, H) mod 360
+By collinear_definition on H, J, F we get J in Line(F, H), F in Line(H, J), Line(F, H) == Line(H, J), 0 == 2 * angle(J, H, F) mod 360
+By collinear_definition on H, F, J we get F in Line(H, J), J in Line(F, H), Line(F, H) == Line(H, J), 0 == 2 * angle(F, H, J) mod 360
+By perpendicular_lines_draw_intersection on g, Line(H, I) we get exists(line_intersection(g, Line(H, I)))
+By isosceles_triangle_altitude_v2 on I, C, D we get identical(perpendicular_bisector(C, D), internal_angle_bisector(C, I, D), perpendicular_line(I, Line(C, D)))
+By isosceles_triangle_altitude_v3 on I, C, D we get identical(perpendicular_bisector(C, D), internal_angle_bisector(C, I, D), perpendicular_line(I, Line(C, D)))
+By isosceles_triangle_altitude_v2 on I, D, C we get identical(perpendicular_bisector(C, D), internal_angle_bisector(C, I, D), perpendicular_line(I, Line(C, D)))
+By power_of_a_point_definition on C, E, A, Circle(A, B, D) we get log(distance(C, E)) + log(distance(A, C)) == log(power_of_a_point(C, Circle(A, B, D)))
+By altitude_definition on A, H, J, f we get f == altitude(A, H, J)
+By sas_anti_similarity on E, A, F, B, A, C we get anti_similar_triangles(A, B, C, A, E, F)
+By altitude_definition on H, B, C, Line(H, I) we get Line(H, I) == altitude(H, B, C)
+By power_of_a_point_definition on A, C, E, Circle(B, C, E) we get log(distance(A, C)) + log(distance(A, E)) == log(power_of_a_point(A, Circle(B, C, E)))
+By power_of_a_point_definition on I, A, E, Circle(A, B, D) we get log(distance(A, I)) + log(distance(E, I)) == log(power_of_a_point(I, Circle(A, B, D)))
+By altitude_definition on A, H, F, f we get f == altitude(A, F, H)
+By altitude_definition on H, D, B, Line(H, I) we get Line(H, I) == altitude(H, B, D)
+By altitude_definition on D, I, H, g we get g == altitude(D, H, I)
+By sas_anti_similarity on B, G, C, F, G, E we get anti_similar_triangles(B, C, G, F, E, G)
+By altitude_definition on B, H, K, f we get f == altitude(B, H, K)
+By power_of_a_point_definition on G, D, A, Circle(A, B, D) we get log(distance(D, G)) + log(distance(A, G)) == log(power_of_a_point(G, Circle(A, B, D)))
+By altitude_definition on I, C, B, Line(H, I) we get Line(H, I) == altitude(I, B, C)
+By sas_anti_similarity on E, B, F, A, B, G we get anti_similar_triangles(A, B, G, E, B, F)
+By power_of_a_point_definition on D, B, C, Circle(B, C, E) we get log(distance(B, D)) + log(distance(C, D)) == log(power_of_a_point(D, Circle(B, C, E)))
+By collinear_definition on midpoint(C, D), C, D we get C in Line(D, midpoint(C, D)), D in Line(C, midpoint(C, D)), Line(C, midpoint(C, D)) == Line(D, midpoint(C, D)), 0 == 2 * angle(C, midpoint(C, D), D) mod 360
+By altitude_definition on H, D, C, Line(H, I) we get Line(H, I) == altitude(H, C, D)
+By power_of_a_point_definition on G, J, H, c we get log(power_of_a_point(G, c)) == log(distance(G, J)) + log(distance(G, H))
+By sas_anti_similarity on A, B, G, E, B, F we get anti_similar_triangles(A, B, G, E, B, F)
+By altitude_definition on C, I, H, g we get g == altitude(C, H, I)
+By sas_anti_similarity on F, B, E, G, B, A we get anti_similar_triangles(A, B, G, E, B, F)
+By sas_anti_similarity on C, G, B, E, G, F we get anti_similar_triangles(B, C, G, F, E, G)
+By altitude_definition on B, H, I, g we get g == altitude(B, H, I)
+By sas_anti_similarity on F, G, E, B, G, C we get anti_similar_triangles(B, C, G, F, E, G)
+By sas_anti_similarity on G, B, A, F, B, E we get anti_similar_triangles(A, B, G, E, B, F)
+By altitude_definition on B, H, J, f we get f == altitude(B, H, J)
+By collinear_definition on H, K, F we get K in Line(F, H), F in Line(H, K), Line(F, H) == Line(H, K), 0 == 2 * angle(K, H, F) mod 360
+By altitude_definition on I, D, C, Line(H, I) we get Line(H, I) == altitude(I, C, D)
+By power_of_a_point_definition on J, F, C, Circle(B, C, E) we get log(distance(F, J)) + log(distance(C, J)) == log(power_of_a_point(J, Circle(B, C, E)))
+By altitude_definition on B, F, H, f we get f == altitude(B, F, H)
+By altitude_definition on A, H, K, f we get f == altitude(A, H, K)
+By power_of_a_point_definition on C, B, D, Circle(A, B, D) we get log(distance(B, C)) + log(distance(C, D)) == log(power_of_a_point(C, Circle(A, B, D)))
+By power_of_a_point_definition on G, E, B, Circle(B, C, E) we get log(distance(E, G)) + log(distance(B, G)) == log(power_of_a_point(G, Circle(B, C, E)))
+By power_of_a_point_definition on G, C, F, Circle(B, C, E) we get log(distance(C, G)) + log(distance(F, G)) == log(power_of_a_point(G, Circle(B, C, E)))
+By sas_anti_similarity on C, A, B, F, A, E we get anti_similar_triangles(A, B, C, A, E, F)
+By sas_anti_similarity on E, G, F, C, G, B we get anti_similar_triangles(B, C, G, F, E, G)
+By altitude_definition on I, B, D, Line(H, I) we get Line(H, I) == altitude(I, B, D)
+By collinear_definition on H, F, K we get F in Line(H, K), K in Line(F, H), Line(F, H) == Line(H, K), 0 == 2 * angle(F, H, K) mod 360
+By collinear_definition on midpoint(C, D), D, C we get D in Line(C, midpoint(C, D)), C in Line(D, midpoint(C, D)), Line(C, midpoint(C, D)) == Line(D, midpoint(C, D)), 0 == 2 * angle(D, midpoint(C, D), C) mod 360
+By sas_anti_similarity on F, A, E, C, A, B we get anti_similar_triangles(A, B, C, A, E, F)
+By power_of_a_point_definition on F, B, A, Circle(A, B, D) we get log(distance(B, F)) + log(distance(A, F)) == log(power_of_a_point(F, Circle(A, B, D)))
+By power_of_a_point_definition on K, F, C, Circle(B, C, E) we get log(distance(F, K)) + log(distance(C, K)) == log(power_of_a_point(K, Circle(B, C, E)))
+By sas_anti_similarity on B, A, C, E, A, F we get anti_similar_triangles(A, B, C, A, E, F)
+By power_of_a_point_definition on A, B, F, Circle(B, C, E) we get log(distance(A, B)) + log(distance(A, F)) == log(power_of_a_point(A, Circle(B, C, E)))
+By power_of_a_point_definition on G, B, E, Circle(A, B, D) we get log(distance(B, G)) + log(distance(E, G)) == log(power_of_a_point(G, Circle(A, B, D)))
+By power_of_a_point_definition on I, E, C, Circle(B, C, E) we get log(distance(E, I)) + log(distance(C, I)) == log(power_of_a_point(I, Circle(B, C, E)))
+By isosceles_triangle_altitude_v3 on H, C, D we get identical(perpendicular_bisector(C, D), internal_angle_bisector(C, H, D), perpendicular_line(H, Line(C, D)))
+By isosceles_triangle_altitude_v3 on H, D, C we get identical(perpendicular_bisector(C, D), internal_angle_bisector(C, H, D), perpendicular_line(H, Line(C, D)))
+By power_of_a_point_definition on F, J, H, c we get log(power_of_a_point(F, c)) == log(distance(F, J)) + log(distance(F, H))
+By power_of_a_point_definition on H, C, F, Circle(B, C, E) we get log(distance(C, H)) + log(distance(F, H)) == log(power_of_a_point(H, Circle(B, C, E)))
+By power_of_a_point_definition on H, C, F, Circle(A, C, D) we get log(distance(C, H)) + log(distance(F, H)) == log(power_of_a_point(H, Circle(A, C, D)))
+By power_of_a_point_definition on midpoint(C, D), D, C, Circle(A, C, D) we get log(power_of_a_point(midpoint(C, D), Circle(A, C, D))) == log(distance(D, midpoint(C, D))) + log(distance(C, midpoint(C, D)))
+By power_of_a_point_definition on midpoint(C, D), D, C, Circle(C, D, E) we get log(power_of_a_point(midpoint(C, D), Circle(C, D, E))) == log(distance(D, midpoint(C, D))) + log(distance(C, midpoint(C, D)))
+By power_of_a_point_definition on K, H, J, c we get log(power_of_a_point(K, c)) == log(distance(H, K)) + log(distance(J, K))
+By between_implies_angles on C, midpoint(C, D), D we get 180 == angle(C, midpoint(C, D), D) mod 360, 0 == angle(midpoint(C, D), D, C) mod 360, 0 == angle(D, C, midpoint(C, D)) mod 360
+By between_implies_angles on D, midpoint(C, D), C we get 180 == angle(D, midpoint(C, D), C) mod 360, 0 == angle(midpoint(C, D), C, D) mod 360, 0 == angle(C, D, midpoint(C, D)) mod 360
+By concurrent_sufficient_conditions on Line(D, E), j, h we get concurrent(h, j, Line(D, E))
+By concyclic_sufficient_conditions_v0 on H, F, D, E we get concyclic(D, E, F, H)
+By concyclic_sufficient_conditions_v0 on I, E, H, F we get concyclic(E, F, H, I)
+By concurrent_sufficient_conditions on i, Line(D, H), Line(D, F) we get concurrent(i, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, F), k, f we get concurrent(f, k, Line(D, F))
+By concurrent_sufficient_conditions on l, Line(D, F), i we get concurrent(i, l, Line(D, F))
+By concurrent_sufficient_conditions on g, Line(D, F), Line(D, E) we get concurrent(g, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on g, Line(D, F), Line(D, H) we get concurrent(g, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, E), i we get concurrent(i, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, F), g, l we get concurrent(g, l, Line(D, F))
+By concurrent_sufficient_conditions on l, Line(D, H), Line(D, F) we get concurrent(l, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), h, Line(A, H) we get concurrent(h, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), h, i we get concurrent(h, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(A, J), i, radical_axis(c, Circle(A, C, D)) we get concurrent(i, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), Line(A, J), Line(A, H) we get concurrent(Line(A, H), Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, E), l, Line(D, H) we get concurrent(l, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on h, radical_axis(c, Circle(A, C, D)), f we get concurrent(f, h, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), f, k we get concurrent(f, k, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, F), Line(D, E) we get concurrent(Line(D, E), Line(D, F), Line(D, H))
+By concyclic_sufficient_conditions_v1 on I, F, D, H we get concyclic(D, F, H, I)
+By concurrent_sufficient_conditions on l, Line(D, E), Line(D, H) we get concurrent(l, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on f, radical_axis(c, Circle(A, C, D)), Line(A, H) we get concurrent(f, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(A, H), h, radical_axis(c, Circle(A, C, D)) we get concurrent(h, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), i, Line(D, E) we get concurrent(i, Line(D, E), Line(D, F))
+By line_definition on midpoint(C, D), B, g we get g == Line(B, midpoint(C, D))
+By concyclic_sufficient_conditions_v0 on D, F, I, E we get concyclic(D, E, F, I)
+By concurrent_sufficient_conditions on i, Line(A, J), radical_axis(c, Circle(A, C, D)) we get concurrent(i, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on i, f, radical_axis(c, Circle(A, C, D)) we get concurrent(f, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on g, l, Line(D, E) we get concurrent(g, l, Line(D, E))
+By concyclic_sufficient_conditions_v0 on K, J, A, D we get concyclic(A, D, J, K)
+By concurrent_sufficient_conditions on Line(D, F), Line(D, H), l we get concurrent(l, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on h, i, radical_axis(c, Circle(A, C, D)) we get concurrent(h, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, E), Line(D, F) we get concurrent(Line(D, E), Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, F), i, Line(D, H) we get concurrent(i, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), g, Line(D, F) we get concurrent(g, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, E), l we get concurrent(l, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on g, Line(D, E), Line(D, H) we get concurrent(g, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on i, radical_axis(c, Circle(A, C, D)), h we get concurrent(h, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(A, H), radical_axis(c, Circle(A, C, D)), Line(A, J) we get concurrent(Line(A, H), Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, H), l we get concurrent(l, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on l, g, Line(D, F) we get concurrent(g, l, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), Line(E, H), h we get concurrent(h, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, E), i, Line(D, F) we get concurrent(i, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on l, Line(D, E), Line(D, F) we get concurrent(l, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), Line(A, J), h we get concurrent(h, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on i, Line(D, E), l we get concurrent(i, l, Line(D, E))
+By concurrent_sufficient_conditions on f, Line(D, F), k we get concurrent(f, k, Line(D, F))
+By concurrent_sufficient_conditions on h, Line(D, E), Line(E, H) we get concurrent(h, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on l, Line(D, F), Line(D, E) we get concurrent(l, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on i, Line(D, F), l we get concurrent(i, l, Line(D, F))
+By concurrent_sufficient_conditions on i, Line(A, H), radical_axis(c, Circle(A, C, D)) we get concurrent(i, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), l, Line(D, H) we get concurrent(l, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, E), Line(D, H) we get concurrent(Line(D, E), Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, E), l we get concurrent(l, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, F), l, Line(D, E) we get concurrent(l, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), g, l we get concurrent(g, l, Line(D, E))
+By concurrent_sufficient_conditions on g, l, Line(D, F) we get concurrent(g, l, Line(D, F))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), Line(A, H), f we get concurrent(f, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on l, Line(D, H), Line(D, E) we get concurrent(l, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), f, Line(A, J) we get concurrent(f, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(E, H), Line(D, E), h we get concurrent(h, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on g, i, Line(D, E) we get concurrent(g, i, Line(D, E))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), Line(A, H), i we get concurrent(i, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, E), i, Line(D, H) we get concurrent(i, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, J), radical_axis(c, Circle(A, C, D)), f we get concurrent(f, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), i, f we get concurrent(f, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, E), g we get concurrent(g, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on i, Line(D, F), Line(D, H) we get concurrent(i, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, F), g we get concurrent(g, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, F), Line(D, H) we get concurrent(Line(D, E), Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on j, h, Line(D, E) we get concurrent(h, j, Line(D, E))
+By concurrent_sufficient_conditions on h, radical_axis(c, Circle(A, C, D)), Line(A, J) we get concurrent(h, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(A, H), Line(A, J), radical_axis(c, Circle(A, C, D)) we get concurrent(Line(A, H), Line(A, J), radical_axis(c, Circle(A, C, D)))
+By tangent_definition_from_perpendicularity_v0 on D, Line(D, H), Circle(A, B, D) we get perpendicular(Line(D, H), Line(D, center(Circle(A, B, D))))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), i, Line(A, H) we get concurrent(i, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on l, i, Line(D, E) we get concurrent(i, l, Line(D, E))
+By concurrent_sufficient_conditions on h, Line(D, E), j we get concurrent(h, j, Line(D, E))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, H), i we get concurrent(i, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on f, radical_axis(c, Circle(A, C, D)), h we get concurrent(f, h, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(F, I), Line(D, F), f we get concurrent(f, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, F), l we get concurrent(l, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on f, Line(A, J), radical_axis(c, Circle(A, C, D)) we get concurrent(f, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on i, g, Line(D, F) we get concurrent(g, i, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), g, Line(D, H) we get concurrent(g, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on f, Line(A, H), radical_axis(c, Circle(A, C, D)) we get concurrent(f, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on l, Line(D, E), g we get concurrent(g, l, Line(D, E))
+By concurrent_sufficient_conditions on Line(F, I), f, Line(D, F) we get concurrent(f, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on Line(D, H), i, Line(D, F) we get concurrent(i, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on g, Line(D, E), Line(D, F) we get concurrent(g, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on g, Line(D, H), Line(D, E) we get concurrent(g, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on h, Line(E, H), Line(D, E) we get concurrent(h, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, F), g, Line(D, E) we get concurrent(g, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on j, Line(D, E), h we get concurrent(h, j, Line(D, E))
+By concurrent_sufficient_conditions on f, h, radical_axis(c, Circle(A, C, D)) we get concurrent(f, h, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, H), Line(D, E) we get concurrent(Line(D, E), Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on h, j, Line(D, E) we get concurrent(h, j, Line(D, E))
+By concurrent_sufficient_conditions on j, Line(D, E), Line(E, H) we get concurrent(j, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, E), l, i we get concurrent(i, l, Line(D, E))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), Line(A, H), Line(A, J) we get concurrent(Line(A, H), Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, E), i we get concurrent(i, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), i, h we get concurrent(h, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, E), i, l we get concurrent(i, l, Line(D, E))
+By concurrent_sufficient_conditions on f, k, Line(D, F) we get concurrent(f, k, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, H), g, Line(D, E) we get concurrent(g, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), Line(A, H), h we get concurrent(h, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, H), Line(D, F) we get concurrent(Line(D, E), Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, J), f, radical_axis(c, Circle(A, C, D)) we get concurrent(f, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, F), g we get concurrent(g, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on k, Line(D, F), Line(F, I) we get concurrent(k, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on Line(D, H), l, Line(D, F) we get concurrent(l, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, H), i, radical_axis(c, Circle(A, C, D)) we get concurrent(i, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on i, Line(D, H), Line(D, E) we get concurrent(i, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, E), l, Line(D, F) we get concurrent(l, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), h, Line(A, J) we get concurrent(h, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on f, Line(D, F), Line(F, I) we get concurrent(f, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on Line(D, F), g, i we get concurrent(g, i, Line(D, F))
+By concurrent_sufficient_conditions on h, f, radical_axis(c, Circle(A, C, D)) we get concurrent(f, h, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(E, H), j, Line(D, E) we get concurrent(j, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on i, h, radical_axis(c, Circle(A, C, D)) we get concurrent(h, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on f, Line(F, I), Line(D, F) we get concurrent(f, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on Line(D, F), f, Line(F, I) we get concurrent(f, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, H), g we get concurrent(g, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, E), h, Line(E, H) we get concurrent(h, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, F), i we get concurrent(i, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(F, I), k, Line(D, F) we get concurrent(k, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, H), g we get concurrent(g, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), f, h we get concurrent(f, h, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on g, Line(D, F), l we get concurrent(g, l, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, F), i, g we get concurrent(g, i, Line(D, F))
+By concurrent_sufficient_conditions on Line(A, J), radical_axis(c, Circle(A, C, D)), i we get concurrent(i, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, E), Line(E, H), j we get concurrent(j, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, H), radical_axis(c, Circle(A, C, D)), f we get concurrent(f, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on h, Line(A, H), radical_axis(c, Circle(A, C, D)) we get concurrent(h, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), l, i we get concurrent(i, l, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, H), Line(D, F), l we get concurrent(l, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), i, Line(A, J) we get concurrent(i, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on i, radical_axis(c, Circle(A, C, D)), Line(A, J) we get concurrent(i, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(A, J), h, radical_axis(c, Circle(A, C, D)) we get concurrent(h, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on k, Line(F, I), Line(D, F) we get concurrent(k, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on i, Line(D, E), Line(D, F) we get concurrent(i, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), f, Line(A, H) we get concurrent(f, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on i, g, Line(D, E) we get concurrent(g, i, Line(D, E))
+By concurrent_sufficient_conditions on i, l, Line(D, E) we get concurrent(i, l, Line(D, E))
+By concurrent_sufficient_conditions on Line(D, E), j, Line(E, H) we get concurrent(j, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on Line(D, E), g, i we get concurrent(g, i, Line(D, E))
+By concurrent_sufficient_conditions on j, Line(E, H), Line(D, E) we get concurrent(j, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on g, Line(D, E), i we get concurrent(g, i, Line(D, E))
+By concurrent_sufficient_conditions on h, radical_axis(c, Circle(A, C, D)), i we get concurrent(h, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), Line(F, I), k we get concurrent(k, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, F), i we get concurrent(i, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on f, i, radical_axis(c, Circle(A, C, D)) we get concurrent(f, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, H), l, Line(D, E) we get concurrent(l, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on i, radical_axis(c, Circle(A, C, D)), Line(A, H) we get concurrent(i, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on k, Line(D, F), f we get concurrent(f, k, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), i, g we get concurrent(g, i, Line(D, E))
+By concurrent_sufficient_conditions on l, Line(D, F), Line(D, H) we get concurrent(l, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(A, J), radical_axis(c, Circle(A, C, D)), Line(A, H) we get concurrent(Line(A, H), Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on l, g, Line(D, E) we get concurrent(g, l, Line(D, E))
+By concurrent_sufficient_conditions on h, Line(A, J), radical_axis(c, Circle(A, C, D)) we get concurrent(h, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), f, i we get concurrent(f, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on i, Line(D, E), Line(D, H) we get concurrent(i, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, E), g, Line(D, F) we get concurrent(g, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(A, H), f, radical_axis(c, Circle(A, C, D)) we get concurrent(f, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on g, i, Line(D, F) we get concurrent(g, i, Line(D, F))
+By concurrent_sufficient_conditions on Line(A, H), radical_axis(c, Circle(A, C, D)), h we get concurrent(h, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on l, Line(D, F), g we get concurrent(g, l, Line(D, F))
+By concurrent_sufficient_conditions on g, Line(D, F), i we get concurrent(g, i, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, E), g we get concurrent(g, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), h, f we get concurrent(f, h, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), k, Line(F, I) we get concurrent(k, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on i, l, Line(D, F) we get concurrent(i, l, Line(D, F))
+By concurrent_sufficient_conditions on Line(A, H), radical_axis(c, Circle(A, C, D)), i we get concurrent(i, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, E), l, g we get concurrent(g, l, Line(D, E))
+By concurrent_sufficient_conditions on Line(A, J), radical_axis(c, Circle(A, C, D)), h we get concurrent(h, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(F, I), Line(D, F), k we get concurrent(k, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on Line(D, F), Line(F, I), f we get concurrent(f, Line(D, F), Line(F, I))
+By concurrent_sufficient_conditions on g, Line(D, H), Line(D, F) we get concurrent(g, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on l, i, Line(D, F) we get concurrent(i, l, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, H), i, Line(D, E) we get concurrent(i, Line(D, E), Line(D, H))
+By concurrent_sufficient_conditions on i, Line(D, F), g we get concurrent(g, i, Line(D, F))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, H), i we get concurrent(i, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on i, radical_axis(c, Circle(A, C, D)), f we get concurrent(f, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on h, radical_axis(c, Circle(A, C, D)), Line(A, H) we get concurrent(h, Line(A, H), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(E, H), Line(D, E), j we get concurrent(j, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), Line(A, J), f we get concurrent(f, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), g, Line(D, H) we get concurrent(g, Line(D, F), Line(D, H))
+By concurrent_sufficient_conditions on Line(D, F), l, g we get concurrent(g, l, Line(D, F))
+By concurrent_sufficient_conditions on k, f, Line(D, F) we get concurrent(f, k, Line(D, F))
+By concurrent_sufficient_conditions on Line(E, H), h, Line(D, E) we get concurrent(h, Line(D, E), Line(E, H))
+By concurrent_sufficient_conditions on Line(A, J), Line(A, H), radical_axis(c, Circle(A, C, D)) we get concurrent(Line(A, H), Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, F), i, l we get concurrent(i, l, Line(D, F))
+By concurrent_sufficient_conditions on radical_axis(c, Circle(A, C, D)), Line(A, J), i we get concurrent(i, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on i, Line(D, F), Line(D, E) we get concurrent(i, Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on f, radical_axis(c, Circle(A, C, D)), i we get concurrent(f, i, radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on f, radical_axis(c, Circle(A, C, D)), Line(A, J) we get concurrent(f, Line(A, J), radical_axis(c, Circle(A, C, D)))
+By concurrent_sufficient_conditions on Line(D, E), h, j we get concurrent(h, j, Line(D, E))
+By concurrent_sufficient_conditions on l, Line(D, E), i we get concurrent(i, l, Line(D, E))
+By concurrent_sufficient_conditions on i, Line(D, E), g we get concurrent(g, i, Line(D, E))
+By concurrent_sufficient_conditions on g, Line(D, E), l we get concurrent(g, l, Line(D, E))
+By radical_axis_is_perpendicular_to_center_line on radical_axis(c, Circle(A, C, D)), c, Circle(A, C, D) we get perpendicular(radical_axis(c, Circle(A, C, D)), Line(center(c), center(Circle(A, C, D))))
+By tangent_definition_from_perpendicularity_v0 on E, Line(E, H), Circle(A, B, D) we get perpendicular(Line(E, H), Line(E, center(Circle(A, B, D))))
+By median_definition on center(c), A, C, Line(I, center(c)) we get Line(I, center(c)) == median(center(c), A, C)
+By line_intersection_definition on A, Line(A, J), Line(A, center(c)) we get A == line_intersection(Line(A, J), Line(A, center(c)))
+By line_intersection_definition on A, radical_axis(c, Circle(A, C, D)), Line(A, center(c)) we get A == line_intersection(Line(A, center(c)), radical_axis(c, Circle(A, C, D)))
+By line_intersection_definition on H, k, Line(H, center(c)) we get H == line_intersection(k, Line(H, center(c)))
+By line_intersection_definition on center(c), Line(A, center(c)), Line(J, center(c)) we get center(c) == line_intersection(Line(A, center(c)), Line(J, center(c)))
+By line_intersection_definition on I, Line(I, center(c)), l we get I == line_intersection(l, Line(I, center(c)))
+By line_intersection_definition on E, Line(D, E), Line(E, F) we get E == line_intersection(Line(D, E), Line(E, F))
+By line_intersection_definition on J, Line(A, J), Line(J, center(c)) we get J == line_intersection(Line(A, J), Line(J, center(c)))
+By line_intersection_definition on center(c), Line(H, center(c)), Line(I, center(c)) we get center(c) == line_intersection(Line(H, center(c)), Line(I, center(c)))
+By perpendicular_line_definition on midpoint(C, D), g, i we get g == perpendicular_line(midpoint(C, D), i)
+By median_definition on center(c), C, G, Line(H, center(c)) we get Line(H, center(c)) == median(center(c), C, G)
+By line_intersection_definition on center(c), Line(J, center(c)), Line(H, center(c)) we get center(c) == line_intersection(Line(H, center(c)), Line(J, center(c)))
+By line_intersection_definition on center(c), Line(I, center(c)), Line(J, center(c)) we get center(c) == line_intersection(Line(I, center(c)), Line(J, center(c)))
+By line_intersection_definition on I, Line(H, I), Line(I, center(c)) we get I == line_intersection(Line(H, I), Line(I, center(c)))
+By line_intersection_definition on J, k, Line(J, center(c)) we get J == line_intersection(k, Line(J, center(c)))
+By perpendicular_line_definition on midpoint(C, D), g, Line(H, I) we get g == perpendicular_line(midpoint(C, D), Line(H, I))
+By line_intersection_definition on E, Line(E, F), j we get E == line_intersection(j, Line(E, F))
+By line_intersection_definition on E, Line(E, F), h we get E == line_intersection(h, Line(E, F))
+By line_intersection_definition on F, Line(E, F), f we get F == line_intersection(f, Line(E, F))
+By line_intersection_definition on E, Line(E, H), Line(E, F) we get E == line_intersection(Line(E, F), Line(E, H))
+By line_intersection_definition on A, i, Line(A, center(c)) we get A == line_intersection(i, Line(A, center(c)))
+By line_intersection_definition on A, Line(A, center(c)), Line(A, H) we get A == line_intersection(Line(A, H), Line(A, center(c)))
+By line_intersection_definition on H, Line(H, center(c)), Line(A, H) we get H == line_intersection(Line(A, H), Line(H, center(c)))
+By line_intersection_definition on center(c), Line(H, center(c)), Line(A, center(c)) we get center(c) == line_intersection(Line(A, center(c)), Line(H, center(c)))
+By line_intersection_definition on center(c), Line(I, center(c)), Line(A, center(c)) we get center(c) == line_intersection(Line(A, center(c)), Line(I, center(c)))
+By line_intersection_definition on H, Line(D, H), Line(H, center(c)) we get H == line_intersection(Line(D, H), Line(H, center(c)))
+By line_intersection_definition on J, Line(I, J), Line(J, center(c)) we get J == line_intersection(Line(I, J), Line(J, center(c)))
+By line_intersection_definition on F, Line(F, I), Line(E, F) we get F == line_intersection(Line(E, F), Line(F, I))
+By line_intersection_definition on F, Line(E, F), k we get F == line_intersection(k, Line(E, F))
+By line_intersection_definition on H, Line(H, I), Line(H, center(c)) we get H == line_intersection(Line(H, I), Line(H, center(c)))
+By line_intersection_definition on A, Line(A, center(c)), h we get A == line_intersection(h, Line(A, center(c)))
+By line_intersection_definition on I, Line(F, I), Line(I, center(c)) we get I == line_intersection(Line(F, I), Line(I, center(c)))
+By line_intersection_definition on F, Line(E, F), Line(D, F) we get F == line_intersection(Line(D, F), Line(E, F))
+By line_intersection_definition on I, h, Line(I, center(c)) we get I == line_intersection(h, Line(I, center(c)))
+By line_intersection_definition on I, Line(I, J), Line(I, center(c)) we get I == line_intersection(Line(I, J), Line(I, center(c)))
+By line_intersection_definition on A, f, Line(A, center(c)) we get A == line_intersection(f, Line(A, center(c)))
+By line_intersection_definition on H, Line(E, H), Line(H, center(c)) we get H == line_intersection(Line(E, H), Line(H, center(c)))
+By tangents_angle_bisector on H, E, D, Circle(A, B, D) we get angle(E, H, center(Circle(A, B, D))) == angle(center(Circle(A, B, D)), H, D) mod 360
+By tangents_angle_bisector on H, D, E, Circle(A, B, D) we get angle(D, H, center(Circle(A, B, D))) == angle(center(Circle(A, B, D)), H, E) mod 360
+By same_angle_converse_v1 on D, B, midpoint(C, D), C we get collinear(B, D, midpoint(C, D))
+By same_angle_v1 on F, K, H, E we get angle(H, F, E) == angle(K, F, E) mod 360
+By same_angle_v2 on F, J, H, E we get angle(J, F, E) == angle(H, F, E) + 180 mod 360
+By projection_definition on D, midpoint(C, D), Line(H, I) we get midpoint(C, D) == projection(D, Line(H, I))
+By same_angle_converse_v0 on C, midpoint(C, D), B, D we get collinear(B, C, midpoint(C, D))
+By perpendicular_direction_conditions_v0_r on A, D, midpoint(C, D), C we get 180 == 2 * direction(A, D) - 2 * direction(midpoint(C, D), C) mod 360
+By same_angle_v3 on F, J, C, E we get angle(J, F, E) == angle(C, F, E) + 180 mod 360
+By same_angle_v0 on E, I, C, F we get angle(C, E, F) == angle(I, E, F) mod 360
+By between_imply_not_between on H, G, F we get collinear_and_not_between(F, H, G)
+By same_angle_v2 on F, J, K, E we get angle(J, F, E) == angle(K, F, E) + 180 mod 360
+By same_angle_v1 on F, G, K, E we get angle(G, F, E) == angle(K, F, E) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, A, G we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(A, G) mod 360
+By same_angle_v2 on F, J, G, E we get angle(J, F, E) == angle(G, F, E) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, D, A we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(D, A) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, D, G we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(D, G) mod 360
+By same_angle_v1 on F, C, K, E we get angle(C, F, E) == angle(K, F, E) mod 360
+By projection_definition on C, midpoint(C, D), Line(H, I) we get midpoint(C, D) == projection(C, Line(H, I))
+By same_angle_v1 on F, H, C, E we get angle(C, F, E) == angle(H, F, E) mod 360
+By same_angle_v1 on F, H, G, E we get angle(G, F, E) == angle(H, F, E) mod 360
+By same_angle_v2 on E, I, A, F we get angle(I, E, F) == angle(A, E, F) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on D, G, midpoint(C, D), D we get 180 == 2 * direction(D, G) - 2 * direction(midpoint(C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on D, G, midpoint(C, D), C we get 180 == 2 * direction(D, G) - 2 * direction(midpoint(C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, A, D we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, G, A we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(G, A) mod 360
+By perpendicular_direction_conditions_v0_r on G, A, midpoint(C, D), D we get 180 == 2 * direction(G, A) - 2 * direction(midpoint(C, D), D) mod 360
+By between_imply_not_between on G, K, H we get collinear_and_not_between(H, G, K)
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, D, G we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(D, G) mod 360
+By perpendicular_direction_conditions_v0_r on H, I, midpoint(C, D), D we get 180 == 2 * direction(H, I) - 2 * direction(midpoint(C, D), D) mod 360
+By projection_definition on H, midpoint(C, D), g we get midpoint(C, D) == projection(H, g)
+By perpendicular_direction_conditions_v0_r on D, A, midpoint(C, D), D we get 180 == 2 * direction(D, A) - 2 * direction(midpoint(C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on D, A, midpoint(C, D), C we get 180 == 2 * direction(D, A) - 2 * direction(midpoint(C, D), C) mod 360
+By between_imply_not_between on H, K, G we get collinear_and_not_between(G, H, K)
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, I, H we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(I, H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, G, D we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(G, D) mod 360
+By perpendicular_direction_conditions_v0_r on G, D, midpoint(C, D), D we get 180 == 2 * direction(G, D) - 2 * direction(midpoint(C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on H, I, midpoint(C, D), C we get 180 == 2 * direction(H, I) - 2 * direction(midpoint(C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, I, H we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(I, H) mod 360
+By perpendicular_direction_conditions_v0_r on I, H, midpoint(C, D), C we get 180 == 2 * direction(I, H) - 2 * direction(midpoint(C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on G, D, midpoint(C, D), C we get 180 == 2 * direction(G, D) - 2 * direction(midpoint(C, D), C) mod 360
+By projection_definition on I, midpoint(C, D), g we get midpoint(C, D) == projection(I, g)
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, D, A we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(D, A) mod 360
+By between_imply_not_between on C, H, F we get collinear_and_not_between(F, C, H)
+By between_imply_not_between on H, K, F we get collinear_and_not_between(F, H, K)
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, A, D we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(A, D) mod 360
+By perpendicular_direction_conditions_v0_r on I, H, midpoint(C, D), D we get 180 == 2 * direction(I, H) - 2 * direction(midpoint(C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on G, A, midpoint(C, D), C we get 180 == 2 * direction(G, A) - 2 * direction(midpoint(C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, H, I we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(H, I) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, H, I we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(H, I) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, A, G we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(A, G) mod 360
+By perpendicular_direction_conditions_v0_r on A, G, midpoint(C, D), C we get 180 == 2 * direction(A, G) - 2 * direction(midpoint(C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, G, A we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(G, A) mod 360
+By between_imply_not_between on C, H, K we get collinear_and_not_between(H, C, K)
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, G, D we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(G, D) mod 360
+By perpendicular_direction_conditions_v0_r on A, G, midpoint(C, D), D we get 180 == 2 * direction(A, G) - 2 * direction(midpoint(C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on A, D, midpoint(C, D), D we get 180 == 2 * direction(A, D) - 2 * direction(midpoint(C, D), D) mod 360
+By between_imply_not_between on C, H, J we get collinear_and_not_between(H, C, J)
+By between_imply_not_between on J, K, H we get collinear_and_not_between(H, J, K)
+By between_imply_not_between on H, K, J we get collinear_and_not_between(J, H, K)
+By between_imply_not_between on K, H, C we get collinear_and_not_between(C, K, H)
+By between_imply_not_between on F, K, H we get collinear_and_not_between(H, F, K)
+By between_imply_not_between on H, G, J we get collinear_and_not_between(G, H, J)
+By between_imply_not_between on F, H, C we get collinear_and_not_between(C, F, H)
+By between_imply_not_between on J, G, H we get collinear_and_not_between(G, J, H)
+By between_imply_not_between on J, F, H we get collinear_and_not_between(F, J, H)
+By between_imply_not_between on J, H, C we get collinear_and_not_between(C, J, H)
+By between_imply_not_between on H, F, J we get collinear_and_not_between(F, H, J)
+By between_imply_not_between on F, G, H we get collinear_and_not_between(G, F, H)
+By circle_radius_v0_r on E, Circle(B, C, E) we get radius(Circle(B, C, E)) == distance(E, center(Circle(B, C, E)))
+By circle_radius_v0_r on D, Circle(A, B, D) we get radius(Circle(A, B, D)) == distance(D, center(Circle(A, B, D)))
+By circle_radius_v0_r on E, Circle(A, B, D) we get radius(Circle(A, B, D)) == distance(E, center(Circle(A, B, D)))
+By circle_radius_v0_r on C, Circle(B, C, E) we get radius(Circle(B, C, E)) == distance(C, center(Circle(B, C, E)))
+By circle_radius_v0_r on B, Circle(B, C, E) we get radius(Circle(B, C, E)) == distance(B, center(Circle(B, C, E)))
+By circle_radius_v0_r on B, Circle(A, B, D) we get radius(Circle(A, B, D)) == distance(B, center(Circle(A, B, D)))
+By circle_radius_v0_r on F, Circle(B, C, E) we get radius(Circle(B, C, E)) == distance(F, center(Circle(B, C, E)))
+By circle_radius_v0_r on A, Circle(A, B, D) we get radius(Circle(A, B, D)) == distance(A, center(Circle(A, B, D)))
+By angle_to_center on E, A, B, Circle(A, B, D) we get 2 * angle(E, A, B) == angle(E, center(Circle(A, B, D)), B) mod 360
+By angle_to_center on E, D, A, Circle(A, B, D) we get 2 * angle(E, D, A) == angle(E, center(Circle(A, B, D)), A) mod 360
+By angle_to_center on B, A, D, Circle(A, B, D) we get 2 * angle(B, A, D) == angle(B, center(Circle(A, B, D)), D) mod 360
+By angle_to_center on B, F, C, Circle(B, C, E) we get 2 * angle(B, F, C) == angle(B, center(Circle(B, C, E)), C) mod 360
+By angle_to_center on D, E, A, Circle(A, B, D) we get 2 * angle(D, E, A) == angle(D, center(Circle(A, B, D)), A) mod 360
+By tangent_lengths_equal on H, Line(E, H), Line(D, H), Circle(A, B, D) we get distance(H, line_circle_tangent_point(Line(D, H), Circle(A, B, D))) == distance(H, line_circle_tangent_point(Line(E, H), Circle(A, B, D)))
+By angle_to_center on E, B, F, Circle(B, C, E) we get 2 * angle(E, B, F) == angle(E, center(Circle(B, C, E)), F) mod 360
+By angle_to_center on B, D, E, Circle(A, B, D) we get 2 * angle(B, D, E) == angle(B, center(Circle(A, B, D)), E) mod 360
+By angle_to_center on B, C, F, Circle(B, C, E) we get 2 * angle(B, C, F) == angle(B, center(Circle(B, C, E)), F) mod 360
+By angle_to_center on D, A, B, Circle(A, B, D) we get 2 * angle(D, A, B) == angle(D, center(Circle(A, B, D)), B) mod 360
+By angle_to_center on D, B, A, Circle(A, B, D) we get 2 * angle(D, B, A) == angle(D, center(Circle(A, B, D)), A) mod 360
+By angle_to_center on D, A, E, Circle(A, B, D) we get 2 * angle(D, A, E) == angle(D, center(Circle(A, B, D)), E) mod 360
+By angle_to_center on F, C, B, Circle(B, C, E) we get 2 * angle(F, C, B) == angle(F, center(Circle(B, C, E)), B) mod 360
+By angle_to_center on C, F, E, Circle(B, C, E) we get 2 * angle(C, F, E) == angle(C, center(Circle(B, C, E)), E) mod 360
+By angle_to_center on C, E, F, Circle(B, C, E) we get 2 * angle(C, E, F) == angle(C, center(Circle(B, C, E)), F) mod 360
+By angle_to_center on F, E, C, Circle(B, C, E) we get 2 * angle(F, E, C) == angle(F, center(Circle(B, C, E)), C) mod 360
+By angle_to_center on A, B, D, Circle(A, B, D) we get 2 * angle(A, B, D) == angle(A, center(Circle(A, B, D)), D) mod 360
+By angle_to_center on B, C, E, Circle(B, C, E) we get 2 * angle(B, C, E) == angle(B, center(Circle(B, C, E)), E) mod 360
+By angle_to_center on E, D, B, Circle(A, B, D) we get 2 * angle(E, D, B) == angle(E, center(Circle(A, B, D)), B) mod 360
+By angle_to_center on E, C, F, Circle(B, C, E) we get 2 * angle(E, C, F) == angle(E, center(Circle(B, C, E)), F) mod 360
+By angle_to_center on B, E, C, Circle(B, C, E) we get 2 * angle(B, E, C) == angle(B, center(Circle(B, C, E)), C) mod 360
+By angle_to_center on B, D, A, Circle(A, B, D) we get 2 * angle(B, D, A) == angle(B, center(Circle(A, B, D)), A) mod 360
+By angle_to_center on C, F, B, Circle(B, C, E) we get 2 * angle(C, F, B) == angle(C, center(Circle(B, C, E)), B) mod 360
+By angle_to_center on C, B, E, Circle(B, C, E) we get 2 * angle(C, B, E) == angle(C, center(Circle(B, C, E)), E) mod 360
+By angle_to_center on B, F, E, Circle(B, C, E) we get 2 * angle(B, F, E) == angle(B, center(Circle(B, C, E)), E) mod 360
+By angle_to_center on A, D, E, Circle(A, B, D) we get 2 * angle(A, D, E) == angle(A, center(Circle(A, B, D)), E) mod 360
+By angle_to_center on C, B, F, Circle(B, C, E) we get 2 * angle(C, B, F) == angle(C, center(Circle(B, C, E)), F) mod 360
+By angle_to_center on B, A, E, Circle(A, B, D) we get 2 * angle(B, A, E) == angle(B, center(Circle(A, B, D)), E) mod 360
+By angle_to_center on A, D, B, Circle(A, B, D) we get 2 * angle(A, D, B) == angle(A, center(Circle(A, B, D)), B) mod 360
+By angle_to_center on F, C, E, Circle(B, C, E) we get 2 * angle(F, C, E) == angle(F, center(Circle(B, C, E)), E) mod 360
+By angle_to_center on E, B, D, Circle(A, B, D) we get 2 * angle(E, B, D) == angle(E, center(Circle(A, B, D)), D) mod 360
+By angle_to_center on E, C, B, Circle(B, C, E) we get 2 * angle(E, C, B) == angle(E, center(Circle(B, C, E)), B) mod 360
+By angle_to_center on B, E, A, Circle(A, B, D) we get 2 * angle(B, E, A) == angle(B, center(Circle(A, B, D)), A) mod 360
+By perpendicular_direction_conditions_v0_r on C, B, H, midpoint(C, D) we get 180 == 2 * direction(C, B) - 2 * direction(H, midpoint(C, D)) mod 360
+By angle_to_center on F, B, E, Circle(B, C, E) we get 2 * angle(F, B, E) == angle(F, center(Circle(B, C, E)), E) mod 360
+By angle_to_center on E, A, D, Circle(A, B, D) we get 2 * angle(E, A, D) == angle(E, center(Circle(A, B, D)), D) mod 360
+By angle_to_center on E, F, B, Circle(B, C, E) we get 2 * angle(E, F, B) == angle(E, center(Circle(B, C, E)), B) mod 360
+By angle_to_center on B, E, F, Circle(B, C, E) we get 2 * angle(B, E, F) == angle(B, center(Circle(B, C, E)), F) mod 360
+By angle_to_center on A, E, B, Circle(A, B, D) we get 2 * angle(A, E, B) == angle(A, center(Circle(A, B, D)), B) mod 360
+By angle_to_center on C, E, B, Circle(B, C, E) we get 2 * angle(C, E, B) == angle(C, center(Circle(B, C, E)), B) mod 360
+By angle_to_center on E, B, C, Circle(B, C, E) we get 2 * angle(E, B, C) == angle(E, center(Circle(B, C, E)), C) mod 360
+By angle_to_center on E, B, A, Circle(A, B, D) we get 2 * angle(E, B, A) == angle(E, center(Circle(A, B, D)), A) mod 360
+By angle_to_center on A, E, D, Circle(A, B, D) we get 2 * angle(A, E, D) == angle(A, center(Circle(A, B, D)), D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, B, D we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(B, D) mod 360
+By angle_to_center on F, E, B, Circle(B, C, E) we get 2 * angle(F, E, B) == angle(F, center(Circle(B, C, E)), B) mod 360
+By angle_to_center on F, B, C, Circle(B, C, E) we get 2 * angle(F, B, C) == angle(F, center(Circle(B, C, E)), C) mod 360
+By angle_to_center on D, B, E, Circle(A, B, D) we get 2 * angle(D, B, E) == angle(D, center(Circle(A, B, D)), E) mod 360
+By angle_to_center on A, B, E, Circle(A, B, D) we get 2 * angle(A, B, E) == angle(A, center(Circle(A, B, D)), E) mod 360
+By angle_to_center on B, E, D, Circle(A, B, D) we get 2 * angle(B, E, D) == angle(B, center(Circle(A, B, D)), D) mod 360
+By angle_to_center on D, E, B, Circle(A, B, D) we get 2 * angle(D, E, B) == angle(D, center(Circle(A, B, D)), B) mod 360
+By angle_to_center on E, F, C, Circle(B, C, E) we get 2 * angle(E, F, C) == angle(E, center(Circle(B, C, E)), C) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, B, C we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(B, C) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, I, midpoint(C, D) we get 180 == 2 * direction(D, B) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), midpoint(C, D), C we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(midpoint(C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on C, midpoint(C, D), H, midpoint(C, D) we get 180 == 2 * direction(C, midpoint(C, D)) - 2 * direction(H, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), midpoint(C, D), D we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(midpoint(C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, H, midpoint(C, D) we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(H, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, B, D we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(B, D) mod 360
+By orthocenter_concurrency on I, B, C we get orthocenter(B, C, I) in altitude(I, B, C), orthocenter(B, C, I) in altitude(B, C, I), orthocenter(B, C, I) in altitude(C, B, I)
+By perpendicular_direction_conditions_v0_r on C, midpoint(C, D), I, midpoint(C, D) we get 180 == 2 * direction(C, midpoint(C, D)) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, midpoint(C, D), I we get 180 == 2 * direction(C, D) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on C, midpoint(C, D), midpoint(C, D), I we get 180 == 2 * direction(C, midpoint(C, D)) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), midpoint(C, D), D we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(midpoint(C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, C, B we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(C, B) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), B, D we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(B, D) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), C, B we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(C, B) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(C, D), midpoint(C, D), I we get 180 == 2 * direction(D, midpoint(C, D)) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, midpoint(C, D), H we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), D, midpoint(C, D) we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(D, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(C, D), I, midpoint(C, D) we get 180 == 2 * direction(D, midpoint(C, D)) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), midpoint(C, D), C we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(midpoint(C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), C, midpoint(C, D) we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(C, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, C, midpoint(C, D) we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(C, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, midpoint(C, D), I we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on C, B, midpoint(C, D), I we get 180 == 2 * direction(C, B) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, H, midpoint(C, D) we get 180 == 2 * direction(B, D) - 2 * direction(H, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, B, midpoint(C, D), H we get 180 == 2 * direction(C, B) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), D, I, midpoint(C, D) we get 180 == 2 * direction(midpoint(C, D), D) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, C, midpoint(C, D), H we get 180 == 2 * direction(D, C) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(C, D), H, midpoint(C, D) we get 180 == 2 * direction(D, midpoint(C, D)) - 2 * direction(H, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, midpoint(C, D), I we get 180 == 2 * direction(B, C) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, midpoint(C, D), C we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(midpoint(C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, midpoint(C, D), I we get 180 == 2 * direction(B, D) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), D, C we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(D, C) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, midpoint(C, D), C we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(midpoint(C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, midpoint(C, D), H we get 180 == 2 * direction(B, C) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on C, B, I, midpoint(C, D) we get 180 == 2 * direction(C, B) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, I, midpoint(C, D) we get 180 == 2 * direction(B, C) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), C, B we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(C, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, H, midpoint(C, D) we get 180 == 2 * direction(C, D) - 2 * direction(H, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), D, B we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(D, B) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), B, C we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(B, C) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, H, midpoint(C, D) we get 180 == 2 * direction(D, B) - 2 * direction(H, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, C, H, midpoint(C, D) we get 180 == 2 * direction(B, C) - 2 * direction(H, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, midpoint(C, D), H we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, B, C we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(B, C) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, I, midpoint(C, D) we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, midpoint(C, D), H we get 180 == 2 * direction(D, B) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on D, C, H, midpoint(C, D) we get 180 == 2 * direction(D, C) - 2 * direction(H, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, C, B we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(C, B) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, midpoint(C, D), I we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, I, midpoint(C, D) we get 180 == 2 * direction(C, D) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, B, midpoint(C, D), I we get 180 == 2 * direction(D, B) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, midpoint(C, D), H we get 180 == 2 * direction(B, D) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on B, D, I, midpoint(C, D) we get 180 == 2 * direction(B, D) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, D, midpoint(C, D) we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(D, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, D, C we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(D, C) mod 360
+By parallel_line_angles_v1 on F, E, A, J we get parallel(Line(A, J), Line(E, F))
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), D, B we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(D, B) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), C, H, midpoint(C, D) we get 180 == 2 * direction(midpoint(C, D), C) - 2 * direction(H, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, D, midpoint(C, D), H we get 180 == 2 * direction(C, D) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, midpoint(C, D), D we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(midpoint(C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), C, midpoint(C, D) we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(C, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), C, D we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(C, D) mod 360
+By orthocenter_concurrency on H, B, C we get orthocenter(B, C, H) in altitude(H, B, C), orthocenter(B, C, H) in altitude(B, C, H), orthocenter(B, C, H) in altitude(C, B, H)
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, midpoint(C, D), D we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(midpoint(C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), B, D we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(B, D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, D, B we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(D, B) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), D, C we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(D, C) mod 360
+By perpendicular_direction_conditions_v0_r on C, midpoint(C, D), midpoint(C, D), H we get 180 == 2 * direction(C, midpoint(C, D)) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, D, midpoint(C, D) we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(D, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, C, midpoint(C, D), I we get 180 == 2 * direction(D, C) - 2 * direction(midpoint(C, D), I) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), D, midpoint(C, D) we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(D, midpoint(C, D)) mod 360
+By anti_similar_triangle_basic_properties on A, C, G, F, D, G we get angle(A, C, G) == 0 - angle(F, D, G) mod 360, angle(C, G, A) == 0 - angle(D, G, F) mod 360, angle(G, A, C) == 0 - angle(G, F, D) mod 360, log(distance(A, C)) + log(distance(D, G)) == log(distance(D, F)) + log(distance(C, G)), log(distance(C, G)) + log(distance(F, G)) == log(distance(D, G)) + log(distance(A, G)), log(distance(A, G)) + log(distance(D, F)) == log(distance(F, G)) + log(distance(A, C))
+By perpendicular_direction_conditions_v0_r on D, C, I, midpoint(C, D) we get 180 == 2 * direction(D, C) - 2 * direction(I, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on I, midpoint(C, D), C, D we get 180 == 2 * direction(I, midpoint(C, D)) - 2 * direction(C, D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, C, D we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(C, D) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, D, C we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(D, C) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), H, C, D we get 180 == 2 * direction(midpoint(C, D), H) - 2 * direction(C, D) mod 360
+By projection_definition on midpoint(C, D), D, i we get D == projection(midpoint(C, D), i)
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, C, midpoint(C, D) we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(C, midpoint(C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, midpoint(C, D), midpoint(C, D), H we get 180 == 2 * direction(D, midpoint(C, D)) - 2 * direction(midpoint(C, D), H) mod 360
+By perpendicular_direction_conditions_v0_r on midpoint(C, D), I, D, B we get 180 == 2 * direction(midpoint(C, D), I) - 2 * direction(D, B) mod 360
+By perpendicular_direction_conditions_v0_r on H, midpoint(C, D), B, C we get 180 == 2 * direction(H, midpoint(C, D)) - 2 * direction(B, C) mod 360
+By anti_similar_triangle_basic_properties on H, D, G, I, F, D we get angle(H, D, G) == 0 - angle(I, F, D) mod 360, angle(D, G, H) == 0 - angle(F, D, I) mod 360, angle(G, H, D) == 0 - angle(D, I, F) mod 360, log(distance(D, H)) + log(distance(D, F)) == log(distance(F, I)) + log(distance(D, G)), log(distance(D, F)) + log(distance(G, H)) == log(distance(D, G)) + log(distance(D, I)), log(distance(D, I)) + log(distance(D, H)) == log(distance(G, H)) + log(distance(F, I))
+By anti_similar_triangle_basic_properties on B, G, A, D, F, A we get angle(B, G, A) == 0 - angle(D, F, A) mod 360, angle(G, A, B) == 0 - angle(F, A, D) mod 360, angle(A, B, G) == 0 - angle(A, D, F) mod 360, log(distance(B, G)) + log(distance(A, F)) == log(distance(D, F)) + log(distance(A, G)), log(distance(A, F)) + log(distance(A, B)) == log(distance(A, G)) + log(distance(A, D)), log(distance(A, B)) + log(distance(D, F)) == log(distance(A, D)) + log(distance(B, G))
+By similar_triangle_basic_properties on G, D, F, H, D, I we get angle(G, D, F) == angle(H, D, I) mod 360, angle(D, F, G) == angle(D, I, H) mod 360, angle(F, G, D) == angle(I, H, D) mod 360, log(distance(D, G)) + log(distance(D, I)) == log(distance(D, H)) + log(distance(D, F)), log(distance(D, F)) + log(distance(H, I)) == log(distance(D, I)) + log(distance(F, G)), log(distance(F, G)) + log(distance(D, H)) == log(distance(H, I)) + log(distance(D, G))
+By anti_similar_triangle_basic_properties on I, H, C, F, G, D we get angle(I, H, C) == 0 - angle(F, G, D) mod 360, angle(H, C, I) == 0 - angle(G, D, F) mod 360, angle(C, I, H) == 0 - angle(D, F, G) mod 360, log(distance(F, G)) + log(distance(C, H)) == log(distance(H, I)) + log(distance(D, G)), log(distance(C, H)) + log(distance(D, F)) == log(distance(D, G)) + log(distance(C, I)), log(distance(C, I)) + log(distance(F, G)) == log(distance(D, F)) + log(distance(H, I))
+By between_imply_segment_sum on F, G, H we get distance(F, H) == distance(F, G) + distance(G, H)
+By external_angle_bisector_definition_v0 on G, midpoint(C, D), A, D we get 180 == angle(G, D, midpoint(C, D)) + angle(A, D, midpoint(C, D)) mod 360
+By between_imply_segment_sum on K, H, C we get distance(C, K) == distance(H, K) + distance(C, H)
+By anti_similar_triangle_basic_properties on D, B, F, A, B, C we get angle(D, B, F) == 0 - angle(A, B, C) mod 360, angle(B, F, D) == 0 - angle(B, C, A) mod 360, angle(F, D, B) == 0 - angle(C, A, B) mod 360, log(distance(A, B)) + log(distance(B, F)) == log(distance(B, D)) + log(distance(B, C)), log(distance(B, C)) + log(distance(D, F)) == log(distance(B, F)) + log(distance(A, C)), log(distance(A, C)) + log(distance(B, D)) == log(distance(D, F)) + log(distance(A, B))
+By anti_similar_triangle_basic_properties on F, D, G, I, C, H we get angle(F, D, G) == 0 - angle(I, C, H) mod 360, angle(D, G, F) == 0 - angle(C, H, I) mod 360, angle(G, F, D) == 0 - angle(H, I, C) mod 360, log(distance(C, I)) + log(distance(D, G)) == log(distance(D, F)) + log(distance(C, H)), log(distance(C, H)) + log(distance(F, G)) == log(distance(D, G)) + log(distance(H, I)), log(distance(F, G)) + log(distance(C, I)) == log(distance(H, I)) + log(distance(D, F))
+By internal_angle_bisector_definition_v0 on B, midpoint(C, D), B, D we get angle(B, D, midpoint(C, D)) == angle(midpoint(C, D), D, B) mod 360
+By anti_similar_triangle_basic_properties on D, F, I, G, D, H we get angle(D, F, I) == 0 - angle(G, D, H) mod 360, angle(F, I, D) == 0 - angle(D, H, G) mod 360, angle(I, D, F) == 0 - angle(H, G, D) mod 360, log(distance(D, F)) + log(distance(D, H)) == log(distance(D, G)) + log(distance(F, I)), log(distance(D, H)) + log(distance(D, I)) == log(distance(F, I)) + log(distance(G, H)), log(distance(D, I)) + log(distance(D, G)) == log(distance(G, H)) + log(distance(D, F))
+By anti_similar_triangle_basic_properties on C, B, G, C, F, D we get angle(C, B, G) == 0 - angle(C, F, D) mod 360, angle(B, G, C) == 0 - angle(F, D, C) mod 360, angle(G, C, B) == 0 - angle(D, C, F) mod 360, log(distance(B, C)) + log(distance(D, F)) == log(distance(C, F)) + log(distance(B, G)), log(distance(B, G)) + log(distance(C, D)) == log(distance(D, F)) + log(distance(C, G)), log(distance(C, D)) + log(distance(B, C)) == log(distance(C, G)) + log(distance(C, F))
+By between_imply_segment_sum on J, F, H we get distance(H, J) == distance(F, J) + distance(F, H)
+By anti_similar_triangle_basic_properties on A, G, C, F, G, D we get angle(A, G, C) == 0 - angle(F, G, D) mod 360, angle(G, C, A) == 0 - angle(G, D, F) mod 360, angle(C, A, G) == 0 - angle(D, F, G) mod 360, log(distance(A, G)) + log(distance(D, G)) == log(distance(F, G)) + log(distance(C, G)), log(distance(C, G)) + log(distance(D, F)) == log(distance(D, G)) + log(distance(A, C)), log(distance(A, C)) + log(distance(F, G)) == log(distance(D, F)) + log(distance(A, G))
+By similar_triangle_basic_properties on I, F, D, H, G, D we get angle(H, G, D) == angle(I, F, D) mod 360, angle(F, D, I) == angle(G, D, H) mod 360, angle(D, H, G) == angle(D, I, F) mod 360, log(distance(F, I)) + log(distance(D, G)) == log(distance(G, H)) + log(distance(D, F)), log(distance(D, F)) + log(distance(D, H)) == log(distance(D, G)) + log(distance(D, I)), log(distance(D, H)) + log(distance(F, I)) == log(distance(D, I)) + log(distance(G, H))
+By between_imply_segment_sum on H, G, J we get distance(H, J) == distance(G, H) + distance(G, J)
+By between_imply_segment_sum on C, H, F we get distance(C, F) == distance(C, H) + distance(F, H)
+By between_imply_segment_sum on F, K, H we get distance(F, H) == distance(F, K) + distance(H, K)
+By similar_triangle_basic_properties on G, H, D, F, I, D we get angle(F, I, D) == angle(G, H, D) mod 360, angle(H, D, G) == angle(I, D, F) mod 360, angle(D, F, I) == angle(D, G, H) mod 360, log(distance(F, I)) + log(distance(D, H)) == log(distance(G, H)) + log(distance(D, I)), log(distance(D, H)) + log(distance(D, F)) == log(distance(D, I)) + log(distance(D, G)), log(distance(D, F)) + log(distance(G, H)) == log(distance(D, G)) + log(distance(F, I))
+By perpendicular_angle_conditions_v0 on A, D, midpoint(C, D) we get angle(A, D, midpoint(C, D)) == orientation(A, D, midpoint(C, D)) mod 360
+By aa_anti_similarity on I, F, J, H, E, A we get anti_similar_triangles(A, E, H, J, F, I)
+By anti_similar_triangle_basic_properties on C, B, A, F, B, D we get angle(C, B, A) == 0 - angle(F, B, D) mod 360, angle(B, A, C) == 0 - angle(B, D, F) mod 360, angle(A, C, B) == 0 - angle(D, F, B) mod 360, log(distance(B, C)) + log(distance(B, D)) == log(distance(B, F)) + log(distance(A, B)), log(distance(A, B)) + log(distance(D, F)) == log(distance(B, D)) + log(distance(A, C)), log(distance(A, C)) + log(distance(B, F)) == log(distance(D, F)) + log(distance(B, C))
+By external_angle_bisector_definition_v0 on A, midpoint(C, D), A, D we get 180 == angle(A, D, midpoint(C, D)) + angle(A, D, midpoint(C, D)) mod 360
+By reverse_direction on D, midpoint(C, D) we get 180 == direction(D, midpoint(C, D)) - direction(midpoint(C, D), D) mod 360
+By anti_similar_triangle_basic_properties on D, A, F, B, A, G we get angle(D, A, F) == 0 - angle(B, A, G) mod 360, angle(A, F, D) == 0 - angle(A, G, B) mod 360, angle(F, D, A) == 0 - angle(G, B, A) mod 360, log(distance(A, B)) + log(distance(A, F)) == log(distance(A, D)) + log(distance(A, G)), log(distance(A, F)) + log(distance(B, G)) == log(distance(A, G)) + log(distance(D, F)), log(distance(B, G)) + log(distance(A, D)) == log(distance(D, F)) + log(distance(A, B))
+By between_imply_segment_sum on C, H, J we get distance(C, J) == distance(C, H) + distance(H, J)
+By between_imply_segment_sum on J, K, H we get distance(H, J) == distance(J, K) + distance(H, K)
+By perpendicular_angle_conditions_v0 on midpoint(C, D), D, A we get angle(midpoint(C, D), D, A) == orientation(A, midpoint(C, D), D) mod 360
+By similar_triangle_basic_properties on I, D, H, F, D, G we get angle(F, D, G) == angle(I, D, H) mod 360, angle(D, G, F) == angle(D, H, I) mod 360, angle(G, F, D) == angle(H, I, D) mod 360, log(distance(D, F)) + log(distance(D, H)) == log(distance(D, I)) + log(distance(D, G)), log(distance(D, G)) + log(distance(H, I)) == log(distance(D, H)) + log(distance(F, G)), log(distance(F, G)) + log(distance(D, I)) == log(distance(H, I)) + log(distance(D, F))
+By reverse_direction on midpoint(C, D), D we get 180 == direction(midpoint(C, D), D) - direction(D, midpoint(C, D)) mod 360
+By anti_similar_triangle_basic_properties on B, C, G, F, C, D we get angle(B, C, G) == 0 - angle(F, C, D) mod 360, angle(C, G, B) == 0 - angle(C, D, F) mod 360, angle(G, B, C) == 0 - angle(D, F, C) mod 360, log(distance(B, C)) + log(distance(C, D)) == log(distance(C, F)) + log(distance(C, G)), log(distance(C, D)) + log(distance(B, G)) == log(distance(C, G)) + log(distance(D, F)), log(distance(B, G)) + log(distance(C, F)) == log(distance(D, F)) + log(distance(B, C))
+By perpendicular_angle_conditions_v0 on G, D, midpoint(C, D) we get angle(G, D, midpoint(C, D)) == orientation(D, midpoint(C, D), G) mod 360
+By aa_anti_similarity on H, A, E, I, J, F we get anti_similar_triangles(A, E, H, J, F, I)
+By external_angle_bisector_definition_v0 on G, midpoint(C, D), G, D we get 180 == angle(G, D, midpoint(C, D)) + angle(G, D, midpoint(C, D)) mod 360
+By between_imply_segment_sum on H, K, G we get distance(G, H) == distance(H, K) + distance(G, K)
+By reverse_direction on C, midpoint(C, D) we get 180 == direction(C, midpoint(C, D)) - direction(midpoint(C, D), C) mod 360
+By perpendicular_angle_conditions_v0 on midpoint(C, D), D, G we get angle(midpoint(C, D), D, G) == orientation(D, G, midpoint(C, D)) mod 360
+By internal_angle_bisector_definition_v0 on B, midpoint(C, D), B, C we get angle(B, C, midpoint(C, D)) == angle(midpoint(C, D), C, B) mod 360
+By aa_anti_similarity on H, E, A, I, F, J we get anti_similar_triangles(A, E, H, J, F, I)
+By reverse_direction on midpoint(C, D), C we get 180 == direction(midpoint(C, D), C) - direction(C, midpoint(C, D)) mod 360
+By aa_anti_similarity on I, J, F, H, A, E we get anti_similar_triangles(A, E, H, J, F, I)
+By anti_similar_triangle_basic_properties on I, C, H, J, C, A we get angle(I, C, H) == 0 - angle(J, C, A) mod 360, angle(C, H, I) == 0 - angle(C, A, J) mod 360, angle(H, I, C) == 0 - angle(A, J, C) mod 360, log(distance(C, I)) + log(distance(A, C)) == log(distance(C, J)) + log(distance(C, H)), log(distance(A, C)) + log(distance(H, I)) == log(distance(C, H)) + log(distance(A, J)), log(distance(A, J)) + log(distance(C, I)) == log(distance(H, I)) + log(distance(C, J))
+By similar_triangle_basic_properties on D, E, H, D, A, I we get angle(D, A, I) == angle(D, E, H) mod 360, angle(A, I, D) == angle(E, H, D) mod 360, angle(H, D, E) == angle(I, D, A) mod 360, log(distance(A, D)) + log(distance(E, H)) == log(distance(D, E)) + log(distance(A, I)), log(distance(A, I)) + log(distance(D, H)) == log(distance(E, H)) + log(distance(D, I)), log(distance(D, H)) + log(distance(A, D)) == log(distance(D, I)) + log(distance(D, E))
+By external_angle_bisector_definition_v0_r on E, B, F, D we get Line(B, D) == external_angle_bisector(E, D, F)
+By external_angle_bisector_definition_v0_r on F, G, H, K we get Line(G, K) == external_angle_bisector(F, K, H)
+By external_angle_bisector_definition_v0_r on G, B, H, F we get Line(B, F) == external_angle_bisector(G, F, H)
+By internal_angle_bisector_definition_v0_r on D, G, E, F we get Line(F, G) == internal_angle_bisector(D, F, E)
+By internal_angle_bisector_definition_v0_r on G, K, F, H we get Line(H, K) == internal_angle_bisector(F, H, G)
+By external_angle_bisector_definition_v0_r on C, G, K, H we get Line(G, H) == external_angle_bisector(C, H, K)
+By external_angle_bisector_definition_v0_r on J, C, H, K we get Line(C, K) == external_angle_bisector(H, K, J)
+By external_angle_bisector_definition_v0_r on E, B, D, F we get Line(B, F) == external_angle_bisector(D, F, E)
+By external_angle_bisector_definition_v0_r on C, J, F, H we get Line(H, J) == external_angle_bisector(C, H, F)
+By internal_angle_bisector_definition_v0_r on G, J, F, H we get Line(H, J) == internal_angle_bisector(F, H, G)
+By anti_similar_triangle_basic_properties on D, E, G, B, A, G we get angle(D, E, G) == 0 - angle(B, A, G) mod 360, angle(E, G, D) == 0 - angle(A, G, B) mod 360, angle(G, D, E) == 0 - angle(G, B, A) mod 360, log(distance(A, B)) + log(distance(E, G)) == log(distance(D, E)) + log(distance(A, G)), log(distance(A, G)) + log(distance(D, G)) == log(distance(E, G)) + log(distance(B, G)), log(distance(B, G)) + log(distance(D, E)) == log(distance(D, G)) + log(distance(A, B))
+By similar_triangle_basic_properties on D, G, F, D, E, A we get angle(D, E, A) == angle(D, G, F) mod 360, angle(E, A, D) == angle(G, F, D) mod 360, angle(A, D, E) == angle(F, D, G) mod 360, log(distance(D, E)) + log(distance(F, G)) == log(distance(D, G)) + log(distance(A, E)), log(distance(A, E)) + log(distance(D, F)) == log(distance(F, G)) + log(distance(A, D)), log(distance(A, D)) + log(distance(D, G)) == log(distance(D, F)) + log(distance(D, E))
+By concyclic_definition_0 on H, D, E, I we get I in Circle(D, E, H)
+By similar_triangle_basic_properties on D, H, E, D, I, A we get angle(D, H, E) == angle(D, I, A) mod 360, angle(H, E, D) == angle(I, A, D) mod 360, angle(A, D, I) == angle(E, D, H) mod 360, log(distance(D, H)) + log(distance(A, I)) == log(distance(D, I)) + log(distance(E, H)), log(distance(A, I)) + log(distance(D, E)) == log(distance(E, H)) + log(distance(A, D)), log(distance(A, D)) + log(distance(D, H)) == log(distance(D, E)) + log(distance(D, I))
+By external_angle_bisector_definition_v0_r on J, C, H, F we get Line(C, F) == external_angle_bisector(H, F, J)
+By external_angle_bisector_definition_v0_r on F, C, E, D we get Line(C, D) == external_angle_bisector(E, D, F)
+By internal_angle_bisector_definition_v0_r on H, F, H, J we get Line(F, J) == internal_angle_bisector(H, J, H)
+By external_angle_bisector_definition_v0_r on D, I, J, H we get Line(H, I) == external_angle_bisector(D, H, J)
+By similar_triangle_basic_properties on A, E, D, I, H, D we get angle(A, E, D) == angle(I, H, D) mod 360, angle(E, D, A) == angle(H, D, I) mod 360, angle(D, A, E) == angle(D, I, H) mod 360, log(distance(A, E)) + log(distance(D, H)) == log(distance(H, I)) + log(distance(D, E)), log(distance(D, E)) + log(distance(D, I)) == log(distance(D, H)) + log(distance(A, D)), log(distance(A, D)) + log(distance(H, I)) == log(distance(D, I)) + log(distance(A, E))
+By external_angle_bisector_definition_v0_r on C, J, K, H we get Line(H, J) == external_angle_bisector(C, H, K)
+By internal_angle_bisector_definition_v0_r on H, K, G, F we get Line(F, K) == internal_angle_bisector(G, F, H)
+By collinear_definition on I, midpoint(C, D), H we get midpoint(C, D) in Line(H, I), H in Line(I, midpoint(C, D)), Line(H, I) == Line(I, midpoint(C, D)), 0 == 2 * angle(midpoint(C, D), I, H) mod 360
+By power_of_a_point_tangent_converse_v1 on C, J, G, A we get tangent(Line(A, C), Circle(A, G, J))
+By external_angle_bisector_definition_v0_r on B, C, midpoint(C, D), D we get Line(C, D) == external_angle_bisector(B, D, midpoint(C, D))
+By similar_triangle_basic_properties on D, B, E, D, F, C we get angle(D, B, E) == angle(D, F, C) mod 360, angle(B, E, D) == angle(F, C, D) mod 360, angle(C, D, F) == angle(E, D, B) mod 360, log(distance(B, D)) + log(distance(C, F)) == log(distance(D, F)) + log(distance(B, E)), log(distance(B, E)) + log(distance(C, D)) == log(distance(C, F)) + log(distance(D, E)), log(distance(C, D)) + log(distance(B, D)) == log(distance(D, E)) + log(distance(D, F))
+By external_angle_bisector_definition_v0_r on H, F, G, K we get Line(F, K) == external_angle_bisector(G, K, H)
+By external_angle_bisector_definition_v0_r on J, K, C, H we get Line(H, K) == external_angle_bisector(C, H, J)
+By external_angle_bisector_definition_v0_r on H, G, J, K we get Line(G, K) == external_angle_bisector(H, K, J)
+By anti_similar_triangle_basic_properties on B, C, A, E, F, A we get angle(B, C, A) == 0 - angle(E, F, A) mod 360, angle(C, A, B) == 0 - angle(F, A, E) mod 360, angle(A, B, C) == 0 - angle(A, E, F) mod 360, log(distance(B, C)) + log(distance(A, F)) == log(distance(E, F)) + log(distance(A, C)), log(distance(A, C)) + log(distance(A, E)) == log(distance(A, F)) + log(distance(A, B)), log(distance(A, B)) + log(distance(E, F)) == log(distance(A, E)) + log(distance(B, C))
+By similar_triangle_basic_properties on I, D, H, A, D, E we get angle(A, D, E) == angle(I, D, H) mod 360, angle(D, E, A) == angle(D, H, I) mod 360, angle(E, A, D) == angle(H, I, D) mod 360, log(distance(A, D)) + log(distance(D, H)) == log(distance(D, I)) + log(distance(D, E)), log(distance(D, E)) + log(distance(H, I)) == log(distance(D, H)) + log(distance(A, E)), log(distance(A, E)) + log(distance(D, I)) == log(distance(H, I)) + log(distance(A, D))
+By anti_similar_triangle_basic_properties on D, E, B, G, C, B we get angle(D, E, B) == 0 - angle(G, C, B) mod 360, angle(E, B, D) == 0 - angle(C, B, G) mod 360, angle(B, D, E) == 0 - angle(B, G, C) mod 360, log(distance(C, G)) + log(distance(B, E)) == log(distance(D, E)) + log(distance(B, C)), log(distance(B, C)) + log(distance(B, D)) == log(distance(B, E)) + log(distance(B, G)), log(distance(B, D)) + log(distance(C, G)) == log(distance(B, G)) + log(distance(D, E))
+By similar_triangle_basic_properties on F, D, C, B, D, E we get angle(B, D, E) == angle(F, D, C) mod 360, angle(D, C, F) == angle(D, E, B) mod 360, angle(C, F, D) == angle(E, B, D) mod 360, log(distance(B, D)) + log(distance(C, D)) == log(distance(D, F)) + log(distance(D, E)), log(distance(C, D)) + log(distance(B, E)) == log(distance(D, E)) + log(distance(C, F)), log(distance(B, E)) + log(distance(D, F)) == log(distance(C, F)) + log(distance(B, D))
+By anti_similar_triangle_basic_properties on C, B, A, C, E, D we get angle(C, B, A) == 0 - angle(C, E, D) mod 360, angle(B, A, C) == 0 - angle(E, D, C) mod 360, angle(A, C, B) == 0 - angle(D, C, E) mod 360, log(distance(B, C)) + log(distance(D, E)) == log(distance(C, E)) + log(distance(A, B)), log(distance(A, B)) + log(distance(C, D)) == log(distance(D, E)) + log(distance(A, C)), log(distance(A, C)) + log(distance(C, E)) == log(distance(C, D)) + log(distance(B, C))
+By internal_angle_bisector_definition_v0_r on H, G, H, F we get Line(F, G) == internal_angle_bisector(H, F, H)
+By external_angle_bisector_definition_v0_r on D, I, F, H we get Line(H, I) == external_angle_bisector(D, H, F)
+By collinear_definition on H, I, midpoint(C, D) we get I in Line(H, midpoint(C, D)), midpoint(C, D) in Line(H, I), Line(H, I) == Line(H, midpoint(C, D)), 0 == 2 * angle(I, H, midpoint(C, D)) mod 360
+By anti_similar_triangle_basic_properties on F, K, D, D, K, G we get angle(F, K, D) == 0 - angle(D, K, G) mod 360, angle(K, D, F) == 0 - angle(K, G, D) mod 360, angle(D, F, K) == 0 - angle(G, D, K) mod 360, log(distance(D, K)) + log(distance(D, K)) == log(distance(F, K)) + log(distance(G, K)), log(distance(D, K)) + log(distance(D, G)) == log(distance(G, K)) + log(distance(D, F)), log(distance(D, F)) + log(distance(D, K)) == log(distance(D, G)) + log(distance(F, K))
+By external_angle_bisector_definition_v0_r on G, J, C, H we get Line(H, J) == external_angle_bisector(C, H, G)
+By similar_triangle_basic_properties on E, F, C, H, I, D we get angle(E, F, C) == angle(H, I, D) mod 360, angle(F, C, E) == angle(I, D, H) mod 360, angle(C, E, F) == angle(D, H, I) mod 360, log(distance(E, F)) + log(distance(D, I)) == log(distance(H, I)) + log(distance(C, F)), log(distance(C, F)) + log(distance(D, H)) == log(distance(D, I)) + log(distance(C, E)), log(distance(C, E)) + log(distance(H, I)) == log(distance(D, H)) + log(distance(E, F))
+By external_angle_bisector_definition_v0_r on E, A, D, F we get Line(A, F) == external_angle_bisector(D, F, E)
+By similar_triangle_basic_properties on D, F, G, C, J, A we get angle(C, J, A) == angle(D, F, G) mod 360, angle(F, G, D) == angle(J, A, C) mod 360, angle(A, C, J) == angle(G, D, F) mod 360, log(distance(C, J)) + log(distance(F, G)) == log(distance(D, F)) + log(distance(A, J)), log(distance(A, J)) + log(distance(D, G)) == log(distance(F, G)) + log(distance(A, C)), log(distance(A, C)) + log(distance(D, F)) == log(distance(D, G)) + log(distance(C, J))
+By external_angle_bisector_definition_v0_r on C, F, G, H we get Line(F, H) == external_angle_bisector(C, H, G)
+By concyclic_definition_0 on B, G, F, D we get D in Circle(B, F, G)
+By similar_triangle_basic_properties on F, D, A, F, B, E we get angle(F, B, E) == angle(F, D, A) mod 360, angle(B, E, F) == angle(D, A, F) mod 360, angle(A, F, D) == angle(E, F, B) mod 360, log(distance(B, F)) + log(distance(A, D)) == log(distance(D, F)) + log(distance(B, E)), log(distance(A, D)) + log(distance(E, F)) == log(distance(B, E)) + log(distance(A, F)), log(distance(A, F)) + log(distance(B, F)) == log(distance(E, F)) + log(distance(D, F))
+By anti_similar_triangle_basic_properties on H, C, I, E, C, F we get angle(H, C, I) == 0 - angle(E, C, F) mod 360, angle(C, I, H) == 0 - angle(C, F, E) mod 360, angle(I, H, C) == 0 - angle(F, E, C) mod 360, log(distance(C, E)) + log(distance(C, I)) == log(distance(C, H)) + log(distance(C, F)), log(distance(C, F)) + log(distance(H, I)) == log(distance(C, I)) + log(distance(E, F)), log(distance(E, F)) + log(distance(C, H)) == log(distance(H, I)) + log(distance(C, E))
+By external_angle_bisector_definition_v0_r on H, F, J, K we get Line(F, K) == external_angle_bisector(H, K, J)
+By internal_angle_bisector_definition_v0_r on E, C, D, F we get Line(C, F) == internal_angle_bisector(D, F, E)
+By anti_similar_triangle_basic_properties on A, G, C, A, E, D we get angle(A, G, C) == 0 - angle(A, E, D) mod 360, angle(G, C, A) == 0 - angle(E, D, A) mod 360, angle(C, A, G) == 0 - angle(D, A, E) mod 360, log(distance(A, E)) + log(distance(C, G)) == log(distance(A, G)) + log(distance(D, E)), log(distance(C, G)) + log(distance(A, D)) == log(distance(D, E)) + log(distance(A, C)), log(distance(A, C)) + log(distance(A, E)) == log(distance(A, D)) + log(distance(A, G))
+By similar_triangle_basic_properties on B, G, D, J, A, F we get angle(B, G, D) == angle(J, A, F) mod 360, angle(A, F, J) == angle(G, D, B) mod 360, angle(D, B, G) == angle(F, J, A) mod 360, log(distance(A, J)) + log(distance(D, G)) == log(distance(B, G)) + log(distance(A, F)), log(distance(A, F)) + log(distance(B, D)) == log(distance(D, G)) + log(distance(F, J)), log(distance(B, D)) + log(distance(A, J)) == log(distance(F, J)) + log(distance(B, G))
+By external_angle_bisector_definition_v0_r on H, C, F, K we get Line(C, K) == external_angle_bisector(F, K, H)
+By similar_triangle_basic_properties on E, B, F, A, D, F we get angle(A, D, F) == angle(E, B, F) mod 360, angle(B, F, E) == angle(D, F, A) mod 360, angle(F, A, D) == angle(F, E, B) mod 360, log(distance(A, D)) + log(distance(B, F)) == log(distance(B, E)) + log(distance(D, F)), log(distance(B, F)) + log(distance(A, F)) == log(distance(D, F)) + log(distance(E, F)), log(distance(A, F)) + log(distance(B, E)) == log(distance(E, F)) + log(distance(A, D))
+By external_angle_bisector_definition_v0_r on C, F, J, H we get Line(F, H) == external_angle_bisector(C, H, J)
+By internal_angle_bisector_definition_v0_r on F, G, E, D we get Line(D, G) == internal_angle_bisector(E, D, F)
+By similar_triangle_basic_properties on I, D, H, J, C, A we get angle(I, D, H) == angle(J, C, A) mod 360, angle(C, A, J) == angle(D, H, I) mod 360, angle(A, J, C) == angle(H, I, D) mod 360, log(distance(C, J)) + log(distance(D, H)) == log(distance(D, I)) + log(distance(A, C)), log(distance(A, C)) + log(distance(H, I)) == log(distance(D, H)) + log(distance(A, J)), log(distance(A, J)) + log(distance(D, I)) == log(distance(H, I)) + log(distance(C, J))
+By concyclic_definition_0 on G, D, F, B we get B in Circle(D, F, G)
+By external_angle_bisector_definition_v0_r on J, G, C, H we get Line(G, H) == external_angle_bisector(C, H, J)
+By external_angle_bisector_definition_v0_r on G, J, H, K we get Line(J, K) == external_angle_bisector(G, K, H)
+By perpendicular_angle_conditions_v0 on C, midpoint(C, D), I we get angle(C, midpoint(C, D), I) == orientation(C, midpoint(C, D), I) mod 360
+By similar_triangle_basic_properties on C, A, D, A, J, F we get angle(A, J, F) == angle(C, A, D) mod 360, angle(A, D, C) == angle(J, F, A) mod 360, angle(D, C, A) == angle(F, A, J) mod 360, log(distance(A, C)) + log(distance(F, J)) == log(distance(A, J)) + log(distance(A, D)), log(distance(A, D)) + log(distance(A, F)) == log(distance(F, J)) + log(distance(C, D)), log(distance(A, F)) + log(distance(A, C)) == log(distance(C, D)) + log(distance(A, J))
+By internal_angle_bisector_definition_v0_r on F, C, G, H we get Line(C, H) == internal_angle_bisector(F, H, G)
+By anti_similar_triangle_basic_properties on C, D, E, C, A, B we get angle(C, D, E) == 0 - angle(C, A, B) mod 360, angle(D, E, C) == 0 - angle(A, B, C) mod 360, angle(E, C, D) == 0 - angle(B, C, A) mod 360, log(distance(A, C)) + log(distance(D, E)) == log(distance(C, D)) + log(distance(A, B)), log(distance(A, B)) + log(distance(C, E)) == log(distance(D, E)) + log(distance(B, C)), log(distance(B, C)) + log(distance(C, D)) == log(distance(C, E)) + log(distance(A, C))
+By external_angle_bisector_definition_v0_r on K, F, C, H we get Line(F, H) == external_angle_bisector(C, H, K)
+By external_angle_bisector_definition_v0_r on C, G, F, H we get Line(G, H) == external_angle_bisector(C, H, F)
+By external_angle_bisector_definition_v0_r on F, A, D, E we get Line(A, E) == external_angle_bisector(D, E, F)
+By concyclic_definition_0 on G, E, F, A we get A in Circle(E, F, G)
+By internal_angle_bisector_definition_v0_r on J, C, F, H we get Line(C, H) == internal_angle_bisector(F, H, J)
+By collinear_definition on H, midpoint(C, D), I we get midpoint(C, D) in Line(H, I), I in Line(H, midpoint(C, D)), Line(H, I) == Line(H, midpoint(C, D)), 0 == 2 * angle(midpoint(C, D), H, I) mod 360
+By anti_similar_triangle_basic_properties on F, J, A, E, B, C we get angle(F, J, A) == 0 - angle(E, B, C) mod 360, angle(J, A, F) == 0 - angle(B, C, E) mod 360, angle(A, F, J) == 0 - angle(C, E, B) mod 360, log(distance(B, E)) + log(distance(A, J)) == log(distance(F, J)) + log(distance(B, C)), log(distance(A, J)) + log(distance(C, E)) == log(distance(B, C)) + log(distance(A, F)), log(distance(A, F)) + log(distance(B, E)) == log(distance(C, E)) + log(distance(F, J))
+By anti_similar_triangle_basic_properties on G, A, C, E, A, D we get angle(G, A, C) == 0 - angle(E, A, D) mod 360, angle(A, C, G) == 0 - angle(A, D, E) mod 360, angle(C, G, A) == 0 - angle(D, E, A) mod 360, log(distance(A, E)) + log(distance(A, C)) == log(distance(A, G)) + log(distance(A, D)), log(distance(A, C)) + log(distance(D, E)) == log(distance(A, D)) + log(distance(C, G)), log(distance(C, G)) + log(distance(A, E)) == log(distance(D, E)) + log(distance(A, G))
+By anti_similar_triangle_basic_properties on A, F, J, G, E, A we get angle(A, F, J) == 0 - angle(G, E, A) mod 360, angle(F, J, A) == 0 - angle(E, A, G) mod 360, angle(J, A, F) == 0 - angle(A, G, E) mod 360, log(distance(A, F)) + log(distance(A, E)) == log(distance(E, G)) + log(distance(F, J)), log(distance(A, E)) + log(distance(A, J)) == log(distance(F, J)) + log(distance(A, G)), log(distance(A, G)) + log(distance(A, F)) == log(distance(A, J)) + log(distance(E, G))
+By internal_angle_bisector_definition_v0_r on G, C, K, H we get Line(C, H) == internal_angle_bisector(G, H, K)
+By external_angle_bisector_definition_v0_r on C, K, G, H we get Line(H, K) == external_angle_bisector(C, H, G)
+By similar_triangle_basic_properties on J, A, C, I, H, D we get angle(I, H, D) == angle(J, A, C) mod 360, angle(A, C, J) == angle(H, D, I) mod 360, angle(C, J, A) == angle(D, I, H) mod 360, log(distance(A, J)) + log(distance(D, H)) == log(distance(H, I)) + log(distance(A, C)), log(distance(A, C)) + log(distance(D, I)) == log(distance(D, H)) + log(distance(C, J)), log(distance(C, J)) + log(distance(H, I)) == log(distance(D, I)) + log(distance(A, J))
+By anti_similar_triangle_basic_properties on I, C, H, F, C, E we get angle(I, C, H) == 0 - angle(F, C, E) mod 360, angle(C, H, I) == 0 - angle(C, E, F) mod 360, angle(H, I, C) == 0 - angle(E, F, C) mod 360, log(distance(C, F)) + log(distance(C, H)) == log(distance(C, I)) + log(distance(C, E)), log(distance(C, E)) + log(distance(H, I)) == log(distance(C, H)) + log(distance(E, F)), log(distance(E, F)) + log(distance(C, I)) == log(distance(H, I)) + log(distance(C, F))
+By internal_angle_bisector_definition_v0_r on K, C, J, H we get Line(C, H) == internal_angle_bisector(J, H, K)
+By internal_angle_bisector_definition_v0_r on F, G, J, H we get Line(G, H) == internal_angle_bisector(F, H, J)
+By internal_angle_bisector_definition_v0_r on C, J, H, F we get Line(F, J) == internal_angle_bisector(C, F, H)
+By external_angle_bisector_definition_v0_r on H, J, F, K we get Line(J, K) == external_angle_bisector(F, K, H)
+By external_angle_bisector_definition_v0_r on D, I, G, H we get Line(H, I) == external_angle_bisector(D, H, G)
+By similar_triangle_basic_properties on G, D, F, E, D, A we get angle(E, D, A) == angle(G, D, F) mod 360, angle(D, A, E) == angle(D, F, G) mod 360, angle(A, E, D) == angle(F, G, D) mod 360, log(distance(D, E)) + log(distance(D, F)) == log(distance(D, G)) + log(distance(A, D)), log(distance(A, D)) + log(distance(F, G)) == log(distance(D, F)) + log(distance(A, E)), log(distance(A, E)) + log(distance(D, G)) == log(distance(F, G)) + log(distance(D, E))
+By external_angle_bisector_definition_v0_r on K, I, D, H we get Line(H, I) == external_angle_bisector(D, H, K)
+By anti_similar_triangle_basic_properties on J, A, C, A, G, C we get angle(J, A, C) == 0 - angle(A, G, C) mod 360, angle(A, C, J) == 0 - angle(G, C, A) mod 360, angle(C, J, A) == 0 - angle(C, A, G) mod 360, log(distance(A, G)) + log(distance(A, C)) == log(distance(A, J)) + log(distance(C, G)), log(distance(A, C)) + log(distance(A, C)) == log(distance(C, G)) + log(distance(C, J)), log(distance(A, C)) + log(distance(A, J)) == log(distance(C, J)) + log(distance(A, G))
+By perpendicular_angle_conditions_v0 on H, midpoint(C, D), C we get angle(H, midpoint(C, D), C) == orientation(C, H, midpoint(C, D)) mod 360
+By internal_angle_bisector_definition_v0_r on K, F, K, H we get Line(F, H) == internal_angle_bisector(K, H, K)
+By internal_angle_bisector_definition_v0_r on K, J, K, H we get Line(H, J) == internal_angle_bisector(K, H, K)
+By external_angle_bisector_definition_v0_r on G, C, H, K we get Line(C, K) == external_angle_bisector(G, K, H)
+By anti_similar_triangle_basic_properties on G, C, B, G, E, F we get angle(G, C, B) == 0 - angle(G, E, F) mod 360, angle(C, B, G) == 0 - angle(E, F, G) mod 360, angle(B, G, C) == 0 - angle(F, G, E) mod 360, log(distance(C, G)) + log(distance(E, F)) == log(distance(E, G)) + log(distance(B, C)), log(distance(B, C)) + log(distance(F, G)) == log(distance(E, F)) + log(distance(B, G)), log(distance(B, G)) + log(distance(E, G)) == log(distance(F, G)) + log(distance(C, G))
+By external_angle_bisector_definition_v0_r on K, B, H, F we get Line(B, F) == external_angle_bisector(H, F, K)
+By internal_angle_bisector_definition_v0 on D, midpoint(C, D), C, I we get angle(D, I, midpoint(C, D)) == angle(midpoint(C, D), I, C) mod 360
+By similar_triangle_basic_properties on E, F, C, G, F, D we get angle(E, F, C) == angle(G, F, D) mod 360, angle(F, C, E) == angle(F, D, G) mod 360, angle(C, E, F) == angle(D, G, F) mod 360, log(distance(E, F)) + log(distance(D, F)) == log(distance(F, G)) + log(distance(C, F)), log(distance(C, F)) + log(distance(D, G)) == log(distance(D, F)) + log(distance(C, E)), log(distance(C, E)) + log(distance(F, G)) == log(distance(D, G)) + log(distance(E, F))
+By internal_angle_bisector_definition_v0_r on J, C, G, H we get Line(C, H) == internal_angle_bisector(G, H, J)
+By similar_triangle_basic_properties on D, I, H, C, F, E we get angle(C, F, E) == angle(D, I, H) mod 360, angle(F, E, C) == angle(I, H, D) mod 360, angle(E, C, F) == angle(H, D, I) mod 360, log(distance(C, F)) + log(distance(H, I)) == log(distance(D, I)) + log(distance(E, F)), log(distance(E, F)) + log(distance(D, H)) == log(distance(H, I)) + log(distance(C, E)), log(distance(C, E)) + log(distance(D, I)) == log(distance(D, H)) + log(distance(C, F))
+By external_angle_bisector_definition_v0_r on H, A, K, F we get Line(A, F) == external_angle_bisector(H, F, K)
+By external_angle_bisector_definition_v0 on K, midpoint(C, D), E, I we get 180 == angle(K, I, midpoint(C, D)) + angle(E, I, midpoint(C, D)) mod 360
+By anti_similar_triangle_basic_properties on E, H, D, D, H, E we get angle(E, H, D) == 0 - angle(D, H, E) mod 360, angle(H, D, E) == 0 - angle(H, E, D) mod 360, angle(D, E, H) == 0 - angle(E, D, H) mod 360, log(distance(D, H)) + log(distance(D, H)) == log(distance(E, H)) + log(distance(E, H)), log(distance(D, H)) + log(distance(D, E)) == log(distance(E, H)) + log(distance(D, E)), log(distance(D, E)) + log(distance(D, H)) == log(distance(D, E)) + log(distance(E, H))
+By anti_similar_triangle_basic_properties on B, G, A, D, G, E we get angle(B, G, A) == 0 - angle(D, G, E) mod 360, angle(G, A, B) == 0 - angle(G, E, D) mod 360, angle(A, B, G) == 0 - angle(E, D, G) mod 360, log(distance(B, G)) + log(distance(E, G)) == log(distance(D, G)) + log(distance(A, G)), log(distance(A, G)) + log(distance(D, E)) == log(distance(E, G)) + log(distance(A, B)), log(distance(A, B)) + log(distance(D, G)) == log(distance(D, E)) + log(distance(B, G))
+By internal_angle_bisector_definition_v0_r on K, J, H, F we get Line(F, J) == internal_angle_bisector(H, F, K)
+By external_angle_bisector_definition_v0_r on C, K, F, H we get Line(H, K) == external_angle_bisector(C, H, F)
+By similar_triangle_basic_properties on J, C, A, F, D, G we get angle(F, D, G) == angle(J, C, A) mod 360, angle(C, A, J) == angle(D, G, F) mod 360, angle(A, J, C) == angle(G, F, D) mod 360, log(distance(C, J)) + log(distance(D, G)) == log(distance(D, F)) + log(distance(A, C)), log(distance(A, C)) + log(distance(F, G)) == log(distance(D, G)) + log(distance(A, J)), log(distance(A, J)) + log(distance(D, F)) == log(distance(F, G)) + log(distance(C, J))
+By internal_angle_bisector_definition_v0_r on H, K, G, J we get Line(J, K) == internal_angle_bisector(G, J, H)
+By internal_angle_bisector_definition_v0_r on F, C, H, J we get Line(C, J) == internal_angle_bisector(F, J, H)
+By anti_similar_triangle_basic_properties on A, C, G, F, C, E we get angle(A, C, G) == 0 - angle(F, C, E) mod 360, angle(C, G, A) == 0 - angle(C, E, F) mod 360, angle(G, A, C) == 0 - angle(E, F, C) mod 360, log(distance(A, C)) + log(distance(C, E)) == log(distance(C, F)) + log(distance(C, G)), log(distance(C, E)) + log(distance(A, G)) == log(distance(C, G)) + log(distance(E, F)), log(distance(A, G)) + log(distance(C, F)) == log(distance(E, F)) + log(distance(A, C))
+By internal_angle_bisector_definition_v0_r on C, D, C, midpoint(C, D) we get Line(D, midpoint(C, D)) == internal_angle_bisector(C, midpoint(C, D), C)
+By similar_triangle_basic_properties on B, D, F, E, A, F we get angle(B, D, F) == angle(E, A, F) mod 360, angle(A, F, E) == angle(D, F, B) mod 360, angle(F, B, D) == angle(F, E, A) mod 360, log(distance(A, E)) + log(distance(D, F)) == log(distance(B, D)) + log(distance(A, F)), log(distance(A, F)) + log(distance(B, F)) == log(distance(D, F)) + log(distance(E, F)), log(distance(B, F)) + log(distance(A, E)) == log(distance(E, F)) + log(distance(B, D))
+By anti_similar_triangle_basic_properties on A, E, D, I, H, C we get angle(A, E, D) == 0 - angle(I, H, C) mod 360, angle(E, D, A) == 0 - angle(H, C, I) mod 360, angle(D, A, E) == 0 - angle(C, I, H) mod 360, log(distance(A, E)) + log(distance(C, H)) == log(distance(H, I)) + log(distance(D, E)), log(distance(C, H)) + log(distance(A, D)) == log(distance(D, E)) + log(distance(C, I)), log(distance(A, D)) + log(distance(H, I)) == log(distance(C, I)) + log(distance(A, E))
+By concyclic_definition_0 on F, A, E, G we get G in Circle(A, E, F)
+By internal_angle_bisector_definition_v0_r on H, F, K, J we get Line(F, J) == internal_angle_bisector(H, J, K)
+By concyclic_definition_0 on B, D, G, F we get F in Circle(B, D, G)
+By external_angle_bisector_definition_v0_r on C, B, H, F we get Line(B, F) == external_angle_bisector(C, F, H)
+By external_angle_bisector_definition_v0_r on J, G, H, F we get Line(F, G) == external_angle_bisector(H, F, J)
+By external_angle_bisector_definition_v0_r on J, K, H, F we get Line(F, K) == external_angle_bisector(H, F, J)
+By anti_similar_triangle_basic_properties on H, E, D, I, D, A we get angle(H, E, D) == 0 - angle(I, D, A) mod 360, angle(E, D, H) == 0 - angle(D, A, I) mod 360, angle(D, H, E) == 0 - angle(A, I, D) mod 360, log(distance(D, I)) + log(distance(D, E)) == log(distance(E, H)) + log(distance(A, D)), log(distance(A, D)) + log(distance(D, H)) == log(distance(D, E)) + log(distance(A, I)), log(distance(A, I)) + log(distance(E, H)) == log(distance(D, H)) + log(distance(D, I))
+By similar_triangle_basic_properties on C, F, D, E, F, G we get angle(C, F, D) == angle(E, F, G) mod 360, angle(F, D, C) == angle(F, G, E) mod 360, angle(D, C, F) == angle(G, E, F) mod 360, log(distance(C, F)) + log(distance(F, G)) == log(distance(E, F)) + log(distance(D, F)), log(distance(D, F)) + log(distance(E, G)) == log(distance(F, G)) + log(distance(C, D)), log(distance(C, D)) + log(distance(E, F)) == log(distance(E, G)) + log(distance(C, F))
+By internal_angle_bisector_definition_v0_r on H, C, H, F we get Line(C, F) == internal_angle_bisector(H, F, H)
+By anti_similar_triangle_basic_properties on F, D, K, D, G, K we get angle(F, D, K) == 0 - angle(D, G, K) mod 360, angle(D, K, F) == 0 - angle(G, K, D) mod 360, angle(K, F, D) == 0 - angle(K, D, G) mod 360, log(distance(D, F)) + log(distance(G, K)) == log(distance(D, G)) + log(distance(D, K)), log(distance(D, K)) + log(distance(D, K)) == log(distance(G, K)) + log(distance(F, K)), log(distance(D, K)) + log(distance(D, F)) == log(distance(F, K)) + log(distance(D, G))
+By internal_angle_bisector_definition_v0_r on H, C, G, F we get Line(C, F) == internal_angle_bisector(G, F, H)
+By external_angle_bisector_definition_v0_r on H, B, H, F we get Line(B, F) == external_angle_bisector(H, F, H)
+By internal_angle_bisector_definition_v0_r on H, J, C, K we get Line(J, K) == internal_angle_bisector(C, K, H)
+By anti_similar_triangle_basic_properties on B, C, G, B, E, D we get angle(B, C, G) == 0 - angle(B, E, D) mod 360, angle(C, G, B) == 0 - angle(E, D, B) mod 360, angle(G, B, C) == 0 - angle(D, B, E) mod 360, log(distance(B, C)) + log(distance(D, E)) == log(distance(B, E)) + log(distance(C, G)), log(distance(C, G)) + log(distance(B, D)) == log(distance(D, E)) + log(distance(B, G)), log(distance(B, D)) + log(distance(B, C)) == log(distance(B, G)) + log(distance(B, E))
+By anti_similar_triangle_basic_properties on B, A, G, B, E, F we get angle(B, A, G) == 0 - angle(B, E, F) mod 360, angle(A, G, B) == 0 - angle(E, F, B) mod 360, angle(G, B, A) == 0 - angle(F, B, E) mod 360, log(distance(A, B)) + log(distance(E, F)) == log(distance(B, E)) + log(distance(A, G)), log(distance(A, G)) + log(distance(B, F)) == log(distance(E, F)) + log(distance(B, G)), log(distance(B, F)) + log(distance(A, B)) == log(distance(B, G)) + log(distance(B, E))
+By similar_triangle_basic_properties on C, E, D, F, B, D we get angle(C, E, D) == angle(F, B, D) mod 360, angle(B, D, F) == angle(E, D, C) mod 360, angle(D, C, E) == angle(D, F, B) mod 360, log(distance(B, F)) + log(distance(D, E)) == log(distance(C, E)) + log(distance(B, D)), log(distance(B, D)) + log(distance(C, D)) == log(distance(D, E)) + log(distance(D, F)), log(distance(C, D)) + log(distance(B, F)) == log(distance(D, F)) + log(distance(C, E))
+By similar_triangle_basic_properties on D, A, C, F, J, A we get angle(D, A, C) == angle(F, J, A) mod 360, angle(A, C, D) == angle(J, A, F) mod 360, angle(A, F, J) == angle(C, D, A) mod 360, log(distance(A, D)) + log(distance(A, J)) == log(distance(F, J)) + log(distance(A, C)), log(distance(A, C)) + log(distance(A, F)) == log(distance(A, J)) + log(distance(C, D)), log(distance(A, F)) + log(distance(A, D)) == log(distance(C, D)) + log(distance(F, J))
+By anti_similar_triangle_basic_properties on C, G, B, E, G, F we get angle(C, G, B) == 0 - angle(E, G, F) mod 360, angle(G, B, C) == 0 - angle(G, F, E) mod 360, angle(B, C, G) == 0 - angle(F, E, G) mod 360, log(distance(C, G)) + log(distance(F, G)) == log(distance(E, G)) + log(distance(B, G)), log(distance(B, G)) + log(distance(E, F)) == log(distance(F, G)) + log(distance(B, C)), log(distance(B, C)) + log(distance(E, G)) == log(distance(E, F)) + log(distance(C, G))
+By anti_similar_triangle_basic_properties on H, D, E, I, A, D we get angle(H, D, E) == 0 - angle(I, A, D) mod 360, angle(D, E, H) == 0 - angle(A, D, I) mod 360, angle(E, H, D) == 0 - angle(D, I, A) mod 360, log(distance(A, I)) + log(distance(D, E)) == log(distance(D, H)) + log(distance(A, D)), log(distance(A, D)) + log(distance(E, H)) == log(distance(D, E)) + log(distance(D, I)), log(distance(D, I)) + log(distance(D, H)) == log(distance(E, H)) + log(distance(A, I))
+By concyclic_definition_0 on E, I, D, H we get H in Circle(D, E, I)
+By internal_angle_bisector_definition_v0_r on F, J, F, H we get Line(H, J) == internal_angle_bisector(F, H, F)
+By internal_angle_bisector_definition_v0_r on H, K, H, J we get Line(J, K) == internal_angle_bisector(H, J, H)
+By concyclic_definition_0 on E, H, I, D we get D in Circle(E, H, I)
+By similar_triangle_basic_properties on D, B, F, A, E, F we get angle(A, E, F) == angle(D, B, F) mod 360, angle(B, F, D) == angle(E, F, A) mod 360, angle(F, A, E) == angle(F, D, B) mod 360, log(distance(A, E)) + log(distance(B, F)) == log(distance(B, D)) + log(distance(E, F)), log(distance(B, F)) + log(distance(A, F)) == log(distance(E, F)) + log(distance(D, F)), log(distance(A, F)) + log(distance(B, D)) == log(distance(D, F)) + log(distance(A, E))
+By similar_triangle_basic_properties on D, G, E, D, F, A we get angle(D, F, A) == angle(D, G, E) mod 360, angle(F, A, D) == angle(G, E, D) mod 360, angle(A, D, F) == angle(E, D, G) mod 360, log(distance(D, F)) + log(distance(E, G)) == log(distance(D, G)) + log(distance(A, F)), log(distance(A, F)) + log(distance(D, E)) == log(distance(E, G)) + log(distance(A, D)), log(distance(A, D)) + log(distance(D, G)) == log(distance(D, E)) + log(distance(D, F))
+By internal_angle_bisector_definition_v0_r on C, G, H, J we get Line(G, J) == internal_angle_bisector(C, J, H)
+By anti_similar_triangle_basic_properties on C, A, G, C, F, E we get angle(C, A, G) == 0 - angle(C, F, E) mod 360, angle(A, G, C) == 0 - angle(F, E, C) mod 360, angle(G, C, A) == 0 - angle(E, C, F) mod 360, log(distance(A, C)) + log(distance(E, F)) == log(distance(C, F)) + log(distance(A, G)), log(distance(A, G)) + log(distance(C, E)) == log(distance(E, F)) + log(distance(C, G)), log(distance(C, E)) + log(distance(A, C)) == log(distance(C, G)) + log(distance(C, F))
+By external_angle_bisector_definition_v0_r on F, C, D, E we get Line(C, E) == external_angle_bisector(D, E, F)
+By internal_angle_bisector_definition_v0_r on F, G, H, J we get Line(G, J) == internal_angle_bisector(F, J, H)
+By reverse_direction on center(c), H we get 180 == direction(center(c), H) - direction(H, center(c)) mod 360
+By similar_triangle_basic_properties on E, G, F, C, D, F we get angle(C, D, F) == angle(E, G, F) mod 360, angle(D, F, C) == angle(G, F, E) mod 360, angle(F, C, D) == angle(F, E, G) mod 360, log(distance(C, D)) + log(distance(F, G)) == log(distance(E, G)) + log(distance(D, F)), log(distance(D, F)) + log(distance(E, F)) == log(distance(F, G)) + log(distance(C, F)), log(distance(C, F)) + log(distance(E, G)) == log(distance(E, F)) + log(distance(C, D))
+By anti_similar_triangle_basic_properties on C, G, A, C, A, J we get angle(C, G, A) == 0 - angle(C, A, J) mod 360, angle(G, A, C) == 0 - angle(A, J, C) mod 360, angle(A, C, G) == 0 - angle(J, C, A) mod 360, log(distance(A, C)) + log(distance(A, G)) == log(distance(C, G)) + log(distance(A, J)), log(distance(A, G)) + log(distance(C, J)) == log(distance(A, J)) + log(distance(A, C)), log(distance(A, C)) + log(distance(A, C)) == log(distance(C, J)) + log(distance(C, G))
+By radical_axis_definition_v0_r on A, c, Circle(A, B, D) we get A in radical_axis(c, Circle(A, B, D))
+By external_angle_bisector_definition_v0_r on H, A, G, F we get Line(A, F) == external_angle_bisector(G, F, H)
+By internal_angle_bisector_definition_v0_r on D, B, F, E we get Line(B, E) == internal_angle_bisector(D, E, F)
+By external_angle_bisector_definition_v0 on A, midpoint(C, D), D, I we get 180 == angle(A, I, midpoint(C, D)) + angle(D, I, midpoint(C, D)) mod 360
+By perpendicular_angle_conditions_v0 on I, midpoint(C, D), C we get angle(I, midpoint(C, D), C) == orientation(C, I, midpoint(C, D)) mod 360
+By internal_angle_bisector_definition_v0_r on C, G, H, F we get Line(F, G) == internal_angle_bisector(C, F, H)
+By similar_triangle_basic_properties on F, E, C, F, G, D we get angle(F, E, C) == angle(F, G, D) mod 360, angle(E, C, F) == angle(G, D, F) mod 360, angle(C, F, E) == angle(D, F, G) mod 360, log(distance(E, F)) + log(distance(D, G)) == log(distance(F, G)) + log(distance(C, E)), log(distance(C, E)) + log(distance(D, F)) == log(distance(D, G)) + log(distance(C, F)), log(distance(C, F)) + log(distance(F, G)) == log(distance(D, F)) + log(distance(E, F))
+By internal_angle_bisector_definition_v0_r on G, C, H, J we get Line(C, J) == internal_angle_bisector(G, J, H)
+By internal_angle_bisector_definition_v0_r on H, K, C, J we get Line(J, K) == internal_angle_bisector(C, J, H)
+By perpendicular_angle_conditions_v0 on D, midpoint(C, D), H we get angle(D, midpoint(C, D), H) == orientation(D, midpoint(C, D), H) mod 360
+By external_angle_bisector_definition_v0 on D, midpoint(C, D), E, I we get 180 == angle(D, I, midpoint(C, D)) + angle(E, I, midpoint(C, D)) mod 360
+By internal_angle_bisector_definition_v0_r on D, G, F, E we get Line(E, G) == internal_angle_bisector(D, E, F)
+By external_angle_bisector_definition_v0_r on H, A, H, F we get Line(A, F) == external_angle_bisector(H, F, H)
+By internal_angle_bisector_definition_v0_r on H, K, C, F we get Line(F, K) == internal_angle_bisector(C, F, H)
+By concyclic_definition_0 on A, F, G, E we get E in Circle(A, F, G)
+By internal_angle_bisector_definition_v0_r on K, J, G, H we get Line(H, J) == internal_angle_bisector(G, H, K)
+By internal_angle_bisector_definition_v0_r on F, C, K, H we get Line(C, H) == internal_angle_bisector(F, H, K)
+By anti_similar_triangle_basic_properties on E, A, F, B, A, C we get angle(E, A, F) == 0 - angle(B, A, C) mod 360, angle(A, F, E) == 0 - angle(A, C, B) mod 360, angle(F, E, A) == 0 - angle(C, B, A) mod 360, log(distance(A, B)) + log(distance(A, F)) == log(distance(A, E)) + log(distance(A, C)), log(distance(A, C)) + log(distance(E, F)) == log(distance(A, F)) + log(distance(B, C)), log(distance(B, C)) + log(distance(A, E)) == log(distance(E, F)) + log(distance(A, B))
+By anti_similar_triangle_basic_properties on A, C, J, H, C, I we get angle(A, C, J) == 0 - angle(H, C, I) mod 360, angle(C, J, A) == 0 - angle(C, I, H) mod 360, angle(J, A, C) == 0 - angle(I, H, C) mod 360, log(distance(A, C)) + log(distance(C, I)) == log(distance(C, H)) + log(distance(C, J)), log(distance(C, I)) + log(distance(A, J)) == log(distance(C, J)) + log(distance(H, I)), log(distance(A, J)) + log(distance(C, H)) == log(distance(H, I)) + log(distance(A, C))
+By external_angle_bisector_definition_v0 on K, midpoint(C, D), A, I we get 180 == angle(K, I, midpoint(C, D)) + angle(A, I, midpoint(C, D)) mod 360
+By concyclic_definition_0 on B, D, F, G we get G in Circle(B, D, F)
+By anti_similar_triangle_basic_properties on G, A, B, F, E, B we get angle(G, A, B) == 0 - angle(F, E, B) mod 360, angle(A, B, G) == 0 - angle(E, B, F) mod 360, angle(B, G, A) == 0 - angle(B, F, E) mod 360, log(distance(A, G)) + log(distance(B, E)) == log(distance(E, F)) + log(distance(A, B)), log(distance(A, B)) + log(distance(B, F)) == log(distance(B, E)) + log(distance(B, G)), log(distance(B, F)) + log(distance(A, G)) == log(distance(B, G)) + log(distance(E, F))
+By internal_angle_bisector_definition_v0_r on H, K, F, J we get Line(J, K) == internal_angle_bisector(F, J, H)
+By internal_angle_bisector_definition_v0_r on H, F, C, K we get Line(F, K) == internal_angle_bisector(C, K, H)
+By concyclic_definition_0 on H, I, D, E we get E in Circle(D, H, I)
+By internal_angle_bisector_definition_v0_r on H, J, H, K we get Line(J, K) == internal_angle_bisector(H, K, H)
+By concyclic_definition_0 on E, G, A, F we get F in Circle(A, E, G)
+By external_angle_bisector_definition_v0_r on C, A, H, F we get Line(A, F) == external_angle_bisector(C, F, H)
+By internal_angle_bisector_definition_v0_r on E, A, F, D we get Line(A, D) == internal_angle_bisector(E, D, F)
+By perpendicular_angle_conditions_v0 on H, midpoint(C, D), D we get angle(H, midpoint(C, D), D) == orientation(D, H, midpoint(C, D)) mod 360
+By reverse_direction on center(c), J we get 180 == direction(center(c), J) - direction(J, center(c)) mod 360
+By anti_similar_triangle_basic_properties on E, G, A, F, A, J we get angle(E, G, A) == 0 - angle(F, A, J) mod 360, angle(G, A, E) == 0 - angle(A, J, F) mod 360, angle(A, E, G) == 0 - angle(J, F, A) mod 360, log(distance(A, F)) + log(distance(A, G)) == log(distance(E, G)) + log(distance(A, J)), log(distance(A, G)) + log(distance(F, J)) == log(distance(A, J)) + log(distance(A, E)), log(distance(A, E)) + log(distance(A, F)) == log(distance(F, J)) + log(distance(E, G))
+By similar_triangle_basic_properties on A, J, F, G, B, D we get angle(A, J, F) == angle(G, B, D) mod 360, angle(B, D, G) == angle(J, F, A) mod 360, angle(D, G, B) == angle(F, A, J) mod 360, log(distance(A, J)) + log(distance(B, D)) == log(distance(B, G)) + log(distance(F, J)), log(distance(B, D)) + log(distance(A, F)) == log(distance(F, J)) + log(distance(D, G)), log(distance(A, F)) + log(distance(B, G)) == log(distance(D, G)) + log(distance(A, J))
+By internal_angle_bisector_definition_v0_r on H, G, C, K we get Line(G, K) == internal_angle_bisector(C, K, H)
+By internal_angle_bisector_definition_v0_r on H, J, H, F we get Line(F, J) == internal_angle_bisector(H, F, H)
+By internal_angle_bisector_definition_v0_r on H, F, G, J we get Line(F, J) == internal_angle_bisector(G, J, H)
+By anti_similar_triangle_basic_properties on B, E, C, J, F, A we get angle(B, E, C) == 0 - angle(J, F, A) mod 360, angle(E, C, B) == 0 - angle(F, A, J) mod 360, angle(C, B, E) == 0 - angle(A, J, F) mod 360, log(distance(B, E)) + log(distance(A, F)) == log(distance(F, J)) + log(distance(C, E)), log(distance(A, F)) + log(distance(B, C)) == log(distance(C, E)) + log(distance(A, J)), log(distance(A, J)) + log(distance(B, E)) == log(distance(B, C)) + log(distance(F, J))
+By perpendicular_angle_conditions_v0 on C, midpoint(C, D), H we get angle(C, midpoint(C, D), H) == orientation(C, midpoint(C, D), H) mod 360
+By internal_angle_bisector_definition_v0_r on J, F, K, H we get Line(F, H) == internal_angle_bisector(J, H, K)
+By internal_angle_bisector_definition_v0_r on C, F, H, J we get Line(F, J) == internal_angle_bisector(C, J, H)
+By internal_angle_bisector_definition_v0_r on H, G, H, K we get Line(G, K) == internal_angle_bisector(H, K, H)
+By internal_angle_bisector_definition_v0_r on H, G, K, F we get Line(F, G) == internal_angle_bisector(H, F, K)
+By internal_angle_bisector_definition_v0_r on K, C, H, F we get Line(C, F) == internal_angle_bisector(H, F, K)
+By similar_triangle_basic_properties on G, D, E, F, D, A we get angle(F, D, A) == angle(G, D, E) mod 360, angle(D, A, F) == angle(D, E, G) mod 360, angle(A, F, D) == angle(E, G, D) mod 360, log(distance(D, F)) + log(distance(D, E)) == log(distance(D, G)) + log(distance(A, D)), log(distance(A, D)) + log(distance(E, G)) == log(distance(D, E)) + log(distance(A, F)), log(distance(A, F)) + log(distance(D, G)) == log(distance(E, G)) + log(distance(D, F))
+By internal_angle_bisector_definition_v0_r on J, K, F, H we get Line(H, K) == internal_angle_bisector(F, H, J)
+By internal_angle_bisector_definition_v0_r on K, G, F, H we get Line(G, H) == internal_angle_bisector(F, H, K)
+By similar_triangle_basic_properties on F, D, B, C, D, E we get angle(C, D, E) == angle(F, D, B) mod 360, angle(D, B, F) == angle(D, E, C) mod 360, angle(B, F, D) == angle(E, C, D) mod 360, log(distance(C, D)) + log(distance(B, D)) == log(distance(D, F)) + log(distance(D, E)), log(distance(B, D)) + log(distance(C, E)) == log(distance(D, E)) + log(distance(B, F)), log(distance(B, F)) + log(distance(C, D)) == log(distance(C, E)) + log(distance(D, F))
+By internal_angle_bisector_definition_v0_r on K, G, H, J we get Line(G, J) == internal_angle_bisector(H, J, K)
+By perpendicular_angle_conditions_v0 on D, midpoint(C, D), I we get angle(D, midpoint(C, D), I) == orientation(D, midpoint(C, D), I) mod 360
+By internal_angle_bisector_definition_v0_r on J, C, J, H we get Line(C, H) == internal_angle_bisector(J, H, J)
+By internal_angle_bisector_definition_v0_r on B, D, midpoint(C, D), C we get Line(C, D) == internal_angle_bisector(B, C, midpoint(C, D))
+By perpendicular_angle_conditions_v0 on I, midpoint(C, D), D we get angle(I, midpoint(C, D), D) == orientation(D, I, midpoint(C, D)) mod 360
+By internal_angle_bisector_definition_v0_r on H, G, H, J we get Line(G, J) == internal_angle_bisector(H, J, H)
+By internal_angle_bisector_definition_v0_r on H, C, H, K we get Line(C, K) == internal_angle_bisector(H, K, H)
+By internal_angle_bisector_definition_v0_r on K, G, J, H we get Line(G, H) == internal_angle_bisector(J, H, K)
+By internal_angle_bisector_definition_v0_r on J, G, J, H we get Line(G, H) == internal_angle_bisector(J, H, J)
+By internal_angle_bisector_definition_v0_r on F, J, K, H we get Line(H, J) == internal_angle_bisector(F, H, K)
+By internal_angle_bisector_definition_v0_r on H, C, K, J we get Line(C, J) == internal_angle_bisector(H, J, K)
+By internal_angle_bisector_definition_v0_r on J, K, G, H we get Line(H, K) == internal_angle_bisector(G, H, J)
+By internal_angle_bisector_definition_v0 on D, midpoint(C, D), C, H we get angle(D, H, midpoint(C, D)) == angle(midpoint(C, D), H, C) mod 360
+By internal_angle_bisector_definition_v0_r on D, C, D, midpoint(C, D) we get Line(C, midpoint(C, D)) == internal_angle_bisector(D, midpoint(C, D), D)
+By internal_angle_bisector_definition_v0_r on J, F, G, H we get Line(F, H) == internal_angle_bisector(G, H, J)
+By internal_angle_bisector_definition_v0_r on J, A, H, F we get Line(A, F) == internal_angle_bisector(H, F, J)
+By internal_angle_bisector_definition_v0_r on F, K, F, H we get Line(H, K) == internal_angle_bisector(F, H, F)
+By internal_angle_bisector_definition_v0_r on F, G, F, H we get Line(G, H) == internal_angle_bisector(F, H, F)
+By reverse_direction on center(c), I we get 180 == direction(center(c), I) - direction(I, center(c)) mod 360
+By internal_angle_bisector_definition_v0_r on K, F, G, H we get Line(F, H) == internal_angle_bisector(G, H, K)
+By internal_angle_bisector_definition_v0_r on J, B, H, F we get Line(B, F) == internal_angle_bisector(H, F, J)
+By internal_angle_bisector_definition_v0 on C, midpoint(C, D), D, I we get angle(C, I, midpoint(C, D)) == angle(midpoint(C, D), I, D) mod 360
+By internal_angle_bisector_definition_v0_r on G, J, H, F we get Line(F, J) == internal_angle_bisector(G, F, H)
+By internal_angle_bisector_definition_v0_r on J, F, J, H we get Line(F, H) == internal_angle_bisector(J, H, J)
+By internal_angle_bisector_definition_v0_r on K, C, K, H we get Line(C, H) == internal_angle_bisector(K, H, K)
+By internal_angle_bisector_definition_v0_r on midpoint(C, D), C, midpoint(C, D), D we get Line(C, D) == internal_angle_bisector(midpoint(C, D), D, midpoint(C, D))
+By internal_angle_bisector_definition_v0_r on F, C, F, H we get Line(C, H) == internal_angle_bisector(F, H, F)
+By internal_angle_bisector_definition_v0 on C, midpoint(C, D), K, I we get angle(C, I, midpoint(C, D)) == angle(midpoint(C, D), I, K) mod 360
+By collinear_definition on I, H, midpoint(C, D) we get H in Line(I, midpoint(C, D)), midpoint(C, D) in Line(H, I), Line(H, I) == Line(I, midpoint(C, D)), 0 == 2 * angle(H, I, midpoint(C, D)) mod 360
+By reverse_direction on center(c), A we get 180 == direction(center(c), A) - direction(A, center(c)) mod 360
+By internal_angle_bisector_definition_v0_r on H, F, H, K we get Line(F, K) == internal_angle_bisector(H, K, H)
+By internal_angle_bisector_definition_v0_r on J, K, J, H we get Line(H, K) == internal_angle_bisector(J, H, J)
+By internal_angle_bisector_definition_v0_r on H, K, H, F we get Line(F, K) == internal_angle_bisector(H, F, H)
+By internal_angle_bisector_definition_v0 on K, midpoint(C, D), C, I we get angle(K, I, midpoint(C, D)) == angle(midpoint(C, D), I, C) mod 360
+By internal_angle_bisector_definition_v0_r on H, C, H, J we get Line(C, J) == internal_angle_bisector(H, J, H)
+By internal_angle_bisector_definition_v0_r on K, G, K, H we get Line(G, H) == internal_angle_bisector(K, H, K)
+By internal_angle_bisector_definition_v0_r on midpoint(C, D), D, midpoint(C, D), C we get Line(C, D) == internal_angle_bisector(midpoint(C, D), C, midpoint(C, D))
+By internal_angle_bisector_definition_v0 on C, midpoint(C, D), D, H we get angle(C, H, midpoint(C, D)) == angle(midpoint(C, D), H, D) mod 360
+By draw_point_of_tangency on Line(D, H), Circle(A, B, D) we get exists(line_circle_tangent_point(Line(D, H), Circle(A, B, D)))
+By draw_point_of_tangency on Line(E, H), Circle(A, B, D) we get exists(line_circle_tangent_point(Line(E, H), Circle(A, B, D)))
+By similar_triangle_basic_properties on C, E, F, C, A, J we get angle(C, A, J) == angle(C, E, F) mod 360, angle(A, J, C) == angle(E, F, C) mod 360, angle(F, C, E) == angle(J, C, A) mod 360, log(distance(A, C)) + log(distance(E, F)) == log(distance(C, E)) + log(distance(A, J)), log(distance(A, J)) + log(distance(C, F)) == log(distance(E, F)) + log(distance(C, J)), log(distance(C, F)) + log(distance(A, C)) == log(distance(C, J)) + log(distance(C, E))
+By anti_similar_triangle_basic_properties on J, I, C, A, H, C we get angle(J, I, C) == 0 - angle(A, H, C) mod 360, angle(I, C, J) == 0 - angle(H, C, A) mod 360, angle(C, J, I) == 0 - angle(C, A, H) mod 360, log(distance(A, H)) + log(distance(C, I)) == log(distance(I, J)) + log(distance(C, H)), log(distance(C, H)) + log(distance(C, J)) == log(distance(C, I)) + log(distance(A, C)), log(distance(A, C)) + log(distance(I, J)) == log(distance(C, J)) + log(distance(A, H))
+By concyclic_definition_1 on E, G, F, A we get Circle(A, F, G) == Circle(E, F, G)
+By similar_triangle_basic_properties on E, D, C, E, A, F we get angle(E, A, F) == angle(E, D, C) mod 360, angle(A, F, E) == angle(D, C, E) mod 360, angle(C, E, D) == angle(F, E, A) mod 360, log(distance(A, E)) + log(distance(C, D)) == log(distance(D, E)) + log(distance(A, F)), log(distance(A, F)) + log(distance(C, E)) == log(distance(C, D)) + log(distance(E, F)), log(distance(C, E)) + log(distance(A, E)) == log(distance(E, F)) + log(distance(D, E))
+By concyclic_definition_1 on I, D, E, H we get Circle(D, E, H) == Circle(D, E, I)
+By anti_similar_triangle_basic_properties on K, H, I, A, G, J we get angle(K, H, I) == 0 - angle(A, G, J) mod 360, angle(H, I, K) == 0 - angle(G, J, A) mod 360, angle(I, K, H) == 0 - angle(J, A, G) mod 360, log(distance(A, G)) + log(distance(H, I)) == log(distance(H, K)) + log(distance(G, J)), log(distance(G, J)) + log(distance(I, K)) == log(distance(H, I)) + log(distance(A, J)), log(distance(A, J)) + log(distance(H, K)) == log(distance(I, K)) + log(distance(A, G))
+By sas_anti_congruence on J, center(c), H, H, center(c), J we get anti_congruent_triangles(H, J, center(c), J, H, center(c))
+By anti_similar_triangle_basic_properties on H, D, K, I, F, K we get angle(H, D, K) == 0 - angle(I, F, K) mod 360, angle(D, K, H) == 0 - angle(F, K, I) mod 360, angle(K, H, D) == 0 - angle(K, I, F) mod 360, log(distance(D, H)) + log(distance(F, K)) == log(distance(F, I)) + log(distance(D, K)), log(distance(D, K)) + log(distance(I, K)) == log(distance(F, K)) + log(distance(H, K)), log(distance(H, K)) + log(distance(F, I)) == log(distance(I, K)) + log(distance(D, H))
+By concyclic_definition_1 on F, B, D, G we get Circle(B, D, F) == Circle(B, D, G)
+By similar_triangle_basic_properties on E, G, D, E, F, B we get angle(E, F, B) == angle(E, G, D) mod 360, angle(F, B, E) == angle(G, D, E) mod 360, angle(B, E, F) == angle(D, E, G) mod 360, log(distance(E, F)) + log(distance(D, G)) == log(distance(E, G)) + log(distance(B, F)), log(distance(B, F)) + log(distance(D, E)) == log(distance(D, G)) + log(distance(B, E)), log(distance(B, E)) + log(distance(E, G)) == log(distance(D, E)) + log(distance(E, F))
+By isosceles_triangle_properties on center(c), A, H we get distance(A, center(c)) == distance(H, center(c)), angle(A, H, center(c)) == angle(center(c), A, H) mod 360
+By similar_triangle_basic_properties on E, A, D, A, J, C we get angle(A, J, C) == angle(E, A, D) mod 360, angle(A, D, E) == angle(J, C, A) mod 360, angle(C, A, J) == angle(D, E, A) mod 360, log(distance(A, E)) + log(distance(C, J)) == log(distance(A, J)) + log(distance(A, D)), log(distance(A, D)) + log(distance(A, C)) == log(distance(C, J)) + log(distance(D, E)), log(distance(A, C)) + log(distance(A, E)) == log(distance(D, E)) + log(distance(A, J))
+By similar_triangle_basic_properties on A, C, J, E, D, A we get angle(A, C, J) == angle(E, D, A) mod 360, angle(C, J, A) == angle(D, A, E) mod 360, angle(A, E, D) == angle(J, A, C) mod 360, log(distance(A, C)) + log(distance(A, D)) == log(distance(D, E)) + log(distance(C, J)), log(distance(A, D)) + log(distance(A, J)) == log(distance(C, J)) + log(distance(A, E)), log(distance(A, E)) + log(distance(A, C)) == log(distance(A, J)) + log(distance(D, E))
+By concyclic_definition_1 on E, F, A, G we get Circle(A, E, F) == Circle(A, F, G)
+By concyclic_definition_1 on B, F, D, G we get Circle(B, D, F) == Circle(D, F, G)
+By concyclic_definition_1 on B, G, F, D we get Circle(B, F, G) == Circle(D, F, G)
+By similar_triangle_basic_properties on C, J, A, C, F, E we get angle(C, F, E) == angle(C, J, A) mod 360, angle(F, E, C) == angle(J, A, C) mod 360, angle(A, C, J) == angle(E, C, F) mod 360, log(distance(C, F)) + log(distance(A, J)) == log(distance(C, J)) + log(distance(E, F)), log(distance(A, J)) + log(distance(C, E)) == log(distance(E, F)) + log(distance(A, C)), log(distance(A, C)) + log(distance(C, F)) == log(distance(C, E)) + log(distance(C, J))
+By anti_similar_triangle_basic_properties on D, G, K, J, G, A we get angle(D, G, K) == 0 - angle(J, G, A) mod 360, angle(G, K, D) == 0 - angle(G, A, J) mod 360, angle(K, D, G) == 0 - angle(A, J, G) mod 360, log(distance(D, G)) + log(distance(A, G)) == log(distance(G, J)) + log(distance(G, K)), log(distance(A, G)) + log(distance(D, K)) == log(distance(G, K)) + log(distance(A, J)), log(distance(A, J)) + log(distance(D, G)) == log(distance(D, K)) + log(distance(G, J))
+By similar_triangle_basic_properties on G, E, D, F, E, B we get angle(F, E, B) == angle(G, E, D) mod 360, angle(E, B, F) == angle(E, D, G) mod 360, angle(B, F, E) == angle(D, G, E) mod 360, log(distance(E, F)) + log(distance(D, E)) == log(distance(E, G)) + log(distance(B, E)), log(distance(B, E)) + log(distance(D, G)) == log(distance(D, E)) + log(distance(B, F)), log(distance(B, F)) + log(distance(E, G)) == log(distance(D, G)) + log(distance(E, F))
+By concyclic_definition_1 on I, E, H, D we get Circle(D, E, H) == Circle(E, H, I)
+By similar_triangle_basic_properties on E, B, D, E, F, G we get angle(E, B, D) == angle(E, F, G) mod 360, angle(B, D, E) == angle(F, G, E) mod 360, angle(D, E, B) == angle(G, E, F) mod 360, log(distance(B, E)) + log(distance(F, G)) == log(distance(E, F)) + log(distance(B, D)), log(distance(B, D)) + log(distance(E, G)) == log(distance(F, G)) + log(distance(D, E)), log(distance(D, E)) + log(distance(E, F)) == log(distance(E, G)) + log(distance(B, E))
+By anti_similar_triangle_basic_properties on I, H, K, J, G, A we get angle(I, H, K) == 0 - angle(J, G, A) mod 360, angle(H, K, I) == 0 - angle(G, A, J) mod 360, angle(K, I, H) == 0 - angle(A, J, G) mod 360, log(distance(G, J)) + log(distance(H, K)) == log(distance(H, I)) + log(distance(A, G)), log(distance(A, G)) + log(distance(I, K)) == log(distance(H, K)) + log(distance(A, J)), log(distance(A, J)) + log(distance(H, I)) == log(distance(I, K)) + log(distance(G, J))
+By similar_triangle_basic_properties on F, A, E, C, D, E we get angle(C, D, E) == angle(F, A, E) mod 360, angle(A, E, F) == angle(D, E, C) mod 360, angle(E, C, D) == angle(E, F, A) mod 360, log(distance(A, F)) + log(distance(D, E)) == log(distance(C, D)) + log(distance(A, E)), log(distance(A, E)) + log(distance(C, E)) == log(distance(D, E)) + log(distance(E, F)), log(distance(C, E)) + log(distance(A, F)) == log(distance(E, F)) + log(distance(C, D))
+By similar_triangle_basic_properties on D, K, G, I, K, H we get angle(D, K, G) == angle(I, K, H) mod 360, angle(K, G, D) == angle(K, H, I) mod 360, angle(G, D, K) == angle(H, I, K) mod 360, log(distance(D, K)) + log(distance(H, K)) == log(distance(I, K)) + log(distance(G, K)), log(distance(G, K)) + log(distance(H, I)) == log(distance(H, K)) + log(distance(D, G)), log(distance(D, G)) + log(distance(I, K)) == log(distance(H, I)) + log(distance(D, K))
+By sas_anti_congruence on I, center(c), A, A, center(c), I we get anti_congruent_triangles(A, I, center(c), I, A, center(c))
+By concyclic_definition_1 on A, E, F, G we get Circle(A, E, F) == Circle(E, F, G)
+By isosceles_triangle_properties on center(c), I, A we get distance(A, center(c)) == distance(I, center(c)), angle(I, A, center(c)) == angle(center(c), I, A) mod 360
+By altitude_definition on G, D, midpoint(C, D), i we get i == altitude(G, D, midpoint(C, D))
+By altitude_definition on H, D, midpoint(C, D), Line(H, I) we get Line(H, I) == altitude(H, D, midpoint(C, D))
+By concyclic_definition_1 on D, B, G, F we get Circle(B, D, G) == Circle(B, F, G)
+By altitude_definition on B, midpoint(C, D), I, g we get g == altitude(B, I, midpoint(C, D))
+By concyclic_definition_1 on D, B, F, G we get Circle(B, D, F) == Circle(B, F, G)
+By altitude_definition on A, D, midpoint(C, D), i we get i == altitude(A, D, midpoint(C, D))
+By similar_triangle_basic_properties on C, F, E, D, A, E we get angle(C, F, E) == angle(D, A, E) mod 360, angle(A, E, D) == angle(F, E, C) mod 360, angle(E, C, F) == angle(E, D, A) mod 360, log(distance(A, D)) + log(distance(E, F)) == log(distance(C, F)) + log(distance(A, E)), log(distance(A, E)) + log(distance(C, E)) == log(distance(E, F)) + log(distance(D, E)), log(distance(C, E)) + log(distance(A, D)) == log(distance(D, E)) + log(distance(C, F))
+By similar_triangle_basic_properties on D, B, E, G, F, E we get angle(D, B, E) == angle(G, F, E) mod 360, angle(B, E, D) == angle(F, E, G) mod 360, angle(E, D, B) == angle(E, G, F) mod 360, log(distance(B, D)) + log(distance(E, F)) == log(distance(F, G)) + log(distance(B, E)), log(distance(B, E)) + log(distance(E, G)) == log(distance(E, F)) + log(distance(D, E)), log(distance(D, E)) + log(distance(F, G)) == log(distance(E, G)) + log(distance(B, D))
+By altitude_definition on I, C, midpoint(C, D), Line(H, I) we get Line(H, I) == altitude(I, C, midpoint(C, D))
+By altitude_definition on midpoint(C, D), G, A, g we get g == altitude(midpoint(C, D), A, G)
+By anti_similar_triangle_basic_properties on H, A, C, I, J, C we get angle(H, A, C) == 0 - angle(I, J, C) mod 360, angle(A, C, H) == 0 - angle(J, C, I) mod 360, angle(C, H, A) == 0 - angle(C, I, J) mod 360, log(distance(A, H)) + log(distance(C, J)) == log(distance(I, J)) + log(distance(A, C)), log(distance(A, C)) + log(distance(C, I)) == log(distance(C, J)) + log(distance(C, H)), log(distance(C, H)) + log(distance(I, J)) == log(distance(C, I)) + log(distance(A, H))
+By collinear_definition on midpoint(C, D), I, H we get I in Line(H, midpoint(C, D)), H in Line(I, midpoint(C, D)), Line(H, midpoint(C, D)) == Line(I, midpoint(C, D)), 0 == 2 * angle(I, midpoint(C, D), H) mod 360
+By altitude_definition on D, H, midpoint(C, D), g we get g == altitude(D, H, midpoint(C, D))
+By anti_similar_triangle_basic_properties on I, K, H, F, K, D we get angle(I, K, H) == 0 - angle(F, K, D) mod 360, angle(K, H, I) == 0 - angle(K, D, F) mod 360, angle(H, I, K) == 0 - angle(D, F, K) mod 360, log(distance(F, K)) + log(distance(H, K)) == log(distance(I, K)) + log(distance(D, K)), log(distance(D, K)) + log(distance(H, I)) == log(distance(H, K)) + log(distance(D, F)), log(distance(D, F)) + log(distance(I, K)) == log(distance(H, I)) + log(distance(F, K))
+By anti_similar_triangle_basic_properties on H, K, D, I, K, F we get angle(H, K, D) == 0 - angle(I, K, F) mod 360, angle(K, D, H) == 0 - angle(K, F, I) mod 360, angle(D, H, K) == 0 - angle(F, I, K) mod 360, log(distance(H, K)) + log(distance(F, K)) == log(distance(I, K)) + log(distance(D, K)), log(distance(D, K)) + log(distance(F, I)) == log(distance(F, K)) + log(distance(D, H)), log(distance(D, H)) + log(distance(I, K)) == log(distance(F, I)) + log(distance(H, K))
+By similar_triangle_basic_properties on D, K, F, G, A, J we get angle(D, K, F) == angle(G, A, J) mod 360, angle(A, J, G) == angle(K, F, D) mod 360, angle(F, D, K) == angle(J, G, A) mod 360, log(distance(A, G)) + log(distance(F, K)) == log(distance(D, K)) + log(distance(A, J)), log(distance(A, J)) + log(distance(D, F)) == log(distance(F, K)) + log(distance(G, J)), log(distance(D, F)) + log(distance(A, G)) == log(distance(G, J)) + log(distance(D, K))
+By concyclic_definition_1 on F, G, E, A we get Circle(A, E, G) == Circle(E, F, G)
+By similar_triangle_basic_properties on G, K, D, H, K, I we get angle(G, K, D) == angle(H, K, I) mod 360, angle(K, D, G) == angle(K, I, H) mod 360, angle(D, G, K) == angle(I, H, K) mod 360, log(distance(G, K)) + log(distance(I, K)) == log(distance(H, K)) + log(distance(D, K)), log(distance(D, K)) + log(distance(H, I)) == log(distance(I, K)) + log(distance(D, G)), log(distance(D, G)) + log(distance(H, K)) == log(distance(H, I)) + log(distance(G, K))
+By sas_anti_congruence on J, center(c), A, A, center(c), J we get anti_congruent_triangles(A, J, center(c), J, A, center(c))
+By altitude_definition on I, D, midpoint(C, D), Line(H, I) we get Line(H, I) == altitude(I, D, midpoint(C, D))
+By anti_similar_triangle_basic_properties on F, D, K, I, H, K we get angle(F, D, K) == 0 - angle(I, H, K) mod 360, angle(D, K, F) == 0 - angle(H, K, I) mod 360, angle(K, F, D) == 0 - angle(K, I, H) mod 360, log(distance(D, F)) + log(distance(H, K)) == log(distance(H, I)) + log(distance(D, K)), log(distance(D, K)) + log(distance(I, K)) == log(distance(H, K)) + log(distance(F, K)), log(distance(F, K)) + log(distance(H, I)) == log(distance(I, K)) + log(distance(D, F))
+By concyclic_definition_1 on D, I, H, E we get Circle(D, H, I) == Circle(E, H, I)
+By similar_triangle_basic_properties on F, C, E, A, D, E we get angle(A, D, E) == angle(F, C, E) mod 360, angle(C, E, F) == angle(D, E, A) mod 360, angle(E, A, D) == angle(E, F, C) mod 360, log(distance(A, D)) + log(distance(C, E)) == log(distance(C, F)) + log(distance(D, E)), log(distance(C, E)) + log(distance(A, E)) == log(distance(D, E)) + log(distance(E, F)), log(distance(A, E)) + log(distance(C, F)) == log(distance(E, F)) + log(distance(A, D))
+By concyclic_definition_1 on H, I, D, E we get Circle(D, E, I) == Circle(D, H, I)
+By altitude_definition on B, midpoint(C, D), H, g we get g == altitude(B, H, midpoint(C, D))
+By concyclic_definition_1 on G, A, E, F we get Circle(A, E, F) == Circle(A, E, G)
+By altitude_definition on G, midpoint(C, D), C, i we get i == altitude(G, C, midpoint(C, D))
+By sas_anti_congruence on J, center(c), I, I, center(c), J we get anti_congruent_triangles(I, J, center(c), J, I, center(c))
+By altitude_definition on H, C, midpoint(C, D), Line(H, I) we get Line(H, I) == altitude(H, C, midpoint(C, D))
+By sas_anti_congruence on A, center(c), I, I, center(c), A we get anti_congruent_triangles(A, I, center(c), I, A, center(c))
+By altitude_definition on midpoint(C, D), A, D, g we get g == altitude(midpoint(C, D), A, D)
+By collinear_definition on midpoint(C, D), H, I we get H in Line(I, midpoint(C, D)), I in Line(H, midpoint(C, D)), Line(H, midpoint(C, D)) == Line(I, midpoint(C, D)), 0 == 2 * angle(H, midpoint(C, D), I) mod 360
+By concyclic_definition_1 on B, D, G, F we get Circle(B, D, G) == Circle(D, F, G)
+By concyclic_definition_1 on I, H, D, E we get Circle(D, E, H) == Circle(D, H, I)
+By altitude_definition on C, midpoint(C, D), H, g we get g == altitude(C, H, midpoint(C, D))
+By sas_anti_congruence on I, center(c), J, J, center(c), I we get anti_congruent_triangles(I, J, center(c), J, I, center(c))
+By similar_triangle_basic_properties on G, J, A, D, F, K we get angle(D, F, K) == angle(G, J, A) mod 360, angle(F, K, D) == angle(J, A, G) mod 360, angle(A, G, J) == angle(K, D, F) mod 360, log(distance(D, F)) + log(distance(A, J)) == log(distance(G, J)) + log(distance(F, K)), log(distance(A, J)) + log(distance(D, K)) == log(distance(F, K)) + log(distance(A, G)), log(distance(A, G)) + log(distance(D, F)) == log(distance(D, K)) + log(distance(G, J))
+By concyclic_definition_1 on E, A, G, F we get Circle(A, E, G) == Circle(A, F, G)
+By altitude_definition on D, I, midpoint(C, D), g we get g == altitude(D, I, midpoint(C, D))
+By concyclic_definition_1 on H, E, I, D we get Circle(D, E, I) == Circle(E, H, I)
+By power_of_a_point_tangent on H, E, Circle(A, B, D) we get 2 * log(distance(E, H)) == log(power_of_a_point(H, Circle(A, B, D)))
+By isosceles_triangle_properties on center(c), I, H we get distance(H, center(c)) == distance(I, center(c)), angle(I, H, center(c)) == angle(center(c), I, H) mod 360
+By isosceles_triangle_properties on center(c), J, I we get distance(I, center(c)) == distance(J, center(c)), angle(J, I, center(c)) == angle(center(c), J, I) mod 360
+By altitude_definition on midpoint(C, D), G, D, g we get g == altitude(midpoint(C, D), D, G)
+By isosceles_triangle_properties on center(c), J, H we get distance(H, center(c)) == distance(J, center(c)), angle(J, H, center(c)) == angle(center(c), J, H) mod 360
+By anti_similar_triangle_basic_properties on G, D, K, G, J, A we get angle(G, D, K) == 0 - angle(G, J, A) mod 360, angle(D, K, G) == 0 - angle(J, A, G) mod 360, angle(K, G, D) == 0 - angle(A, G, J) mod 360, log(distance(D, G)) + log(distance(A, J)) == log(distance(G, J)) + log(distance(D, K)), log(distance(A, J)) + log(distance(G, K)) == log(distance(D, K)) + log(distance(A, G)), log(distance(A, G)) + log(distance(D, G)) == log(distance(G, K)) + log(distance(G, J))
+By sas_anti_congruence on H, center(c), J, J, center(c), H we get anti_congruent_triangles(H, J, center(c), J, H, center(c))
+By sas_anti_congruence on H, center(c), I, I, center(c), H we get anti_congruent_triangles(H, I, center(c), I, H, center(c))
+By isosceles_triangle_properties on center(c), H, J we get distance(H, center(c)) == distance(J, center(c)), angle(H, J, center(c)) == angle(center(c), H, J) mod 360
+By sas_anti_congruence on A, center(c), J, J, center(c), A we get anti_congruent_triangles(A, J, center(c), J, A, center(c))
+By isosceles_triangle_properties on center(c), J, A we get distance(A, center(c)) == distance(J, center(c)), angle(J, A, center(c)) == angle(center(c), J, A) mod 360
+By isosceles_triangle_properties on center(c), I, J we get distance(I, center(c)) == distance(J, center(c)), angle(I, J, center(c)) == angle(center(c), I, J) mod 360
+By sas_anti_congruence on A, center(c), H, H, center(c), A we get anti_congruent_triangles(A, H, center(c), H, A, center(c))
+By isosceles_triangle_properties on center(c), A, J we get distance(A, center(c)) == distance(J, center(c)), angle(A, J, center(c)) == angle(center(c), A, J) mod 360
+By isosceles_triangle_properties on center(c), H, I we get distance(H, center(c)) == distance(I, center(c)), angle(H, I, center(c)) == angle(center(c), H, I) mod 360
+By altitude_definition on A, midpoint(C, D), C, i we get i == altitude(A, C, midpoint(C, D))
+By sas_anti_congruence on I, center(c), H, H, center(c), I we get anti_congruent_triangles(H, I, center(c), I, H, center(c))
+By altitude_definition on C, I, midpoint(C, D), g we get g == altitude(C, I, midpoint(C, D))
+By isosceles_triangle_properties on center(c), A, I we get distance(A, center(c)) == distance(I, center(c)), angle(A, I, center(c)) == angle(center(c), A, I) mod 360
+By isosceles_triangle_properties on center(c), H, A we get distance(A, center(c)) == distance(H, center(c)), angle(H, A, center(c)) == angle(center(c), H, A) mod 360
+By sas_anti_congruence on H, center(c), A, A, center(c), H we get anti_congruent_triangles(A, H, center(c), H, A, center(c))
+By power_of_a_point_tangent on H, D, Circle(A, B, D) we get 2 * log(distance(D, H)) == log(power_of_a_point(H, Circle(A, B, D)))
+By anti_similar_triangle_basic_properties on A, G, H, J, A, I we get angle(A, G, H) == 0 - angle(J, A, I) mod 360, angle(G, H, A) == 0 - angle(A, I, J) mod 360, angle(H, A, G) == 0 - angle(I, J, A) mod 360, log(distance(A, G)) + log(distance(A, I)) == log(distance(A, J)) + log(distance(G, H)), log(distance(A, I)) + log(distance(A, H)) == log(distance(G, H)) + log(distance(I, J)), log(distance(A, H)) + log(distance(A, J)) == log(distance(I, J)) + log(distance(A, G))
+By anti_similar_triangle_basic_properties on J, I, A, A, H, G we get angle(J, I, A) == 0 - angle(A, H, G) mod 360, angle(I, A, J) == 0 - angle(H, G, A) mod 360, angle(A, J, I) == 0 - angle(G, A, H) mod 360, log(distance(A, H)) + log(distance(A, I)) == log(distance(I, J)) + log(distance(G, H)), log(distance(A, I)) + log(distance(A, G)) == log(distance(G, H)) + log(distance(A, J)), log(distance(A, G)) + log(distance(I, J)) == log(distance(A, J)) + log(distance(A, H))
+By power_of_a_point_definition on midpoint(C, D), I, H, c we get log(power_of_a_point(midpoint(C, D), c)) == log(distance(I, midpoint(C, D))) + log(distance(H, midpoint(C, D)))

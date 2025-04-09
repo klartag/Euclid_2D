@@ -30,854 +30,1130 @@ Need to prove:
 collinear(B, F, G)
 
 Proof:
-By line_definition on F, C, h we get h == Line(C, F)
 By line_definition on E, C, f we get f == Line(C, E)
-By line_definition on B, E, g we get g == Line(B, E)
+By line_definition on C, F, h we get h == Line(C, F)
+By line_definition on E, B, g we get g == Line(B, E)
+By circle_definition on E, F, C, c we get c == Circle(C, E, F)
 By circle_definition on F, E, D, c we get c == Circle(D, E, F)
-By circle_definition on F, D, C, c we get c == Circle(C, D, F)
-By circle_definition on E, C, F, c we get c == Circle(C, E, F)
-By line_intersection_definition on C, f, h we get C == line_intersection(f, h)
-By line_unique_intersection_v1 on f, g, E, B we get B not in f
-By line_unique_intersection_v1 on g, f, E, C we get C not in g
-By line_unique_intersection_v1 on f, h, C, F we get F not in f
-By line_unique_intersection_v1 on h, f, C, E we get E not in h
-By between_imply_not_between on A, D, C we get collinear_and_not_between(C, A, D)
+By circle_definition on C, F, D, c we get c == Circle(C, D, F)
+By line_intersection_definition on C, h, f we get C == line_intersection(f, h)
 By between_imply_not_between on C, D, A we get collinear_and_not_between(A, C, D)
+By between_imply_not_between on A, D, C we get collinear_and_not_between(C, A, D)
+By circle_radius_v0_r on C, c we get radius(c) == distance(C, center(c))
 By circle_radius_v0_r on F, c we get radius(c) == distance(F, center(c))
 By circle_radius_v0_r on D, c we get radius(c) == distance(D, center(c))
-By circle_radius_v0_r on C, c we get radius(c) == distance(C, center(c))
 By circle_radius_v0_r on E, c we get radius(c) == distance(E, center(c))
-By center_not_on_circle on c we get center(c) not in c
-By angle_bisector_draw_angle_v1 on D, B, C we get exists(Line(B, C), Line(B, D))
-By angle_bisector_draw_angle_v0 on A, C, B we get exists(Line(A, C), Line(B, C))
-By in_imply_concyclic on E, D, C, F we get concyclic(C, D, E, F)
-By angle_bisectors_are_perpendicular on A, C, B we get perpendicular(external_angle_bisector(A, C, B), internal_angle_bisector(A, C, B))
-By angle_bisector_draw_angle_v1 on C, B, D we get exists(Line(B, C), Line(B, D))
 By angle_bisector_draw_angle_v0 on B, C, A we get exists(Line(A, C), Line(B, C))
-By angle_bisector_draw_angle_v1 on B, C, A we get exists(Line(A, C), Line(B, C))
-By line_circle_intersection_has_at_most_two_points_0 on C, D, A, c we get A not in c
+By in_imply_concyclic on D, E, C, F we get concyclic(C, D, E, F)
+By angle_bisectors_are_perpendicular on B, C, A we get perpendicular(external_angle_bisector(A, C, B), internal_angle_bisector(A, C, B))
+By angle_bisector_draw_angle_v1 on C, B, D we get exists(Line(B, C), Line(B, D))
+By angle_bisector_draw_angle_v0 on A, C, B we get exists(Line(A, C), Line(B, C))
 By angle_bisector_draw_angle_v1 on A, C, B we get exists(Line(A, C), Line(B, C))
-By power_of_a_point_on_circle on D, c we get 0 == power_of_a_point(D, c)
+By angle_bisector_draw_angle_v1 on D, B, C we get exists(Line(B, C), Line(B, D))
+By angle_bisector_draw_angle_v1 on B, C, A we get exists(Line(A, C), Line(B, C))
 By power_of_a_point_on_circle on E, c we get 0 == power_of_a_point(E, c)
-By power_of_a_point_in_circle on F, c we get 0 == power_of_a_point(F, c)
+By power_of_a_point_on_circle on F, c we get 0 == power_of_a_point(F, c)
 By power_of_a_point_on_circle on C, c we get 0 == power_of_a_point(C, c)
-By angles_on_chord_v1 on E, F, D, C, c we get angle(E, C, F) == angle(E, D, F) mod 360
-By angles_on_chord_v1 on C, D, F, E, c we get angle(C, E, D) == angle(C, F, D) mod 360
-By angles_on_chord_v3 on E, C, D, F, c we get angle(E, D, C) == angle(E, F, C) + 180 mod 360
-By angles_on_chord_v0 on D, C, F, E, c we get angle(D, E, C) == angle(D, F, C) mod 360
-By angles_on_chord_v2 on E, C, F, D, c we get angle(E, F, C) == angle(E, D, C) + 180 mod 360
-By angles_on_chord_v1 on F, C, D, E, c we get angle(F, D, C) == angle(F, E, C) mod 360
-By angles_on_chord_v3 on C, E, F, D, c we get angle(C, F, E) == angle(C, D, E) + 180 mod 360
-By angles_on_chord_v0 on C, F, D, E, c we get angle(C, D, F) == angle(C, E, F) mod 360
-By angle_to_center on C, D, E, c we get 2 * angle(C, D, E) == angle(C, center(c), E) mod 360
+By angles_on_chord_v2 on F, D, C, E, c we get angle(F, C, D) == angle(F, E, D) + 180 mod 360
+By power_of_a_point_on_circle on D, c we get 0 == power_of_a_point(D, c)
 By angles_on_chord_v1 on D, E, F, C, c we get angle(D, C, E) == angle(D, F, E) mod 360
+By angles_on_chord_v0 on D, C, F, E, c we get angle(D, E, C) == angle(D, F, C) mod 360
 By angles_on_chord_v3 on D, F, C, E, c we get angle(D, C, F) == angle(D, E, F) + 180 mod 360
 By angles_on_chord_v2 on C, E, D, F, c we get angle(C, D, E) == angle(C, F, E) + 180 mod 360
-By angles_on_chord_v0 on F, E, D, C, c we get angle(F, C, E) == angle(F, D, E) mod 360
+By angles_on_chord_v3 on C, E, F, D, c we get angle(C, F, E) == angle(C, D, E) + 180 mod 360
+By angles_on_chord_v1 on C, D, F, E, c we get angle(C, E, D) == angle(C, F, D) mod 360
+By angles_on_chord_v3 on E, C, D, F, c we get angle(E, D, C) == angle(E, F, C) + 180 mod 360
+By angles_on_chord_v1 on E, F, C, D, c we get angle(E, C, F) == angle(E, D, F) mod 360
+By angles_on_chord_v0 on C, F, D, E, c we get angle(C, D, F) == angle(C, E, F) mod 360
 By angles_on_chord_v0 on E, D, C, F, c we get angle(E, C, D) == angle(E, F, D) mod 360
-By angles_on_chord_v2 on F, D, C, E, c we get angle(F, C, D) == angle(F, E, D) + 180 mod 360
-By angle_to_center on E, D, F, c we get 2 * angle(E, D, F) == angle(E, center(c), F) mod 360
-By angle_to_center on E, C, D, c we get 2 * angle(E, C, D) == angle(E, center(c), D) mod 360
-By angles_on_chord_v2 on D, F, E, C, c we get angle(D, E, F) == angle(D, C, F) + 180 mod 360
-By angle_to_center on F, C, E, c we get 2 * angle(F, C, E) == angle(F, center(c), E) mod 360
-By angle_to_center on F, D, E, c we get 2 * angle(F, D, E) == angle(F, center(c), E) mod 360
+By angles_on_chord_v2 on E, C, F, D, c we get angle(E, F, C) == angle(E, D, C) + 180 mod 360
 By angles_on_chord_v3 on F, D, E, C, c we get angle(F, E, D) == angle(F, C, D) + 180 mod 360
-By angle_to_center on F, E, C, c we get 2 * angle(F, E, C) == angle(F, center(c), C) mod 360
-By angle_to_center on D, F, C, c we get 2 * angle(D, F, C) == angle(D, center(c), C) mod 360
-By angle_to_center on D, E, C, c we get 2 * angle(D, E, C) == angle(D, center(c), C) mod 360
+By angles_on_chord_v0 on F, E, D, C, c we get angle(F, C, E) == angle(F, D, E) mod 360
+By angle_to_center on D, E, F, c we get 2 * angle(D, E, F) == angle(D, center(c), F) mod 360
 By angle_to_center on E, D, C, c we get 2 * angle(E, D, C) == angle(E, center(c), C) mod 360
 By angle_to_center on D, C, E, c we get 2 * angle(D, C, E) == angle(D, center(c), E) mod 360
-By angle_to_center on D, E, F, c we get 2 * angle(D, E, F) == angle(D, center(c), F) mod 360
-By angle_to_center on C, E, F, c we get 2 * angle(C, E, F) == angle(C, center(c), F) mod 360
-By angle_to_center on C, F, E, c we get 2 * angle(C, F, E) == angle(C, center(c), E) mod 360
-By angle_to_center on E, C, F, c we get 2 * angle(E, C, F) == angle(E, center(c), F) mod 360
-By angle_to_center on C, F, D, c we get 2 * angle(C, F, D) == angle(C, center(c), D) mod 360
-By angle_to_center on F, C, D, c we get 2 * angle(F, C, D) == angle(F, center(c), D) mod 360
-By angle_to_center on C, E, D, c we get 2 * angle(C, E, D) == angle(C, center(c), D) mod 360
-By angle_to_center on F, E, D, c we get 2 * angle(F, E, D) == angle(F, center(c), D) mod 360
-By angle_to_center on E, F, C, c we get 2 * angle(E, F, C) == angle(E, center(c), C) mod 360
-By angle_to_center on D, F, E, c we get 2 * angle(D, F, E) == angle(D, center(c), E) mod 360
-By angle_to_center on F, D, C, c we get 2 * angle(F, D, C) == angle(F, center(c), C) mod 360
-By angle_to_center on C, D, F, c we get 2 * angle(C, D, F) == angle(C, center(c), F) mod 360
+By angle_to_center on F, D, E, c we get 2 * angle(F, D, E) == angle(F, center(c), E) mod 360
 By angle_to_center on D, C, F, c we get 2 * angle(D, C, F) == angle(D, center(c), F) mod 360
+By angles_on_chord_v1 on F, C, E, D, c we get angle(F, D, C) == angle(F, E, C) mod 360
+By angles_on_chord_v2 on D, F, E, C, c we get angle(D, E, F) == angle(D, C, F) + 180 mod 360
+By angle_to_center on C, E, D, c we get 2 * angle(C, E, D) == angle(C, center(c), D) mod 360
+By angle_to_center on F, D, C, c we get 2 * angle(F, D, C) == angle(F, center(c), C) mod 360
+By angle_to_center on F, E, C, c we get 2 * angle(F, E, C) == angle(F, center(c), C) mod 360
+By angle_to_center on C, E, F, c we get 2 * angle(C, E, F) == angle(C, center(c), F) mod 360
+By angle_to_center on C, D, E, c we get 2 * angle(C, D, E) == angle(C, center(c), E) mod 360
+By angle_to_center on C, F, E, c we get 2 * angle(C, F, E) == angle(C, center(c), E) mod 360
+By angle_to_center on C, F, D, c we get 2 * angle(C, F, D) == angle(C, center(c), D) mod 360
+By angle_to_center on E, C, D, c we get 2 * angle(E, C, D) == angle(E, center(c), D) mod 360
+By angle_to_center on F, C, E, c we get 2 * angle(F, C, E) == angle(F, center(c), E) mod 360
+By angle_to_center on E, F, C, c we get 2 * angle(E, F, C) == angle(E, center(c), C) mod 360
+By angle_to_center on E, C, F, c we get 2 * angle(E, C, F) == angle(E, center(c), F) mod 360
+By angle_to_center on D, F, E, c we get 2 * angle(D, F, E) == angle(D, center(c), E) mod 360
+By angle_to_center on D, F, C, c we get 2 * angle(D, F, C) == angle(D, center(c), C) mod 360
+By angle_to_center on F, C, D, c we get 2 * angle(F, C, D) == angle(F, center(c), D) mod 360
 By angle_to_center on E, F, D, c we get 2 * angle(E, F, D) == angle(E, center(c), D) mod 360
-By log_of_2_times_distance on A, C, C, D we get log(distance(A, C)) == 0.6931471805599453 + log(distance(C, D))
-By collinear_definition on D, A, C we get A in Line(C, D), C in Line(A, D), Line(A, D) == Line(C, D), 0 == 2 * angle(A, D, C) mod 360
+By angle_to_center on C, D, F, c we get 2 * angle(C, D, F) == angle(C, center(c), F) mod 360
+By angle_to_center on E, D, F, c we get 2 * angle(E, D, F) == angle(E, center(c), F) mod 360
+By angle_to_center on D, E, C, c we get 2 * angle(D, E, C) == angle(D, center(c), C) mod 360
+By angle_to_center on F, E, D, c we get 2 * angle(F, E, D) == angle(F, center(c), D) mod 360
+By log_of_2_times_distance on A, C, A, D we get log(distance(A, C)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(A, D))
 By collinear_definition on C, D, A we get D in Line(A, C), A in Line(C, D), Line(A, C) == Line(C, D), 0 == 2 * angle(D, C, A) mod 360
-By log_of_2_times_distance on C, A, A, D we get log(distance(A, C)) == 0.6931471805599453 + log(distance(A, D))
-By collinear_definition on A, D, C we get D in Line(A, C), C in Line(A, D), Line(A, C) == Line(A, D), 0 == 2 * angle(D, A, C) mod 360
-By collinear_definition on A, C, D we get C in Line(A, D), D in Line(A, C), Line(A, C) == Line(A, D), 0 == 2 * angle(C, A, D) mod 360
-By collinear_definition on D, C, A we get C in Line(A, D), A in Line(C, D), Line(A, D) == Line(C, D), 0 == 2 * angle(C, D, A) mod 360
 By collinear_definition on C, A, D we get A in Line(C, D), D in Line(A, C), Line(A, C) == Line(C, D), 0 == 2 * angle(A, C, D) mod 360
-By isosceles_triangle_properties on D, A, C we get distance(A, D) == distance(C, D), angle(A, C, D) == angle(D, A, C) mod 360
-By isosceles_triangle_properties on D, C, A we get distance(A, D) == distance(C, D), angle(C, A, D) == angle(D, C, A) mod 360
-By between_implies_angles on A, D, C we get 180 == angle(A, D, C) mod 360, 0 == angle(D, C, A) mod 360, 0 == angle(C, A, D) mod 360
+By collinear_definition on D, C, A we get C in Line(A, D), A in Line(C, D), Line(A, D) == Line(C, D), 0 == 2 * angle(C, D, A) mod 360
+By collinear_definition on D, A, C we get A in Line(C, D), C in Line(A, D), Line(A, D) == Line(C, D), 0 == 2 * angle(A, D, C) mod 360
+By collinear_definition on A, C, D we get C in Line(A, D), D in Line(A, C), Line(A, C) == Line(A, D), 0 == 2 * angle(C, A, D) mod 360
+By log_of_2_times_distance on A, C, C, D we get log(distance(A, C)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(C, D))
+By collinear_definition on A, D, C we get D in Line(A, C), C in Line(A, D), Line(A, C) == Line(A, D), 0 == 2 * angle(D, A, C) mod 360
+By power_of_a_point_definition on A, C, D, c we get log(power_of_a_point(A, c)) == log(distance(A, C)) + log(distance(A, D))
 By between_implies_angles on C, D, A we get 180 == angle(C, D, A) mod 360, 0 == angle(D, A, C) mod 360, 0 == angle(A, C, D) mod 360
-By perpendicular_line_definition on E, f, h we get f == perpendicular_line(E, h)
-By median_definition on B, C, A, Line(B, D) we get Line(B, D) == median(B, A, C)
-By perpendicular_line_definition on F, h, f we get h == perpendicular_line(F, f)
-By perpendicular_line_definition on C, h, f we get h == perpendicular_line(C, f)
-By median_definition on F, A, C, Line(D, F) we get Line(D, F) == median(F, A, C)
-By median_definition on G, C, A, Line(D, G) we get Line(D, G) == median(G, A, C)
-By perpendicular_line_definition on C, f, h we get f == perpendicular_line(C, h)
+By between_implies_angles on A, D, C we get 180 == angle(A, D, C) mod 360, 0 == angle(D, C, A) mod 360, 0 == angle(C, A, D) mod 360
+By median_definition on B, A, C, Line(B, D) we get Line(B, D) == median(B, A, C)
+By line_intersection_definition on B, g, Line(B, C) we get B == line_intersection(g, Line(B, C))
+By line_intersection_definition on C, f, Line(C, G) we get C == line_intersection(f, Line(C, G))
+By line_intersection_definition on B, Line(B, D), Line(B, C) we get B == line_intersection(Line(B, C), Line(B, D))
+By line_intersection_definition on D, Line(D, F), Line(A, C) we get D == line_intersection(Line(A, C), Line(D, F))
+By line_intersection_definition on D, Line(D, E), Line(B, D) we get D == line_intersection(Line(B, D), Line(D, E))
+By line_intersection_definition on D, Line(D, E), Line(A, C) we get D == line_intersection(Line(A, C), Line(D, E))
+By line_intersection_definition on B, Line(B, D), g we get B == line_intersection(g, Line(B, D))
+By line_intersection_definition on C, Line(B, C), Line(A, C) we get C == line_intersection(Line(A, C), Line(B, C))
+By line_intersection_definition on E, Line(E, F), Line(D, E) we get E == line_intersection(Line(D, E), Line(E, F))
+By line_intersection_definition on C, Line(B, C), f we get C == line_intersection(f, Line(B, C))
+By line_intersection_definition on E, f, Line(E, F) we get E == line_intersection(f, Line(E, F))
+By line_intersection_definition on E, Line(E, G), Line(D, E) we get E == line_intersection(Line(D, E), Line(E, G))
+By line_intersection_definition on F, h, Line(E, F) we get F == line_intersection(h, Line(E, F))
+By median_definition on G, A, C, Line(D, G) we get Line(D, G) == median(G, A, C)
+By line_intersection_definition on G, Line(D, G), Line(F, G) we get G == line_intersection(Line(D, G), Line(F, G))
+By line_intersection_definition on F, h, Line(F, G) we get F == line_intersection(h, Line(F, G))
 By median_definition on E, A, C, Line(D, E) we get Line(D, E) == median(E, A, C)
+By line_intersection_definition on D, Line(D, G), Line(A, C) we get D == line_intersection(Line(A, C), Line(D, G))
+By line_intersection_definition on D, Line(D, E), Line(D, F) we get D == line_intersection(Line(D, E), Line(D, F))
+By line_intersection_definition on G, Line(E, G), Line(C, G) we get G == line_intersection(Line(C, G), Line(E, G))
+By line_intersection_definition on C, Line(C, G), Line(A, C) we get C == line_intersection(Line(A, C), Line(C, G))
+By line_intersection_definition on C, Line(A, C), h we get C == line_intersection(h, Line(A, C))
+By line_intersection_definition on C, Line(A, C), f we get C == line_intersection(f, Line(A, C))
+By perpendicular_line_definition on F, h, f we get h == perpendicular_line(F, f)
+By perpendicular_line_definition on E, f, h we get f == perpendicular_line(E, h)
+By line_intersection_definition on F, Line(D, F), Line(E, F) we get F == line_intersection(Line(D, F), Line(E, F))
+By median_definition on F, C, A, Line(D, F) we get Line(D, F) == median(F, A, C)
+By line_intersection_definition on E, f, Line(E, G) we get E == line_intersection(f, Line(E, G))
+By line_intersection_definition on F, Line(F, G), Line(D, F) we get F == line_intersection(Line(D, F), Line(F, G))
+By line_intersection_definition on E, Line(D, E), g we get E == line_intersection(g, Line(D, E))
+By line_intersection_definition on D, Line(D, F), Line(D, G) we get D == line_intersection(Line(D, F), Line(D, G))
+By line_intersection_definition on D, Line(D, G), Line(B, D) we get D == line_intersection(Line(B, D), Line(D, G))
+By line_intersection_definition on G, Line(C, G), Line(F, G) we get G == line_intersection(Line(C, G), Line(F, G))
+By line_intersection_definition on C, h, Line(C, G) we get C == line_intersection(h, Line(C, G))
+By line_intersection_definition on E, f, Line(D, E) we get E == line_intersection(f, Line(D, E))
+By line_intersection_definition on C, Line(B, C), h we get C == line_intersection(h, Line(B, C))
+By line_intersection_definition on G, Line(D, G), Line(C, G) we get G == line_intersection(Line(C, G), Line(D, G))
+By line_intersection_definition on F, Line(D, F), h we get F == line_intersection(h, Line(D, F))
+By perpendicular_line_definition on C, h, f we get h == perpendicular_line(C, f)
+By line_intersection_definition on D, Line(B, D), Line(D, F) we get D == line_intersection(Line(B, D), Line(D, F))
+By line_intersection_definition on D, Line(D, E), Line(D, G) we get D == line_intersection(Line(D, E), Line(D, G))
+By line_intersection_definition on G, Line(E, G), Line(D, G) we get G == line_intersection(Line(D, G), Line(E, G))
+By line_intersection_definition on D, Line(B, D), Line(A, C) we get D == line_intersection(Line(A, C), Line(B, D))
+By line_intersection_definition on C, Line(B, C), Line(C, G) we get C == line_intersection(Line(B, C), Line(C, G))
+By perpendicular_line_definition on C, f, h we get f == perpendicular_line(C, h)
+By same_angle_v3 on D, C, A, F we get angle(C, D, F) == angle(A, D, F) + 180 mod 360
 By same_angle_v1 on C, A, D, E we get angle(A, C, E) == angle(D, C, E) mod 360
-By same_angle_v2 on D, C, A, F we get angle(C, D, F) == angle(A, D, F) + 180 mod 360
-By perpendicular_direction_conditions_v0_r on E, C, F, C we get 180 == 2 * direction(E, C) - 2 * direction(F, C) mod 360
-By same_angle_v2 on D, C, A, E we get angle(C, D, E) == angle(A, D, E) + 180 mod 360
 By perpendicular_direction_conditions_v0_r on C, F, C, E we get 180 == 2 * direction(C, F) - 2 * direction(C, E) mod 360
 By same_angle_v1 on C, D, A, F we get angle(A, C, F) == angle(D, C, F) mod 360
-By perpendicular_direction_conditions_v0_r on C, F, E, C we get 180 == 2 * direction(C, F) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, F, C we get 180 == 2 * direction(E, C) - 2 * direction(F, C) mod 360
 By perpendicular_direction_conditions_v0_r on C, E, C, F we get 180 == 2 * direction(C, E) - 2 * direction(C, F) mod 360
-By perpendicular_direction_conditions_v0_r on E, C, C, F we get 180 == 2 * direction(E, C) - 2 * direction(C, F) mod 360
-By perpendicular_direction_conditions_v0_r on F, C, C, E we get 180 == 2 * direction(F, C) - 2 * direction(C, E) mod 360
-By perpendicular_direction_conditions_v0_r on C, E, F, C we get 180 == 2 * direction(C, E) - 2 * direction(F, C) mod 360
+By same_angle_v2 on D, C, A, E we get angle(C, D, E) == angle(A, D, E) + 180 mod 360
 By perpendicular_direction_conditions_v0_r on F, C, E, C we get 180 == 2 * direction(F, C) - 2 * direction(E, C) mod 360
-By different_points_v1 on D, E we get 0 != distance(D, E)
-By different_points_v1 on C, E we get 0 != distance(C, E)
-By different_points_v1 on B, D we get 0 != distance(B, D)
-By different_points_v1 on G, D we get 0 != distance(D, G)
-By different_points_v1 on F, E we get 0 != distance(E, F)
-By different_points_v1 on D, F we get 0 != distance(D, F)
-By different_points_v1 on B, C we get 0 != distance(B, C)
-By different_points_v1 on G, E we get 0 != distance(E, G)
-By different_points_v1 on C, G we get 0 != distance(C, G)
-By different_points_v1 on B, E we get 0 != distance(B, E)
-By different_points_v1 on G, F we get 0 != distance(F, G)
-By different_points_v1 on F, C we get 0 != distance(C, F)
-By same_angle_v1 on C, A, D, B we get angle(A, C, B) == angle(D, C, B) mod 360
-By same_angle_v3 on D, C, A, G we get angle(C, D, G) == angle(A, D, G) + 180 mod 360
-By same_angle_v3 on D, C, A, B we get angle(C, D, B) == angle(A, D, B) + 180 mod 360
+By perpendicular_direction_conditions_v0_r on E, C, C, F we get 180 == 2 * direction(E, C) - 2 * direction(C, F) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, F, C we get 180 == 2 * direction(C, E) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, C, E we get 180 == 2 * direction(F, C) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, E, C we get 180 == 2 * direction(C, F) - 2 * direction(E, C) mod 360
+By same_angle_v2 on D, C, A, B we get angle(C, D, B) == angle(A, D, B) + 180 mod 360
 By same_angle_v1 on C, D, A, G we get angle(A, C, G) == angle(D, C, G) mod 360
 By projection_definition on E, C, h we get C == projection(E, h)
+By same_angle_v2 on D, C, A, G we get angle(C, D, G) == angle(A, D, G) + 180 mod 360
+By same_angle_v1 on C, A, D, B we get angle(A, C, B) == angle(D, C, B) mod 360
 By projection_definition on F, C, f we get C == projection(F, f)
-By reverse_direction on A, C we get 180 == direction(A, C) - direction(C, A) mod 360
-By reverse_direction on D, E we get 180 == direction(D, E) - direction(E, D) mod 360
-By reverse_direction on D, A we get 180 == direction(D, A) - direction(A, D) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on D, G, E we get D not in Line(E, G)
-By perpendicular_angle_conditions_v0 on F, C, E we get angle(F, C, E) == orientation(C, E, F) mod 360
-By reverse_direction on E, C we get 180 == direction(E, C) - direction(C, E) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on G, D, C we get G not in Line(C, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, C, E we get A not in Line(C, E)
 By perpendicular_angle_conditions_v0 on E, C, F we get angle(E, C, F) == orientation(C, F, E) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on A, E, G we get A not in Line(E, G)
-By reverse_direction on D, C we get 180 == direction(D, C) - direction(C, D) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on G, B, C we get G not in Line(B, C)
-By not_in_line_equivalent_to_not_collinear_v0_r on B, C, A we get B not in Line(A, C)
-By not_in_line_equivalent_to_not_collinear_v0_r on B, D, F we get B not in Line(D, F)
-By reverse_direction on C, D we get 180 == direction(C, D) - direction(D, C) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on A, E, D we get A not in Line(D, E)
-By not_in_line_equivalent_to_not_collinear_v0_r on B, E, D we get B not in Line(D, E)
-By reverse_direction on E, F we get 180 == direction(E, F) - direction(F, E) mod 360
+By reverse_direction on C, E we get 180 == direction(C, E) - direction(E, C) mod 360
+By perpendicular_angle_conditions_v0 on F, C, E we get angle(F, C, E) == orientation(C, E, F) mod 360
+By reverse_direction on A, C we get 180 == direction(A, C) - direction(C, A) mod 360
+By reverse_direction on C, F we get 180 == direction(C, F) - direction(F, C) mod 360
+By reverse_direction on D, A we get 180 == direction(D, A) - direction(A, D) mod 360
+By reverse_direction on F, E we get 180 == direction(F, E) - direction(E, F) mod 360
+By reverse_direction on F, C we get 180 == direction(F, C) - direction(C, F) mod 360
+By reverse_direction on D, E we get 180 == direction(D, E) - direction(E, D) mod 360
+By reverse_direction on D, F we get 180 == direction(D, F) - direction(F, D) mod 360
+By reverse_direction on E, C we get 180 == direction(E, C) - direction(C, E) mod 360
 By reverse_direction on C, A we get 180 == direction(C, A) - direction(A, C) mod 360
 By reverse_direction on F, D we get 180 == direction(F, D) - direction(D, F) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on F, B, C we get F not in Line(B, C)
-By not_in_line_equivalent_to_not_collinear_v0_r on C, B, D we get C not in Line(B, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on B, C, G we get B not in Line(C, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, C, G we get A not in Line(C, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on F, C, G we get F not in Line(C, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on B, G, D we get B not in Line(D, G)
-By reverse_direction on D, F we get 180 == direction(D, F) - direction(F, D) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on D, F, E we get D not in Line(E, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on G, D, F we get G not in Line(D, F)
-By reverse_direction on F, E we get 180 == direction(F, E) - direction(E, F) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on E, D, G we get E not in Line(D, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on B, D, C we get B not in Line(C, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, D, F we get A not in Line(D, F)
+By reverse_direction on D, C we get 180 == direction(D, C) - direction(C, D) mod 360
+By reverse_direction on C, D we get 180 == direction(C, D) - direction(D, C) mod 360
+By reverse_direction on E, F we get 180 == direction(E, F) - direction(F, E) mod 360
 By reverse_direction on E, D we get 180 == direction(E, D) - direction(D, E) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on C, D, G we get C not in Line(D, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on G, A, C we get G not in Line(A, C)
-By not_in_line_equivalent_to_not_collinear_v0_r on G, E, D we get G not in Line(D, E)
-By not_in_line_equivalent_to_not_collinear_v0_r on E, C, A we get E not in Line(A, C)
-By reverse_direction on C, E we get 180 == direction(C, E) - direction(E, C) mod 360
-By reverse_direction on F, C we get 180 == direction(F, C) - direction(C, F) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on F, D, G we get F not in Line(D, G)
-By reverse_direction on C, F we get 180 == direction(C, F) - direction(F, C) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on F, E, D we get F not in Line(D, E)
 By reverse_direction on A, D we get 180 == direction(A, D) - direction(D, A) mod 360
-By line_inequality on Line(E, F), f, F we get f != Line(E, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, F, E we get A not in Line(E, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on D, C, B we get D not in Line(B, C)
-By not_in_line_equivalent_to_not_collinear_v0_r on G, F, C we get G not in Line(C, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on D, E, B we get D not in Line(B, E)
-By not_in_line_equivalent_to_not_collinear_v0_r on E, B, C we get E not in Line(B, C)
-By not_in_line_equivalent_to_not_collinear_v0_r on C, G, F we get C not in Line(F, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on E, D, F we get E not in Line(D, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on E, C, D we get E not in Line(C, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on F, C, A we get F not in Line(A, C)
-By line_inequality on Line(C, G), g, C we get g != Line(C, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, E, B we get A not in Line(B, E)
-By not_in_line_equivalent_to_not_collinear_v0_r on G, A, D we get G not in Line(A, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on F, C, D we get F not in Line(C, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on D, C, E we get D not in Line(C, E)
-By not_in_line_equivalent_to_not_collinear_v0_r on C, G, E we get C not in Line(E, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on G, B, D we get G not in Line(B, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, G, F we get A not in Line(F, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on D, G, F we get D not in Line(F, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, C, F we get A not in Line(C, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, D, G we get A not in Line(D, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on E, D, B we get E not in Line(B, D)
-By line_inequality on Line(B, D), f, B we get f != Line(B, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on C, E, D we get C not in Line(D, E)
-By not_in_line_equivalent_to_not_collinear_v0_r on D, F, C we get D not in Line(C, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on E, G, C we get E not in Line(C, G)
-By line_inequality on Line(B, C), f, B we get f != Line(B, C)
-By line_inequality on Line(E, G), h, E we get h != Line(E, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on B, A, D we get B not in Line(A, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on D, G, C we get D not in Line(C, G)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, D, B we get A not in Line(B, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on F, A, D we get F not in Line(A, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on C, F, D we get C not in Line(D, F)
-By line_inequality on Line(E, F), h, E we get h != Line(E, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on F, B, D we get F not in Line(B, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on E, D, A we get E not in Line(A, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on C, E, F we get C not in Line(E, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on B, C, F we get B not in Line(C, F)
-By not_in_line_equivalent_to_not_collinear_v0_r on G, C, E we get G not in Line(C, E)
-By not_in_line_equivalent_to_not_collinear_v0_r on A, C, B we get A not in Line(B, C)
-By line_inequality on Line(D, F), f, F we get f != Line(D, F)
-By line_inequality on Line(D, E), h, E we get h != Line(D, E)
-By line_inequality on Line(B, C), g, C we get g != Line(B, C)
-By line_inequality on Line(F, G), f, F we get f != Line(F, G)
-By line_inequality on Line(A, C), g, C we get g != Line(A, C)
+By internal_angle_bisector_definition_v0_r on A, D, A, C we get Line(C, D) == internal_angle_bisector(A, C, A)
+By external_angle_bisector_definition_v0 on B, F, A, C we get 180 == angle(B, C, F) + angle(A, C, F) mod 360
+By reverse_direction on G, E we get 180 == direction(G, E) - direction(E, G) mod 360
 By reverse_direction on G, C we get 180 == direction(G, C) - direction(C, G) mod 360
 By internal_angle_bisector_definition_v0_r on C, D, C, A we get Line(A, D) == internal_angle_bisector(C, A, C)
 By internal_angle_bisector_definition_v0_r on D, C, D, A we get Line(A, C) == internal_angle_bisector(D, A, D)
-By internal_angle_bisector_definition_v0 on A, E, B, C we get angle(A, C, E) == angle(E, C, B) mod 360
-By reverse_direction on G, E we get 180 == direction(G, E) - direction(E, G) mod 360
-By internal_angle_bisector_definition_v0_r on A, D, A, C we get Line(C, D) == internal_angle_bisector(A, C, A)
+By internal_angle_bisector_definition_v0_r on A, C, A, D we get Line(C, D) == internal_angle_bisector(A, D, A)
 By reverse_direction on G, D we get 180 == direction(G, D) - direction(D, G) mod 360
-By internal_angle_bisector_definition_v0_r on D, A, D, C we get Line(A, C) == internal_angle_bisector(D, C, D)
 By internal_angle_bisector_definition_v0_r on C, A, C, D we get Line(A, D) == internal_angle_bisector(C, D, C)
 By internal_angle_bisector_definition_v0 on B, E, A, C we get angle(B, C, E) == angle(E, C, A) mod 360
+By internal_angle_bisector_definition_v0 on A, E, B, C we get angle(A, C, E) == angle(E, C, B) mod 360
+By internal_angle_bisector_definition_v0_r on D, A, D, C we get Line(A, C) == internal_angle_bisector(D, C, D)
 By reverse_direction on G, F we get 180 == direction(G, F) - direction(F, G) mod 360
-By external_angle_bisector_definition_v0 on B, F, A, C we get 180 == angle(B, C, F) + angle(A, C, F) mod 360
-By internal_angle_bisector_definition_v0_r on A, C, A, D we get Line(C, D) == internal_angle_bisector(A, D, A)
+By altitude_definition on E, F, C, f we get f == altitude(E, C, F)
+By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
 By isosceles_triangle_properties on G, C, F we get distance(C, G) == distance(F, G), angle(C, F, G) == angle(G, C, F) mod 360
-By sas_anti_congruence on D, G, F, F, G, D we get anti_congruent_triangles(D, F, G, F, D, G)
-By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By isosceles_triangle_properties on G, D, C we get distance(C, G) == distance(D, G), angle(D, C, G) == angle(G, D, C) mod 360
-By isosceles_triangle_properties on G, F, E we get distance(E, G) == distance(F, G), angle(F, E, G) == angle(G, F, E) mod 360
-By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
 By sss_anti_congruence_v0 on C, D, G, D, C, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By isosceles_triangle_properties on G, D, F we get distance(D, G) == distance(F, G), angle(D, F, G) == angle(G, D, F) mod 360
-By isosceles_triangle_properties on G, F, D we get distance(D, G) == distance(F, G), angle(F, D, G) == angle(G, F, D) mod 360
+By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
 By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
 By sas_anti_congruence on C, G, E, E, G, C we get anti_congruent_triangles(C, E, G, E, C, G)
-By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sas_anti_congruence on F, G, C, C, G, F we get anti_congruent_triangles(C, F, G, F, C, G)
-By sas_anti_congruence on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By isosceles_triangle_properties on G, C, D we get distance(C, G) == distance(D, G), angle(C, D, G) == angle(G, C, D) mod 360
-By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By isosceles_triangle_properties on G, D, F we get distance(D, G) == distance(F, G), angle(D, F, G) == angle(G, D, F) mod 360
 By sss_anti_congruence_v0 on C, D, G, D, C, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v0 on C, D, G, D, C, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By sas_anti_congruence on D, G, E, E, G, D we get anti_congruent_triangles(D, E, G, E, D, G)
 By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
 By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By altitude_definition on E, C, F, f we get f == altitude(E, C, F)
-By sss_anti_congruence_v0 on C, D, G, D, C, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v0 on C, D, G, D, C, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By sas_anti_congruence on F, G, D, D, G, F we get anti_congruent_triangles(D, F, G, F, D, G)
-By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By altitude_definition on F, E, C, h we get h == altitude(F, C, E)
 By sas_anti_congruence on C, G, F, F, G, C we get anti_congruent_triangles(C, F, G, F, C, G)
-By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By isosceles_triangle_properties on G, E, F we get distance(E, G) == distance(F, G), angle(E, F, G) == angle(G, E, F) mod 360
-By altitude_definition on F, C, E, h we get h == altitude(F, C, E)
-By power_of_a_point_definition on A, C, D, c we get log(power_of_a_point(A, c)) == log(distance(A, C)) + log(distance(A, D))
-By isosceles_triangle_properties on G, C, E we get distance(C, G) == distance(E, G), angle(C, E, G) == angle(G, C, E) mod 360
+By sss_anti_congruence_v0 on C, D, G, D, C, G we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
 By isosceles_triangle_properties on G, E, D we get distance(D, G) == distance(E, G), angle(E, D, G) == angle(G, E, D) mod 360
-By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By isosceles_triangle_properties on G, F, C we get distance(C, G) == distance(F, G), angle(F, C, G) == angle(G, F, C) mod 360
-By isosceles_triangle_properties on G, D, E we get distance(D, G) == distance(E, G), angle(D, E, G) == angle(G, D, E) mod 360
+By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By sas_anti_congruence on F, G, D, D, G, F we get anti_congruent_triangles(D, F, G, F, D, G)
 By isosceles_triangle_properties on G, E, C we get distance(C, G) == distance(E, G), angle(E, C, G) == angle(G, E, C) mod 360
 By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By sas_anti_congruence on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
-By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
-By sas_anti_congruence on E, G, C, C, G, E we get anti_congruent_triangles(C, E, G, E, C, G)
-By sas_anti_congruence on E, G, D, D, G, E we get anti_congruent_triangles(D, E, G, E, D, G)
+By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
 By sss_anti_congruence_v0 on C, D, G, D, C, G we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
 By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
-By external_angle_bisector_definition_v0 on C, E, D, B we get 180 == angle(C, B, E) + angle(D, B, E) mod 360
-By line_intersection_definition on C, Line(B, C), f we get C == line_intersection(f, Line(B, C))
-By line_intersection_definition on F, h, Line(E, F) we get F == line_intersection(h, Line(E, F))
-By line_intersection_definition on B, Line(B, C), g we get B == line_intersection(g, Line(B, C))
-By line_intersection_definition on E, Line(E, F), f we get E == line_intersection(f, Line(E, F))
-By same_angle_converse_v1 on G, E, F, C we get collinear(E, F, G)
-By perpendicular_direction_conditions_v0 on D, E, D, F we get perpendicular(Line(D, E), Line(D, F))
-By orthocenter_concurrency on E, F, C we get orthocenter(C, E, F) in altitude(E, C, F), orthocenter(C, E, F) in altitude(F, C, E), orthocenter(C, E, F) in altitude(C, E, F)
-By divide_by_2_mod_180_v1 on F, E, C, G, E, C we get angle(F, E, C) == angle(G, E, C) mod 360
-By divide_by_2_mod_180_v0 on G, F, D, E, C, A we get angle(E, C, A) == angle(G, F, D) mod 360
-By line_inequality on Line(C, G), Line(B, D), G we get Line(B, D) != Line(C, G)
-By divide_by_2_mod_180_v2 on G, D, E, A, C, F we get angle(G, D, E) == angle(A, C, F) + 180 mod 360
-By divide_by_2_mod_180_v1 on D, F, G, D, C, E we get angle(D, C, E) == angle(D, F, G) mod 360
-By divide_by_2_mod_180_v0 on C, E, G, C, D, F we get angle(C, D, F) == angle(C, E, G) mod 360
-By divide_by_2_mod_180_v0 on E, F, C, F, C, G we get angle(E, F, C) == angle(F, C, G) mod 360
-By divide_by_2_mod_180_v1 on A, D, E, G, C, F we get angle(A, D, E) == angle(G, C, F) mod 360
-By divide_by_2_mod_180_v1 on C, F, E, C, F, G we get angle(C, F, E) == angle(C, F, G) mod 360
-By divide_by_2_mod_180_v0 on E, F, C, G, F, C we get angle(E, F, C) == angle(G, F, C) mod 360
-By divide_by_2_mod_180_v0 on G, F, D, E, C, D we get angle(E, C, D) == angle(G, F, D) mod 360
-By divide_by_2_mod_180_v0 on C, D, F, G, C, E we get angle(C, D, F) == angle(G, C, E) mod 360
-By divide_by_2_mod_180_v0 on F, C, B, G, D, E we get angle(F, C, B) == angle(G, D, E) mod 360
-By divide_by_2_mod_180_v2 on G, F, C, E, D, C we get angle(G, F, C) == angle(E, D, C) + 180 mod 360
-By divide_by_2_mod_180_v0 on E, F, D, G, F, D we get angle(E, F, D) == angle(G, F, D) mod 360
-By divide_by_2_mod_180_v2 on D, E, G, D, C, F we get angle(D, E, G) == angle(D, C, F) + 180 mod 360
-By divide_by_2_mod_180_v2 on C, D, E, C, F, G we get angle(C, D, E) == angle(C, F, G) + 180 mod 360
-By divide_by_2_mod_180_v1 on B, C, F, G, E, D we get angle(B, C, F) == angle(G, E, D) mod 360
-By divide_by_2_mod_180_v0 on D, E, G, D, E, F we get angle(D, E, F) == angle(D, E, G) mod 360
-By divide_by_2_mod_180_v3 on A, D, F, G, C, E we get angle(A, D, F) == angle(G, C, E) + 180 mod 360
-By divide_by_2_mod_180_v1 on G, E, D, F, E, D we get angle(F, E, D) == angle(G, E, D) mod 360
-By divide_by_2_mod_180_v0 on F, C, G, E, D, A we get angle(E, D, A) == angle(F, C, G) mod 360
-By divide_by_2_mod_180_v1 on C, F, E, G, C, F we get angle(C, F, E) == angle(G, C, F) mod 360
-By divide_by_2_mod_180_v1 on G, D, F, D, F, E we get angle(D, F, E) == angle(G, D, F) mod 360
-By divide_by_2_mod_180_v0 on D, E, F, G, D, E we get angle(D, E, F) == angle(G, D, E) mod 360
-By divide_by_2_mod_180_v3 on E, D, G, F, C, D we get angle(E, D, G) == angle(F, C, D) + 180 mod 360
-By divide_by_2_mod_180_v3 on G, E, D, F, C, A we get angle(G, E, D) == angle(F, C, A) + 180 mod 360
-By divide_by_2_mod_180_v3 on G, E, C, F, D, A we get angle(G, E, C) == angle(F, D, A) + 180 mod 360
-By divide_by_2_mod_180_v0 on G, F, D, B, C, E we get angle(B, C, E) == angle(G, F, D) mod 360
-By divide_by_2_mod_180_v0 on E, C, A, F, D, G we get angle(E, C, A) == angle(F, D, G) mod 360
-By divide_by_2_mod_180_v2 on F, D, A, G, E, C we get angle(F, D, A) == angle(G, E, C) + 180 mod 360
-By divide_by_2_mod_180_v2 on F, C, G, E, D, C we get angle(F, C, G) == angle(E, D, C) + 180 mod 360
-By divide_by_2_mod_180_v1 on F, E, C, E, C, G we get angle(E, C, G) == angle(F, E, C) mod 360
-By divide_by_2_mod_180_v3 on E, D, G, F, C, A we get angle(E, D, G) == angle(F, C, A) + 180 mod 360
-By divide_by_2_mod_180_v1 on D, F, G, E, C, B we get angle(D, F, G) == angle(E, C, B) mod 360
-By divide_by_2_mod_180_v1 on B, C, F, E, D, G we get angle(B, C, F) == angle(E, D, G) mod 360
-By divide_by_2_mod_180_v0 on E, D, A, G, F, C we get angle(E, D, A) == angle(G, F, C) mod 360
-By divide_by_2_mod_180_v3 on A, C, F, G, D, E we get angle(A, C, F) == angle(G, D, E) + 180 mod 360
-By divide_by_2_mod_180_v3 on C, F, G, C, D, E we get angle(C, F, G) == angle(C, D, E) + 180 mod 360
-By divide_by_2_mod_180_v1 on G, D, F, A, C, E we get angle(A, C, E) == angle(G, D, F) mod 360
-By divide_by_2_mod_180_v3 on E, D, C, F, C, G we get angle(E, D, C) == angle(F, C, G) + 180 mod 360
-By divide_by_2_mod_180_v1 on C, F, G, A, D, E we get angle(A, D, E) == angle(C, F, G) mod 360
-By divide_by_2_mod_180_v1 on F, D, C, E, C, G we get angle(E, C, G) == angle(F, D, C) mod 360
-By divide_by_2_mod_180_v0 on C, E, F, C, E, G we get angle(C, E, F) == angle(C, E, G) mod 360
-By divide_by_2_mod_180_v3 on G, C, F, C, D, E we get angle(G, C, F) == angle(C, D, E) + 180 mod 360
-By divide_by_2_mod_180_v0 on F, C, B, D, E, G we get angle(D, E, G) == angle(F, C, B) mod 360
-By divide_by_2_mod_180_v1 on D, C, E, G, D, F we get angle(D, C, E) == angle(G, D, F) mod 360
-By divide_by_2_mod_180_v1 on E, D, G, F, E, D we get angle(E, D, G) == angle(F, E, D) mod 360
-By line_inequality on Line(D, G), f, D we get f != Line(D, G)
-By divide_by_2_mod_180_v0 on E, F, D, F, D, G we get angle(E, F, D) == angle(F, D, G) mod 360
-By divide_by_2_mod_180_v3 on D, C, F, D, E, G we get angle(D, C, F) == angle(D, E, G) + 180 mod 360
-By divide_by_2_mod_180_v1 on D, F, G, A, C, E we get angle(A, C, E) == angle(D, F, G) mod 360
-By divide_by_2_mod_180_v2 on F, C, A, G, E, D we get angle(F, C, A) == angle(G, E, D) + 180 mod 360
-By divide_by_2_mod_180_v0 on F, D, G, B, C, E we get angle(B, C, E) == angle(F, D, G) mod 360
-By divide_by_2_mod_180_v1 on E, C, B, G, D, F we get angle(E, C, B) == angle(G, D, F) mod 360
-By divide_by_2_mod_180_v0 on G, C, E, C, E, F we get angle(C, E, F) == angle(G, C, E) mod 360
-By divide_by_2_mod_180_v3 on A, D, F, C, E, G we get angle(A, D, F) == angle(C, E, G) + 180 mod 360
-By line_inequality on Line(C, G), Line(D, E), C we get Line(C, G) != Line(D, E)
-By divide_by_2_mod_180_v2 on F, D, A, E, C, G we get angle(F, D, A) == angle(E, C, G) + 180 mod 360
-By line_inequality on Line(A, C), Line(E, F), C we get Line(A, C) != Line(E, F)
-By line_inequality on Line(D, E), Line(E, F), D we get Line(D, E) != Line(E, F)
-By divide_by_2_mod_180_v1 on G, E, C, F, D, C we get angle(F, D, C) == angle(G, E, C) mod 360
-By divide_by_2_mod_180_v3 on A, C, F, D, E, G we get angle(A, C, F) == angle(D, E, G) + 180 mod 360
-By divide_by_2_mod_180_v3 on E, C, G, F, D, A we get angle(E, C, G) == angle(F, D, A) + 180 mod 360
-By reverse_direction on D, B we get 180 == direction(D, B) - direction(B, D) mod 360
-By line_inequality on Line(E, G), Line(A, C), G we get Line(A, C) != Line(E, G)
-By divide_by_2_mod_180_v0 on F, D, G, E, C, D we get angle(E, C, D) == angle(F, D, G) mod 360
-By line_inequality on Line(B, D), Line(E, F), D we get Line(B, D) != Line(E, F)
-By line_inequality on g, Line(D, G), E we get g != Line(D, G)
-By divide_by_2_mod_180_v2 on F, C, D, E, D, G we get angle(F, C, D) == angle(E, D, G) + 180 mod 360
-By divide_by_2_mod_180_v1 on D, F, G, D, F, E we get angle(D, F, E) == angle(D, F, G) mod 360
-By line_inequality on Line(D, E), Line(A, C), E we get Line(A, C) != Line(D, E)
-By line_inequality on f, Line(E, G), C we get f != Line(E, G)
-By divide_by_2_mod_180_v2 on D, E, G, A, C, F we get angle(D, E, G) == angle(A, C, F) + 180 mod 360
-By divide_by_2_mod_180_v3 on D, C, F, G, D, E we get angle(D, C, F) == angle(G, D, E) + 180 mod 360
-By line_inequality on Line(F, G), Line(A, C), G we get Line(A, C) != Line(F, G)
-By line_inequality on Line(E, F), Line(B, C), F we get Line(B, C) != Line(E, F)
-By divide_by_2_mod_180_v2 on F, C, D, G, E, D we get angle(F, C, D) == angle(G, E, D) + 180 mod 360
-By divide_by_2_mod_180_v2 on F, C, A, E, D, G we get angle(F, C, A) == angle(E, D, G) + 180 mod 360
-By line_inequality on Line(A, C), Line(D, F), C we get Line(A, C) != Line(D, F)
-By line_inequality on Line(B, D), Line(F, G), D we get Line(B, D) != Line(F, G)
-By line_inequality on Line(B, D), Line(D, E), B we get Line(B, D) != Line(D, E)
-By line_inequality on Line(D, G), Line(D, E), G we get Line(D, E) != Line(D, G)
-By divide_by_2_mod_180_v2 on C, E, G, A, D, F we get angle(C, E, G) == angle(A, D, F) + 180 mod 360
-By divide_by_2_mod_180_v3 on G, E, D, F, C, D we get angle(G, E, D) == angle(F, C, D) + 180 mod 360
-By divide_by_2_mod_180_v2 on G, C, E, A, D, F we get angle(G, C, E) == angle(A, D, F) + 180 mod 360
-By line_inequality on Line(C, G), Line(E, F), C we get Line(C, G) != Line(E, F)
-By divide_by_2_mod_180_v2 on G, D, E, D, C, F we get angle(G, D, E) == angle(D, C, F) + 180 mod 360
-By line_inequality on Line(C, G), Line(D, F), C we get Line(C, G) != Line(D, F)
-By line_inequality on f, Line(D, E), C we get f != Line(D, E)
-By line_inequality on Line(A, C), f, A we get f != Line(A, C)
-By line_inequality on Line(B, C), Line(D, G), C we get Line(B, C) != Line(D, G)
-By divide_by_2_mod_180_v3 on E, D, C, G, F, C we get angle(E, D, C) == angle(G, F, C) + 180 mod 360
-By divide_by_2_mod_180_v2 on C, D, E, G, C, F we get angle(C, D, E) == angle(G, C, F) + 180 mod 360
-By line_inequality on h, Line(A, C), F we get h != Line(A, C)
-By reverse_direction on B, C we get 180 == direction(B, C) - direction(C, B) mod 360
-By line_inequality on Line(D, G), Line(A, C), G we get Line(A, C) != Line(D, G)
-By line_inequality on Line(D, F), Line(B, C), F we get Line(B, C) != Line(D, F)
-By line_inequality on Line(E, G), Line(B, C), E we get Line(B, C) != Line(E, G)
-By line_inequality on Line(F, G), Line(C, G), F we get Line(C, G) != Line(F, G)
-By line_inequality on Line(B, D), g, D we get g != Line(B, D)
-By reverse_direction on B, D we get 180 == direction(B, D) - direction(D, B) mod 360
-By reverse_direction on C, B we get 180 == direction(C, B) - direction(B, C) mod 360
-By line_inequality on Line(B, D), h, B we get h != Line(B, D)
-By line_inequality on Line(A, C), Line(C, G), D we get Line(A, C) != Line(C, G)
-By line_inequality on Line(D, F), Line(D, E), F we get Line(D, E) != Line(D, F)
-By line_inequality on g, Line(D, F), B we get g != Line(D, F)
-By line_inequality on Line(F, G), Line(B, C), G we get Line(B, C) != Line(F, G)
-By line_inequality on Line(A, C), Line(B, C), A we get Line(A, C) != Line(B, C)
-By line_inequality on Line(B, D), Line(D, F), B we get Line(B, D) != Line(D, F)
-By line_inequality on Line(D, E), Line(E, G), D we get Line(D, E) != Line(E, G)
-By line_inequality on Line(F, G), Line(D, F), G we get Line(D, F) != Line(F, G)
-By line_inequality on Line(D, E), Line(B, C), D we get Line(B, C) != Line(D, E)
-By line_inequality on Line(B, D), Line(D, G), B we get Line(B, D) != Line(D, G)
-By line_inequality on Line(B, C), h, B we get h != Line(B, C)
-By line_inequality on Line(A, C), Line(B, D), A we get Line(A, C) != Line(B, D)
-By line_inequality on Line(F, G), h, G we get h != Line(F, G)
-By line_inequality on Line(E, G), Line(D, F), G we get Line(D, F) != Line(E, G)
-By line_inequality on Line(E, F), Line(D, G), F we get Line(D, G) != Line(E, F)
-By line_inequality on Line(E, F), Line(D, F), E we get Line(D, F) != Line(E, F)
-By line_inequality on Line(D, G), Line(D, F), G we get Line(D, F) != Line(D, G)
-By line_inequality on Line(D, G), Line(E, G), D we get Line(D, G) != Line(E, G)
-By line_inequality on Line(C, G), Line(B, C), G we get Line(B, C) != Line(C, G)
-By line_inequality on Line(F, G), Line(D, E), F we get Line(D, E) != Line(F, G)
-By line_inequality on Line(C, G), f, G we get f != Line(C, G)
-By line_inequality on Line(D, F), h, D we get h != Line(D, F)
-By line_inequality on Line(E, G), Line(C, G), E we get Line(C, G) != Line(E, G)
-By line_inequality on Line(D, G), h, D we get h != Line(D, G)
-By line_inequality on Line(E, G), Line(B, D), G we get Line(B, D) != Line(E, G)
-By line_inequality on h, Line(C, G), F we get h != Line(C, G)
-By line_inequality on Line(C, G), Line(D, G), C we get Line(C, G) != Line(D, G)
-By line_inequality on Line(B, D), Line(B, C), D we get Line(B, C) != Line(B, D)
-By line_inequality on Line(D, E), g, D we get g != Line(D, E)
-By line_inequality on Line(D, G), Line(F, G), D we get Line(D, G) != Line(F, G)
-By external_angle_bisector_definition_v0_r on F, E, F, C we get Line(C, E) == external_angle_bisector(F, C, F)
-By isogonal_conjugate_sufficient_conditions_v2 on B, C, D, E, E we get E == isogonal_conjugate(E, B, C, D)
-By external_angle_bisector_definition_v0_r on D, F, B, C we get Line(C, F) == external_angle_bisector(B, C, D)
-By internal_angle_bisector_definition_v0_r on G, F, G, E we get Line(E, F) == internal_angle_bisector(G, E, G)
-By external_angle_bisector_definition_v0_r on F, E, F, D we get Line(D, E) == external_angle_bisector(F, D, F)
-By external_angle_bisector_definition_v0_r on E, F, E, C we get Line(C, F) == external_angle_bisector(E, C, E)
-By external_angle_bisector_definition_v0_r on E, F, E, D we get Line(D, F) == external_angle_bisector(E, D, E)
-By internal_angle_bisector_definition_v0_r on D, E, B, C we get Line(C, E) == internal_angle_bisector(B, C, D)
-By reverse_direction on B, E we get 180 == direction(B, E) - direction(E, B) mod 360
-By internal_angle_bisector_definition_v0_r on F, E, F, G we get Line(E, G) == internal_angle_bisector(F, G, F)
-By internal_angle_bisector_definition_v0_r on E, G, E, F we get Line(F, G) == internal_angle_bisector(E, F, E)
-By internal_angle_bisector_definition_v0_r on G, E, G, F we get Line(E, F) == internal_angle_bisector(G, F, G)
-By internal_angle_bisector_definition_v0_r on E, F, E, G we get Line(F, G) == internal_angle_bisector(E, G, E)
-By internal_angle_bisector_definition_v0_r on F, G, F, E we get Line(E, G) == internal_angle_bisector(F, E, F)
-By anti_similar_triangle_basic_properties on D, G, C, C, G, D we get not_collinear(C, D, G), not_collinear(C, D, G), angle(D, G, C) == 0 - angle(C, G, D) mod 360, angle(G, C, D) == 0 - angle(G, D, C) mod 360, angle(C, D, G) == 0 - angle(D, C, G) mod 360, log(distance(C, G)) + log(distance(C, G)) == log(distance(D, G)) + log(distance(D, G)), log(distance(C, G)) + log(distance(C, D)) == log(distance(D, G)) + log(distance(C, D)), log(distance(C, D)) + log(distance(C, G)) == log(distance(C, D)) + log(distance(D, G))
-By anti_similar_triangle_basic_properties on C, F, G, F, C, G we get not_collinear(C, F, G), not_collinear(C, F, G), angle(C, F, G) == 0 - angle(F, C, G) mod 360, angle(F, G, C) == 0 - angle(C, G, F) mod 360, angle(G, C, F) == 0 - angle(G, F, C) mod 360, log(distance(C, F)) + log(distance(C, G)) == log(distance(C, F)) + log(distance(F, G)), log(distance(C, G)) + log(distance(C, G)) == log(distance(F, G)) + log(distance(F, G)), log(distance(C, G)) + log(distance(C, F)) == log(distance(F, G)) + log(distance(C, F))
-By anti_similar_triangle_basic_properties on D, G, E, E, G, D we get not_collinear(D, E, G), not_collinear(D, E, G), angle(D, G, E) == 0 - angle(E, G, D) mod 360, angle(G, E, D) == 0 - angle(G, D, E) mod 360, angle(E, D, G) == 0 - angle(D, E, G) mod 360, log(distance(D, G)) + log(distance(D, G)) == log(distance(E, G)) + log(distance(E, G)), log(distance(D, G)) + log(distance(D, E)) == log(distance(E, G)) + log(distance(D, E)), log(distance(D, E)) + log(distance(D, G)) == log(distance(D, E)) + log(distance(E, G))
-By anti_similar_triangle_basic_properties on E, C, G, C, E, G we get not_collinear(C, E, G), not_collinear(C, E, G), angle(E, C, G) == 0 - angle(C, E, G) mod 360, angle(C, G, E) == 0 - angle(E, G, C) mod 360, angle(G, E, C) == 0 - angle(G, C, E) mod 360, log(distance(C, E)) + log(distance(C, G)) == log(distance(C, E)) + log(distance(E, G)), log(distance(C, G)) + log(distance(C, G)) == log(distance(E, G)) + log(distance(E, G)), log(distance(C, G)) + log(distance(C, E)) == log(distance(E, G)) + log(distance(C, E))
-By anti_similar_triangle_basic_properties on G, D, F, G, F, D we get not_collinear(D, F, G), not_collinear(D, F, G), angle(G, D, F) == 0 - angle(G, F, D) mod 360, angle(D, F, G) == 0 - angle(F, D, G) mod 360, angle(F, G, D) == 0 - angle(D, G, F) mod 360, log(distance(D, G)) + log(distance(D, F)) == log(distance(F, G)) + log(distance(D, F)), log(distance(D, F)) + log(distance(D, G)) == log(distance(D, F)) + log(distance(F, G)), log(distance(D, G)) + log(distance(D, G)) == log(distance(F, G)) + log(distance(F, G))
-By line_intersection_definition on orthocenter(C, E, F), h, f we get orthocenter(C, E, F) == line_intersection(f, h)
-By line_intersection_definition on C, h, Line(A, C) we get C == line_intersection(h, Line(A, C))
-By line_intersection_definition on G, Line(C, G), Line(E, G) we get G == line_intersection(Line(C, G), Line(E, G))
-By line_intersection_definition on E, Line(E, F), Line(D, E) we get E == line_intersection(Line(D, E), Line(E, F))
-By line_intersection_definition on E, f, Line(D, E) we get E == line_intersection(f, Line(D, E))
-By line_intersection_definition on C, Line(C, G), h we get C == line_intersection(h, Line(C, G))
-By line_intersection_definition on F, h, Line(D, F) we get F == line_intersection(h, Line(D, F))
-By line_intersection_definition on D, Line(D, F), Line(D, G) we get D == line_intersection(Line(D, F), Line(D, G))
-By concurrent_sufficient_conditions on h, Line(B, C), f we get concurrent(f, h, Line(B, C))
-By line_intersection_definition on C, Line(C, G), Line(A, C) we get C == line_intersection(Line(A, C), Line(C, G))
-By line_intersection_definition on C, Line(B, C), h we get C == line_intersection(h, Line(B, C))
-By line_intersection_definition on C, Line(A, C), f we get C == line_intersection(f, Line(A, C))
-By line_intersection_definition on G, Line(D, G), Line(C, G) we get G == line_intersection(Line(C, G), Line(D, G))
-By line_intersection_definition on F, h, Line(F, G) we get F == line_intersection(h, Line(F, G))
-By line_intersection_definition on D, Line(B, D), Line(D, F) we get D == line_intersection(Line(B, D), Line(D, F))
-By perpendicular_line_definition on orthocenter(C, E, F), f, h we get f == perpendicular_line(orthocenter(C, E, F), h)
-By line_intersection_definition on G, Line(F, G), Line(D, G) we get G == line_intersection(Line(D, G), Line(F, G))
-By line_intersection_definition on D, Line(D, G), Line(D, E) we get D == line_intersection(Line(D, E), Line(D, G))
-By perpendicular_line_definition on orthocenter(C, E, F), altitude(C, E, F), Line(E, F) we get altitude(C, E, F) == perpendicular_line(orthocenter(C, E, F), Line(E, F))
-By line_intersection_definition on F, Line(F, G), Line(D, F) we get F == line_intersection(Line(D, F), Line(F, G))
-By line_intersection_definition on C, Line(B, C), Line(A, C) we get C == line_intersection(Line(A, C), Line(B, C))
-By line_intersection_definition on D, Line(D, E), Line(A, C) we get D == line_intersection(Line(A, C), Line(D, E))
-By perpendicular_line_definition on D, Line(D, F), Line(D, E) we get Line(D, F) == perpendicular_line(D, Line(D, E))
-By line_intersection_definition on C, Line(C, G), f we get C == line_intersection(f, Line(C, G))
-By line_intersection_definition on E, Line(D, E), Line(E, G) we get E == line_intersection(Line(D, E), Line(E, G))
-By perpendicular_line_definition on orthocenter(C, E, F), h, f we get h == perpendicular_line(orthocenter(C, E, F), f)
-By line_intersection_definition on B, g, Line(B, D) we get B == line_intersection(g, Line(B, D))
-By line_intersection_definition on D, Line(D, G), Line(B, D) we get D == line_intersection(Line(B, D), Line(D, G))
-By line_intersection_definition on D, Line(D, E), Line(D, F) we get D == line_intersection(Line(D, E), Line(D, F))
-By perpendicular_line_definition on D, Line(D, E), Line(D, F) we get Line(D, E) == perpendicular_line(D, Line(D, F))
-By line_intersection_definition on D, Line(D, E), Line(B, D) we get D == line_intersection(Line(B, D), Line(D, E))
-By line_intersection_definition on B, Line(B, C), Line(B, D) we get B == line_intersection(Line(B, C), Line(B, D))
-By perpendicular_line_definition on F, Line(E, F), altitude(C, E, F) we get Line(E, F) == perpendicular_line(F, altitude(C, E, F))
-By line_intersection_definition on E, g, Line(D, E) we get E == line_intersection(g, Line(D, E))
-By line_intersection_definition on D, Line(A, C), Line(D, F) we get D == line_intersection(Line(A, C), Line(D, F))
-By line_intersection_definition on G, Line(D, G), Line(E, G) we get G == line_intersection(Line(D, G), Line(E, G))
-By line_intersection_definition on D, Line(A, C), Line(B, D) we get D == line_intersection(Line(A, C), Line(B, D))
-By line_intersection_definition on D, Line(D, G), Line(A, C) we get D == line_intersection(Line(A, C), Line(D, G))
-By perpendicular_line_definition on E, Line(D, E), Line(D, F) we get Line(D, E) == perpendicular_line(E, Line(D, F))
-By line_intersection_definition on F, Line(D, F), Line(E, F) we get F == line_intersection(Line(D, F), Line(E, F))
-By line_intersection_definition on E, Line(E, G), f we get E == line_intersection(f, Line(E, G))
-By line_intersection_definition on C, Line(B, C), Line(C, G) we get C == line_intersection(Line(B, C), Line(C, G))
-By perpendicular_line_definition on E, Line(E, F), altitude(C, E, F) we get Line(E, F) == perpendicular_line(E, altitude(C, E, F))
+By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
+By sas_anti_congruence on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
+By isosceles_triangle_properties on G, F, D we get distance(D, G) == distance(F, G), angle(F, D, G) == angle(G, F, D) mod 360
+By sas_anti_congruence on E, G, D, D, G, E we get anti_congruent_triangles(D, E, G, E, D, G)
+By isosceles_triangle_properties on G, F, C we get distance(C, G) == distance(F, G), angle(F, C, G) == angle(G, F, C) mod 360
+By isosceles_triangle_properties on G, D, C we get distance(C, G) == distance(D, G), angle(D, C, G) == angle(G, D, C) mod 360
+By isosceles_triangle_properties on G, C, E we get distance(C, G) == distance(E, G), angle(C, E, G) == angle(G, C, E) mod 360
+By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
+By sas_anti_congruence on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v0 on G, C, D, G, D, C we get anti_congruent_triangles(C, D, G, D, C, G)
+By sas_anti_congruence on D, G, F, F, G, D we get anti_congruent_triangles(D, F, G, F, D, G)
+By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By isosceles_triangle_properties on G, C, D we get distance(C, G) == distance(D, G), angle(C, D, G) == angle(G, C, D) mod 360
+By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v1 on D, C, G, C, D, G we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v0 on D, G, C, C, G, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By sas_anti_congruence on F, G, C, C, G, F we get anti_congruent_triangles(C, F, G, F, C, G)
+By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By sas_anti_congruence on E, G, C, C, G, E we get anti_congruent_triangles(C, E, G, E, C, G)
+By isosceles_triangle_properties on G, D, E we get distance(D, G) == distance(E, G), angle(D, E, G) == angle(G, D, E) mod 360
+By sas_anti_congruence on D, G, E, E, G, D we get anti_congruent_triangles(D, E, G, E, D, G)
+By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v0 on C, D, G, D, C, G we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v0 on C, D, G, D, C, G we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v1 on C, G, D, D, G, C we get anti_congruent_triangles(C, D, G, D, C, G)
+By sss_anti_congruence_v1 on G, D, C, G, C, D we get anti_congruent_triangles(C, D, G, D, C, G)
+By external_angle_bisector_definition_v0 on D, E, C, B we get 180 == angle(D, B, E) + angle(C, B, E) mod 360
+By concurrent_sufficient_conditions on Line(D, F), Line(E, F), h we get concurrent(h, Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on g, f, Line(D, E) we get concurrent(f, g, Line(D, E))
+By concurrent_sufficient_conditions on f, h, Line(C, G) we get concurrent(f, h, Line(C, G))
+By concurrent_sufficient_conditions on Line(D, F), Line(A, C), Line(D, E) we get concurrent(Line(A, C), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(E, F), Line(D, E), f we get concurrent(f, Line(D, E), Line(E, F))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, E), Line(D, G) we get concurrent(Line(D, E), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on h, Line(C, G), Line(B, C) we get concurrent(h, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, C), f, Line(A, C) we get concurrent(f, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, G), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, C), f, h we get concurrent(f, h, Line(B, C))
+By concurrent_sufficient_conditions on Line(C, G), Line(B, C), Line(A, C) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, E), Line(D, G) we get concurrent(Line(A, C), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(A, C), h, f we get concurrent(f, h, Line(A, C))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, E), Line(A, C) we get concurrent(Line(A, C), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(F, G), Line(D, G), Line(C, G) we get concurrent(Line(C, G), Line(D, G), Line(F, G))
 By concurrent_sufficient_conditions on Line(B, C), h, f we get concurrent(f, h, Line(B, C))
-By line_intersection_definition on G, Line(C, G), Line(F, G) we get G == line_intersection(Line(C, G), Line(F, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(C, G), Line(A, C) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(B, C), h we get concurrent(h, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, C), h we get concurrent(h, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on Line(A, C), f, Line(C, G) we get concurrent(f, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(D, E), Line(B, D), Line(D, G) we get concurrent(Line(B, D), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, E), Line(A, C) we get concurrent(Line(A, C), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on f, h, Line(A, C) we get concurrent(f, h, Line(A, C))
+By concurrent_sufficient_conditions on Line(B, C), Line(A, C), Line(C, G) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(A, C), Line(D, F) we get concurrent(Line(A, C), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, E), g, f we get concurrent(f, g, Line(D, E))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, E), Line(B, D) we get concurrent(Line(B, D), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, F), Line(B, D), Line(D, E) we get concurrent(Line(B, D), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(B, C), Line(C, G), h we get concurrent(h, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on h, Line(B, C), Line(C, G) we get concurrent(h, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(A, C), f we get concurrent(f, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on Line(D, G), Line(E, G), Line(C, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, G), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, E), Line(A, C), Line(D, G) we get concurrent(Line(A, C), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, F), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), f, Line(E, G) we get concurrent(f, Line(D, E), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, F), Line(D, E) we get concurrent(Line(B, D), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, F), Line(B, D), Line(D, G) we get concurrent(Line(B, D), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(C, G), f, h we get concurrent(f, h, Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, G), Line(D, E) we get concurrent(Line(A, C), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(F, G), h, Line(D, F) we get concurrent(h, Line(D, F), Line(F, G))
+By concurrent_sufficient_conditions on Line(D, F), Line(F, G), h we get concurrent(h, Line(D, F), Line(F, G))
+By concurrent_sufficient_conditions on Line(E, F), h, Line(D, F) we get concurrent(h, Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(F, G), Line(D, F), h we get concurrent(h, Line(D, F), Line(F, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(B, C), f we get concurrent(f, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, F), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), Line(A, C), Line(D, F) we get concurrent(Line(A, C), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on h, Line(D, F), Line(F, G) we get concurrent(h, Line(D, F), Line(F, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, F), Line(A, C) we get concurrent(Line(A, C), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, D), Line(D, F) we get concurrent(Line(A, C), Line(B, D), Line(D, F))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, F), Line(D, E) we get concurrent(Line(A, C), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(C, G), h, Line(B, C) we get concurrent(h, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, D), Line(D, E) we get concurrent(Line(A, C), Line(B, D), Line(D, E))
+By concurrent_sufficient_conditions on Line(D, G), Line(C, G), Line(E, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on h, f, Line(B, C) we get concurrent(f, h, Line(B, C))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, F), Line(D, G) we get concurrent(Line(A, C), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on f, Line(A, C), h we get concurrent(f, h, Line(A, C))
+By concurrent_sufficient_conditions on Line(D, E), Line(E, G), f we get concurrent(f, Line(D, E), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(C, G), f we get concurrent(f, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(C, G), h, Line(A, C) we get concurrent(h, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, E), Line(D, G) we get concurrent(Line(B, D), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, G), Line(A, C) we get concurrent(Line(A, C), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(D, G), Line(F, G) we get concurrent(Line(C, G), Line(D, G), Line(F, G))
+By concurrent_sufficient_conditions on h, Line(B, C), Line(A, C) we get concurrent(h, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on f, Line(E, F), Line(D, E) we get concurrent(f, Line(D, E), Line(E, F))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, E), Line(D, F) we get concurrent(Line(D, E), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, E), f, Line(E, F) we get concurrent(f, Line(D, E), Line(E, F))
+By concurrent_sufficient_conditions on Line(D, E), Line(A, C), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(D, E))
+By concurrent_sufficient_conditions on f, Line(D, E), Line(E, F) we get concurrent(f, Line(D, E), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, C), Line(C, G), f we get concurrent(f, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(E, G), Line(D, E), f we get concurrent(f, Line(D, E), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(B, D), g we get concurrent(g, Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on h, f, Line(A, C) we get concurrent(f, h, Line(A, C))
+By concurrent_sufficient_conditions on f, Line(E, G), Line(D, E) we get concurrent(f, Line(D, E), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, C), g, Line(B, D) we get concurrent(g, Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, F), Line(D, G) we get concurrent(Line(D, E), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on g, Line(D, E), f we get concurrent(f, g, Line(D, E))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, G), Line(D, F) we get concurrent(Line(D, E), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(C, G), f, Line(B, C) we get concurrent(f, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, C), f, Line(C, G) we get concurrent(f, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, C), Line(A, C), h we get concurrent(h, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on Line(D, G), Line(F, G), Line(C, G) we get concurrent(Line(C, G), Line(D, G), Line(F, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, C), Line(C, G) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on f, Line(C, G), Line(A, C) we get concurrent(f, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, G), Line(D, E) we get concurrent(Line(D, E), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, F), Line(B, D), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), Line(E, F), f we get concurrent(f, Line(D, E), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, C), f, Line(B, C) we get concurrent(f, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on Line(D, G), Line(B, D), Line(D, F) we get concurrent(Line(B, D), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, F), Line(A, C) we get concurrent(Line(A, C), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(E, G), Line(D, G), Line(C, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on h, Line(A, C), Line(B, C) we get concurrent(h, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on Line(C, G), f, Line(A, C) we get concurrent(f, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(C, G), Line(B, C) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on f, Line(D, E), g we get concurrent(f, g, Line(D, E))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, F), Line(B, D) we get concurrent(Line(B, D), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), Line(B, D), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(D, E))
+By concurrent_sufficient_conditions on Line(D, G), Line(A, C), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, F), Line(B, D) we get concurrent(Line(B, D), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on h, Line(D, F), Line(E, F) we get concurrent(h, Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on f, Line(A, C), Line(C, G) we get concurrent(f, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(E, F), f, Line(D, E) we get concurrent(f, Line(D, E), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, G), Line(D, F) we get concurrent(Line(A, C), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(B, C), g we get concurrent(g, Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(D, G), Line(B, D), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, E), Line(B, D), Line(D, F) we get concurrent(Line(B, D), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, G), Line(B, D) we get concurrent(Line(B, D), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(E, F), Line(D, F), h we get concurrent(h, Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, G), Line(B, D) we get concurrent(Line(B, D), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(B, D), Line(D, E) we get concurrent(Line(B, D), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, C), Line(D, G) we get concurrent(Line(A, C), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on f, Line(A, C), Line(B, C) we get concurrent(f, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on h, f, Line(C, G) we get concurrent(f, h, Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), h, Line(B, C) we get concurrent(h, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, F), Line(D, E) we get concurrent(Line(D, E), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, F), h, Line(E, F) we get concurrent(h, Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, E), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(D, E))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, G), Line(A, C) we get concurrent(Line(A, C), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on h, Line(A, C), Line(C, G) we get concurrent(h, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(D, F), h, Line(F, G) we get concurrent(h, Line(D, F), Line(F, G))
+By concurrent_sufficient_conditions on f, Line(D, E), Line(E, G) we get concurrent(f, Line(D, E), Line(E, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, F), Line(D, G) we get concurrent(Line(B, D), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(D, G), Line(A, C), Line(D, E) we get concurrent(Line(A, C), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, E), Line(A, C) we get concurrent(Line(A, C), Line(B, D), Line(D, E))
+By concurrent_sufficient_conditions on Line(F, G), Line(C, G), Line(D, G) we get concurrent(Line(C, G), Line(D, G), Line(F, G))
+By concurrent_sufficient_conditions on g, Line(B, D), Line(B, C) we get concurrent(g, Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(C, G), Line(E, G), Line(D, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(D, E), f, g we get concurrent(f, g, Line(D, E))
+By concurrent_sufficient_conditions on f, h, Line(B, C) we get concurrent(f, h, Line(B, C))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, E), Line(D, F) we get concurrent(Line(B, D), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, F), Line(A, C), Line(D, G) we get concurrent(Line(A, C), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on f, Line(B, C), h we get concurrent(f, h, Line(B, C))
+By concurrent_sufficient_conditions on f, Line(C, G), Line(B, C) we get concurrent(f, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, C), h, Line(A, C) we get concurrent(h, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on Line(B, C), h, Line(C, G) we get concurrent(h, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, C), Line(D, F) we get concurrent(Line(A, C), Line(B, D), Line(D, F))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, E), Line(B, D) we get concurrent(Line(B, D), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on f, Line(C, G), h we get concurrent(f, h, Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, D), Line(D, G) we get concurrent(Line(A, C), Line(B, D), Line(D, G))
+By concurrent_sufficient_conditions on Line(E, G), f, Line(D, E) we get concurrent(f, Line(D, E), Line(E, G))
+By concurrent_sufficient_conditions on h, Line(A, C), f we get concurrent(f, h, Line(A, C))
+By concurrent_sufficient_conditions on Line(C, G), Line(D, G), Line(E, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(D, F), Line(A, C), Line(B, D) we get concurrent(Line(A, C), Line(B, D), Line(D, F))
+By concurrent_sufficient_conditions on g, Line(B, C), Line(B, D) we get concurrent(g, Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on Line(C, G), Line(F, G), Line(D, G) we get concurrent(Line(C, G), Line(D, G), Line(F, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(A, C), h we get concurrent(h, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, D), g, Line(B, C) we get concurrent(g, Line(B, C), Line(B, D))
+By concurrent_sufficient_conditions on f, Line(B, C), Line(A, C) we get concurrent(f, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on h, Line(C, G), f we get concurrent(f, h, Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, E), Line(D, F) we get concurrent(Line(A, C), Line(D, E), Line(D, F))
+By concurrent_sufficient_conditions on Line(A, C), f, h we get concurrent(f, h, Line(A, C))
+By concurrent_sufficient_conditions on Line(A, C), h, Line(C, G) we get concurrent(h, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on h, Line(C, G), Line(A, C) we get concurrent(h, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(B, C), f we get concurrent(f, Line(A, C), Line(B, C))
+By concurrent_sufficient_conditions on h, Line(F, G), Line(D, F) we get concurrent(h, Line(D, F), Line(F, G))
+By concurrent_sufficient_conditions on Line(A, C), Line(C, G), h we get concurrent(h, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(E, G), Line(C, G), Line(D, G) we get concurrent(Line(C, G), Line(D, G), Line(E, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(A, C), f we get concurrent(f, Line(A, C), Line(C, G))
+By concurrent_sufficient_conditions on h, Line(B, C), f we get concurrent(f, h, Line(B, C))
+By concurrent_sufficient_conditions on Line(D, G), Line(C, G), Line(F, G) we get concurrent(Line(C, G), Line(D, G), Line(F, G))
+By concurrent_sufficient_conditions on f, g, Line(D, E) we get concurrent(f, g, Line(D, E))
+By concurrent_sufficient_conditions on f, Line(B, C), Line(C, G) we get concurrent(f, Line(B, C), Line(C, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, G), Line(D, E) we get concurrent(Line(B, D), Line(D, E), Line(D, G))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, C), Line(D, E) we get concurrent(Line(A, C), Line(B, D), Line(D, E))
+By concurrent_sufficient_conditions on Line(C, G), h, f we get concurrent(f, h, Line(C, G))
+By concurrent_sufficient_conditions on h, Line(E, F), Line(D, F) we get concurrent(h, Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, G), Line(D, F) we get concurrent(Line(B, D), Line(D, F), Line(D, G))
+By concurrent_sufficient_conditions on Line(C, G), Line(A, C), Line(B, C) we get concurrent(Line(A, C), Line(B, C), Line(C, G))
+By perpendicular_direction_conditions_v0 on F, D, D, E we get perpendicular(Line(D, E), Line(D, F))
+By same_angle_converse_v1 on G, E, F, D we get collinear(E, F, G)
+By divide_by_2_mod_180_v1 on E, C, B, G, D, F we get angle(E, C, B) == angle(G, D, F) mod 360
+By divide_by_2_mod_180_v1 on B, C, F, G, E, D we get angle(B, C, F) == angle(G, E, D) mod 360
+By divide_by_2_mod_180_v1 on A, D, E, G, C, F we get angle(A, D, E) == angle(G, C, F) mod 360
+By divide_by_2_mod_180_v1 on F, E, C, G, E, C we get angle(F, E, C) == angle(G, E, C) mod 360
+By divide_by_2_mod_180_v0 on E, F, D, F, D, G we get angle(E, F, D) == angle(F, D, G) mod 360
+By divide_by_2_mod_180_v1 on D, C, E, G, D, F we get angle(D, C, E) == angle(G, D, F) mod 360
+By divide_by_2_mod_180_v3 on E, D, G, F, C, D we get angle(E, D, G) == angle(F, C, D) + 180 mod 360
+By divide_by_2_mod_180_v1 on D, F, G, A, C, E we get angle(A, C, E) == angle(D, F, G) mod 360
+By divide_by_2_mod_180_v0 on C, D, F, C, E, G we get angle(C, D, F) == angle(C, E, G) mod 360
+By divide_by_2_mod_180_v0 on E, F, C, F, C, G we get angle(E, F, C) == angle(F, C, G) mod 360
+By divide_by_2_mod_180_v0 on G, F, D, E, F, D we get angle(E, F, D) == angle(G, F, D) mod 360
+By divide_by_2_mod_180_v2 on C, D, E, G, C, F we get angle(C, D, E) == angle(G, C, F) + 180 mod 360
+By divide_by_2_mod_180_v1 on G, D, F, D, F, E we get angle(D, F, E) == angle(G, D, F) mod 360
+By divide_by_2_mod_180_v0 on G, F, C, E, F, C we get angle(E, F, C) == angle(G, F, C) mod 360
+By divide_by_2_mod_180_v0 on E, C, D, G, F, D we get angle(E, C, D) == angle(G, F, D) mod 360
+By divide_by_2_mod_180_v3 on D, C, F, G, D, E we get angle(D, C, F) == angle(G, D, E) + 180 mod 360
+By divide_by_2_mod_180_v0 on C, E, G, C, E, F we get angle(C, E, F) == angle(C, E, G) mod 360
+By divide_by_2_mod_180_v1 on E, D, G, F, E, D we get angle(E, D, G) == angle(F, E, D) mod 360
+By divide_by_2_mod_180_v1 on C, F, E, G, C, F we get angle(C, F, E) == angle(G, C, F) mod 360
+By divide_by_2_mod_180_v1 on A, C, E, G, D, F we get angle(A, C, E) == angle(G, D, F) mod 360
+By divide_by_2_mod_180_v2 on G, F, C, E, D, C we get angle(G, F, C) == angle(E, D, C) + 180 mod 360
+By divide_by_2_mod_180_v0 on F, D, G, E, C, A we get angle(E, C, A) == angle(F, D, G) mod 360
+By divide_by_2_mod_180_v3 on A, C, F, G, D, E we get angle(A, C, F) == angle(G, D, E) + 180 mod 360
+By divide_by_2_mod_180_v2 on D, E, G, A, C, F we get angle(D, E, G) == angle(A, C, F) + 180 mod 360
+By divide_by_2_mod_180_v2 on D, E, G, D, C, F we get angle(D, E, G) == angle(D, C, F) + 180 mod 360
+By divide_by_2_mod_180_v3 on A, C, F, D, E, G we get angle(A, C, F) == angle(D, E, G) + 180 mod 360
+By divide_by_2_mod_180_v2 on G, D, E, A, C, F we get angle(G, D, E) == angle(A, C, F) + 180 mod 360
+By divide_by_2_mod_180_v0 on G, D, E, F, C, B we get angle(F, C, B) == angle(G, D, E) mod 360
+By divide_by_2_mod_180_v0 on C, E, F, G, C, E we get angle(C, E, F) == angle(G, C, E) mod 360
+By divide_by_2_mod_180_v1 on A, D, E, C, F, G we get angle(A, D, E) == angle(C, F, G) mod 360
+By divide_by_2_mod_180_v3 on G, E, C, F, D, A we get angle(G, E, C) == angle(F, D, A) + 180 mod 360
+By divide_by_2_mod_180_v0 on D, E, F, D, E, G we get angle(D, E, F) == angle(D, E, G) mod 360
+By divide_by_2_mod_180_v3 on G, E, D, F, C, D we get angle(G, E, D) == angle(F, C, D) + 180 mod 360
+By reverse_direction on B, C we get 180 == direction(B, C) - direction(C, B) mod 360
+By divide_by_2_mod_180_v0 on F, C, B, D, E, G we get angle(D, E, G) == angle(F, C, B) mod 360
+By divide_by_2_mod_180_v1 on F, E, C, E, C, G we get angle(E, C, G) == angle(F, E, C) mod 360
+By divide_by_2_mod_180_v1 on C, F, G, C, F, E we get angle(C, F, E) == angle(C, F, G) mod 360
+By divide_by_2_mod_180_v2 on F, D, A, E, C, G we get angle(F, D, A) == angle(E, C, G) + 180 mod 360
+By divide_by_2_mod_180_v0 on C, D, F, G, C, E we get angle(C, D, F) == angle(G, C, E) mod 360
+By divide_by_2_mod_180_v2 on F, C, D, E, D, G we get angle(F, C, D) == angle(E, D, G) + 180 mod 360
+By divide_by_2_mod_180_v0 on B, C, E, F, D, G we get angle(B, C, E) == angle(F, D, G) mod 360
+By divide_by_2_mod_180_v3 on E, D, C, F, C, G we get angle(E, D, C) == angle(F, C, G) + 180 mod 360
+By divide_by_2_mod_180_v1 on E, C, B, D, F, G we get angle(D, F, G) == angle(E, C, B) mod 360
+By divide_by_2_mod_180_v2 on F, C, A, G, E, D we get angle(F, C, A) == angle(G, E, D) + 180 mod 360
+By divide_by_2_mod_180_v2 on F, C, D, G, E, D we get angle(F, C, D) == angle(G, E, D) + 180 mod 360
+By divide_by_2_mod_180_v1 on D, F, E, D, F, G we get angle(D, F, E) == angle(D, F, G) mod 360
+By divide_by_2_mod_180_v3 on G, E, D, F, C, A we get angle(G, E, D) == angle(F, C, A) + 180 mod 360
+By divide_by_2_mod_180_v2 on G, D, E, D, C, F we get angle(G, D, E) == angle(D, C, F) + 180 mod 360
+By divide_by_2_mod_180_v3 on C, F, G, C, D, E we get angle(C, F, G) == angle(C, D, E) + 180 mod 360
+By divide_by_2_mod_180_v3 on A, D, F, C, E, G we get angle(A, D, F) == angle(C, E, G) + 180 mod 360
+By divide_by_2_mod_180_v2 on F, D, A, G, E, C we get angle(F, D, A) == angle(G, E, C) + 180 mod 360
+By divide_by_2_mod_180_v2 on C, E, G, A, D, F we get angle(C, E, G) == angle(A, D, F) + 180 mod 360
+By divide_by_2_mod_180_v0 on E, D, A, G, F, C we get angle(E, D, A) == angle(G, F, C) mod 360
+By divide_by_2_mod_180_v1 on E, C, G, F, D, C we get angle(E, C, G) == angle(F, D, C) mod 360
+By divide_by_2_mod_180_v0 on F, C, G, E, D, A we get angle(E, D, A) == angle(F, C, G) mod 360
+By divide_by_2_mod_180_v1 on F, D, C, G, E, C we get angle(F, D, C) == angle(G, E, C) mod 360
+By divide_by_2_mod_180_v1 on G, E, D, F, E, D we get angle(F, E, D) == angle(G, E, D) mod 360
+By divide_by_2_mod_180_v2 on F, C, G, E, D, C we get angle(F, C, G) == angle(E, D, C) + 180 mod 360
+By divide_by_2_mod_180_v1 on D, F, G, D, C, E we get angle(D, C, E) == angle(D, F, G) mod 360
+By divide_by_2_mod_180_v3 on E, C, G, F, D, A we get angle(E, C, G) == angle(F, D, A) + 180 mod 360
+By divide_by_2_mod_180_v1 on E, D, G, B, C, F we get angle(B, C, F) == angle(E, D, G) mod 360
+By divide_by_2_mod_180_v3 on G, C, F, C, D, E we get angle(G, C, F) == angle(C, D, E) + 180 mod 360
+By divide_by_2_mod_180_v2 on C, D, E, C, F, G we get angle(C, D, E) == angle(C, F, G) + 180 mod 360
+By divide_by_2_mod_180_v0 on G, F, D, B, C, E we get angle(B, C, E) == angle(G, F, D) mod 360
+By divide_by_2_mod_180_v0 on E, C, D, F, D, G we get angle(E, C, D) == angle(F, D, G) mod 360
+By divide_by_2_mod_180_v0 on G, F, D, E, C, A we get angle(E, C, A) == angle(G, F, D) mod 360
+By divide_by_2_mod_180_v2 on G, C, E, A, D, F we get angle(G, C, E) == angle(A, D, F) + 180 mod 360
+By divide_by_2_mod_180_v0 on D, E, F, G, D, E we get angle(D, E, F) == angle(G, D, E) mod 360
+By divide_by_2_mod_180_v3 on E, D, C, G, F, C we get angle(E, D, C) == angle(G, F, C) + 180 mod 360
+By divide_by_2_mod_180_v2 on F, C, A, E, D, G we get angle(F, C, A) == angle(E, D, G) + 180 mod 360
+By divide_by_2_mod_180_v3 on D, C, F, D, E, G we get angle(D, C, F) == angle(D, E, G) + 180 mod 360
+By divide_by_2_mod_180_v3 on A, D, F, G, C, E we get angle(A, D, F) == angle(G, C, E) + 180 mod 360
+By reverse_direction on C, B we get 180 == direction(C, B) - direction(B, C) mod 360
+By divide_by_2_mod_180_v3 on E, D, G, F, C, A we get angle(E, D, G) == angle(F, C, A) + 180 mod 360
+By reverse_direction on D, B we get 180 == direction(D, B) - direction(B, D) mod 360
+By reverse_direction on B, D we get 180 == direction(B, D) - direction(D, B) mod 360
+By external_angle_bisector_definition_v0_r on F, E, F, D we get Line(D, E) == external_angle_bisector(F, D, F)
+By internal_angle_bisector_definition_v0_r on E, F, E, G we get Line(F, G) == internal_angle_bisector(E, G, E)
+By internal_angle_bisector_definition_v0_r on B, E, D, C we get Line(C, E) == internal_angle_bisector(B, C, D)
+By external_angle_bisector_definition_v0_r on D, F, B, C we get Line(C, F) == external_angle_bisector(B, C, D)
+By external_angle_bisector_definition_v0_r on E, F, E, D we get Line(D, F) == external_angle_bisector(E, D, E)
+By internal_angle_bisector_definition_v0_r on F, E, F, G we get Line(E, G) == internal_angle_bisector(F, G, F)
+By external_angle_bisector_definition_v0_r on F, E, F, C we get Line(C, E) == external_angle_bisector(F, C, F)
+By external_angle_bisector_definition_v0_r on E, F, E, C we get Line(C, F) == external_angle_bisector(E, C, E)
+By reverse_direction on B, E we get 180 == direction(B, E) - direction(E, B) mod 360
+By anti_similar_triangle_basic_properties on D, G, C, C, G, D we get angle(D, G, C) == 0 - angle(C, G, D) mod 360, angle(G, C, D) == 0 - angle(G, D, C) mod 360, angle(C, D, G) == 0 - angle(D, C, G) mod 360, log(distance(C, G)) + log(distance(C, G)) == log(distance(D, G)) + log(distance(D, G)), log(distance(C, G)) + log(distance(C, D)) == log(distance(D, G)) + log(distance(C, D)), log(distance(C, D)) + log(distance(C, G)) == log(distance(C, D)) + log(distance(D, G))
+By anti_similar_triangle_basic_properties on G, C, E, G, E, C we get angle(G, C, E) == 0 - angle(G, E, C) mod 360, angle(C, E, G) == 0 - angle(E, C, G) mod 360, angle(E, G, C) == 0 - angle(C, G, E) mod 360, log(distance(C, G)) + log(distance(C, E)) == log(distance(E, G)) + log(distance(C, E)), log(distance(C, E)) + log(distance(C, G)) == log(distance(C, E)) + log(distance(E, G)), log(distance(C, G)) + log(distance(C, G)) == log(distance(E, G)) + log(distance(E, G))
+By anti_similar_triangle_basic_properties on G, F, D, G, D, F we get angle(G, F, D) == 0 - angle(G, D, F) mod 360, angle(F, D, G) == 0 - angle(D, F, G) mod 360, angle(D, G, F) == 0 - angle(F, G, D) mod 360, log(distance(D, G)) + log(distance(D, F)) == log(distance(F, G)) + log(distance(D, F)), log(distance(D, F)) + log(distance(D, G)) == log(distance(D, F)) + log(distance(F, G)), log(distance(D, G)) + log(distance(D, G)) == log(distance(F, G)) + log(distance(F, G))
+By anti_similar_triangle_basic_properties on D, E, G, E, D, G we get angle(D, E, G) == 0 - angle(E, D, G) mod 360, angle(E, G, D) == 0 - angle(D, G, E) mod 360, angle(G, D, E) == 0 - angle(G, E, D) mod 360, log(distance(D, E)) + log(distance(D, G)) == log(distance(D, E)) + log(distance(E, G)), log(distance(D, G)) + log(distance(D, G)) == log(distance(E, G)) + log(distance(E, G)), log(distance(D, G)) + log(distance(D, E)) == log(distance(E, G)) + log(distance(D, E))
+By anti_similar_triangle_basic_properties on G, F, C, G, C, F we get angle(G, F, C) == 0 - angle(G, C, F) mod 360, angle(F, C, G) == 0 - angle(C, F, G) mod 360, angle(C, G, F) == 0 - angle(F, G, C) mod 360, log(distance(C, G)) + log(distance(C, F)) == log(distance(F, G)) + log(distance(C, F)), log(distance(C, F)) + log(distance(C, G)) == log(distance(C, F)) + log(distance(F, G)), log(distance(C, G)) + log(distance(C, G)) == log(distance(F, G)) + log(distance(F, G))
+By perpendicular_line_definition on E, Line(D, E), Line(D, F) we get Line(D, E) == perpendicular_line(E, Line(D, F))
+By perpendicular_line_definition on D, Line(D, E), Line(D, F) we get Line(D, E) == perpendicular_line(D, Line(D, F))
 By perpendicular_line_definition on F, Line(D, F), Line(D, E) we get Line(D, F) == perpendicular_line(F, Line(D, E))
-By line_unique_intersection_v0 on f, h, orthocenter(C, E, F), C we get C == orthocenter(C, E, F)
-By projection_definition on E, D, Line(D, F) we get D == projection(E, Line(D, F))
+By perpendicular_line_definition on D, Line(D, F), Line(D, E) we get Line(D, F) == perpendicular_line(D, Line(D, E))
 By projection_definition on F, D, Line(D, E) we get D == projection(F, Line(D, E))
 By probably_between_and_collinear_implies_between on F, G, E we get between(E, G, F)
-By in_imply_collinear on orthocenter(C, E, F), C, E we get collinear(C, E, orthocenter(C, E, F))
-By collinear_definition on G, F, E we get F in Line(E, G), E in Line(F, G), Line(E, G) == Line(F, G), 0 == 2 * angle(F, G, E) mod 360
-By isogonal_conjugate_definition_v10 on C, B, D, E, E we get angle(C, D, E) == angle(E, D, B) + 180 mod 360
-By in_imply_collinear on orthocenter(C, E, F), C, F we get collinear(C, F, orthocenter(C, E, F))
-By isogonal_conjugate_definition_v6 on C, D, B, E, E we get angle(B, D, E) == angle(E, D, C) + 180 mod 360
-By collinear_definition on F, G, E we get G in Line(E, F), E in Line(F, G), Line(E, F) == Line(F, G), 0 == 2 * angle(G, F, E) mod 360
-By line_inequality on altitude(C, E, F), Line(D, G), C we get Line(D, G) != altitude(C, E, F)
-By line_inequality on altitude(C, E, F), Line(E, G), C we get Line(E, G) != altitude(C, E, F)
+By projection_definition on E, D, Line(D, F) we get D == projection(E, Line(D, F))
+By collinear_definition on E, G, F we get G in Line(E, F), F in Line(E, G), Line(E, F) == Line(E, G), 0 == 2 * angle(G, E, F) mod 360
+By collinear_definition on G, E, F we get E in Line(F, G), F in Line(E, G), Line(E, G) == Line(F, G), 0 == 2 * angle(E, G, F) mod 360
+By collinear_definition on F, E, G we get E in Line(F, G), G in Line(E, F), Line(E, F) == Line(F, G), 0 == 2 * angle(E, F, G) mod 360
 By collinear_definition on E, F, G we get F in Line(E, G), G in Line(E, F), Line(E, F) == Line(E, G), 0 == 2 * angle(F, E, G) mod 360
-By line_containment_inequality on orthocenter(C, E, F), E, h we get E != orthocenter(C, E, F)
-By line_containment_inequality on orthocenter(C, E, F), A, f we get A != orthocenter(C, E, F)
-By line_inequality on altitude(C, E, F), g, C we get g != altitude(C, E, F)
-By line_containment_inequality on orthocenter(C, E, F), B, h we get B != orthocenter(C, E, F)
-By line_containment_inequality on orthocenter(C, E, F), D, h we get D != orthocenter(C, E, F)
-By line_inequality on altitude(C, E, F), Line(B, D), C we get Line(B, D) != altitude(C, E, F)
-By line_containment_inequality on orthocenter(C, E, F), G, f we get G != orthocenter(C, E, F)
-By line_containment_inequality on orthocenter(C, E, F), F, f we get F != orthocenter(C, E, F)
-By line_inequality on altitude(C, E, F), Line(D, E), C we get Line(D, E) != altitude(C, E, F)
-By line_inequality on altitude(C, E, F), Line(F, G), C we get Line(F, G) != altitude(C, E, F)
-By line_inequality on altitude(C, E, F), Line(E, F), C we get Line(E, F) != altitude(C, E, F)
-By line_inequality on altitude(C, E, F), Line(D, F), C we get Line(D, F) != altitude(C, E, F)
-By perpendicular_lines_draw_intersection on Line(E, F), altitude(C, E, F) we get exists(line_intersection(Line(E, F), altitude(C, E, F)))
-By perpendicular_lines_draw_intersection on Line(D, E), Line(D, F) we get exists(line_intersection(Line(D, E), Line(D, F)))
-By altitude_definition on E, F, D, Line(D, E) we get Line(D, E) == altitude(E, D, F)
-By altitude_definition on F, D, E, Line(D, F) we get Line(D, F) == altitude(F, D, E)
-By power_of_a_point_definition on G, E, F, c we get log(power_of_a_point(G, c)) == log(distance(E, G)) + log(distance(F, G))
-By excenter_concurrency_alternate on D, B, C we get excenter(D, B, C) in external_angle_bisector(C, B, D), excenter(D, B, C) in external_angle_bisector(B, C, D), excenter(D, B, C) in internal_angle_bisector(B, D, C)
+By collinear_definition on F, G, E we get G in Line(E, F), E in Line(F, G), Line(E, F) == Line(F, G), 0 == 2 * angle(G, F, E) mod 360
+By altitude_definition on E, D, F, Line(D, E) we get Line(D, E) == altitude(E, D, F)
+By altitude_definition on F, E, D, Line(D, F) we get Line(D, F) == altitude(F, D, E)
+By power_of_a_point_definition on G, F, E, c we get log(power_of_a_point(G, c)) == log(distance(F, G)) + log(distance(E, G))
 By excenter_concurrency on C, D, B we get excenter(C, B, D) in external_angle_bisector(B, D, C), excenter(C, B, D) in external_angle_bisector(C, B, D), excenter(C, B, D) in internal_angle_bisector(B, C, D)
-By line_definition on D, E, external_angle_bisector(B, D, C) we get Line(D, E) == external_angle_bisector(B, D, C)
-By median_definition on E, C, A, external_angle_bisector(B, D, C) we get median(E, A, C) == external_angle_bisector(B, D, C)
-By midpoint_definition_v1 on F, E, G we get G == midpoint(E, F)
-By perpendicular_line_definition on excenter(D, B, C), h, f we get h == perpendicular_line(excenter(D, B, C), f)
-By perpendicular_line_definition on line_intersection(Line(E, F), altitude(C, E, F)), Line(E, F), altitude(C, E, F) we get Line(E, F) == perpendicular_line(line_intersection(Line(E, F), altitude(C, E, F)), altitude(C, E, F))
-By perpendicular_line_definition on line_intersection(Line(E, F), altitude(C, E, F)), altitude(C, E, F), Line(E, F) we get altitude(C, E, F) == perpendicular_line(line_intersection(Line(E, F), altitude(C, E, F)), Line(E, F))
-By perpendicular_line_definition on G, Line(E, F), altitude(C, E, F) we get Line(E, F) == perpendicular_line(G, altitude(C, E, F))
-By line_unique_intersection_v1 on external_angle_bisector(B, D, C), f, E, C we get C not in external_angle_bisector(B, D, C)
-By line_unique_intersection_v1 on external_angle_bisector(B, D, C), g, E, B we get B not in external_angle_bisector(B, D, C)
-By between_implies_orientation on B, F, G, E we get orientation(B, F, G) == orientation(B, G, E) mod 360, orientation(B, F, E) == orientation(B, F, G) mod 360
-By between_implies_orientation on B, E, G, F we get orientation(B, E, G) == orientation(B, G, F) mod 360, orientation(B, E, F) == orientation(B, E, G) mod 360
-By between_imply_not_between on F, G, E we get collinear_and_not_between(E, F, G)
-By between_imply_not_between on E, G, F we get collinear_and_not_between(F, E, G)
-By in_imply_collinear on line_intersection(Line(E, F), altitude(C, E, F)), F, E we get collinear(E, F, line_intersection(Line(E, F), altitude(C, E, F)))
-By orthocenter_concurrency on F, E, D we get orthocenter(D, E, F) in altitude(F, D, E), orthocenter(D, E, F) in altitude(E, D, F), orthocenter(D, E, F) in altitude(D, E, F)
-By divide_by_2_mod_180_v0 on E, B, C, G, D, A we get angle(E, B, C) == angle(G, D, A) mod 360
-By divide_by_2_mod_180_v0 on G, C, A, E, B, D we get angle(E, B, D) == angle(G, C, A) mod 360
-By in_imply_collinear on excenter(D, B, C), B, E we get collinear(B, E, excenter(D, B, C))
-By divide_by_2_mod_180_v0 on E, B, D, C, D, G we get angle(C, D, G) == angle(E, B, D) mod 360
-By in_imply_collinear on excenter(D, B, C), F, C we get collinear(C, F, excenter(D, B, C))
-By divide_by_2_mod_180_v1 on D, B, E, A, C, G we get angle(A, C, G) == angle(D, B, E) mod 360
-By divide_by_2_mod_180_v1 on D, C, G, D, B, E we get angle(D, B, E) == angle(D, C, G) mod 360
-By divide_by_2_mod_180_v1 on G, D, C, D, B, E we get angle(D, B, E) == angle(G, D, C) mod 360
-By divide_by_2_mod_180_v3 on D, B, E, G, D, A we get angle(D, B, E) == angle(G, D, A) + 180 mod 360
-By divide_by_2_mod_180_v3 on D, C, G, E, B, C we get angle(D, C, G) == angle(E, B, C) + 180 mod 360
-By divide_by_2_mod_180_v0 on G, C, D, E, B, D we get angle(E, B, D) == angle(G, C, D) mod 360
-By in_imply_collinear on line_intersection(Line(E, F), altitude(C, E, F)), E, G we get collinear(E, G, line_intersection(Line(E, F), altitude(C, E, F)))
-By divide_by_2_mod_180_v2 on E, B, D, A, D, G we get angle(E, B, D) == angle(A, D, G) + 180 mod 360
-By in_imply_collinear on line_intersection(Line(E, F), altitude(C, E, F)), F, G we get collinear(F, G, line_intersection(Line(E, F), altitude(C, E, F)))
-By divide_by_2_mod_180_v2 on E, B, C, A, C, G we get angle(E, B, C) == angle(A, C, G) + 180 mod 360
-By line_containment_inequality on excenter(D, B, C), B, h we get B != excenter(D, B, C)
-By divide_by_2_mod_180_v2 on E, B, C, D, C, G we get angle(E, B, C) == angle(D, C, G) + 180 mod 360
-By divide_by_2_mod_180_v3 on A, C, G, E, B, C we get angle(A, C, G) == angle(E, B, C) + 180 mod 360
-By angle_bisectors_are_perpendicular on C, D, B we get perpendicular(external_angle_bisector(B, D, C), internal_angle_bisector(B, D, C))
-By divide_by_2_mod_180_v2 on E, B, C, G, D, C we get angle(E, B, C) == angle(G, D, C) + 180 mod 360
-By divide_by_2_mod_180_v2 on G, C, A, C, B, E we get angle(G, C, A) == angle(C, B, E) + 180 mod 360
-By line_inequality on external_angle_bisector(B, D, C), Line(B, C), E we get Line(B, C) != external_angle_bisector(B, D, C)
-By divide_by_2_mod_180_v1 on A, D, G, C, B, E we get angle(A, D, G) == angle(C, B, E) mod 360
-By divide_by_2_mod_180_v3 on C, B, E, G, C, D we get angle(C, B, E) == angle(G, C, D) + 180 mod 360
-By divide_by_2_mod_180_v2 on C, D, G, C, B, E we get angle(C, D, G) == angle(C, B, E) + 180 mod 360
-By divide_by_2_mod_180_v3 on G, D, C, E, B, C we get angle(G, D, C) == angle(E, B, C) + 180 mod 360
-By divide_by_2_mod_180_v3 on C, B, E, C, D, G we get angle(C, B, E) == angle(C, D, G) + 180 mod 360
-By divide_by_2_mod_180_v2 on G, D, A, D, B, E we get angle(G, D, A) == angle(D, B, E) + 180 mod 360
-By divide_by_2_mod_180_v3 on C, B, E, G, C, A we get angle(C, B, E) == angle(G, C, A) + 180 mod 360
-By line_containment_inequality on excenter(D, B, C), C, g we get C != excenter(D, B, C)
-By divide_by_2_mod_180_v2 on G, C, D, C, B, E we get angle(G, C, D) == angle(C, B, E) + 180 mod 360
-By divide_by_2_mod_180_v3 on A, D, G, E, B, D we get angle(A, D, G) == angle(E, B, D) + 180 mod 360
-By between_imply_segment_sum on F, G, E we get distance(E, F) == distance(F, G) + distance(E, G)
-By line_containment_inequality on excenter(D, B, C), D, g we get D != excenter(D, B, C)
-By line_inequality on external_angle_bisector(B, D, C), Line(C, G), D we get Line(C, G) != external_angle_bisector(B, D, C)
-By line_inequality on internal_angle_bisector(B, D, C), Line(B, C), D we get Line(B, C) != internal_angle_bisector(B, D, C)
-By line_inequality on internal_angle_bisector(B, D, C), Line(E, F), D we get Line(E, F) != internal_angle_bisector(B, D, C)
-By line_containment_inequality on line_intersection(Line(E, F), altitude(C, E, F)), C, Line(E, F) we get C != line_intersection(Line(E, F), altitude(C, E, F))
-By line_containment_inequality on excenter(D, B, C), A, g we get A != excenter(D, B, C)
-By line_inequality on external_angle_bisector(B, D, C), Line(B, D), E we get Line(B, D) != external_angle_bisector(B, D, C)
-By line_inequality on external_angle_bisector(B, D, C), Line(D, G), E we get Line(D, G) != external_angle_bisector(B, D, C)
-By line_inequality on internal_angle_bisector(B, D, C), f, D we get f != internal_angle_bisector(B, D, C)
-By line_inequality on internal_angle_bisector(B, D, C), Line(C, G), D we get Line(C, G) != internal_angle_bisector(B, D, C)
-By line_containment_inequality on excenter(D, B, C), G, h we get G != excenter(D, B, C)
-By line_inequality on external_angle_bisector(B, D, C), h, E we get h != external_angle_bisector(B, D, C)
-By line_inequality on external_angle_bisector(B, D, C), Line(E, F), D we get Line(E, F) != external_angle_bisector(B, D, C)
-By line_inequality on external_angle_bisector(B, D, C), Line(D, F), E we get Line(D, F) != external_angle_bisector(B, D, C)
-By line_inequality on external_angle_bisector(B, D, C), Line(A, C), E we get Line(A, C) != external_angle_bisector(B, D, C)
-By line_containment_inequality on excenter(D, B, C), E, h we get E != excenter(D, B, C)
-By line_containment_inequality on line_intersection(Line(E, F), altitude(C, E, F)), D, Line(E, F) we get D != line_intersection(Line(E, F), altitude(C, E, F))
-By line_containment_inequality on line_intersection(Line(E, F), altitude(C, E, F)), A, Line(E, F) we get A != line_intersection(Line(E, F), altitude(C, E, F))
-By excenter_isogonal_conjugate on D, C, B we get excenter(D, B, C) == isogonal_conjugate(excenter(D, B, C), B, C, D)
-By internal_angle_bisector_definition_v0_r on B, E, A, D we get Line(D, E) == internal_angle_bisector(A, D, B)
-By altitude_definition on C, E, G, altitude(C, E, F) we get altitude(C, E, F) == altitude(C, E, G)
-By altitude_definition on C, F, G, altitude(C, E, F) we get altitude(C, E, F) == altitude(C, F, G)
-By excenter_concurrency_alternate on B, D, C we get excenter(B, C, D) in external_angle_bisector(B, D, C), excenter(B, C, D) in external_angle_bisector(B, C, D), excenter(B, C, D) in internal_angle_bisector(C, B, D)
-By incenter_concurrency on B, D, C we get incenter(B, C, D) in internal_angle_bisector(B, D, C), incenter(B, C, D) in internal_angle_bisector(B, C, D), incenter(B, C, D) in internal_angle_bisector(C, B, D)
-By line_intersection_definition on orthocenter(D, E, F), Line(D, F), Line(D, E) we get orthocenter(D, E, F) == line_intersection(Line(D, E), Line(D, F))
+By excenter_concurrency_alternate on D, C, B we get excenter(D, B, C) in external_angle_bisector(B, C, D), excenter(D, B, C) in external_angle_bisector(C, B, D), excenter(D, B, C) in internal_angle_bisector(B, D, C)
+By line_definition on E, D, external_angle_bisector(B, D, C) we get Line(D, E) == external_angle_bisector(B, D, C)
 By line_definition on B, excenter(D, B, C), g we get g == Line(B, excenter(D, B, C))
-By perpendicular_line_definition on D, internal_angle_bisector(B, D, C), Line(D, E) we get internal_angle_bisector(B, D, C) == perpendicular_line(D, Line(D, E))
-By line_definition on line_intersection(Line(E, F), altitude(C, E, F)), C, altitude(C, E, F) we get altitude(C, E, F) == Line(C, line_intersection(Line(E, F), altitude(C, E, F)))
+By median_definition on E, C, A, external_angle_bisector(B, D, C) we get median(E, A, C) == external_angle_bisector(B, D, C)
 By line_definition on excenter(D, B, C), E, g we get g == Line(E, excenter(D, B, C))
 By line_definition on C, excenter(D, B, C), h we get h == Line(C, excenter(D, B, C))
-By line_definition on D, excenter(D, B, C), internal_angle_bisector(B, D, C) we get Line(D, excenter(D, B, C)) == internal_angle_bisector(B, D, C)
-By perpendicular_line_definition on E, Line(D, E), internal_angle_bisector(B, D, C) we get Line(D, E) == perpendicular_line(E, internal_angle_bisector(B, D, C))
-By perpendicular_line_definition on orthocenter(D, E, F), altitude(D, E, F), Line(E, F) we get altitude(D, E, F) == perpendicular_line(orthocenter(D, E, F), Line(E, F))
-By median_definition on C, F, E, Line(C, G) we get Line(C, G) == median(C, E, F)
-By perpendicular_line_definition on orthocenter(D, E, F), Line(D, F), Line(D, E) we get Line(D, F) == perpendicular_line(orthocenter(D, E, F), Line(D, E))
-By perpendicular_line_definition on excenter(D, B, C), internal_angle_bisector(B, D, C), Line(D, E) we get internal_angle_bisector(B, D, C) == perpendicular_line(excenter(D, B, C), Line(D, E))
-By perpendicular_line_definition on orthocenter(D, E, F), Line(D, E), Line(D, F) we get Line(D, E) == perpendicular_line(orthocenter(D, E, F), Line(D, F))
-By median_definition on D, E, F, Line(D, G) we get Line(D, G) == median(D, E, F)
-By perpendicular_line_definition on G, Line(E, F), altitude(D, E, F) we get Line(E, F) == perpendicular_line(G, altitude(D, E, F))
-By perpendicular_line_definition on excenter(B, C, D), Line(D, E), Line(D, F) we get Line(D, E) == perpendicular_line(excenter(B, C, D), Line(D, F))
-By perpendicular_line_definition on excenter(B, C, D), h, f we get h == perpendicular_line(excenter(B, C, D), f)
-By perpendicular_line_definition on excenter(B, C, D), Line(D, E), internal_angle_bisector(B, D, C) we get Line(D, E) == perpendicular_line(excenter(B, C, D), internal_angle_bisector(B, D, C))
-By perpendicular_line_definition on orthocenter(D, E, F), Line(D, E), internal_angle_bisector(B, D, C) we get Line(D, E) == perpendicular_line(orthocenter(D, E, F), internal_angle_bisector(B, D, C))
-By perpendicular_line_definition on incenter(B, C, D), f, h we get f == perpendicular_line(incenter(B, C, D), h)
-By perpendicular_line_definition on incenter(B, C, D), internal_angle_bisector(B, D, C), Line(D, E) we get internal_angle_bisector(B, D, C) == perpendicular_line(incenter(B, C, D), Line(D, E))
-By perpendicular_line_definition on E, Line(E, F), altitude(D, E, F) we get Line(E, F) == perpendicular_line(E, altitude(D, E, F))
-By perpendicular_line_definition on F, Line(E, F), altitude(D, E, F) we get Line(E, F) == perpendicular_line(F, altitude(D, E, F))
-By perpendicular_line_definition on D, Line(D, E), internal_angle_bisector(B, D, C) we get Line(D, E) == perpendicular_line(D, internal_angle_bisector(B, D, C))
-By perpendicular_line_definition on line_intersection(Line(E, F), altitude(C, E, F)), Line(E, F), altitude(D, E, F) we get Line(E, F) == perpendicular_line(line_intersection(Line(E, F), altitude(C, E, F)), altitude(D, E, F))
-By line_unique_intersection_v1 on Line(A, C), h, C, excenter(D, B, C) we get excenter(D, B, C) not in Line(A, C)
-By line_unique_intersection_v0 on Line(D, F), Line(D, E), D, orthocenter(D, E, F) we get D == orthocenter(D, E, F)
-By line_unique_intersection_v1 on f, h, C, excenter(D, B, C) we get excenter(D, B, C) not in f
-By line_unique_intersection_v1 on Line(B, C), h, C, excenter(D, B, C) we get excenter(D, B, C) not in Line(B, C)
-By line_unique_intersection_v1 on Line(B, D), g, B, excenter(D, B, C) we get excenter(D, B, C) not in Line(B, D)
-By line_unique_intersection_v1 on internal_angle_bisector(B, D, C), g, excenter(D, B, C), B we get B not in internal_angle_bisector(B, D, C)
-By line_unique_intersection_v1 on internal_angle_bisector(B, D, C), h, excenter(D, B, C), C we get C not in internal_angle_bisector(B, D, C)
-By line_unique_intersection_v1 on internal_angle_bisector(B, D, C), g, excenter(D, B, C), E we get E not in internal_angle_bisector(B, D, C)
-By line_unique_intersection_v1 on Line(C, G), h, C, excenter(D, B, C) we get excenter(D, B, C) not in Line(C, G)
-By line_unique_intersection_v1 on Line(D, E), g, E, excenter(D, B, C) we get excenter(D, B, C) not in Line(D, E)
-By between_implies_orientation on excenter(D, B, C), A, D, C we get orientation(A, D, excenter(D, B, C)) == orientation(C, excenter(D, B, C), D) mod 360, orientation(A, C, excenter(D, B, C)) == orientation(A, D, excenter(D, B, C)) mod 360
-By between_implies_orientation on line_intersection(Line(E, F), altitude(C, E, F)), C, D, A we get orientation(A, line_intersection(Line(E, F), altitude(C, E, F)), D) == orientation(C, D, line_intersection(Line(E, F), altitude(C, E, F))) mod 360, orientation(A, line_intersection(Line(E, F), altitude(C, E, F)), C) == orientation(C, D, line_intersection(Line(E, F), altitude(C, E, F))) mod 360
-By collinear_and_not_between_implies_orientation on excenter(D, B, C), A, C, D we get orientation(A, excenter(D, B, C), C) == orientation(C, D, excenter(D, B, C)) mod 360
-By between_implies_orientation on excenter(D, B, C), C, D, A we get orientation(A, excenter(D, B, C), D) == orientation(C, D, excenter(D, B, C)) mod 360, orientation(A, excenter(D, B, C), C) == orientation(C, D, excenter(D, B, C)) mod 360
-By between_implies_orientation on line_intersection(Line(E, F), altitude(C, E, F)), A, D, C we get orientation(A, D, line_intersection(Line(E, F), altitude(C, E, F))) == orientation(C, line_intersection(Line(E, F), altitude(C, E, F)), D) mod 360, orientation(A, C, line_intersection(Line(E, F), altitude(C, E, F))) == orientation(A, D, line_intersection(Line(E, F), altitude(C, E, F))) mod 360
-By projection_definition on E, D, internal_angle_bisector(B, D, C) we get D == projection(E, internal_angle_bisector(B, D, C))
-By in_imply_collinear on incenter(B, C, D), C, E we get collinear(C, E, incenter(B, C, D))
-By in_imply_collinear on excenter(B, C, D), E, D we get collinear(D, E, excenter(B, C, D))
-By in_imply_collinear on orthocenter(D, E, F), D, F we get collinear(D, F, orthocenter(D, E, F))
-By in_imply_collinear on orthocenter(D, E, F), D, E we get collinear(D, E, orthocenter(D, E, F))
-By in_imply_collinear on excenter(B, C, D), F, C we get collinear(C, F, excenter(B, C, D))
-By double_perpendicular_and_parallel_v0 on altitude(C, E, F), Line(E, F), altitude(D, E, F) we get parallel(altitude(C, E, F), altitude(D, E, F))
-By double_perpendicular_and_parallel_v0 on internal_angle_bisector(B, D, C), Line(D, E), Line(D, F) we get parallel(Line(D, F), internal_angle_bisector(B, D, C))
-By angle_bisectors_are_perpendicular on D, B, C we get perpendicular(external_angle_bisector(C, B, D), internal_angle_bisector(C, B, D))
-By line_containment_inequality on incenter(B, C, D), G, f we get G != incenter(B, C, D)
-By line_containment_inequality on orthocenter(D, E, F), F, Line(D, E) we get F != orthocenter(D, E, F)
-By line_inequality on internal_angle_bisector(C, B, D), Line(D, G), B we get Line(D, G) != internal_angle_bisector(C, B, D)
-By line_containment_inequality on excenter(B, C, D), G, Line(D, E) we get G != excenter(B, C, D)
-By line_inequality on internal_angle_bisector(C, B, D), Line(C, G), B we get Line(C, G) != internal_angle_bisector(C, B, D)
-By line_containment_inequality on orthocenter(D, E, F), E, Line(D, F) we get E != orthocenter(D, E, F)
-By line_containment_inequality on excenter(B, C, D), A, Line(D, E) we get A != excenter(B, C, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on excenter(D, B, C), D, C we get excenter(D, B, C) not in Line(C, D)
-By line_inequality on altitude(D, E, F), h, D we get h != altitude(D, E, F)
-By line_inequality on altitude(D, E, F), g, D we get g != altitude(D, E, F)
-By line_containment_inequality on excenter(B, C, D), F, Line(D, E) we get F != excenter(B, C, D)
-By line_inequality on altitude(D, E, F), f, D we get f != altitude(D, E, F)
-By line_containment_inequality on orthocenter(D, E, F), C, Line(D, E) we get C != orthocenter(D, E, F)
-By line_containment_inequality on excenter(B, C, D), B, h we get B != excenter(B, C, D)
-By line_containment_inequality on orthocenter(D, E, F), G, Line(D, E) we get G != orthocenter(D, E, F)
-By line_containment_inequality on incenter(B, C, D), D, f we get D != incenter(B, C, D)
-By line_containment_inequality on orthocenter(D, E, F), A, Line(D, E) we get A != orthocenter(D, E, F)
-By line_containment_inequality on incenter(B, C, D), F, f we get F != incenter(B, C, D)
-By line_inequality on altitude(D, E, F), Line(C, G), D we get Line(C, G) != altitude(D, E, F)
-By line_inequality on altitude(D, E, F), Line(E, F), D we get Line(E, F) != altitude(D, E, F)
-By line_containment_inequality on orthocenter(D, E, F), B, Line(D, E) we get B != orthocenter(D, E, F)
-By line_inequality on internal_angle_bisector(C, B, D), Line(A, C), B we get Line(A, C) != internal_angle_bisector(C, B, D)
-By line_containment_inequality on incenter(B, C, D), A, f we get A != incenter(B, C, D)
-By line_containment_inequality on excenter(B, C, D), D, h we get D != excenter(B, C, D)
-By line_inequality on altitude(D, E, F), Line(B, C), D we get Line(B, C) != altitude(D, E, F)
-By line_containment_inequality on incenter(B, C, D), B, f we get B != incenter(B, C, D)
-By line_containment_inequality on excenter(B, C, D), C, Line(D, E) we get C != excenter(B, C, D)
-By line_containment_inequality on excenter(B, C, D), E, h we get E != excenter(B, C, D)
-By line_inequality on internal_angle_bisector(C, B, D), Line(D, F), B we get Line(D, F) != internal_angle_bisector(C, B, D)
-By incenter_isogonal_conjugate on C, B, D we get incenter(B, C, D) == isogonal_conjugate(incenter(B, C, D), B, C, D)
-By log_of_2_times_distance on E, F, F, G we get log(distance(E, F)) == 0.6931471805599453 + log(distance(F, G))
-By perpendicular_lines_draw_intersection on Line(E, F), altitude(D, E, F) we get exists(line_intersection(Line(E, F), altitude(D, E, F)))
-By log_of_2_times_distance on F, E, G, E we get log(distance(E, F)) == 0.6931471805599453 + log(distance(E, G))
-By collinear_definition on B, E, excenter(D, B, C) we get E in Line(B, excenter(D, B, C)), excenter(D, B, C) in Line(B, E), Line(B, E) == Line(B, excenter(D, B, C)), 0 == 2 * angle(E, B, excenter(D, B, C)) mod 360
-By log_of_2_times_distance on F, E, G, D we get log(distance(E, F)) == 0.6931471805599453 + log(distance(D, G))
-By right_triangle_circumcenter_v1 on F, C, E we get midpoint(E, F) == circumcenter(C, E, F)
-By perpendicular_lines_draw_intersection on internal_angle_bisector(B, D, C), Line(D, E) we get exists(line_intersection(Line(D, E), internal_angle_bisector(B, D, C)))
-By collinear_definition on C, F, excenter(D, B, C) we get F in Line(C, excenter(D, B, C)), excenter(D, B, C) in Line(C, F), Line(C, F) == Line(C, excenter(D, B, C)), 0 == 2 * angle(F, C, excenter(D, B, C)) mod 360
-By collinear_definition on C, excenter(D, B, C), F we get excenter(D, B, C) in Line(C, F), F in Line(C, excenter(D, B, C)), Line(C, F) == Line(C, excenter(D, B, C)), 0 == 2 * angle(excenter(D, B, C), C, F) mod 360
-By right_triangle_circumcenter_v1 on E, D, F we get midpoint(E, F) == circumcenter(D, E, F)
-By log_of_2_times_distance on E, F, C, G we get log(distance(E, F)) == 0.6931471805599453 + log(distance(C, G))
-By collinear_definition on E, B, excenter(D, B, C) we get B in Line(E, excenter(D, B, C)), excenter(D, B, C) in Line(B, E), Line(B, E) == Line(E, excenter(D, B, C)), 0 == 2 * angle(B, E, excenter(D, B, C)) mod 360
-By excenter_isogonal_conjugate on B, C, D we get excenter(B, C, D) == isogonal_conjugate(excenter(B, C, D), B, C, D)
-By collinear_definition on E, excenter(D, B, C), B we get excenter(D, B, C) in Line(B, E), B in Line(E, excenter(D, B, C)), Line(B, E) == Line(E, excenter(D, B, C)), 0 == 2 * angle(excenter(D, B, C), E, B) mod 360
-By collinear_definition on B, excenter(D, B, C), E we get excenter(D, B, C) in Line(B, E), E in Line(B, excenter(D, B, C)), Line(B, E) == Line(B, excenter(D, B, C)), 0 == 2 * angle(excenter(D, B, C), B, E) mod 360
-By collinear_definition on excenter(D, B, C), B, E we get B in Line(E, excenter(D, B, C)), E in Line(B, excenter(D, B, C)), Line(B, excenter(D, B, C)) == Line(E, excenter(D, B, C)), 0 == 2 * angle(B, excenter(D, B, C), E) mod 360
-By collinear_definition on excenter(D, B, C), E, B we get E in Line(B, excenter(D, B, C)), B in Line(E, excenter(D, B, C)), Line(B, excenter(D, B, C)) == Line(E, excenter(D, B, C)), 0 == 2 * angle(E, excenter(D, B, C), B) mod 360
-By altitude_definition on D, F, G, altitude(D, E, F) we get altitude(D, E, F) == altitude(D, F, G)
-By altitude_definition on D, E, G, altitude(D, E, F) we get altitude(D, E, F) == altitude(D, E, G)
-By line_definition on D, incenter(B, C, D), Line(D, F) we get Line(D, F) == Line(D, incenter(B, C, D))
-By line_definition on excenter(B, C, D), C, h we get h == Line(C, excenter(B, C, D))
-By line_definition on incenter(B, C, D), B, internal_angle_bisector(C, B, D) we get Line(B, incenter(B, C, D)) == internal_angle_bisector(C, B, D)
-By line_definition on B, excenter(B, C, D), internal_angle_bisector(C, B, D) we get Line(B, excenter(B, C, D)) == internal_angle_bisector(C, B, D)
-By line_definition on excenter(B, C, D), E, Line(D, E) we get Line(D, E) == Line(E, excenter(B, C, D))
-By line_definition on F, incenter(B, C, D), Line(D, F) we get Line(D, F) == Line(F, incenter(B, C, D))
+By line_definition on excenter(D, B, C), D, internal_angle_bisector(B, D, C) we get internal_angle_bisector(B, D, C) == Line(D, excenter(D, B, C))
+By midpoint_definition_v0 on E, F, G we get G == midpoint(E, F)
+By line_intersection_definition on D, external_angle_bisector(B, D, C), Line(A, C) we get D == line_intersection(Line(A, C), external_angle_bisector(B, D, C))
+By line_intersection_definition on D, external_angle_bisector(B, D, C), Line(D, F) we get D == line_intersection(Line(D, F), external_angle_bisector(B, D, C))
+By line_intersection_definition on D, internal_angle_bisector(B, D, C), Line(B, D) we get D == line_intersection(Line(B, D), internal_angle_bisector(B, D, C))
+By line_intersection_definition on D, internal_angle_bisector(B, D, C), Line(D, G) we get D == line_intersection(Line(D, G), internal_angle_bisector(B, D, C))
+By line_intersection_definition on D, external_angle_bisector(B, D, C), internal_angle_bisector(B, D, C) we get D == line_intersection(external_angle_bisector(B, D, C), internal_angle_bisector(B, D, C))
+By median_definition on excenter(D, B, C), A, C, internal_angle_bisector(B, D, C) we get internal_angle_bisector(B, D, C) == median(excenter(D, B, C), A, C)
+By line_intersection_definition on E, Line(E, F), external_angle_bisector(B, D, C) we get E == line_intersection(Line(E, F), external_angle_bisector(B, D, C))
+By perpendicular_line_definition on excenter(D, B, C), h, f we get h == perpendicular_line(excenter(D, B, C), f)
+By line_intersection_definition on D, Line(D, G), external_angle_bisector(B, D, C) we get D == line_intersection(Line(D, G), external_angle_bisector(B, D, C))
+By line_intersection_definition on D, Line(A, C), internal_angle_bisector(B, D, C) we get D == line_intersection(Line(A, C), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(E, F), external_angle_bisector(B, D, C), f we get concurrent(f, Line(E, F), external_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on external_angle_bisector(B, D, C), Line(E, F), f we get concurrent(f, Line(E, F), external_angle_bisector(B, D, C))
+By line_intersection_definition on D, Line(B, D), external_angle_bisector(B, D, C) we get D == line_intersection(Line(B, D), external_angle_bisector(B, D, C))
+By line_intersection_definition on D, internal_angle_bisector(B, D, C), Line(D, E) we get D == line_intersection(Line(D, E), internal_angle_bisector(B, D, C))
+By between_imply_not_between on F, G, E we get collinear_and_not_between(E, F, G)
+By between_imply_not_between on E, G, F we get collinear_and_not_between(F, E, G)
+By in_imply_collinear on excenter(D, B, C), E, B we get collinear(B, E, excenter(D, B, C))
+By in_imply_collinear on excenter(D, B, C), F, C we get collinear(C, F, excenter(D, B, C))
+By between_imply_segment_sum on E, G, F we get distance(E, F) == distance(E, G) + distance(F, G)
+By angle_bisectors_are_perpendicular on C, D, B we get perpendicular(external_angle_bisector(B, D, C), internal_angle_bisector(B, D, C))
+By internal_angle_bisector_definition_v0_r on G, F, G, E we get Line(E, F) == internal_angle_bisector(G, E, G)
+By internal_angle_bisector_definition_v0_r on G, E, G, F we get Line(E, F) == internal_angle_bisector(G, F, G)
+By internal_angle_bisector_definition_v0_r on E, G, E, F we get Line(F, G) == internal_angle_bisector(E, F, E)
+By internal_angle_bisector_definition_v0_r on F, G, F, E we get Line(E, G) == internal_angle_bisector(F, E, F)
+By altitude_definition on excenter(D, B, C), E, C, h we get h == altitude(excenter(D, B, C), C, E)
+By incenter_concurrency on B, D, C we get incenter(B, C, D) in internal_angle_bisector(B, D, C), incenter(B, C, D) in internal_angle_bisector(B, C, D), incenter(B, C, D) in internal_angle_bisector(C, B, D)
+By excenter_concurrency_alternate on B, C, D we get excenter(B, C, D) in external_angle_bisector(B, C, D), excenter(B, C, D) in external_angle_bisector(B, D, C), excenter(B, C, D) in internal_angle_bisector(C, B, D)
+By concurrent_sufficient_conditions on Line(A, C), Line(B, D), internal_angle_bisector(B, D, C) we get concurrent(Line(A, C), Line(B, D), internal_angle_bisector(B, D, C))
+By line_definition on incenter(B, C, D), excenter(B, C, D), internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == Line(excenter(B, C, D), incenter(B, C, D))
+By line_definition on E, incenter(B, C, D), f we get f == Line(E, incenter(B, C, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(D, G), Line(A, C) we get concurrent(Line(A, C), Line(D, G), internal_angle_bisector(B, D, C))
 By line_definition on excenter(B, C, D), F, h we get h == Line(F, excenter(B, C, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(A, C), Line(B, D) we get concurrent(Line(A, C), Line(B, D), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(B, D), internal_angle_bisector(B, D, C), Line(A, C) we get concurrent(Line(A, C), Line(B, D), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(A, C), internal_angle_bisector(B, D, C), Line(B, D) we get concurrent(Line(A, C), Line(B, D), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(D, G), Line(D, E), internal_angle_bisector(B, D, C) we get concurrent(Line(D, E), Line(D, G), internal_angle_bisector(B, D, C))
+By line_definition on B, excenter(B, C, D), internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == Line(B, excenter(B, C, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(D, E), Line(D, G) we get concurrent(Line(D, E), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(D, E), Line(D, G), internal_angle_bisector(B, D, C) we get concurrent(Line(D, E), Line(D, G), internal_angle_bisector(B, D, C))
+By line_definition on E, excenter(B, C, D), Line(D, E) we get Line(D, E) == Line(E, excenter(B, C, D))
+By concurrent_sufficient_conditions on Line(D, E), Line(A, C), internal_angle_bisector(B, D, C) we get concurrent(Line(A, C), Line(D, E), internal_angle_bisector(B, D, C))
+By line_definition on C, incenter(B, C, D), f we get f == Line(C, incenter(B, C, D))
+By line_definition on excenter(B, C, D), excenter(D, B, C), h we get h == Line(excenter(B, C, D), excenter(D, B, C))
+By concurrent_sufficient_conditions on Line(D, E), Line(B, D), internal_angle_bisector(B, D, C) we get concurrent(Line(B, D), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(D, E), internal_angle_bisector(B, D, C), Line(D, G) we get concurrent(Line(D, E), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(D, E), Line(A, C) we get concurrent(Line(A, C), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(D, G), Line(B, D) we get concurrent(Line(B, D), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(D, G), Line(A, C), internal_angle_bisector(B, D, C) we get concurrent(Line(A, C), Line(D, G), internal_angle_bisector(B, D, C))
+By line_definition on incenter(B, C, D), D, internal_angle_bisector(B, D, C) we get internal_angle_bisector(B, D, C) == Line(D, incenter(B, C, D))
+By concurrent_sufficient_conditions on Line(D, E), internal_angle_bisector(B, D, C), Line(A, C) we get concurrent(Line(A, C), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(A, C), internal_angle_bisector(B, D, C), Line(D, G) we get concurrent(Line(A, C), Line(D, G), internal_angle_bisector(B, D, C))
 By line_definition on excenter(B, C, D), D, Line(D, E) we get Line(D, E) == Line(D, excenter(B, C, D))
-By line_definition on B, G, g we get g == Line(B, G)
-By perpendicular_line_definition on E, g, internal_angle_bisector(C, B, D) we get g == perpendicular_line(E, internal_angle_bisector(C, B, D))
-By perpendicular_line_definition on line_intersection(g, altitude(D, E, F)), altitude(D, E, F), g we get altitude(D, E, F) == perpendicular_line(line_intersection(g, altitude(D, E, F)), g)
-By perpendicular_line_definition on G, g, internal_angle_bisector(C, B, D) we get g == perpendicular_line(G, internal_angle_bisector(C, B, D))
-By perpendicular_line_definition on excenter(B, C, D), internal_angle_bisector(C, B, D), g we get internal_angle_bisector(C, B, D) == perpendicular_line(excenter(B, C, D), g)
-By perpendicular_line_definition on line_intersection(g, altitude(D, E, F)), g, altitude(D, E, F) we get g == perpendicular_line(line_intersection(g, altitude(D, E, F)), altitude(D, E, F))
-By perpendicular_line_definition on incenter(B, C, D), internal_angle_bisector(C, B, D), g we get internal_angle_bisector(C, B, D) == perpendicular_line(incenter(B, C, D), g)
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(A, C), Line(D, E) we get concurrent(Line(A, C), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(B, D), Line(A, C), internal_angle_bisector(B, D, C) we get concurrent(Line(A, C), Line(B, D), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, G), internal_angle_bisector(B, D, C) we get concurrent(Line(A, C), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(D, G), internal_angle_bisector(B, D, C), Line(B, D) we get concurrent(Line(B, D), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(D, G), internal_angle_bisector(B, D, C), Line(D, E) we get concurrent(Line(D, E), Line(D, G), internal_angle_bisector(B, D, C))
+By line_definition on excenter(D, B, C), incenter(B, C, D), internal_angle_bisector(B, D, C) we get internal_angle_bisector(B, D, C) == Line(excenter(D, B, C), incenter(B, C, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(B, D), Line(D, G) we get concurrent(Line(B, D), Line(D, G), internal_angle_bisector(B, D, C))
+By line_definition on C, excenter(B, C, D), h we get h == Line(C, excenter(B, C, D))
+By perpendicular_line_definition on D, internal_angle_bisector(B, D, C), Line(D, E) we get internal_angle_bisector(B, D, C) == perpendicular_line(D, Line(D, E))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(B, D), Line(D, E) we get concurrent(Line(B, D), Line(D, E), internal_angle_bisector(B, D, C))
+By line_definition on incenter(B, C, D), B, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == Line(B, incenter(B, C, D))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, E), internal_angle_bisector(B, D, C) we get concurrent(Line(B, D), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(D, E), Line(B, D) we get concurrent(Line(B, D), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(A, C), Line(D, E), internal_angle_bisector(B, D, C) we get concurrent(Line(A, C), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(D, E), internal_angle_bisector(B, D, C), Line(B, D) we get concurrent(Line(B, D), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(A, C), internal_angle_bisector(B, D, C), Line(D, E) we get concurrent(Line(A, C), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(D, G), Line(B, D), internal_angle_bisector(B, D, C) we get concurrent(Line(B, D), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(B, D), Line(A, C) we get concurrent(Line(A, C), Line(B, D), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(B, D), Line(D, G), internal_angle_bisector(B, D, C) we get concurrent(Line(B, D), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(B, D), internal_angle_bisector(B, D, C), Line(D, G) we get concurrent(Line(B, D), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(B, D), internal_angle_bisector(B, D, C), Line(D, E) we get concurrent(Line(B, D), Line(D, E), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(D, G), Line(D, E) we get concurrent(Line(D, E), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on internal_angle_bisector(B, D, C), Line(A, C), Line(D, G) we get concurrent(Line(A, C), Line(D, G), internal_angle_bisector(B, D, C))
+By concurrent_sufficient_conditions on Line(D, G), internal_angle_bisector(B, D, C), Line(A, C) we get concurrent(Line(A, C), Line(D, G), internal_angle_bisector(B, D, C))
+By perpendicular_line_definition on excenter(D, B, C), internal_angle_bisector(B, D, C), Line(D, E) we get internal_angle_bisector(B, D, C) == perpendicular_line(excenter(D, B, C), Line(D, E))
+By line_intersection_definition on B, internal_angle_bisector(C, B, D), Line(B, C) we get B == line_intersection(Line(B, C), internal_angle_bisector(C, B, D))
+By perpendicular_line_definition on excenter(B, C, D), h, f we get h == perpendicular_line(excenter(B, C, D), f)
+By perpendicular_line_definition on E, Line(D, E), internal_angle_bisector(B, D, C) we get Line(D, E) == perpendicular_line(E, internal_angle_bisector(B, D, C))
+By median_definition on D, F, E, Line(D, G) we get Line(D, G) == median(D, E, F)
+By perpendicular_line_definition on excenter(B, C, D), Line(D, E), internal_angle_bisector(B, D, C) we get Line(D, E) == perpendicular_line(excenter(B, C, D), internal_angle_bisector(B, D, C))
+By line_intersection_definition on B, internal_angle_bisector(C, B, D), g we get B == line_intersection(g, internal_angle_bisector(C, B, D))
+By perpendicular_line_definition on excenter(B, C, D), Line(D, E), Line(D, F) we get Line(D, E) == perpendicular_line(excenter(B, C, D), Line(D, F))
+By perpendicular_line_definition on D, Line(D, E), internal_angle_bisector(B, D, C) we get Line(D, E) == perpendicular_line(D, internal_angle_bisector(B, D, C))
+By median_definition on excenter(B, C, D), A, C, Line(D, E) we get Line(D, E) == median(excenter(B, C, D), A, C)
+By median_definition on C, F, E, Line(C, G) we get Line(C, G) == median(C, E, F)
+By line_intersection_definition on B, Line(B, D), internal_angle_bisector(C, B, D) we get B == line_intersection(Line(B, D), internal_angle_bisector(C, B, D))
+By perpendicular_line_definition on incenter(B, C, D), f, h we get f == perpendicular_line(incenter(B, C, D), h)
+By median_definition on incenter(B, C, D), A, C, internal_angle_bisector(B, D, C) we get internal_angle_bisector(B, D, C) == median(incenter(B, C, D), A, C)
+By perpendicular_line_definition on incenter(B, C, D), internal_angle_bisector(B, D, C), Line(D, E) we get internal_angle_bisector(B, D, C) == perpendicular_line(incenter(B, C, D), Line(D, E))
+By projection_definition on excenter(D, B, C), C, f we get C == projection(excenter(D, B, C), f)
+By perpendicular_direction_conditions_v0_r on E, D, D, excenter(D, B, C) we get 180 == 2 * direction(E, D) - 2 * direction(D, excenter(D, B, C)) mod 360
+By projection_definition on excenter(D, B, C), D, Line(D, E) we get D == projection(excenter(D, B, C), Line(D, E))
+By projection_definition on E, D, internal_angle_bisector(B, D, C) we get D == projection(E, internal_angle_bisector(B, D, C))
+By perpendicular_direction_conditions_v0_r on C, E, C, excenter(D, B, C) we get 180 == 2 * direction(C, E) - 2 * direction(C, excenter(D, B, C)) mod 360
+By in_imply_collinear on incenter(B, C, D), E, C we get collinear(C, E, incenter(B, C, D))
+By perpendicular_direction_conditions_v0_r on E, C, C, excenter(D, B, C) we get 180 == 2 * direction(E, C) - 2 * direction(C, excenter(D, B, C)) mod 360
+By perpendicular_direction_conditions_v0_r on C, excenter(D, B, C), E, C we get 180 == 2 * direction(C, excenter(D, B, C)) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on D, excenter(D, B, C), D, E we get 180 == 2 * direction(D, excenter(D, B, C)) - 2 * direction(D, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, excenter(D, B, C), C we get 180 == 2 * direction(E, C) - 2 * direction(excenter(D, B, C), C) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(D, B, C), D, E, D we get 180 == 2 * direction(excenter(D, B, C), D) - 2 * direction(E, D) mod 360
+By perpendicular_direction_conditions_v0_r on D, excenter(D, B, C), E, D we get 180 == 2 * direction(D, excenter(D, B, C)) - 2 * direction(E, D) mod 360
+By in_imply_collinear on excenter(B, C, D), E, D we get collinear(D, E, excenter(B, C, D))
+By perpendicular_direction_conditions_v0_r on D, E, D, excenter(D, B, C) we get 180 == 2 * direction(D, E) - 2 * direction(D, excenter(D, B, C)) mod 360
+By perpendicular_direction_conditions_v0_r on E, D, excenter(D, B, C), D we get 180 == 2 * direction(E, D) - 2 * direction(excenter(D, B, C), D) mod 360
+By perpendicular_direction_conditions_v0_r on C, excenter(D, B, C), C, E we get 180 == 2 * direction(C, excenter(D, B, C)) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(D, B, C), C, C, E we get 180 == 2 * direction(excenter(D, B, C), C) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(D, B, C), C, E, C we get 180 == 2 * direction(excenter(D, B, C), C) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, excenter(D, B, C), C we get 180 == 2 * direction(C, E) - 2 * direction(excenter(D, B, C), C) mod 360
+By perpendicular_direction_conditions_v0_r on D, E, excenter(D, B, C), D we get 180 == 2 * direction(D, E) - 2 * direction(excenter(D, B, C), D) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(D, B, C), D, D, E we get 180 == 2 * direction(excenter(D, B, C), D) - 2 * direction(D, E) mod 360
+By in_imply_collinear on excenter(B, C, D), excenter(D, B, C), C we get collinear(C, excenter(B, C, D), excenter(D, B, C))
+By in_imply_collinear on incenter(B, C, D), excenter(D, B, C), D we get collinear(D, excenter(D, B, C), incenter(B, C, D))
+By external_angle_bisector_definition_v0 on C, E, B, D we get 180 == angle(C, D, E) + angle(B, D, E) mod 360
+By in_imply_collinear on excenter(B, C, D), F, C we get collinear(C, F, excenter(B, C, D))
+By double_perpendicular_and_parallel_v0 on internal_angle_bisector(B, D, C), Line(D, E), Line(D, F) we get parallel(Line(D, F), internal_angle_bisector(B, D, C))
+By angle_bisectors_are_perpendicular on C, B, D we get perpendicular(external_angle_bisector(C, B, D), internal_angle_bisector(C, B, D))
+By right_triangle_circumcenter_v1 on E, C, F we get midpoint(E, F) == circumcenter(C, E, F)
+By collinear_definition on B, excenter(D, B, C), E we get excenter(D, B, C) in Line(B, E), E in Line(B, excenter(D, B, C)), Line(B, E) == Line(B, excenter(D, B, C)), 0 == 2 * angle(excenter(D, B, C), B, E) mod 360
+By log_of_2_times_distance on F, E, G, E we get log(distance(E, F)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(E, G))
+By external_angle_bisector_definition_v0 on D, excenter(D, B, C), B, C we get 180 == angle(D, C, excenter(D, B, C)) + angle(B, C, excenter(D, B, C)) mod 360
+By collinear_definition on B, E, excenter(D, B, C) we get E in Line(B, excenter(D, B, C)), excenter(D, B, C) in Line(B, E), Line(B, E) == Line(B, excenter(D, B, C)), 0 == 2 * angle(E, B, excenter(D, B, C)) mod 360
+By external_angle_bisector_definition_v0 on D, excenter(D, B, C), C, B we get 180 == angle(D, B, excenter(D, B, C)) + angle(C, B, excenter(D, B, C)) mod 360
+By collinear_definition on E, excenter(D, B, C), B we get excenter(D, B, C) in Line(B, E), B in Line(E, excenter(D, B, C)), Line(B, E) == Line(E, excenter(D, B, C)), 0 == 2 * angle(excenter(D, B, C), E, B) mod 360
+By log_of_2_times_distance on F, E, G, C we get log(distance(E, F)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(C, G))
+By perpendicular_angle_conditions_v0 on excenter(D, B, C), C, E we get angle(excenter(D, B, C), C, E) == orientation(C, E, excenter(D, B, C)) mod 360
+By internal_angle_bisector_definition_v0 on B, excenter(D, B, C), C, D we get angle(B, D, excenter(D, B, C)) == angle(excenter(D, B, C), D, C) mod 360
+By external_angle_bisector_definition_v0 on E, excenter(D, B, C), E, C we get 180 == angle(E, C, excenter(D, B, C)) + angle(E, C, excenter(D, B, C)) mod 360
+By log_of_2_times_distance on F, E, D, G we get log(distance(E, F)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(D, G))
+By right_triangle_circumcenter_v1 on E, D, F we get midpoint(E, F) == circumcenter(D, E, F)
+By collinear_definition on C, excenter(D, B, C), F we get excenter(D, B, C) in Line(C, F), F in Line(C, excenter(D, B, C)), Line(C, F) == Line(C, excenter(D, B, C)), 0 == 2 * angle(excenter(D, B, C), C, F) mod 360
+By perpendicular_angle_conditions_v0 on E, C, excenter(D, B, C) we get angle(E, C, excenter(D, B, C)) == orientation(C, excenter(D, B, C), E) mod 360
+By internal_angle_bisector_definition_v0 on C, excenter(D, B, C), B, D we get angle(C, D, excenter(D, B, C)) == angle(excenter(D, B, C), D, B) mod 360
+By perpendicular_angle_conditions_v0 on excenter(D, B, C), D, E we get angle(excenter(D, B, C), D, E) == orientation(D, E, excenter(D, B, C)) mod 360
+By log_of_2_times_distance on F, E, F, G we get log(distance(E, F)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(F, G))
+By collinear_definition on C, F, excenter(D, B, C) we get F in Line(C, excenter(D, B, C)), excenter(D, B, C) in Line(C, F), Line(C, F) == Line(C, excenter(D, B, C)), 0 == 2 * angle(F, C, excenter(D, B, C)) mod 360
+By external_angle_bisector_definition_v0 on A, excenter(D, B, C), B, C we get 180 == angle(A, C, excenter(D, B, C)) + angle(B, C, excenter(D, B, C)) mod 360
+By collinear_definition on E, B, excenter(D, B, C) we get B in Line(E, excenter(D, B, C)), excenter(D, B, C) in Line(B, E), Line(B, E) == Line(E, excenter(D, B, C)), 0 == 2 * angle(B, E, excenter(D, B, C)) mod 360
+By perpendicular_angle_conditions_v0 on E, D, excenter(D, B, C) we get angle(E, D, excenter(D, B, C)) == orientation(D, excenter(D, B, C), E) mod 360
+By altitude_definition on E, C, excenter(D, B, C), f we get f == altitude(E, C, excenter(D, B, C))
+By altitude_definition on incenter(B, C, D), C, F, f we get f == altitude(incenter(B, C, D), C, F)
+By altitude_definition on excenter(B, C, D), C, E, h we get h == altitude(excenter(B, C, D), C, E)
+By altitude_definition on E, D, excenter(D, B, C), Line(D, E) we get Line(D, E) == altitude(E, D, excenter(D, B, C))
+By altitude_definition on incenter(B, C, D), C, excenter(D, B, C), f we get f == altitude(incenter(B, C, D), C, excenter(D, B, C))
+By altitude_definition on incenter(B, C, D), E, D, internal_angle_bisector(B, D, C) we get internal_angle_bisector(B, D, C) == altitude(incenter(B, C, D), D, E)
+By altitude_definition on excenter(B, C, D), D, excenter(D, B, C), Line(D, E) we get Line(D, E) == altitude(excenter(B, C, D), D, excenter(D, B, C))
+By collinear_definition on excenter(D, B, C), B, E we get B in Line(E, excenter(D, B, C)), E in Line(B, excenter(D, B, C)), Line(B, excenter(D, B, C)) == Line(E, excenter(D, B, C)), 0 == 2 * angle(B, excenter(D, B, C), E) mod 360
+By altitude_definition on excenter(B, C, D), F, D, Line(D, E) we get Line(D, E) == altitude(excenter(B, C, D), D, F)
+By collinear_definition on excenter(D, B, C), E, B we get E in Line(B, excenter(D, B, C)), B in Line(E, excenter(D, B, C)), Line(B, excenter(D, B, C)) == Line(E, excenter(D, B, C)), 0 == 2 * angle(E, excenter(D, B, C), B) mod 360
+By altitude_definition on excenter(D, B, C), E, D, internal_angle_bisector(B, D, C) we get internal_angle_bisector(B, D, C) == altitude(excenter(D, B, C), D, E)
+By line_definition on G, B, g we get g == Line(B, G)
+By concurrent_sufficient_conditions on Line(B, D), internal_angle_bisector(C, B, D), g we get concurrent(g, Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(C, B, D), Line(B, D), Line(B, C) we get concurrent(Line(B, C), Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(C, B, D), Line(B, C), Line(B, D) we get concurrent(Line(B, C), Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on g, Line(B, D), internal_angle_bisector(C, B, D) we get concurrent(g, Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on Line(B, C), internal_angle_bisector(C, B, D), g we get concurrent(g, Line(B, C), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(C, B, D), g, Line(B, C) we get concurrent(g, Line(B, C), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(C, B, D), g, Line(B, D) we get concurrent(g, Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on Line(B, D), internal_angle_bisector(C, B, D), Line(B, C) we get concurrent(Line(B, C), Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on g, internal_angle_bisector(C, B, D), Line(B, C) we get concurrent(g, Line(B, C), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on Line(B, C), g, internal_angle_bisector(C, B, D) we get concurrent(g, Line(B, C), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on Line(B, D), g, internal_angle_bisector(C, B, D) we get concurrent(g, Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(C, B, D), Line(B, D), g we get concurrent(g, Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on g, internal_angle_bisector(C, B, D), Line(B, D) we get concurrent(g, Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on Line(B, D), Line(B, C), internal_angle_bisector(C, B, D) we get concurrent(Line(B, C), Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on internal_angle_bisector(C, B, D), Line(B, C), g we get concurrent(g, Line(B, C), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on g, Line(B, C), internal_angle_bisector(C, B, D) we get concurrent(g, Line(B, C), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on Line(B, C), Line(B, D), internal_angle_bisector(C, B, D) we get concurrent(Line(B, C), Line(B, D), internal_angle_bisector(C, B, D))
+By concurrent_sufficient_conditions on Line(B, C), internal_angle_bisector(C, B, D), Line(B, D) we get concurrent(Line(B, C), Line(B, D), internal_angle_bisector(C, B, D))
 By perpendicular_line_definition on F, g, internal_angle_bisector(C, B, D) we get g == perpendicular_line(F, internal_angle_bisector(C, B, D))
-By perpendicular_line_definition on B, g, altitude(C, E, F) we get g == perpendicular_line(B, altitude(C, E, F))
+By perpendicular_line_definition on excenter(B, C, D), internal_angle_bisector(C, B, D), g we get internal_angle_bisector(C, B, D) == perpendicular_line(excenter(B, C, D), g)
 By perpendicular_line_definition on B, g, internal_angle_bisector(C, B, D) we get g == perpendicular_line(B, internal_angle_bisector(C, B, D))
-By perpendicular_line_definition on B, g, altitude(D, E, F) we get g == perpendicular_line(B, altitude(D, E, F))
+By perpendicular_line_definition on G, g, internal_angle_bisector(C, B, D) we get g == perpendicular_line(G, internal_angle_bisector(C, B, D))
+By perpendicular_line_definition on incenter(B, C, D), internal_angle_bisector(C, B, D), g we get internal_angle_bisector(C, B, D) == perpendicular_line(incenter(B, C, D), g)
+By perpendicular_line_definition on E, g, internal_angle_bisector(C, B, D) we get g == perpendicular_line(E, internal_angle_bisector(C, B, D))
 By perpendicular_line_definition on B, internal_angle_bisector(C, B, D), g we get perpendicular_line(B, g) == internal_angle_bisector(C, B, D)
-By perpendicular_line_definition on line_intersection(g, altitude(D, E, F)), g, internal_angle_bisector(C, B, D) we get g == perpendicular_line(line_intersection(g, altitude(D, E, F)), internal_angle_bisector(C, B, D))
-By perpendicular_line_definition on line_intersection(g, altitude(C, E, F)), g, internal_angle_bisector(C, B, D) we get g == perpendicular_line(line_intersection(g, altitude(C, E, F)), internal_angle_bisector(C, B, D))
-By perpendicular_line_definition on line_intersection(g, altitude(D, E, F)), g, altitude(C, E, F) we get g == perpendicular_line(line_intersection(g, altitude(D, E, F)), altitude(C, E, F))
-By line_unique_intersection_v1 on internal_angle_bisector(C, B, D), Line(D, E), excenter(B, C, D), E we get E not in internal_angle_bisector(C, B, D)
-By line_unique_intersection_v1 on Line(D, F), h, F, excenter(B, C, D) we get excenter(B, C, D) not in Line(D, F)
-By line_unique_intersection_v1 on Line(A, C), Line(D, E), D, excenter(B, C, D) we get excenter(B, C, D) not in Line(A, C)
-By line_unique_intersection_v1 on Line(B, C), h, C, excenter(B, C, D) we get excenter(B, C, D) not in Line(B, C)
-By line_unique_intersection_v1 on internal_angle_bisector(C, B, D), h, excenter(B, C, D), C we get C not in internal_angle_bisector(C, B, D)
-By line_unique_intersection_v1 on Line(D, G), Line(D, E), D, excenter(B, C, D) we get excenter(B, C, D) not in Line(D, G)
-By line_unique_intersection_v1 on g, h, F, excenter(B, C, D) we get excenter(B, C, D) not in g
-By line_unique_intersection_v1 on f, Line(D, E), E, excenter(B, C, D) we get excenter(B, C, D) not in f
-By line_unique_intersection_v1 on Line(A, C), Line(D, F), D, incenter(B, C, D) we get incenter(B, C, D) not in Line(A, C)
-By line_unique_intersection_v1 on internal_angle_bisector(C, B, D), Line(D, F), incenter(B, C, D), F we get F not in internal_angle_bisector(C, B, D)
-By line_unique_intersection_v1 on Line(D, E), Line(D, F), D, incenter(B, C, D) we get incenter(B, C, D) not in Line(D, E)
-By line_unique_intersection_v1 on h, Line(D, F), F, incenter(B, C, D) we get incenter(B, C, D) not in h
-By line_unique_intersection_v1 on Line(B, D), Line(D, F), D, incenter(B, C, D) we get incenter(B, C, D) not in Line(B, D)
-By line_unique_intersection_v1 on Line(D, G), Line(D, F), D, incenter(B, C, D) we get incenter(B, C, D) not in Line(D, G)
-By line_unique_intersection_v1 on Line(C, G), h, C, excenter(B, C, D) we get excenter(B, C, D) not in Line(C, G)
-By line_unique_intersection_v1 on g, Line(D, F), F, incenter(B, C, D) we get incenter(B, C, D) not in g
-By line_unique_intersection_v1 on internal_angle_bisector(C, B, D), Line(D, F), incenter(B, C, D), D we get D not in internal_angle_bisector(C, B, D)
-By line_unique_intersection_v1 on Line(B, D), Line(D, E), D, excenter(B, C, D) we get excenter(B, C, D) not in Line(B, D)
-By same_angle_converse_v0 on E, G, B, F we get collinear(B, E, G)
-By same_angle_v2 on B, E, F, C we get angle(E, B, C) == angle(F, B, C) + 180 mod 360
-By same_angle_v0 on F, B, E, D we get angle(B, F, D) == angle(E, F, D) mod 360
-By same_angle_v2 on B, E, F, D we get angle(E, B, D) == angle(F, B, D) + 180 mod 360
-By same_angle_v0 on F, B, E, C we get angle(B, F, C) == angle(E, F, C) mod 360
-By between_implies_orientation on excenter(B, C, D), C, D, A we get orientation(A, excenter(B, C, D), D) == orientation(C, D, excenter(B, C, D)) mod 360, orientation(A, excenter(B, C, D), C) == orientation(C, D, excenter(B, C, D)) mod 360
 By same_angle_v1 on E, B, F, C we get angle(B, E, C) == angle(F, E, C) mod 360
+By same_angle_v0 on F, E, B, C we get angle(B, F, C) == angle(E, F, C) mod 360
+By same_angle_v2 on B, E, F, D we get angle(E, B, D) == angle(F, B, D) + 180 mod 360
+By same_angle_v0 on F, E, B, D we get angle(B, F, D) == angle(E, F, D) mod 360
+By same_angle_v2 on B, E, F, C we get angle(E, B, C) == angle(F, B, C) + 180 mod 360
 By same_angle_v1 on E, F, B, D we get angle(B, E, D) == angle(F, E, D) mod 360
-By collinear_and_not_between_implies_orientation on excenter(B, C, D), G, F, E we get orientation(E, excenter(B, C, D), F) == orientation(F, G, excenter(B, C, D)) mod 360
-By collinear_and_not_between_implies_orientation on excenter(B, C, D), F, E, G we get orientation(E, F, excenter(B, C, D)) == orientation(E, G, excenter(B, C, D)) mod 360
-By projection_definition on C, line_intersection(g, altitude(C, E, F)), g we get projection(C, g) == line_intersection(g, altitude(C, E, F))
-By collinear_and_not_between_implies_orientation on excenter(B, C, D), C, A, D we get orientation(A, C, excenter(B, C, D)) == orientation(A, D, excenter(B, C, D)) mod 360
-By between_implies_orientation on excenter(B, C, D), E, G, F we get orientation(E, G, excenter(B, C, D)) == orientation(F, excenter(B, C, D), G) mod 360, orientation(E, F, excenter(B, C, D)) == orientation(E, G, excenter(B, C, D)) mod 360
-By between_implies_orientation on excenter(B, C, D), A, D, C we get orientation(A, D, excenter(B, C, D)) == orientation(C, excenter(B, C, D), D) mod 360, orientation(A, C, excenter(B, C, D)) == orientation(A, D, excenter(B, C, D)) mod 360
-By between_implies_orientation on excenter(B, C, D), F, G, E we get orientation(E, excenter(B, C, D), G) == orientation(F, G, excenter(B, C, D)) mod 360, orientation(E, excenter(B, C, D), F) == orientation(F, G, excenter(B, C, D)) mod 360
-By parallel_line_definition on C, altitude(C, E, F), altitude(D, E, F) we get altitude(C, E, F) == parallel_line(C, altitude(D, E, F))
-By parallel_line_definition on line_intersection(g, altitude(D, E, F)), altitude(D, E, F), altitude(C, E, F) we get altitude(D, E, F) == parallel_line(line_intersection(g, altitude(D, E, F)), altitude(C, E, F))
-By parallel_line_definition on line_intersection(g, altitude(C, E, F)), altitude(C, E, F), altitude(D, E, F) we get altitude(C, E, F) == parallel_line(line_intersection(g, altitude(C, E, F)), altitude(D, E, F))
-By parallel_line_definition on D, altitude(D, E, F), altitude(C, E, F) we get altitude(D, E, F) == parallel_line(D, altitude(C, E, F))
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, G, E we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(G, E) mod 360
-By different_points_v1 on B, F we get 0 != distance(B, F)
-By different_points_v1 on C, line_intersection(g, altitude(C, E, F)) we get 0 != distance(C, line_intersection(g, altitude(C, E, F)))
-By perpendicular_direction_conditions_v0_r on E, G, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(E, G) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on E, G, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(E, G) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on G, E, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(G, E) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, E, B we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(E, B) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), F, E we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(F, E) mod 360
-By perpendicular_direction_conditions_v0_r on F, B, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(F, B) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, E, F we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(E, F) mod 360
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, F, E we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(F, E) mod 360
-By perpendicular_direction_conditions_v0_r on G, E, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(G, E) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on G, F, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(G, F) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on B, E, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(B, E) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on E, B, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(E, B) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on E, B, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(E, B) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on F, E, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(F, E) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on F, E, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(F, E) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), F, G we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(F, G) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), G, E we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(G, E) mod 360
-By perpendicular_direction_conditions_v0_r on B, F, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(B, F) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on F, G, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(F, G) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, B, F we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(B, F) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), E, G we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(E, G) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), E, F we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(E, F) mod 360
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, F, B we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(F, B) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), G, F we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(G, F) mod 360
-By perpendicular_direction_conditions_v0_r on F, B, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(F, B) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), B, E we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(B, E) mod 360
-By perpendicular_direction_conditions_v0_r on E, F, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(E, F) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, F, G we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(F, G) mod 360
-By probably_between_and_collinear_implies_between on F, B, E we get between(E, B, F)
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, G, F we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(G, F) mod 360
-By perpendicular_direction_conditions_v0_r on F, G, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(F, G) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, E, G we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(E, G) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), B, F we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(B, F) mod 360
-By projection_definition on E, B, internal_angle_bisector(C, B, D) we get B == projection(E, internal_angle_bisector(C, B, D))
-By perpendicular_direction_conditions_v0_r on B, F, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(B, F) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), E, B we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(E, B) mod 360
-By perpendicular_direction_conditions_v0_r on B, E, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(B, E) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on E, F, line_intersection(g, altitude(C, E, F)), C we get 180 == 2 * direction(E, F) - 2 * direction(line_intersection(g, altitude(C, E, F)), C) mod 360
-By perpendicular_direction_conditions_v0_r on G, F, C, line_intersection(g, altitude(C, E, F)) we get 180 == 2 * direction(G, F) - 2 * direction(C, line_intersection(g, altitude(C, E, F))) mod 360
-By perpendicular_direction_conditions_v0_r on C, line_intersection(g, altitude(C, E, F)), F, B we get 180 == 2 * direction(C, line_intersection(g, altitude(C, E, F))) - 2 * direction(F, B) mod 360
-By perpendicular_direction_conditions_v0_r on line_intersection(g, altitude(C, E, F)), C, B, E we get 180 == 2 * direction(line_intersection(g, altitude(C, E, F)), C) - 2 * direction(B, E) mod 360
+By projection_definition on incenter(B, C, D), D, Line(D, E) we get D == projection(incenter(B, C, D), Line(D, E))
+By projection_definition on excenter(B, C, D), D, Line(D, F) we get D == projection(excenter(B, C, D), Line(D, F))
+By projection_definition on incenter(B, C, D), C, h we get C == projection(incenter(B, C, D), h)
+By projection_definition on excenter(B, C, D), C, f we get C == projection(excenter(B, C, D), f)
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, F, E we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(F, E) mod 360
+By in_imply_collinear on B, G, F we get collinear(B, F, G)
+By perpendicular_direction_conditions_v0_r on G, F, B, incenter(B, C, D) we get 180 == 2 * direction(G, F) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, incenter(B, C, D), C, F we get 180 == 2 * direction(E, incenter(B, C, D)) - 2 * direction(C, F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, E, F we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(E, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, B, incenter(B, C, D) we get 180 == 2 * direction(B, F) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), B, E we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, B, excenter(B, C, D) we get 180 == 2 * direction(F, B) - 2 * direction(B, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, excenter(B, C, D), E, C we get 180 == 2 * direction(F, excenter(B, C, D)) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), F, C, E we get 180 == 2 * direction(excenter(B, C, D), F) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, excenter(B, C, D), C we get 180 == 2 * direction(E, C) - 2 * direction(excenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on E, F, B, excenter(B, C, D) we get 180 == 2 * direction(E, F) - 2 * direction(B, excenter(B, C, D)) mod 360
+By in_imply_collinear on B, excenter(B, C, D), incenter(B, C, D) we get collinear(B, excenter(B, C, D), incenter(B, C, D))
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, F, B we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, E, G we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), E, F we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(E, F) mod 360
+By perpendicular_direction_conditions_v0_r on D, E, incenter(B, C, D), F we get 180 == 2 * direction(D, E) - 2 * direction(incenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), F, E we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(F, E) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, B, excenter(B, C, D) we get 180 == 2 * direction(F, G) - 2 * direction(B, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), E, F we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(E, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(B, F) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, G, E we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), E, G we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on E, D, incenter(B, C, D), F we get 180 == 2 * direction(E, D) - 2 * direction(incenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, G, E we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, incenter(B, C, D), F, C we get 180 == 2 * direction(E, incenter(B, C, D)) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, G, F we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, excenter(B, C, D), D, F we get 180 == 2 * direction(E, excenter(B, C, D)) - 2 * direction(D, F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, B, E we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on D, incenter(B, C, D), D, E we get 180 == 2 * direction(D, incenter(B, C, D)) - 2 * direction(D, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, C, excenter(B, C, D) we get 180 == 2 * direction(E, C) - 2 * direction(C, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, excenter(B, C, D), E, C we get 180 == 2 * direction(C, excenter(B, C, D)) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), E, F, D we get 180 == 2 * direction(excenter(B, C, D), E) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), E, G we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, E, excenter(B, C, D) we get 180 == 2 * direction(F, D) - 2 * direction(E, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, excenter(B, C, D), B we get 180 == 2 * direction(B, F) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), C, F, C we get 180 == 2 * direction(incenter(B, C, D), C) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on D, E, incenter(B, C, D), D we get 180 == 2 * direction(D, E) - 2 * direction(incenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, B, excenter(B, C, D) we get 180 == 2 * direction(B, F) - 2 * direction(B, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, incenter(B, C, D), C we get 180 == 2 * direction(C, F) - 2 * direction(incenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, E, F we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(E, F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), G, E we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), D, D, E we get 180 == 2 * direction(incenter(B, C, D), D) - 2 * direction(D, E) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, excenter(B, C, D), E we get 180 == 2 * direction(D, F) - 2 * direction(excenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, B, excenter(B, C, D) we get 180 == 2 * direction(E, B) - 2 * direction(B, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, B, excenter(B, C, D) we get 180 == 2 * direction(B, E) - 2 * direction(B, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(E, G) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), G, E we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on F, E, B, excenter(B, C, D) we get 180 == 2 * direction(F, E) - 2 * direction(B, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(G, E) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), F, G we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), F, G we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(G, F) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, D, D, incenter(B, C, D) we get 180 == 2 * direction(E, D) - 2 * direction(D, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, excenter(B, C, D), B we get 180 == 2 * direction(E, G) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on D, E, D, incenter(B, C, D) we get 180 == 2 * direction(D, E) - 2 * direction(D, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, excenter(B, C, D), C we get 180 == 2 * direction(C, E) - 2 * direction(excenter(B, C, D), C) mod 360
+By projection_definition on excenter(B, C, D), B, g we get B == projection(excenter(B, C, D), g)
+By perpendicular_direction_conditions_v0_r on E, B, B, incenter(B, C, D) we get 180 == 2 * direction(E, B) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, excenter(B, C, D), B we get 180 == 2 * direction(F, G) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(E, B) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, incenter(B, C, D), E we get 180 == 2 * direction(C, F) - 2 * direction(incenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), B, F we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, F, excenter(B, C, D), B we get 180 == 2 * direction(E, F) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on E, D, incenter(B, C, D), D we get 180 == 2 * direction(E, D) - 2 * direction(incenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, excenter(B, C, D), B we get 180 == 2 * direction(G, F) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, incenter(B, C, D), B we get 180 == 2 * direction(F, G) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), F, G we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on E, D, F, incenter(B, C, D) we get 180 == 2 * direction(E, D) - 2 * direction(F, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, excenter(B, C, D), F, D we get 180 == 2 * direction(D, excenter(B, C, D)) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), F, B we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), G, E we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), D, E, D we get 180 == 2 * direction(incenter(B, C, D), D) - 2 * direction(E, D) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, E, incenter(B, C, D) we get 180 == 2 * direction(F, C) - 2 * direction(E, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, C, incenter(B, C, D) we get 180 == 2 * direction(C, F) - 2 * direction(C, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(G, F) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, incenter(B, C, D), B we get 180 == 2 * direction(F, B) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on D, E, F, incenter(B, C, D) we get 180 == 2 * direction(D, E) - 2 * direction(F, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, F, B we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), E, B we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), E, F we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(E, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, incenter(B, C, D), E we get 180 == 2 * direction(F, C) - 2 * direction(incenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, D, excenter(B, C, D) we get 180 == 2 * direction(F, D) - 2 * direction(D, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, E, B, incenter(B, C, D) we get 180 == 2 * direction(F, E) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), C, E, C we get 180 == 2 * direction(excenter(B, C, D), C) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), E, B we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, E, excenter(B, C, D), B we get 180 == 2 * direction(F, E) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, E, B we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), E, B we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), F, E, D we get 180 == 2 * direction(incenter(B, C, D), F) - 2 * direction(E, D) mod 360
+By perpendicular_direction_conditions_v0_r on F, E, incenter(B, C, D), B we get 180 == 2 * direction(F, E) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, incenter(B, C, D), B we get 180 == 2 * direction(E, B) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, B, incenter(B, C, D) we get 180 == 2 * direction(F, B) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, excenter(B, C, D), B we get 180 == 2 * direction(B, E) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), F, G we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), D, F, D we get 180 == 2 * direction(excenter(B, C, D), D) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, excenter(B, C, D), B we get 180 == 2 * direction(E, B) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on F, incenter(B, C, D), E, D we get 180 == 2 * direction(F, incenter(B, C, D)) - 2 * direction(E, D) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, E, G we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, G, F we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, B, incenter(B, C, D) we get 180 == 2 * direction(E, G) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, incenter(B, C, D), B we get 180 == 2 * direction(E, G) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, B, F we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, excenter(B, C, D), F, D we get 180 == 2 * direction(E, excenter(B, C, D)) - 2 * direction(F, D) mod 360
+By perpendicular_direction_conditions_v0_r on F, incenter(B, C, D), D, E we get 180 == 2 * direction(F, incenter(B, C, D)) - 2 * direction(D, E) mod 360
+By perpendicular_direction_conditions_v0_r on D, incenter(B, C, D), E, D we get 180 == 2 * direction(D, incenter(B, C, D)) - 2 * direction(E, D) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), F, B we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(F, G) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), G, F we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(B, E) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, incenter(B, C, D), B we get 180 == 2 * direction(G, E) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), F, B we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), C, C, F we get 180 == 2 * direction(incenter(B, C, D), C) - 2 * direction(C, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), F, E we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(F, E) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), E, B we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), E, F we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(E, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, B, incenter(B, C, D) we get 180 == 2 * direction(F, G) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, F, E we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(F, E) mod 360
+By perpendicular_direction_conditions_v0_r on C, F, E, incenter(B, C, D) we get 180 == 2 * direction(C, F) - 2 * direction(E, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), G, E we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(G, E) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), E, C, F we get 180 == 2 * direction(incenter(B, C, D), E) - 2 * direction(C, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), F, B we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(F, B) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), B, E we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(B, E) mod 360
+By projection_definition on incenter(B, C, D), B, g we get B == projection(incenter(B, C, D), g)
+By perpendicular_direction_conditions_v0_r on F, excenter(B, C, D), C, E we get 180 == 2 * direction(F, excenter(B, C, D)) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), B, F, G we get 180 == 2 * direction(excenter(B, C, D), B) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on F, G, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(F, G) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), B, F we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, B, excenter(B, C, D) we get 180 == 2 * direction(G, E) - 2 * direction(B, excenter(B, C, D)) mod 360
 By projection_definition on F, B, internal_angle_bisector(C, B, D) we get B == projection(F, internal_angle_bisector(C, B, D))
-By in_imply_collinear on G, B, F we get collinear(B, F, G)
-By in_imply_collinear on line_intersection(g, altitude(C, E, F)), B, F we get collinear(B, F, line_intersection(g, altitude(C, E, F)))
-By in_imply_collinear on line_intersection(g, altitude(D, E, F)), E, B we get collinear(B, E, line_intersection(g, altitude(D, E, F)))
-By in_imply_collinear on incenter(B, C, D), D, F we get collinear(D, F, incenter(B, C, D))
-By in_imply_collinear on line_intersection(g, altitude(D, E, F)), F, G we get collinear(F, G, line_intersection(g, altitude(D, E, F)))
-By isogonal_conjugate_definition_v1 on D, B, C, F, F we get angle(B, D, F) == angle(F, D, C) mod 360
-By in_imply_collinear on line_intersection(g, altitude(D, E, F)), B, F we get collinear(B, F, line_intersection(g, altitude(D, E, F)))
-By isogonal_conjugate_definition_v2 on B, C, D, F, F we get angle(C, B, F) == angle(F, B, D) + 180 mod 360
-By in_imply_collinear on line_intersection(g, altitude(D, E, F)), E, G we get collinear(E, G, line_intersection(g, altitude(D, E, F)))
-By in_imply_collinear on line_intersection(g, altitude(C, E, F)), B, E we get collinear(B, E, line_intersection(g, altitude(C, E, F)))
-By internal_angle_bisector_definition_v0 on C, F, B, D we get angle(C, D, F) == angle(F, D, B) mod 360
-By in_imply_collinear on line_intersection(g, altitude(D, E, F)), E, F we get collinear(E, F, line_intersection(g, altitude(D, E, F)))
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, B, E we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, B, excenter(B, C, D) we get 180 == 2 * direction(E, G) - 2 * direction(B, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, incenter(B, C, D), C we get 180 == 2 * direction(F, C) - 2 * direction(incenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), B, E we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, excenter(B, C, D), B we get 180 == 2 * direction(G, E) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, excenter(B, C, D), F we get 180 == 2 * direction(E, C) - 2 * direction(excenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), F, E, C we get 180 == 2 * direction(excenter(B, C, D), F) - 2 * direction(E, C) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, excenter(B, C, D), E we get 180 == 2 * direction(F, D) - 2 * direction(excenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, E, excenter(B, C, D) we get 180 == 2 * direction(D, F) - 2 * direction(E, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, B, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(E, B) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, B, excenter(B, C, D) we get 180 == 2 * direction(G, F) - 2 * direction(B, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on G, F, incenter(B, C, D), B we get 180 == 2 * direction(G, F) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), G, F we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, excenter(B, C, D), B we get 180 == 2 * direction(F, B) - 2 * direction(excenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on E, F, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(E, F) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, F, incenter(B, C, D), B we get 180 == 2 * direction(E, F) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on E, F, B, incenter(B, C, D) we get 180 == 2 * direction(E, F) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, E, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(F, E) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, B, incenter(B, C, D) we get 180 == 2 * direction(G, E) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, C, F, excenter(B, C, D) we get 180 == 2 * direction(E, C) - 2 * direction(F, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), B, F we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), E, G we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, E, B we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(E, B) mod 360
+By perpendicular_direction_conditions_v0_r on C, incenter(B, C, D), F, C we get 180 == 2 * direction(C, incenter(B, C, D)) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), C, C, E we get 180 == 2 * direction(excenter(B, C, D), C) - 2 * direction(C, E) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, F, excenter(B, C, D) we get 180 == 2 * direction(C, E) - 2 * direction(F, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), F, E we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(F, E) mod 360
+By perpendicular_direction_conditions_v0_r on D, excenter(B, C, D), D, F we get 180 == 2 * direction(D, excenter(B, C, D)) - 2 * direction(D, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, B, incenter(B, C, D) we get 180 == 2 * direction(B, E) - 2 * direction(B, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, D, excenter(B, C, D) we get 180 == 2 * direction(D, F) - 2 * direction(D, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, F, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(E, F) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), G, F we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), E, D, F we get 180 == 2 * direction(excenter(B, C, D), E) - 2 * direction(D, F) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(F, B) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By projection_definition on E, B, internal_angle_bisector(C, B, D) we get B == projection(E, internal_angle_bisector(C, B, D))
+By perpendicular_direction_conditions_v0_r on C, E, C, excenter(B, C, D) we get 180 == 2 * direction(C, E) - 2 * direction(C, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, E, excenter(B, C, D), F we get 180 == 2 * direction(C, E) - 2 * direction(excenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(B, E) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, E, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(F, E) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, incenter(B, C, D), B we get 180 == 2 * direction(B, F) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on C, incenter(B, C, D), C, F we get 180 == 2 * direction(C, incenter(B, C, D)) - 2 * direction(C, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, incenter(B, C, D), B, F we get 180 == 2 * direction(B, incenter(B, C, D)) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), E, G we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(E, G) mod 360
+By perpendicular_direction_conditions_v0_r on B, excenter(B, C, D), B, E we get 180 == 2 * direction(B, excenter(B, C, D)) - 2 * direction(B, E) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), excenter(B, C, D), F, E we get 180 == 2 * direction(incenter(B, C, D), excenter(B, C, D)) - 2 * direction(F, E) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), incenter(B, C, D), G, F we get 180 == 2 * direction(excenter(B, C, D), incenter(B, C, D)) - 2 * direction(G, F) mod 360
+By perpendicular_direction_conditions_v0_r on B, F, excenter(B, C, D), incenter(B, C, D) we get 180 == 2 * direction(B, F) - 2 * direction(excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, B, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(F, B) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), D, D, F we get 180 == 2 * direction(excenter(B, C, D), D) - 2 * direction(D, F) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), F, D, E we get 180 == 2 * direction(incenter(B, C, D), F) - 2 * direction(D, E) mod 360
+By perpendicular_direction_conditions_v0_r on D, F, excenter(B, C, D), D we get 180 == 2 * direction(D, F) - 2 * direction(excenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on F, C, C, incenter(B, C, D) we get 180 == 2 * direction(F, C) - 2 * direction(C, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), E, F, C we get 180 == 2 * direction(incenter(B, C, D), E) - 2 * direction(F, C) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, F, G we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(F, G) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), B, B, F we get 180 == 2 * direction(incenter(B, C, D), B) - 2 * direction(B, F) mod 360
+By perpendicular_direction_conditions_v0_r on E, G, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(E, G) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on B, E, incenter(B, C, D), B we get 180 == 2 * direction(B, E) - 2 * direction(incenter(B, C, D), B) mod 360
+By perpendicular_direction_conditions_v0_r on G, E, incenter(B, C, D), excenter(B, C, D) we get 180 == 2 * direction(G, E) - 2 * direction(incenter(B, C, D), excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, D, excenter(B, C, D), D we get 180 == 2 * direction(F, D) - 2 * direction(excenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on C, excenter(B, C, D), C, E we get 180 == 2 * direction(C, excenter(B, C, D)) - 2 * direction(C, E) mod 360
+By probably_between_and_collinear_implies_between on E, B, F we get between(E, B, F)
+By divide_by_2_mod_180_v0 on G, C, A, E, B, D we get angle(E, B, D) == angle(G, C, A) mod 360
+By divide_by_2_mod_180_v0 on G, D, A, D, B, F we get angle(D, B, F) == angle(G, D, A) mod 360
+By divide_by_2_mod_180_v0 on D, B, F, E, B, C we get angle(D, B, F) == angle(E, B, C) mod 360
+By divide_by_2_mod_180_v3 on F, B, C, G, D, A we get angle(F, B, C) == angle(G, D, A) + 180 mod 360
+By divide_by_2_mod_180_v2 on D, B, F, D, C, G we get angle(D, B, F) == angle(D, C, G) + 180 mod 360
+By divide_by_2_mod_180_v3 on G, D, C, D, B, F we get angle(G, D, C) == angle(D, B, F) + 180 mod 360
+By divide_by_2_mod_180_v0 on G, C, D, C, B, F we get angle(C, B, F) == angle(G, C, D) mod 360
+By divide_by_2_mod_180_v0 on C, D, G, E, B, D we get angle(C, D, G) == angle(E, B, D) mod 360
+By in_imply_collinear on G, B, E we get collinear(B, E, G)
+By divide_by_2_mod_180_v2 on G, D, A, D, B, E we get angle(G, D, A) == angle(D, B, E) + 180 mod 360
+By divide_by_2_mod_180_v3 on D, C, G, E, B, C we get angle(D, C, G) == angle(E, B, C) + 180 mod 360
+By divide_by_2_mod_180_v0 on E, B, D, G, C, D we get angle(E, B, D) == angle(G, C, D) mod 360
+By divide_by_2_mod_180_v1 on F, B, C, D, C, G we get angle(D, C, G) == angle(F, B, C) mod 360
+By divide_by_2_mod_180_v1 on A, C, G, F, B, C we get angle(A, C, G) == angle(F, B, C) mod 360
+By divide_by_2_mod_180_v0 on E, B, D, C, B, F we get angle(C, B, F) == angle(E, B, D) mod 360
+By divide_by_2_mod_180_v0 on C, B, F, C, D, G we get angle(C, B, F) == angle(C, D, G) mod 360
+By divide_by_2_mod_180_v1 on C, B, E, F, B, D we get angle(C, B, E) == angle(F, B, D) mod 360
+By divide_by_2_mod_180_v3 on A, D, G, C, B, F we get angle(A, D, G) == angle(C, B, F) + 180 mod 360
 By internal_angle_bisector_definition_v0 on G, B, G, E we get angle(B, E, G) == angle(G, E, B) mod 360
-By not_in_line_equivalent_to_not_collinear_v0_r on incenter(B, C, D), D, C we get incenter(B, C, D) not in Line(C, D)
+By divide_by_2_mod_180_v3 on C, B, E, C, D, G we get angle(C, B, E) == angle(C, D, G) + 180 mod 360
+By divide_by_2_mod_180_v3 on D, C, G, D, B, F we get angle(D, C, G) == angle(D, B, F) + 180 mod 360
+By divide_by_2_mod_180_v2 on C, B, F, A, D, G we get angle(C, B, F) == angle(A, D, G) + 180 mod 360
+By divide_by_2_mod_180_v1 on D, B, E, G, D, C we get angle(D, B, E) == angle(G, D, C) mod 360
+By divide_by_2_mod_180_v1 on A, D, G, C, B, E we get angle(A, D, G) == angle(C, B, E) mod 360
+By divide_by_2_mod_180_v2 on E, B, C, A, C, G we get angle(E, B, C) == angle(A, C, G) + 180 mod 360
+By divide_by_2_mod_180_v1 on D, B, E, D, C, G we get angle(D, B, E) == angle(D, C, G) mod 360
+By divide_by_2_mod_180_v2 on G, C, A, F, B, D we get angle(G, C, A) == angle(F, B, D) + 180 mod 360
+By divide_by_2_mod_180_v0 on E, B, C, G, D, A we get angle(E, B, C) == angle(G, D, A) mod 360
+By divide_by_2_mod_180_v3 on C, B, E, G, C, A we get angle(C, B, E) == angle(G, C, A) + 180 mod 360
+By divide_by_2_mod_180_v0 on C, B, F, G, C, A we get angle(C, B, F) == angle(G, C, A) mod 360
+By divide_by_2_mod_180_v3 on C, B, E, C, B, F we get angle(C, B, E) == angle(C, B, F) + 180 mod 360
+By divide_by_2_mod_180_v2 on C, D, G, F, B, D we get angle(C, D, G) == angle(F, B, D) + 180 mod 360
+By divide_by_2_mod_180_v1 on A, D, G, F, B, D we get angle(A, D, G) == angle(F, B, D) mod 360
+By divide_by_2_mod_180_v1 on D, B, E, A, C, G we get angle(A, C, G) == angle(D, B, E) mod 360
+By divide_by_2_mod_180_v2 on E, B, C, D, C, G we get angle(E, B, C) == angle(D, C, G) + 180 mod 360
 By internal_angle_bisector_definition_v0 on G, B, G, F we get angle(B, F, G) == angle(G, F, B) mod 360
-By isogonal_conjugate_definition_v6 on C, B, D, F, F we get angle(D, B, F) == angle(F, B, C) + 180 mod 360
-By double_perpendicular_and_parallel_v0 on altitude(C, E, F), g, internal_angle_bisector(C, B, D) we get parallel(altitude(C, E, F), internal_angle_bisector(C, B, D))
+By divide_by_2_mod_180_v3 on D, B, E, G, D, A we get angle(D, B, E) == angle(G, D, A) + 180 mod 360
+By divide_by_2_mod_180_v3 on G, D, C, E, B, C we get angle(G, D, C) == angle(E, B, C) + 180 mod 360
+By divide_by_2_mod_180_v2 on G, D, A, F, B, C we get angle(G, D, A) == angle(F, B, C) + 180 mod 360
+By divide_by_2_mod_180_v3 on F, B, C, E, B, C we get angle(F, B, C) == angle(E, B, C) + 180 mod 360
+By divide_by_2_mod_180_v3 on A, C, G, E, B, C we get angle(A, C, G) == angle(E, B, C) + 180 mod 360
+By divide_by_2_mod_180_v1 on F, B, C, G, D, C we get angle(F, B, C) == angle(G, D, C) mod 360
+By divide_by_2_mod_180_v1 on F, B, C, D, B, E we get angle(D, B, E) == angle(F, B, C) mod 360
+By divide_by_2_mod_180_v2 on E, B, C, G, D, C we get angle(E, B, C) == angle(G, D, C) + 180 mod 360
+By divide_by_2_mod_180_v3 on C, B, E, G, C, D we get angle(C, B, E) == angle(G, C, D) + 180 mod 360
+By divide_by_2_mod_180_v3 on F, B, D, G, C, A we get angle(F, B, D) == angle(G, C, A) + 180 mod 360
+By divide_by_2_mod_180_v2 on D, B, F, D, B, E we get angle(D, B, F) == angle(D, B, E) + 180 mod 360
+By divide_by_2_mod_180_v3 on F, B, D, C, D, G we get angle(F, B, D) == angle(C, D, G) + 180 mod 360
+By divide_by_2_mod_180_v3 on A, D, G, E, B, D we get angle(A, D, G) == angle(E, B, D) + 180 mod 360
+By divide_by_2_mod_180_v2 on D, B, F, A, C, G we get angle(D, B, F) == angle(A, C, G) + 180 mod 360
+By divide_by_2_mod_180_v2 on G, C, A, C, B, E we get angle(G, C, A) == angle(C, B, E) + 180 mod 360
+By divide_by_2_mod_180_v3 on F, B, D, E, B, D we get angle(F, B, D) == angle(E, B, D) + 180 mod 360
+By divide_by_2_mod_180_v2 on G, C, D, F, B, D we get angle(G, C, D) == angle(F, B, D) + 180 mod 360
+By divide_by_2_mod_180_v2 on C, B, F, C, B, E we get angle(C, B, F) == angle(C, B, E) + 180 mod 360
+By divide_by_2_mod_180_v2 on E, B, D, A, D, G we get angle(E, B, D) == angle(A, D, G) + 180 mod 360
+By divide_by_2_mod_180_v3 on D, B, E, D, B, F we get angle(D, B, E) == angle(D, B, F) + 180 mod 360
+By divide_by_2_mod_180_v2 on D, B, F, G, D, C we get angle(D, B, F) == angle(G, D, C) + 180 mod 360
+By divide_by_2_mod_180_v2 on G, C, D, C, B, E we get angle(G, C, D) == angle(C, B, E) + 180 mod 360
+By divide_by_2_mod_180_v2 on C, D, G, C, B, E we get angle(C, D, G) == angle(C, B, E) + 180 mod 360
+By divide_by_2_mod_180_v3 on A, C, G, D, B, F we get angle(A, C, G) == angle(D, B, F) + 180 mod 360
 By reverse_direction on B, F we get 180 == direction(B, F) - direction(F, B) mod 360
-By external_angle_bisector_definition_v0 on D, F, C, B we get 180 == angle(D, B, F) + angle(C, B, F) mod 360
+By divide_by_2_mod_180_v3 on F, B, D, G, C, D we get angle(F, B, D) == angle(G, C, D) + 180 mod 360
 By reverse_direction on F, B we get 180 == direction(F, B) - direction(B, F) mod 360
-By line_circle_intersection_has_at_most_two_points_0 on E, D, excenter(B, C, D), c we get excenter(B, C, D) not in c
-By double_perpendicular_and_parallel_v0 on altitude(D, E, F), g, internal_angle_bisector(C, B, D) we get parallel(altitude(D, E, F), internal_angle_bisector(C, B, D))
-By line_containment_inequality on incenter(B, C, D), E, Line(D, F) we get E != incenter(B, C, D)
-By not_in_line_equivalent_to_not_collinear_v0_r on incenter(B, C, D), C, B we get incenter(B, C, D) not in Line(B, C)
-By line_circle_intersection_has_at_most_two_points_0 on E, F, B, c we get B not in c
-By not_in_line_equivalent_to_not_collinear_v0_r on excenter(B, C, D), D, C we get excenter(B, C, D) not in Line(C, D)
-By line_containment_inequality on incenter(B, C, D), C, Line(D, F) we get C != incenter(B, C, D)
-By line_containment_inequality on line_intersection(g, altitude(D, E, F)), C, g we get C != line_intersection(g, altitude(D, E, F))
-By line_containment_inequality on line_intersection(g, altitude(D, E, F)), A, g we get A != line_intersection(g, altitude(D, E, F))
-By line_containment_inequality on line_intersection(g, altitude(D, E, F)), D, g we get D != line_intersection(g, altitude(D, E, F))
-By collinear_definition on E, excenter(B, C, D), D we get excenter(B, C, D) in Line(D, E), D in Line(E, excenter(B, C, D)), Line(D, E) == Line(E, excenter(B, C, D)), 0 == 2 * angle(excenter(B, C, D), E, D) mod 360
-By collinear_definition on E, D, excenter(B, C, D) we get D in Line(E, excenter(B, C, D)), excenter(B, C, D) in Line(D, E), Line(D, E) == Line(E, excenter(B, C, D)), 0 == 2 * angle(D, E, excenter(B, C, D)) mod 360
-By internal_angle_bisector_definition_v0_r on B, F, B, E we get Line(E, F) == internal_angle_bisector(B, E, B)
-By internal_angle_bisector_definition_v0_r on F, E, F, B we get Line(B, E) == internal_angle_bisector(F, B, F)
+By perpendicular_direction_conditions_v0_r on F, excenter(B, C, D), C, incenter(B, C, D) we get 180 == 2 * direction(F, excenter(B, C, D)) - 2 * direction(C, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), C, C, excenter(B, C, D) we get 180 == 2 * direction(incenter(B, C, D), C) - 2 * direction(C, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, incenter(B, C, D), excenter(B, C, D), F we get 180 == 2 * direction(C, incenter(B, C, D)) - 2 * direction(excenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on F, incenter(B, C, D), D, excenter(B, C, D) we get 180 == 2 * direction(F, incenter(B, C, D)) - 2 * direction(D, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), D, D, incenter(B, C, D) we get 180 == 2 * direction(excenter(B, C, D), D) - 2 * direction(D, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), E, C, excenter(B, C, D) we get 180 == 2 * direction(incenter(B, C, D), E) - 2 * direction(C, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, excenter(B, C, D), incenter(B, C, D), C we get 180 == 2 * direction(F, excenter(B, C, D)) - 2 * direction(incenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), D, F, incenter(B, C, D) we get 180 == 2 * direction(excenter(B, C, D), D) - 2 * direction(F, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, excenter(B, C, D), D, incenter(B, C, D) we get 180 == 2 * direction(E, excenter(B, C, D)) - 2 * direction(D, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), F, D, excenter(B, C, D) we get 180 == 2 * direction(incenter(B, C, D), F) - 2 * direction(D, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, incenter(B, C, D), excenter(B, C, D), F we get 180 == 2 * direction(E, incenter(B, C, D)) - 2 * direction(excenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), D, incenter(B, C, D), D we get 180 == 2 * direction(excenter(B, C, D), D) - 2 * direction(incenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), E, excenter(B, C, D), F we get 180 == 2 * direction(incenter(B, C, D), E) - 2 * direction(excenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on F, incenter(B, C, D), excenter(B, C, D), E we get 180 == 2 * direction(F, incenter(B, C, D)) - 2 * direction(excenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on C, excenter(B, C, D), incenter(B, C, D), E we get 180 == 2 * direction(C, excenter(B, C, D)) - 2 * direction(incenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), E, D, incenter(B, C, D) we get 180 == 2 * direction(excenter(B, C, D), E) - 2 * direction(D, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), C, incenter(B, C, D), E we get 180 == 2 * direction(excenter(B, C, D), C) - 2 * direction(incenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on F, incenter(B, C, D), E, excenter(B, C, D) we get 180 == 2 * direction(F, incenter(B, C, D)) - 2 * direction(E, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, excenter(B, C, D), incenter(B, C, D), F we get 180 == 2 * direction(E, excenter(B, C, D)) - 2 * direction(incenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), C, F, excenter(B, C, D) we get 180 == 2 * direction(incenter(B, C, D), C) - 2 * direction(F, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), F, excenter(B, C, D), E we get 180 == 2 * direction(incenter(B, C, D), F) - 2 * direction(excenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on F, excenter(B, C, D), incenter(B, C, D), E we get 180 == 2 * direction(F, excenter(B, C, D)) - 2 * direction(incenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), C, C, incenter(B, C, D) we get 180 == 2 * direction(excenter(B, C, D), C) - 2 * direction(C, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), C, E, incenter(B, C, D) we get 180 == 2 * direction(excenter(B, C, D), C) - 2 * direction(E, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, excenter(B, C, D), F, incenter(B, C, D) we get 180 == 2 * direction(D, excenter(B, C, D)) - 2 * direction(F, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), F, E, incenter(B, C, D) we get 180 == 2 * direction(excenter(B, C, D), F) - 2 * direction(E, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, incenter(B, C, D), excenter(B, C, D), D we get 180 == 2 * direction(F, incenter(B, C, D)) - 2 * direction(excenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), C, incenter(B, C, D), C we get 180 == 2 * direction(excenter(B, C, D), C) - 2 * direction(incenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on D, incenter(B, C, D), D, excenter(B, C, D) we get 180 == 2 * direction(D, incenter(B, C, D)) - 2 * direction(D, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), F, E, excenter(B, C, D) we get 180 == 2 * direction(incenter(B, C, D), F) - 2 * direction(E, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, excenter(B, C, D), E, incenter(B, C, D) we get 180 == 2 * direction(C, excenter(B, C, D)) - 2 * direction(E, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), D, excenter(B, C, D), E we get 180 == 2 * direction(incenter(B, C, D), D) - 2 * direction(excenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on D, incenter(B, C, D), E, excenter(B, C, D) we get 180 == 2 * direction(D, incenter(B, C, D)) - 2 * direction(E, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, incenter(B, C, D), F, excenter(B, C, D) we get 180 == 2 * direction(E, incenter(B, C, D)) - 2 * direction(F, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), D, D, excenter(B, C, D) we get 180 == 2 * direction(incenter(B, C, D), D) - 2 * direction(D, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, incenter(B, C, D), C, excenter(B, C, D) we get 180 == 2 * direction(E, incenter(B, C, D)) - 2 * direction(C, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), F, incenter(B, C, D), E we get 180 == 2 * direction(excenter(B, C, D), F) - 2 * direction(incenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on D, incenter(B, C, D), excenter(B, C, D), D we get 180 == 2 * direction(D, incenter(B, C, D)) - 2 * direction(excenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on D, excenter(B, C, D), D, incenter(B, C, D) we get 180 == 2 * direction(D, excenter(B, C, D)) - 2 * direction(D, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on E, excenter(B, C, D), F, incenter(B, C, D) we get 180 == 2 * direction(E, excenter(B, C, D)) - 2 * direction(F, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on D, excenter(B, C, D), incenter(B, C, D), F we get 180 == 2 * direction(D, excenter(B, C, D)) - 2 * direction(incenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), E, F, incenter(B, C, D) we get 180 == 2 * direction(excenter(B, C, D), E) - 2 * direction(F, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), C, excenter(B, C, D), C we get 180 == 2 * direction(incenter(B, C, D), C) - 2 * direction(excenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), D, excenter(B, C, D), D we get 180 == 2 * direction(incenter(B, C, D), D) - 2 * direction(excenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on D, incenter(B, C, D), excenter(B, C, D), E we get 180 == 2 * direction(D, incenter(B, C, D)) - 2 * direction(excenter(B, C, D), E) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), F, incenter(B, C, D), C we get 180 == 2 * direction(excenter(B, C, D), F) - 2 * direction(incenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), D, E, excenter(B, C, D) we get 180 == 2 * direction(incenter(B, C, D), D) - 2 * direction(E, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on F, excenter(B, C, D), E, incenter(B, C, D) we get 180 == 2 * direction(F, excenter(B, C, D)) - 2 * direction(E, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, incenter(B, C, D), excenter(B, C, D), C we get 180 == 2 * direction(C, incenter(B, C, D)) - 2 * direction(excenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on E, incenter(B, C, D), excenter(B, C, D), C we get 180 == 2 * direction(E, incenter(B, C, D)) - 2 * direction(excenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on E, excenter(B, C, D), incenter(B, C, D), D we get 180 == 2 * direction(E, excenter(B, C, D)) - 2 * direction(incenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), E, excenter(B, C, D), C we get 180 == 2 * direction(incenter(B, C, D), E) - 2 * direction(excenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on C, incenter(B, C, D), C, excenter(B, C, D) we get 180 == 2 * direction(C, incenter(B, C, D)) - 2 * direction(C, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), F, C, incenter(B, C, D) we get 180 == 2 * direction(excenter(B, C, D), F) - 2 * direction(C, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), E, incenter(B, C, D), F we get 180 == 2 * direction(excenter(B, C, D), E) - 2 * direction(incenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on C, excenter(B, C, D), incenter(B, C, D), C we get 180 == 2 * direction(C, excenter(B, C, D)) - 2 * direction(incenter(B, C, D), C) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), E, F, excenter(B, C, D) we get 180 == 2 * direction(incenter(B, C, D), E) - 2 * direction(F, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), C, excenter(B, C, D), F we get 180 == 2 * direction(incenter(B, C, D), C) - 2 * direction(excenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), D, incenter(B, C, D), F we get 180 == 2 * direction(excenter(B, C, D), D) - 2 * direction(incenter(B, C, D), F) mod 360
+By perpendicular_direction_conditions_v0_r on D, excenter(B, C, D), incenter(B, C, D), D we get 180 == 2 * direction(D, excenter(B, C, D)) - 2 * direction(incenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on excenter(B, C, D), E, incenter(B, C, D), D we get 180 == 2 * direction(excenter(B, C, D), E) - 2 * direction(incenter(B, C, D), D) mod 360
+By perpendicular_direction_conditions_v0_r on C, incenter(B, C, D), F, excenter(B, C, D) we get 180 == 2 * direction(C, incenter(B, C, D)) - 2 * direction(F, excenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on C, excenter(B, C, D), C, incenter(B, C, D) we get 180 == 2 * direction(C, excenter(B, C, D)) - 2 * direction(C, incenter(B, C, D)) mod 360
+By perpendicular_direction_conditions_v0_r on incenter(B, C, D), F, excenter(B, C, D), D we get 180 == 2 * direction(incenter(B, C, D), F) - 2 * direction(excenter(B, C, D), D) mod 360
+By external_angle_bisector_definition_v0_r on B, F, A, D we get Line(D, F) == external_angle_bisector(A, D, B)
+By collinear_definition on C, E, incenter(B, C, D) we get E in Line(C, incenter(B, C, D)), incenter(B, C, D) in Line(C, E), Line(C, E) == Line(C, incenter(B, C, D)), 0 == 2 * angle(E, C, incenter(B, C, D)) mod 360
+By internal_angle_bisector_definition_v0_r on B, E, A, D we get Line(D, E) == internal_angle_bisector(A, D, B)
+By perpendicular_angle_conditions_v0 on E, B, excenter(B, C, D) we get angle(E, B, excenter(B, C, D)) == orientation(B, excenter(B, C, D), E) mod 360
+By perpendicular_angle_conditions_v0 on excenter(B, C, D), C, E we get angle(excenter(B, C, D), C, E) == orientation(C, E, excenter(B, C, D)) mod 360
+By external_angle_bisector_definition_v0 on B, excenter(B, C, D), C, D we get 180 == angle(B, D, excenter(B, C, D)) + angle(C, D, excenter(B, C, D)) mod 360
+By internal_angle_bisector_definition_v0 on C, incenter(B, C, D), B, D we get angle(C, D, incenter(B, C, D)) == angle(incenter(B, C, D), D, B) mod 360
+By perpendicular_angle_conditions_v0 on incenter(B, C, D), C, F we get angle(incenter(B, C, D), C, F) == orientation(C, F, incenter(B, C, D)) mod 360
+By internal_angle_bisector_definition_v0 on D, incenter(B, C, D), C, B we get angle(D, B, incenter(B, C, D)) == angle(incenter(B, C, D), B, C) mod 360
+By perpendicular_angle_conditions_v0 on F, B, incenter(B, C, D) we get angle(F, B, incenter(B, C, D)) == orientation(B, incenter(B, C, D), F) mod 360
 By collinear_definition on C, F, excenter(B, C, D) we get F in Line(C, excenter(B, C, D)), excenter(B, C, D) in Line(C, F), Line(C, F) == Line(C, excenter(B, C, D)), 0 == 2 * angle(F, C, excenter(B, C, D)) mod 360
-By internal_angle_bisector_definition_v0_r on G, F, B, E we get Line(E, F) == internal_angle_bisector(B, E, G)
-By collinear_definition on D, excenter(B, C, D), E we get excenter(B, C, D) in Line(D, E), E in Line(D, excenter(B, C, D)), Line(D, E) == Line(D, excenter(B, C, D)), 0 == 2 * angle(excenter(B, C, D), D, E) mod 360
+By internal_angle_bisector_definition_v0 on C, excenter(B, C, D), D, B we get angle(C, B, excenter(B, C, D)) == angle(excenter(B, C, D), B, D) mod 360
+By perpendicular_angle_conditions_v0 on incenter(B, C, D), B, F we get angle(incenter(B, C, D), B, F) == orientation(B, F, incenter(B, C, D)) mod 360
+By external_angle_bisector_definition_v0 on F, incenter(B, C, D), F, C we get 180 == angle(F, C, incenter(B, C, D)) + angle(F, C, incenter(B, C, D)) mod 360
+By internal_angle_bisector_definition_v0 on B, incenter(B, C, D), C, D we get angle(B, D, incenter(B, C, D)) == angle(incenter(B, C, D), D, C) mod 360
+By collinear_definition on D, F, incenter(B, C, D) we get F in Line(D, incenter(B, C, D)), incenter(B, C, D) in Line(D, F), Line(D, F) == Line(D, incenter(B, C, D)), 0 == 2 * angle(F, D, incenter(B, C, D)) mod 360
 By internal_angle_bisector_definition_v0_r on B, E, B, F we get Line(E, F) == internal_angle_bisector(B, F, B)
-By internal_angle_bisector_definition_v0_r on E, F, E, B we get Line(B, F) == internal_angle_bisector(E, B, E)
-By perpendicular_lines_draw_intersection on g, internal_angle_bisector(C, B, D) we get exists(line_intersection(g, internal_angle_bisector(C, B, D)))
-By collinear_definition on C, excenter(B, C, D), F we get excenter(B, C, D) in Line(C, F), F in Line(C, excenter(B, C, D)), Line(C, F) == Line(C, excenter(B, C, D)), 0 == 2 * angle(excenter(B, C, D), C, F) mod 360
-By internal_angle_bisector_definition_v0_r on F, F, F, C we get Line(C, F) == internal_angle_bisector(F, C, F)
+By collinear_definition on E, D, excenter(B, C, D) we get D in Line(E, excenter(B, C, D)), excenter(B, C, D) in Line(D, E), Line(D, E) == Line(E, excenter(B, C, D)), 0 == 2 * angle(D, E, excenter(B, C, D)) mod 360
+By internal_angle_bisector_definition_v0 on B, incenter(B, C, D), A, C we get angle(B, C, incenter(B, C, D)) == angle(incenter(B, C, D), C, A) mod 360
+By perpendicular_angle_conditions_v0 on E, C, excenter(B, C, D) we get angle(E, C, excenter(B, C, D)) == orientation(C, excenter(B, C, D), E) mod 360
+By collinear_definition on D, incenter(B, C, D), F we get incenter(B, C, D) in Line(D, F), F in Line(D, incenter(B, C, D)), Line(D, F) == Line(D, incenter(B, C, D)), 0 == 2 * angle(incenter(B, C, D), D, F) mod 360
+By collinear_definition on D, excenter(B, C, D), E we get excenter(B, C, D) in Line(D, E), E in Line(D, excenter(B, C, D)), Line(D, E) == Line(D, excenter(B, C, D)), 0 == 2 * angle(excenter(B, C, D), D, E) mod 360
+By perpendicular_angle_conditions_v0 on excenter(B, C, D), B, E we get angle(excenter(B, C, D), B, E) == orientation(B, E, excenter(B, C, D)) mod 360
+By internal_angle_bisector_definition_v0 on D, incenter(B, C, D), B, C we get angle(D, C, incenter(B, C, D)) == angle(incenter(B, C, D), C, B) mod 360
+By external_angle_bisector_definition_v0 on B, excenter(B, C, D), D, C we get 180 == angle(B, C, excenter(B, C, D)) + angle(D, C, excenter(B, C, D)) mod 360
+By internal_angle_bisector_definition_v0_r on B, F, B, E we get Line(E, F) == internal_angle_bisector(B, E, B)
+By external_angle_bisector_definition_v0 on E, incenter(B, C, D), E, D we get 180 == angle(E, D, incenter(B, C, D)) + angle(E, D, incenter(B, C, D)) mod 360
+By external_angle_bisector_definition_v0 on B, excenter(B, C, D), A, C we get 180 == angle(B, C, excenter(B, C, D)) + angle(A, C, excenter(B, C, D)) mod 360
 By collinear_definition on F, excenter(B, C, D), C we get excenter(B, C, D) in Line(C, F), C in Line(F, excenter(B, C, D)), Line(C, F) == Line(F, excenter(B, C, D)), 0 == 2 * angle(excenter(B, C, D), F, C) mod 360
+By internal_angle_bisector_definition_v0_r on E, F, E, B we get Line(B, F) == internal_angle_bisector(E, B, E)
+By collinear_definition on E, incenter(B, C, D), C we get incenter(B, C, D) in Line(C, E), C in Line(E, incenter(B, C, D)), Line(C, E) == Line(E, incenter(B, C, D)), 0 == 2 * angle(incenter(B, C, D), E, C) mod 360
+By internal_angle_bisector_definition_v0 on B, incenter(B, C, D), D, C we get angle(B, C, incenter(B, C, D)) == angle(incenter(B, C, D), C, D) mod 360
+By internal_angle_bisector_definition_v0 on D, excenter(B, C, D), C, B we get angle(D, B, excenter(B, C, D)) == angle(excenter(B, C, D), B, C) mod 360
+By collinear_definition on C, incenter(B, C, D), E we get incenter(B, C, D) in Line(C, E), E in Line(C, incenter(B, C, D)), Line(C, E) == Line(C, incenter(B, C, D)), 0 == 2 * angle(incenter(B, C, D), C, E) mod 360
+By perpendicular_angle_conditions_v0 on F, C, incenter(B, C, D) we get angle(F, C, incenter(B, C, D)) == orientation(C, incenter(B, C, D), F) mod 360
+By perpendicular_angle_conditions_v0 on incenter(B, C, D), B, E we get angle(incenter(B, C, D), B, E) == orientation(B, E, incenter(B, C, D)) mod 360
+By perpendicular_angle_conditions_v0 on E, B, incenter(B, C, D) we get angle(E, B, incenter(B, C, D)) == orientation(B, incenter(B, C, D), E) mod 360
+By perpendicular_angle_conditions_v0 on F, B, excenter(B, C, D) we get angle(F, B, excenter(B, C, D)) == orientation(B, excenter(B, C, D), F) mod 360
+By external_angle_bisector_definition_v0 on E, excenter(B, C, D), E, C we get 180 == angle(E, C, excenter(B, C, D)) + angle(E, C, excenter(B, C, D)) mod 360
+By perpendicular_angle_conditions_v0 on F, D, excenter(B, C, D) we get angle(F, D, excenter(B, C, D)) == orientation(D, excenter(B, C, D), F) mod 360
+By internal_angle_bisector_definition_v0_r on F, E, F, B we get Line(B, E) == internal_angle_bisector(F, B, F)
+By collinear_definition on F, incenter(B, C, D), D we get incenter(B, C, D) in Line(D, F), D in Line(F, incenter(B, C, D)), Line(D, F) == Line(F, incenter(B, C, D)), 0 == 2 * angle(incenter(B, C, D), F, D) mod 360
+By external_angle_bisector_definition_v0 on F, excenter(B, C, D), F, D we get 180 == angle(F, D, excenter(B, C, D)) + angle(F, D, excenter(B, C, D)) mod 360
+By collinear_definition on E, C, incenter(B, C, D) we get C in Line(E, incenter(B, C, D)), incenter(B, C, D) in Line(C, E), Line(C, E) == Line(E, incenter(B, C, D)), 0 == 2 * angle(C, E, incenter(B, C, D)) mod 360
+By internal_angle_bisector_definition_v0 on A, incenter(B, C, D), B, C we get angle(A, C, incenter(B, C, D)) == angle(incenter(B, C, D), C, B) mod 360
+By perpendicular_angle_conditions_v0 on excenter(B, C, D), B, F we get angle(excenter(B, C, D), B, F) == orientation(B, F, excenter(B, C, D)) mod 360
+By perpendicular_angle_conditions_v0 on excenter(B, C, D), D, F we get angle(excenter(B, C, D), D, F) == orientation(D, F, excenter(B, C, D)) mod 360
 By collinear_definition on F, C, excenter(B, C, D) we get C in Line(F, excenter(B, C, D)), excenter(B, C, D) in Line(C, F), Line(C, F) == Line(F, excenter(B, C, D)), 0 == 2 * angle(C, F, excenter(B, C, D)) mod 360
 By collinear_definition on D, E, excenter(B, C, D) we get E in Line(D, excenter(B, C, D)), excenter(B, C, D) in Line(D, E), Line(D, E) == Line(D, excenter(B, C, D)), 0 == 2 * angle(E, D, excenter(B, C, D)) mod 360
-By altitude_definition on C, E, B, altitude(C, E, F) we get altitude(C, B, E) == altitude(C, E, F)
-By altitude_definition on D, B, F, altitude(D, E, F) we get altitude(D, B, F) == altitude(D, E, F)
-By altitude_definition on D, E, B, altitude(D, E, F) we get altitude(D, B, E) == altitude(D, E, F)
+By internal_angle_bisector_definition_v0_r on F, F, F, C we get Line(C, F) == internal_angle_bisector(F, C, F)
+By perpendicular_angle_conditions_v0 on incenter(B, C, D), D, E we get angle(incenter(B, C, D), D, E) == orientation(D, E, incenter(B, C, D)) mod 360
+By collinear_definition on C, excenter(B, C, D), F we get excenter(B, C, D) in Line(C, F), F in Line(C, excenter(B, C, D)), Line(C, F) == Line(C, excenter(B, C, D)), 0 == 2 * angle(excenter(B, C, D), C, F) mod 360
+By collinear_definition on F, D, incenter(B, C, D) we get D in Line(F, incenter(B, C, D)), incenter(B, C, D) in Line(D, F), Line(D, F) == Line(F, incenter(B, C, D)), 0 == 2 * angle(D, F, incenter(B, C, D)) mod 360
+By internal_angle_bisector_definition_v0 on C, incenter(B, C, D), D, B we get angle(C, B, incenter(B, C, D)) == angle(incenter(B, C, D), B, D) mod 360
+By collinear_definition on E, excenter(B, C, D), D we get excenter(B, C, D) in Line(D, E), D in Line(E, excenter(B, C, D)), Line(D, E) == Line(E, excenter(B, C, D)), 0 == 2 * angle(excenter(B, C, D), E, D) mod 360
+By perpendicular_angle_conditions_v0 on E, D, incenter(B, C, D) we get angle(E, D, incenter(B, C, D)) == orientation(D, incenter(B, C, D), E) mod 360
+By altitude_definition on excenter(B, C, D), G, F, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(excenter(B, C, D), F, G)
 By collinear_definition on excenter(B, C, D), D, E we get D in Line(E, excenter(B, C, D)), E in Line(D, excenter(B, C, D)), Line(D, excenter(B, C, D)) == Line(E, excenter(B, C, D)), 0 == 2 * angle(D, excenter(B, C, D), E) mod 360
-By collinear_definition on excenter(B, C, D), E, D we get E in Line(D, excenter(B, C, D)), D in Line(E, excenter(B, C, D)), Line(D, excenter(B, C, D)) == Line(E, excenter(B, C, D)), 0 == 2 * angle(E, excenter(B, C, D), D) mod 360
-By altitude_definition on C, B, F, altitude(C, E, F) we get altitude(C, B, F) == altitude(C, E, F)
-By collinear_definition on excenter(B, C, D), F, C we get F in Line(C, excenter(B, C, D)), C in Line(F, excenter(B, C, D)), Line(C, excenter(B, C, D)) == Line(F, excenter(B, C, D)), 0 == 2 * angle(F, excenter(B, C, D), C) mod 360
+By altitude_definition on E, C, excenter(B, C, D), f we get f == altitude(E, C, excenter(B, C, D))
+By altitude_definition on incenter(B, C, D), D, excenter(B, C, D), Line(D, F) we get Line(D, F) == altitude(incenter(B, C, D), D, excenter(B, C, D))
+By altitude_definition on incenter(B, C, D), excenter(B, C, D), C, f we get f == altitude(incenter(B, C, D), C, excenter(B, C, D))
+By altitude_definition on incenter(B, C, D), E, excenter(B, C, D), Line(D, F) we get Line(D, F) == altitude(incenter(B, C, D), E, excenter(B, C, D))
+By altitude_definition on excenter(B, C, D), incenter(B, C, D), F, Line(D, E) we get Line(D, E) == altitude(excenter(B, C, D), F, incenter(B, C, D))
+By altitude_definition on incenter(B, C, D), F, E, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(incenter(B, C, D), E, F)
+By perpendicular_angle_conditions_v0 on excenter(B, C, D), C, incenter(B, C, D) we get angle(excenter(B, C, D), C, incenter(B, C, D)) == orientation(C, incenter(B, C, D), excenter(B, C, D)) mod 360
+By altitude_definition on E, incenter(B, C, D), F, Line(D, E) we get Line(D, E) == altitude(E, F, incenter(B, C, D))
+By collinear_definition on incenter(B, C, D), C, E we get C in Line(E, incenter(B, C, D)), E in Line(C, incenter(B, C, D)), Line(C, incenter(B, C, D)) == Line(E, incenter(B, C, D)), 0 == 2 * angle(C, incenter(B, C, D), E) mod 360
+By altitude_definition on G, excenter(B, C, D), incenter(B, C, D), g we get g == altitude(G, excenter(B, C, D), incenter(B, C, D))
+By altitude_definition on incenter(B, C, D), E, G, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(incenter(B, C, D), E, G)
+By altitude_definition on excenter(B, C, D), B, F, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(excenter(B, C, D), B, F)
+By collinear_definition on incenter(B, C, D), F, D we get F in Line(D, incenter(B, C, D)), D in Line(F, incenter(B, C, D)), Line(D, incenter(B, C, D)) == Line(F, incenter(B, C, D)), 0 == 2 * angle(F, incenter(B, C, D), D) mod 360
+By altitude_definition on incenter(B, C, D), excenter(B, C, D), F, f we get f == altitude(incenter(B, C, D), F, excenter(B, C, D))
+By altitude_definition on F, E, excenter(B, C, D), Line(D, F) we get Line(D, F) == altitude(F, E, excenter(B, C, D))
+By altitude_definition on E, incenter(B, C, D), excenter(B, C, D), g we get g == altitude(E, excenter(B, C, D), incenter(B, C, D))
+By collinear_definition on incenter(B, C, D), D, F we get D in Line(F, incenter(B, C, D)), F in Line(D, incenter(B, C, D)), Line(D, incenter(B, C, D)) == Line(F, incenter(B, C, D)), 0 == 2 * angle(D, incenter(B, C, D), F) mod 360
+By altitude_definition on G, incenter(B, C, D), B, g we get g == altitude(G, B, incenter(B, C, D))
 By collinear_definition on excenter(B, C, D), C, F we get C in Line(F, excenter(B, C, D)), F in Line(C, excenter(B, C, D)), Line(C, excenter(B, C, D)) == Line(F, excenter(B, C, D)), 0 == 2 * angle(C, excenter(B, C, D), F) mod 360
+By altitude_definition on incenter(B, C, D), E, B, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(incenter(B, C, D), B, E)
+By altitude_definition on excenter(B, C, D), F, E, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(excenter(B, C, D), E, F)
+By altitude_definition on E, B, excenter(B, C, D), g we get g == altitude(E, B, excenter(B, C, D))
+By altitude_definition on excenter(B, C, D), incenter(B, C, D), D, Line(D, E) we get Line(D, E) == altitude(excenter(B, C, D), D, incenter(B, C, D))
+By altitude_definition on E, F, excenter(B, C, D), f we get f == altitude(E, F, excenter(B, C, D))
+By altitude_definition on excenter(B, C, D), C, incenter(B, C, D), h we get h == altitude(excenter(B, C, D), C, incenter(B, C, D))
+By altitude_definition on incenter(B, C, D), F, B, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(incenter(B, C, D), B, F)
+By altitude_definition on G, B, excenter(B, C, D), g we get g == altitude(G, B, excenter(B, C, D))
+By altitude_definition on E, D, incenter(B, C, D), Line(D, E) we get Line(D, E) == altitude(E, D, incenter(B, C, D))
+By perpendicular_angle_conditions_v0 on excenter(B, C, D), D, incenter(B, C, D) we get angle(excenter(B, C, D), D, incenter(B, C, D)) == orientation(D, incenter(B, C, D), excenter(B, C, D)) mod 360
+By altitude_definition on excenter(B, C, D), incenter(B, C, D), E, h we get h == altitude(excenter(B, C, D), E, incenter(B, C, D))
+By altitude_definition on F, excenter(B, C, D), D, Line(D, F) we get Line(D, F) == altitude(F, D, excenter(B, C, D))
+By altitude_definition on F, C, incenter(B, C, D), h we get h == altitude(F, C, incenter(B, C, D))
+By altitude_definition on E, B, incenter(B, C, D), g we get g == altitude(E, B, incenter(B, C, D))
+By altitude_definition on F, incenter(B, C, D), E, h we get h == altitude(F, E, incenter(B, C, D))
+By altitude_definition on excenter(B, C, D), E, G, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(excenter(B, C, D), E, G)
+By collinear_definition on incenter(B, C, D), E, C we get E in Line(C, incenter(B, C, D)), C in Line(E, incenter(B, C, D)), Line(C, incenter(B, C, D)) == Line(E, incenter(B, C, D)), 0 == 2 * angle(E, incenter(B, C, D), C) mod 360
+By perpendicular_angle_conditions_v0 on incenter(B, C, D), D, excenter(B, C, D) we get angle(incenter(B, C, D), D, excenter(B, C, D)) == orientation(D, excenter(B, C, D), incenter(B, C, D)) mod 360
+By perpendicular_angle_conditions_v0 on incenter(B, C, D), C, excenter(B, C, D) we get angle(incenter(B, C, D), C, excenter(B, C, D)) == orientation(C, excenter(B, C, D), incenter(B, C, D)) mod 360
+By altitude_definition on excenter(B, C, D), E, B, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(excenter(B, C, D), B, E)
+By altitude_definition on F, excenter(B, C, D), B, g we get g == altitude(F, B, excenter(B, C, D))
+By altitude_definition on F, B, incenter(B, C, D), g we get g == altitude(F, B, incenter(B, C, D))
+By altitude_definition on F, incenter(B, C, D), excenter(B, C, D), g we get g == altitude(F, excenter(B, C, D), incenter(B, C, D))
+By altitude_definition on incenter(B, C, D), F, G, internal_angle_bisector(C, B, D) we get internal_angle_bisector(C, B, D) == altitude(incenter(B, C, D), F, G)
+By collinear_definition on excenter(B, C, D), F, C we get F in Line(C, excenter(B, C, D)), C in Line(F, excenter(B, C, D)), Line(C, excenter(B, C, D)) == Line(F, excenter(B, C, D)), 0 == 2 * angle(F, excenter(B, C, D), C) mod 360
+By collinear_definition on excenter(B, C, D), E, D we get E in Line(D, excenter(B, C, D)), D in Line(E, excenter(B, C, D)), Line(D, excenter(B, C, D)) == Line(E, excenter(B, C, D)), 0 == 2 * angle(E, excenter(B, C, D), D) mod 360
+By power_of_a_point_definition on B, F, E, c we get log(power_of_a_point(B, c)) == log(distance(B, F)) + log(distance(B, E))
+By power_of_a_point_definition on excenter(B, C, D), F, C, c we get log(power_of_a_point(excenter(B, C, D), c)) == log(distance(F, excenter(B, C, D))) + log(distance(C, excenter(B, C, D)))
+By power_of_a_point_definition on incenter(B, C, D), D, F, c we get log(power_of_a_point(incenter(B, C, D), c)) == log(distance(D, incenter(B, C, D))) + log(distance(F, incenter(B, C, D)))
+By power_of_a_point_definition on excenter(B, C, D), E, D, c we get log(power_of_a_point(excenter(B, C, D), c)) == log(distance(E, excenter(B, C, D))) + log(distance(D, excenter(B, C, D)))
+By power_of_a_point_definition on incenter(B, C, D), E, C, c we get log(power_of_a_point(incenter(B, C, D), c)) == log(distance(E, incenter(B, C, D))) + log(distance(C, incenter(B, C, D)))
