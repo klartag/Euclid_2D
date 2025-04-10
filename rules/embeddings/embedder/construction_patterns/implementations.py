@@ -37,12 +37,8 @@ CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
     SimpleSymmetricPredicatePattern(
         GeneralizedEmbeddedConstruction,
         lambda objects, line0, line1: line_on_point(objects, line_intersection(line0, line1)),
-        'concurrent'
+        'concurrent',
     ),
     ExplicitConstructionPattern(),
-    ContainmentPattern((LINE,), GeneralizedEmbeddedConstruction, point_on_line),
-    ContainmentPattern((CIRCLE,), GeneralizedEmbeddedConstruction, point_on_circle),
-    ContainmentPattern((LINE, LINE), ExplicitEmbeddedConstruction, line_intersection),
-    ContainmentPattern((LINE, CIRCLE), ExplicitEmbeddedConstruction, line_circle_intersection),
-    ContainmentPattern((CIRCLE, CIRCLE), ExplicitEmbeddedConstruction, circle_circle_intersection),
+    ContainmentPattern(),
 ]
