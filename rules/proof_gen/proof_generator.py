@@ -133,6 +133,8 @@ class ProofGenerator:
                 )
                 print(f'=========== {i}th try of finding up to {actions_per_step} steps =========')
                 steps = self.find_steps(actions_per_step)
+                for step in steps:
+                    step.comment = "try index {}".format(i)
                 print(f'=========== found {len(steps)} steps =========')
                 if len(steps) == 0:
                     raise ProofGeneratorError(ProofGeneratorErrorType.NoMoreSteps)
