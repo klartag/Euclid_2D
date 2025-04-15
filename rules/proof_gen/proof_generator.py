@@ -132,6 +132,9 @@ class ProofGenerator:
                 steps = self.find_steps(actions_per_step)
                 if self.verbose:
                     print(f'=========== found {len(steps)} steps =========')
+                for step in steps:
+                    step.comment = "try index {}".format(i)
+                print(f'=========== found {len(steps)} steps =========')
                 if len(steps) == 0:
                     raise ProofGeneratorError(ProofGeneratorErrorType.NoMoreSteps)
                 for step in steps:
