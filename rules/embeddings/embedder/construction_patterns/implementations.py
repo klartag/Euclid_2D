@@ -31,8 +31,8 @@ CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
     EmptyPattern(POINT, new_point),
     EmptyPattern(LINE, new_line),
     EmptyPattern(CIRCLE, new_circle),
-    ReverseContainmentPattern(1, LINE, GeneralizedEmbeddedConstruction, line_on_point),
-    ReverseContainmentPattern(2, LINE, ExplicitEmbeddedConstruction, line),
+    # ReverseContainmentPattern(1, LINE, GeneralizedEmbeddedConstruction, line_on_point),
+    # ReverseContainmentPattern(2, LINE, ExplicitEmbeddedConstruction, line),
     ReverseContainmentPattern(3, CIRCLE, ExplicitEmbeddedConstruction, circumcircle),
     SimpleSymmetricPredicatePattern(
         GeneralizedEmbeddedConstruction,

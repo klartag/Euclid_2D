@@ -1,9 +1,12 @@
 from typing import Callable, List, Optional, Tuple, Unpack
 
+from rules.embeddings.constructions.polarity import ORIGIN, polar
+from rules.embeddings.constructions.projection import project
+from rules.embeddings.embedded_objects.line import EmbeddedLine
+
 from ...embedded_geo_objects.embedded_geo_object import EmbeddedGeoObject, ExtendedGeoObject
 
 from .locus_pattern_matcher import LocusPattern
-from .explicit_locus import ExplicitLocus
 from .simple_predicate_locus import SimplePredicateLocus
 from .simple_construction_predicate_locus import SimplePredicateConstructionLocus
 from .equal_constructions_locus import EqualConstructionsLocus
@@ -19,7 +22,7 @@ def construction_generator(
 
 
 LOCUS_PATTERNS: List[LocusPattern] = [
-    ExplicitLocus(),
+    SimplePredicateLocus(lambda locus: locus, 'in', 0),
     SimplePredicateLocus(construction_generator('Line'), 'collinear', None),
     SimplePredicateLocus(construction_generator('Line'), 'between', None),
     SimplePredicateLocus(construction_generator('Line'), 'collinear_and_not_between', None),
@@ -60,4 +63,9 @@ LOCUS_PATTERNS: List[LocusPattern] = [
     EqualConstructionsLocus(construction_generator('perpendicular_bisector'), 'distance', None, 'distance', None),
 ]
 
-DUAL_LOCUS_PATTERNS: List[LocusPattern] = []
+DUAL_LOCUS_PATTERNS: List[LocusPattern] = [
+    SimplePredicateLocus(construction_generator('polar'), 'in', 1),
+    SimplePredicateLocus(
+        lambda line: EmbeddedGeoObject('line_from_origin', (EmbeddedGeoObject('pole', (line,)),)), 'parallel', None
+    ),
+]
