@@ -17,7 +17,7 @@ from .proof_checker_utils import ADD_CFG, ADD_NO_TRUST_CFG, CHECK_CFG, TRUST_NO_
 from .signature_dag import SignatureDag
 from .geometry_trackers.geometry_tracker import involved_objects
 
-from .proof import AlmostAlwaysStep, AssertStep, IfStep, Proof, ObjDefineStep, Step, TheoremStep
+from .proof import AlmostAlwaysStep, AssertStep, CommentStep, IfStep, Proof, ObjDefineStep, Step, TheoremStep
 from .theorem import Theorem
 
 from . import rule_utils
@@ -432,6 +432,9 @@ class ProofChecker:
 
                 case IfStep():
                     self._add_if_step(step)
+
+                case CommentStep():
+                    pass
 
                 case _:
                     raise NotImplementedError(f'Proof checker received illegal step: {step}!')

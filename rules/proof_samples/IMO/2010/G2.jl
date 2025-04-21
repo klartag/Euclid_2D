@@ -22,34 +22,39 @@ Need to prove:
 distance(K, M) == distance(L, M)
 
 Proof:
-By line_definition on C, S, point_circle_tangent_line(C, Circle(A, B, C)) we get Line(C, S) == point_circle_tangent_line(C, Circle(A, B, C))
-By circle_definition on C, M, L, Circle(A, B, C) we get Circle(A, B, C) == Circle(C, L, M)
-By in_imply_collinear on L, B, P we get collinear(B, L, P)
-By in_imply_collinear on K, A, P we get collinear(A, K, P)
-By in_imply_collinear on S, B, A we get collinear(A, B, S)
+Comment: Step 1 - Found 291 steps
+By line_definition on S, C, point_circle_tangent_line(C, Circle(A, B, C)) we get Line(C, S) == point_circle_tangent_line(C, Circle(A, B, C))
+By circle_definition on A, C, K, Circle(A, B, C) we get Circle(A, B, C) == Circle(A, C, K)
+By in_imply_collinear on K, P, A we get collinear(A, K, P)
 By in_imply_collinear on M, P, C we get collinear(C, M, P)
-By angles_on_chord_v0 on K, A, B, M, Circle(A, B, C) we get angle(K, B, A) == angle(K, M, A) mod 360
-By angles_on_chord_v2 on M, L, A, C, Circle(A, B, C) we get angle(M, A, L) == angle(M, C, L) + 180 mod 360
-By angles_on_chord_v1 on L, C, B, M, Circle(A, B, C) we get angle(L, B, C) == angle(L, M, C) mod 360
-By angles_on_chord_v0 on A, K, L, C, Circle(A, B, C) we get angle(A, C, K) == angle(A, L, K) mod 360
-By angles_on_chord_v3 on K, A, C, M, Circle(A, B, C) we get angle(K, C, A) == angle(K, M, A) + 180 mod 360
-By angles_on_chord_v2 on C, A, B, L, Circle(A, B, C) we get angle(C, B, A) == angle(C, L, A) + 180 mod 360
-By angles_on_chord_v3 on L, K, B, C, Circle(A, B, C) we get angle(L, B, K) == angle(L, C, K) + 180 mod 360
-By angles_on_chord_v1 on K, M, C, L, Circle(A, B, C) we get angle(K, C, M) == angle(K, L, M) mod 360
+By in_imply_collinear on S, A, B we get collinear(A, B, S)
+By in_imply_collinear on L, P, B we get collinear(B, L, P)
+By angles_on_chord_v0 on L, B, K, C, Circle(A, B, C) we get angle(L, C, B) == angle(L, K, B) mod 360
+By angles_on_chord_v0 on M, K, C, A, Circle(A, B, C) we get angle(M, A, K) == angle(M, C, K) mod 360
+By angles_on_chord_v1 on K, B, L, A, Circle(A, B, C) we get angle(K, A, B) == angle(K, L, B) mod 360
+By angles_on_chord_v0 on A, B, K, C, Circle(A, B, C) we get angle(A, C, B) == angle(A, K, B) mod 360
+By angles_on_chord_v0 on B, L, A, M, Circle(A, B, C) we get angle(B, A, L) == angle(B, M, L) mod 360
+By angles_on_chord_v0 on B, K, L, M, Circle(A, B, C) we get angle(B, L, K) == angle(B, M, K) mod 360
+By angles_on_chord_v0 on L, M, C, K, Circle(A, B, C) we get angle(L, C, M) == angle(L, K, M) mod 360
 By isosceles_triangle_properties on S, C, P we get distance(C, S) == distance(P, S), angle(C, P, S) == angle(S, C, P) mod 360
-By same_angle_v0 on C, M, P, S we get angle(M, C, S) == angle(P, C, S) mod 360
-By same_angle_v2 on B, A, S, M we get angle(A, B, M) == angle(S, B, M) + 180 mod 360
-By same_angle_v0 on A, P, K, L we get angle(K, A, L) == angle(P, A, L) mod 360
-By same_angle_v1 on B, L, P, K we get angle(L, B, K) == angle(P, B, K) mod 360
-By reverse_direction on L, M we get 180 == direction(L, M) - direction(M, L) mod 360
-By tangent_chord_angle_reverse_v0 on C, M, L, S we get angle(M, C, S) == angle(M, L, C) mod 360
-By reverse_direction on C, M we get 180 == direction(C, M) - direction(M, C) mod 360
-By reverse_direction on L, A we get 180 == direction(L, A) - direction(A, L) mod 360
-By reverse_direction on P, C we get 180 == direction(P, C) - direction(C, P) mod 360
-By same_angle_v1 on S, A, B, P we get angle(A, S, P) == angle(B, S, P) mod 360
+Comment: Step 2 - Found 262 steps
+By same_angle_v1 on C, P, M, A we get angle(M, C, A) == angle(P, C, A) mod 360
+By same_angle_v1 on L, B, P, A we get angle(B, L, A) == angle(P, L, A) mod 360
+By same_angle_v1 on A, P, K, B we get angle(K, A, B) == angle(P, A, B) mod 360
+By same_angle_v0 on A, S, B, L we get angle(B, A, L) == angle(S, A, L) mod 360
+By tangent_chord_angle_reverse_v3 on C, A, K, S we get angle(A, K, C) == angle(A, C, S) + 180 mod 360
+By reverse_direction on K, M we get 180 == direction(K, M) - direction(M, K) mod 360
+By reverse_direction on M, L we get 180 == direction(M, L) - direction(L, M) mod 360
+By reverse_direction on C, K we get 180 == direction(C, K) - direction(K, C) mod 360
+By reverse_direction on C, P we get 180 == direction(C, P) - direction(P, C) mod 360
+By same_angle_v2 on P, B, L, C we get angle(B, P, C) == angle(L, P, C) + 180 mod 360
+By same_angle_v1 on S, B, A, P we get angle(A, S, P) == angle(B, S, P) mod 360
 By power_of_a_point_tangent on S, C, Circle(A, B, C) we get 2 * log(distance(C, S)) == log(power_of_a_point(S, Circle(A, B, C)))
 By power_of_a_point_definition on S, B, A, Circle(A, B, C) we get log(distance(B, S)) + log(distance(A, S)) == log(power_of_a_point(S, Circle(A, B, C)))
-By reverse_direction on A, P we get 180 == direction(A, P) - direction(P, A) mod 360
-By anti_similar_triangle_basic_properties on S, P, C, S, C, P we get angle(S, P, C) == 0 - angle(S, C, P) mod 360, angle(P, C, S) == 0 - angle(C, P, S) mod 360, angle(C, S, P) == 0 - angle(P, S, C) mod 360, log(distance(C, S)) + log(distance(C, P)) == log(distance(P, S)) + log(distance(C, P)), log(distance(C, P)) + log(distance(C, S)) == log(distance(C, P)) + log(distance(P, S)), log(distance(C, S)) + log(distance(C, S)) == log(distance(P, S)) + log(distance(P, S))
+Comment: Step 3 - Found 507 steps
+By reverse_direction on P, L we get 180 == direction(P, L) - direction(L, P) mod 360
+By anti_similar_triangle_basic_properties on P, C, S, C, P, S we get angle(P, C, S) == 0 - angle(C, P, S) mod 360, angle(C, S, P) == 0 - angle(P, S, C) mod 360, angle(S, P, C) == 0 - angle(S, C, P) mod 360, log(distance(C, P)) + log(distance(C, S)) == log(distance(C, P)) + log(distance(P, S)), log(distance(C, S)) + log(distance(C, S)) == log(distance(P, S)) + log(distance(P, S)), log(distance(C, S)) + log(distance(C, P)) == log(distance(P, S)) + log(distance(C, P))
+Comment: Step 4 - Found 5 steps
 By sas_anti_similarity on B, S, P, P, S, A we get anti_similar_triangles(A, P, S, P, B, S)
-By chords_on_equal_angles_v0 on M, C, L, K, A, M, Circle(A, B, C) we get distance(K, M) == distance(L, M)
+Comment: Step 5 - Found 26 steps
+By chords_on_equal_angles_v1 on M, A, L, M, L, K, Circle(A, B, C) we get distance(K, M) == distance(L, M)
