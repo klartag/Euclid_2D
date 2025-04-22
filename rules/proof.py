@@ -2,7 +2,7 @@ import abc
 from collections import defaultdict
 import dataclasses
 from dataclasses import dataclass
-from decimal import Decimal
+from mpmath import mpf
 import itertools
 import json
 from pathlib import Path
@@ -11,15 +11,14 @@ import re
 import string
 from typing import Iterable, Mapping, Optional
 
-from torch import tensor
-
 from util import BASE_PATH
 
 from . import rule_utils
 
 from .rule_utils import ALL_TYPES, LITERAL, ProofParseError, split_args
 
-from .embeddings.embedded_objects import EmbeddedObject, EmbeddedPoint, EmbeddedLine, EmbeddedCircle, Embedding
+from .embeddings import Embedding
+from .embeddings.embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, EmbeddedScalar
 from .predicates.implementations.exists_predicate import ExistsPredicate
 from .predicates.predicate_factory import parse_predicate, predicate_from_args
 from .predicates.predicate import Predicate
@@ -39,6 +38,7 @@ LINE_BREAK = '\n'
 OBJ_NAME_PATTERN = r'([\w\']+)'
 THEOREM_STEP_PATTERN = r'By (\w+)( on )?(.*) we get (.*)$'
 NULL_THEOREM_STEP_PATTERN = r'We have (.*)$'
+COMMENT_STEP_PATTERN = r'Comment: \w*(.*)'
 OBJ_DEFINE_PATTERN = rf'Let {OBJ_NAME_PATTERN} := (.*)$'  # The pattern for naming new constructions.
 """The pattern for introducing new constructions."""
 OBJ_DEFINE_PATTERN_2 = rf'We introduce (.*)$'
@@ -83,6 +83,17 @@ class NullTheoremStep(Step):
             [g.substitute(subs) for g in self.result_objects],
             [pred.substitute(subs) for pred in self.result_predicates],
         )
+
+
+@dataclass
+class CommentStep(Step):
+    comment: str
+
+    def to_language_format(self):
+        return f'Comment: {self.comment}'
+
+    def substitute(self, subs: 'Mapping[GeoObject, GeoObject]') -> 'Step':
+        return CommentStep(self.comment)
 
 
 @dataclass
@@ -360,6 +371,9 @@ class Proof:
                     preds_text = assert_match.group(1)
                     preds = [parse_predicate(part, obj_map) for part in split_args(preds_text)]
                     steps.append(AlmostAlwaysStep(preds))
+                elif (comment_match := re.search(COMMENT_STEP_PATTERN, line)) is not None:
+                    comment = comment_match.group(1).strip()
+                    steps.append(CommentStep(comment))
                 elif (null_theorem_match := re.search(NULL_THEOREM_STEP_PATTERN, line)) is not None:
                     # Matching a theorem step without a defined theorem.
                     results = null_theorem_match.group(1)
@@ -494,7 +508,7 @@ class Proof:
         """
         Parses the embedding section of the proof.
         """
-        embedding = {}
+        embedding = Embedding()
         for line in data:
             if not line.strip():
                 continue
@@ -512,7 +526,7 @@ class Proof:
                 case rule_utils.CIRCLE:
                     embedded_object = EmbeddedCircle.from_dict(data)
                 case rule_utils.ANGLE | rule_utils.SCALAR:
-                    embedded_object = Decimal(data)
+                    embedded_object = EmbeddedScalar.from_dict(data)
 
             embedding[name] = embedded_object
 
@@ -583,7 +597,9 @@ class Proof:
         auxiliary_preds.append(predicate_from_args('exists', tuple(exist_objects)))
 
         steps = Proof.parse_body(proof_lines, dict(assumption_objects)) if parse_proof_body else []
+
         embedding = Proof.parse_embeds(embed_lines, assumption_objects) if len(embed_lines) > 0 else None
+
         return Proof(
             assumption_objects | target_objects,
             assumption_objects,
@@ -620,9 +636,7 @@ class Proof:
         # Representing the embeds.
         if self.embedding is not None:
             for name, embedded_object in self.embedding.items():
-                embeds.append(
-                    f'{name} := {json.dumps(embedded_object.to_dict())}'
-                )
+                embeds.append(f'{name} := {json.dumps(embedded_object.to_dict())}')
         else:
             embeds = []
 
@@ -707,7 +721,7 @@ class Proof:
 
         for assumption in self.assumption_predicates:
             res_assumption_predicates.append(assumption.substitute(subs))
-            
+
         for auxiliary_predicate in self.auxiliary_predicates:
             res_auxiliary_predicates.append(auxiliary_predicate.substitute(subs))
 
@@ -717,7 +731,12 @@ class Proof:
         for step in self.steps:
             res_steps.append(step.substitute(subs))
 
-        res_embeds = {obj.substitute(subs): emb for obj, emb in self.embedding.items()}
+        res_embeds = None
+        if self.embedding is not None:
+            res_embeds = {}
+            for name, embedded_object in self.embedding.items():
+                new_name = [value for obj, value in subs.items() if obj.name == name][0]
+                res_embeds[new_name] = embedded_object
 
         return Proof(
             res_assumption_objects | res_target_objects,
@@ -743,7 +762,7 @@ class Proof:
             list(self.auxiliary_predicates),
             dict(self.target_objects),
             list(self.target_predicates),
-            dict(self.embedding) if self.embedding is not None else None,
+            self.embedding.shallow_copy() if self.embedding is not None else None,
             list(self.steps),
         )
 
@@ -756,7 +775,7 @@ class Proof:
             if isinstance(step, TheoremStep):
                 step.comment = ''
         return res
-    
+
     def starting_predicates(self) -> list[Predicate]:
         return self.assumption_predicates + self.auxiliary_predicates
 

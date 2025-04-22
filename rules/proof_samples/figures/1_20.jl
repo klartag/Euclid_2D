@@ -1,134 +1,59 @@
 Assumptions:
 A, B, C, D, X, Y, Z, W, T: Point
-distinct(A, B, C, D, X, Y, Z, W, T)
-distinct(Line(X, Y), Line(Y, Z), Line(Z, W), Line(W, X))
-
+distinct(A, B, C, D, T, W, X, Y, Z)
+distinct(Line(W, X), Line(W, Z), Line(X, Y), Line(Y, Z))
 not_collinear(A, B, C)
 not_collinear(A, B, D)
 not_collinear(A, C, D)
 not_collinear(B, C, D)
-
 X == midpoint(A, B)
 Y == midpoint(B, C)
 Z == midpoint(C, D)
-W == midpoint(D, A)
+W == midpoint(A, D)
+T == line_intersection(Line(W, Y), Line(X, Z))
 
-T == line_intersection(Line(X, Z), Line(Y, W))
+Embedding:
+D := {"x": "0.483825097926760261390910500267636962234973907470703125", "y": "0.87516471284905039684787197984405793249607086181640625"}
+A := {"x": "-0.90702353831911619597150320259970612823963165283203125", "y": "-0.4210799222654422191425283017451874911785125732421875"}
+W := {"x": "-0.2115992201961779672902963511660345830023288726806640625", "y": "0.227042395291804088852671839049435220658779144287109375"}
+C := {"x": "-0.96302908993719793517840344065916724503040313720703125", "y": "-0.269397423771520816426772171325865201652050018310546875"}
+Z := {"x": "-0.2396019960052188368937464701957651413977146148681640625", "y": "0.3028836445387647902105499042590963654220104217529296875"}
+B := {"x": "-0.93747994545458801507464841051842086017131805419921875", "y": "0.34803929644576425683766274232766591012477874755859375"}
+Y := {"x": "-0.950254517695892975126525925588794052600860595703125", "y": "0.0393209363371217202054452855009003542363643646240234375"}
+X := {"x": "-0.922251741886852105523075806559063494205474853515625", "y": "-0.036520312909838981152432779708760790526866912841796875"}
+T := {"x": "-0.58092686894603547120841113837741431780159473419189453125", "y": "0.13318166581446290452905856227516778744757175445556640625"}
 
 Need to prove:
-distance(X, T) == distance(Z, T)
-distance(Y, T) == distance(W, T)
+distance(T, X) == distance(T, Z)
+distance(T, W) == distance(T, Y)
 
 Proof:
-By line_definition on T, X, Line(X,Z) we get Line(T,X) == Line(X,Z)
-By line_unique_intersection_v1 on Line(Y,Z), Line(W,Z), Z, W we get W not in Line(Y,Z)
-By line_unique_intersection_v1 on Line(X,Y), Line(W,X), X, W we get W not in Line(X,Y)
-By line_unique_intersection_v1 on Line(W,X), Line(X,Y), X, Y we get Y not in Line(W,X)
-By line_unique_intersection_v1 on Line(W,X), Line(W,Z), W, Z we get Z not in Line(W,X)
-By line_unique_intersection_v1 on Line(X,Y), Line(Y,Z), Y, Z we get Z not in Line(X,Y)
 By in_imply_collinear on T, W, Y we get collinear(T, W, Y)
-By in_imply_collinear on T, Z, X we get collinear(T, X, Z)
-By collinear_definition on C, Z, D we get Z in Line(C,D), D in Line(C,Z), Line(C,D) == Line(C,Z), 0 == 2 * angle(Z,C,D) mod 360
-By log_of_2_times_distance on B, A, X, B we get log(distance(A,B)) == 0.6931471805599453 + log(distance(B,X))
-By collinear_definition on B, Y, C we get Y in Line(B,C), C in Line(B,Y), Line(B,C) == Line(B,Y), 0 == 2 * angle(Y,B,C) mod 360
-By log_of_2_times_distance on D, C, C, Z we get log(distance(C,D)) == 0.6931471805599453 + log(distance(C,Z))
-By log_of_2_times_distance on B, C, C, Y we get log(distance(B,C)) == 0.6931471805599453 + log(distance(C,Y))
-By collinear_definition on D, W, A we get W in Line(A,D), A in Line(D,W), Line(A,D) == Line(D,W), 0 == 2 * angle(W,D,A) mod 360
-By collinear_definition on B, A, X we get A in Line(B,X), X in Line(A,B), Line(A,B) == Line(B,X), 0 == 2 * angle(A,B,X) mod 360
-By log_of_2_times_distance on A, D, W, D we get log(distance(A,D)) == 0.6931471805599453 + log(distance(D,W))
-By log_of_2_times_distance on A, D, W, A we get log(distance(A,D)) == 0.6931471805599453 + log(distance(A,W))
-By log_of_2_times_distance on A, B, A, X we get log(distance(A,B)) == 0.6931471805599453 + log(distance(A,X))
-By log_of_2_times_distance on B, C, Y, B we get log(distance(B,C)) == 0.6931471805599453 + log(distance(B,Y))
-By log_of_2_times_distance on D, C, D, Z we get log(distance(C,D)) == 0.6931471805599453 + log(distance(D,Z))
-By triangle_halfangle_sum on Y, Z, X we get orientation(Y,Z,X) == halfangle(Y,Z,X) + halfangle(Z,X,Y) + halfangle(X,Y,Z) mod 360
-By triangle_halfangle_sum on Z, X, Y we get orientation(Z,X,Y) == halfangle(Z,X,Y) + halfangle(X,Y,Z) + halfangle(Y,Z,X) mod 360
-By triangle_halfangle_sum on X, W, Z we get orientation(X,W,Z) == halfangle(X,W,Z) + halfangle(W,Z,X) + halfangle(Z,X,W) mod 360
-By triangle_halfangle_sum on W, Y, X we get orientation(W,Y,X) == halfangle(W,Y,X) + halfangle(Y,X,W) + halfangle(X,W,Y) mod 360
-By triangle_halfangle_sum on W, Y, Z we get orientation(W,Y,Z) == halfangle(W,Y,Z) + halfangle(Y,Z,W) + halfangle(Z,W,Y) mod 360
-By triangle_halfangle_sum on Z, Y, X we get orientation(Z,Y,X) == halfangle(Z,Y,X) + halfangle(Y,X,Z) + halfangle(X,Z,Y) mod 360
-By triangle_halfangle_sum on W, Z, Y we get orientation(W,Z,Y) == halfangle(W,Z,Y) + halfangle(Z,Y,W) + halfangle(Y,W,Z) mod 360
-By triangle_halfangle_sum on Z, X, W we get orientation(Z,X,W) == halfangle(Z,X,W) + halfangle(X,W,Z) + halfangle(W,Z,X) mod 360
-By triangle_halfangle_sum on Y, Z, W we get orientation(Y,Z,W) == halfangle(Y,Z,W) + halfangle(Z,W,Y) + halfangle(W,Y,Z) mod 360
-By triangle_halfangle_sum on Z, Y, W we get orientation(Z,Y,W) == halfangle(Z,Y,W) + halfangle(Y,W,Z) + halfangle(W,Z,Y) mod 360
-By triangle_halfangle_sum on X, W, Y we get orientation(X,W,Y) == halfangle(X,W,Y) + halfangle(W,Y,X) + halfangle(Y,X,W) mod 360
-By triangle_halfangle_sum on X, Z, Y we get orientation(X,Z,Y) == halfangle(X,Z,Y) + halfangle(Z,Y,X) + halfangle(Y,X,Z) mod 360
-By isosceles_triangle_properties on Y, C, B we get distance(B,Y) == distance(C,Y), angle(C,B,Y) == angle(Y,C,B) mod 360, orientation(Y,C,B) == angle(Y,C,B) + halfangle(B,Y,C) mod 360
-By isosceles_triangle_properties on X, A, B we get distance(A,X) == distance(B,X), angle(A,B,X) == angle(X,A,B) mod 360, orientation(X,A,B) == angle(X,A,B) + halfangle(B,X,A) mod 360
-By isosceles_triangle_properties on Z, C, D we get distance(C,Z) == distance(D,Z), angle(C,D,Z) == angle(Z,C,D) mod 360, orientation(Z,C,D) == angle(Z,C,D) + halfangle(D,Z,C) mod 360
-By isosceles_triangle_properties on W, A, D we get distance(A,W) == distance(D,W), angle(A,D,W) == angle(W,A,D) mod 360, orientation(W,A,D) == angle(W,A,D) + halfangle(D,W,A) mod 360
-By isosceles_triangle_properties on X, B, A we get distance(A,X) == distance(B,X), angle(B,A,X) == angle(X,B,A) mod 360, orientation(X,B,A) == angle(X,B,A) + halfangle(A,X,B) mod 360
-By triangle_halfangle_sum on B, X, A we get orientation(B,X,A) == halfangle(B,X,A) + halfangle(X,A,B) + halfangle(A,B,X) mod 360
-By triangle_halfangle_sum on X, B, A we get orientation(X,B,A) == halfangle(X,B,A) + halfangle(B,A,X) + halfangle(A,X,B) mod 360
-By triangle_halfangle_sum on B, Y, C we get orientation(B,Y,C) == halfangle(B,Y,C) + halfangle(Y,C,B) + halfangle(C,B,Y) mod 360
-By triangle_halfangle_sum on Y, C, B we get orientation(Y,C,B) == halfangle(Y,C,B) + halfangle(C,B,Y) + halfangle(B,Y,C) mod 360
-By triangle_halfangle_sum on D, Z, C we get orientation(D,Z,C) == halfangle(D,Z,C) + halfangle(Z,C,D) + halfangle(C,D,Z) mod 360
-By triangle_halfangle_sum on D, W, A we get orientation(D,W,A) == halfangle(D,W,A) + halfangle(W,A,D) + halfangle(A,D,W) mod 360
-By triangle_halfangle_sum on A, X, B we get orientation(A,X,B) == halfangle(A,X,B) + halfangle(X,B,A) + halfangle(B,A,X) mod 360
-By triangle_halfangle_sum on Z, C, D we get orientation(Z,C,D) == halfangle(Z,C,D) + halfangle(C,D,Z) + halfangle(D,Z,C) mod 360
-By triangle_halfangle_sum on W, A, D we get orientation(W,A,D) == halfangle(W,A,D) + halfangle(A,D,W) + halfangle(D,W,A) mod 360
-By triangle_halfangle_sum on X, A, B we get orientation(X,A,B) == halfangle(X,A,B) + halfangle(A,B,X) + halfangle(B,X,A) mod 360
-By angles_equality_imply_halfangles_equality on B, X, A, D, Z, C we get halfangle(B,X,A) == halfangle(D,Z,C) mod 360
-By angles_equality_imply_halfangles_equality on A, X, B, A, W, D we get halfangle(A,W,D) == halfangle(A,X,B) mod 360
-By angles_equality_imply_halfangles_equality on C, Y, B, A, W, D we get halfangle(A,W,D) == halfangle(C,Y,B) mod 360
-By reverse_direction on A, W we get 180 == direction(A,W) - direction(W,A) mod 360
-By reverse_direction on D, Z we get 180 == direction(D,Z) - direction(Z,D) mod 360
-By angles_equality_imply_halfangles_equality on C, Y, B, B, Y, C we get halfangle(B,Y,C) == halfangle(C,Y,B) mod 360
-By angles_equality_imply_halfangles_equality on B, X, A, A, W, D we get halfangle(A,W,D) == halfangle(B,X,A) mod 360
-By reverse_direction on D, A we get 180 == direction(D,A) - direction(A,D) mod 360
-By angles_equality_imply_halfangles_equality on D, W, A, C, Y, B we get halfangle(C,Y,B) == halfangle(D,W,A) mod 360
-By not_in_line_equivalent_to_not_collinear_v0 on Z, X, Y we get not_collinear(X, Y, Z), exists(Line(X,Y))
-By reverse_direction on A, X we get 180 == direction(A,X) - direction(X,A) mod 360
-By reverse_direction on X, W we get 180 == direction(X,W) - direction(W,X) mod 360
-By reverse_direction on Z, X we get 180 == direction(Z,X) - direction(X,Z) mod 360
-By not_in_line_equivalent_to_not_collinear_v0 on Z, W, X we get not_collinear(W, X, Z), exists(Line(W,X))
-By not_in_line_equivalent_to_not_collinear_v0 on Y, W, X we get not_collinear(W, X, Y), exists(Line(W,X))
-By not_in_line_equivalent_to_not_collinear_v0 on W, Z, Y we get not_collinear(W, Y, Z), exists(Line(Y,Z))
-By line_inequality on Line(T,W), Line(X,Y), W we get Line(T,W) != Line(X,Y)
-By line_inequality on Line(T,X), Line(X,Y), Z we get Line(T,X) != Line(X,Y)
-By collinear_definition on Z, X, T we get X in Line(T,Z), T in Line(X,Z), Line(T,Z) == Line(X,Z), 0 == 2 * angle(X,Z,T) mod 360
-By coangle_definition_v0 on X, W, Y we get angle(X,W,Y) == coangle(X,W,Y) + orientation(X,W,Y) mod 360
-By coangle_definition_v0 on Y, Z, X we get angle(Y,Z,X) == coangle(Y,Z,X) + orientation(Y,Z,X) mod 360
-By coangle_definition_v0 on Z, X, Y we get angle(Z,X,Y) == coangle(Z,X,Y) + orientation(Z,X,Y) mod 360
-By coangle_definition_v0 on X, Y, W we get angle(X,Y,W) == coangle(X,Y,W) + orientation(X,Y,W) mod 360
-By coangle_definition_v0 on Z, Y, X we get angle(Z,Y,X) == coangle(Z,Y,X) + orientation(Z,Y,X) mod 360
-By coangle_definition_v0 on X, W, Z we get angle(X,W,Z) == coangle(X,W,Z) + orientation(X,W,Z) mod 360
-By coangle_definition_v0 on Z, X, W we get angle(Z,X,W) == coangle(Z,X,W) + orientation(Z,X,W) mod 360
-By collinear_definition on W, T, Y we get T in Line(W,Y), Y in Line(T,W), Line(T,W) == Line(W,Y), 0 == 2 * angle(T,W,Y) mod 360
-By coangle_definition_v0 on Z, Y, W we get angle(Z,Y,W) == coangle(Z,Y,W) + orientation(Z,Y,W) mod 360
-By coangle_definition_v0 on W, Y, Z we get angle(W,Y,Z) == coangle(W,Y,Z) + orientation(W,Y,Z) mod 360
-By angle_equality_conversions_v0 on D, W, A, B, X, A we get coangle(B,X,A) == coangle(D,W,A) mod 360, orientation(B,X,A) == orientation(D,W,A) mod 360       
-By angle_equality_conversions_v0 on A, X, B, B, Y, C we get coangle(A,X,B) == coangle(B,Y,C) mod 360, orientation(A,X,B) == orientation(B,Y,C) mod 360       
-By angle_equality_conversions_v0 on D, Z, C, D, W, A we get coangle(D,W,A) == coangle(D,Z,C) mod 360, orientation(D,W,A) == orientation(D,Z,C) mod 360       
-By triangle_halfangle_sum on X, Y, T we get orientation(X,Y,T) == halfangle(X,Y,T) + halfangle(Y,T,X) + halfangle(T,X,Y) mod 360
-By triangle_halfangle_sum on T, Y, Z we get orientation(T,Y,Z) == halfangle(T,Y,Z) + halfangle(Y,Z,T) + halfangle(Z,T,Y) mod 360
-By triangle_halfangle_sum on T, X, W we get orientation(T,X,W) == halfangle(T,X,W) + halfangle(X,W,T) + halfangle(W,T,X) mod 360
-By triangle_halfangle_sum on T, X, Y we get orientation(T,X,Y) == halfangle(T,X,Y) + halfangle(X,Y,T) + halfangle(Y,T,X) mod 360
-By triangle_halfangle_sum on Y, Z, T we get orientation(Y,Z,T) == halfangle(Y,Z,T) + halfangle(Z,T,Y) + halfangle(T,Y,Z) mod 360
-By triangle_halfangle_sum on X, W, T we get orientation(X,W,T) == halfangle(X,W,T) + halfangle(W,T,X) + halfangle(T,X,W) mod 360
-By line_unique_intersection_v1 on Line(T,W), Line(X,Y), Y, X we get X not in Line(T,W)
-By line_unique_intersection_v1 on Line(T,X), Line(X,Y), X, Y we get Y not in Line(T,X)
-By same_angle on X, Z, T, W we get coangle(T,X,W) == coangle(Z,X,W) mod 360
-By same_angle on X, Z, T, Y we get coangle(T,X,Y) == coangle(Z,X,Y) mod 360
-By same_angle on Y, W, T, Z we get coangle(T,Y,Z) == coangle(W,Y,Z) mod 360
-By reverse_orientation on W, Z, Y we get orientation(W,Z,Y) == 0 - orientation(Y,Z,W) mod 360
-By reverse_orientation on W, Y, X we get orientation(W,Y,X) == 0 - orientation(X,Y,W) mod 360
-By reverse_orientation on X, Z, Y we get orientation(X,Z,Y) == 0 - orientation(Y,Z,X) mod 360
-By divide_by_2_two_angles on X, W, Y, X, W, T we get coangle(X,W,T) == coangle(X,W,Y) mod 360
-By coangle_definition_v0 on T, X, W we get angle(T,X,W) == coangle(T,X,W) + orientation(T,X,W) mod 360
-By coangle_definition_v0 on T, X, Y we get angle(T,X,Y) == coangle(T,X,Y) + orientation(T,X,Y) mod 360
-By coangle_definition_v0 on X, W, T we get angle(X,W,T) == coangle(X,W,T) + orientation(X,W,T) mod 360
-By coangle_definition_v0 on X, Y, T we get angle(X,Y,T) == coangle(X,Y,T) + orientation(X,Y,T) mod 360
-By coangle_definition_v0 on T, Y, Z we get angle(T,Y,Z) == coangle(T,Y,Z) + orientation(T,Y,Z) mod 360
-By coangle_definition_v0 on Y, Z, T we get angle(Y,Z,T) == coangle(Y,Z,T) + orientation(Y,Z,T) mod 360
-By divide_by_2_two_angles on X, Y, W, X, Y, T we get coangle(X,Y,T) == coangle(X,Y,W) mod 360
-By divide_by_2_two_angles on Y, Z, X, Y, Z, T we get coangle(Y,Z,T) == coangle(Y,Z,X) mod 360
-By not_in_line_equivalent_to_not_collinear_v0 on Y, T, Z we get not_collinear(T, Y, Z), exists(Line(T,X))
-By not_in_line_equivalent_to_not_collinear_v0 on X, W, T we get not_collinear(T, W, X), exists(Line(T,W))
-By sas_similarity on C, B, A, Y, B, X we get similar_triangles(A, B, C, X, B, Y)
-By sas_similarity on D, C, B, Z, C, Y we get similar_triangles(B, C, D, Y, C, Z)
-By sas_similarity on C, D, A, Z, D, W we get similar_triangles(A, C, D, W, Z, D)
-By sas_similarity on D, A, B, W, A, X we get similar_triangles(A, B, D, A, X, W)
-By divide_by_2_two_angles on Z, Y, X, X, W, Z we get coangle(X,W,Z) == coangle(Z,Y,X) mod 360
-By divide_by_2_two_angles on X, W, T, Z, Y, W we get coangle(X,W,T) == coangle(Z,Y,W) mod 360
-By congruence_from_similar_triangles on Y, W, X, W, Y, Z we get congruent_triangles(W, X, Y, Y, Z, W)
-By congruence_from_similar_triangles on Y, Z, T, W, X, T we get congruent_triangles(T, W, X, T, Y, Z)
+By in_imply_collinear on T, X, Z we get collinear(T, X, Z)
+By log_of_2_times_distance on C, D, Z, D we get log(distance(C, D)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(D, Z))
+By log_of_2_times_distance on A, D, D, W we get log(distance(A, D)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(D, W))
+By log_of_2_times_distance on C, B, B, Y we get log(distance(B, C)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(B, Y))
+By log_of_2_times_distance on A, B, B, X we get log(distance(A, B)) == 0.69314718055994530941723212145817656807550013436025525412068000949339362196969471560586332699641868754200148102057068573368552023575813055703267075163507596193072757082837143519030703862389167347112335011536449795523912047517268157493206515552473413952588295045300709532636664265410423915781495204374043038550080194417064167151864471283996817178454695702627163106454615025720740248163777338963855069526066834113727387372292895649354702576265209885969320196505855476470330679365443254763274495125040606943814710468994650622016772042452452961268794654619316517468139267250410380254625965686914419287160829380317271436778265487756648508567407764845146443994046142260319309673540257444607030809608504748663852313818167675143866747664789088143714198549423151997354880375165861275352916610007105355824987941472950929311389715599820565439287170007218085761025236889213244971389320378439353088774825970171559107088236836275898425891853530243634214367061189236789192372314672321720534016492568727477823445353476481149418642386776774406069562657379600867076257199184734022651462837904883062033061144630073719489002743643965002580936519443041191150608094879306786515887090060520346842973619384128965255653968602219412292420757432175748909770675268711581705113700915894266547859596489065305846025866838294002283300538207400567705304678700184162404418833232798386349001563121889560650553151272199398332030751408426091479001265168243443893572472788205486271552741877243002489794540196187233980860831664811490930667519339312890431641370681397776498176974868903887789991296503619270710889264105230924783917373501229842420499568935992206602204654941510613918788574424557751020683703086661948089641218680779020818158858000168811597305618667619918739520076671921459223672060253959543654165531129517598994005600036651356756905124592682574394648316833262490180382424082423145230614096380570070255138770268178516306902551370323405380214501901537402950994226299577964742713815736380172987394070424217997226696297993931270694 + log(distance(B, X))
+By between_implies_angles on A, X, B we get 180 == angle(A, X, B) mod 360, 0 == angle(X, B, A) mod 360, 0 == angle(B, A, X) mod 360
+By between_implies_angles on C, Y, B we get 180 == angle(C, Y, B) mod 360, 0 == angle(Y, B, C) mod 360, 0 == angle(B, C, Y) mod 360
+By between_implies_angles on C, Z, D we get 180 == angle(C, Z, D) mod 360, 0 == angle(Z, D, C) mod 360, 0 == angle(D, C, Z) mod 360
+By between_implies_angles on D, W, A we get 180 == angle(D, W, A) mod 360, 0 == angle(W, A, D) mod 360, 0 == angle(A, D, W) mod 360
+By same_angle_v1 on Z, X, T, Y we get angle(T, Z, Y) == angle(X, Z, Y) mod 360
+By same_angle_v1 on W, Y, T, Z we get angle(T, W, Z) == angle(Y, W, Z) mod 360
+By same_angle_v0 on X, Z, T, Y we get angle(T, X, Y) == angle(Z, X, Y) mod 360
+By same_angle_v1 on Y, T, W, C we get angle(T, Y, C) == angle(W, Y, C) mod 360
+By reverse_direction on X, Y we get 180 == direction(X, Y) - direction(Y, X) mod 360
+By reverse_direction on X, A we get 180 == direction(X, A) - direction(A, X) mod 360
+By reverse_direction on Y, B we get 180 == direction(Y, B) - direction(B, Y) mod 360
+By reverse_direction on A, W we get 180 == direction(A, W) - direction(W, A) mod 360
+By reverse_direction on C, Z we get 180 == direction(C, Z) - direction(Z, C) mod 360
+By reverse_direction on C, B we get 180 == direction(C, B) - direction(B, C) mod 360
+By reverse_direction on W, Y we get 180 == direction(W, Y) - direction(Y, W) mod 360
+By reverse_direction on Z, X we get 180 == direction(Z, X) - direction(X, Z) mod 360
+By same_angle_v3 on T, W, Y, Z we get angle(W, T, Z) == angle(Y, T, Z) + 180 mod 360
+By same_angle_v3 on T, X, Z, W we get angle(X, T, W) == angle(Z, T, W) + 180 mod 360
+By sas_similarity on W, D, Z, A, D, C we get similar_triangles(A, C, D, W, Z, D)
+By sas_similarity on Y, B, X, C, B, A we get similar_triangles(A, B, C, X, B, Y)
+By similar_triangle_basic_properties on C, D, A, Z, D, W we get angle(C, D, A) == angle(Z, D, W) mod 360, angle(D, A, C) == angle(D, W, Z) mod 360, angle(A, C, D) == angle(W, Z, D) mod 360, log(distance(C, D)) + log(distance(D, W)) == log(distance(D, Z)) + log(distance(A, D)), log(distance(A, D)) + log(distance(W, Z)) == log(distance(D, W)) + log(distance(A, C)), log(distance(A, C)) + log(distance(D, Z)) == log(distance(W, Z)) + log(distance(C, D))
+By similar_triangle_basic_properties on C, B, A, Y, B, X we get angle(C, B, A) == angle(Y, B, X) mod 360, angle(B, A, C) == angle(B, X, Y) mod 360, angle(A, C, B) == angle(X, Y, B) mod 360, log(distance(B, C)) + log(distance(B, X)) == log(distance(B, Y)) + log(distance(A, B)), log(distance(A, B)) + log(distance(X, Y)) == log(distance(B, X)) + log(distance(A, C)), log(distance(A, C)) + log(distance(B, Y)) == log(distance(X, Y)) + log(distance(B, C))
+By similar_triangle_basic_properties on T, Y, X, T, W, Z we get angle(T, W, Z) == angle(T, Y, X) mod 360, angle(W, Z, T) == angle(Y, X, T) mod 360, angle(X, T, Y) == angle(Z, T, W) mod 360, log(distance(T, W)) + log(distance(X, Y)) == log(distance(T, Y)) + log(distance(W, Z)), log(distance(W, Z)) + log(distance(T, X)) == log(distance(X, Y)) + log(distance(T, Z)), log(distance(T, X)) + log(distance(T, W)) == log(distance(T, Z)) + log(distance(T, Y))

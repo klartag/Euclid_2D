@@ -4,7 +4,7 @@ from typing import List, Optional
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 
-from ..embedded_constructions import EmbeddedConstruction
+from ..embedded_constructions.embedded_construction import EmbeddedConstruction
 
 
 class ConstructionPattern(ABC):

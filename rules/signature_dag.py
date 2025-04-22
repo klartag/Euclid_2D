@@ -28,7 +28,7 @@ from .rust_code.rust_match import RustMatch
 from .predicates.predicate import Predicate
 
 
-MAX_INTERSECTION_PATTERN_MATCHES = 1_000_000
+MAX_INTERSECTION_PATTERN_MATCHES = 100_000
 """A maximal number of possible matches. Supposed to prevent theorems with an excessive number of 
 objects from freezing the whole program with no option to unfreeze it, but currently only used to warn."""
 

@@ -2,8 +2,9 @@ concyclic_definition_0:
   inputs:
     - A, B, C, D: Point
   where:
-    - distinct(A, B, C)
     - concyclic(A, B, C, D)
+  where_embedding:
+    - distinct(A, B, C)
   conclude:
     - D in Circle(A, B, C)
   metadata: auto
@@ -12,9 +13,10 @@ concyclic_definition_1:
   inputs:
     - A, B, C, D: Point
   where:
+    - concyclic(A, B, C, D)
+  where_embedding:
     - distinct(A, B, C)
     - distinct(B, C, D)
-    - concyclic(A, B, C, D)
   conclude:
     - Circle(A, B, C) == Circle(B, C, D)
   metadata: auto
@@ -26,15 +28,4 @@ in_imply_concyclic:
     - D in Circle(A, B, C)
   conclude:
     - concyclic(A, B, C, D)
-  metadata: auto
-  
-concyclic_implies_not_collinear:
-  inputs:
-    - A, B, C: Point
-    - c: Circle
-  where:
-    - A, B, C in c
-    - distinct(A, B, C)
-  conclude:
-    - not_collinear(A, B, C)
   metadata: auto

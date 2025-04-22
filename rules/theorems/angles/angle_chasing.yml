@@ -2,23 +2,25 @@ same_angle:
   inputs:
     - O, A, B, C: Point
   where:
-    - not_one_of(O, A, B, C)
-    - not_collinear(O, A, C)
     - collinear(O, A, B)
     - exists(Line(O, C))
-  conclude:
-    - coangle(A, O, C) == coangle(B, O, C) mod 360
+  where_embedding:
+    - not_one_of(O, A, B, C)
+    - not_collinear(O, A, C)
+    - A != B
+  possible_conclusions:
+    - orientation(A, O, C) == 90 mod 360 & orientation(B, O, C) == 90 mod 360 => angle(A, O, C) == angle(B, O, C) mod 360
+    - orientation(A, O, C) == -90 mod 360 & orientation(B, O, C) == -90 mod 360 => angle(A, O, C) == angle(B, O, C) mod 360
+    - orientation(A, O, C) == 90 mod 360 & orientation(B, O, C) == -90 mod 360 => angle(A, O, C) == angle(B, O, C) + 180 mod 360
+    - orientation(A, O, C) == 90 mod 360 & orientation(B, O, C) == -90 mod 360 => angle(A, O, C) == angle(B, O, C) + 180 mod 360
   rank: 2
-  trivial_if_equal:
-    - [A, B]
 
 same_angle_converse:
   inputs:
     - O, A, B, C: Point
-  where:
-    - coangle(A, O, C) == coangle(B, O, C) mod 360
-  conclude:
-    - collinear(O, A, B)
+  where_embedding:
+    - A != B
+  possible_conclusions:
+    - angle(A, O, C) == angle(B, O, C) mod 360 => collinear(A, O, B)
+    - angle(A, O, C) == angle(B, O, C) + 180 mod 360 => collinear(A, O, B)
   rank: 2
-  trivial_if_equal: 
-    - [A, B]

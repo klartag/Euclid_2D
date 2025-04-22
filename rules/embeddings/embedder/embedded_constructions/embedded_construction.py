@@ -1,22 +1,25 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import List, Mapping, TypeVar, Tuple, Optional
+import itertools
+from typing import Tuple
+
+from ... import Embedding
 
 from ...embedded_objects.embedded_object import EmbeddedObject
-
-Input = TypeVar('Input', bound=Tuple[EmbeddedObject, ...])
-Output = TypeVar('Output', bound=EmbeddedObject)
+from ...embedder.embedded_geo_objects.embedded_geo_object import ExtendedGeoObject
 
 
 @dataclass
-class EmbeddedConstruction[Input, Output](ABC):
-    input_names: Tuple[str, ...]
+class EmbeddedConstruction(ABC):
+    input_objects: Tuple[ExtendedGeoObject, ...]
     output_name: str
 
-    def get_parameters(self, embedded_objects: Mapping[str, EmbeddedObject]) -> Input:
-        return tuple([embedded_objects[name] for name in self.input_names])
+    def get_parameters(self, partial_embedding: Embedding) -> Tuple[Tuple[EmbeddedObject, ...]]:
+        return tuple(itertools.product(*[partial_embedding.evaluate_object(obj_) for obj_ in self.input_objects]))
 
     @abstractmethod
-    def construct(
-        self, embedded_objects: Mapping[str, EmbeddedObject], distinct_names: Mapping[str, List[str]]
-    ) -> Optional[Output]: ...
+    def construct(self, partial_embedding: Embedding) -> Tuple[EmbeddedObject, ...]: ...
+
+    def __repr__(self):
+        type_name = type(self).__name__
+        return f'{type_name}(output_name={self.output_name}, input_objects={self.input_objects})'

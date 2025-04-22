@@ -12,7 +12,7 @@ perpendicular_angle_conditions:
   inputs:
     - A, B, C: Point
   possible_conclusions:
-    - perpendicular(Line(A, B), Line(B, C)) <=> coangle(A, B, C) == 0 mod 360
+    - perpendicular(Line(A, B), Line(B, C)) <=> angle(A, B, C) == orientation(A, B, C) mod 360
 
 perpendicular_line_definition:
   inputs:
@@ -40,9 +40,10 @@ altitude_definition:
     - A, B, C: Point
     - l: Line
   where:
-    - not_collinear(A, B, C)
     - A in l
     - perpendicular(l, Line(B, C))
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - l == altitude(A, B, C)
 

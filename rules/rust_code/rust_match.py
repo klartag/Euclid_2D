@@ -1,4 +1,4 @@
-import linear_b
+from . import linear_b
 from typing import TypeVar, Any
 
 from rules.proof_checker_utils import KNOWN_KEYS

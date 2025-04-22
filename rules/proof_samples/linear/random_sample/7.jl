@@ -5,20 +5,20 @@ c, d: Circle
 distinct(A, B, C, D, E, F, G, H)
 distinct(f, g, h, i, j)
 distinct(c, d)
-f == Line(B, A)
+f == Line(A, B)
 g == Line(B, C)
-h == Line(C, A)
+h == Line(A, C)
 D == projection(A, g)
 E == projection(B, h)
 F == projection(C, f)
-i == Line(D, A)
+i == Line(A, D)
 j == Line(B, E)
 G == line_intersection(i, j)
 c == Circle(B, D, G)
-d == Circle(F, A, E)
+d == Circle(A, E, F)
 H in d, c
 
 Need to prove:
-false() # collinear(D, G, H)
+false()
 
 Proof:

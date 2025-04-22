@@ -20,6 +20,89 @@ from .proof_gen.proof_generator import prove
 from util import BASE_PATH
 
 
+# Problems from Yoel Geva
+GEVA_PROBLEM_NAMES = ['geva/p288_1.jl', 'geva/p292_4.jl', 'geva/p301_8.jl']
+
+# Problems from the Geometry in Figures book
+FIGURES_PROBLEM_NAMES = [
+    # Chapter 1
+    'figures/1_1.jl',
+    'figures/1_3.jl',
+    'figures/1_4.jl',
+    'figures/1_5.jl',
+    'figures/1_6.jl',
+    'figures/1_7.jl',
+    'figures/1_8.jl',
+    'figures/1_9.jl',
+    'figures/1_10.jl',
+    'figures/1_11.jl',
+    'figures/1_12.jl',
+    'figures/1_13.jl',
+    'figures/1_15.jl',
+    'figures/1_16.jl',
+    'figures/1_17.jl',
+    'figures/1_18.jl',
+    'figures/1_19.jl',
+    'figures/1_20.jl',
+    'figures/1_21.jl',
+    'figures/1_22.jl',
+    'figures/1_23.jl',
+    'figures/1_24.jl',
+    # Chapter 3
+    'figures/3_12.jl',
+    'figures/3_13.jl',
+    # Chapter 4
+    'figures/4_1_1.jl',
+    'figures/4_3_4.jl',
+    'figures/4_6_1.jl',
+]
+
+# Problems from IMOs
+IMO_G1_PROBLEMS = [
+    'IMO/2008/G1.jl',
+    'IMO/2010/G1.jl',
+    'IMO/2012/G1.jl',
+    'IMO/2013/G1.jl',
+    'IMO/2014/G1.jl',
+    'IMO/2015/G1.jl',
+    'IMO/2016/G1.jl',
+    'IMO/2017/G1.jl',
+    'IMO/2018/G1.jl',
+    'IMO/2019/G1.jl',
+    'IMO/2020/G1.jl',
+    'IMO/2021/G1.jl',
+    'IMO/2022/G1.jl',
+    'IMO/2023/G1.jl',
+]
+
+IMO_G2_PROBLEMS = [
+    'IMO/2006/G2.jl',
+    'IMO/2007/G2.jl',
+    'IMO/2008/G2.jl',
+    'IMO/2008/G2_converse.jl',
+    'IMO/2009/G2.jl',
+    'IMO/2010/G2.jl',
+    'IMO/2010/G2_converse.jl',
+    'IMO/2012/G2.jl',
+    'IMO/2013/G2.jl',
+    'IMO/2015/G2.jl',
+    'IMO/2016/G2.jl',
+    'IMO/2017/G2.jl',
+    'IMO/2018/G2.jl',
+    'IMO/2019/G2.jl',
+    'IMO/2020/G2.jl',
+    'IMO/2021/G2.jl',
+    'IMO/2022/G2.jl',
+    'IMO/2023/G2.jl',
+]
+
+IMO_G3_PROBLEMS = [
+    'IMO/2019/G3.jl',
+]
+
+IMO_SHORTLIST_PROBLEMS = IMO_G1_PROBLEMS + IMO_G2_PROBLEMS + IMO_G3_PROBLEMS
+
+
 @pytest.fixture(autouse=True)
 def load_constructions_and_macros_for_tests():
     load_constructions_and_macros()
@@ -27,53 +110,7 @@ def load_constructions_and_macros_for_tests():
 
 @pytest.mark.parametrize(
     "problem_name",
-    [
-        # Problems from Yoel Geva
-        'geva/p288_1.jl',
-        'geva/p292_4.jl',
-        'geva/p301_8.jl',
-        # Problems from the Geometry in Figures book
-        # Chapter 1
-        'figures/1_1.jl',
-        'figures/1_3.jl',
-        'figures/1_4.jl',
-        'figures/1_5.jl',
-        'figures/1_6.jl',
-        'figures/1_7.jl',
-        'figures/1_8.jl',
-        'figures/1_9.jl',
-        'figures/1_10.jl',
-        'figures/1_11.jl',
-        'figures/1_12.jl',
-        'figures/1_13.jl',
-        'figures/1_15.jl',
-        'figures/1_16.jl',
-        'figures/1_17.jl',
-        'figures/1_18.jl',
-        'figures/1_19.jl',
-        'figures/1_20.jl',
-        'figures/1_21.jl',
-        'figures/1_22.jl',
-        'figures/1_23.jl',
-        'figures/1_24.jl',
-        # Chapter 3
-        'figures/3_12.jl',
-        'figures/3_13.jl',
-        # Chapter 4
-        'figures/4_1_1.jl',
-        'figures/4_3_4.jl',
-        'figures/4_6_1.jl',
-        # Problems from the IMO 2021 Shortlist
-        'IMO/2021/G1.jl',
-        'IMO/2021/G2.jl',
-        'IMO/2021/G4.jl',
-        # Problems from the IMO 2022 Shortlist
-        'IMO/2022/G1.jl',
-        'IMO/2022/G2.jl',
-        'IMO/2022/G3.jl',
-        'IMO/2022/G4.jl',
-        'IMO/2022/G5.jl',
-    ],
+    GEVA_PROBLEM_NAMES + FIGURES_PROBLEM_NAMES + IMO_SHORTLIST_PROBLEMS,
 )
 def test_check_proof(problem_name: str):
     '''
@@ -88,12 +125,9 @@ def test_check_proof(problem_name: str):
 
 @pytest.mark.parametrize(
     "problem_name",
-    [
-        # Problems from Yoel Geva
-        'geva/p288_1.jl',
-        'geva/p292_4.jl',
-        'geva/p301_8.jl',
-        # Problems from the Geometry in Figures book
+    GEVA_PROBLEM_NAMES
+    + [
+        # Some problems from the Geometry in Figures book
         'figures/1_1.jl',
         'figures/1_3.jl',
         'figures/1_4.jl',
@@ -117,9 +151,9 @@ def test_proof_shuffle():
     '''
     Tests that shuffling the names of objects in a proof
     does not make the proof invalid.
-    (Specifically, testing this on problem 4.1.1 from the Geometry in Figures book)
+    (Specifically, testing this on problem 1.1 from the Geometry in Figures book)
     '''
-    proof = Proof.parse((BASE_PATH / 'rules/proof_samples/figures/4_1_1.jl').open().read())
+    proof = Proof.parse((BASE_PATH / 'rules/proof_samples/figures/1_1.jl').open().read())
     shuffled = proof.shuffled()
     checker = ProofChecker(shuffled)
     checker.check()

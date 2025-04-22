@@ -34,12 +34,6 @@ circle_circle_other_intersection:
   - {P: Point}
   - {'c, d': Circle}
   where: ['P in c, d']
-coangle:
-  construct:
-  - {c: Angle}
-  inputs:
-  - {'A, B, C': Point}
-  where: [A != B, C != B]
 distance:
   construct:
   - {d: Scalar}
@@ -86,7 +80,6 @@ line_circle_tangent_point:
   inputs:
   - {l: Line}
   - {c: Circle}
-  where: ['tangent(l, c)']
 line_intersection:
   conclude: ['P in l, m']
   construct:
@@ -100,6 +93,7 @@ orientation:
   - {o: Angle}
   inputs:
   - {'A, B, C': Point}
+  preprocess: cyclic
   where: [A != B, C != B]
 orthocenter:
   construct:
@@ -108,6 +102,14 @@ orthocenter:
   - {'A, B, C': Point}
   preprocess: symmetric
   where: ['not_collinear(A, B, C)']
+point_circle_tangent_line:
+  conclude: [P in l, 'tangent(l, c)']
+  construct:
+  - {l: Line}
+  inputs:
+  - {P: Point}
+  - {c: Circle}
+  where: [P in c]
 power_of_a_point:
   construct:
   - {x: Scalar}

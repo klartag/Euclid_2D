@@ -4,6 +4,8 @@ orthocenter_concurrency:
   where:
     - exists(altitude(A, B, C))
     - exists(altitude(B, C, A))
+  where_embedding:
+    - not_one_of(orthocenter(A, B, C), A, B, C)
   conclude:
     - orthocenter(A, B, C) in altitude(A, B, C)
     - orthocenter(A, B, C) in altitude(B, C, A)

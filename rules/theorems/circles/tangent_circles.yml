@@ -18,16 +18,16 @@ circle_tangency_unique_intersection:
   conclude:
     - A == B
 
-circle_tangency_from_chord_angle_sum:
-  inputs:
-    - A, B, C, D, E: Point
-    - e, f: Circle
-  where:
-    - e != f
-    - A, B, C in e
-    - C, D, E in f
-  possible_conclusions:
-    - angle(A, B, C) + angle(C, D, E) == angle(A, C, E) mod 360 => tangent(e, f)
-    - angle(A, B, C) + angle(C, D, E) == angle(A, C, E) + 180 mod 360 => tangent(e, f)
-  rank: 5
+# circle_tangency_from_chord_angle_sum:
+#   inputs:
+#     - A, B, C, D, E: Point
+#     - e, f: Circle
+#   where:
+#     - e != f
+#     - A, B, C in e
+#     - C, D, E in f
+#   possible_conclusions:
+#     - angle(A, B, C) + angle(C, D, E) == angle(A, C, E) mod 360 => tangent(e, f)
+#     - angle(A, B, C) + angle(C, D, E) == angle(A, C, E) + 180 mod 360 => tangent(e, f)
+#   rank: 5
 

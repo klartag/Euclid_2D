@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
-from decimal import Decimal
+from mpmath import mpf
 from typing import Self
 
+from ...rule_utils import POINT
 from .embedded_object import EmbeddedObject, EPSILON
 
 
@@ -12,11 +13,14 @@ class EmbeddedPoint(EmbeddedObject):
     Represents the point (x, y).
     '''
 
-    x: Decimal
-    y: Decimal
+    x: mpf
+    y: mpf
 
-    def is_equal(self, other: 'EmbeddedPoint') -> bool:
-        return abs(self.x - other.x) < EPSILON and abs(self.y - other.y) < EPSILON
+    def _type(self) -> str:
+        return POINT
+
+    def is_equal(self, other: EmbeddedObject) -> bool:
+        return other._type() == POINT and abs(self.x - other.x) < EPSILON and abs(self.y - other.y) < EPSILON
 
     def __add__(self, other: 'EmbeddedPoint') -> 'EmbeddedPoint':
         return EmbeddedPoint(self.x + other.x, self.y + other.y)
@@ -36,26 +40,26 @@ class EmbeddedPoint(EmbeddedObject):
 
         return abs(self.x * other.y - self.y * other.x) < EPSILON**2
 
-    def scalar_product(self, other: 'EmbeddedPoint') -> Decimal:
+    def scalar_product(self, other: 'EmbeddedPoint') -> mpf:
         return self.x * other.x + self.y * other.y
 
-    def length_squared(self) -> Decimal:
+    def length_squared(self) -> mpf:
         return self.scalar_product(self)
 
-    def length(self) -> Decimal:
+    def length(self) -> mpf:
         return self.length_squared().sqrt()
 
-    def scale(self, ratio: Decimal) -> 'EmbeddedPoint':
+    def scale(self, ratio: mpf) -> 'EmbeddedPoint':
         return EmbeddedPoint(self.x * ratio, self.y * ratio)
 
     def normalize(self) -> 'EmbeddedPoint':
         return self.scale(1 / self.length())
-    
+
     def to_dict(self) -> dict:
-        return {
-            'x': str(self.x),
-            'y': str(self.y)
-        }
-    
+        return {'x': str(self.x), 'y': str(self.y)}
+
     def from_dict(data: dict) -> Self:
-        return EmbeddedPoint(Decimal(data['x']), Decimal(data['y']))
+        return EmbeddedPoint(mpf(data['x']), mpf(data['y']))
+
+    def to_str(self, accuracy: int) -> str:
+        return f'({round(self.x, accuracy)}, {round(self.y, accuracy)})'

@@ -27,13 +27,25 @@ parallel_and_intersecting:
 parallel_line_angles:
   inputs:
     - A, B, C, D: Point
-  where:
+  where_embedding:
     - Line(A, B) != Line(C, D)
-    - exists(coangle(A, B, C))
-    - parallel_lines: parallel(Line(A, B), Line(C, D))
-    - equal_coangles: coangle(A, B, C) == coangle(D, C, B) mod 360
   possible_conclusions:
-    - parallel_lines <=> equal_coangles
+    - angle(A, B, C) == angle(D, C, B) mod 360 => parallel(Line(A, B), Line(C, D))
+    - angle(A, B, C) == angle(D, C, B) + 180 mod 360 => parallel(Line(A, B), Line(C, D))
+
+parallel_line_angles_reverse:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - exists(Line(B, C))
+    - parallel(Line(A, B), Line(C, D))
+  where_embedding:
+    - Line(A, B) != Line(C, D)
+  possible_conclusions:
+    - orientation(A, B, C) == 90 mod 360 & orientation(D, C, B) == 90 mod 360 => angle(A, B, C) == angle(D, C, B) mod 360
+    - orientation(A, B, C) == -90 mod 360 & orientation(D, C, B) == -90 mod 360 => angle(A, B, C) == angle(D, C, B) mod 360
+    - orientation(A, B, C) == 90 mod 360 & orientation(D, C, B) == -90 mod 360 => angle(A, B, C) == angle(D, C, B) + 180 mod 360
+    - orientation(A, B, C) == -90 mod 360 & orientation(D, C, B) == 90 mod 360 => angle(A, B, C) == angle(D, C, B) + 180 mod 360
 
 parallel_lines_are_transitive:
   inputs:

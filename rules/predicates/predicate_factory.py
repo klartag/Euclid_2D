@@ -66,7 +66,7 @@ def parse_predicate(predicate_data: str, obj_map: dict[str, GeoObject]) -> Predi
     The string representation of the predicate is in the format name(x, y, z).
     The names in the predicate might include unnamed objects, such as Line(a, b) or distance(a, b).
 
-    There are for special predicate formats:
+    There are four special predicate formats:
     - equals, which can be stated as ==
     - not_equals, which can be stated as !=
     - equals_mod, which can be stated as A == B mod C

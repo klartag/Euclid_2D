@@ -1,9 +1,9 @@
-import math
 from typing import TYPE_CHECKING, Mapping
+from mpmath import mp
 
 from ..predicates.global_predicates import get_constructions
 from ..symmetry import Symmetry
-from ..rule_utils import SCALAR, ProofCheckError, union, GeometryError
+from ..rule_utils import LITERAL, SCALAR, ANGLE, ProofCheckError, union, GeometryError
 
 from .geo_object import ONE, ZERO, GeoObject
 from .equation_object import EquationObject
@@ -54,10 +54,10 @@ class Construction:
         """
         Constructs an object using the given arguments.
         """
-        if len(args) != len(self.signature) or any(arg.type != sig.type for arg, sig in zip(args, self.signature)):
-            print('===============================================')
-            print(args)
-            print(self.name)
+        if len(args) != len(self.signature) or not all(
+            arg.type == sig.type or (arg.type == LITERAL and sig.type in [SCALAR, ANGLE])
+            for arg, sig in zip(args, self.signature)
+        ):
             raise ProofCheckError(f'Construction {self.name} received illegal arguments: {args}')
 
         args = self.symmetry.canonical_order(args)
@@ -85,6 +85,7 @@ class ConstructionObject(GeoObject):
         self.constructor = constructor
         self.components = components
         self.id = id or hash(self.name)
+        self.depth = max([component.depth for component in components]) + 1
 
     def substitute(self, replacements: Mapping[GeoObject, GeoObject], ignore_self=False) -> GeoObject:
         if self in replacements and not ignore_self:
@@ -167,7 +168,7 @@ def as_log_equation(self) -> dict[GeoObject, float] | None:
     if (val := self.as_literal()) is not None:
         if val <= 0:
             return None
-        return {ONE: math.log(val)}
+        return {ONE: mp.log(val)}
     if self.type == SCALAR:
         return {ConstructionObject.from_args('log', (self,)): 1}
     return None

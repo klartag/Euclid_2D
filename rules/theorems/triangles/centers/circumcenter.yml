@@ -2,9 +2,10 @@ circumcenter_perpendicular_bisectors:
   inputs:
     - A, B, C: Point
   where:
-    - not_collinear(A, B, C)
     - exists(perpendicular_bisector(A, B))
     - exists(perpendicular_bisector(B, C))
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - circumcenter(A, B, C) in perpendicular_bisector(A, B)
     - circumcenter(A, B, C) in perpendicular_bisector(B, C)

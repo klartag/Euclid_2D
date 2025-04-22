@@ -1,10 +1,15 @@
 import heapq
+from typing import Optional
+
+from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
 
 from .linear_algebra_tracker import LinearAlgebraTracker
 
 from ..predicates.predicate_factory import predicate_from_args
 
 from ..theorem import Theorem
+
+from ..embeddings import Embedding
 
 from ..proof_checker_utils import (
     ADD_CFG,
@@ -115,8 +120,11 @@ class GeometryTracker:
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
     _linear_algebra: LinearAlgebraTracker
+
     numeric_tracker: NumericTracker
     """Tracks 2D embeddings of the geometric configurations."""
+    embedding_tracker: Optional[Embedding]
+    """A new numeric tracker to track 2D embeddings of the geometric configurations."""
 
     def __init__(self):
         self._objects = UnionFind()
@@ -125,6 +133,7 @@ class GeometryTracker:
 
         self._predicates = set()
         self._asserted_predicates = set()
+        self.embedding_tracker = None
 
         self.get_object(ONE, ADD_CFG)
 
@@ -132,13 +141,13 @@ class GeometryTracker:
 
         self.numeric_tracker = NumericTracker(NUMERIC_PRECISION)
 
+
     def load_embeds(self, proof: Proof):
         """
         Loads the data of the known point embeddings.
         """
-        for obj, embed in proof.embeds.items():
-            for pred in self.numeric_tracker.add_object(obj, embed):
-                self.add_predicate(pred, ADD_CFG, 'From numeric tracker')
+        if proof.embedding is not None:
+            self.embedding_tracker = proof.embedding.shallow_copy()
 
     def get_object(self, obj: GeoObject, config: StepConfig) -> GeoObject:
         """
@@ -349,6 +358,14 @@ class GeometryTracker:
                 self.process_angle(obj)
             case rule_utils.ORIENTATION:
                 self.process_orientation(obj)
+
+        if self.embedding_tracker is not None and isinstance(obj, ConstructionObject) and obj.name not in self.embedding_tracker:
+            try:
+                embedded_construction_object_options = self.embedding_tracker.evaluate_construction_object(obj)
+                if len(embedded_construction_object_options) == 1:
+                    self.embedding_tracker[obj.name] = embedded_construction_object_options[0]
+            except UndefinedEmbeddingError:
+                pass
 
     def add_equal_angle(self, pred: Predicate, mod: int | None):
         """
@@ -813,7 +830,7 @@ class GeometryTracker:
         2. Predicates on these objects.
         3. Embeddings of the objects into R^2, if they are present.
         """
-        # self.load_embeds(proof)
+        self.load_embeds(proof)
         # Adding the objects defined by the proof.
         for obj in proof.all_objects.values():
             self.get_object(obj, ADD_CFG)
@@ -821,6 +838,6 @@ class GeometryTracker:
         # Adding the assumptions of the proof.
         for pred in proof.assumption_predicates:
             self.add_predicate(pred, ADD_CFG, 'Assumption predicate')
-        
+
         for pred in proof.auxiliary_predicates:
             self.add_predicate(pred, ADD_CFG, 'Auxiliary predicate')

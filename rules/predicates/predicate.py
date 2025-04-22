@@ -130,7 +130,7 @@ class Predicate:
         """
         Checks if a predicate is an "open" predicate, which is almost always satisfied.
         """
-        return 'not' in self.name or self.name == 'triangle' or 'distinct' in self.name
+        return 'not' in self.name or self.name in ['triangle', 'distinct', 'exists', 'convex', 'acute_triangle']
 
     def potential(self, torch_obj_map: 'dict[str, Point|Line|Circle|Triangle]', eps: float = 1e-1):
         """
@@ -176,9 +176,9 @@ class Predicate:
                 elif isinstance(args[0], Line):
                     p1, p2 = args[0].p1, args[0].p2
                     line = args[1]
-                    expr = (line.distance(p1) + line.distance(p2)) / 2 # type: ignore
+                    expr = (line.distance(p1) + line.distance(p2)) / 2  # type: ignore
                 elif isinstance(args[0], Circle):
-                    expr = (args[0].center.distance(args[1].center) + torch.abs(args[0].radius - args[1].radius))/2  # type: ignore
+                    expr = (args[0].center.distance(args[1].center) + torch.abs(args[0].radius - args[1].radius)) / 2  # type: ignore
                 elif self.components[0].type == ORIENTATION:
                     expr = -args[0] * args[1]  # type: ignore
                 else:
@@ -187,21 +187,20 @@ class Predicate:
             case 'equals_mod_360':
                 assert len(args) == 2
                 device = args[0].device  # type: ignore
-                diff = (torch.remainder((args[0] - args[1]) / 360, torch.tensor(1, device=device)))
-                loss = torch.min(diff.abs(), 1-diff.abs()) ** 2
+                diff = torch.remainder((args[0] - args[1]) / 360, torch.tensor(1, device=device))
+                loss = torch.min(diff.abs(), 1 - diff.abs()) ** 2
             case 'not_equals_mod_360':
                 assert len(args) == 2
                 device = args[0].device  # type: ignore
-                diff = (torch.remainder((args[0] - args[1]) / 360, torch.tensor(1, device=device)))
-                expr = torch.min(diff.abs(), 1-diff.abs()) ** 2
+                diff = torch.remainder((args[0] - args[1]) / 360, torch.tensor(1, device=device))
+                expr = torch.min(diff.abs(), 1 - diff.abs()) ** 2
                 loss = torch_hinge_loss(expr, eps)  # type: ignore
             case 'collinear':
                 assert len(args) == 3 and all(isinstance(arg, Point) for arg in args)
                 dist1 = args[0].distance(args[1])
                 dist2 = args[1].distance(args[2])
                 dist3 = args[0].distance(args[2])
-                loss = torch.min(torch.abs(dist1 + dist2 - dist3) ** 2,
-                                    torch.abs(dist1 + dist3 - dist2) ** 2)
+                loss = torch.min(torch.abs(dist1 + dist2 - dist3) ** 2, torch.abs(dist1 + dist3 - dist2) ** 2)
                 loss = torch.min(loss, torch.abs(dist2 + dist3 - dist1) ** 2)
 
                 # line = Line(args[0], args[1])  # type: ignore
@@ -210,12 +209,12 @@ class Predicate:
                 assert len(args) == 3 and all(isinstance(arg, Point) for arg in args)
                 line = Line(args[0], args[1])  # type: ignore
                 colinear_loss = line.distance(args[2]) ** 2  # type: ignore
-                
+
                 d1 = args[0].distance(args[1])
                 d2 = args[1].distance(args[2])
                 d3 = args[0].distance(args[2])
                 not_between_loss = torch_hinge_loss(torch.abs(d1 + d2 - d3), eps) ** 2
-                
+
                 loss = colinear_loss + not_between_loss
 
             case 'concyclic':
@@ -289,9 +288,11 @@ class Predicate:
                     center1, radius1 = args[0].center, args[0].radius
                     center2, radius2 = args[1].center, args[1].radius
                     distance = center1.distance(center2)
-                    possible_losses = [torch.abs(distance - radius1 - radius2),
-                                       torch.abs(radius1 - distance - radius2),
-                                       torch.abs(radius2 - distance - radius1)]
+                    possible_losses = [
+                        torch.abs(distance - radius1 - radius2),
+                        torch.abs(radius1 - distance - radius2),
+                        torch.abs(radius2 - distance - radius1),
+                    ]
                     loss = torch.min(torch.stack(possible_losses)) ** 2
                 else:
                     print(self.name, args)
@@ -300,7 +301,7 @@ class Predicate:
                 assert len(args) == 2 and isinstance(args[0], Line) and isinstance(args[1], Line)
                 line1, line2 = args[0], args[1]
                 v1, v2 = line1.unit_direction(), line2.unit_direction()
-                loss = 100*torch.min((v1 - v2).norm() ** 2, (v1 + v2).norm() ** 2)
+                loss = 100 * torch.min((v1 - v2).norm() ** 2, (v1 + v2).norm() ** 2)
                 # angle1, angle2 = line1.line_angle(), line2.line_angle()
                 # device = angle1.device  # type: ignore
                 # diff = (torch.remainder((angle1 - angle2) / torch.pi, torch.tensor(1, device=device)))

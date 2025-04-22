@@ -1,43 +1,23 @@
-coangle_definition:
-  inputs:
-    - A, B, C: Point
-  where:
-    - sum: angle(A, B, C) == coangle(A, B, C) + orientation(A, B, C) mod 360
-  possible_conclusions:
-    - exists(angle(A, B, C)) => sum
-    - exists(coangle(A, B, C)) => sum
-  metadata: auto
-
-angle_equality_conversions:
+divide_by_2_mod_180:
   inputs:
     - A, B, C, A', B', C': Point
   where:
-    - angle_equality: angle(A, B, C) == angle(A', B', C') mod 360
-    - coangle_equality: coangle(A, B, C) == coangle(A', B', C') mod 360
-    - orientation_equality: orientation(A, B, C) == orientation(A', B', C') mod 360
+    - 2 * angle(A, B, C) == 2 * angle(A', B', C') mod 360
   possible_conclusions:
-    - angle_equality <=> coangle_equality & orientation_equality
+    - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == 90 mod 360 => angle(A, B, C) == angle(A', B', C') mod 360
+    - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == -90 mod 360 => angle(A, B, C) == angle(A', B', C') mod 360
+    - orientation(A, B, C) == 90 mod 360 & orientation(A', B', C') == -90 mod 360 => angle(A, B, C) == angle(A', B', C') + 180 mod 360
+    - orientation(A, B, C) == -90 mod 360 & orientation(A', B', C') == 90 mod 360 => angle(A, B, C) == angle(A', B', C') + 180 mod 360
   trivial_if_equal:
     - [[A, B, C], [A', B', C']]
-
-  metadata: auto
-
-orientations_are_cyclic:
-  inputs:
-    - A, B, C: Point
-  where:
-    - distinct(A, B, C)
-    - exists(orientation(A, B, C))
-  conclude:
-    - orientation(A, B, C) == orientation(B, C, A) mod 360
-    - orientation(A, B, C) == orientation(C, A, B) mod 360
 
 reverse_orientation:
   inputs:
     - A, B, C: Point
   where:
-    - not_collinear(A, B, C)
     - exists(orientation(A, B, C))
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - orientation(A, B, C) == - orientation(C, B, A) mod 360
   metadata: auto

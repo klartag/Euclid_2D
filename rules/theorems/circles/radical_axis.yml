@@ -3,9 +3,10 @@ radical_axis_definition:
     - A: Point
     - e, f: Circle
   where:
-    - e != f
     - equal_power_of_point: power_of_a_point(A, e) == power_of_a_point(A, f)
     - on_radical_axis: A in radical_axis(e, f)
+  where_embedding:
+    - e != f
   possible_conclusions:
     - on_radical_axis <=> equal_power_of_point
 
@@ -25,9 +26,10 @@ radical_axis_of_intersecting_circles:
     - A, B: Point
     - c, d: Circle
   where:
+    - A, B in c, d
+  where_embedding:
     - c != d
     - A != B
-    - A, B in c, d
   possible_conclusions:
     - exists(Line(A, B)) => radical_axis(c, d) == Line(A, B)
     - exists(radical_axis(c, d)) => radical_axis(c, d) == Line(A, B)
@@ -39,9 +41,10 @@ radical_axis_of_tangent_circles:
     - l: Line
     - c, d: Circle
   where:
-    - c != d
     - tangent(c, d)
     - O in l, c, d
+  where_embedding:
+    - c != d
   possible_conclusions:
     - tangent(l, c) => radical_axis(c, d) == l & tangent(l, d)
     - radical_axis(c, d) == l => tangent(l, c) & tangent(l, d)

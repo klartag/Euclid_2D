@@ -1,23 +1,18 @@
-from typing import Type, TypeVar, List, Optional
-from dataclasses import dataclass
-
-from .construction_pattern import ConstructionPattern
+from typing import List, Optional
 
 from ....geometry_objects.geo_object import GeoObject
 from ....geometry_objects.construction_object import ConstructionObject
 from ....predicates.predicate import Predicate
-from ..embedded_constructions import EmbeddedConstruction
+
+from ...method_dictionaries import CONSTRUCTION_METHOD_DICTIONARY
+
+from ..embedded_constructions.explicit_embedded_construction import ExplicitEmbeddedConstruction
+
+from .construction_pattern import ConstructionPattern
 
 
-C = TypeVar('C', bound=EmbeddedConstruction)
-
-
-@dataclass
-class ExplicitConstructionPattern[C](ConstructionPattern):
-    construction_name: str
-    construction_type: Type[C]
-
-    def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[C]:
+class ExplicitConstructionPattern(ConstructionPattern):
+    def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[ExplicitEmbeddedConstruction]:
         if len(predicates) != 1:
             return None
         predicate = predicates[0]
@@ -27,9 +22,9 @@ class ExplicitConstructionPattern[C](ConstructionPattern):
         rhs = predicate.components[1]
         if not (lhs.name == object_.name and isinstance(rhs, ConstructionObject)):
             return None
-        if rhs.constructor.name != self.construction_name:
+        if rhs.constructor.name not in CONSTRUCTION_METHOD_DICTIONARY.keys():
             return None
-        rhs_names = tuple([obj.name for obj in rhs.components])
-        if not (object_.name not in rhs_names and all(name.isalnum() for name in rhs_names)):
+        if any([involved_object.name == object_.name for involved_object in rhs.involved_objects()]):
             return None
-        return self.construction_type(rhs_names, object_.name)
+        construction_method = CONSTRUCTION_METHOD_DICTIONARY[rhs.constructor.name]
+        return ExplicitEmbeddedConstruction(rhs.components, object_.name, construction_method)

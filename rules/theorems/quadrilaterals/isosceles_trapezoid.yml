@@ -13,12 +13,13 @@ isosceles_trapezoid_sufficient_conditions:
   inputs:
     - A, B, C, D: Point
   where:
-    - Line(A, B) != Line(C, D)
     - parallel(Line(A, B), Line(C, D))
     - distance(D, A) == distance(B, C)
-    - coangle(A, B, C) == coangle(D, A, B) mod 360
-  conclude:
-    - isosceles_trapezoid(A, B, C, D)
+  where_embedding:
+    - Line(A, B) != Line(C, D)
+  possible_conclusions:
+    - angle(A, B, C) == angle(D, A, B) mod 360 => isosceles_trapezoid(A, B, C, D)
+    - angle(A, B, C) == angle(D, A, B) + 180 mod 360 => isosceles_trapezoid(A, B, C, D)
 
 isosceles_trapezoid_symmetry:
   inputs:

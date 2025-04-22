@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
 import glob
-import argparse
 import os
 from pathlib import Path
 import pickle
@@ -15,30 +14,27 @@ from typing import Callable, Optional
 
 from frozendict import frozendict
 
-from ..embeddings.embedder.embedder import DiagramEmbedder
-from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from rules.embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+
 from ..trimmers.old_trimmer import max_depth_trim
 
 from ..interactive_predicate_checker import InteractivePredicateChecker
-from ..proof_prettifier import ProofPrettifier
-from ..trimmers.trimmer import ProofTrimmer
 
 
 from ..predicates.predicate import Predicate
 from ..predicates.global_predicates import get_constructions
-from ..predicates.predicate_factory import parse_predicate, predicate_from_args
+from ..predicates.predicate_factory import predicate_from_args
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
-from .. import pred_config
 from ..geometry_objects.construction_object import Construction, ConstructionObject
-from ..proof import ObjDefineStep, Proof, Step, TheoremStep
+from ..embeddings.embedded_predicate_value import EmbeddedPredicateValue
+from ..proof import CommentStep, ObjDefineStep, Proof, Step, TheoremStep
 from ..proof_checker import CHECK_CFG, TRUST_NO_ADD_CFG, ProofChecker, involved_objects
 from ..proof_checker_utils import KNOWN_KEYS
 from .gen_utils import is_trivial
 from .scores import StepSuggestion, get_result_predicates
 from ..signature_dag import IntersectPattern, SignatureDag
 from ..rule_utils import LITERAL, GeometryError, IllegalObjectError, ProofCheckError
-from ..trimmers.trimmer import ProofTrimmer
 from ..theorem import Theorem
 from util import BASE_PATH
 
@@ -93,7 +89,6 @@ class ProofGenerator:
         self.target_objects = list(proof.target_objects.values())
         self.target_predicates = proof.target_predicates
         self.checker = ProofChecker(proof)
-        print('============ load the assumption =============')
         self.checker.geometry_tracker.load_assumptions(proof)
         self.verbose = verbose
         self.proof_steps = []
@@ -119,7 +114,8 @@ class ProofGenerator:
                 if self.verbose:
                     print(f'Step {i}')
                 if self.check_finished():
-                    print('Success!')
+                    if self.verbose:
+                        print('Success!')
                     return
                 if timeout is not None and time.process_time() - start_time > timeout:
                     raise ProofGeneratorError(ProofGeneratorErrorType.Timeout)
@@ -131,11 +127,14 @@ class ProofGenerator:
                     if isinstance(self.actions_per_step, int)
                     else self.actions_per_step(len(self.proof_steps))
                 )
-                print(f'=========== {i}th try of finding up to {actions_per_step} steps =========')
+                if self.verbose:
+                    print(f'=========== {i}th try of finding up to {actions_per_step} steps =========')
                 steps = self.find_steps(actions_per_step)
-                print(f'=========== found {len(steps)} steps =========')
+                if self.verbose:
+                    print(f'=========== found {len(steps)} steps =========')
                 if len(steps) == 0:
                     raise ProofGeneratorError(ProofGeneratorErrorType.NoMoreSteps)
+                self.proof_steps.append(CommentStep(f"Step {i} - Found {len(steps)} steps"))
                 for step in steps:
                     match step:
                         case ObjDefineStep() as obj_step:
@@ -145,10 +144,6 @@ class ProofGenerator:
                             self.checker.add_step(obj_step)
                         case TheoremStep() as theo_step:
                             # Fixing the names of theorem objects.
-                            if self.verbose:
-                                print(
-                                    f'Adding theorem step {theo_step.theorem_name} on {theo_step.inputs}: {theo_step.result_predicates}'
-                                )
                             self.proof_steps.append(theo_step)
                             self.checker.add_step(theo_step)
                         case _:
@@ -208,7 +203,7 @@ class ProofGenerator:
                     for pred in fin_step.result_predicates
                 ):
                     continue
-                if self.is_trivial_theorem_step(fin_step):
+                if self.should_skip_theorem_step(fin_step):
                     continue
                 # print(f'Found step {fin_step.to_language_format()} with score {step.score}.')
                 found_steps.append(fin_step)
@@ -303,8 +298,16 @@ class ProofGenerator:
                 new_step = StepSuggestion(step, match_)
                 heapq.heappush(self.step_queue, new_step)
 
-    def is_trivial_theorem_step(self, theorem_step: TheoremStep) -> bool:
+    def should_skip_theorem_step(self, theorem_step: TheoremStep) -> bool:
         theorem = Theorem.all_theorems()[theorem_step.theorem_name]
+
+        if len(theorem.required_embedding_predicates) > 0 and self.checker.geometry_tracker.embedding_tracker is None:
+            return True
+        for predicate in theorem.required_embedding_predicates:
+            substituted_predicate = predicate.substitute(dict(zip(theorem.signature, theorem_step.inputs)))
+            value = self.checker.geometry_tracker.embedding_tracker.evaluate_predicate(substituted_predicate)
+            if value != EmbeddedPredicateValue.Correct:
+                return True
 
         for condition in theorem.trivial_if_equal_conditions:
             obj_names = [obj.name for obj in theorem.signature]
@@ -319,6 +322,7 @@ class ProofGenerator:
                 ############### comment for now ##############################################
                 # print(f'Found trivial theorem step! ({theorem_step})')
                 return True
+
         return False
 
 
@@ -592,17 +596,13 @@ def prove_all_assumptions(
             generate_random_proof(*arg)
 
 
-def prove(base: Proof, interactive: bool) -> Proof:
-    if base.embedding is None:
-        embedder = DiagramEmbedder()
-        embedding = embedder.embed(base)
-        if embedding is not None:
-            collector = NonDegeneracyPrediateCollector()
-            non_degenerecy_predicates = collector.collect(base, embedding)
-            base.embedding = embedding
-            base.auxiliary_predicates.extend(non_degenerecy_predicates)
+def prove(base: Proof, interactive: bool, verbose: bool) -> Proof:
+    if base.embedding is not None:
+        collector = NonDegeneracyPrediateCollector()
+        non_degenerecy_predicates = collector.collect(base.assumption_objects, base.embedding)
+        base.auxiliary_predicates.extend(non_degenerecy_predicates)
 
-    proof_gen = ProofGenerator(base, actions_per_step=10000)
+    proof_gen = ProofGenerator(base, actions_per_step=10000, verbose=verbose)
 
     try:
         proof_gen.run()
@@ -625,107 +625,3 @@ def prove(base: Proof, interactive: bool) -> Proof:
             print('Beginning interactive session...')
             InteractivePredicateChecker(proof_gen.checker.geometry_tracker).run()
         raise e
-
-
-def validate_main():
-    parser = argparse.ArgumentParser(
-        description='''Tries to validate that a proof can be found by the proof generator,
-without actually running the proof generator.'''
-    )
-    parser.add_argument('path')
-    args = parser.parse_args()
-
-    path = Proof.get_full_proof_path(args.path)
-    proof = Proof.parse(path.open().read())
-
-    validate_proof(proof)
-
-
-def main():
-    parser = argparse.ArgumentParser(description='Attempts to prove a Geometry problem.')
-    parser.add_argument('path', help='The path of the problem to prove.', type=str)
-    parser.add_argument(
-        '--glob',
-        help='Use this flag when the path argument is a glob\n\
-        of paths. Runs the ProofGenerator seperately on each of these paths.',
-        action='store_true',
-    )
-    parser.add_argument(
-        '--interactive',
-        help='When a proof fails due to NoMoreSteps or a KeyboardInterrupt, allows the user to check what was proved.',
-        action='store_true',
-    )
-    parser.add_argument(
-        '--overwrite',
-        help='Overwrite the file with the proof when proving is complete.\n\
-              (If `--trim` or `--prettify` are on, will overwrite the problem file\n\
-              multiple times each time a step is completed)',
-        action='store_true',
-    )
-    parser.add_argument(
-        '--trim',
-        help='Also runs the generated proof through the ProofTrimmer.',
-        action='store_true',
-    )
-    parser.add_argument(
-        '--prettify',
-        help='Also runs the generated proof through the ProofPrettifier.',
-        action='store_true',
-    )
-
-    args = parser.parse_args()
-
-    paths = [Path(p) for p in glob(args.path)] if args.glob else [Proof.get_full_proof_path(args.path)]
-
-    if len(paths) == 0:
-        print('No matching files found.')
-
-    for i, path in enumerate(paths):
-        if len(paths) > 1:
-            print(f'[{i+1}/{len(paths)}] Proving file "{path}":')
-        else:
-            print(f'Proving file "{path}":')
-        incomplete_proof = Proof.parse(path.open().read(), False)
-
-        try:
-            proof = prove(incomplete_proof, interactive=args.interactive)
-
-            proof_text = proof.to_language_format()
-            if args.overwrite:
-                open(path, 'w').write(proof_text)
-            else:
-                print(proof_text)
-
-            if args.trim:
-                print('Running Trimmer...')
-                trimmer = ProofTrimmer(proof)
-                proof = trimmer.trim()
-                proof_text = proof.to_language_format()
-                if args.overwrite:
-                    open(path, 'w').write(proof_text)
-                else:
-                    print(proof_text)
-
-            if args.prettify:
-                print('Running Prettifier...')
-                prettifier = ProofPrettifier()
-                proof = prettifier.prettify(proof)
-
-                proof_text = proof.to_language_format()
-                if args.overwrite:
-                    open(path, 'w').write(proof_text)
-                else:
-                    print(proof_text)
-        except KeyboardInterrupt as e:
-            print(e)
-            if i == len(paths) - 1:
-                return
-            user_input = ''
-            while user_input.lower() not in ['s', 'q']:
-                user_input = input("(S)kip or (Q)uit?")
-            if user_input.lower() == 's':
-                continue
-            else:
-                return
-        except Exception as e:
-            print('Error:', e)

@@ -4,7 +4,10 @@ import time
 
 from tqdm import trange
 
-from rules.interactive_predicate_checker import InteractivePredicateChecker
+from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
+
+from .interactive_predicate_checker import InteractivePredicateChecker
 
 from .predicates.predicate_factory import predicate_from_args
 
@@ -14,7 +17,7 @@ from .proof_checker_utils import ADD_CFG, ADD_NO_TRUST_CFG, CHECK_CFG, TRUST_NO_
 from .signature_dag import SignatureDag
 from .geometry_trackers.geometry_tracker import involved_objects
 
-from .proof import AlmostAlwaysStep, AssertStep, IfStep, Proof, ObjDefineStep, Step, TheoremStep
+from .proof import AlmostAlwaysStep, AssertStep, CommentStep, IfStep, Proof, ObjDefineStep, Step, TheoremStep
 from .theorem import Theorem
 
 from . import rule_utils
@@ -225,10 +228,22 @@ class ProofChecker:
         if not skim:
             # Making sure that all predicates are satisfied.
             for pred in theorem.required_predicates:
-                if not self.geometry_tracker.contains_predicate(
-                    pred.substitute(substitutions), config=ADD_NO_TRUST_CFG
-                ):
-                    return f'In step {step}, required predicate {pred.substitute(substitutions)} is not satisfied.\n{pred.name} {pred.name == "equals"}'
+                substituded_pred = pred.substitute(substitutions)
+                if not self.geometry_tracker.contains_predicate(substituded_pred, config=ADD_NO_TRUST_CFG):
+                    return f'In step {step}, required predicate {substituded_pred} is not satisfied.\n{pred.name} {pred.name == "equals"}'
+                if self.geometry_tracker.embedding_tracker is not None:
+                    pred_value = self.geometry_tracker.embedding_tracker.evaluate_predicate(substituded_pred)
+                    if pred_value == EmbeddedPredicateValue.Incorrect:
+                        return f'In step {step}, required predicate {substituded_pred} is not satisfied in the embedding.\n{pred.name} {pred.name == "equals"}'
+                    elif pred_value == EmbeddedPredicateValue.Undefined:
+                        return f'In step {step}, required predicate {substituded_pred} is undefined in the embedding.\n{pred.name} {pred.name == "equals"}'
+            for pred in theorem.required_embedding_predicates:
+                if self.geometry_tracker.embedding_tracker is None:
+                    return f'In step {step}, there are required embedding predicates, but there is no embedding!'
+                substituded_pred = pred.substitute(substitutions)
+                pred_value = self.geometry_tracker.embedding_tracker.evaluate_predicate(substituded_pred)
+                if pred_value != EmbeddedPredicateValue.Correct:
+                    return f'In step {step}, required embedding predicate {substituded_pred} is not satisfied in the embedding.\n{pred.name} {pred.name == "equals"}'
 
         # All predicates are satisfied, and all objects are legal.
         # The results are known to exist.
@@ -237,6 +252,10 @@ class ProofChecker:
 
         for result_predicate in theorem.result_predicates:
             pred = result_predicate.substitute(substitutions)
+            if self.geometry_tracker.embedding_tracker is not None:
+                pred_value = self.geometry_tracker.embedding_tracker.evaluate_predicate(pred)
+                if pred_value == EmbeddedPredicateValue.Incorrect:
+                    return f'In step {step}, result predicate {pred} is not satisfied in the embedding.\n{pred.name} {pred.name == "equals"}'
             for obj in pred.involved_objects():
                 predicate = predicate_from_args('exists', (obj,))
                 self.geometry_tracker.add_predicate(predicate, ADD_CFG, 'Marking a processed object as existing')
@@ -414,6 +433,9 @@ class ProofChecker:
                 case IfStep():
                     self._add_if_step(step)
 
+                case CommentStep():
+                    pass
+
                 case _:
                     raise NotImplementedError(f'Proof checker received illegal step: {step}!')
         except Exception as e:
@@ -485,6 +507,10 @@ class ProofChecker:
 
 def check_proof(path: Path, verbose=False, interactive: bool = False):
     proof = Proof.parse(path.open().read())
+    if proof.embedding is not None:
+        collector = NonDegeneracyPrediateCollector()
+        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
+        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
     checker = ProofChecker(proof)
     try:
         checker.check(verbose)
@@ -515,3 +541,31 @@ def main():
     path = Proof.get_full_proof_path(args.path)
     check_proof(path, verbose=args.v, interactive=args.interactive)
     print(f't={time.perf_counter() - t0}')
+
+
+def interactive_main():
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Loads a proof into the Interactive Predicate Checker.')
+    parser.add_argument('path', help='The path of the problem file to load.', type=Path)
+    parser.add_argument('-v', help='Prints debug information', action='store_true')
+
+    args = parser.parse_args()
+
+    path = Proof.get_full_proof_path(args.path)
+
+    proof = Proof.parse(path.open().read())
+
+    if proof.embedding is not None:
+        collector = NonDegeneracyPrediateCollector()
+        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
+        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
+
+    checker = ProofChecker(proof)
+    try:
+        checker.check(False)
+        print(f'Successfully loaded proof steps.')
+    except ProofCheckError as e:
+        print(f'Stopped due to {e}.')
+    print('Beginning interactive session...')
+    InteractivePredicateChecker(checker.geometry_tracker).run()

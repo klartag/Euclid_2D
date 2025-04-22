@@ -1,21 +1,3 @@
-directions_draw_angle:
-  inputs:
-    - A, B, C: Point
-  where:
-    - exists(direction(B, A), direction(B, C))
-  conclude:
-    - exists(angle(A, B, C))
-  metadata: auto
-
-angle_draws_line:
-  inputs:
-    - A, B, C: Point
-  where:
-    - exists(angle(A, B, C))
-  conclude:
-    - exists(Line(A, B), Line(B, C))
-  metadata: auto
-
 perpendicular_lines_draw_intersection:
   inputs:
     - k, l: Line
@@ -33,3 +15,16 @@ draw_point_of_tangency:
     - tangent(l, c)
   conclude:
     - exists(line_circle_tangent_point(l, c))
+  metadata: auto
+
+angle_bisector_draw_angle:
+  inputs:
+    - A, B, C: Point
+  where:
+    - internal_angle_bisector_exists: exists(internal_angle_bisector(A, B, C))
+    - external_angle_bisector_exists: exists(external_angle_bisector(A, B, C))
+    - angle_exists: exists(Line(A, B), Line(B, C))
+  possible_conclusions:
+    - internal_angle_bisector_exists => angle_exists
+    - external_angle_bisector_exists => angle_exists
+  metadata: auto

@@ -2,8 +2,9 @@ euler_line:
   inputs:
     - A, B, C: Point
   where:
-    - not_collinear(A, B, C)
     - exists(orthocenter(A, B, C), centroid(A, B, C), circumcenter(A, B, C))
+  where_embedding:
+    - not_collinear(A, B, C)
   conclude:
     - collinear(orthocenter(A, B, C), centroid(A, B, C), circumcenter(A, B, C))
     - distance(circumcenter(A, B, C), orthocenter(A, B, C)) == 3 * distance(circumcenter(A, B, C), centroid(A, B, C))
