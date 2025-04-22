@@ -30,47 +30,43 @@ Need to prove:
 parallel(Line(A, T), Line(B, C))
 
 Proof:
-By line_definition on C, F, Line(B, C) we get Line(B, C) == Line(C, F)
-By line_definition on T, F, l we get l == Line(F, T)
-By line_definition on T, G, m we get m == Line(G, T)
-By circle_definition on F, G, E, w we get w == Circle(E, F, G)
-By in_imply_collinear on D, A, B we get collinear(A, B, D)
-By in_imply_collinear on G, B, C we get collinear(B, C, G)
-By in_imply_collinear on F, B, C we get collinear(B, C, F)
+Comment: Step 1 - Found 141 steps
+By line_definition on G, T, m we get m == Line(G, T)
+By line_definition on F, T, l we get l == Line(F, T)
+By circle_definition on F, E, G, w we get w == Circle(E, F, G)
+By in_imply_collinear on G, C, B we get collinear(B, C, G)
 By in_imply_collinear on E, A, C we get collinear(A, C, E)
-By angles_on_chord_v1 on D, E, A, G, w we get angle(D, A, E) == angle(D, G, E) mod 360
-By angles_on_chord_v3 on D, F, A, G, w we get angle(D, A, F) == angle(D, G, F) + 180 mod 360
-By angles_on_chord_v1 on A, D, E, G, w we get angle(A, E, D) == angle(A, G, D) mod 360
-By angles_on_chord_v1 on F, A, G, D, w we get angle(F, D, A) == angle(F, G, A) mod 360
-By angles_on_chord_v0 on D, F, E, G, w we get angle(D, E, F) == angle(D, G, F) mod 360
-By angles_on_chord_v0 on G, E, A, F, w we get angle(G, A, E) == angle(G, F, E) mod 360
-By angles_on_chord_v1 on G, F, E, D, w we get angle(G, D, F) == angle(G, E, F) mod 360
-By angles_on_chord_v3 on A, G, F, D, w we get angle(A, F, G) == angle(A, D, G) + 180 mod 360
-By angles_on_chord_v1 on E, G, F, D, w we get angle(E, D, G) == angle(E, F, G) mod 360
-By angles_on_chord_v0 on F, G, A, E, w we get angle(F, A, G) == angle(F, E, G) mod 360
-By angles_on_chord_v1 on A, D, G, F, w we get angle(A, F, D) == angle(A, G, D) mod 360
-By between_implies_angles on G, F, B we get 180 == angle(G, F, B) mod 360, 0 == angle(F, B, G) mod 360, 0 == angle(B, G, F) mod 360
-By same_angle_v1 on G, B, C, A we get angle(B, G, A) == angle(C, G, A) mod 360
-By same_angle_v0 on D, B, A, E we get angle(A, D, E) == angle(B, D, E) mod 360
-By same_angle_v0 on E, C, A, F we get angle(A, E, F) == angle(C, E, F) mod 360
-By same_angle_v1 on B, A, D, G we get angle(A, B, G) == angle(D, B, G) mod 360
-By same_angle_v1 on F, B, C, A we get angle(B, F, A) == angle(C, F, A) mod 360
-By reverse_direction on F, E we get 180 == direction(F, E) - direction(E, F) mod 360
-By reverse_direction on E, G we get 180 == direction(E, G) - direction(G, E) mod 360
-By reverse_direction on D, A we get 180 == direction(D, A) - direction(A, D) mod 360
-By reverse_direction on D, E we get 180 == direction(D, E) - direction(E, D) mod 360
-By reverse_direction on F, B we get 180 == direction(F, B) - direction(B, F) mod 360
+By in_imply_collinear on D, B, A we get collinear(A, B, D)
+By angles_on_chord_v1 on F, A, D, E, w we get angle(F, D, A) == angle(F, E, A) mod 360
+By angles_on_chord_v1 on A, E, G, F, w we get angle(A, F, E) == angle(A, G, E) mod 360
+By angles_on_chord_v0 on G, D, A, F, w we get angle(G, A, D) == angle(G, F, D) mod 360
+By angles_on_chord_v1 on E, G, F, A, w we get angle(E, A, G) == angle(E, F, G) mod 360
+By same_angle_v0 on B, G, F, A we get angle(F, B, A) == angle(G, B, A) mod 360
+Comment: Step 2 - Found 191 steps
+By same_angle_v2 on A, C, E, F we get angle(C, A, F) == angle(E, A, F) + 180 mod 360
+By same_angle_v0 on E, A, C, G we get angle(A, E, G) == angle(C, E, G) mod 360
+By same_angle_v1 on B, A, D, F we get angle(A, B, F) == angle(D, B, F) mod 360
+By same_angle_v1 on G, C, B, D we get angle(B, G, D) == angle(C, G, D) mod 360
+By reverse_direction on E, F we get 180 == direction(E, F) - direction(F, E) mod 360
+By reverse_direction on A, G we get 180 == direction(A, G) - direction(G, A) mod 360
+By reverse_direction on B, G we get 180 == direction(B, G) - direction(G, B) mod 360
+By reverse_direction on E, A we get 180 == direction(E, A) - direction(A, E) mod 360
 By same_angle_v2 on A, B, D, T we get angle(B, A, T) == angle(D, A, T) + 180 mod 360
 By reverse_direction on B, A we get 180 == direction(B, A) - direction(A, B) mod 360
-By tangent_chord_angle_reverse_v2 on F, B, D, T we get angle(B, D, F) == angle(B, F, T) + 180 mod 360
+By same_angle_v0 on C, G, B, E we get angle(B, C, E) == angle(G, C, E) mod 360
+By same_angle_v1 on C, E, A, G we get angle(A, C, G) == angle(E, C, G) mod 360
+By tangent_chord_angle_reverse_v1 on F, D, B, T we get angle(D, B, F) == angle(D, F, T) mod 360
 By tangent_chord_angle_reverse_v2 on G, C, E, T we get angle(C, E, G) == angle(C, G, T) + 180 mod 360
+By tangent_chord_angle_reverse_v1 on G, E, C, T we get angle(E, C, G) == angle(E, G, T) mod 360
+Comment: Step 3 - Found 385 steps
+By reverse_direction on A, T we get 180 == direction(A, T) - direction(T, A) mod 360
 By reverse_direction on F, T we get 180 == direction(F, T) - direction(T, F) mod 360
 By reverse_direction on G, T we get 180 == direction(G, T) - direction(T, G) mod 360
-By reverse_direction on A, T we get 180 == direction(A, T) - direction(T, A) mod 360
-By anti_similar_triangle_basic_properties on F, D, B, A, G, B we get angle(F, D, B) == 0 - angle(A, G, B) mod 360, angle(D, B, F) == 0 - angle(G, B, A) mod 360, angle(B, F, D) == 0 - angle(B, A, G) mod 360, log(distance(A, G)) + log(distance(B, D)) == log(distance(D, F)) + log(distance(B, G)), log(distance(B, D)) + log(distance(A, B)) == log(distance(B, G)) + log(distance(B, F)), log(distance(A, B)) + log(distance(D, F)) == log(distance(B, F)) + log(distance(A, G))
-By concyclic_sufficient_conditions_v0 on G, T, F, E we get concyclic(E, F, G, T)
-By anti_similar_triangle_basic_properties on A, G, F, T, F, G we get angle(A, G, F) == 0 - angle(T, F, G) mod 360, angle(G, F, A) == 0 - angle(F, G, T) mod 360, angle(F, A, G) == 0 - angle(G, T, F) mod 360, log(distance(A, G)) + log(distance(F, G)) == log(distance(F, T)) + log(distance(F, G)), log(distance(F, G)) + log(distance(A, F)) == log(distance(F, G)) + log(distance(G, T)), log(distance(A, F)) + log(distance(F, T)) == log(distance(G, T)) + log(distance(A, G))
-By concyclic_definition_0 on F, E, G, T we get T in Circle(E, F, G)
-By sas_anti_similarity on T, F, D, A, B, F we get anti_similar_triangles(A, B, F, T, F, D)
-By angles_on_chord_v0 on G, T, D, A, w we get angle(G, A, T) == angle(G, D, T) mod 360
-By parallel_line_angles_v1 on A, T, F, C we get parallel(Line(A, T), Line(C, F))
+Comment: Step 4 - Found 191 steps
+By concyclic_sufficient_conditions_v0 on G, E, F, T we get concyclic(E, F, G, T)
+Comment: Step 5 - Found 704 steps
+By concyclic_definition_0 on E, G, F, T we get T in Circle(E, F, G)
+Comment: Step 6 - Found 273 steps
+By angles_on_chord_v2 on G, A, F, T, w we get angle(G, F, A) == angle(G, T, A) + 180 mod 360
+Comment: Step 7 - Found 314 steps
+By parallel_line_angles_v1 on B, C, A, T we get parallel(Line(A, T), Line(B, C))

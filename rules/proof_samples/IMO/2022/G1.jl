@@ -30,36 +30,51 @@ Need to prove:
 concyclic(P, Q, R, S)
 
 Proof:
-By line_definition on D, R, Line(C, D) we get Line(C, D) == Line(D, R)
+Comment: Step 1 - Found 158 steps
+By line_definition on P, D, Line(C, D) we get Line(C, D) == Line(D, P)
+By same_angle_v1 on E, S, A, T we get angle(A, E, T) == angle(S, E, T) mod 360
 By same_angle_v2 on B, A, P, T we get angle(A, B, T) == angle(P, B, T) + 180 mod 360
-By same_angle_v0 on B, A, Q, T we get angle(A, B, T) == angle(Q, B, T) mod 360
-By in_imply_collinear on S, T, D we get collinear(D, S, T)
+By in_imply_collinear on R, C, D we get collinear(C, D, R)
 By in_imply_collinear on Q, T, C we get collinear(C, Q, T)
-By in_imply_collinear on P, D, C we get collinear(C, D, P)
-By same_angle_v0 on A, E, R, B we get angle(E, A, B) == angle(R, A, B) mod 360
-By collinear_definition on P, B, A we get B in Line(A, P), A in Line(B, P), Line(A, P) == Line(B, P), 0 == 2 * angle(B, P, A) mod 360
-By isosceles_triangle_properties on T, C, E we get distance(C, T) == distance(E, T), angle(C, E, T) == angle(T, C, E) mod 360
-By between_implies_angles on S, A, E we get 180 == angle(S, A, E) mod 360, 0 == angle(A, E, S) mod 360, 0 == angle(E, S, A) mod 360
-By sss_congruence_v0 on E, T, D, C, T, B we get congruent_triangles(B, C, T, D, E, T)
-By same_angle_converse_v1 on A, S, R, E we get collinear(A, R, S)
+By in_imply_collinear on S, D, T we get collinear(D, S, T)
+By reverse_direction on B, A we get 180 == direction(B, A) - direction(A, B) mod 360
+By reverse_direction on E, A we get 180 == direction(E, A) - direction(A, E) mod 360
+By reverse_direction on B, T we get 180 == direction(B, T) - direction(T, B) mod 360
+By reverse_direction on E, T we get 180 == direction(E, T) - direction(T, E) mod 360
+By collinear_definition on S, E, A we get E in Line(A, S), A in Line(E, S), Line(A, S) == Line(E, S), 0 == 2 * angle(E, S, A) mod 360
+By isosceles_triangle_properties on T, E, C we get distance(C, T) == distance(E, T), angle(E, C, T) == angle(T, E, C) mod 360
+By between_implies_angles on B, A, Q we get 180 == angle(B, A, Q) mod 360, 0 == angle(A, Q, B) mod 360, 0 == angle(Q, B, A) mod 360
+By between_implies_angles on A, E, R we get 180 == angle(A, E, R) mod 360, 0 == angle(E, R, A) mod 360, 0 == angle(R, A, E) mod 360
+By sss_congruence_v0 on C, T, B, E, T, D we get congruent_triangles(B, C, T, D, E, T)
+Comment: Step 2 - Found 212 steps
+By same_angle_converse_v1 on E, S, R, A we get collinear(E, R, S)
 By same_angle_converse_v1 on B, P, Q, T we get collinear(B, P, Q)
-By same_angle_v3 on T, Q, C, D we get angle(Q, T, D) == angle(C, T, D) + 180 mod 360
-By same_angle_v2 on T, S, D, E we get angle(S, T, E) == angle(D, T, E) + 180 mod 360
-By in_imply_collinear on P, D, R we get collinear(D, P, R)
-By same_angle_v1 on Q, A, B, T we get angle(A, Q, T) == angle(B, Q, T) mod 360
-By reverse_direction on P, B we get 180 == direction(P, B) - direction(B, P) mod 360
-By reverse_direction on B, Q we get 180 == direction(B, Q) - direction(Q, B) mod 360
+By same_angle_v2 on T, D, S, B we get angle(D, T, B) == angle(S, T, B) + 180 mod 360
+By same_angle_v3 on T, C, Q, B we get angle(C, T, B) == angle(Q, T, B) + 180 mod 360
+By same_angle_v1 on C, T, Q, B we get angle(Q, C, B) == angle(T, C, B) mod 360
+By same_angle_v0 on D, T, S, E we get angle(S, D, E) == angle(T, D, E) mod 360
+By in_imply_collinear on R, P, D we get collinear(D, P, R)
+By reverse_direction on T, D we get 180 == direction(T, D) - direction(D, T) mod 360
+By reverse_direction on A, R we get 180 == direction(A, R) - direction(R, A) mod 360
+By reverse_direction on S, E we get 180 == direction(S, E) - direction(E, S) mod 360
+By reverse_direction on A, Q we get 180 == direction(A, Q) - direction(Q, A) mod 360
 By reverse_direction on T, C we get 180 == direction(T, C) - direction(C, T) mod 360
-By same_angle_v3 on C, P, D, E we get angle(P, C, E) == angle(D, C, E) + 180 mod 360
-By same_angle_v1 on P, C, D, A we get angle(C, P, A) == angle(D, P, A) mod 360
-By similar_triangle_basic_properties on E, T, D, C, T, B we get angle(C, T, B) == angle(E, T, D) mod 360, angle(T, B, C) == angle(T, D, E) mod 360, angle(B, C, T) == angle(D, E, T) mod 360, log(distance(C, T)) + log(distance(D, T)) == log(distance(E, T)) + log(distance(B, T)), log(distance(B, T)) + log(distance(D, E)) == log(distance(D, T)) + log(distance(B, C)), log(distance(B, C)) + log(distance(E, T)) == log(distance(D, E)) + log(distance(C, T))
-By same_angle_v0 on S, R, A, T we get angle(A, S, T) == angle(R, S, T) mod 360
-By same_angle_v0 on P, B, Q, D we get angle(B, P, D) == angle(Q, P, D) mod 360
-By same_angle_v1 on P, D, R, Q we get angle(D, P, Q) == angle(R, P, Q) mod 360
-By reverse_direction on Q, T we get 180 == direction(Q, T) - direction(T, Q) mod 360
-By aa_anti_similarity on S, E, T, Q, B, T we get anti_similar_triangles(B, Q, T, E, S, T)
-By reverse_direction on C, P we get 180 == direction(C, P) - direction(P, C) mod 360
-By anti_similar_triangle_basic_properties on E, T, C, C, T, E we get angle(E, T, C) == 0 - angle(C, T, E) mod 360, angle(T, C, E) == 0 - angle(T, E, C) mod 360, angle(C, E, T) == 0 - angle(E, C, T) mod 360, log(distance(C, T)) + log(distance(C, T)) == log(distance(E, T)) + log(distance(E, T)), log(distance(C, T)) + log(distance(C, E)) == log(distance(E, T)) + log(distance(C, E)), log(distance(C, E)) + log(distance(C, T)) == log(distance(C, E)) + log(distance(E, T))
-By anti_similar_triangle_basic_properties on Q, B, T, S, E, T we get angle(Q, B, T) == 0 - angle(S, E, T) mod 360, angle(B, T, Q) == 0 - angle(E, T, S) mod 360, angle(T, Q, B) == 0 - angle(T, S, E) mod 360, log(distance(B, Q)) + log(distance(E, T)) == log(distance(E, S)) + log(distance(B, T)), log(distance(B, T)) + log(distance(S, T)) == log(distance(E, T)) + log(distance(Q, T)), log(distance(Q, T)) + log(distance(E, S)) == log(distance(S, T)) + log(distance(B, Q))
-By sas_anti_similarity on S, T, Q, C, T, D we get anti_similar_triangles(C, D, T, S, Q, T)
-By concyclic_sufficient_conditions_v0 on Q, P, R, S we get concyclic(P, Q, R, S)
+By same_angle_v2 on D, C, R, T we get angle(C, D, T) == angle(R, D, T) + 180 mod 360
+By same_angle_v0 on Q, C, T, A we get angle(C, Q, A) == angle(T, Q, A) mod 360
+By same_angle_v1 on S, D, T, A we get angle(D, S, A) == angle(T, S, A) mod 360
+By similar_triangle_basic_properties on D, E, T, B, C, T we get angle(B, C, T) == angle(D, E, T) mod 360, angle(C, T, B) == angle(E, T, D) mod 360, angle(T, B, C) == angle(T, D, E) mod 360, log(distance(B, C)) + log(distance(E, T)) == log(distance(D, E)) + log(distance(C, T)), log(distance(C, T)) + log(distance(D, T)) == log(distance(E, T)) + log(distance(B, T)), log(distance(B, T)) + log(distance(D, E)) == log(distance(D, T)) + log(distance(B, C))
+Comment: Step 3 - Found 298 steps
+By same_angle_v1 on Q, B, P, C we get angle(B, Q, C) == angle(P, Q, C) mod 360
+By same_angle_v0 on R, D, P, A we get angle(D, R, A) == angle(P, R, A) mod 360
+By same_angle_v1 on R, S, E, C we get angle(E, R, C) == angle(S, R, C) mod 360
+By reverse_direction on D, S we get 180 == direction(D, S) - direction(S, D) mod 360
+By reverse_direction on C, Q we get 180 == direction(C, Q) - direction(Q, C) mod 360
+By reverse_direction on D, R we get 180 == direction(D, R) - direction(R, D) mod 360
+By anti_similar_triangle_basic_properties on C, T, E, E, T, C we get angle(C, T, E) == 0 - angle(E, T, C) mod 360, angle(T, E, C) == 0 - angle(T, C, E) mod 360, angle(E, C, T) == 0 - angle(C, E, T) mod 360, log(distance(C, T)) + log(distance(C, T)) == log(distance(E, T)) + log(distance(E, T)), log(distance(C, T)) + log(distance(C, E)) == log(distance(E, T)) + log(distance(C, E)), log(distance(C, E)) + log(distance(C, T)) == log(distance(C, E)) + log(distance(E, T))
+Comment: Step 4 - Found 66 steps
+By anti_similar_triangle_basic_properties on T, B, Q, T, E, S we get angle(T, B, Q) == 0 - angle(T, E, S) mod 360, angle(B, Q, T) == 0 - angle(E, S, T) mod 360, angle(Q, T, B) == 0 - angle(S, T, E) mod 360, log(distance(B, T)) + log(distance(E, S)) == log(distance(E, T)) + log(distance(B, Q)), log(distance(B, Q)) + log(distance(S, T)) == log(distance(E, S)) + log(distance(Q, T)), log(distance(Q, T)) + log(distance(E, T)) == log(distance(S, T)) + log(distance(B, T))
+Comment: Step 5 - Found 12 steps
+By sas_anti_similarity on D, T, C, Q, T, S we get anti_similar_triangles(C, D, T, S, Q, T)
+Comment: Step 6 - Found 51 steps
+Comment: Step 7 - Found 124 steps
+By concyclic_sufficient_conditions_v0 on S, R, P, Q we get concyclic(P, Q, R, S)
