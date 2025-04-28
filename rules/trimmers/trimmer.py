@@ -48,6 +48,36 @@ class ProofTrimmer:
 
         return self.trimmed_proof.shallow_copy()
 
+    def trim_with_indices(self) -> Proof:
+        """
+        Attempts to shorten a proof as much as possible,
+        while still keeping the proof valid.
+        """
+
+        end = len(self.proof.steps)
+        step_indices = set(range(end))
+        slice_length = 1
+
+        ProofChecker(self.proof).check()
+
+        for i in tqdm(range(len(self.proof.steps), 0, -1)):
+            if i > end:
+                continue
+
+            slice_length = self.trim_longest_tail(end, slice_length)
+
+            if slice_length > 0:
+                del self.trimmed_proof.steps[end - slice_length : end]
+                step_indices -= set(range(end - slice_length, end))
+                end -= slice_length
+                slice_length *= 2
+                slice_length = min(slice_length, end)
+            else:
+                end -= 1
+                slice_length = 1
+
+        return self.trimmed_proof.shallow_copy(), step_indices
+
     def get_checker_at_step(self, step: int) -> ProofChecker:
         """
         Gets the checker after applying `step` steps.
