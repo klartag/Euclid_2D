@@ -1,36 +1,50 @@
-from typing import Type, List, Optional, Tuple
+from typing import List, Optional, Tuple
 
-from ....rule_utils import POINT
+
+from ....rule_utils import POINT, LINE, CIRCLE
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 
-from ...types import ConstructionMethod, ExtendedConstructionMethod, normalize_return_type
+from ...constructions.circle_intersection import circle_circle_intersection, line_circle_intersection
+from ...constructions.line_intersection import line_intersection
+from ...constructions.object_on_object import point_on_circle, point_on_line
+from ...constructions.polarity import polar, pole
+from ...embedded_objects.embedded_object import EmbeddedObject
+from ...types import ConstructionMethod, normalize_return_type
 
 from ..embedded_constructions.embedded_construction import EmbeddedConstruction
+from ..embedded_constructions.explicit_embedded_construction import ExplicitEmbeddedConstruction
+from ..embedded_constructions.generalized_embedded_construction import (
+    GeneralizedEmbeddedConstruction,
+)
 from ..embedded_geo_objects.embedded_geo_object import ExtendedGeoObject
 
 from .construction_pattern import ConstructionPattern
-from .locus_patterns.implementations import LOCUS_PATTERNS
+from .locus_patterns.implementations import LOCUS_PATTERNS, DUAL_LOCUS_PATTERNS
+
+
+SINGLE_LOCUS_TYPE_PATTERNS = {LINE: point_on_line, CIRCLE: point_on_circle}
+
+
+LOCUS_INTERSECTION_TYPE_PATTERNS = {
+    (LINE, LINE): line_intersection,
+    (LINE, CIRCLE): line_circle_intersection,
+    (CIRCLE, CIRCLE): circle_circle_intersection,
+}
+
+
+def concatenate_polar(func: ConstructionMethod) -> ConstructionMethod:
+    def wrapper(*parameters: Tuple[EmbeddedObject, ...]) -> Tuple[EmbeddedObject, ...]:
+        construction_result = func(*parameters)
+        return tuple([polar(point) for point in construction_result])
+
+    wrapper.__name__ = f'polar_{func.__name__}'
+    return wrapper
 
 
 class ContainmentPattern(ConstructionPattern):
-    intersection_types: Tuple[str]
-    construction_type: Type[EmbeddedConstruction]
-    construction_method: ConstructionMethod
-
-
-    def __init__(
-        self,
-        intersection_types: Tuple[str],
-        construction_type: Type[EmbeddedConstruction],
-        construction_method: ExtendedConstructionMethod
-    ):
-        self.intersection_types = intersection_types
-        self.construction_type = construction_type
-        self.construction_method = normalize_return_type(construction_method)
-
     def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[EmbeddedConstruction]:
-        if object_.type != POINT:
+        if object_.type not in [POINT, LINE]:
             return None
 
         containing_objects: List[ExtendedGeoObject] = []
@@ -40,24 +54,35 @@ class ContainmentPattern(ConstructionPattern):
                 return None
             containing_objects.append(locus)
 
-        sorted_objects: List[ExtendedGeoObject] = []
+        if len(containing_objects) == 1:
+            (locus,) = containing_objects
+            if locus.type in SINGLE_LOCUS_TYPE_PATTERNS:
+                construction_method = normalize_return_type(SINGLE_LOCUS_TYPE_PATTERNS[locus.type])
+                if object_.type == LINE:
+                    construction_method = concatenate_polar(construction_method)
+                return GeneralizedEmbeddedConstruction((locus,), object_.name, construction_method)
+        elif len(containing_objects) == 2:
+            locus_0, locus_1 = containing_objects
+            if (locus_1.type, locus_0.type) in LOCUS_INTERSECTION_TYPE_PATTERNS:
+                locus_1, locus_0 = locus_0, locus_1
+            if (locus_0.type, locus_1.type) in LOCUS_INTERSECTION_TYPE_PATTERNS:
+                construction_method = normalize_return_type(
+                    LOCUS_INTERSECTION_TYPE_PATTERNS[(locus_0.type, locus_1.type)]
+                )
+                if object_.type == LINE:
+                    construction_method = concatenate_polar(construction_method)
+                return ExplicitEmbeddedConstruction((locus_0, locus_1), object_.name, construction_method)
 
-        for intersection_type in self.intersection_types:
-            for containing_object in list(containing_objects):
-                if containing_object.type == intersection_type:
-                    containing_objects.remove(containing_object)
-                    sorted_objects.append(containing_object)
-                    break
-            else:
-                return None
-
-        if len(containing_objects) > 0:
-            return None
-
-        return self.construction_type(tuple(sorted_objects), object_.name, self.construction_method)
+        return None
 
     def parse_containment_predicate(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]:
-        for locus_pattern in LOCUS_PATTERNS:
+        patterns = []
+        if object_.type == POINT:
+            patterns = LOCUS_PATTERNS
+        elif object_.type == LINE:
+            patterns = DUAL_LOCUS_PATTERNS
+
+        for locus_pattern in patterns:
             locus = locus_pattern.match(object_, predicate)
             if locus is not None:
                 return locus

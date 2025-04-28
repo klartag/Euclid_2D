@@ -15,7 +15,7 @@ class EmbeddedPoint(EmbeddedObject):
 
     x: mpf
     y: mpf
-    
+
     def _type(self) -> str:
         return POINT
 
@@ -54,13 +54,10 @@ class EmbeddedPoint(EmbeddedObject):
 
     def normalize(self) -> 'EmbeddedPoint':
         return self.scale(1 / self.length())
-    
+
     def to_dict(self) -> dict:
-        return {
-            'x': str(self.x),
-            'y': str(self.y)
-        }
-    
+        return {'x': str(self.x), 'y': str(self.y)}
+
     def from_dict(data: dict) -> Self:
         return EmbeddedPoint(mpf(data['x']), mpf(data['y']))
 

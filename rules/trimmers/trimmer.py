@@ -4,7 +4,7 @@ import time
 from tqdm import tqdm
 
 from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
-from ..proof import Proof
+from ..proof import CommentStep, Proof
 from ..proof_checker import ProofChecker
 from ..rule_utils import ProofCheckError
 
@@ -132,17 +132,20 @@ class ProofTrimmer:
         """
         while True:
             checker = self.get_checker_at_step(end - slice_length)
-            del checker.proof.steps[end - slice_length : end]
-            try:
-                checker.check_steps()
-                checker.check_proof_finished()
-                return slice_length
 
-            except ProofCheckError:
-                if slice_length > 1:
-                    slice_length = slice_length // 2
-                else:
-                    return 0
+            proof_slice = slice(end - slice_length, end)
+            if not any([isinstance(step, CommentStep) for step in checker.proof.steps[proof_slice]]):
+                del checker.proof.steps[end - slice_length : end]
+                try:
+                    checker.check_steps()
+                    checker.check_proof_finished()
+                    return slice_length
+                except ProofCheckError:
+                    pass
+            if slice_length > 1:
+                slice_length = slice_length // 2
+            else:
+                return 0
 
 
 def main():
@@ -159,7 +162,7 @@ def main():
     args = parser.parse_args()
     path = Proof.get_full_proof_path(args.path)
     proof = Proof.parse(path.open().read())
-    
+
     if proof.embedding is not None:
         collector = NonDegeneracyPrediateCollector()
         non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)

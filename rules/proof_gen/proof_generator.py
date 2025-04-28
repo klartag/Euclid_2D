@@ -28,7 +28,7 @@ from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject
 from ..embeddings.embedded_predicate_value import EmbeddedPredicateValue
-from ..proof import ObjDefineStep, Proof, Step, TheoremStep
+from ..proof import CommentStep, ObjDefineStep, Proof, Step, TheoremStep
 from ..proof_checker import CHECK_CFG, TRUST_NO_ADD_CFG, ProofChecker, involved_objects
 from ..proof_checker_utils import KNOWN_KEYS
 from .gen_utils import is_trivial
@@ -137,6 +137,7 @@ class ProofGenerator:
                 print(f'=========== found {len(steps)} steps =========')
                 if len(steps) == 0:
                     raise ProofGeneratorError(ProofGeneratorErrorType.NoMoreSteps)
+                self.proof_steps.append(CommentStep(f"Step {i} - Found {len(steps)} steps"))
                 for step in steps:
                     match step:
                         case ObjDefineStep() as obj_step:
