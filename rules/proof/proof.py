@@ -15,18 +15,18 @@ from util import BASE_PATH
 
 from . import rule_utils
 
-from .rule_utils import ALL_TYPES, LITERAL, ProofParseError, split_args
+from ..rule_utils import ALL_TYPES, LITERAL, ProofParseError, split_args
 
-from .embeddings import Embedding
-from .embeddings.embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, EmbeddedScalar
-from .predicates.implementations.exists_predicate import ExistsPredicate
-from .predicates.predicate_factory import parse_predicate, predicate_from_args
-from .predicates.predicate import Predicate
-from .geometry_objects.construction_object import ConstructionObject
-from .geometry_objects.geo_object import GeoObject
-from .geometry_objects.equation_object import EquationObject
-from .geometry_objects.parse import parse_geo_object
-from .theorem import Theorem
+from ..embeddings import Embedding
+from ..embeddings.embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, EmbeddedScalar
+from ..predicates.implementations.exists_predicate import ExistsPredicate
+from ..predicates.predicate_factory import parse_predicate, predicate_from_args
+from ..predicates.predicate import Predicate
+from ..geometry_objects.construction_object import ConstructionObject
+from ..geometry_objects.geo_object import GeoObject
+from ..geometry_objects.equation_object import EquationObject
+from ..geometry_objects.parse import parse_geo_object
+from ..theorem import Theorem
 
 ASSUMPTION_TITLE = 'Assumptions:'
 TARGET_TITLE = 'Need to prove:'
@@ -47,181 +47,6 @@ ASSERT_PATTERN = r'We have (proved|shown) (.*)$'
 ALMOST_ALWAYS_STEP = r'It is almost always true that (.*)$'
 IF_PATTERN = r'(\s*)If (.*):$'
 ELSE_IF_PATTERN = r'Else if (.*):$'
-
-
-@dataclass
-class Step(abc.ABC):
-    @abc.abstractmethod
-    def to_language_format(self) -> str:
-        """
-        Converts the given step to a string representing the step.
-        """
-        ...
-
-    @abc.abstractmethod
-    def substitute(self, subs: 'Mapping[GeoObject, GeoObject]') -> 'Step':
-        """
-        Replaces the object in the given step with other objects.
-        """
-        ...
-
-
-@dataclass
-class NullTheoremStep(Step):
-    result_objects: list[GeoObject]
-    result_predicates: list[Predicate]
-
-    def to_language_format(self) -> str:
-        result_str = ', '.join(
-            [f'{obj.name}: {obj.type}' for obj in self.result_objects]
-            + [pred.to_language_format() for pred in self.result_predicates]
-        )
-        return f'We have {result_str}'
-
-    def substitute(self, subs: 'Mapping[GeoObject, GeoObject]') -> 'Step':
-        return NullTheoremStep(
-            [g.substitute(subs) for g in self.result_objects],
-            [pred.substitute(subs) for pred in self.result_predicates],
-        )
-
-
-@dataclass
-class CommentStep(Step):
-    comment: str
-
-    def to_language_format(self):
-        return f'Comment: {self.comment}'
-
-    def substitute(self, subs: 'Mapping[GeoObject, GeoObject]') -> 'Step':
-        return CommentStep(self.comment)
-
-
-@dataclass
-class TheoremStep(Step):
-    theorem_name: str
-    inputs: list[GeoObject]
-    result_objects: list[GeoObject]
-    result_predicates: list[Predicate]
-    comment: str = dataclasses.field(compare=False, default='')
-
-    def to_language_format(self) -> str:
-        input_str = ', '.join(obj.name for obj in self.inputs)
-        result_str = ', '.join(
-            [obj.name for obj in self.result_objects] + [pred.to_language_format() for pred in self.result_predicates]
-        )
-
-        comment = f'  # {self.comment}' if self.comment else ''
-
-        return f'By {self.theorem_name} on {input_str} we get {result_str}{comment}'
-
-    def substitute(self, subs: 'Mapping[GeoObject, GeoObject]') -> 'Step':
-        return TheoremStep(
-            self.theorem_name,
-            [g.substitute(subs) for g in self.inputs],
-            [g.substitute(subs) for g in self.result_objects],
-            [pred.substitute(subs) for pred in self.result_predicates],
-            self.comment,
-        )
-
-    def __hash__(self) -> int:
-        return hash(self.theorem_name) ^ hash(tuple(self.inputs))
-
-
-@dataclass
-class ObjDefineStep(Step):
-    """
-    A step that defines a new object. Can be used either as:
-    Let a := tangent(B, c)
-    Or as:
-    We introduce tangent(B, c)
-    """
-
-    left_hand: GeoObject
-    right_hand: GeoObject | None = dataclasses.field(default=None)
-
-    def to_language_format(self) -> str:
-        if self.right_hand is not None:
-            return f'Let {self.left_hand.name} := {self.right_hand.name}'
-        else:
-            return f'We introduce {self.left_hand.name}'
-
-    def substitute(self, subs: 'Mapping[GeoObject, GeoObject]') -> 'Step':
-        return ObjDefineStep(
-            self.left_hand.substitute(subs), self.right_hand.substitute(subs) if self.right_hand is not None else None
-        )
-
-
-@dataclass
-class AssertStep(Step):
-    """
-    A step of the form:
-    We have shown that A, B, C.
-    """
-
-    predicates: list[Predicate]
-
-    def to_language_format(self) -> str:
-        return f'We have shown ' + ', '.join(pred.to_language_format() for pred in self.predicates)
-
-    def substitute(self, subs: 'Mapping[GeoObject, GeoObject]') -> 'Step':
-        return AssertStep([pred.substitute(subs) for pred in self.predicates])
-
-
-@dataclass
-class IfStep(Step):
-    """
-    A step of the form:
-    If predicate:
-        stuff
-    Else if predicate:
-        stuff
-    """
-
-    data: dict[Predicate, list[Step]]
-    """A dictionary, containing a map from tested predicate to the proof segment under it."""
-
-    def to_language_format(self) -> str:
-        reprs = [
-            (pred.to_language_format(), '\n'.join(step.to_language_format() for step in steps))
-            for pred, steps in self.data.items()
-        ]
-        reprs = sorted(reprs, key=lambda t: len(t[1]))
-        res = []
-        for pred, body in reprs:
-            if len(res) == 0:
-                res.append(f'If {pred}:')
-            else:
-                res.append(f'Else if {pred}:')
-            body = body.split('\n')
-            body = ['\t' + row for row in body]
-            body = '\n'.join(body)
-            res.append(body)
-        return '\n'.join(res)
-
-    def substitute(self, subs: 'Mapping[GeoObject, GeoObject]') -> 'Step':
-        return IfStep(
-            {
-                pred.substitute(subs): [sub_step.substitute(subs) for sub_step in sub_steps]
-                for pred, sub_steps in self.data.items()
-            }
-        )
-
-
-@dataclass
-class AlmostAlwaysStep(Step):
-    """
-    A step that states that some predicate is satisfied on an open set,
-    and asserts that in the current problem it is almost always true.
-    This assertion is not checked, and incorrect use of this step can lead to contradictions.
-    """
-
-    predicates: list[Predicate]
-
-    def to_language_format(self) -> str:
-        return f'It is almost always true that ' + ', '.join(pred.to_language_format() for pred in self.predicates)
-
-    def substitute(self, subs: 'Mapping[GeoObject, GeoObject]') -> 'Step':
-        return AlmostAlwaysStep([pred.substitute(subs) for pred in self.predicates])
 
 
 class Proof:
