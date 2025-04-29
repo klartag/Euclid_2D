@@ -21,14 +21,372 @@ Need to prove:
 concyclic(C, D, E, O)
 
 Proof:
-By probably_between_and_collinear_implies_between on C, A, E we get between(C, A, E)
+Comment: Step 1 - Found 41 steps
+By probably_between_and_collinear_implies_between on E, A, C we get between(C, A, E)
+By probably_between_and_collinear_implies_between on D, C, B we get between(B, C, D)
 By probably_between_and_collinear_implies_between on B, A, F we get between(B, A, F)
-By probably_between_and_collinear_implies_between on B, C, D we get between(B, C, D)
-By concyclic_definition_0 on F, B, D, O we get O in Circle(B, D, F)
-By concyclic_definition_0 on A, E, F, O we get O in Circle(A, E, F)
-By angles_on_chord_v1 on A, O, F, E, Circle(A, E, F) we get angle(A, E, O) == angle(A, F, O) mod 360
-By angles_on_chord_v0 on O, B, D, F, Circle(B, D, F) we get angle(O, D, B) == angle(O, F, B) mod 360
+By concyclic_definition_0 on A, E, O, F we get F in Circle(A, E, O)
+By concyclic_definition_0 on O, D, B, F we get F in Circle(B, D, O)
+By concyclic_definition_0 on B, F, D, O we get O in Circle(B, D, F)
+By concyclic_definition_0 on A, O, F, E we get E in Circle(A, F, O)
+By concyclic_definition_0 on F, A, E, O we get O in Circle(A, E, F)
+By concyclic_definition_0 on F, B, O, D we get D in Circle(B, F, O)
+By concyclic_definition_0 on O, D, F, B we get B in Circle(D, F, O)
+By concyclic_definition_0 on E, O, F, A we get A in Circle(E, F, O)
+By concyclic_definition_1 on O, F, D, B we get Circle(B, D, F) == Circle(D, F, O)
+By concyclic_definition_1 on A, E, F, O we get Circle(A, E, F) == Circle(E, F, O)
+By collinear_definition on C, E, A we get E in Line(A, C), A in Line(C, E), Line(A, C) == Line(C, E), 0 == 2 * angle(E, C, A) mod 360
+By concyclic_definition_1 on E, A, O, F we get Circle(A, E, O) == Circle(A, F, O)
+By concyclic_definition_1 on B, O, D, F we get Circle(B, D, O) == Circle(D, F, O)
+By concyclic_definition_1 on F, O, E, A we get Circle(A, E, O) == Circle(E, F, O)
+By concyclic_definition_1 on E, F, A, O we get Circle(A, E, F) == Circle(A, F, O)
+By concyclic_definition_1 on D, F, O, B we get Circle(B, F, O) == Circle(D, F, O)
+By concyclic_definition_1 on F, E, A, O we get Circle(A, E, F) == Circle(A, E, O)
+By collinear_definition on A, C, E we get C in Line(A, E), E in Line(A, C), Line(A, C) == Line(A, E), 0 == 2 * angle(C, A, E) mod 360
+By concyclic_definition_1 on D, F, B, O we get Circle(B, D, F) == Circle(B, F, O)
+By concyclic_definition_1 on A, F, O, E we get Circle(A, F, O) == Circle(E, F, O)
+By collinear_definition on C, B, D we get B in Line(C, D), D in Line(B, C), Line(B, C) == Line(C, D), 0 == 2 * angle(B, C, D) mod 360
+By collinear_definition on B, A, F we get A in Line(B, F), F in Line(A, B), Line(A, B) == Line(B, F), 0 == 2 * angle(A, B, F) mod 360
+By concyclic_definition_1 on F, B, O, D we get Circle(B, D, O) == Circle(B, F, O)
+By collinear_definition on C, D, B we get D in Line(B, C), B in Line(C, D), Line(B, C) == Line(C, D), 0 == 2 * angle(D, C, B) mod 360
+By concyclic_definition_1 on F, D, B, O we get Circle(B, D, F) == Circle(B, D, O)
+By collinear_definition on D, C, B we get C in Line(B, D), B in Line(C, D), Line(B, D) == Line(C, D), 0 == 2 * angle(C, D, B) mod 360
+By collinear_definition on A, B, F we get B in Line(A, F), F in Line(A, B), Line(A, B) == Line(A, F), 0 == 2 * angle(B, A, F) mod 360
+By collinear_definition on F, B, A we get B in Line(A, F), A in Line(B, F), Line(A, F) == Line(B, F), 0 == 2 * angle(B, F, A) mod 360
+By collinear_definition on D, B, C we get B in Line(C, D), C in Line(B, D), Line(B, D) == Line(C, D), 0 == 2 * angle(B, D, C) mod 360
+By collinear_definition on B, C, D we get C in Line(B, D), D in Line(B, C), Line(B, C) == Line(B, D), 0 == 2 * angle(C, B, D) mod 360
+By collinear_definition on B, F, A we get F in Line(A, B), A in Line(B, F), Line(A, B) == Line(B, F), 0 == 2 * angle(F, B, A) mod 360
+By collinear_definition on F, A, B we get A in Line(B, F), B in Line(A, F), Line(A, F) == Line(B, F), 0 == 2 * angle(A, F, B) mod 360
+By collinear_definition on A, E, C we get E in Line(A, C), C in Line(A, E), Line(A, C) == Line(A, E), 0 == 2 * angle(E, A, C) mod 360
+By collinear_definition on A, F, B we get F in Line(A, B), B in Line(A, F), Line(A, B) == Line(A, F), 0 == 2 * angle(F, A, B) mod 360
+By collinear_definition on C, A, E we get A in Line(C, E), E in Line(A, C), Line(A, C) == Line(C, E), 0 == 2 * angle(A, C, E) mod 360
+By collinear_definition on B, D, C we get D in Line(B, C), C in Line(B, D), Line(B, C) == Line(B, D), 0 == 2 * angle(D, B, C) mod 360
+By collinear_definition on E, C, A we get C in Line(A, E), A in Line(C, E), Line(A, E) == Line(C, E), 0 == 2 * angle(C, E, A) mod 360
+By collinear_definition on E, A, C we get A in Line(C, E), C in Line(A, E), Line(A, E) == Line(C, E), 0 == 2 * angle(A, E, C) mod 360
+Comment: Step 2 - Found 110 steps
+By line_intersection_definition on A, Line(A, B), Line(A, C) we get A == line_intersection(Line(A, B), Line(A, C))
+By line_intersection_definition on C, Line(B, C), Line(A, C) we get C == line_intersection(Line(A, C), Line(B, C))
+By line_intersection_definition on B, Line(A, B), Line(B, C) we get B == line_intersection(Line(A, B), Line(B, C))
+By same_angle_v2 on A, E, C, F we get angle(E, A, F) == angle(C, A, F) + 180 mod 360
+By same_angle_v2 on A, F, B, C we get angle(F, A, C) == angle(B, A, C) + 180 mod 360
+By same_angle_v1 on B, D, C, A we get angle(C, B, A) == angle(D, B, A) mod 360
+By same_angle_v2 on C, B, D, E we get angle(B, C, E) == angle(D, C, E) + 180 mod 360
+By same_angle_v3 on A, C, E, B we get angle(C, A, B) == angle(E, A, B) + 180 mod 360
+By same_angle_v1 on B, C, D, F we get angle(C, B, F) == angle(D, B, F) mod 360
+By same_angle_v1 on C, A, E, B we get angle(A, C, B) == angle(E, C, B) mod 360
+By same_angle_v0 on C, A, E, D we get angle(A, C, D) == angle(E, C, D) mod 360
+By same_angle_v0 on B, A, F, C we get angle(A, B, C) == angle(F, B, C) mod 360
+By same_angle_v0 on B, A, F, D we get angle(A, B, D) == angle(F, B, D) mod 360
+By same_angle_v3 on A, B, F, E we get angle(B, A, E) == angle(F, A, E) + 180 mod 360
+By same_angle_v3 on C, B, D, A we get angle(B, C, A) == angle(D, C, A) + 180 mod 360
+By between_imply_not_between on E, A, C we get collinear_and_not_between(A, E, C)
+By between_imply_not_between on C, A, E we get collinear_and_not_between(A, C, E)
+By between_imply_not_between on B, C, D we get collinear_and_not_between(C, B, D)
+By between_imply_not_between on B, A, F we get collinear_and_not_between(A, B, F)
+By between_imply_not_between on F, A, B we get collinear_and_not_between(A, F, B)
+By between_imply_not_between on D, C, B we get collinear_and_not_between(B, D, C)
+By angles_on_chord_v0 on F, D, B, O, Circle(B, D, F) we get angle(F, B, D) == angle(F, O, D) mod 360
+By angles_on_chord_v1 on A, O, E, F, Circle(A, E, F) we get angle(A, E, O) == angle(A, F, O) mod 360
+By angles_on_chord_v0 on E, F, A, O, Circle(A, E, F) we get angle(E, A, F) == angle(E, O, F) mod 360
+By angles_on_chord_v0 on O, A, F, E, Circle(A, E, F) we get angle(O, E, A) == angle(O, F, A) mod 360
+By angles_on_chord_v1 on B, O, D, F, Circle(B, D, F) we get angle(B, D, O) == angle(B, F, O) mod 360
+By angles_on_chord_v0 on O, B, F, D, Circle(B, D, F) we get angle(O, D, B) == angle(O, F, B) mod 360
+By angles_on_chord_v1 on D, F, B, O, Circle(B, D, F) we get angle(D, B, F) == angle(D, O, F) mod 360
+By angles_on_chord_v1 on F, E, A, O, Circle(A, E, F) we get angle(F, A, E) == angle(F, O, E) mod 360
+By between_imply_segment_sum on C, A, E we get distance(C, E) == distance(A, C) + distance(A, E)
+By reverse_direction on F, B we get 180 == direction(F, B) - direction(B, F) mod 360
 By between_implies_angles on C, A, E we get 180 == angle(C, A, E) mod 360, 0 == angle(A, E, C) mod 360, 0 == angle(E, C, A) mod 360
+By reverse_direction on C, D we get 180 == direction(C, D) - direction(D, C) mod 360
+By reverse_direction on B, A we get 180 == direction(B, A) - direction(A, B) mod 360
+By reverse_direction on F, A we get 180 == direction(F, A) - direction(A, F) mod 360
+By between_imply_segment_sum on F, A, B we get distance(B, F) == distance(A, F) + distance(A, B)
 By between_implies_angles on B, A, F we get 180 == angle(B, A, F) mod 360, 0 == angle(A, F, B) mod 360, 0 == angle(F, B, A) mod 360
+By reverse_direction on B, D we get 180 == direction(B, D) - direction(D, B) mod 360
+By reverse_direction on B, F we get 180 == direction(B, F) - direction(F, B) mod 360
+By reverse_direction on A, E we get 180 == direction(A, E) - direction(E, A) mod 360
 By between_implies_angles on B, C, D we get 180 == angle(B, C, D) mod 360, 0 == angle(C, D, B) mod 360, 0 == angle(D, B, C) mod 360
+By reverse_direction on E, A we get 180 == direction(E, A) - direction(A, E) mod 360
+By reverse_direction on C, B we get 180 == direction(C, B) - direction(B, C) mod 360
+By reverse_direction on E, C we get 180 == direction(E, C) - direction(C, E) mod 360
+By angles_on_chord_v1 on O, F, A, E, Circle(A, E, F) we get angle(O, A, F) == angle(O, E, F) mod 360
+By between_imply_segment_sum on B, C, D we get distance(B, D) == distance(B, C) + distance(C, D)
+By reverse_direction on C, E we get 180 == direction(C, E) - direction(E, C) mod 360
+By reverse_direction on D, C we get 180 == direction(D, C) - direction(C, D) mod 360
+By reverse_direction on A, B we get 180 == direction(A, B) - direction(B, A) mod 360
+By reverse_direction on D, B we get 180 == direction(D, B) - direction(B, D) mod 360
+By between_implies_angles on D, C, B we get 180 == angle(D, C, B) mod 360, 0 == angle(C, B, D) mod 360, 0 == angle(B, D, C) mod 360
+By reverse_direction on A, F we get 180 == direction(A, F) - direction(F, A) mod 360
+By reverse_direction on A, C we get 180 == direction(A, C) - direction(C, A) mod 360
+By between_implies_angles on E, A, C we get 180 == angle(E, A, C) mod 360, 0 == angle(A, C, E) mod 360, 0 == angle(C, E, A) mod 360
+By between_implies_angles on F, A, B we get 180 == angle(F, A, B) mod 360, 0 == angle(A, B, F) mod 360, 0 == angle(B, F, A) mod 360
+By reverse_direction on C, A we get 180 == direction(C, A) - direction(A, C) mod 360
+By reverse_direction on B, C we get 180 == direction(B, C) - direction(C, B) mod 360
+By angles_on_chord_v3 on F, A, O, E, Circle(A, E, F) we get angle(F, O, A) == angle(F, E, A) + 180 mod 360
+By angles_on_chord_v0 on A, E, F, O, Circle(A, E, F) we get angle(A, F, E) == angle(A, O, E) mod 360
+By angles_on_chord_v2 on O, F, D, B, Circle(B, D, F) we get angle(O, D, F) == angle(O, B, F) + 180 mod 360
+By angles_on_chord_v2 on F, O, B, D, Circle(B, D, F) we get angle(F, B, O) == angle(F, D, O) + 180 mod 360
+By angles_on_chord_v3 on F, O, D, B, Circle(B, D, F) we get angle(F, D, O) == angle(F, B, O) + 180 mod 360
+By angles_on_chord_v2 on A, F, O, E, Circle(A, E, F) we get angle(A, O, F) == angle(A, E, F) + 180 mod 360
+By angles_on_chord_v3 on O, E, A, F, Circle(A, E, F) we get angle(O, A, E) == angle(O, F, E) + 180 mod 360
+By angles_on_chord_v1 on E, A, F, O, Circle(A, E, F) we get angle(E, F, A) == angle(E, O, A) mod 360
+By angles_on_chord_v1 on F, B, O, D, Circle(B, D, F) we get angle(F, D, B) == angle(F, O, B) mod 360
+By angles_on_chord_v3 on D, B, O, F, Circle(B, D, F) we get angle(D, O, B) == angle(D, F, B) + 180 mod 360
+By angles_on_chord_v3 on O, F, B, D, Circle(B, D, F) we get angle(O, B, F) == angle(O, D, F) + 180 mod 360
+By angles_on_chord_v0 on B, F, D, O, Circle(B, D, F) we get angle(B, D, F) == angle(B, O, F) mod 360
+By angles_on_chord_v1 on O, D, B, F, Circle(B, D, F) we get angle(O, B, D) == angle(O, F, D) mod 360
+By angles_on_chord_v0 on D, O, B, F, Circle(B, D, F) we get angle(D, B, O) == angle(D, F, O) mod 360
+By angles_on_chord_v2 on O, E, F, A, Circle(A, E, F) we get angle(O, F, E) == angle(O, A, E) + 180 mod 360
+By angles_on_chord_v2 on F, A, E, O, Circle(A, E, F) we get angle(F, E, A) == angle(F, O, A) + 180 mod 360
+By angles_on_chord_v2 on E, O, A, F, Circle(A, E, F) we get angle(E, A, O) == angle(E, F, O) + 180 mod 360
+By angles_on_chord_v2 on D, B, F, O, Circle(B, D, F) we get angle(D, F, B) == angle(D, O, B) + 180 mod 360
+By angles_on_chord_v3 on A, F, E, O, Circle(A, E, F) we get angle(A, E, F) == angle(A, O, F) + 180 mod 360
+By angles_on_chord_v3 on B, D, F, O, Circle(B, D, F) we get angle(B, F, D) == angle(B, O, D) + 180 mod 360
+By angles_on_chord_v2 on B, D, O, F, Circle(B, D, F) we get angle(B, O, D) == angle(B, F, D) + 180 mod 360
+By angles_on_chord_v0 on F, O, A, E, Circle(A, E, F) we get angle(F, A, O) == angle(F, E, O) mod 360
+By angles_on_chord_v3 on E, O, F, A, Circle(A, E, F) we get angle(E, F, O) == angle(E, A, O) + 180 mod 360
+By internal_angle_bisector_definition_v0_r on A, F, A, B we get Line(B, F) == internal_angle_bisector(A, B, A)
+By internal_angle_bisector_definition_v0_r on B, A, B, F we get Line(A, F) == internal_angle_bisector(B, F, B)
+By internal_angle_bisector_definition_v0_r on B, F, B, A we get Line(A, F) == internal_angle_bisector(B, A, B)
+By internal_angle_bisector_definition_v0_r on F, B, F, A we get Line(A, B) == internal_angle_bisector(F, A, F)
+By power_of_a_point_on_circle on A, Circle(A, E, F) we get 0 == power_of_a_point(A, Circle(A, E, F))
+By internal_angle_bisector_definition_v0_r on E, A, E, C we get Line(A, C) == internal_angle_bisector(E, C, E)
+By internal_angle_bisector_definition_v0_r on D, C, D, B we get Line(B, C) == internal_angle_bisector(D, B, D)
+By power_of_a_point_in_circle on F, Circle(B, D, F) we get 0 == power_of_a_point(F, Circle(B, D, F))
+By power_of_a_point_on_circle on F, Circle(A, E, F) we get 0 == power_of_a_point(F, Circle(A, E, F))
+By power_of_a_point_on_circle on E, Circle(A, E, F) we get 0 == power_of_a_point(E, Circle(A, E, F))
+By internal_angle_bisector_definition_v0_r on C, D, C, B we get Line(B, D) == internal_angle_bisector(C, B, C)
+By internal_angle_bisector_definition_v0_r on C, E, C, A we get Line(A, E) == internal_angle_bisector(C, A, C)
+By power_of_a_point_on_circle on O, Circle(A, E, F) we get 0 == power_of_a_point(O, Circle(A, E, F))
+By internal_angle_bisector_definition_v0_r on D, B, D, C we get Line(B, C) == internal_angle_bisector(D, C, D)
+By internal_angle_bisector_definition_v0_r on C, B, C, D we get Line(B, D) == internal_angle_bisector(C, D, C)
+By power_of_a_point_on_circle on D, Circle(B, D, F) we get 0 == power_of_a_point(D, Circle(B, D, F))
+By internal_angle_bisector_definition_v0_r on A, C, A, E we get Line(C, E) == internal_angle_bisector(A, E, A)
+By internal_angle_bisector_definition_v0_r on B, C, B, D we get Line(C, D) == internal_angle_bisector(B, D, B)
+By internal_angle_bisector_definition_v0_r on F, A, F, B we get Line(A, B) == internal_angle_bisector(F, B, F)
+By power_of_a_point_on_circle on O, Circle(B, D, F) we get 0 == power_of_a_point(O, Circle(B, D, F))
+By internal_angle_bisector_definition_v0_r on E, C, E, A we get Line(A, C) == internal_angle_bisector(E, A, E)
+By internal_angle_bisector_definition_v0_r on A, E, A, C we get Line(C, E) == internal_angle_bisector(A, C, A)
+By power_of_a_point_on_circle on B, Circle(B, D, F) we get 0 == power_of_a_point(B, Circle(B, D, F))
+By internal_angle_bisector_definition_v0_r on A, B, A, F we get Line(B, F) == internal_angle_bisector(A, F, A)
+By internal_angle_bisector_definition_v0_r on B, D, B, C we get Line(C, D) == internal_angle_bisector(B, C, B)
+By internal_angle_bisector_definition_v0_r on C, A, C, E we get Line(A, E) == internal_angle_bisector(C, E, C)
+By power_of_a_point_definition on C, E, A, Circle(A, E, F) we get log(distance(C, E)) + log(distance(A, C)) == log(power_of_a_point(C, Circle(A, E, F)))
+By power_of_a_point_definition on C, D, B, Circle(B, D, F) we get log(distance(C, D)) + log(distance(B, C)) == log(power_of_a_point(C, Circle(B, D, F)))
+By power_of_a_point_definition on A, F, B, Circle(B, D, F) we get log(distance(A, F)) + log(distance(A, B)) == log(power_of_a_point(A, Circle(B, D, F)))
+By power_of_a_point_definition on B, A, F, Circle(A, E, F) we get log(distance(A, B)) + log(distance(B, F)) == log(power_of_a_point(B, Circle(A, E, F)))
+Comment: Step 3 - Found 49 steps
+By line_intersection_definition on D, Line(B, C), Line(D, F) we get D == line_intersection(Line(B, C), Line(D, F))
+By line_intersection_definition on E, Line(A, C), Line(E, F) we get E == line_intersection(Line(A, C), Line(E, F))
+By radical_axis_of_intersecting_circles_v0 on F, O, Circle(A, E, F), Circle(B, D, F) we get Line(F, O) == radical_axis(Circle(A, E, F), Circle(B, D, F))
+By line_intersection_definition on D, Line(B, C), Line(D, O) we get D == line_intersection(Line(B, C), Line(D, O))
+By line_intersection_definition on F, Line(D, F), Line(F, O) we get F == line_intersection(Line(D, F), Line(F, O))
+By line_intersection_definition on F, Line(F, O), Line(E, F) we get F == line_intersection(Line(E, F), Line(F, O))
+By line_intersection_definition on B, Line(B, C), Line(B, O) we get B == line_intersection(Line(B, C), Line(B, O))
+By line_intersection_definition on E, Line(E, F), Line(E, O) we get E == line_intersection(Line(E, F), Line(E, O))
+By line_intersection_definition on F, Line(A, B), Line(F, O) we get F == line_intersection(Line(A, B), Line(F, O))
+By line_intersection_definition on O, Line(D, O), Line(E, O) we get O == line_intersection(Line(D, O), Line(E, O))
+By line_intersection_definition on A, Line(A, B), Line(A, O) we get A == line_intersection(Line(A, B), Line(A, O))
+By line_intersection_definition on F, Line(D, F), Line(E, F) we get F == line_intersection(Line(D, F), Line(E, F))
+By line_intersection_definition on O, Line(D, O), Line(B, O) we get O == line_intersection(Line(B, O), Line(D, O))
+By line_intersection_definition on O, Line(A, O), Line(E, O) we get O == line_intersection(Line(A, O), Line(E, O))
+By line_intersection_definition on O, Line(F, O), Line(E, O) we get O == line_intersection(Line(E, O), Line(F, O))
+By line_intersection_definition on O, Line(D, O), Line(A, O) we get O == line_intersection(Line(A, O), Line(D, O))
+By line_intersection_definition on A, Line(A, C), Line(A, O) we get A == line_intersection(Line(A, C), Line(A, O))
+By line_intersection_definition on O, Line(A, O), Line(F, O) we get O == line_intersection(Line(A, O), Line(F, O))
+By line_intersection_definition on O, Line(F, O), Line(D, O) we get O == line_intersection(Line(D, O), Line(F, O))
+By line_intersection_definition on F, Line(D, F), Line(A, B) we get F == line_intersection(Line(A, B), Line(D, F))
+By line_intersection_definition on O, Line(A, O), Line(B, O) we get O == line_intersection(Line(A, O), Line(B, O))
+By line_intersection_definition on D, Line(D, O), Line(D, F) we get D == line_intersection(Line(D, F), Line(D, O))
+By line_intersection_definition on O, Line(F, O), Line(B, O) we get O == line_intersection(Line(B, O), Line(F, O))
+By line_intersection_definition on E, Line(A, C), Line(E, O) we get E == line_intersection(Line(A, C), Line(E, O))
+By line_intersection_definition on B, Line(A, B), Line(B, O) we get B == line_intersection(Line(A, B), Line(B, O))
+By line_intersection_definition on F, Line(A, B), Line(E, F) we get F == line_intersection(Line(A, B), Line(E, F))
+By line_intersection_definition on O, Line(B, O), Line(E, O) we get O == line_intersection(Line(B, O), Line(E, O))
+By same_angle_v1 on E, C, A, O we get angle(A, E, O) == angle(C, E, O) mod 360
+By same_angle_v1 on F, B, A, D we get angle(A, F, D) == angle(B, F, D) mod 360
+By same_angle_v1 on E, A, C, F we get angle(A, E, F) == angle(C, E, F) mod 360
+By same_angle_v0 on B, D, C, O we get angle(C, B, O) == angle(D, B, O) mod 360
+By same_angle_v0 on F, A, B, E we get angle(A, F, E) == angle(B, F, E) mod 360
+By same_angle_v2 on A, F, B, O we get angle(F, A, O) == angle(B, A, O) + 180 mod 360
+By same_angle_v0 on D, B, C, F we get angle(B, D, F) == angle(C, D, F) mod 360
+By same_angle_v0 on B, A, F, O we get angle(A, B, O) == angle(F, B, O) mod 360
+By same_angle_v2 on A, E, C, O we get angle(E, A, O) == angle(C, A, O) + 180 mod 360
+By same_angle_v1 on D, C, B, O we get angle(B, D, O) == angle(C, D, O) mod 360
+By reverse_direction on E, O we get 180 == direction(E, O) - direction(O, E) mod 360
+By reverse_direction on F, O we get 180 == direction(F, O) - direction(O, F) mod 360
+By reverse_direction on O, F we get 180 == direction(O, F) - direction(F, O) mod 360
+By reverse_direction on O, B we get 180 == direction(O, B) - direction(B, O) mod 360
+By reverse_direction on B, O we get 180 == direction(B, O) - direction(O, B) mod 360
+By reverse_direction on O, E we get 180 == direction(O, E) - direction(E, O) mod 360
+By reverse_direction on A, O we get 180 == direction(A, O) - direction(O, A) mod 360
+By reverse_direction on O, A we get 180 == direction(O, A) - direction(A, O) mod 360
+By reverse_direction on D, O we get 180 == direction(D, O) - direction(O, D) mod 360
+By reverse_direction on O, D we get 180 == direction(O, D) - direction(D, O) mod 360
+By radical_axis_definition_v0_r on F, Circle(A, E, F), Circle(B, D, F) we get F in radical_axis(Circle(A, E, F), Circle(B, D, F))
+By radical_axis_definition_v0_r on O, Circle(B, D, F), Circle(A, E, F) we get O in radical_axis(Circle(A, E, F), Circle(B, D, F))
+Comment: Step 4 - Found 165 steps
+By concurrent_sufficient_conditions on Line(D, F), Line(F, O), Line(E, F) we get concurrent(Line(D, F), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, B), Line(F, O), Line(E, F) we get concurrent(Line(A, B), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(D, O), Line(F, O) we get concurrent(Line(A, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(B, O), Line(D, O) we get concurrent(Line(A, O), Line(B, O), Line(D, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(A, B), Line(D, F) we get concurrent(Line(A, B), Line(D, F), Line(F, O))
 By concyclic_sufficient_conditions_v0 on O, E, C, D we get concyclic(C, D, E, O)
+By concurrent_sufficient_conditions on Line(A, B), Line(A, C), Line(A, O) we get concurrent(Line(A, B), Line(A, C), Line(A, O))
+By concurrent_sufficient_conditions on Line(D, F), Line(E, F), Line(A, B) we get concurrent(Line(A, B), Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, C), Line(A, B), Line(A, O) we get concurrent(Line(A, B), Line(A, C), Line(A, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(B, O), Line(D, O) we get concurrent(Line(B, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(D, O), Line(E, O) we get concurrent(Line(D, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(A, C), Line(A, B) we get concurrent(Line(A, B), Line(A, C), Line(A, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(F, O), Line(D, O) we get concurrent(Line(B, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(D, F), Line(B, C), Line(D, O) we get concurrent(Line(B, C), Line(D, F), Line(D, O))
+By concurrent_sufficient_conditions on Line(E, F), Line(A, C), Line(E, O) we get concurrent(Line(A, C), Line(E, F), Line(E, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(D, O), Line(A, O) we get concurrent(Line(A, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(B, O), Line(E, O) we get concurrent(Line(B, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(B, O), Line(E, O) we get concurrent(Line(A, O), Line(B, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(E, F), Line(A, C) we get concurrent(Line(A, C), Line(E, F), Line(E, O))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, O), Line(E, F) we get concurrent(Line(A, C), Line(E, F), Line(E, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(E, O), Line(A, O) we get concurrent(Line(A, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(A, O), Line(F, O) we get concurrent(Line(A, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, B), Line(E, F), Line(F, O) we get concurrent(Line(A, B), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(F, O), Line(D, O) we get concurrent(Line(D, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(E, O), Line(A, O) we get concurrent(Line(A, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(F, O), Line(B, O) we get concurrent(Line(A, O), Line(B, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, B), Line(B, C), Line(B, O) we get concurrent(Line(A, B), Line(B, C), Line(B, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(F, O), Line(A, O) we get concurrent(Line(A, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, F), Line(E, O), Line(A, C) we get concurrent(Line(A, C), Line(E, F), Line(E, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(A, O), Line(D, O) we get concurrent(Line(A, O), Line(B, O), Line(D, O))
+By concurrent_sufficient_conditions on Line(D, F), Line(E, F), Line(F, O) we get concurrent(Line(D, F), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, F), Line(D, F), Line(A, B) we get concurrent(Line(A, B), Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(D, O), Line(B, O), Line(F, O) we get concurrent(Line(B, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(D, F), Line(A, B), Line(F, O) we get concurrent(Line(A, B), Line(D, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(B, O), Line(A, O) we get concurrent(Line(A, O), Line(B, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(B, C), Line(D, F), Line(D, O) we get concurrent(Line(B, C), Line(D, F), Line(D, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(A, O), Line(E, O) we get concurrent(Line(A, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(A, B), Line(A, O), Line(A, C) we get concurrent(Line(A, B), Line(A, C), Line(A, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(D, O), Line(A, O) we get concurrent(Line(A, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(E, O), Line(B, O) we get concurrent(Line(B, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(E, O), Line(F, O) we get concurrent(Line(D, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, F), Line(A, B), Line(F, O) we get concurrent(Line(A, B), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, B), Line(D, F), Line(F, O) we get concurrent(Line(A, B), Line(D, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(B, C), Line(A, B) we get concurrent(Line(A, B), Line(B, C), Line(B, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(D, F), Line(A, B) we get concurrent(Line(A, B), Line(D, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(A, B), Line(B, C) we get concurrent(Line(A, B), Line(B, C), Line(B, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(F, O), Line(E, O) we get concurrent(Line(D, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(D, F), Line(F, O), Line(A, B) we get concurrent(Line(A, B), Line(D, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(F, O), Line(A, O) we get concurrent(Line(A, O), Line(B, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(D, O), Line(E, O) we get concurrent(Line(B, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(E, F), Line(A, B) we get concurrent(Line(A, B), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, C), Line(A, O), Line(A, B) we get concurrent(Line(A, B), Line(A, C), Line(A, O))
+By concurrent_sufficient_conditions on Line(E, F), Line(A, B), Line(D, F) we get concurrent(Line(A, B), Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(B, C), Line(A, B), Line(B, O) we get concurrent(Line(A, B), Line(B, C), Line(B, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(F, O), Line(E, O) we get concurrent(Line(A, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(D, O), Line(B, O) we get concurrent(Line(B, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(E, F), Line(D, F) we get concurrent(Line(D, F), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(A, O), Line(E, O) we get concurrent(Line(A, O), Line(B, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(D, F), Line(D, O), Line(B, C) we get concurrent(Line(B, C), Line(D, F), Line(D, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(A, O), Line(D, O) we get concurrent(Line(A, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(B, C), Line(D, O), Line(D, F) we get concurrent(Line(B, C), Line(D, F), Line(D, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(D, O), Line(A, O) we get concurrent(Line(A, O), Line(B, O), Line(D, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(B, O), Line(E, O) we get concurrent(Line(B, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(A, B), Line(E, F) we get concurrent(Line(A, B), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(A, O), Line(B, O) we get concurrent(Line(A, O), Line(B, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(E, O), Line(B, O) we get concurrent(Line(B, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(E, O), Line(D, O) we get concurrent(Line(A, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(A, B), Line(A, C) we get concurrent(Line(A, B), Line(A, C), Line(A, O))
+By concurrent_sufficient_conditions on Line(A, B), Line(E, F), Line(D, F) we get concurrent(Line(A, B), Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(A, O), Line(E, O), Line(F, O) we get concurrent(Line(A, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(F, O), Line(D, O) we get concurrent(Line(A, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(D, O), Line(E, O) we get concurrent(Line(A, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(A, B), Line(F, O), Line(D, F) we get concurrent(Line(A, B), Line(D, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, F), Line(F, O), Line(A, B) we get concurrent(Line(A, B), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, F), Line(F, O), Line(D, F) we get concurrent(Line(D, F), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(D, F), Line(A, B), Line(E, F) we get concurrent(Line(A, B), Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(B, O), Line(E, O), Line(D, O) we get concurrent(Line(B, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(E, O), Line(F, O) we get concurrent(Line(B, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(E, O), Line(B, O) we get concurrent(Line(A, O), Line(B, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(E, F), Line(D, F), Line(F, O) we get concurrent(Line(D, F), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(D, O), Line(B, O) we get concurrent(Line(B, O), Line(D, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(A, C), Line(E, F) we get concurrent(Line(A, C), Line(E, F), Line(E, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(A, O), Line(B, O) we get concurrent(Line(A, O), Line(B, O), Line(D, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(D, O), Line(F, O) we get concurrent(Line(D, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(B, O), Line(D, O) we get concurrent(Line(B, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(A, O), Line(F, O) we get concurrent(Line(A, O), Line(B, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(B, O), Line(A, O) we get concurrent(Line(A, O), Line(B, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(A, O), Line(E, O) we get concurrent(Line(A, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(D, O), Line(B, O) we get concurrent(Line(A, O), Line(B, O), Line(D, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(F, O), Line(E, O) we get concurrent(Line(B, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(F, O), Line(A, O) we get concurrent(Line(A, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(D, O), Line(F, O) we get concurrent(Line(B, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(E, O), Line(D, O) we get concurrent(Line(D, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(F, O), Line(B, O) we get concurrent(Line(B, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(A, O), Line(F, O) we get concurrent(Line(A, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, O), Line(B, O), Line(F, O) we get concurrent(Line(A, O), Line(B, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, B), Line(B, O), Line(B, C) we get concurrent(Line(A, B), Line(B, C), Line(B, O))
+By concurrent_sufficient_conditions on Line(B, C), Line(B, O), Line(A, B) we get concurrent(Line(A, B), Line(B, C), Line(B, O))
+By concurrent_sufficient_conditions on Line(B, O), Line(E, O), Line(A, O) we get concurrent(Line(A, O), Line(B, O), Line(E, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(B, O), Line(F, O) we get concurrent(Line(B, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(E, O), Line(F, O), Line(B, O) we get concurrent(Line(B, O), Line(E, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(D, F), Line(E, F) we get concurrent(Line(D, F), Line(E, F), Line(F, O))
+By concurrent_sufficient_conditions on Line(A, B), Line(D, F), Line(E, F) we get concurrent(Line(A, B), Line(D, F), Line(E, F))
+By concurrent_sufficient_conditions on Line(F, O), Line(A, O), Line(D, O) we get concurrent(Line(A, O), Line(D, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(F, O), Line(A, O), Line(B, O) we get concurrent(Line(A, O), Line(B, O), Line(F, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(D, F), Line(B, C) we get concurrent(Line(B, C), Line(D, F), Line(D, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(B, O), Line(A, O) we get concurrent(Line(A, O), Line(B, O), Line(D, O))
+By concurrent_sufficient_conditions on Line(D, O), Line(B, C), Line(D, F) we get concurrent(Line(B, C), Line(D, F), Line(D, O))
+By concurrent_sufficient_conditions on Line(A, C), Line(E, F), Line(E, O) we get concurrent(Line(A, C), Line(E, F), Line(E, O))
+By circle_radius_v0_r on E, Circle(A, E, F) we get radius(Circle(A, E, F)) == distance(E, center(Circle(A, E, F)))
+By circle_radius_v0_r on D, Circle(B, D, F) we get radius(Circle(B, D, F)) == distance(D, center(Circle(B, D, F)))
+By circle_radius_v0_r on O, Circle(B, D, F) we get radius(Circle(B, D, F)) == distance(O, center(Circle(B, D, F)))
+By circle_radius_v0_r on F, Circle(A, E, F) we get radius(Circle(A, E, F)) == distance(F, center(Circle(A, E, F)))
+By circle_radius_v0_r on O, Circle(A, E, F) we get radius(Circle(A, E, F)) == distance(O, center(Circle(A, E, F)))
+By circle_radius_v0_r on F, Circle(B, D, F) we get radius(Circle(B, D, F)) == distance(F, center(Circle(B, D, F)))
+By circle_radius_v0_r on B, Circle(B, D, F) we get radius(Circle(B, D, F)) == distance(B, center(Circle(B, D, F)))
+By circle_radius_v0_r on A, Circle(A, E, F) we get radius(Circle(A, E, F)) == distance(A, center(Circle(A, E, F)))
+By angle_to_center on F, D, O, Circle(B, D, F) we get 2 * angle(F, D, O) == angle(F, center(Circle(B, D, F)), O) mod 360
+By angle_to_center on E, A, F, Circle(A, E, F) we get 2 * angle(E, A, F) == angle(E, center(Circle(A, E, F)), F) mod 360
+By angle_to_center on D, F, O, Circle(B, D, F) we get 2 * angle(D, F, O) == angle(D, center(Circle(B, D, F)), O) mod 360
+By angle_to_center on O, E, A, Circle(A, E, F) we get 2 * angle(O, E, A) == angle(O, center(Circle(A, E, F)), A) mod 360
+By angle_to_center on E, F, O, Circle(A, E, F) we get 2 * angle(E, F, O) == angle(E, center(Circle(A, E, F)), O) mod 360
+By angle_to_center on E, O, F, Circle(A, E, F) we get 2 * angle(E, O, F) == angle(E, center(Circle(A, E, F)), F) mod 360
+By angle_to_center on O, F, B, Circle(B, D, F) we get 2 * angle(O, F, B) == angle(O, center(Circle(B, D, F)), B) mod 360
+By angle_to_center on A, F, E, Circle(A, E, F) we get 2 * angle(A, F, E) == angle(A, center(Circle(A, E, F)), E) mod 360
+By angle_to_center on O, A, E, Circle(A, E, F) we get 2 * angle(O, A, E) == angle(O, center(Circle(A, E, F)), E) mod 360
+By angle_to_center on O, B, F, Circle(B, D, F) we get 2 * angle(O, B, F) == angle(O, center(Circle(B, D, F)), F) mod 360
+By angle_to_center on D, B, O, Circle(B, D, F) we get 2 * angle(D, B, O) == angle(D, center(Circle(B, D, F)), O) mod 360
+By angle_to_center on A, F, O, Circle(A, E, F) we get 2 * angle(A, F, O) == angle(A, center(Circle(A, E, F)), O) mod 360
+By angle_to_center on B, F, O, Circle(B, D, F) we get 2 * angle(B, F, O) == angle(B, center(Circle(B, D, F)), O) mod 360
+By angle_to_center on O, E, F, Circle(A, E, F) we get 2 * angle(O, E, F) == angle(O, center(Circle(A, E, F)), F) mod 360
+By angle_to_center on D, O, B, Circle(B, D, F) we get 2 * angle(D, O, B) == angle(D, center(Circle(B, D, F)), B) mod 360
+By angle_to_center on A, E, O, Circle(A, E, F) we get 2 * angle(A, E, O) == angle(A, center(Circle(A, E, F)), O) mod 360
+By angle_to_center on O, F, E, Circle(A, E, F) we get 2 * angle(O, F, E) == angle(O, center(Circle(A, E, F)), E) mod 360
+By angle_to_center on D, O, F, Circle(B, D, F) we get 2 * angle(D, O, F) == angle(D, center(Circle(B, D, F)), F) mod 360
+By angle_to_center on A, O, F, Circle(A, E, F) we get 2 * angle(A, O, F) == angle(A, center(Circle(A, E, F)), F) mod 360
+By angle_to_center on F, O, B, Circle(B, D, F) we get 2 * angle(F, O, B) == angle(F, center(Circle(B, D, F)), B) mod 360
+By angle_to_center on B, O, D, Circle(B, D, F) we get 2 * angle(B, O, D) == angle(B, center(Circle(B, D, F)), D) mod 360
+By angle_to_center on O, F, A, Circle(A, E, F) we get 2 * angle(O, F, A) == angle(O, center(Circle(A, E, F)), A) mod 360
+By angle_to_center on E, A, O, Circle(A, E, F) we get 2 * angle(E, A, O) == angle(E, center(Circle(A, E, F)), O) mod 360
+By angle_to_center on F, B, D, Circle(B, D, F) we get 2 * angle(F, B, D) == angle(F, center(Circle(B, D, F)), D) mod 360
+By angle_to_center on E, O, A, Circle(A, E, F) we get 2 * angle(E, O, A) == angle(E, center(Circle(A, E, F)), A) mod 360
+By angle_to_center on D, F, B, Circle(B, D, F) we get 2 * angle(D, F, B) == angle(D, center(Circle(B, D, F)), B) mod 360
+By angle_to_center on B, O, F, Circle(B, D, F) we get 2 * angle(B, O, F) == angle(B, center(Circle(B, D, F)), F) mod 360
+By angle_to_center on E, F, A, Circle(A, E, F) we get 2 * angle(E, F, A) == angle(E, center(Circle(A, E, F)), A) mod 360
+By angle_to_center on O, A, F, Circle(A, E, F) we get 2 * angle(O, A, F) == angle(O, center(Circle(A, E, F)), F) mod 360
+By angle_to_center on O, D, B, Circle(B, D, F) we get 2 * angle(O, D, B) == angle(O, center(Circle(B, D, F)), B) mod 360
+By angle_to_center on F, A, E, Circle(A, E, F) we get 2 * angle(F, A, E) == angle(F, center(Circle(A, E, F)), E) mod 360
+By angle_to_center on F, E, A, Circle(A, E, F) we get 2 * angle(F, E, A) == angle(F, center(Circle(A, E, F)), A) mod 360
+By angle_to_center on B, D, F, Circle(B, D, F) we get 2 * angle(B, D, F) == angle(B, center(Circle(B, D, F)), F) mod 360
+By angle_to_center on F, A, O, Circle(A, E, F) we get 2 * angle(F, A, O) == angle(F, center(Circle(A, E, F)), O) mod 360
+By angle_to_center on O, D, F, Circle(B, D, F) we get 2 * angle(O, D, F) == angle(O, center(Circle(B, D, F)), F) mod 360
+By angle_to_center on F, D, B, Circle(B, D, F) we get 2 * angle(F, D, B) == angle(F, center(Circle(B, D, F)), B) mod 360
+By angle_to_center on F, O, A, Circle(A, E, F) we get 2 * angle(F, O, A) == angle(F, center(Circle(A, E, F)), A) mod 360
+By angle_to_center on F, O, D, Circle(B, D, F) we get 2 * angle(F, O, D) == angle(F, center(Circle(B, D, F)), D) mod 360
+By angle_to_center on O, F, D, Circle(B, D, F) we get 2 * angle(O, F, D) == angle(O, center(Circle(B, D, F)), D) mod 360
+By angle_to_center on O, B, D, Circle(B, D, F) we get 2 * angle(O, B, D) == angle(O, center(Circle(B, D, F)), D) mod 360
+By angle_to_center on B, D, O, Circle(B, D, F) we get 2 * angle(B, D, O) == angle(B, center(Circle(B, D, F)), O) mod 360
+By angle_to_center on F, B, O, Circle(B, D, F) we get 2 * angle(F, B, O) == angle(F, center(Circle(B, D, F)), O) mod 360
+By angle_to_center on F, E, O, Circle(A, E, F) we get 2 * angle(F, E, O) == angle(F, center(Circle(A, E, F)), O) mod 360
+By angle_to_center on B, F, D, Circle(B, D, F) we get 2 * angle(B, F, D) == angle(B, center(Circle(B, D, F)), D) mod 360
+By angle_to_center on F, O, E, Circle(A, E, F) we get 2 * angle(F, O, E) == angle(F, center(Circle(A, E, F)), E) mod 360
+By angle_to_center on A, E, F, Circle(A, E, F) we get 2 * angle(A, E, F) == angle(A, center(Circle(A, E, F)), F) mod 360
+By angle_to_center on A, O, E, Circle(A, E, F) we get 2 * angle(A, O, E) == angle(A, center(Circle(A, E, F)), E) mod 360
+By angle_to_center on D, B, F, Circle(B, D, F) we get 2 * angle(D, B, F) == angle(D, center(Circle(B, D, F)), F) mod 360
