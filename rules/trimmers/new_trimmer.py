@@ -23,18 +23,21 @@ class ProofTrimmer:
         Attempts to shorten a proof as much as possible,
         while still keeping the proof valid.
         """
-
         step = 0
+        chunk_size = 1
 
         ProofChecker(self.proof).check()
 
         with tqdm(total=len(self.trimmed_proof.steps)) as progress_bar:
             while step < len(self.trimmed_proof.steps):
-                trimmed_steps = self.trim_from_step(step)
+                trimmed_steps = self.trim_from_step(step, chunk_size)
                 if len(trimmed_steps) > 0:
                     for i in trimmed_steps[::-1]:
                         del self.trimmed_proof.steps[i]
                     progress_bar.update(len(trimmed_steps))
+                    chunk_size = min(2 * chunk_size, len(self.trimmed_proof.steps) - step)
+                elif chunk_size > 1:
+                    chunk_size //= 2
                 else:
                     step += 1
                     progress_bar.update(1)
@@ -53,7 +56,7 @@ class ProofTrimmer:
         res.proof = self.trimmed_proof.shallow_copy()
         return res
 
-    def trim_from_step(self, step: int) -> List[int]:
+    def trim_from_step(self, step: int, chunk_size: int) -> List[int]:
         """
         Attempts to shorten a proof, by removing the step `step`,
         and then by also removing every proof step that depends on it.
@@ -63,13 +66,12 @@ class ProofTrimmer:
 
         Returns the list of steps this method managed to remove.
         """
-        if isinstance(self.trimmed_proof.steps[step], CommentStep):
-            return []
+        removed_steps = [
+            i for i in range(step, step + chunk_size) if not isinstance(self.trimmed_proof.steps[i], CommentStep)
+        ]
 
         checker = self.get_checker_at_step(step)
-
-        removed_steps = [checker.checked_steps]
-        checker.checked_steps += 1
+        checker.checked_steps += chunk_size
 
         while checker.checked_steps < len(checker.proof.steps):
             try:
