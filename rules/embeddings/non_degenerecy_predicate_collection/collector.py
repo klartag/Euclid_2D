@@ -17,9 +17,32 @@ class NonDegeneracyPrediateCollector:
         pass
 
     def collect(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
+        two_point_non_degenerecy_predicates = self.collect_two_point_non_degenerecy_predicates(assumption_objects, embedding)
         triangle_non_degenerecy_predicates = self.collect_triangle_non_degenerecy_predicates(assumption_objects, embedding)
         probably_between_predicates = self.collect_probably_between_predicates(assumption_objects, embedding)
-        return triangle_non_degenerecy_predicates + probably_between_predicates
+        return two_point_non_degenerecy_predicates + triangle_non_degenerecy_predicates + probably_between_predicates
+
+    def collect_two_point_non_degenerecy_predicates(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
+        predicates = []
+
+        points = {name: point for (name, point) in embedding.items() if isinstance(point, EmbeddedPoint)}
+        for name0, name1 in combinations(points, 2):
+            point0, point1 = points[name0], points[name1]
+            if point0.is_equal(point1):
+                continue
+
+            object0 = assumption_objects[name0]
+            object1 = assumption_objects[name1]
+
+            direction_object = ConstructionObject.from_args('direction', (object0, object1))
+            reverse_direction_object = ConstructionObject.from_args('direction', (object1, object0))
+
+            exists_predicate = predicate_from_args('exists', (direction_object,))
+            exists_reverse_predicate = predicate_from_args('exists', (reverse_direction_object,))
+
+            predicates.extend([exists_predicate, exists_reverse_predicate])
+
+        return predicates
 
     def collect_triangle_non_degenerecy_predicates(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
         predicates = []
