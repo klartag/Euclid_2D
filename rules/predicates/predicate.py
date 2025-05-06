@@ -1,4 +1,6 @@
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Mapping, Optional
+
+from rules.geometry_configuration.torch_geo.geometry_entities import torch_hinge_loss
 
 
 if TYPE_CHECKING:
@@ -7,7 +9,6 @@ if TYPE_CHECKING:
     from ..geometry_objects.construction_object import Construction
     from .implementations.macro_predicate import MacroData
 
-from ..geometry_configuration.evaluate_geo_object import *
 from ..symmetry import Symmetry
 from ..rule_utils import POINT, LINE, SCALAR, ANGLE, ORIENTATION, LITERAL, CIRCLE, union, unpack_dict
 

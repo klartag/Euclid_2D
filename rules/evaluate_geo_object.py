@@ -2,7 +2,7 @@ from .geometry_objects.construction_object import ConstructionObject
 from .geometry_objects.equation_object import EquationObject
 from .geo_config import get_sympy_objects
 from .geometry_objects.parse import parse_geo_object
-from .geometry_objects.geo_object import *
+from .geometry_objects.geo_object import GeoObject
 import sympy
 
 

@@ -5,10 +5,9 @@ if __name__ == '__main__':
 
     sys.path.append(dirname(dirname(dirname(abspath(__file__)))))
 
+from torch_geo.geometry_entities import Circle, Line, Point, Triangle
 from ..geometry_objects import construction_object
 from ..geometry_objects.eq_op import EqOp
-
-from .torch_geo.geometry_entities import *
 
 from typing import Iterable, Dict, TYPE_CHECKING
 import torch

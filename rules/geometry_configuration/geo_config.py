@@ -9,10 +9,12 @@ from matplotlib import pyplot as plt
 from typing import Dict
 from adjustText import adjust_text
 import random
+import torch
 from tqdm import tqdm
 
-from .evaluate_geo_object import *
-from .torch_geo.geometry_entities import *
+from rules.geometry_configuration.evaluate_geo_object import evaluate_construction
+from rules.predicates.predicate import PREDICATE_SIGNATURES, Predicate
+from torch_geo.geometry_entities import Circle, Line, Point, Triangle
 
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.construction_object import ConstructionObject
