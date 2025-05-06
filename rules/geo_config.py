@@ -7,7 +7,7 @@ from typing import List, Dict
 from adjustText import adjust_text
 import sympy
 
-from rules.geometry_objects.geo_object import GeoObject
+from .geometry_objects.geo_object import GeoObject
 
 
 def get_sympy_objects(obj_map):

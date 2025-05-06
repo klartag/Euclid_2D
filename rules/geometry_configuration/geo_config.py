@@ -12,12 +12,13 @@ import random
 import torch
 from tqdm import tqdm
 
-from rules.geometry_configuration.evaluate_geo_object import evaluate_construction
-from rules.predicates.predicate import PREDICATE_SIGNATURES, Predicate
 from torch_geo.geometry_entities import Circle, Line, Point, Triangle
 
+from ..predicates.predicate import PREDICATE_SIGNATURES, Predicate
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.construction_object import ConstructionObject
+
+from .evaluate_geo_object import evaluate_construction
 
 
 def fully_unpack_predicate(predicate):
