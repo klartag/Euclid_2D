@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from rules.geometry_objects.construction_object import ConstructionObject
+from .....geometry_objects.construction_object import ConstructionObject
 from .....predicates.predicate import Predicate
 
 from ..pattern import PredicatePreprocessingPattern

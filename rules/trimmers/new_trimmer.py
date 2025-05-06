@@ -5,7 +5,8 @@ from typing import List
 from tqdm import tqdm
 
 from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
-from ..proof import CommentStep, Proof
+from ..proof.proof import Proof
+from ..proof.steps import CommentStep
 from ..proof_checker import ProofChecker
 from ..rule_utils import ProofCheckError
 

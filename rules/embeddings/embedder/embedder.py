@@ -9,7 +9,7 @@ from ...geometry_objects.construction_object import ConstructionObject
 from ...geometry_trackers.geometry_tracker import GeometryTracker
 from ...interactive_predicate_checker import InteractivePredicateChecker
 from ...predicates.predicate import Predicate
-from ...proof import Proof
+from ...proof.proof import Proof
 from ...proof_gen.proof_generator import ProofGenerator, ProofGeneratorError, ProofGeneratorErrorType
 
 from .. import Embedding
@@ -28,15 +28,8 @@ EMBEDDING_ATTEMPTS = 50
 class DiagramEmbedder:
     def is_assumption_necessary(self, assumption: Predicate, assumptions: List[Predicate]) -> bool:
         try:
-            objects = {
-                obj.name: obj for pred in assumptions + [assumption] for obj in pred.involved_objects()
-            }
-            proof = Proof(
-                objects, objects,
-                assumptions, [],
-                {}, [assumption],
-                None, []
-            )
+            objects = {obj.name: obj for pred in assumptions + [assumption] for obj in pred.involved_objects()}
+            proof = Proof(objects, objects, assumptions, [], {}, [assumption], None, [])
             proof_gen = ProofGenerator(proof, actions_per_step=10000)
             proof_gen.run(1000)
             return False
@@ -66,7 +59,9 @@ class DiagramEmbedder:
         else:
             return None
 
-    def sequence_assumptions(self, objects: List[GeoObject], predicates: List[Predicate]) -> Optional[List[EmbeddedConstruction]]:
+    def sequence_assumptions(
+        self, objects: List[GeoObject], predicates: List[Predicate]
+    ) -> Optional[List[EmbeddedConstruction]]:
         predicates = predicates[:]
         constructions: List[EmbeddedConstruction] = []
 
@@ -89,7 +84,9 @@ class DiagramEmbedder:
 
         return constructions
 
-    def embed_construction_sequence(self, constructions: List[EmbeddedConstruction], predicates_by_step: List[List[Predicate]]) -> Iterator[Embedding]:
+    def embed_construction_sequence(
+        self, constructions: List[EmbeddedConstruction], predicates_by_step: List[List[Predicate]]
+    ) -> Iterator[Embedding]:
         stage = 0
         construction_options: List[List[EmbeddedObject]] = []
         embedding = Embedding()
@@ -134,10 +131,14 @@ class DiagramEmbedder:
 
     def embed(self, proof: Proof) -> Optional[Embedding]:
         objects = list(proof.assumption_objects.values())
-        split_predicates = SequencingPreprocessor(SPLITTING_PATTERNS).preprocess_assumptions(proof.assumption_predicates)
-        processed_predicates = SequencingPreprocessor(INEQUALITY_REMOVAL_PATTERNS).preprocess_assumptions(split_predicates)
+        split_predicates = SequencingPreprocessor(SPLITTING_PATTERNS).preprocess_assumptions(
+            proof.assumption_predicates
+        )
+        processed_predicates = SequencingPreprocessor(INEQUALITY_REMOVAL_PATTERNS).preprocess_assumptions(
+            split_predicates
+        )
         processed_predicates = self.remove_necessary_assumptions(processed_predicates)
-        
+
         constructions = self.sequence_assumptions(objects, processed_predicates)
 
         if constructions is None:
@@ -146,7 +147,11 @@ class DiagramEmbedder:
         predicates_by_step = [[] for i in range(len(constructions))]
         name_to_stage = {construction.output_name: i for (i, construction) in enumerate(constructions)}
         for predicate in split_predicates:
-            involved_names = [obj.name for obj in predicate.involved_objects() if not isinstance(obj, ConstructionObject) and not obj.type == LITERAL]
+            involved_names = [
+                obj.name
+                for obj in predicate.involved_objects()
+                if not isinstance(obj, ConstructionObject) and not obj.type == LITERAL
+            ]
             stage = max([name_to_stage[name] for name in involved_names])
             predicates_by_step[stage].append(predicate)
 
@@ -198,9 +203,17 @@ def main():
 
     if args.overwrite:
         open(path, 'w').write(proof_text)
-    
-    failed_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Incorrect]
-    unknown_predicates = [pred for pred in proof.target_predicates if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Undefined]
+
+    failed_predicates = [
+        pred
+        for pred in proof.target_predicates
+        if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Incorrect
+    ]
+    unknown_predicates = [
+        pred
+        for pred in proof.target_predicates
+        if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Undefined
+    ]
 
     print('Embedding successful.')
     if len(failed_predicates) > 0:
@@ -214,7 +227,7 @@ def main():
         for pred in unknown_predicates:
             print(pred.to_language_format())
         print()
-        
+
     if len(failed_predicates) > 0 or len(unknown_predicates) > 0:
         print('Beginning interactive session...')
         geometry_tracker = GeometryTracker()

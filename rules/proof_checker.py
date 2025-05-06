@@ -14,11 +14,11 @@ from .predicates.predicate_factory import predicate_from_args
 from .geometry_trackers.geometry_tracker import GeometryTracker
 
 from .proof_checker_utils import ADD_CFG, ADD_NO_TRUST_CFG, CHECK_CFG, TRUST_NO_ADD_CFG, unpack_predicate_full
-from .signature_dag import SignatureDag
 from .geometry_trackers.geometry_tracker import involved_objects
 
-from .proof import AlmostAlwaysStep, AssertStep, CommentStep, IfStep, Proof, ObjDefineStep, Step, TheoremStep
 from .theorem import Theorem
+from .proof.proof import Proof
+from .proof.steps import AlmostAlwaysStep, AssertStep, CommentStep, IfStep, ObjDefineStep, Step, TheoremStep
 
 from . import rule_utils
 from .rule_utils import ProofCheckError, R_EQN_TYPES

@@ -1,3 +1,11 @@
+from dataclasses import dataclass, field
+from typing import Mapping
+
+from ...geometry_objects.geo_object import GeoObject
+
+from .step import Step
+
+
 @dataclass
 class ObjDefineStep(Step):
     """
@@ -8,7 +16,7 @@ class ObjDefineStep(Step):
     """
 
     left_hand: GeoObject
-    right_hand: GeoObject | None = dataclasses.field(default=None)
+    right_hand: GeoObject | None = field(default=None)
 
     def to_language_format(self) -> str:
         if self.right_hand is not None:

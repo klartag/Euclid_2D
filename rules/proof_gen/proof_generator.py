@@ -11,16 +11,13 @@ import hashlib
 import time
 from glob import glob
 from typing import Callable, Optional
-
 from frozendict import frozendict
 
-from rules.embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from util import BASE_PATH
 
+from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
 from ..trimmers.old_trimmer import max_depth_trim
-
 from ..interactive_predicate_checker import InteractivePredicateChecker
-
-
 from ..predicates.predicate import Predicate
 from ..predicates.global_predicates import get_constructions
 from ..predicates.predicate_factory import predicate_from_args
@@ -28,15 +25,16 @@ from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject
 from ..embeddings.embedded_predicate_value import EmbeddedPredicateValue
-from ..proof import CommentStep, ObjDefineStep, Proof, Step, TheoremStep
+from ..proof.proof import Proof
+from ..proof.steps import CommentStep, ObjDefineStep, Step, TheoremStep
 from ..proof_checker import CHECK_CFG, TRUST_NO_ADD_CFG, ProofChecker, involved_objects
 from ..proof_checker_utils import KNOWN_KEYS
-from .gen_utils import is_trivial
-from .scores import StepSuggestion, get_result_predicates
 from ..signature_dag import IntersectPattern, SignatureDag
 from ..rule_utils import LITERAL, GeometryError, IllegalObjectError, ProofCheckError
 from ..theorem import Theorem
-from util import BASE_PATH
+
+from .gen_utils import is_trivial
+from .scores import StepSuggestion, get_result_predicates
 
 
 class ProofGeneratorErrorType(Enum):

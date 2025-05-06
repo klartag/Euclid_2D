@@ -1,9 +1,5 @@
 from typing import Callable, List, Optional, Tuple, Unpack
 
-from rules.embeddings.constructions.polarity import ORIGIN, polar
-from rules.embeddings.constructions.projection import project
-from rules.embeddings.embedded_objects.line import EmbeddedLine
-
 from ...embedded_geo_objects.embedded_geo_object import EmbeddedGeoObject, ExtendedGeoObject
 
 from .locus_pattern_matcher import LocusPattern

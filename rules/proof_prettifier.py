@@ -2,7 +2,8 @@ from pathlib import Path
 from typing import List
 
 from .theorem import Theorem
-from .proof import AssertStep, Proof, TheoremStep
+from .proof.proof import Proof
+from .proof.steps import AssertStep, TheoremStep
 
 
 class ProofPrettifier:

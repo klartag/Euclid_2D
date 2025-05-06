@@ -7,7 +7,8 @@ from glob import glob
 from ..embeddings.embedder.embedder import DiagramEmbedder
 from ..proof_prettifier import ProofPrettifier
 from ..trimmers.trimmer import ProofTrimmer
-from ..proof import Proof, TheoremStep
+from ..proof.proof import Proof
+from ..proof.steps import TheoremStep
 from ..trimmers.trimmer import ProofTrimmer
 
 from .proof_generator import validate_proof, prove
@@ -85,33 +86,33 @@ def main():
         proof = Proof.parse(path.open().read(), False)
 
         try:
-            if args.embed and proof.embedding is None: # ARGS.embed
+            if args.embed and proof.embedding is None:  # ARGS.embed
                 print('Running Embedder...')
                 diagram_embedder = DiagramEmbedder()
                 embedding = diagram_embedder.embed(proof)
                 if embedding is not None:
                     proof.embedding = embedding
-                
+
                 proof_text = proof.to_language_format()
-                
+
                 if args.overwrite:
                     open(path, 'w').write(proof_text)
                 else:
                     print(proof_text)
-                    
+
             print('Running Prover...')
             proof = prove(proof, interactive=args.interactive, verbose=True)
-            
+
             proof_text = proof.to_language_format()
             if args.overwrite:
                 open(path, 'w').write(proof_text)
             else:
                 print(proof_text)
-            
+
             counter = Counter([x.theorem_name for x in proof.steps if isinstance(x, TheoremStep)])
             if len(counter) > 0:
                 longest_name = max(map(len, counter.keys()))
-                for (name, count) in sorted(counter.items(), key=lambda x:x[1]):
+                for name, count in sorted(counter.items(), key=lambda x: x[1]):
                     print(f'{name:<{longest_name}}:', count)
 
             if args.trim:
@@ -145,7 +146,7 @@ def main():
                 continue
             else:
                 return
-        except (Exception if args.ignore_errors else NeverMatch) as e:
+        except Exception if args.ignore_errors else NeverMatch as e:
             print('Error:', e)
 
 

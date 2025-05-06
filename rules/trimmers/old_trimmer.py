@@ -1,16 +1,12 @@
-import cProfile
 from pathlib import Path
-import random
 import time
-import numpy as np
 import tqdm
 
-from rules.proof import Step
 
 from ..predicates.predicate_factory import predicate_from_args
 from ..geometry_objects.construction_object import ConstructionObject
-from ..predicates.predicate import Predicate
-from ..proof import AssertStep, ObjDefineStep, Proof, TheoremStep
+from ..proof.proof import Proof
+from ..proof.steps import Step, AssertStep, ObjDefineStep, TheoremStep
 from ..proof_checker import ADD_CFG, ProofChecker, involved_objects
 from ..geometry_trackers.geometry_tracker import unpack_predicate_minimal
 from ..geometry_objects.equation_object import EquationObject
@@ -84,7 +80,7 @@ def compute_step_requirements_graph(proof: Proof, verb=False) -> list[set[int]]:
         checker.geometry_tracker.add_predicate(pred, ADD_CFG, 'Assumption')
     for pred in proof.auxiliary_predicates:
         checker.geometry_tracker.add_predicate(pred, ADD_CFG, 'Auxiliary')
-        
+
     # Initializing the checkers array.
     checkers: list[ProofChecker] = []
     for step in proof.steps:
@@ -155,7 +151,7 @@ def compute_requirement_graph_2(proof: Proof, verb=False) -> tuple[list[set[int]
     for obj in proof.assumption_objects.values():
         checker.geometry_tracker.get_object(obj, ADD_CFG)
     assumption_requirements = [set() for _ in proof.steps]
-    
+
     for pred in proof.auxiliary_predicates:
         checker.geometry_tracker.add_predicate(pred, ADD_CFG, 'Auxiliary')
 

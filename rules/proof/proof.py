@@ -9,17 +9,15 @@ from pathlib import Path
 import random
 import re
 import string
-from typing import Iterable, Mapping, Optional
+from typing import Iterable, Optional
 
 from util import BASE_PATH
 
-from . import rule_utils
+from .. import rule_utils
 
 from ..rule_utils import ALL_TYPES, LITERAL, ProofParseError, split_args
-
 from ..embeddings import Embedding
 from ..embeddings.embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, EmbeddedScalar
-from ..predicates.implementations.exists_predicate import ExistsPredicate
 from ..predicates.predicate_factory import parse_predicate, predicate_from_args
 from ..predicates.predicate import Predicate
 from ..geometry_objects.construction_object import ConstructionObject
@@ -27,6 +25,8 @@ from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.parse import parse_geo_object
 from ..theorem import Theorem
+
+from .steps import AlmostAlwaysStep, AssertStep, CommentStep, IfStep, NullTheoremStep, ObjDefineStep, Step, TheoremStep
 
 ASSUMPTION_TITLE = 'Assumptions:'
 TARGET_TITLE = 'Need to prove:'

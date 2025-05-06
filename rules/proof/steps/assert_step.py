@@ -1,3 +1,12 @@
+from dataclasses import dataclass
+from typing import Mapping
+
+from ...geometry_objects.geo_object import GeoObject
+from ...predicates.predicate import Predicate
+
+from .step import Step
+
+
 @dataclass
 class AssertStep(Step):
     """

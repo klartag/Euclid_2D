@@ -1,16 +1,12 @@
 import heapq
 from typing import Optional
 
+from .. import rule_utils
+
 from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
-
-from .linear_algebra_tracker import LinearAlgebraTracker
-
 from ..predicates.predicate_factory import predicate_from_args
-
 from ..theorem import Theorem
-
 from ..embeddings import Embedding
-
 from ..proof_checker_utils import (
     ADD_CFG,
     CHECK_CFG,
@@ -22,11 +18,6 @@ from ..proof_checker_utils import (
     unpack_predicate_minimal,
 )
 from ..rust_code.rust_sparse_linear import BaseSolver
-
-from ..proof import Proof
-
-from .. import rule_utils
-from .numeric_tracker import NumericTracker
 from ..rule_utils import (
     ANGLE,
     LITERAL,
@@ -42,8 +33,11 @@ from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject
 from ..predicates.predicate import Predicate
 from ..predicates.implementations.macro_predicate import MacroPredicate
+from ..proof.proof import Proof
 from ..union_find import UnionFind
 
+from .numeric_tracker import NumericTracker
+from .linear_algebra_tracker import LinearAlgebraTracker
 
 NUMERIC_PRECISION = 1e-3
 """
@@ -140,7 +134,6 @@ class GeometryTracker:
         self._linear_algebra = LinearAlgebraTracker()
 
         self.numeric_tracker = NumericTracker(NUMERIC_PRECISION)
-
 
     def load_embeds(self, proof: Proof):
         """
@@ -359,7 +352,11 @@ class GeometryTracker:
             case rule_utils.ORIENTATION:
                 self.process_orientation(obj)
 
-        if self.embedding_tracker is not None and isinstance(obj, ConstructionObject) and obj.name not in self.embedding_tracker:
+        if (
+            self.embedding_tracker is not None
+            and isinstance(obj, ConstructionObject)
+            and obj.name not in self.embedding_tracker
+        ):
             try:
                 embedded_construction_object_options = self.embedding_tracker.evaluate_construction_object(obj)
                 if len(embedded_construction_object_options) == 1:

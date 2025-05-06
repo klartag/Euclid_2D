@@ -7,11 +7,12 @@ if __name__ == '__main__':
 
 import functools
 import torch
-from torch import Tensor, tensor
+from torch import Tensor
 from typing import Generic, TypeVar, Union
 
-from rules.rule_utils import split_args
 from .imprecise import ImpreciseTensor
+
+from ...rule_utils import split_args
 
 PI = torch.tensor(torch.pi)
 

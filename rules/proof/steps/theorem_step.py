@@ -1,10 +1,19 @@
+from dataclasses import dataclass, field
+from typing import Mapping
+
+from ...geometry_objects.geo_object import GeoObject
+from ...predicates.predicate import Predicate
+
+from .step import Step
+
+
 @dataclass
 class TheoremStep(Step):
     theorem_name: str
     inputs: list[GeoObject]
     result_objects: list[GeoObject]
     result_predicates: list[Predicate]
-    comment: str = dataclasses.field(compare=False, default='')
+    comment: str = field(compare=False, default='')
 
     def to_language_format(self) -> str:
         input_str = ', '.join(obj.name for obj in self.inputs)

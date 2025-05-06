@@ -1,3 +1,12 @@
+from dataclasses import dataclass
+from typing import Mapping
+
+from ...predicates.predicate import Predicate
+from ...geometry_objects.geo_object import GeoObject
+
+from .step import Step
+
+
 @dataclass
 class AlmostAlwaysStep(Step):
     """
