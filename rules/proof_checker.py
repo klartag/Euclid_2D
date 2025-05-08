@@ -18,7 +18,7 @@ from .geometry_trackers.geometry_tracker import involved_objects
 
 from .theorem import Theorem
 from .proof.proof import Proof
-from .proof.steps import AlmostAlwaysStep, AssertStep, CommentStep, IfStep, ObjDefineStep, Step, TheoremStep
+from .proof.steps import AlmostAlwaysStep, AssertStep, CommentStep, ObjDefineStep, Step, TheoremStep
 
 from . import rule_utils
 from .rule_utils import ProofCheckError, R_EQN_TYPES
@@ -340,76 +340,6 @@ class ProofChecker:
         res.checked_steps = self.checked_steps
         return res
 
-    def _add_if_step(self, step: IfStep):
-        """
-        Adds an if step.
-        The if step contains several possible proof continuations.
-        Each continuation is checked, and then the predicates and objects which are in all continuations
-        which are not false are added to the current checker.
-        """
-        # Checking that the if is exhastive.
-        if len(step.data) == 0:
-            return
-
-        print('Handling IF step.')
-
-        legal_paths: list[ProofChecker] = []
-        for idx, (pred, sub_steps) in enumerate(step.data.items()):
-            print(f'If branch {idx}')
-            clone = self.shallow_copy()
-            # The objects in the step are not known to be legal.
-            clone.geometry_tracker.add_predicate(pred, ADD_NO_TRUST_CFG, f'IF step assumption.')
-            idx = -1
-            try:
-                for idx, sub_step in enumerate(sub_steps):
-                    clone.add_step(sub_step)
-            except ProofCheckError as e:
-                e.args = (f'In IfStep {pred} step {idx}:\n{e.args[0]}',)
-                raise
-
-            for sub_pred in clone.geometry_tracker._predicates:
-                if sub_pred.name == 'false':
-                    break
-            else:
-                legal_paths.append(clone)
-
-        exhaustive = all_possibilities(next(iter(step.data)))
-        remaining_possibilities = exhaustive - set(step.data.keys())
-        print(f'FINISHED IF STEP')
-        print(f'If step: {remaining_possibilities=}')
-        if len(remaining_possibilities) == 0:
-            # All legal paths are false.
-            if len(legal_paths) == 0:
-                reason = f'All legal paths are false for the IF step.'
-                self.geometry_tracker.add_predicate(predicate_from_args('false', ()), ADD_CFG, reason)
-                return
-            old_preds = set(self.geometry_tracker.all_predicates())
-            # We check which predicates are proved for all options.
-            obj_intersection = set(legal_paths[0].geometry_tracker.all_objects())
-            pred_intersection = set(legal_paths[0].geometry_tracker.all_predicates())
-
-            for idx, legal_path in enumerate(legal_paths[1:]):
-                obj_intersection &= legal_path.geometry_tracker.all_objects()
-                pred_intersection &= legal_path.geometry_tracker.all_predicates()
-            if set(step.data.keys()) != exhaustive:
-                raise ProofCheckError(
-                    f'Predicates in if step are not exhaustive: {set(step.data.keys())} != {exhaustive}'
-                )
-            for obj in obj_intersection - set(self.geometry_tracker.all_objects()):
-                self.geometry_tracker.get_object(obj, ADD_CFG)  # The objects proved by all steps are known to exist.
-            for pred in pred_intersection - self.geometry_tracker.all_predicates():
-                print(f'If step adding predicate {pred}')
-                reason = f'conclustion of the IF step: {step}'
-                self.geometry_tracker.add_predicate(
-                    pred, ADD_CFG, reason
-                )  # The predicates proved by all steps rely on objects that are known to exist.
-
-        elif (len(remaining_possibilities) == 1) and len(legal_paths) == 0:
-            # We have proved that every possibility except for one leads to a contradiction.
-            pred = next(iter(remaining_possibilities))
-            reason = f'We have proved that every possibility except for one leads to a contradiction for the IF step.'
-            self.geometry_tracker.add_predicate(pred, ADD_CFG, reason)
-
     def add_step(self, step: Step, skim=False):
         """
         Handles a single theorem step.
@@ -429,9 +359,6 @@ class ProofChecker:
 
                 case AlmostAlwaysStep():
                     self._add_almost_always_step(step)
-
-                case IfStep():
-                    self._add_if_step(step)
 
                 case CommentStep():
                     pass
