@@ -15,7 +15,7 @@ from .step_parsers import (
 )
 
 
-class BodyParser:
+class ProofParser:
     step_parsers: list[AbstractStepParser]
 
     def __init__(self):

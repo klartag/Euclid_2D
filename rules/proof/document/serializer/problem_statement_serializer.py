@@ -1,0 +1,2 @@
+class ProblemStatementSerializer:
+    pass

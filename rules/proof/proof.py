@@ -1,7 +1,6 @@
 from collections import defaultdict
 import itertools
 import json
-from pathlib import Path
 import random
 import string
 from typing import Optional
@@ -53,7 +52,6 @@ class Proof:
         embedding: Optional[Embedding],
         steps: list[Step],
     ):
-
         self.all_objects = objects
         self.assumption_objects = assumption_objects
         self.assumption_predicates = assumption_predicates
@@ -62,16 +60,6 @@ class Proof:
         self.target_predicates = target_predicates
         self.embedding = embedding
         self.steps = steps
-
-    @staticmethod
-    def get_full_proof_path(path: Path) -> Path:
-        full_path_options = [BASE_PATH / 'rules/proof_samples' / path, BASE_PATH / path, Path(path)]
-
-        for path in full_path_options:
-            if path.exists():
-                return path
-        else:
-            raise Exception(f'Proof file {path} was not found.')
 
     def to_language_format(self) -> str:
         """
@@ -243,24 +231,18 @@ class Proof:
 
 
 def test_pretty_print():
-    from util import BASE_PATH
-
     path = BASE_PATH / 'rules/proof_samples/IMO_2022_shortlist_G2.txt'
     proof = Proof.parse(path.open().read())
     print(proof.to_language_format())
 
 
 def test_shuffle():
-    from util import BASE_PATH
-
     proof = Proof.parse((BASE_PATH / 'rules/proof_samples/IMO_2022_shortlist_G3.jl').open().read())
 
     print(proof.shuffled().to_language_format())
 
 
 def test_parse():
-    from util import BASE_PATH
-
     proof = Proof.parse((BASE_PATH / 'rules/proof_samples/IMO_2022_shortlist_G2_numeric.jl').open().read())
     print(proof.to_language_format())
 

@@ -5,7 +5,7 @@ from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.predicate_factory import parse_predicate
 
-from .body_parser.step_parsers.object_definition_step_parser import (
+from .proof_parser.step_parsers.object_definition_step_parser import (
     OBJECT_DEFINITION_PATTERN,
     OBJECT_NAME_PATTERN,
 )

@@ -9,7 +9,7 @@ from ... import Proof
 from ..document_section import DocumentSection
 from ..geometry_document import GeometryDocument
 
-from .body_parser.body_parser import BodyParser
+from .proof_parser.proof_parser import ProofParser
 from .embedding_parser import EmbeddingParser
 from .problem_statement_parser import ProblemStatementParser
 
@@ -17,7 +17,7 @@ from .problem_statement_parser import ProblemStatementParser
 class DocumentParser:
     def __init__(self):
         self.problem_statement_parser = ProblemStatementParser()
-        self.body_parser = BodyParser()
+        self.proof_parser = ProofParser()
         self.embedding_parser = EmbeddingParser()
 
     def parse(self, document: GeometryDocument, parse_proof_body: bool) -> Proof:
@@ -47,7 +47,7 @@ class DocumentParser:
         auxiliary_preds.append(predicate_from_args('exists', tuple(exist_objects)))
 
         steps = (
-            self.body_parser.parse(document.get_section_text(DocumentSection.PROOF), dict(assumption_objects))
+            self.proof_parser.parse(document.get_section_text(DocumentSection.PROOF), dict(assumption_objects))
             if parse_proof_body
             else []
         )

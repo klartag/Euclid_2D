@@ -1,0 +1,2 @@
+class ProofSerializer:
+    pass

@@ -1,6 +1,9 @@
 from pathlib import Path
 from typing import List
 
+from rules.proof.document.geometry_document import GeometryDocument
+from rules.proof.document.parser.document_parser import DocumentParser
+
 from .theorem import Theorem
 from .proof.proof import Proof
 from .proof.steps import AssertStep, TheoremStep
@@ -48,8 +51,8 @@ def main():
     )
 
     args = parser.parse_args()
-    path = Proof.get_full_proof_path(args.path)
-    proof = Proof.parse(path.open().read())
+    document = GeometryDocument(args.path)
+    proof = DocumentParser().parse(document)
 
     prettifier = ProofPrettifier()
     pretty_proof = prettifier.prettify(proof)
@@ -57,6 +60,6 @@ def main():
     proof_text = pretty_proof.to_language_format()
 
     if args.overwrite:
-        open(path, 'w').write(proof_text)
+        open(document.path, 'w').write(proof_text)
     else:
         print(proof_text)
