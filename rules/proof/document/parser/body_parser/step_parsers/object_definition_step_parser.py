@@ -9,8 +9,12 @@ from .....steps.object_define_step import ObjDefineStep
 from ..abstract_step_parser import AbstractStepParser
 
 
+OBJECT_NAME_PATTERN = rf'([\w\']+)'
+OBJECT_DEFINITION_PATTERN = rf'Let {OBJECT_NAME_PATTERN} := (.*)$'
+
+
 class ObjectDefinitionStepParser(AbstractStepParser[ObjDefineStep]):
-    pattern = rf'Let ([\w\']+) := (.*)$'
+    pattern = OBJECT_DEFINITION_PATTERN
 
     def parse(line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> ObjDefineStep:
         left, right = match.groups()
