@@ -2,6 +2,10 @@ from pathlib import Path
 from typing import Iterator, List, Optional
 from tqdm import tqdm
 
+from rules.proof.document.document_section import DocumentSection
+from rules.proof.document.geometry_document import GeometryDocument
+from rules.proof.document.reader.document_reader import DocumentReader
+from rules.proof.document.writer.document_writer import DocumentWriter
 from rules.proof.statement import Statement
 from rules.proof.geometry_problem import GeometryProblem
 
@@ -31,9 +35,11 @@ EMBEDDING_ATTEMPTS = 50
 class DiagramEmbedder:
     def is_assumption_necessary(self, assumption: Predicate, assumptions: List[Predicate]) -> bool:
         try:
-            objects = {obj.name: obj for pred in assumptions + [assumption] for obj in pred.involved_objects()}
+            assumption_objects = {
+                obj.name: obj for pred in assumptions + [assumption] for obj in pred.involved_objects()
+            }
 
-            problem_statement = Statement(objects, assumptions, [assumption])
+            problem_statement = Statement(assumption_objects, assumptions, [], {}, [assumption])
 
             problem = GeometryProblem(problem_statement, None, None)
             proof_generator = ProofGenerator(problem, actions_per_step=10000)
@@ -136,7 +142,7 @@ class DiagramEmbedder:
             return True
 
     def embed(self, problem: GeometryProblem) -> Optional[Embedding]:
-        objects = list(problem.assumption_objects.values())
+        objects = list(problem.statement.assumption_objects.values())
         split_predicates = SequencingPreprocessor(SPLITTING_PATTERNS).preprocess_assumptions(
             problem.statement.assumption_predicates
         )
@@ -190,34 +196,34 @@ def main():
 
     args = parser.parse_args()
 
-    path = Proof.get_full_proof_path(args.path)
-    proof = Proof.parse(path.open().read(), False)
+    document = GeometryDocument(args.path)
+    problem = DocumentReader().read(document, read_proof_body=False)
 
     diagram_embedder = DiagramEmbedder()
-    embedding = diagram_embedder.embed(proof)
+    embedding = diagram_embedder.embed(problem)
 
     if embedding is None:
         print('Embedding failed')
         return
 
-    proof.embedding = embedding
+    problem.embedding = embedding
 
-    proof_text = proof.to_language_format()
-
-    if args.show:
-        print(proof_text)
+    DocumentWriter().write_sections(problem, document, DocumentSection.EMBEDDING)
 
     if args.overwrite:
-        open(path, 'w').write(proof_text)
+        document.save()
+    else:
+        for line in document.get_section_content(DocumentSection.EMBEDDING):
+            print(line)
 
     failed_predicates = [
         pred
-        for pred in proof.target_predicates
+        for pred in problem.statement.target_predicates
         if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Incorrect
     ]
     unknown_predicates = [
         pred
-        for pred in proof.target_predicates
+        for pred in problem.statement.target_predicates
         if embedding.evaluate_predicate(pred) == EmbeddedPredicateValue.Undefined
     ]
 
@@ -237,6 +243,6 @@ def main():
     if len(failed_predicates) > 0 or len(unknown_predicates) > 0:
         print('Beginning interactive session...')
         geometry_tracker = GeometryTracker()
-        geometry_tracker.load_assumptions(proof)
-        geometry_tracker.load_embedding(proof)
+        geometry_tracker.load_assumptions(problem)
+        geometry_tracker.load_embedding(problem)
         InteractivePredicateChecker(geometry_tracker).run()
