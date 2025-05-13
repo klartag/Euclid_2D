@@ -14,7 +14,7 @@ from typing import Callable, Optional
 
 from frozendict import frozendict
 
-from rules.embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from rules.embeddings.predicate_collection.collector import EmbeddingPredicateCollector
 
 from ..trimmers.old_trimmer import max_depth_trim
 
@@ -132,6 +132,9 @@ class ProofGenerator:
                 steps = self.find_steps(actions_per_step)
                 if self.verbose:
                     print(f'=========== found {len(steps)} steps =========')
+                for step in steps:
+                    step.comment = "try index {}".format(i)
+                print(f'=========== found {len(steps)} steps =========')
                 if len(steps) == 0:
                     raise ProofGeneratorError(ProofGeneratorErrorType.NoMoreSteps)
                 self.proof_steps.append(CommentStep(f"Step {i} - Found {len(steps)} steps"))
@@ -598,7 +601,7 @@ def prove_all_assumptions(
 
 def prove(base: Proof, interactive: bool, verbose: bool) -> Proof:
     if base.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
+        collector = EmbeddingPredicateCollector()
         non_degenerecy_predicates = collector.collect(base.assumption_objects, base.embedding)
         base.auxiliary_predicates.extend(non_degenerecy_predicates)
 
