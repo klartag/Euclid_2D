@@ -1,6 +1,9 @@
 from pathlib import Path
 from typing import List
 
+from rules.proof.document.document_section import DocumentSection
+from rules.proof.document.writer.document_writer import DocumentWriter
+
 from .theorem import Theorem
 from .proof.document.geometry_document import GeometryDocument
 from .proof.document.reader.document_reader import DocumentReader
@@ -51,14 +54,14 @@ def main():
 
     args = parser.parse_args()
     document = GeometryDocument(args.path)
-    proof = DocumentReader().read(document)
+    problem = DocumentReader().read(document, read_proof_body=True)
 
     prettifier = ProofPrettifier()
-    pretty_proof = prettifier.prettify(proof)
+    problem.proof = prettifier.prettify(problem.proof)
 
-    proof_text = pretty_proof.to_language_format()
-
+    DocumentWriter().write_sections(problem, document, DocumentSection.PROOF)
     if args.overwrite:
-        open(document.path, 'w').write(proof_text)
+        document.save()
     else:
-        print(proof_text)
+        for line in document.get_section_content(DocumentSection.PROOF):
+            print(line)
