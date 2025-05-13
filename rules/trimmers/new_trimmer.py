@@ -4,6 +4,10 @@ from typing import List
 
 from tqdm import tqdm
 
+from rules.proof.document.document_section import DocumentSection
+from rules.proof.document.geometry_document import GeometryDocument
+from rules.proof.document.reader.document_reader import DocumentReader
+from rules.proof.document.writer.document_writer import DocumentWriter
 from rules.proof.geometry_problem import GeometryProblem
 
 from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
@@ -78,7 +82,7 @@ class ProofTrimmer:
         checker = self.get_checker_at_step(step)
         checker.checked_steps += chunk_size
 
-        while checker.checked_steps < len(checker.proof.steps):
+        while checker.checked_steps < len(checker.problem.proof.steps):
             try:
                 checker.check_steps()
             except ProofCheckError:
@@ -103,23 +107,25 @@ def main():
     )
 
     args = parser.parse_args()
-    path = Proof.get_full_proof_path(args.path)
-    proof = Proof.parse(path.open().read())
 
-    if proof.embedding is not None:
+    document = GeometryDocument(args.path)
+    problem = DocumentReader().read(document, read_proof_body=True)
+
+    if problem.embedding is not None:
         collector = NonDegeneracyPrediateCollector()
-        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
-        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
+        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
+        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
 
-    t0 = time.time()
-    trimmer = ProofTrimmer(proof)
+    start_time = time.time()
+    trimmer = ProofTrimmer(problem)
     trimmed_problem = trimmer.trim()
 
-    proof_text = trimmed_problem.to_language_format()
+    DocumentWriter().write_sections(trimmed_problem, document, DocumentSection.PROOF)
 
     if args.overwrite:
-        open(path, 'w').write(proof_text)
+        document.save()
     else:
-        print(proof_text)
+        for line in document.get_section_content(DocumentSection.PROOF):
+            print(line)
 
-    print(f'Trimmed in {round(time.time() - t0, 2)} seconds')
+    print(f'Trimmed in {round(time.time() - start_time, 2)} seconds')
