@@ -435,7 +435,7 @@ class ProofChecker:
 
 
 def check_proof(path: Path, verbose=False, interactive: bool = False):
-    document = GeometryDocument(path)
+    document = GeometryDocument.open(path)
     problem = DocumentReader().read(document, read_proof_body=True)
     if problem.embedding is not None:
         collector = NonDegeneracyPredicateCollector()
@@ -481,7 +481,7 @@ def interactive_main():
 
     args = parser.parse_args()
 
-    document = GeometryDocument(args.path)
+    document = GeometryDocument.open(args.path)
     problem = DocumentReader().read(document, read_proof_body=True)
 
     if problem.embedding is not None:

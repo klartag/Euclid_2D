@@ -52,7 +52,7 @@ def main():
     )
 
     args = parser.parse_args()
-    document = GeometryDocument(args.path)
+    document = GeometryDocument.open(args.path)
     problem = DocumentReader().read(document, read_proof_body=True)
 
     prettifier = ProofPrettifier()

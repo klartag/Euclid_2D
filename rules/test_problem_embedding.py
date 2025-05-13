@@ -121,7 +121,7 @@ def test_difficult_problem_embedding(problem_name: str):
 
 
 def assert_problem_embedding_possible(problem_name: str):
-    document = GeometryDocument(problem_name)
+    document = GeometryDocument.open(problem_name)
     problem = DocumentReader().read(document, read_proof_body=False)
     diagram_embedder = DiagramEmbedder()
 

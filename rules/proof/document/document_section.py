@@ -7,3 +7,4 @@ class DocumentSection(Enum):
     EMBEDDING = 'Embedding'
     TARGET = 'Need to prove'
     PROOF = 'Proof'
+    ERROR = 'Error'

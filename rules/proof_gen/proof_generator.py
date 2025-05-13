@@ -5,6 +5,10 @@ import time
 from typing import Callable, Optional
 from frozendict import frozendict
 
+from rules.proof.document.document_section import DocumentSection
+from rules.proof.document.geometry_document import GeometryDocument
+from rules.proof.document.writer.document_writer import DocumentWriter
+from rules.proof.proof import Proof
 from util import BASE_PATH
 
 from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
@@ -405,15 +409,24 @@ def prove(problem: GeometryProblem, interactive: bool, verbose: bool) -> Geometr
     try:
         proof_generator.run()
         completed_problem = problem.shallow_copy()
-        completed_problem.steps = proof_generator.proof_steps
+        completed_problem.proof = Proof(proof_generator.proof_steps)
         return completed_problem
     except (KeyboardInterrupt, ProofGeneratorError, ProofCheckError) as e:
-        problem.steps = proof_generator.proof_steps
-        with (BASE_PATH / 'rules' / 'proof_samples' / 'proof_fail.jl').open('w') as f:
-            f.write(problem.to_language_format())
-            f.write('\n')
-            for ln in repr(e).split('\n'):
-                f.write(f'# {ln}\n')
+        problem.proof.steps = proof_generator.proof_steps
+
+        failed_problem_path = BASE_PATH / 'rules' / 'proof_samples' / 'proof_fail.jl'
+
+        document = GeometryDocument(failed_problem_path, {})
+        DocumentWriter().write_sections(
+            problem,
+            document,
+            DocumentSection.ASSUMPTION,
+            DocumentSection.EMBEDDING,
+            DocumentSection.TARGET,
+            DocumentSection.PROOF,
+        )
+        document.sections[DocumentSection.ERROR] = repr(e).split('\n')
+        document.save()
 
         if interactive and (
             isinstance(e, KeyboardInterrupt)

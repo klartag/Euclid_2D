@@ -18,7 +18,7 @@ class AssumptionsWriter(DocumentSectionWriter[Statement]):
     def to_lines(self, statement: Statement) -> List[str]:
         objects_by_type = defaultdict(list)
         for obj in statement.assumption_objects.values():
-            if obj not in self.target_objects:
+            if obj not in statement.target_objects:
                 objects_by_type[obj.type].append(obj)
 
         object_declaration_lines = []

@@ -140,7 +140,7 @@ def test_proof_generator(problem_name: str):
     '''
     Tests that the Proof Generator works on a geometry problem.
     '''
-    document = GeometryDocument(problem_name)
+    document = GeometryDocument.open(problem_name)
     problem = DocumentReader().read(document, read_proof_body=False)
     solved_problem = prove(problem, interactive=False, verbose=False)
     checker = ProofChecker(solved_problem)
