@@ -10,16 +10,16 @@ from ....steps.step import Step
 S = TypeVar('S', Step)
 
 
-class AbstractStepParser[S](ABC):
+class AbstractStepReader[S](ABC):
     @property
     @abstractmethod
     def pattern(self) -> str: ...
 
-    def try_parse(self, line: str, obj_map: dict[str, GeoObject]) -> Optional[Step]:
+    def try_read(self, line: str, obj_map: dict[str, GeoObject]) -> Optional[Step]:
         match = re.search(self.pattern(), line)
         if match is None:
             return None
-        return self.parse(line, match, obj_map)
+        return self.read(line, match, obj_map)
 
     @abstractmethod
-    def parse(self, line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> Step: ...
+    def read(self, line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> Step: ...

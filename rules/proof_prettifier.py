@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import List
 
 from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.document.parser.document_parser import DocumentParser
+from rules.proof.document.reader.document_reader import DocumentReader
 
 from .theorem import Theorem
 from .proof.proof import Proof
@@ -52,7 +52,7 @@ def main():
 
     args = parser.parse_args()
     document = GeometryDocument(args.path)
-    proof = DocumentParser().parse(document)
+    proof = DocumentReader().read(document)
 
     prettifier = ProofPrettifier()
     pretty_proof = prettifier.prettify(proof)

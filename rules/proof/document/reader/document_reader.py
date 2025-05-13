@@ -9,26 +9,26 @@ from ... import Proof
 from ..document_section import DocumentSection
 from ..geometry_document import GeometryDocument
 
-from .proof_parser.proof_parser import ProofParser
-from .embedding_parser import EmbeddingParser
-from .problem_statement_parser import ProblemStatementParser
+from .proof_reader.proof_reader import ProofReader
+from .embedding_reader import EmbeddingReader
+from .problem_statement_reader import ProblemStatementReader
 
 
-class DocumentParser:
+class DocumentReader:
     def __init__(self):
-        self.problem_statement_parser = ProblemStatementParser()
-        self.proof_parser = ProofParser()
-        self.embedding_parser = EmbeddingParser()
+        self.problem_statement_reader = ProblemStatementReader()
+        self.proof_reader = ProofReader()
+        self.embedding_reader = EmbeddingReader()
 
-    def parse(self, document: GeometryDocument, parse_proof_body: bool) -> Proof:
+    def read(self, document: GeometryDocument, read_proof_body: bool) -> Proof:
         """
         Parses a string representing a proof.
         """
-        assumption_objects, assumption_preds = self.problem_statement_parser.parse_assumptions(
+        assumption_objects, assumption_preds = self.problem_statement_reader.read_assumptions(
             document.get_section_text(DocumentSection.ASSUMPTION)
         )
 
-        target_objects, target_preds = self.problem_statement_parser.parse_targets(
+        target_objects, target_preds = self.problem_statement_reader.read_targets(
             document.get_section_text(DocumentSection.TARGET), dict(assumption_objects)
         )
         auxiliary_preds: list[Predicate] = []
@@ -47,15 +47,15 @@ class DocumentParser:
         auxiliary_preds.append(predicate_from_args('exists', tuple(exist_objects)))
 
         steps = (
-            self.proof_parser.parse(document.get_section_text(DocumentSection.PROOF), dict(assumption_objects))
-            if parse_proof_body
+            self.proof_reader.read(document.get_section_text(DocumentSection.PROOF), dict(assumption_objects))
+            if read_proof_body
             else []
         )
 
         embedding_lines = document.get_section_text(DocumentSection.EMBEDDING)
 
         embedding = (
-            self.embedding_parser.parse(embedding_lines, assumption_objects) if len(embedding_lines) > 0 else None
+            self.embedding_reader.read(embedding_lines, assumption_objects) if len(embedding_lines) > 0 else None
         )
 
         return Proof(

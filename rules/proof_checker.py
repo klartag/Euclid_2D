@@ -5,7 +5,7 @@ import time
 from tqdm import trange
 
 from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.document.parser.document_parser import DocumentParser
+from rules.proof.document.reader.document_reader import DocumentReader
 
 from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
@@ -436,7 +436,7 @@ class ProofChecker:
 
 
 def check_proof(path: Path, verbose=False, interactive: bool = False):
-    proof = DocumentParser().parse(GeometryDocument(path))
+    proof = DocumentReader().read(GeometryDocument(path))
     if proof.embedding is not None:
         collector = NonDegeneracyPrediateCollector()
         non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
@@ -482,7 +482,7 @@ def interactive_main():
 
     args = parser.parse_args()
 
-    proof = DocumentParser().parse(GeometryDocument(args.path))
+    proof = DocumentReader().read(GeometryDocument(args.path))
 
     if proof.embedding is not None:
         collector = NonDegeneracyPrediateCollector()

@@ -1,8 +1,0 @@
-from .almost_always_step_parser import AlmostAlwaysStepParser
-from .anonymous_object_definition_step_parser import (
-    AnonymousObjectDefinitionStepParser,
-)
-from .assert_step_parser import AssertStepParser
-from .comment_step_parser import CommentStepParser
-from .null_theorem_step_parser import NullTheoremStepParser
-from .object_definition_step_parser import ObjectDefinitionStepParser

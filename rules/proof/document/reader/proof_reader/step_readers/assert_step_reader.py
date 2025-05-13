@@ -6,13 +6,13 @@ from ......predicates.predicate_factory import parse_predicate
 
 from .....steps.assert_step import AssertStep
 
-from ..abstract_step_parser import AbstractStepParser
+from ..abstract_step_reader import AbstractStepReader
 
 
-class AssertStepParser(AbstractStepParser[AssertStep]):
+class AssertStepReader(AbstractStepReader[AssertStep]):
     pattern = r'We have (proved|shown) (.*)$'
 
-    def parse(line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> AssertStep:
+    def read(line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> AssertStep:
         _, preds_text = match.groups()
         preds = [parse_predicate(part, obj_map) for part in split_args(preds_text)]
         return AssertStep(preds)

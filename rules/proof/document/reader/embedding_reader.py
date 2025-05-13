@@ -11,8 +11,8 @@ from ....geometry_objects.geo_object import GeoObject
 from .. import rule_utils
 
 
-class EmbeddingParser:
-    def parse(self, data: list[str], obj_map: dict[str, GeoObject]) -> Embedding:
+class EmbeddingReader:
+    def read(self, data: list[str], obj_map: dict[str, GeoObject]) -> Embedding:
         """
         Parses the embedding section of the proof.
         """

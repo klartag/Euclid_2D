@@ -5,14 +5,14 @@ from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.predicate_factory import parse_predicate
 
-from .proof_parser.step_parsers.object_definition_step_parser import (
+from .proof_reader.step_readers.object_definition_step_reader import (
     OBJECT_DEFINITION_PATTERN,
     OBJECT_NAME_PATTERN,
 )
 
 
-class ProblemStatementParser:
-    def parse_assumptions(self, data: list[str]) -> tuple[dict[str, GeoObject], list[Predicate]]:
+class ProblemStatementReader:
+    def read_assumptions(self, data: list[str]) -> tuple[dict[str, GeoObject], list[Predicate]]:
         """
         Parses the assumptions segment of the proof.
         Returns a proof with only the assumptions.
@@ -23,7 +23,7 @@ class ProblemStatementParser:
         for line in self.preprocess_lines(data):
             if ':' in line:
                 # Checking if the line contains object definitions.
-                self.parse_object_definition_line(line, obj_map)
+                self.read_object_definition_line(line, obj_map)
             else:
                 # Parsing a predicate.
                 pred = parse_predicate(line, obj_map)
@@ -33,7 +33,7 @@ class ProblemStatementParser:
 
         return obj_map, assumptions
 
-    def parse_targets(
+    def read_targets(
         self, data: list[str], obj_map: dict[str, GeoObject]
     ) -> tuple[dict[str, GeoObject], list[Predicate]]:
         """
@@ -46,7 +46,7 @@ class ProblemStatementParser:
         for line in self.preprocess_lines(data):
             if ':' in line:
                 # Checking if the line contains object definitions.
-                self.parse_object_definition_line(line, obj_map)
+                self.read_object_definition_line(line, obj_map)
             else:
                 # Parsing a predicate.
                 pred = parse_predicate(line, obj_map)
@@ -59,7 +59,7 @@ class ProblemStatementParser:
 
         return target_objects, target_predicates
 
-    def parse_object_definition_line(self, line: str, obj_map: dict[str, GeoObject]):
+    def read_object_definition_line(self, line: str, obj_map: dict[str, GeoObject]):
         """
         Parses a line defining objects.
         @param line: The line. Should be of the format a, b, c: Type

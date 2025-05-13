@@ -6,13 +6,13 @@ from ......predicates.predicate_factory import parse_predicate
 
 from .....steps.null_theorem_step import NullTheoremStep
 
-from ..abstract_step_parser import AbstractStepParser
+from ..abstract_step_reader import AbstractStepReader
 
 
-class NullTheoremStepParser(AbstractStepParser[NullTheoremStep]):
+class NullTheoremStepReader(AbstractStepReader[NullTheoremStep]):
     pattern = r'We have (.*)$'
 
-    def parse(line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> NullTheoremStep:
+    def read(line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> NullTheoremStep:
         # Matching a theorem step without a defined theorem.
         results = match.group(1)
         results = split_args(results)
