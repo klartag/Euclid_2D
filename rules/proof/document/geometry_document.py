@@ -50,6 +50,7 @@ class GeometryDocument:
         lines = []
         for section in DocumentSection:
             lines.extend(self.get_section_text(section))
+            lines.append('')
         return '\n'.join(lines)
 
     def get_section_text(self, section: DocumentSection) -> List[str]:
