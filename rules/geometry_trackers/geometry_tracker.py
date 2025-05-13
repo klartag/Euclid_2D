@@ -1,6 +1,8 @@
 import heapq
 from typing import Optional
 
+from rules.proof.geometry_problem import GeometryProblem
+
 from .. import rule_utils
 
 from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
@@ -135,12 +137,12 @@ class GeometryTracker:
 
         self.numeric_tracker = NumericTracker(NUMERIC_PRECISION)
 
-    def load_embeds(self, proof: Proof):
+    def load_embedding(self, problem: GeometryProblem):
         """
         Loads the data of the known point embeddings.
         """
-        if proof.embedding is not None:
-            self.embedding_tracker = proof.embedding.shallow_copy()
+        if problem.embedding is not None:
+            self.embedding_tracker = problem.embedding.shallow_copy()
 
     def get_object(self, obj: GeoObject, config: StepConfig) -> GeoObject:
         """
@@ -819,7 +821,7 @@ class GeometryTracker:
         res.numeric_tracker = self.numeric_tracker.clone()
         return res
 
-    def load_assumptions(self, proof: Proof):
+    def load_assumptions(self, problem: GeometryProblem):
         """
         Loads all assumption data from the problem into the checker.
         The assumption data includes:
@@ -827,13 +829,13 @@ class GeometryTracker:
         2. Predicates on these objects.
         3. Embeddings of the objects into R^2, if they are present.
         """
-        self.load_embeds(proof)
+        self.load_embedding(problem)
         # Adding the objects defined by the proof.
-        for obj in proof.all_objects.values():
+        for obj in problem.statement.objects.values():
             self.get_object(obj, ADD_CFG)
 
         # Adding the assumptions of the proof.
-        for pred in proof.assumption_predicates:
+        for pred in problem.statement.assumption_predicates:
             self.add_predicate(pred, ADD_CFG, 'Assumption predicate')
 
         for pred in proof.auxiliary_predicates:

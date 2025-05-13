@@ -1,22 +1,14 @@
 from dataclasses import dataclass
 from enum import Enum
-import glob
-import os
-from pathlib import Path
-import pickle
-import random
 import heapq
-import multiprocessing
-import hashlib
 import time
-from glob import glob
 from typing import Callable, Optional
 from frozendict import frozendict
 
+from rules.proof.geometry_problem import GeometryProblem
 from util import BASE_PATH
 
 from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
-from ..trimmers.old_trimmer import max_depth_trim
 from ..interactive_predicate_checker import InteractivePredicateChecker
 from ..predicates.predicate import Predicate
 from ..predicates.global_predicates import get_constructions
@@ -30,7 +22,7 @@ from ..proof.steps import CommentStep, ObjDefineStep, Step, TheoremStep
 from ..proof_checker import CHECK_CFG, TRUST_NO_ADD_CFG, ProofChecker, involved_objects
 from ..proof_checker_utils import KNOWN_KEYS
 from ..signature_dag import IntersectPattern, SignatureDag
-from ..rule_utils import LITERAL, GeometryError, IllegalObjectError, ProofCheckError
+from ..rule_utils import LITERAL, GeometryError, ProofCheckError
 from ..theorem import Theorem
 
 from .gen_utils import is_trivial
@@ -58,10 +50,8 @@ class ProofGenerator:
     """The problem's objects."""
     input_predicates: list[Predicate]
     """Predicates on the problem's objects."""
-    target_objects: list[GeoObject] | None
-    """The objects that should be created."""
     target_predicates: list[Predicate] | None
-    """The predicates the created objects should satisfy."""
+    """The predicates the problem should satisfy."""
     checker: ProofChecker
     """The object tracking all the objects and predicates created."""
     proof_steps: list[Step]
@@ -81,16 +71,14 @@ class ProofGenerator:
     all_names: set[str]
     """All names used either in the checker or by any step in the step queue."""
 
-    def __init__(self, proof: Proof, actions_per_step: int | Callable[[int], int] = 3, verbose=False):
-        self.input_objects = list(proof.assumption_objects.values())
-        self.input_predicates = list(proof.starting_predicates())
-        self.target_objects = list(proof.target_objects.values())
-        self.target_predicates = proof.target_predicates
-        self.checker = ProofChecker(proof)
-        self.checker.geometry_tracker.load_assumptions(proof)
+    def __init__(self, problem: GeometryProblem, actions_per_step: int | Callable[[int], int] = 3, verbose=False):
+        self.input_objects = list(problem.statement.objects.values())
+        self.input_predicates = list(problem.statement.starting_predicates())
+        self.target_predicates = list(problem.statement.target_predicates)
+        self.checker = ProofChecker(problem)
+        self.checker.geometry_tracker.load_assumptions(problem)
         self.verbose = verbose
         self.proof_steps = []
-        # self.sig_matcher = SignatureMatcher(self.checker, verbose=self.verbose)
         self.sig_dag = SignatureDag(
             self.checker.geometry_tracker, list(Theorem.all_theorems().values()) + list(get_constructions().values())
         )
@@ -277,8 +265,7 @@ class ProofGenerator:
         if self.checker.geometry_tracker.contains_predicate(predicate_from_args('false', ())):
             raise ProofGeneratorError(ProofGeneratorErrorType.Contradiction)
 
-        if self.target_objects is not None and self.target_predicates is not None:
-            # TODO: This doesn't yet find cases where the target objects are constructed under a different name.
+        if self.target_predicates is not None:
             mapped_predicates = [
                 self.checker.geometry_tracker.get_predicate(pred, TRUST_NO_ADD_CFG) for pred in self.target_predicates
             ]
@@ -324,11 +311,11 @@ class ProofGenerator:
         return False
 
 
-def validate_proof(proof: Proof):
+def validate_proof(problem: GeometryProblem):
     """
     Checks that the checker can find all theorem steps used by the given proof.
     """
-    proof_gen = ProofGenerator(proof)
+    proof_gen = ProofGenerator(problem)
     checker = proof_gen.checker
 
     failed_steps = []
@@ -336,7 +323,7 @@ def validate_proof(proof: Proof):
 
     all_steps: list[tuple[Theorem | Construction, frozendict[GeoObject, GeoObject]]] = []
 
-    for idx, step in enumerate(proof.steps):
+    for step in problem.proof.steps:
         if isinstance(step, TheoremStep):
             theorem = Theorem.from_name(step.theorem_name)
             assert theorem is not None
@@ -408,209 +395,23 @@ def validate_proof(proof: Proof):
         raise GeometryError(failed_repr)
 
 
-def generate_random_proof(
-    path: Path,
-    out_path_pattern: str,
-    out_dir: Path,
-    job_idx: int,
-    shuffle=False,
-    timeout: int | None = None,
-    proofs_per_problem=5,
-    quiet_fail: bool = False,
-):
-    """
-    Attempts to generate a proof.
-
-    Parameters:
-    * `path`: The path to the problem.
-    * `out_path_pattern`: The pattern for output paths related to the problem.
-    * `shuffle`: Whether to shuffle the problems and proofs.
-    * `timeout`: The maximal amount of time to allocate for each proof.
-    * `proofs_per_problem`: The number of proofs to attmept to create for each problem.
-    """
-    if len(path.suffixes) == 0:
-        return
-    if path.suffixes[0] == '.proof':
-        return
-
-    out_lock = Path(out_path_pattern.format('lock'))
-    log_addr = out_dir / f'log_{job_idx}.txt'
-    try:
-        # Making sure the output directory exists.
-        # This sometimes raises an exception when there are collisions.
-        os.makedirs(str(Path(out_path_pattern).parent), exist_ok=True)
-    except:
-        ...
-
-    try:
-        if out_lock.exists():
-            return
-        try:
-            match path.suffix:
-                case '.txt':
-                    base = Proof.parse(path.open().read(), False)
-                case '.pkl':
-                    base = Proof.parse(pickle.load(path.open('rb'))['text'], False)
-                case _:
-                    # Ignoring unknown files.
-                    return
-
-        except (KeyError, GeometryError) as e:
-            print(f'Failed to parse {path.stem}: {e}')
-            return
-
-        if shuffle:
-            random.shuffle(base.assumption_predicates)
-            random.shuffle(base.auxiliary_predicates)
-
-        # Converting empty proofs to unprovable proofs.
-        if len(base.target_predicates) == 0:
-            base.target_predicates.append(predicate_from_args('false', ()))
-
-        t = time.process_time()
-        with log_addr.open('a') as f:
-            f.write(f'Process {multiprocessing.current_process().name} starting {path.name} at time {t:.1f}\n')
-        out_lock.touch()
-
-        proof_gen = ProofGenerator(base, actions_per_step=lambda steps: 3 * int(10 // (steps + 1) + 1))
-        proof_gen.run(step_count=None, timeout=timeout)
-
-        new_proof = base.shallow_copy()
-        new_proof.steps = proof_gen.proof_steps  # type: ignore
-
-        untrim_addr = out_path_pattern.format('untrimmed')
-        with open(untrim_addr, 'w') as f:
-            f.write(new_proof.to_language_format())
-
-        # Checking that all the steps are legal.
-        checker = ProofChecker(new_proof)
-        new_proof.target_predicates = []
-        checker.check()
-        new_proof.target_predicates = base.target_predicates
-
-        # Trimming the proof.
-
-        trimmed_proofs = max_depth_trim(new_proof, target_count=proofs_per_problem)
-        for idx, trimmed_proof in enumerate(trimmed_proofs):
-            # Making sure that the trimmed proof is valid.
-            checker = ProofChecker(trimmed_proof)
-            checker.check()
-
-            if shuffle:
-                trimmed_proof = trimmed_proof.shuffled()
-            # Making sure it remains valid when shuffled.
-            checker = ProofChecker(trimmed_proof)
-            checker.check()
-
-            out_path = Path(out_path_pattern.format(idx))
-            with out_path.open('w') as f:
-                f.write(trimmed_proof.to_language_format())
-        with log_addr.open('a') as f:
-            t_fin = time.process_time()
-            f.write(
-                f'Process {multiprocessing.current_process().name} finished {path.name} at time {t_fin:.1f} ({t_fin - t:.1f})\n'
-            )
-
-    except KeyboardInterrupt as e:
-        if out_lock.exists():
-            out_lock.unlink()
-        time.sleep(0.1)
-
-    except (ProofGeneratorError, ProofCheckError, AssertionError, IllegalObjectError, GeometryError) as e:
-        if out_lock.exists():
-            out_lock.unlink()
-        print(f'Encountered {e}')
-
-        if not quiet_fail:
-            identifier = str(path).split('_')[-1].split('.')[0]
-
-            with open(f'proof_fail_{identifier}.jl', 'w') as f:
-                base.steps = proof_gen.proof_steps  # type: ignore
-                f.write(base.to_language_format())
-                f.write('\n')
-                for ln in repr(e).split('\n'):
-                    f.write(f'# {ln}\n')
-            with log_addr.open('a') as f:
-                t_fin = time.process_time()
-                f.write(
-                    f'Process {multiprocessing.current_process().name} failed {path.name} at time {t_fin:.1f} ({t_fin - t:.1f}) with exception {e}\n'
-                )
-            raise
-
-
-def prove_all_assumptions(
-    assumption_path: Path,
-    out_dir: Path,
-    multiprocess: bool,
-    shuffle=False,
-    job_idx: int | None = None,
-    job_count: int | None = None,
-    timeout: int | None = None,
-    proofs_per_problem: int = 1,
-    quiet_fail: bool = False,
-):
-    """
-    Proves all assumptions in the given directory.
-
-    Parameters:
-    * `dir`: The directory containing the problem files.
-    * `multiprocess`: Whether to use multiprocessing to prove multiple problems in parallel.
-    * `shuffle`: Whether to shuffle the names and assumption order in the problem input.
-    * `job_idx`: If several jobs were used to search for proofs, then this stores the index of the job.
-    * `job_count`: If several jobs were used to search for proofs, then this is the total count of jobs used.
-    """
-    print(f'Assumption path exists: {assumption_path.exists()}')
-    print(f'Searching for geometry problems in {assumption_path}/**/*.txt')
-    assumption_paths = glob.glob(f'{assumption_path}/**/*.txt', recursive=True) + glob.glob(
-        f'{assumption_path}/**/*.pkl', recursive=True
-    )
-    print(f'Assumption paths: {len(assumption_paths)}')
-
-    if job_count is not None and job_idx is not None:
-        assumption_paths = [
-            path
-            for path in assumption_paths
-            if (int(hashlib.blake2b(str(path).encode('utf-8')).hexdigest()[:8], 16) % job_count) == job_idx
-        ]
-
-    print(f'For given job: {len(assumption_paths)}')
-    assumption_paths = [Path(path) for path in (assumption_paths) if 'proof.txt' not in str(path)]
-
-    out_paths = [
-        str(out_dir / '/'.join(path.parts[len(assumption_path.parts) : -1]) / f'{path.stem}_{{}}.proof.txt')
-        for path in (assumption_paths)
-    ]
-    args = [
-        (in_path, out_path, out_dir, job_idx or 0, shuffle, timeout, proofs_per_problem, quiet_fail)
-        for in_path, out_path in (zip(assumption_paths, out_paths))
-    ]
-    print('Starting!')
-    if multiprocess:
-        print(f'Using {os.cpu_count()} processes.')
-        with multiprocessing.Pool() as pool:
-            pool.starmap(generate_random_proof, args)
-    else:
-        for arg in args:
-            generate_random_proof(*arg)
-
-
-def prove(base: Proof, interactive: bool, verbose: bool) -> Proof:
-    if base.embedding is not None:
+def prove(problem: GeometryProblem, interactive: bool, verbose: bool) -> GeometryProblem:
+    if problem.embedding is not None:
         collector = NonDegeneracyPrediateCollector()
-        non_degenerecy_predicates = collector.collect(base.assumption_objects, base.embedding)
-        base.auxiliary_predicates.extend(non_degenerecy_predicates)
+        non_degenerecy_predicates = collector.collect(problem.assumption_objects, problem.embedding)
+        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
 
-    proof_gen = ProofGenerator(base, actions_per_step=10000, verbose=verbose)
+    proof_generator = ProofGenerator(problem, actions_per_step=10000, verbose=verbose)
 
     try:
-        proof_gen.run()
-        completed_proof = base.shallow_copy()
-        completed_proof.steps = proof_gen.proof_steps
-        return completed_proof
+        proof_generator.run()
+        completed_problem = problem.shallow_copy()
+        completed_problem.steps = proof_generator.proof_steps
+        return completed_problem
     except (KeyboardInterrupt, ProofGeneratorError, ProofCheckError) as e:
-        base.steps = proof_gen.proof_steps
+        problem.steps = proof_generator.proof_steps
         with (BASE_PATH / 'rules/proof_samples/proof_fail.jl').open('w') as f:
-            f.write(base.to_language_format())
+            f.write(problem.to_language_format())
             f.write('\n')
             for ln in repr(e).split('\n'):
                 f.write(f'# {ln}\n')
@@ -621,5 +422,5 @@ def prove(base: Proof, interactive: bool, verbose: bool) -> Proof:
         ):
             print(f'Stopped due to {e}.')
             print('Beginning interactive session...')
-            InteractivePredicateChecker(proof_gen.checker.geometry_tracker).run()
+            InteractivePredicateChecker(proof_generator.checker.geometry_tracker).run()
         raise e

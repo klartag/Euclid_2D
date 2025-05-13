@@ -24,7 +24,7 @@ class DocumentReader:
         """
         Parses a string representing a proof.
         """
-        assumption_objects, assumption_preds = self.problem_statement_reader.read_assumptions(
+        assumption_objects, assumption_preds, auxiliary_preds = self.problem_statement_reader.read_assumptions(
             document.get_section_text(DocumentSection.ASSUMPTION)
         )
 

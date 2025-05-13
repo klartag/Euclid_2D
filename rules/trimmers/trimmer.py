@@ -2,6 +2,8 @@ from pathlib import Path
 import time
 from tqdm import tqdm
 
+from rules.proof.geometry_problem import GeometryProblem
+
 from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
 from ..proof.proof import Proof
 from ..proof.steps import CommentStep
@@ -12,33 +14,33 @@ MIN_CHECKPOINT_STEPS = 2
 
 
 class ProofTrimmer:
-    proof: Proof
-    trimmed_proof: Proof
+    problem: GeometryProblem
+    trimmed_problem: GeometryProblem
     checkpoints: list[ProofChecker]
 
-    def __init__(self, proof: Proof):
-        self.proof = proof
-        self.trimmed_proof = self.proof.shallow_copy()
+    def __init__(self, problem: GeometryProblem):
+        self.problem = problem
+        self.trimmed_problem = self.problem.shallow_copy()
         self.checkpoints = []
 
-    def trim(self) -> Proof:
+    def trim(self) -> GeometryProblem:
         """
         Attempts to shorten a proof as much as possible,
         while still keeping the proof valid.
         """
-        end = len(self.proof.steps)
+        end = len(self.problem.proof.steps)
         slice_length = 1
 
-        ProofChecker(self.proof).check()
+        ProofChecker(self.problem).check()
 
-        for i in tqdm(range(len(self.proof.steps), 0, -1)):
+        for i in tqdm(range(len(self.problem.proof.steps), 0, -1)):
             if i > end:
                 continue
 
             slice_length = self.trim_longest_tail(end, slice_length)
 
             if slice_length > 0:
-                del self.trimmed_proof.steps[end - slice_length : end]
+                del self.trimmed_problem.proof.steps[end - slice_length : end]
                 end -= slice_length
                 slice_length *= 2
                 slice_length = min(slice_length, end)
@@ -46,7 +48,7 @@ class ProofTrimmer:
                 end -= 1
                 slice_length = 1
 
-        return self.trimmed_proof.shallow_copy()
+        return self.trimmed_problem.shallow_copy()
 
     def get_checker_at_step(self, step: int) -> ProofChecker:
         """
@@ -64,29 +66,12 @@ class ProofTrimmer:
         I did not give enough thought to the usage:
         We perform a binary search, which gives a more complex access pattern, and might remove too many checkpoints.
         """
-        # Loading the first checkpoint.
-        # if len(self.checkpoints) == 0:
-        #     res = ProofChecker(self.trimmed_proof.shallow_copy())
-        #     res.load_proof()
-        #     self.checkpoints.append(res)
+        checker = ProofChecker(self.trimmed_problem.shallow_copy())
+        checker.load_proof()
 
-        # while self.checkpoints[-1].checked_steps > step:
-        #     self.checkpoints.pop()
-
-        # res = self.checkpoints[-1].shallow_copy()
-
-        res = ProofChecker(self.trimmed_proof.shallow_copy())
-        res.load_proof()
-
-        # for _ in range(2):
-        #     if (step - res.checked_steps) >= 2 * MIN_CHECKPOINT_STEPS:
-        #         checkpoint_step = (res.checked_steps + step) // 2
-        #         res.check_until_step(checkpoint_step, skim=True)
-        #         self.checkpoints.append(res.shallow_copy())
-
-        res.check_until_step(step, skim=True)
-        res.proof = self.trimmed_proof.shallow_copy()
-        return res
+        checker.check_until_step(step, skim=True)
+        checker.problem = self.trimmed_problem.shallow_copy()
+        return checker
 
     def trim_longest_tail(self, end: int, slice_length: int) -> int:
         """
@@ -140,9 +125,9 @@ def main():
 
     t0 = time.time()
     trimmer = ProofTrimmer(proof)
-    trimmed_proof = trimmer.trim()
+    trimmed_problem = trimmer.trim()
 
-    proof_text = trimmed_proof.to_language_format()
+    proof_text = trimmed_problem.to_language_format()
 
     if args.overwrite:
         open(path, 'w').write(proof_text)

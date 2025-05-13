@@ -4,6 +4,8 @@ import time
 
 from tqdm import trange
 
+from rules.proof.geometry_problem import GeometryProblem
+
 from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
@@ -62,13 +64,13 @@ class ProofChecker:
     A class that checks that a proof is valid.
     """
 
-    proof: Proof
+    problem: GeometryProblem
     checked_steps: int
     geometry_tracker: GeometryTracker
     """Tracks when automatic theorems can be applied. The automatic predicates are added after a step is applied."""
 
-    def __init__(self, proof: Proof):
-        self.proof = proof
+    def __init__(self, problem: GeometryProblem):
+        self.problem = problem
         self.checked_steps = 0
 
         self.geometry_tracker = GeometryTracker()
@@ -337,7 +339,7 @@ class ProofChecker:
         """
         Returns a shallow copy of the proof checker.
         """
-        res = ProofChecker(self.proof.shallow_copy())
+        res = ProofChecker(self.problem.shallow_copy())
         res.geometry_tracker = self.geometry_tracker.clone()
         res.checked_steps = self.checked_steps
         return res
@@ -379,7 +381,7 @@ class ProofChecker:
         """
         Loads the proof's assumptions.
         """
-        self.geometry_tracker.load_assumptions(self.proof)
+        self.geometry_tracker.load_assumptions(self.problem)
 
     def check_proof_finished(self):
         # If we have found a contradiction, then the proof is valid.
@@ -388,7 +390,7 @@ class ProofChecker:
                 return
 
         # Making sure that the results follow.
-        for pred in self.proof.target_predicates:
+        for pred in self.problem.need_to_prove.predicates:
             if not self.geometry_tracker.contains_predicate(pred):
                 self.geometry_tracker.contains_predicate(pred)
                 raise ProofCheckError(f'Required predicate {pred} was not proved.')
@@ -406,7 +408,7 @@ class ProofChecker:
         Checks the next `step_count` steps in the proof that have not yet been checked.
         If `step_count == None`, checks all of the remaining steps in the proof.
         '''
-        steps_left = len(self.proof.steps) - self.checked_steps
+        steps_left = len(self.problem.proof.steps) - self.checked_steps
 
         if step_count == None:
             step_count = steps_left
@@ -418,7 +420,7 @@ class ProofChecker:
 
         for i in range_wrapper(self.checked_steps, self.checked_steps + step_count):
             try:
-                step = self.proof.steps[i]
+                step = self.problem.proof.steps[i]
                 self.add_step(step, skim=skim)
                 self.checked_steps += 1
             except ProofCheckError as e:

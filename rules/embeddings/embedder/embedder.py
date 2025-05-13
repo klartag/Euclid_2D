@@ -2,6 +2,10 @@ from pathlib import Path
 from typing import Iterator, List, Optional
 from tqdm import tqdm
 
+from rules.proof.statement import Statement
+from rules.proof.geometry_problem import GeometryProblem
+from rules.proof.problem_target import ProblemTarget
+
 from ...rule_utils import LITERAL
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ...geometry_objects.geo_object import GeoObject
@@ -29,9 +33,12 @@ class DiagramEmbedder:
     def is_assumption_necessary(self, assumption: Predicate, assumptions: List[Predicate]) -> bool:
         try:
             objects = {obj.name: obj for pred in assumptions + [assumption] for obj in pred.involved_objects()}
-            proof = Proof(objects, objects, assumptions, [], {}, [assumption], None, [])
-            proof_gen = ProofGenerator(proof, actions_per_step=10000)
-            proof_gen.run(1000)
+
+            problem_statement = Statement(objects, assumptions, [assumption])
+
+            problem = GeometryProblem(problem_statement, None, None)
+            proof_generator = ProofGenerator(problem, actions_per_step=10000)
+            proof_generator.run(1000)
             return False
         except ProofGeneratorError as e:
             if e.error in [ProofGeneratorErrorType.NoMoreSteps, ProofGeneratorErrorType.StepLimitReached]:
@@ -129,10 +136,10 @@ class DiagramEmbedder:
         else:
             return True
 
-    def embed(self, proof: Proof) -> Optional[Embedding]:
-        objects = list(proof.assumption_objects.values())
+    def embed(self, problem: GeometryProblem) -> Optional[Embedding]:
+        objects = list(problem.assumption_objects.values())
         split_predicates = SequencingPreprocessor(SPLITTING_PATTERNS).preprocess_assumptions(
-            proof.assumption_predicates
+            problem.statement.assumption_predicates
         )
         processed_predicates = SequencingPreprocessor(INEQUALITY_REMOVAL_PATTERNS).preprocess_assumptions(
             split_predicates
@@ -232,5 +239,5 @@ def main():
         print('Beginning interactive session...')
         geometry_tracker = GeometryTracker()
         geometry_tracker.load_assumptions(proof)
-        geometry_tracker.load_embeds(proof)
+        geometry_tracker.load_embedding(proof)
         InteractivePredicateChecker(geometry_tracker).run()
