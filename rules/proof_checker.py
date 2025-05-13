@@ -469,11 +469,9 @@ def main():
 
     args = parser.parse_args()
 
-    t0 = time.perf_counter()
-
-    document = GeometryDocument(args.path)
+    start_time = time.perf_counter()
     check_proof(args.path, verbose=args.v, interactive=args.interactive)
-    print(f't={time.perf_counter() - t0}')
+    print(f'Time: {time.perf_counter() - start_time} seconds')
 
 
 def interactive_main():
@@ -486,12 +484,12 @@ def interactive_main():
     args = parser.parse_args()
 
     document = GeometryDocument(args.path)
-    problem = DocumentReader().read(document)
+    problem = DocumentReader().read(document, read_proof_body=True)
 
     if problem.embedding is not None:
         collector = NonDegeneracyPrediateCollector()
-        non_degenerecy_predicates = collector.collect(problem.assumption_objects, problem.embedding)
-        problem.auxiliary_predicates.extend(non_degenerecy_predicates)
+        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
+        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
 
     checker = ProofChecker(problem)
     try:
