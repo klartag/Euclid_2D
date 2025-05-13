@@ -93,3 +93,15 @@ def union(sets: Iterable[set[V]]) -> set[V]:
     for s in sets:
         res |= s
     return res
+
+
+def preprocess_lines(lines: Iterable[str]) -> Iterable[str]:
+    """
+    Removes comments from the lines and removes empty lines.
+    """
+    for line in lines:
+        if '#' in line:
+            line = line.split('#')[0]
+        line = line.rstrip()
+        if line:
+            yield line

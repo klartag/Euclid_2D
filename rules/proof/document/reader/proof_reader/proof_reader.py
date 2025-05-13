@@ -1,6 +1,6 @@
 from rules.proof.proof import Proof
 from .....geometry_objects.geo_object import GeoObject
-from .....rule_utils import ProofParseError
+from .....rule_utils import ProofParseError, preprocess_lines
 
 from ....steps.step import Step
 
@@ -37,7 +37,7 @@ class ProofReader:
         """
         try:
             steps = []
-            for line in self.preprocess_lines(lines):
+            for line in preprocess_lines(lines):
                 steps.append(self.read_step(line, obj_map))
             return Proof(steps)
         except Exception as e:

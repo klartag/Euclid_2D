@@ -16,7 +16,7 @@ class AbstractStepReader[S](ABC):
     def pattern(self) -> str: ...
 
     def try_read(self, line: str, obj_map: dict[str, GeoObject]) -> Optional[Step]:
-        match = re.search(self.pattern(), line)
+        match = re.search(self.pattern, line)
         if match is None:
             return None
         return self.read(line, match, obj_map)

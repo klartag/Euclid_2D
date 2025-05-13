@@ -1,11 +1,11 @@
 import re
-from typing import Mapping, NamedTuple, Sequence
+from typing import Mapping, NamedTuple
 
 from rules.proof.document.document_section import DocumentSection
 from rules.proof.document.geometry_document import GeometryDocument
 from rules.proof.statement import Statement
 
-from ....rule_utils import ALL_TYPES, ProofParseError
+from ....rule_utils import ALL_TYPES, ProofParseError, preprocess_lines
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.predicate_factory import parse_predicate, predicate_from_args
@@ -20,17 +20,18 @@ PredicateData = NamedTuple('PredicateData', [("objects", dict[str, GeoObject]), 
 
 class ProblemStatementReader:
     def read(self, document: GeometryDocument) -> Statement:
-        assumption_objects, assumption_predicates = self.read_assumptions(
-            document.get_section_text(DocumentSection.ASSUMPTION)
+        assumption_predicate_data = self.read_assumptions(document.get_section_text(DocumentSection.ASSUMPTION))
+        target_predicate_data = self.read_targets(
+            document.get_section_text(DocumentSection.TARGET), assumption_predicate_data.objects
         )
-        target_objects, target_predicates = self.read_targets(
-            document.get_section_text(DocumentSection.TARGET), assumption_objects
-        )
-        auxiliary_predicates = self.create_auxiliary_predicates(
-            assumption_objects, assumption_predicates, target_objects, target_predicates
-        )
+        auxiliary_predicates = self.create_auxiliary_predicates(assumption_predicate_data, target_predicate_data)
+
         return Statement(
-            assumption_objects, assumption_predicates, auxiliary_predicates, target_objects, target_predicates
+            assumption_predicate_data.objects,
+            assumption_predicate_data.predicates,
+            auxiliary_predicates,
+            target_predicate_data.objects,
+            target_predicate_data.predicates,
         )
 
     def create_auxiliary_predicates(
@@ -56,7 +57,7 @@ class ProblemStatementReader:
         assumption_objects = {}
         assumption_predicates = []
         # Parsing the assumptions section
-        for line in self.preprocess_lines(data):
+        for line in preprocess_lines(data):
             if ':' in line:
                 # Checking if the line contains object definitions.
                 self.read_object_definition_line(line, assumption_objects)
@@ -77,7 +78,7 @@ class ProblemStatementReader:
         old_objects = dict(assumption_objects)
         target_predicates = []
         # Parsing the target section.
-        for line in self.preprocess_lines(data):
+        for line in preprocess_lines(data):
             if ':' in line:
                 # Checking if the line contains object definitions.
                 self.read_object_definition_line(line, assumption_objects)
