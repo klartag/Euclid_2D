@@ -6,7 +6,7 @@ from tqdm import trange
 
 from rules.proof.geometry_problem import GeometryProblem
 
-from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
 from .interactive_predicate_checker import InteractivePredicateChecker
@@ -440,7 +440,7 @@ def check_proof(path: Path, verbose=False, interactive: bool = False):
     document = GeometryDocument(path)
     problem = DocumentReader().read(document, read_proof_body=True)
     if problem.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
+        collector = NonDegeneracyPredicateCollector()
         non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
         problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
     checker = ProofChecker(problem)
@@ -487,7 +487,7 @@ def interactive_main():
     problem = DocumentReader().read(document, read_proof_body=True)
 
     if problem.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
+        collector = NonDegeneracyPredicateCollector()
         non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
         problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
 

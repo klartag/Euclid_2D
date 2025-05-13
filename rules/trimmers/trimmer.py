@@ -8,8 +8,7 @@ from rules.proof.document.reader.document_reader import DocumentReader
 from rules.proof.document.writer.document_writer import DocumentWriter
 from rules.proof.geometry_problem import GeometryProblem
 
-from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
-from ..proof.proof import Proof
+from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
 from ..proof.steps import CommentStep
 from ..proof_checker import ProofChecker
 from ..rule_utils import ProofCheckError
@@ -124,7 +123,7 @@ def main():
     problem = DocumentReader().read(document, read_proof_body=True)
 
     if problem.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
+        collector = NonDegeneracyPredicateCollector()
         non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
         problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
 
