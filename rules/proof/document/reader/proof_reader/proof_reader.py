@@ -35,11 +35,9 @@ class ProofReader:
         Parses the body of the proof.
         This step is used recursively when parsing if-steps.
         """
-        lines = list(self.preprocess_lines(lines))
-
         try:
             steps = []
-            for line in lines:
+            for line in self.preprocess_lines(lines):
                 steps.append(self.read_step(line, obj_map))
             return Proof(steps)
         except Exception as e:
