@@ -4,7 +4,7 @@ from typing import List
 
 from tqdm import tqdm
 
-from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from ..embeddings.predicate_collection.collector import EmbeddingPredicateCollector
 from ..proof import CommentStep, Proof
 from ..proof_checker import ProofChecker
 from ..rule_utils import ProofCheckError
@@ -102,7 +102,7 @@ def main():
     proof = Proof.parse(path.open().read())
 
     if proof.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
+        collector = EmbeddingPredicateCollector()
         non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
         proof.auxiliary_predicates.extend(non_degenerecy_predicates)
 

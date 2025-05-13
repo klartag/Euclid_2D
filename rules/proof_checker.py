@@ -4,7 +4,7 @@ import time
 
 from tqdm import trange
 
-from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from .embeddings.predicate_collection.collector import EmbeddingPredicateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
 from .interactive_predicate_checker import InteractivePredicateChecker
@@ -508,7 +508,7 @@ class ProofChecker:
 def check_proof(path: Path, verbose=False, interactive: bool = False):
     proof = Proof.parse(path.open().read())
     if proof.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
+        collector = EmbeddingPredicateCollector()
         non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
         proof.auxiliary_predicates.extend(non_degenerecy_predicates)
     checker = ProofChecker(proof)
@@ -557,7 +557,7 @@ def interactive_main():
     proof = Proof.parse(path.open().read())
 
     if proof.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
+        collector = EmbeddingPredicateCollector()
         non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
         proof.auxiliary_predicates.extend(non_degenerecy_predicates)
 

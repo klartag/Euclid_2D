@@ -12,17 +12,21 @@ from ...predicates.predicate_factory import predicate_from_args
 from ...geometry_objects.construction_object import ConstructionObject
 
 
-class NonDegeneracyPrediateCollector:
+class EmbeddingPredicateCollector:
     def __init__(self):
         pass
 
     def collect(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
-        two_point_non_degenerecy_predicates = self.collect_two_point_non_degenerecy_predicates(assumption_objects, embedding)
-        triangle_non_degenerecy_predicates = self.collect_triangle_non_degenerecy_predicates(assumption_objects, embedding)
+        direction_existence_predicates = self.collect_direction_existence_predicates(assumption_objects, embedding)
+        triangle_non_degenerecy_predicates = self.collect_triangle_non_degenerecy_predicates(
+            assumption_objects, embedding
+        )
         probably_between_predicates = self.collect_probably_between_predicates(assumption_objects, embedding)
-        return two_point_non_degenerecy_predicates + triangle_non_degenerecy_predicates + probably_between_predicates
+        return direction_existence_predicates + triangle_non_degenerecy_predicates + probably_between_predicates
 
-    def collect_two_point_non_degenerecy_predicates(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
+    def collect_direction_existence_predicates(
+        self, assumption_objects: dict[str, GeoObject], embedding: Embedding
+    ) -> List[Predicate]:
         predicates = []
 
         points = {name: point for (name, point) in embedding.items() if isinstance(point, EmbeddedPoint)}
@@ -44,7 +48,9 @@ class NonDegeneracyPrediateCollector:
 
         return predicates
 
-    def collect_triangle_non_degenerecy_predicates(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
+    def collect_triangle_non_degenerecy_predicates(
+        self, assumption_objects: dict[str, GeoObject], embedding: Embedding
+    ) -> List[Predicate]:
         predicates = []
 
         points = {name: point for (name, point) in embedding.items() if isinstance(point, EmbeddedPoint)}
@@ -64,23 +70,27 @@ class NonDegeneracyPrediateCollector:
             diff1 = point1 - point0
             orthogonal_to_diff1 = EmbeddedPoint(diff1.y, -diff1.x)
             diff2 = point2 - point0
-            
+
             orientation_value = int(mpf(90) * mp.sign(diff2.scalar_product(orthogonal_to_diff1)))
-            
+
             orientation = GeoObject(str(orientation_value), LITERAL)
             reverse_orientation = GeoObject(str(-orientation_value), LITERAL)
-            
+
             orientation_object = ConstructionObject.from_args('orientation', (object0, object1, object2))
             reverse_orientation_object = ConstructionObject.from_args('orientation', (object2, object1, object0))
-            
+
             orientation_predicate = predicate_from_args('equals_mod_360', (orientation_object, orientation))
-            reverse_orientation_predicate = predicate_from_args('equals_mod_360', (reverse_orientation_object, reverse_orientation))
+            reverse_orientation_predicate = predicate_from_args(
+                'equals_mod_360', (reverse_orientation_object, reverse_orientation)
+            )
 
             predicates.extend([not_collinear_predicate, orientation_predicate, reverse_orientation_predicate])
 
         return predicates
 
-    def collect_probably_between_predicates(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
+    def collect_probably_between_predicates(
+        self, assumption_objects: dict[str, GeoObject], embedding: Embedding
+    ) -> List[Predicate]:
         predicates = []
 
         points = {name: point for (name, point) in embedding.items() if isinstance(point, EmbeddedPoint)}
@@ -90,7 +100,7 @@ class NonDegeneracyPrediateCollector:
                 continue
             if not (point1 - point0).is_proportional(point2 - point0):
                 continue
-            
+
             if (point1 - point0).x * (point2 - point0).x < 0:
                 point0, point1 = point1, point0
                 name0, name1 = name1, name0

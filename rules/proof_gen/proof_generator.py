@@ -14,7 +14,7 @@ from typing import Callable, Optional
 
 from frozendict import frozendict
 
-from rules.embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from rules.embeddings.predicate_collection.collector import EmbeddingPredicateCollector
 
 from ..trimmers.old_trimmer import max_depth_trim
 
@@ -601,7 +601,7 @@ def prove_all_assumptions(
 
 def prove(base: Proof, interactive: bool, verbose: bool) -> Proof:
     if base.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
+        collector = EmbeddingPredicateCollector()
         non_degenerecy_predicates = collector.collect(base.assumption_objects, base.embedding)
         base.auxiliary_predicates.extend(non_degenerecy_predicates)
 
