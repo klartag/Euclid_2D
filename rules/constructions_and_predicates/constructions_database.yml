@@ -277,7 +277,7 @@ excenter: #the center of the circle whoe's tangent to BC and incribe in between 
   construct:
     - P: Point
   conclude:
-    - concurrent(external_angle_bisector(A, C, B), external_angle_bisector(A, B, C), internal_angle_bisector(B, A, C))
+    - P in external_angle_bisector(A, C, B), external_angle_bisector(A, B, C), internal_angle_bisector(B, A, C)
     - P == line_intersection(external_angle_bisector(A, C, B), external_angle_bisector(A, B, C))
 
 #cosmetical
@@ -290,7 +290,7 @@ incenter: #the center of the circle inscribe in triangle ABC
   construct:
     - P: Point
   conclude:
-    - concurrent(internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B), internal_angle_bisector(C, A, B))
+    - P in internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B), internal_angle_bisector(C, A, B)
     - P == line_intersection(internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B))
 
 #cosmetical

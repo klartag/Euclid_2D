@@ -13,22 +13,20 @@ angle:
   inputs:
   - {'A, B, C': Point}
   where: [A != B, C != B]
-excenter:
-  conclude: ['concurrent(external_angle_bisector(A, C, B), external_angle_bisector(A,
-      B, C), internal_angle_bisector(B, A, C))', 'P == line_intersection(external_angle_bisector(A,
-      C, B), external_angle_bisector(A, B, C))']
+excircle:
+  conclude: ['tangent(Line(A, B), c)', 'tangent(Line(B, C), c)', 'tangent(Line(C,
+      A), c)', 'excenter(A, B, C) == center(c)']
   construct:
-  - {P: Point}
+  - {c: Circle}
   inputs:
   - {'A, B, C': Point}
   preprocess: swap
   where: ['not_collinear(A, B, C)']
-incenter:
-  conclude: ['concurrent(internal_angle_bisector(A, B, C), internal_angle_bisector(A,
-      C, B), internal_angle_bisector(C, A, B))', 'P == line_intersection(internal_angle_bisector(A,
-      B, C), internal_angle_bisector(A, C, B))']
+incircle:
+  conclude: ['tangent(Line(A, B), c)', 'tangent(Line(B, C), c)', 'tangent(Line(C,
+      A), c)', 'incenter(A, B, C) == center(c)']
   construct:
-  - {P: Point}
+  - {c: Circle}
   inputs:
   - {'A, B, C': Point}
   preprocess: symmetric
