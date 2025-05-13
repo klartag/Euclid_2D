@@ -14,7 +14,7 @@ from ..abstract_step_reader import AbstractStepReader
 class TheoremStepReader(AbstractStepReader[TheoremStep]):
     pattern = r'By (\w+)( on )?(.*) we get (.*)$'
 
-    def read(line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> TheoremStep:
+    def read(self, line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> TheoremStep:
         # Matching a theorem step using a named theorem.
         name, _, args, results = match.groups()
         args = split_args(args) if args else []

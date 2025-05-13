@@ -11,7 +11,7 @@ from ..abstract_step_reader import AbstractStepReader
 class AnonymousObjectDefinitionStepReader(AbstractStepReader[ObjDefineStep]):
     pattern = rf'We introduce (.*)$'
 
-    def read(line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> ObjDefineStep:
+    def read(self, line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> ObjDefineStep:
         obj = match.group(1)
         obj = parse_geo_object(obj, obj_map)
         obj_map[obj.name] = obj

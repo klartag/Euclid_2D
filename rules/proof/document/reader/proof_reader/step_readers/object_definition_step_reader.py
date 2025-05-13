@@ -16,7 +16,7 @@ OBJECT_DEFINITION_PATTERN = rf'Let {OBJECT_NAME_PATTERN} := (.*)$'
 class ObjectDefinitionStepReader(AbstractStepReader[ObjDefineStep]):
     pattern = OBJECT_DEFINITION_PATTERN
 
-    def read(line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> ObjDefineStep:
+    def read(self, line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> ObjDefineStep:
         left, right = match.groups()
         right_obj = parse_geo_object(right, obj_map)
         left_obj = GeoObject(left, right_obj.type)

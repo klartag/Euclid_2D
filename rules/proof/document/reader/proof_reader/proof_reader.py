@@ -1,8 +1,8 @@
-from rules.proof.proof import Proof
 from .....geometry_objects.geo_object import GeoObject
 from .....rule_utils import ProofParseError, preprocess_lines
 
 from ....steps.step import Step
+from ....proof import Proof
 
 from .abstract_step_reader import AbstractStepReader
 
@@ -13,6 +13,7 @@ from .step_readers import (
     CommentStepReader,
     NullTheoremStepReader,
     ObjectDefinitionStepReader,
+    TheoremStepReader,
 )
 
 
@@ -28,12 +29,12 @@ class ProofReader:
             AssertStepReader(),
             NullTheoremStepReader(),
             ObjectDefinitionStepReader(),
+            TheoremStepReader(),
         ]
 
     def read(self, lines: list[str], obj_map: dict[str, GeoObject]) -> Proof:
         """
         Parses the body of the proof.
-        This step is used recursively when parsing if-steps.
         """
         try:
             steps = []

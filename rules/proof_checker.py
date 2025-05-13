@@ -390,7 +390,7 @@ class ProofChecker:
                 return
 
         # Making sure that the results follow.
-        for pred in self.problem.need_to_prove.predicates:
+        for pred in self.problem.statement.target_predicates:
             if not self.geometry_tracker.contains_predicate(pred):
                 self.geometry_tracker.contains_predicate(pred)
                 raise ProofCheckError(f'Required predicate {pred} was not proved.')
@@ -441,7 +441,7 @@ def check_proof(path: Path, verbose=False, interactive: bool = False):
     problem = DocumentReader().read(document, read_proof_body=True)
     if problem.embedding is not None:
         collector = NonDegeneracyPrediateCollector()
-        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.statement.embedding)
+        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
         problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
     checker = ProofChecker(problem)
     try:

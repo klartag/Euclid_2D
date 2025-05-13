@@ -6,3 +6,4 @@ from .assert_step_reader import AssertStepReader
 from .comment_step_reader import CommentStepReader
 from .null_theorem_step_reader import NullTheoremStepReader
 from .object_definition_step_reader import ObjectDefinitionStepReader
+from .theorem_step_reader import TheoremStepReader

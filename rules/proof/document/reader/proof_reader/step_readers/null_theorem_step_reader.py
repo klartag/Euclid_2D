@@ -12,7 +12,7 @@ from ..abstract_step_reader import AbstractStepReader
 class NullTheoremStepReader(AbstractStepReader[NullTheoremStep]):
     pattern = r'We have (.*)$'
 
-    def read(line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> NullTheoremStep:
+    def read(self, line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> NullTheoremStep:
         # Matching a theorem step without a defined theorem.
         results = match.group(1)
         results = split_args(results)
