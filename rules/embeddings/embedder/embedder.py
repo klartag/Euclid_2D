@@ -4,7 +4,6 @@ from tqdm import tqdm
 
 from rules.proof.statement import Statement
 from rules.proof.geometry_problem import GeometryProblem
-from rules.proof.problem_target import ProblemTarget
 
 from ...rule_utils import LITERAL
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError

@@ -7,7 +7,7 @@ from .....geometry_objects.geo_object import GeoObject
 
 from ....steps.step import Step
 
-S = TypeVar('S', Step)
+S = TypeVar('S', bound=Step)
 
 
 class AbstractStepReader[S](ABC):

@@ -2,12 +2,6 @@ from typing import Iterable
 
 from rules.proof.geometry_problem import GeometryProblem
 
-from ....geometry_objects.geo_object import GeoObject
-from ....predicates.predicate import Predicate
-from ....predicates.predicate_factory import predicate_from_args
-
-from ... import Proof
-
 from ..document_section import DocumentSection
 from ..geometry_document import GeometryDocument
 

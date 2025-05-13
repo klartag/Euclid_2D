@@ -437,12 +437,13 @@ class ProofChecker:
 
 
 def check_proof(path: Path, verbose=False, interactive: bool = False):
-    proof = DocumentReader().read(GeometryDocument(path))
-    if proof.embedding is not None:
+    document = GeometryDocument(path)
+    problem = DocumentReader().read(document, read_proof_body=True)
+    if problem.embedding is not None:
         collector = NonDegeneracyPrediateCollector()
-        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
-        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
-    checker = ProofChecker(proof)
+        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.statement.embedding)
+        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
+    checker = ProofChecker(problem)
     try:
         checker.check(verbose)
     except ProofCheckError as e:
@@ -469,8 +470,9 @@ def main():
     args = parser.parse_args()
 
     t0 = time.perf_counter()
-    path = Proof.get_full_proof_path(args.path)
-    check_proof(path, verbose=args.v, interactive=args.interactive)
+
+    document = GeometryDocument(args.path)
+    check_proof(args.path, verbose=args.v, interactive=args.interactive)
     print(f't={time.perf_counter() - t0}')
 
 
@@ -483,14 +485,15 @@ def interactive_main():
 
     args = parser.parse_args()
 
-    proof = DocumentReader().read(GeometryDocument(args.path))
+    document = GeometryDocument(args.path)
+    problem = DocumentReader().read(document)
 
-    if proof.embedding is not None:
+    if problem.embedding is not None:
         collector = NonDegeneracyPrediateCollector()
-        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
-        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
+        non_degenerecy_predicates = collector.collect(problem.assumption_objects, problem.embedding)
+        problem.auxiliary_predicates.extend(non_degenerecy_predicates)
 
-    checker = ProofChecker(proof)
+    checker = ProofChecker(problem)
     try:
         checker.check(False)
         print(f'Successfully loaded proof steps.')
