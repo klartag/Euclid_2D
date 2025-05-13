@@ -3,6 +3,7 @@ import sys
 from .proof_checker import main as proof_checker_main, interactive_main
 from .proof_gen.main import validate_main as proof_validator_main, main as proof_generator_main
 from .trimmers.old_trimmer import main as old_trimmer_main
+from .trimmers.new_trimmer import main as new_trimmer_main
 from .embeddings.embedder.embedder import main as embedder_main
 from .trimmers.trimmer import main as trimmer_main
 from .proof_prettifier import main as prettifier_main
@@ -18,6 +19,7 @@ check [<args>]          -   Checks that a proof is correct.
 validate [<args>]       -   Validates that the Proof Generator can create this proof.
 prove [<args>]          -   Proves a Geometry problem.
 trim [<args>]           -   Shortens a given proof.
+new_trim [<args>]       -   Shortens a given proof with the new trimmer.
 prettify [<args>]       -   Makes a proof more readable for our neural net.
 interactive [<args>]    -   Loads the proof into an interactive checker.
 
@@ -32,6 +34,7 @@ PROGRAM_LIST = {
     'prove': proof_generator_main,
     'old_trim': old_trimmer_main,
     'trim': trimmer_main,
+    'new_trim': new_trimmer_main,
     'prettify': prettifier_main,
     'interactive': interactive_main,
 }
