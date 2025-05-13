@@ -410,7 +410,7 @@ def prove(problem: GeometryProblem, interactive: bool, verbose: bool) -> Geometr
         return completed_problem
     except (KeyboardInterrupt, ProofGeneratorError, ProofCheckError) as e:
         problem.steps = proof_generator.proof_steps
-        with (BASE_PATH / 'rules/proof_samples/proof_fail.jl').open('w') as f:
+        with (BASE_PATH / 'rules' / 'proof_samples' / 'proof_fail.jl').open('w') as f:
             f.write(problem.to_language_format())
             f.write('\n')
             for ln in repr(e).split('\n'):
