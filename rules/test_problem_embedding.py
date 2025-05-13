@@ -7,15 +7,15 @@ from pathlib import Path
 import pytest
 from contextlib import nullcontext
 
+from .proof.document.geometry_document import GeometryDocument
+from .proof.document.reader.document_reader import DocumentReader
+
 from .embeddings.embedder.embedder import DiagramEmbedder
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
 from .pred_config import load_constructions_and_macros
-from .proof import Proof
 
 from .test_proofs import GEVA_PROBLEM_NAMES, FIGURES_PROBLEM_NAMES, IMO_SHORTLIST_PROBLEMS
-
-from util import BASE_PATH
 
 
 @pytest.fixture(autouse=True)
@@ -121,12 +121,12 @@ def test_difficult_problem_embedding(problem_name: str):
 
 
 def assert_problem_embedding_possible(problem_name: str):
-    problem_path = BASE_PATH / 'rules' / 'proof_samples' / problem_name
-    proof = Proof.parse(open(problem_path, 'r').read(), parse_proof_body=False)
+    document = GeometryDocument(problem_name)
+    problem = DocumentReader().read(document, read_proof_body=False)
     diagram_embedder = DiagramEmbedder()
 
-    embedding = diagram_embedder.embed(proof)
+    embedding = diagram_embedder.embed(problem)
     assert embedding is not None
 
-    for target_predicate in proof.target_predicates:
+    for target_predicate in problem.statement.target_predicates:
         assert embedding.evaluate_predicate(target_predicate) == EmbeddedPredicateValue.Correct
