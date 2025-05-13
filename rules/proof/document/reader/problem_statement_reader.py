@@ -1,14 +1,15 @@
 import re
 from typing import Mapping, NamedTuple
 
-from rules.proof.document.document_section import DocumentSection
-from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.statement import Statement
-
 from ....rule_utils import ALL_TYPES, ProofParseError, preprocess_lines
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.predicate_factory import parse_predicate, predicate_from_args
+
+from ...statement import Statement
+
+from ..document_section import DocumentSection
+from ..geometry_document import GeometryDocument
 
 from .proof_reader.step_readers.object_definition_step_reader import (
     OBJECT_DEFINITION_PATTERN,

@@ -1,8 +1,6 @@
 import heapq
 from typing import Optional
 
-from rules.proof.geometry_problem import GeometryProblem
-
 from .. import rule_utils
 
 from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
@@ -35,7 +33,7 @@ from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject
 from ..predicates.predicate import Predicate
 from ..predicates.implementations.macro_predicate import MacroPredicate
-from ..proof.proof import Proof
+from ..proof.geometry_problem import GeometryProblem
 from ..union_find import UnionFind
 
 from .numeric_tracker import NumericTracker

@@ -5,8 +5,8 @@ It should absolutely never be imported.
 
 import pytest
 
-from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.document.reader.document_reader import DocumentReader
+from .proof.document.geometry_document import GeometryDocument
+from .proof.document.reader.document_reader import DocumentReader
 
 from .pred_config import load_constructions_and_macros
 
@@ -19,7 +19,6 @@ from .geometry_objects.geo_object import GeoObject
 from .rule_utils import POINT, SCALAR
 from .proof_checker import ProofChecker, check_proof
 from .proof_gen.proof_generator import prove
-from util import BASE_PATH
 
 
 # Problems from Yoel Geva

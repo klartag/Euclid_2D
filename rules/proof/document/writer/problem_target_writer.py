@@ -1,8 +1,7 @@
 from typing import Optional
 
-from rules.proof.statement import Statement
-
 from ...geometry_problem import GeometryProblem
+from ...statement import Statement
 
 from ..document_section import DocumentSection
 

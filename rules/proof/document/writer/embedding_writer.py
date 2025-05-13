@@ -1,11 +1,11 @@
 import json
 from typing import List, Optional
 
-from rules.proof.document.document_section import DocumentSection
-
 from ....embeddings.embedding import Embedding
 
 from ...geometry_problem import GeometryProblem
+
+from ..document_section import DocumentSection
 
 from .document_section_writer import DocumentSectionWriter
 

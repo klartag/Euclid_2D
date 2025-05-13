@@ -4,8 +4,6 @@ import time
 
 from tqdm import trange
 
-from rules.proof.geometry_problem import GeometryProblem
-
 from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
@@ -21,7 +19,7 @@ from .geometry_trackers.geometry_tracker import involved_objects
 from .theorem import Theorem
 from .proof.document.geometry_document import GeometryDocument
 from .proof.document.reader.document_reader import DocumentReader
-from .proof.proof import Proof
+from .proof.geometry_problem import GeometryProblem
 from .proof.steps import AlmostAlwaysStep, AssertStep, CommentStep, ObjDefineStep, Step, TheoremStep
 
 from . import rule_utils

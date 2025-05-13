@@ -4,14 +4,12 @@ from typing import List
 
 from tqdm import tqdm
 
-from rules.proof.document.document_section import DocumentSection
-from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.document.reader.document_reader import DocumentReader
-from rules.proof.document.writer.document_writer import DocumentWriter
-from rules.proof.geometry_problem import GeometryProblem
-
 from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
-from ..proof.proof import Proof
+from ..proof.document.document_section import DocumentSection
+from ..proof.document.geometry_document import GeometryDocument
+from ..proof.document.reader.document_reader import DocumentReader
+from ..proof.document.writer.document_writer import DocumentWriter
+from ..proof.geometry_problem import GeometryProblem
 from ..proof.steps import CommentStep
 from ..proof_checker import ProofChecker
 from ..rule_utils import ProofCheckError

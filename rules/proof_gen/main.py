@@ -4,16 +4,14 @@ import argparse
 from pathlib import Path
 from glob import glob
 
-from rules.proof.document.document_section import DocumentSection
-from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.document.reader.document_reader import DocumentReader
-from rules.proof.document.writer.document_writer import DocumentWriter
-
 from ..embeddings.embedder.embedder import DiagramEmbedder
 from ..proof_prettifier import ProofPrettifier
 from ..trimmers.trimmer import ProofTrimmer
-from ..proof.proof import Proof
 from ..proof.steps import TheoremStep
+from ..proof.document.document_section import DocumentSection
+from ..proof.document.geometry_document import GeometryDocument
+from ..proof.document.reader.document_reader import DocumentReader
+from ..proof.document.writer.document_writer import DocumentWriter
 from ..trimmers.trimmer import ProofTrimmer
 
 from .proof_generator import validate_proof, prove

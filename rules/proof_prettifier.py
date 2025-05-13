@@ -1,12 +1,11 @@
 from pathlib import Path
 from typing import List
 
-from rules.proof.document.document_section import DocumentSection
-from rules.proof.document.writer.document_writer import DocumentWriter
-
 from .theorem import Theorem
+from .proof.document.document_section import DocumentSection
 from .proof.document.geometry_document import GeometryDocument
 from .proof.document.reader.document_reader import DocumentReader
+from .proof.document.writer.document_writer import DocumentWriter
 from .proof.proof import Proof
 from .proof.steps import AssertStep, TheoremStep
 

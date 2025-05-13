@@ -1,14 +1,6 @@
 from pathlib import Path
 from typing import Iterator, List, Optional
 from tqdm import tqdm
-
-from rules.proof.document.document_section import DocumentSection
-from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.document.reader.document_reader import DocumentReader
-from rules.proof.document.writer.document_writer import DocumentWriter
-from rules.proof.statement import Statement
-from rules.proof.geometry_problem import GeometryProblem
-
 from ...rule_utils import LITERAL
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ...geometry_objects.geo_object import GeoObject
@@ -16,7 +8,12 @@ from ...geometry_objects.construction_object import ConstructionObject
 from ...geometry_trackers.geometry_tracker import GeometryTracker
 from ...interactive_predicate_checker import InteractivePredicateChecker
 from ...predicates.predicate import Predicate
-from ...proof.proof import Proof
+from ...proof.document.document_section import DocumentSection
+from ...proof.document.geometry_document import GeometryDocument
+from ...proof.document.reader.document_reader import DocumentReader
+from ...proof.document.writer.document_writer import DocumentWriter
+from ...proof.statement import Statement
+from ...proof.geometry_problem import GeometryProblem
 from ...proof_gen.proof_generator import ProofGenerator, ProofGeneratorError, ProofGeneratorErrorType
 
 from .. import Embedding
