@@ -22,11 +22,11 @@ class DocumentReader:
         """
         statement = self.problem_statement_reader.read(document)
         proof = (
-            self.proof_reader.read(document.get_section_text(DocumentSection.PROOF), statement.get_all_objects())
+            self.proof_reader.read(document.get_section_content(DocumentSection.PROOF), statement.get_all_objects())
             if read_proof_body
             else None
         )
-        embedding_lines = document.get_section_text(DocumentSection.EMBEDDING)
+        embedding_lines = document.get_section_content(DocumentSection.EMBEDDING)
         embedding = (
             self.embedding_reader.read(embedding_lines, statement.assumption_objects)
             if len(embedding_lines) > 0

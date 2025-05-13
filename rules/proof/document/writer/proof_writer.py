@@ -1,6 +1,6 @@
 from typing import Optional
 
-from ....proof import Proof
+from rules.proof.proof import Proof
 
 from ...geometry_problem import GeometryProblem
 

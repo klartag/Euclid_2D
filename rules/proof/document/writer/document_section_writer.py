@@ -22,16 +22,16 @@ class DocumentSectionWriter[T](ABC):
         section_value = self.get_section_value(problem)
 
         if section_value is None:
-            document.sections.pop(self.section(), [])
+            document.sections.pop(self.section, [])
             return
 
         lines = self.to_lines(section_value)
 
-        if self.all_lines_empty(lines):
-            document.sections.pop(self.section(), [])
+        if self.are_all_lines_empty(lines):
+            document.sections.pop(self.section, [])
             return
 
-        document.sections[self.section()] = lines
+        document.sections[self.section] = lines
 
-    def are_lines_empty(self, lines: str) -> bool:
+    def are_all_lines_empty(self, lines: str) -> bool:
         return not any([line.strip() for line in lines])

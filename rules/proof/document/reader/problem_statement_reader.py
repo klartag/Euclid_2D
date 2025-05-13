@@ -20,9 +20,9 @@ PredicateData = NamedTuple('PredicateData', [("objects", dict[str, GeoObject]), 
 
 class ProblemStatementReader:
     def read(self, document: GeometryDocument) -> Statement:
-        assumption_predicate_data = self.read_assumptions(document.get_section_text(DocumentSection.ASSUMPTION))
+        assumption_predicate_data = self.read_assumptions(document.get_section_content(DocumentSection.ASSUMPTION))
         target_predicate_data = self.read_targets(
-            document.get_section_text(DocumentSection.TARGET), assumption_predicate_data.objects
+            document.get_section_content(DocumentSection.TARGET), assumption_predicate_data.objects
         )
         auxiliary_predicates = self.create_auxiliary_predicates(assumption_predicate_data, target_predicate_data)
 

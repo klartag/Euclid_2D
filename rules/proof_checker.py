@@ -471,7 +471,7 @@ def main():
 
     start_time = time.perf_counter()
     check_proof(args.path, verbose=args.v, interactive=args.interactive)
-    print(f'Time: {time.perf_counter() - start_time} seconds')
+    print(f'Checked in {round(time.perf_counter() - start_time, 2)} seconds')
 
 
 def interactive_main():

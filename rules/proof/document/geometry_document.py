@@ -49,9 +49,10 @@ class GeometryDocument:
     def get_text(self) -> str:
         lines = []
         for section in DocumentSection:
-            lines.extend(self.get_section_header(section))
-            lines.extend(self.get_section_text(section))
-            lines.append('')
+            if section in self.sections:
+                lines.extend(self.get_section_header(section))
+                lines.extend(self.get_section_content(section))
+        lines.append('')
         return '\n'.join(lines)
 
     def get_section_header(self, section: DocumentSection) -> List[str]:
@@ -59,7 +60,7 @@ class GeometryDocument:
             return []
         return [f'{section.value}:']
 
-    def get_section_text(self, section: DocumentSection) -> List[str]:
+    def get_section_content(self, section: DocumentSection) -> List[str]:
         return self.sections.get(section, [])
 
     def save(self):
