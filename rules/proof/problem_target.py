@@ -1,5 +1,6 @@
-from .assumptions import Assumptions
+from ..geometry_objects.geo_object import GeoObject
+from ..predicates.predicate import Predicate
 
 
 class ProblemTarget:
-    pass
+    predicates: list[Predicate]

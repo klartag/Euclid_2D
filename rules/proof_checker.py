@@ -4,9 +4,6 @@ import time
 
 from tqdm import trange
 
-from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.document.reader.document_reader import DocumentReader
-
 from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
@@ -20,6 +17,8 @@ from .proof_checker_utils import ADD_CFG, ADD_NO_TRUST_CFG, CHECK_CFG, TRUST_NO_
 from .geometry_trackers.geometry_tracker import involved_objects
 
 from .theorem import Theorem
+from .proof.document.geometry_document import GeometryDocument
+from .proof.document.reader.document_reader import DocumentReader
 from .proof.proof import Proof
 from .proof.steps import AlmostAlwaysStep, AssertStep, CommentStep, ObjDefineStep, Step, TheoremStep
 

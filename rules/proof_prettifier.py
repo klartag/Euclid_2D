@@ -1,10 +1,9 @@
 from pathlib import Path
 from typing import List
 
-from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.document.reader.document_reader import DocumentReader
-
 from .theorem import Theorem
+from .proof.document.geometry_document import GeometryDocument
+from .proof.document.reader.document_reader import DocumentReader
 from .proof.proof import Proof
 from .proof.steps import AssertStep, TheoremStep
 

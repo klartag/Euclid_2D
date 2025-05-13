@@ -1,14 +1,12 @@
 import json
 
-from rules.rule_utils import ProofParseError
-
+from ....rule_utils import ProofParseError
 from ....embeddings.embedded_objects.circle import EmbeddedCircle
 from ....embeddings.embedded_objects.line import EmbeddedLine
 from ....embeddings.embedded_objects.point import EmbeddedPoint
 from ....embeddings.embedded_objects.scalar import EmbeddedScalar
 from ....embeddings.embedding import Embedding
 from ....geometry_objects.geo_object import GeoObject
-from .. import rule_utils
 
 
 class EmbeddingReader:
