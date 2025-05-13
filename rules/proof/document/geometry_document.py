@@ -16,7 +16,7 @@ class GeometryDocument:
         self.sections = self.parse_sections(text)
 
     def get_full_problem_path(self, path_base: str) -> Path:
-        full_path_options = [BASE_PATH / 'rules/proof_samples' / path_base, BASE_PATH / path_base, Path(path_base)]
+        full_path_options = [BASE_PATH / 'rules' / 'proof_samples' / path_base, BASE_PATH / path_base, Path(path_base)]
 
         for path_base in full_path_options:
             if path_base.exists():
