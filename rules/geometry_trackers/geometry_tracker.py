@@ -831,12 +831,12 @@ class GeometryTracker:
         """
         self.load_embedding(problem)
         # Adding the objects defined by the proof.
-        for obj in problem.statement.objects.values():
+        for obj in problem.statement.assumption_objects.values():
             self.get_object(obj, ADD_CFG)
 
         # Adding the assumptions of the proof.
         for pred in problem.statement.assumption_predicates:
             self.add_predicate(pred, ADD_CFG, 'Assumption predicate')
 
-        for pred in proof.auxiliary_predicates:
+        for pred in problem.statement.auxiliary_predicates:
             self.add_predicate(pred, ADD_CFG, 'Auxiliary predicate')

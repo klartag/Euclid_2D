@@ -1,3 +1,4 @@
+from rules.proof.proof import Proof
 from .....geometry_objects.geo_object import GeoObject
 from .....rule_utils import ProofParseError
 
@@ -29,7 +30,7 @@ class ProofReader:
             ObjectDefinitionStepReader(),
         ]
 
-    def read(self, lines: list[str], obj_map: dict[str, GeoObject]) -> list[Step]:
+    def read(self, lines: list[str], obj_map: dict[str, GeoObject]) -> Proof:
         """
         Parses the body of the proof.
         This step is used recursively when parsing if-steps.
@@ -40,7 +41,7 @@ class ProofReader:
             steps = []
             for line in lines:
                 steps.append(self.read_step(line, obj_map))
-            return steps
+            return Proof(steps)
         except Exception as e:
             raise ProofParseError(f'Error when parsing line {line} ====> Because of {e}') from e
 

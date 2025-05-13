@@ -7,6 +7,7 @@ from ....embeddings.embedded_objects.point import EmbeddedPoint
 from ....embeddings.embedded_objects.scalar import EmbeddedScalar
 from ....embeddings.embedding import Embedding
 from ....geometry_objects.geo_object import GeoObject
+from rules import rule_utils
 
 
 class EmbeddingReader:

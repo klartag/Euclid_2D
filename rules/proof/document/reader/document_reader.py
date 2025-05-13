@@ -1,5 +1,7 @@
 from typing import Iterable
 
+from rules.proof.geometry_problem import GeometryProblem
+
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.predicate_factory import predicate_from_args
@@ -20,54 +22,23 @@ class DocumentReader:
         self.proof_reader = ProofReader()
         self.embedding_reader = EmbeddingReader()
 
-    def read(self, document: GeometryDocument, read_proof_body: bool) -> Proof:
+    def read(self, document: GeometryDocument, read_proof_body: bool) -> GeometryProblem:
         """
         Parses a string representing a proof.
         """
-        assumption_objects, assumption_preds, auxiliary_preds = self.problem_statement_reader.read_assumptions(
-            document.get_section_text(DocumentSection.ASSUMPTION)
-        )
-
-        target_objects, target_preds = self.problem_statement_reader.read_targets(
-            document.get_section_text(DocumentSection.TARGET), dict(assumption_objects)
-        )
-        auxiliary_preds: list[Predicate] = []
-
-        exist_objects: set[GeoObject] = set()
-
-        # Marking objects in the 'Assumptions' and in the 'Need To Prove' sections as existing.
-        for obj in set(assumption_objects.values()) | set(target_objects.values()):
-            exist_objects.add(obj)
-
-        # Marking objects in predicates from the 'Assumptions' and 'Need To Prove' sections as existing.
-        for pred in assumption_preds + target_preds:
-            for obj in pred.involved_objects():
-                exist_objects.add(obj)
-
-        auxiliary_preds.append(predicate_from_args('exists', tuple(exist_objects)))
-
-        steps = (
-            self.proof_reader.read(document.get_section_text(DocumentSection.PROOF), dict(assumption_objects))
+        statement = self.problem_statement_reader.read(document)
+        proof = (
+            self.proof_reader.read(document.get_section_text(DocumentSection.PROOF), statement.get_all_objects())
             if read_proof_body
-            else []
+            else None
         )
-
         embedding_lines = document.get_section_text(DocumentSection.EMBEDDING)
-
         embedding = (
-            self.embedding_reader.read(embedding_lines, assumption_objects) if len(embedding_lines) > 0 else None
+            self.embedding_reader.read(embedding_lines, statement.assumption_objects)
+            if len(embedding_lines) > 0
+            else None
         )
-
-        return Proof(
-            assumption_objects | target_objects,
-            assumption_objects,
-            assumption_preds,
-            auxiliary_preds,
-            target_objects,
-            target_preds,
-            embedding,
-            steps,
-        )
+        return GeometryProblem(statement, embedding, proof)
 
     def remove_comments(self, lines: Iterable[str]) -> Iterable[str]:
         """

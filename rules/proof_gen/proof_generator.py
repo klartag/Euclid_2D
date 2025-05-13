@@ -72,7 +72,7 @@ class ProofGenerator:
     """All names used either in the checker or by any step in the step queue."""
 
     def __init__(self, problem: GeometryProblem, actions_per_step: int | Callable[[int], int] = 3, verbose=False):
-        self.input_objects = list(problem.statement.objects.values())
+        self.input_objects = list(problem.statement.assumption_objects.values())
         self.input_predicates = list(problem.statement.starting_predicates())
         self.target_predicates = list(problem.statement.target_predicates)
         self.checker = ProofChecker(problem)

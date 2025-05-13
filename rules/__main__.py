@@ -2,7 +2,6 @@ import sys
 
 from .proof_checker import main as proof_checker_main, interactive_main
 from .proof_gen.main import validate_main as proof_validator_main, main as proof_generator_main
-from .trimmers.old_trimmer import main as old_trimmer_main
 from .trimmers.new_trimmer import main as new_trimmer_main
 from .embeddings.embedder.embedder import main as embedder_main
 from .trimmers.trimmer import main as trimmer_main
@@ -32,7 +31,6 @@ PROGRAM_LIST = {
     'check': proof_checker_main,
     'validate': proof_validator_main,
     'prove': proof_generator_main,
-    'old_trim': old_trimmer_main,
     'trim': trimmer_main,
     'new_trim': new_trimmer_main,
     'prettify': prettifier_main,
