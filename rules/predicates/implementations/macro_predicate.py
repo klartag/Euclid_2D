@@ -48,9 +48,6 @@ class MacroPredicate(Predicate):
             obj.type == macro_obj.type for obj, macro_obj in zip(self.components, self.macro_data.objects)
         )
 
-    def substitute(self, replacements: Mapping[GeoObject, GeoObject]) -> Predicate:
-        return MacroPredicate(self.name, tuple(obj.substitute(replacements) for obj in self.components))
-
     def possible_conclusions(self) -> list[tuple[list[Predicate], list[Predicate]]]:
         """
         Returns the list of predicates created by the construction object.

@@ -15,7 +15,7 @@ class Atom(GeoObject):
         Replaces the given object with the given replacement objects.
         If the object is a construction or an equation, replaces subcomponents too.
         """
-        return replacements.get(self, self)
+        return replacements[self]
 
     def __eq__(self, other: object) -> bool:
         return isinstance(other, Atom) and self.name == other.name and self.type == other.type
