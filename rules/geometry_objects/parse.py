@@ -1,7 +1,8 @@
-from typing import Literal
-from ..rule_utils import LITERAL, split_args
+from ..rule_utils import split_args
 
-from .geo_object import ZERO, GeoObject, is_literal
+from .geo_object import GeoObject
+from .literal import Literal
+from .literal import ZERO, is_literal
 from .construction_object import ConstructionObject
 from .equation_object import EquationObject, is_equation_object
 from .eq_op import EqOp

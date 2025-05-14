@@ -40,7 +40,6 @@ def load_constructions_and_macros() -> None:
 
     log_arg_0 = Atom('arg_0', SCALAR)
     global_constructions: dict[str, Construction] = {
-        '': Construction('', [], Symmetry.NONE, GeoObject('Null', NULL), [], []),
         'log': LogConstruction(
             'log',
             [log_arg_0],

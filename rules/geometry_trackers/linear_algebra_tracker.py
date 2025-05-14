@@ -1,4 +1,5 @@
-from ..geometry_objects.geo_object import ONE, GeoObject
+from ..geometry_objects.geo_object import GeoObject
+from ..geometry_objects.literal import ONE
 
 from ..proof_checker_utils import get_eqn_key
 from ..rust_code.rust_sparse_linear import BaseSolver, BoolLinearSolver, ModLinearSolver, RLinearSolver

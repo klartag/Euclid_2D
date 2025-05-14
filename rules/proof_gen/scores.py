@@ -175,6 +175,7 @@ def get_required_predicates(
             all_required_objects = union(get_required_predicates(obj) for obj in step.inputs)
 
             return all_required_objects | all_required_predicates
+    debug = 1
 
 
 def get_result_predicates(step: TheoremStep | Theorem | ConstructionObject | Construction) -> set[Predicate]:

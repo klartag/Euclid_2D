@@ -34,3 +34,6 @@ class Atom(GeoObject):
         Finds all objects referred to in the definition of this object.
         """
         return {self}
+
+    def __hash__(self) -> int:
+        return self.id

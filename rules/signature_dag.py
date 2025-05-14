@@ -12,7 +12,8 @@ from .predicates.predicate_factory import predicate_from_args
 
 from .geometry_trackers.geometry_tracker import GeometryTracker, involved_objects
 from .geometry_objects.construction_object import Construction, ConstructionObject
-from .geometry_objects.geo_object import ONE, ZERO, GeoObject
+from .geometry_objects.geo_object import GeoObject
+from .geometry_objects.literal import ONE, ZERO
 from .geometry_objects.equation_object import EquationObject
 from .proof_checker_utils import (
     KNOWN_KEYS,

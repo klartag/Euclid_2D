@@ -2,6 +2,8 @@ import functools
 import itertools
 from pathlib import Path
 
+from rules.geometry_objects.atom import Atom
+
 
 from .rule_utils import ProofParseError, unpack_dict
 from util import BASE_PATH

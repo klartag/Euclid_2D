@@ -5,7 +5,8 @@ from mpmath import mp
 from rules.geometry_objects.literal import Literal
 
 from .eq_op import EqOp
-from .geo_object import ZERO, GeoObject, ONE
+from .geo_object import GeoObject
+from .literal import ZERO, ONE
 from ..rule_utils import LITERAL, GeometryError
 
 

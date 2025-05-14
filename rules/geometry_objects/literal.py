@@ -41,6 +41,9 @@ class Literal(GeoObject):
         """
         return set()
 
+    def __hash__(self) -> int:
+        return self.id
+
 
 ONE = Literal('1')
 ZERO = Literal('0')

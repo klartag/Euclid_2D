@@ -31,7 +31,8 @@ from ..rule_utils import (
     ProofCheckError,
     R_EQN_TYPES,
 )
-from ..geometry_objects.geo_object import ONE, GeoObject
+from ..geometry_objects.geo_object import GeoObject
+from ..geometry_objects.literal import ONE
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject
 from ..predicates.predicate import Predicate
