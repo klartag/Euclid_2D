@@ -1,11 +1,14 @@
 from typing import TYPE_CHECKING, Mapping
 from mpmath import mp
 
+from rules.geometry_objects.atom import Atom
+
 from ..predicates.global_predicates import get_constructions
 from ..symmetry import Symmetry
 from ..rule_utils import LITERAL, SCALAR, ANGLE, ProofCheckError, union, GeometryError
 
-from .geo_object import ONE, ZERO, GeoObject
+from .geo_object import GeoObject
+from .literal import ONE, ZERO
 from .equation_object import EquationObject
 
 if TYPE_CHECKING:
@@ -68,7 +71,7 @@ class Construction:
         return f'Construction({self.name})'
 
 
-class ConstructionObject(GeoObject):
+class ConstructionObject(Atom):
     """
     A geometric object constructed from several sub-objects.
     """
@@ -103,9 +106,6 @@ class ConstructionObject(GeoObject):
         return res
 
     def __repr__(self) -> str:
-        return self.name
-
-    def to_language_format(self) -> str:
         return self.name
 
     def requirements(self) -> 'list[Predicate]':

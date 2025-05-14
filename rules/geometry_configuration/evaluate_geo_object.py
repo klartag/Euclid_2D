@@ -9,7 +9,6 @@ from torch_geo.geometry_entities import Circle, Line, Point, Triangle
 from ..geometry_objects import construction_object
 from ..geometry_objects.eq_op import EqOp
 
-from typing import Iterable, Dict, TYPE_CHECKING
 import torch
 
 
@@ -347,28 +346,3 @@ def evaluate_construction(object, obj_map):
             return torch.abs(args[0][1])
         case _:
             raise NotImplementedError(object.constructor.name)
-
-
-def test_evaluation():
-    from rules.geo_config import GeoConfig
-    from rules import geo_object
-
-    obj_map = {
-        'A': geo_object.GeoObject('A', 'Point'),
-        'B': geo_object.GeoObject('B', 'Point'),
-        'C': geo_object.GeoObject('C', 'Point'),
-        'D': geo_object.GeoObject('D', 'Point'),
-        'r': geo_object.GeoObject('r', 'Scalar'),
-    }
-
-    geo_object = geo_object.GeoObject.parse('angle(A, B, C) - angle(B, C, D)', obj_map)
-    config = GeoConfig(obj_map, [])
-    params = torch.randn(config.num_params, device='cpu')
-    torch_obj_map = config.get_torch_objects(params)
-    print(geo_object)
-    print(torch_obj_map, params)
-    print(evaluate(geo_object, torch_obj_map))
-
-
-if __name__ == "__main__":
-    test_evaluation()

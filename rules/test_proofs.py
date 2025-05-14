@@ -5,6 +5,8 @@ It should absolutely never be imported.
 
 import pytest
 
+from rules.geometry_objects.atom import Atom
+
 from .proof.document.geometry_document import GeometryDocument
 from .proof.document.reader.document_reader import DocumentReader
 
@@ -163,11 +165,11 @@ def test_constructions():
 
 def test_parsing():
     objects = {
-        'A': GeoObject('A', POINT),
-        'B': GeoObject('B', POINT),
-        'C': GeoObject('C', POINT),
-        'r': GeoObject('r', SCALAR),
-        's': GeoObject('s', SCALAR),
+        'A': Atom('A', POINT),
+        'B': Atom('B', POINT),
+        'C': Atom('C', POINT),
+        'r': Atom('r', SCALAR),
+        's': Atom('s', SCALAR),
     }
     p = parse_geo_object('2*(r) * s', objects)
     ConstructionObject.from_args('log', (p,))

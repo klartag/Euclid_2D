@@ -1,5 +1,7 @@
 from re import Match
 
+from rules.geometry_objects.atom import Atom
+
 from ......rule_utils import ProofParseError
 from ......geometry_objects.geo_object import GeoObject
 from ......geometry_objects.parse import parse_geo_object
@@ -19,7 +21,7 @@ class ObjectDefinitionStepReader(AbstractStepReader[ObjDefineStep]):
     def read(self, line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> ObjDefineStep:
         left, right = match.groups()
         right_obj = parse_geo_object(right, obj_map)
-        left_obj = GeoObject(left, right_obj.type)
+        left_obj = Atom(left, right_obj.type)
         if left_obj.name in obj_map:
             raise ProofParseError(f'Object {left_obj.name} redefined in line {line}!')
 

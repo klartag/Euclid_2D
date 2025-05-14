@@ -1,6 +1,8 @@
-from ..rule_utils import LITERAL, split_args
+from ..rule_utils import split_args
 
-from .geo_object import ZERO, GeoObject, is_literal
+from .geo_object import GeoObject
+from .literal import Literal
+from .literal import ZERO, is_literal
 from .construction_object import ConstructionObject
 from .equation_object import EquationObject, is_equation_object
 from .eq_op import EqOp
@@ -22,16 +24,16 @@ def parse_geo_object(data: str, obj_map: dict[str, GeoObject]) -> GeoObject:
 
     # Checking if the data is just a number, such as 50.
     if is_literal(data):
-        return GeoObject(data, LITERAL)
+        return Literal(data)
     # Checking if the data is an equation.
     if is_equation_object(data):
         return parse_equation_object(data, obj_map)
-    
+
     # If there are no parentheses, this is a simple object name.
     if '(' not in data:
         return obj_map[data]
-    
-    # This is a construction term, like distance(a, b). 
+
+    # This is a construction term, like distance(a, b).
     # Currently, construction objects will just have the name of their construction.
     const_name, arg_str = data[:-1].split('(', 1)
     args = tuple(parse_geo_object(arg, obj_map) for arg in split_args(arg_str))
@@ -53,7 +55,7 @@ def parse_equation_object(data: str, obj_map: dict[str, GeoObject]) -> EquationO
             paren_depth += 1
         elif c == ')':
             paren_depth -= 1
-        
+
         if paren_depth != 0:
             continue
 
@@ -66,14 +68,14 @@ def parse_equation_object(data: str, obj_map: dict[str, GeoObject]) -> EquationO
         if indices[0] == 0:
             curr = ZERO
         else:
-            curr = parse_geo_object(data[:indices[0]], obj_map)
+            curr = parse_geo_object(data[: indices[0]], obj_map)
         for i in range(len(ops)):
-            nxt = parse_geo_object(data[indices[i] + 1:indices[i+1]], obj_map)
+            nxt = parse_geo_object(data[indices[i] + 1 : indices[i + 1]], obj_map)
             curr = EquationObject(curr, nxt, ops[i])
 
         assert isinstance(curr, EquationObject)
         return curr
-    
+
     # Finding all multiplications and divisions.
     paren_depth = 0
     ops = []
@@ -83,7 +85,7 @@ def parse_equation_object(data: str, obj_map: dict[str, GeoObject]) -> EquationO
             paren_depth += 1
         elif c == ')':
             paren_depth -= 1
-        
+
         if paren_depth != 0:
             continue
 
@@ -93,9 +95,9 @@ def parse_equation_object(data: str, obj_map: dict[str, GeoObject]) -> EquationO
 
     assert len(ops) > 0
     indices.append(len(data))
-    curr = parse_geo_object(data[:indices[0]], obj_map)
+    curr = parse_geo_object(data[: indices[0]], obj_map)
     for i in range(len(ops)):
-        nxt = parse_geo_object(data[indices[i] + 1:indices[i+1]], obj_map)
+        nxt = parse_geo_object(data[indices[i] + 1 : indices[i + 1]], obj_map)
         curr = EquationObject(curr, nxt, ops[i])
 
     assert isinstance(curr, EquationObject)

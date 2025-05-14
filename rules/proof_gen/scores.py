@@ -5,6 +5,9 @@ import string
 
 from frozendict import frozendict
 
+from rules.geometry_objects.atom import Atom
+from rules.geometry_objects.literal import Literal
+
 from ..predicates.predicate import Predicate
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
@@ -99,7 +102,7 @@ def get_constructions(
             )
         case EquationObject():
             return get_constructions(step.left, checked) | get_constructions(step.right, checked)
-        case GeoObject():
+        case Atom() | Literal():
             return set()
         case Predicate():
             full_unpack = unpack_predicate_full(step)
@@ -133,7 +136,7 @@ def get_all_predicates(obj: Predicate | GeoObject) -> set[Predicate]:
             return set(obj.conclusions()) | union(get_all_predicates(comp) for comp in obj.components)
         case EquationObject():
             return get_all_predicates(obj.left) | get_all_predicates(obj.right)
-        case GeoObject():
+        case Atom() | Literal():
             return set()
         case Predicate():
             full_unpack = unpack_predicate_full(obj)
@@ -153,8 +156,10 @@ def get_required_predicates(
             return get_required_predicates(step(*step.signature))
         case ConstructionObject():
             return set(step.requirements()) | union(get_required_predicates(comp) for comp in step.components)
-        case GeoObject():
+        case Atom() | Literal():
             return set()
+        case EquationObject():
+            return get_required_predicates(step.left) | get_required_predicates(step.right)
         case Predicate():
             return {step} | union(get_required_predicates(comp) for comp in step.components)
         case Theorem():
@@ -344,7 +349,7 @@ class StepSuggestion:
         if isinstance(self.step, Construction):
             return ObjDefineStep(self.step(*[self.inputs[sig] for sig in self.step.signature]))
         elif isinstance(self.step, Theorem):
-            res_objects = [GeoObject(gen_name(all_names), res.type) for res in self.step.result_objects]
+            res_objects = [Atom(gen_name(all_names), res.type) for res in self.step.result_objects]
             full_sub = self.inputs | {out: res for out, res in zip(self.step.result_objects, res_objects)}
             res_predicates = [pred.substitute(full_sub) for pred in self.step.result_predicates]
 
