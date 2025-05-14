@@ -1,9 +1,6 @@
 import heapq
 from typing import Optional
 
-from rules.geometry_objects.atom import Atom
-from rules.geometry_objects.literal import Literal
-
 from .. import rule_utils
 
 from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
@@ -31,8 +28,9 @@ from ..rule_utils import (
     ProofCheckError,
     R_EQN_TYPES,
 )
+from ..geometry_objects.atom import Atom
 from ..geometry_objects.geo_object import GeoObject
-from ..geometry_objects.literal import ONE
+from ..geometry_objects.literal import ONE, Literal
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject
 from ..predicates.predicate import Predicate

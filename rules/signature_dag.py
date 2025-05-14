@@ -3,13 +3,12 @@ import functools
 import itertools
 from typing import Sequence, TypeVar
 import warnings
-
 from frozendict import frozendict
 
-from rules.geometry_objects.atom import Atom
 
 from .predicates.predicate_factory import predicate_from_args
 
+from .geometry_objects.atom import Atom
 from .geometry_trackers.geometry_tracker import GeometryTracker, involved_objects
 from .geometry_objects.construction_object import Construction, ConstructionObject
 from .geometry_objects.geo_object import GeoObject

@@ -1,9 +1,8 @@
 from re import Match
 
-from rules.geometry_objects.atom import Atom
-
 from ......rule_utils import ProofParseError, split_args
 from ......geometry_objects.geo_object import GeoObject
+from ......geometry_objects.atom import Atom
 from ......predicates.predicate_factory import parse_predicate
 
 from .....steps.null_theorem_step import NullTheoremStep

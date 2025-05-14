@@ -2,12 +2,11 @@ from mpmath import mpf
 from typing import Mapping
 from mpmath import mp
 
-from rules.geometry_objects.literal import Literal
+from ..rule_utils import LITERAL, GeometryError
 
 from .eq_op import EqOp
 from .geo_object import GeoObject
-from .literal import ZERO, ONE
-from ..rule_utils import LITERAL, GeometryError
+from .literal import ZERO, ONE, Literal
 
 
 class EquationObject(GeoObject):

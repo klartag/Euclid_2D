@@ -1,9 +1,9 @@
 import re
 from typing import Mapping
 
-from rules.geometry_objects.geo_object import GeoObject
-
 from ..rule_utils import LITERAL
+
+from .geo_object import GeoObject
 
 
 LITERAL_PATTERN = r'(-?\d+(\.\d+)?)'

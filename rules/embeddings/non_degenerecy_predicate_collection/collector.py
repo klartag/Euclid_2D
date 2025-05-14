@@ -2,16 +2,13 @@ from mpmath import mp, mpf
 from typing import List
 from itertools import combinations
 
-from rules.geometry_objects.literal import Literal
-
-from ...geometry_objects.geo_object import GeoObject
-from ...rule_utils import LITERAL
-
 from .. import Embedding, EmbeddedPoint
 
 from ...predicates.predicate import Predicate
 from ...predicates.predicate_factory import predicate_from_args
 from ...geometry_objects.construction_object import ConstructionObject
+from ...geometry_objects.geo_object import GeoObject
+from ...geometry_objects.literal import Literal
 
 
 class NonDegeneracyPredicateCollector:

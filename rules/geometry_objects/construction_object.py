@@ -1,12 +1,11 @@
 from typing import TYPE_CHECKING, Mapping
 from mpmath import mp
 
-from rules.geometry_objects.atom import Atom
-
 from ..predicates.global_predicates import get_constructions
 from ..symmetry import Symmetry
 from ..rule_utils import LITERAL, SCALAR, ANGLE, ProofCheckError, union, GeometryError
 
+from .atom import Atom
 from .geo_object import GeoObject
 from .literal import ONE, ZERO
 from .equation_object import EquationObject

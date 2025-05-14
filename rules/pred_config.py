@@ -1,17 +1,16 @@
 import itertools
 from pathlib import Path
 
-from rules.geometry_objects.atom import Atom
-from rules.geometry_objects.literal import Literal
 
 from .theorem import CONDITION_LABEL, CONSTRUCTION_LABEL, POSS_CONCLUSIONS_LABEL, RESULT_PREDICATE_LABEL
 from .predicates.predicate import INPUT_LABEL, PREPROCESS_LABEL, Predicate
 from .predicates.implementations.macro_predicate import MacroData
 from .predicates.predicate_factory import parse_predicate, predicate_from_args
-from .geometry_objects.geo_object import GeoObject
+from .geometry_objects.atom import Atom
 from .geometry_objects.construction_object import Construction, LogConstruction
-from .geometry_objects import geo_object
-from .rule_utils import LITERAL, NULL, SCALAR, ProofParseError, unpack_dict
+from .geometry_objects.geo_object import GeoObject
+from .geometry_objects.literal import Literal
+from .rule_utils import SCALAR, ProofParseError, unpack_dict
 from .symmetry import Symmetry
 from util import BASE_PATH
 

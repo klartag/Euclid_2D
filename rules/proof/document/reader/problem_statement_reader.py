@@ -1,9 +1,8 @@
 import re
 from typing import Mapping, NamedTuple
 
-from rules.geometry_objects.atom import Atom
-
 from ....rule_utils import ALL_TYPES, ProofParseError, preprocess_lines
+from ....geometry_objects.atom import Atom
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.predicate_factory import parse_predicate, predicate_from_args

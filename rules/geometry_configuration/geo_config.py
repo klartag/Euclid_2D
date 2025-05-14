@@ -12,10 +12,10 @@ import random
 import torch
 from tqdm import tqdm
 
-from rules.geometry_objects.atom import Atom
 from torch_geo.geometry_entities import Circle, Line, Point, Triangle
 
 from ..predicates.predicate import PREDICATE_SIGNATURES, Predicate
+from ..geometry_objects.atom import Atom
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.construction_object import ConstructionObject
 

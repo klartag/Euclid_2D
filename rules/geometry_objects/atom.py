@@ -1,6 +1,6 @@
 from typing import Mapping
 
-from rules.geometry_objects.geo_object import GeoObject
+from .geo_object import GeoObject
 
 
 class Atom(GeoObject):

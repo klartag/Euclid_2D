@@ -5,8 +5,6 @@ It should absolutely never be imported.
 
 import pytest
 
-from rules.geometry_objects.atom import Atom
-
 from .proof.document.geometry_document import GeometryDocument
 from .proof.document.reader.document_reader import DocumentReader
 
@@ -14,10 +12,10 @@ from .pred_config import load_constructions_and_macros
 
 from .predicates.global_predicates import get_constructions
 
+from .geometry_objects.atom import Atom
 from .geometry_objects.parse import parse_geo_object
 
 from .geometry_objects.construction_object import ConstructionObject
-from .geometry_objects.geo_object import GeoObject
 from .rule_utils import POINT, SCALAR
 from .proof_checker import ProofChecker, check_proof
 from .proof_gen.proof_generator import prove

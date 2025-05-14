@@ -1,8 +1,7 @@
 from re import Match
 
-from rules.geometry_objects.atom import Atom
-
 from ......rule_utils import ProofParseError, split_args
+from ......geometry_objects.atom import Atom
 from ......geometry_objects.geo_object import GeoObject
 from ......geometry_objects.parse import parse_geo_object
 from ......predicates.predicate_factory import parse_predicate

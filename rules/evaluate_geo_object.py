@@ -1,11 +1,12 @@
-from rules.geometry_objects.atom import Atom
-from rules.rule_utils import POINT, SCALAR
+import sympy
+
+from .rule_utils import POINT, SCALAR
+from .geometry_objects.atom import Atom
 from .geometry_objects.construction_object import ConstructionObject
 from .geometry_objects.equation_object import EquationObject
 from .geo_config import get_sympy_objects
 from .geometry_objects.parse import parse_geo_object
 from .geometry_objects.geo_object import GeoObject
-import sympy
 
 
 def evaluate(object, obj_map):

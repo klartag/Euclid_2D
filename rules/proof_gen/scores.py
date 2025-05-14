@@ -2,13 +2,11 @@ import functools
 import math
 import random
 import string
-
 from frozendict import frozendict
 
-from rules.geometry_objects.atom import Atom
-from rules.geometry_objects.literal import Literal
-
 from ..predicates.predicate import Predicate
+from ..geometry_objects.atom import Atom
+from ..geometry_objects.literal import Literal
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject

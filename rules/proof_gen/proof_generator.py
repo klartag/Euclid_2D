@@ -5,10 +5,6 @@ import time
 from typing import Callable, Optional
 from frozendict import frozendict
 
-from rules.proof.document.document_section import DocumentSection
-from rules.proof.document.geometry_document import GeometryDocument
-from rules.proof.document.writer.document_writer import DocumentWriter
-from rules.proof.proof import Proof
 from util import BASE_PATH
 
 from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
@@ -20,6 +16,10 @@ from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject
 from ..embeddings.embedded_predicate_value import EmbeddedPredicateValue
+from ..proof.document.document_section import DocumentSection
+from ..proof.document.geometry_document import GeometryDocument
+from ..proof.document.writer.document_writer import DocumentWriter
+from ..proof.proof import Proof
 from ..proof.geometry_problem import GeometryProblem
 from ..proof.steps import CommentStep, ObjDefineStep, Step, TheoremStep
 from ..proof_checker import CHECK_CFG, TRUST_NO_ADD_CFG, ProofChecker, involved_objects
