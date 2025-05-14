@@ -39,7 +39,7 @@ class Literal(GeoObject):
         """
         Finds all objects referred to in the definition of this object.
         """
-        return {self}
+        return set()
 
 
 ONE = Literal('1')

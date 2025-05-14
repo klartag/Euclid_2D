@@ -12,6 +12,7 @@ import random
 import torch
 from tqdm import tqdm
 
+from rules.geometry_objects.atom import Atom
 from torch_geo.geometry_entities import Circle, Line, Point, Triangle
 
 from ..predicates.predicate import PREDICATE_SIGNATURES, Predicate
@@ -205,7 +206,7 @@ def sample_theorem_assumptions(candidate_theorems=None, num_samples=2):
     for idx, theorem in enumerate(sampled_theorems):
         replacement = {}
         for obj in theorem.signature:
-            replacement[obj] = GeoObject(f"t{idx}_" + obj.name, obj.type)
+            replacement[obj] = Atom(f"t{idx}_" + obj.name, obj.type)
 
         for pred in theorem.required_predicates:
             pred = pred.substitute(replacement)
@@ -227,6 +228,6 @@ def sample_predicates(candidate_predicates=None, num_samples=2):
         pred_objects = []
         for obj_idx, obj_type in enumerate(object_types):
             obj_name = f"p{idx}_{obj_idx}"
-            pred_objects.append(GeoObject(obj_name, obj_type))
+            pred_objects.append(Atom(obj_name, obj_type))
         sampled_predicates.append(Predicate.from_args(pred_name, tuple(pred_objects)))
     return sampled_predicates

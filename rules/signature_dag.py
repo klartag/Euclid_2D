@@ -6,6 +6,8 @@ import warnings
 
 from frozendict import frozendict
 
+from rules.geometry_objects.atom import Atom
+
 from .predicates.predicate_factory import predicate_from_args
 
 from .geometry_trackers.geometry_tracker import GeometryTracker, involved_objects
@@ -67,7 +69,7 @@ def normalize(
 
     Parameters:
     * `obj`: The object to normalize. Could be a GeoObject, which will be converted to a semi-canonical form
-             `(GeoObject('A', 'Point')` will be converted to `GeoObject('Point_0', 'Point')`).
+             `(Atom('A', 'Point')` will be converted to `Atom('Point_0', 'Point')`).
     * `keys`: A mapping from all keys in the resulting object to the original keys, ro be used in a `RekeyPattern`.
               When converting `Line(A, B)` to `Line(Point_0, Point_1)`, this will map the key of `Point_0` to the key of `A`,
               the key of `Point_1` to the key of `B`, and the key of `Line(Point_0, Point_1)` to the key of `Line(A, B)`.
@@ -115,7 +117,7 @@ def normalize(
         while f'{TYPE_NAMES[obj.type]}{i}' in names:
             i += 1
         new_name = f'{TYPE_NAMES[obj.type]}{i}'
-        new_obj = GeoObject(new_name, obj.type)
+        new_obj = Atom(new_name, obj.type)
         keys[get_eqn_key(new_obj)] = get_eqn_key(obj)
         subs[obj] = new_obj
         names.add(new_name)

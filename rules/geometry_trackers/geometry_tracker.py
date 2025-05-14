@@ -1,6 +1,9 @@
 import heapq
 from typing import Optional
 
+from rules.geometry_objects.atom import Atom
+from rules.geometry_objects.literal import Literal
+
 from .. import rule_utils
 
 from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
@@ -92,9 +95,10 @@ def involved_objects(
             if isinstance(obj, ConstructionObject):
                 for comp in obj.components:
                     involved_objects(comp, res)
-        case GeoObject():
-            if obj.type != LITERAL:
-                res.add(obj)
+        case Atom():
+            res.add(obj)
+        case Literal():
+            pass
 
     return res
 

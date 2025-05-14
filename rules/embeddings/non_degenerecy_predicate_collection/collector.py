@@ -2,6 +2,8 @@ from mpmath import mp, mpf
 from typing import List
 from itertools import combinations
 
+from rules.geometry_objects.literal import Literal
+
 from ...geometry_objects.geo_object import GeoObject
 from ...rule_utils import LITERAL
 
@@ -48,8 +50,8 @@ class NonDegeneracyPredicateCollector:
 
             orientation_value = int(mpf(90) * mp.sign(diff2.scalar_product(orthogonal_to_diff1)))
 
-            orientation = GeoObject(str(orientation_value), LITERAL)
-            reverse_orientation = GeoObject(str(-orientation_value), LITERAL)
+            orientation = Literal(str(orientation_value))
+            reverse_orientation = Literal(str(-orientation_value))
 
             orientation_object = ConstructionObject.from_args('orientation', (object0, object1, object2))
             reverse_orientation_object = ConstructionObject.from_args('orientation', (object2, object1, object0))

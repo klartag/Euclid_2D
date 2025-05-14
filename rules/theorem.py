@@ -120,7 +120,7 @@ class Theorem:
                     for name in names.split(','):
                         name = name.strip()
                         assert name not in obj_map, f'In theorem {theorem_name}, object name {name} appears twice!'
-                        g = GeoObject(name, typ)
+                        g = Atom(name, typ)
                         obj_map[name] = g
                         signature.append(g)
 
@@ -132,7 +132,7 @@ class Theorem:
                     for name in names.split(','):
                         name = name.strip()
                         assert name not in obj_map, f'In theorem {theorem_name}, object name {name} appears twice!'
-                        g = GeoObject(name, typ)
+                        g = Atom(name, typ)
                         obj_map[name] = g
                         result_objects.append(g)
 

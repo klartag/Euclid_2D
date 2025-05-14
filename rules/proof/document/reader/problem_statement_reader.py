@@ -1,6 +1,8 @@
 import re
 from typing import Mapping, NamedTuple
 
+from rules.geometry_objects.atom import Atom
+
 from ....rule_utils import ALL_TYPES, ProofParseError, preprocess_lines
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
@@ -118,4 +120,4 @@ class ProblemStatementReader:
             if name in assumption_objects:
                 raise ProofParseError(f'Object {name} redefined in line {line}!')
 
-            assumption_objects[name] = GeoObject(name, type_)
+            assumption_objects[name] = Atom(name, type_)

@@ -1,5 +1,7 @@
 from re import Match
 
+from rules.geometry_objects.atom import Atom
+
 from ......rule_utils import ProofParseError, split_args
 from ......geometry_objects.geo_object import GeoObject
 from ......geometry_objects.parse import parse_geo_object
@@ -44,7 +46,7 @@ class TheoremStepReader(AbstractStepReader[TheoremStep]):
             if cons_name in obj_map:
                 raise ProofParseError(f'Line {line} redefines the object {cons_name}!')
             typ = theorem_out.type
-            res = GeoObject(cons_name, typ)
+            res = Atom(cons_name, typ)
             obj_map[cons_name] = res
             result_objects.append(res)
 
