@@ -7,7 +7,11 @@ from glob import glob
 from ..embeddings.embedder.embedder import DiagramEmbedder
 from ..proof_prettifier import ProofPrettifier
 from ..trimmers.trimmer import ProofTrimmer
-from ..proof import Proof, TheoremStep
+from ..proof.steps import TheoremStep
+from ..proof.document.document_section import DocumentSection
+from ..proof.document.geometry_document import GeometryDocument
+from ..proof.document.reader.document_reader import DocumentReader
+from ..proof.document.writer.document_writer import DocumentWriter
 from ..trimmers.trimmer import ProofTrimmer
 
 from .proof_generator import validate_proof, prove
@@ -21,10 +25,9 @@ without actually running the proof generator.'''
     parser.add_argument('path')
     args = parser.parse_args()
 
-    path = Proof.get_full_proof_path(args.path)
-    proof = Proof.parse(path.open().read())
-
-    validate_proof(proof)
+    document = GeometryDocument.open(args.path)
+    problem = DocumentReader().read(document, read_proof_body=False)
+    validate_proof(problem)
 
 
 def main():
@@ -71,7 +74,7 @@ def main():
 
     args = parser.parse_args()
 
-    paths = [Path(p) for p in glob(args.path)] if args.glob else [Proof.get_full_proof_path(args.path)]
+    paths = [Path(p) for p in glob(args.path)] if args.glob else [args.path]
 
     if len(paths) == 0:
         print('No matching files found.')
@@ -82,58 +85,61 @@ def main():
         else:
             print(f'Proving file "{path}":')
 
-        proof = Proof.parse(path.open().read(), False)
+        document = GeometryDocument.open(path)
+        problem = DocumentReader().read(document, read_proof_body=True)
 
         try:
-            if args.embed and proof.embedding is None: # ARGS.embed
+            if args.embed and problem.embedding is None:  # ARGS.embed
                 print('Running Embedder...')
                 diagram_embedder = DiagramEmbedder()
-                embedding = diagram_embedder.embed(proof)
-                if embedding is not None:
-                    proof.embedding = embedding
-                
-                proof_text = proof.to_language_format()
-                
+                problem.embedding = diagram_embedder.embed(problem)
+
+                DocumentWriter().write_sections(problem, document, DocumentSection.EMBEDDING)
                 if args.overwrite:
-                    open(path, 'w').write(proof_text)
+                    document.save()
                 else:
-                    print(proof_text)
-                    
+                    for line in document.get_section_content(DocumentSection.EMBEDDING):
+                        print(line)
+
             print('Running Prover...')
-            proof = prove(proof, interactive=args.interactive, verbose=True)
-            
-            proof_text = proof.to_language_format()
+            problem = prove(problem, interactive=args.interactive, verbose=True)
+
+            DocumentWriter().write_sections(problem, document, DocumentSection.PROOF)
             if args.overwrite:
-                open(path, 'w').write(proof_text)
+                document.save()
             else:
-                print(proof_text)
-            
-            counter = Counter([x.theorem_name for x in proof.steps if isinstance(x, TheoremStep)])
+                for line in document.get_section_content(DocumentSection.PROOF):
+                    print(line)
+
+            counter = Counter([x.theorem_name for x in problem.proof.steps if isinstance(x, TheoremStep)])
             if len(counter) > 0:
                 longest_name = max(map(len, counter.keys()))
-                for (name, count) in sorted(counter.items(), key=lambda x:x[1]):
+                for name, count in sorted(counter.items(), key=lambda x: x[1]):
                     print(f'{name:<{longest_name}}:', count)
 
             if args.trim:
                 print('Running Trimmer...')
-                trimmer = ProofTrimmer(proof)
-                proof = trimmer.trim()
-                proof_text = proof.to_language_format()
+                trimmer = ProofTrimmer(problem)
+                problem = trimmer.trim()
+
+                DocumentWriter().write_sections(problem, document, DocumentSection.PROOF)
                 if args.overwrite:
-                    open(path, 'w').write(proof_text)
+                    document.save()
                 else:
-                    print(proof_text)
+                    for line in document.get_section_content(DocumentSection.PROOF):
+                        print(line)
 
             if args.prettify:
                 print('Running Prettifier...')
                 prettifier = ProofPrettifier()
-                proof = prettifier.prettify(proof)
+                problem.proof = prettifier.prettify(problem.proof)
 
-                proof_text = proof.to_language_format()
+                DocumentWriter().write_sections(problem, document, DocumentSection.PROOF)
                 if args.overwrite:
-                    open(path, 'w').write(proof_text)
+                    document.save()
                 else:
-                    print(proof_text)
+                    for line in document.get_section_content(DocumentSection.PROOF):
+                        print(line)
         except KeyboardInterrupt as e:
             print(e)
             if i == len(paths) - 1:
@@ -145,7 +151,7 @@ def main():
                 continue
             else:
                 return
-        except (Exception if args.ignore_errors else NeverMatch) as e:
+        except Exception if args.ignore_errors else NeverMatch as e:
             print('Error:', e)
 
 

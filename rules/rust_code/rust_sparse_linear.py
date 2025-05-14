@@ -1,9 +1,9 @@
 import abc
 from typing import Any, Generic, TypeVar
-from . import linear_b
-from rules.proof_checker_utils import KNOWN_KEYS
-from rules.rule_utils import GeometryError
+
 from util import Bijection
+
+from . import linear_b
 
 T = TypeVar('T', float, int, bool)
 O = TypeVar('O')

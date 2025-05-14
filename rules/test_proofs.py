@@ -5,19 +5,20 @@ It should absolutely never be imported.
 
 import pytest
 
+from .proof.document.geometry_document import GeometryDocument
+from .proof.document.reader.document_reader import DocumentReader
+
 from .pred_config import load_constructions_and_macros
 
 from .predicates.global_predicates import get_constructions
 
 from .geometry_objects.parse import parse_geo_object
 
-from .geometry_objects.construction_object import Construction, ConstructionObject
+from .geometry_objects.construction_object import ConstructionObject
 from .geometry_objects.geo_object import GeoObject
 from .rule_utils import POINT, SCALAR
-from .proof import Proof
 from .proof_checker import ProofChecker, check_proof
 from .proof_gen.proof_generator import prove
-from util import BASE_PATH
 
 
 # Problems from Yoel Geva
@@ -119,8 +120,7 @@ def test_check_proof(problem_name: str):
     if problem_name.startswith('IMO'):
         pytest.skip('Currently disabling proof checking of all IMO problems.')
 
-    problem_path = BASE_PATH / 'rules' / 'proof_samples' / problem_name
-    check_proof(problem_path)
+    check_proof(problem_name)
 
 
 @pytest.mark.parametrize(
@@ -140,26 +140,14 @@ def test_proof_generator(problem_name: str):
     '''
     Tests that the Proof Generator works on a geometry problem.
     '''
-    problem_path = BASE_PATH / 'rules' / 'proof_samples' / problem_name
-    proof_assumptions = Proof.parse(problem_path.open().read())
-    proof = prove(proof_assumptions, interactive=False)
-    checker = ProofChecker(proof)
+    document = GeometryDocument.open(problem_name)
+    problem = DocumentReader().read(document, read_proof_body=False)
+    solved_problem = prove(problem, interactive=False, verbose=False)
+    checker = ProofChecker(solved_problem)
     checker.check()
 
 
-def test_proof_shuffle():
-    '''
-    Tests that shuffling the names of objects in a proof
-    does not make the proof invalid.
-    (Specifically, testing this on problem 1.1 from the Geometry in Figures book)
-    '''
-    proof = Proof.parse((BASE_PATH / 'rules/proof_samples/figures/1_1.jl').open().read())
-    shuffled = proof.shuffled()
-    checker = ProofChecker(shuffled)
-    checker.check()
-
-
-def validate_constructions():
+def test_constructions():
     bad_constructions = set()
     for con in get_constructions().values():
         for pred in con.result_predicates:

@@ -21,7 +21,7 @@ from .undefined_embedding_error import UndefinedEmbeddingError
 
 class Embedding:
     embedding: DefaultDict[str, Optional[EmbeddedObject]]
-    
+
     def __init__(self):
         self.embedding = defaultdict(lambda: None)
 
@@ -30,19 +30,19 @@ class Embedding:
 
     def __getitem__(self, object_name: str) -> Optional[EmbeddedObject]:
         return self.embedding[object_name]
-    
+
     def __delitem__(self, object_name: str):
         del self.embedding[object_name]
-    
+
     def __contains__(self, object_name: str) -> bool:
         return object_name in self.embedding
-    
+
     def __iter__(self) -> Iterator[str]:
         return iter(self.embedding)
-    
+
     def keys(self) -> KeysView[str]:
         return tuple([name for (name, obj) in self.embedding.items() if obj is not None])
-    
+
     def values(self) -> Tuple[EmbeddedObject]:
         return tuple([obj for obj in self.embedding.values() if obj is not None])
 
@@ -77,7 +77,11 @@ class Embedding:
         for component in obj.components:
             parameter_options = self.evaluate_object(component)
             embedded_parameter_options.append(parameter_options)
-        return tuple(itertools.chain(*[construction_method(*parameters) for parameters in itertools.product(*embedded_parameter_options)]))
+        return tuple(
+            itertools.chain(
+                *[construction_method(*parameters) for parameters in itertools.product(*embedded_parameter_options)]
+            )
+        )
 
     def evaluate_embedded_geo_object(self, obj: EmbeddedGeoObject) -> Tuple[EmbeddedObject, ...]:
         construction_method = obj.construction_method()
@@ -85,7 +89,11 @@ class Embedding:
         for component in obj.components:
             parameter_options = self.evaluate_object(component)
             embedded_parameter_options.append(parameter_options)
-        return tuple(itertools.chain(*[construction_method(*parameters) for parameters in itertools.product(*embedded_parameter_options)]))
+        return tuple(
+            itertools.chain(
+                *[construction_method(*parameters) for parameters in itertools.product(*embedded_parameter_options)]
+            )
+        )
 
     def evaluate_equation_object(self, eqn: EquationObject) -> Tuple[EmbeddedScalar]:
         lhs_options = self.evaluate_object(eqn.left)
@@ -93,22 +101,33 @@ class Embedding:
 
         for lhs in lhs_options:
             if not isinstance(lhs, EmbeddedScalar):
-                raise UndefinedEmbeddingError(f"Cannot evaluate an arithmetic expression with {lhs}, as it is not a scalar.")
+                raise UndefinedEmbeddingError(
+                    f"Cannot evaluate an arithmetic expression with {lhs}, as it is not a scalar."
+                )
 
         for rhs in rhs_options:
             if not isinstance(rhs, EmbeddedScalar):
-                raise UndefinedEmbeddingError(f"Cannot evaluate an arithmetic expression with {rhs}, as it is not a scalar.")
-            
+                raise UndefinedEmbeddingError(
+                    f"Cannot evaluate an arithmetic expression with {rhs}, as it is not a scalar."
+                )
+
         results = []
 
         for lhs in lhs_options:
             for rhs in rhs_options:
                 match eqn.op:
-                    case EqOp.ADD: results.append(lhs + rhs)
-                    case EqOp.SUB: results.append(lhs - rhs)
-                    case EqOp.MUL: results.append(lhs * rhs)
-                    case EqOp.DIV: results.append(lhs / rhs)
-                    case _: raise UndefinedEmbeddingError(f"Cannot evaluate an arithmetic expression with {eqn.op} as an operator.")
+                    case EqOp.ADD:
+                        results.append(lhs + rhs)
+                    case EqOp.SUB:
+                        results.append(lhs - rhs)
+                    case EqOp.MUL:
+                        results.append(lhs * rhs)
+                    case EqOp.DIV:
+                        results.append(lhs / rhs)
+                    case _:
+                        raise UndefinedEmbeddingError(
+                            f"Cannot evaluate an arithmetic expression with {eqn.op} as an operator."
+                        )
 
         return tuple(results)
 
@@ -122,7 +141,7 @@ class Embedding:
                     embedded_parameter_options.append(parameter_options)
                 except UndefinedEmbeddingError:
                     return EmbeddedPredicateValue.Undefined
-            
+
             results = []
             for parameters in itertools.product(*embedded_parameter_options):
                 try:
@@ -137,6 +156,3 @@ class Embedding:
                 return EmbeddedPredicateValue.Incorrect
         else:
             raise Exception(f'Predicate {predicate.name} not recognized.')
-        
-    def to_str(self, accuracy: int) -> str:
-        return '\n'.join([f'{name} = {obj.to_str(accuracy)}' for (name, obj) in self.embedding.items()])

@@ -1,21 +1,3 @@
-excircle:
-  conclude: ['tangent(Line(A, B), c)', 'tangent(Line(B, C), c)', 'tangent(Line(C,
-      A), c)', 'excenter(A, B, C) == center(c)']
-  construct:
-  - {c: Circle}
-  inputs:
-  - {'A, B, C': Point}
-  preprocess: swap
-  where: ['not_collinear(A, B, C)']
-incircle:
-  conclude: ['tangent(Line(A, B), c)', 'tangent(Line(B, C), c)', 'tangent(Line(C,
-      A), c)', 'incenter(A, B, C) == center(c)']
-  construct:
-  - {c: Circle}
-  inputs:
-  - {'A, B, C': Point}
-  preprocess: symmetric
-  where: ['not_collinear(A, B, C)']
 nine_points_circle:
   conclude: ['midpoint(A, B) in c', 'midpoint(B, C) in c', 'midpoint(C, A) in c',
     'midpoint(A, orthocenter(A, B, C)) in c', 'midpoint(B, orthocenter(A, B, C)) in

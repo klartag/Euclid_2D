@@ -4,7 +4,7 @@ import time
 
 from tqdm import trange
 
-from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
+from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
 from .interactive_predicate_checker import InteractivePredicateChecker
@@ -14,11 +14,13 @@ from .predicates.predicate_factory import predicate_from_args
 from .geometry_trackers.geometry_tracker import GeometryTracker
 
 from .proof_checker_utils import ADD_CFG, ADD_NO_TRUST_CFG, CHECK_CFG, TRUST_NO_ADD_CFG, unpack_predicate_full
-from .signature_dag import SignatureDag
 from .geometry_trackers.geometry_tracker import involved_objects
 
-from .proof import AlmostAlwaysStep, AssertStep, CommentStep, IfStep, Proof, ObjDefineStep, Step, TheoremStep
 from .theorem import Theorem
+from .proof.document.geometry_document import GeometryDocument
+from .proof.document.reader.document_reader import DocumentReader
+from .proof.geometry_problem import GeometryProblem
+from .proof.steps import AlmostAlwaysStep, AssertStep, CommentStep, ObjDefineStep, Step, TheoremStep
 
 from . import rule_utils
 from .rule_utils import ProofCheckError, R_EQN_TYPES
@@ -60,13 +62,13 @@ class ProofChecker:
     A class that checks that a proof is valid.
     """
 
-    proof: Proof
+    problem: GeometryProblem
     checked_steps: int
     geometry_tracker: GeometryTracker
     """Tracks when automatic theorems can be applied. The automatic predicates are added after a step is applied."""
 
-    def __init__(self, proof: Proof):
-        self.proof = proof
+    def __init__(self, problem: GeometryProblem):
+        self.problem = problem
         self.checked_steps = 0
 
         self.geometry_tracker = GeometryTracker()
@@ -335,80 +337,10 @@ class ProofChecker:
         """
         Returns a shallow copy of the proof checker.
         """
-        res = ProofChecker(self.proof.shallow_copy())
+        res = ProofChecker(self.problem.shallow_copy())
         res.geometry_tracker = self.geometry_tracker.clone()
         res.checked_steps = self.checked_steps
         return res
-
-    def _add_if_step(self, step: IfStep):
-        """
-        Adds an if step.
-        The if step contains several possible proof continuations.
-        Each continuation is checked, and then the predicates and objects which are in all continuations
-        which are not false are added to the current checker.
-        """
-        # Checking that the if is exhastive.
-        if len(step.data) == 0:
-            return
-
-        print('Handling IF step.')
-
-        legal_paths: list[ProofChecker] = []
-        for idx, (pred, sub_steps) in enumerate(step.data.items()):
-            print(f'If branch {idx}')
-            clone = self.shallow_copy()
-            # The objects in the step are not known to be legal.
-            clone.geometry_tracker.add_predicate(pred, ADD_NO_TRUST_CFG, f'IF step assumption.')
-            idx = -1
-            try:
-                for idx, sub_step in enumerate(sub_steps):
-                    clone.add_step(sub_step)
-            except ProofCheckError as e:
-                e.args = (f'In IfStep {pred} step {idx}:\n{e.args[0]}',)
-                raise
-
-            for sub_pred in clone.geometry_tracker._predicates:
-                if sub_pred.name == 'false':
-                    break
-            else:
-                legal_paths.append(clone)
-
-        exhaustive = all_possibilities(next(iter(step.data)))
-        remaining_possibilities = exhaustive - set(step.data.keys())
-        print(f'FINISHED IF STEP')
-        print(f'If step: {remaining_possibilities=}')
-        if len(remaining_possibilities) == 0:
-            # All legal paths are false.
-            if len(legal_paths) == 0:
-                reason = f'All legal paths are false for the IF step.'
-                self.geometry_tracker.add_predicate(predicate_from_args('false', ()), ADD_CFG, reason)
-                return
-            old_preds = set(self.geometry_tracker.all_predicates())
-            # We check which predicates are proved for all options.
-            obj_intersection = set(legal_paths[0].geometry_tracker.all_objects())
-            pred_intersection = set(legal_paths[0].geometry_tracker.all_predicates())
-
-            for idx, legal_path in enumerate(legal_paths[1:]):
-                obj_intersection &= legal_path.geometry_tracker.all_objects()
-                pred_intersection &= legal_path.geometry_tracker.all_predicates()
-            if set(step.data.keys()) != exhaustive:
-                raise ProofCheckError(
-                    f'Predicates in if step are not exhaustive: {set(step.data.keys())} != {exhaustive}'
-                )
-            for obj in obj_intersection - set(self.geometry_tracker.all_objects()):
-                self.geometry_tracker.get_object(obj, ADD_CFG)  # The objects proved by all steps are known to exist.
-            for pred in pred_intersection - self.geometry_tracker.all_predicates():
-                print(f'If step adding predicate {pred}')
-                reason = f'conclustion of the IF step: {step}'
-                self.geometry_tracker.add_predicate(
-                    pred, ADD_CFG, reason
-                )  # The predicates proved by all steps rely on objects that are known to exist.
-
-        elif (len(remaining_possibilities) == 1) and len(legal_paths) == 0:
-            # We have proved that every possibility except for one leads to a contradiction.
-            pred = next(iter(remaining_possibilities))
-            reason = f'We have proved that every possibility except for one leads to a contradiction for the IF step.'
-            self.geometry_tracker.add_predicate(pred, ADD_CFG, reason)
 
     def add_step(self, step: Step, skim=False):
         """
@@ -430,9 +362,6 @@ class ProofChecker:
                 case AlmostAlwaysStep():
                     self._add_almost_always_step(step)
 
-                case IfStep():
-                    self._add_if_step(step)
-
                 case CommentStep():
                     pass
 
@@ -450,7 +379,7 @@ class ProofChecker:
         """
         Loads the proof's assumptions.
         """
-        self.geometry_tracker.load_assumptions(self.proof)
+        self.geometry_tracker.load_assumptions(self.problem)
 
     def check_proof_finished(self):
         # If we have found a contradiction, then the proof is valid.
@@ -459,7 +388,7 @@ class ProofChecker:
                 return
 
         # Making sure that the results follow.
-        for pred in self.proof.target_predicates:
+        for pred in self.problem.statement.target_predicates:
             if not self.geometry_tracker.contains_predicate(pred):
                 self.geometry_tracker.contains_predicate(pred)
                 raise ProofCheckError(f'Required predicate {pred} was not proved.')
@@ -477,7 +406,7 @@ class ProofChecker:
         Checks the next `step_count` steps in the proof that have not yet been checked.
         If `step_count == None`, checks all of the remaining steps in the proof.
         '''
-        steps_left = len(self.proof.steps) - self.checked_steps
+        steps_left = len(self.problem.proof.steps) - self.checked_steps
 
         if step_count == None:
             step_count = steps_left
@@ -489,7 +418,7 @@ class ProofChecker:
 
         for i in range_wrapper(self.checked_steps, self.checked_steps + step_count):
             try:
-                step = self.proof.steps[i]
+                step = self.problem.proof.steps[i]
                 self.add_step(step, skim=skim)
                 self.checked_steps += 1
             except ProofCheckError as e:
@@ -506,12 +435,13 @@ class ProofChecker:
 
 
 def check_proof(path: Path, verbose=False, interactive: bool = False):
-    proof = Proof.parse(path.open().read())
-    if proof.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
-        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
-        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
-    checker = ProofChecker(proof)
+    document = GeometryDocument.open(path)
+    problem = DocumentReader().read(document, read_proof_body=True)
+    if problem.embedding is not None:
+        collector = NonDegeneracyPredicateCollector()
+        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
+        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
+    checker = ProofChecker(problem)
     try:
         checker.check(verbose)
     except ProofCheckError as e:
@@ -537,10 +467,9 @@ def main():
 
     args = parser.parse_args()
 
-    t0 = time.perf_counter()
-    path = Proof.get_full_proof_path(args.path)
-    check_proof(path, verbose=args.v, interactive=args.interactive)
-    print(f't={time.perf_counter() - t0}')
+    start_time = time.perf_counter()
+    check_proof(args.path, verbose=args.v, interactive=args.interactive)
+    print(f'Checked in {round(time.perf_counter() - start_time, 2)} seconds')
 
 
 def interactive_main():
@@ -552,16 +481,15 @@ def interactive_main():
 
     args = parser.parse_args()
 
-    path = Proof.get_full_proof_path(args.path)
+    document = GeometryDocument.open(args.path)
+    problem = DocumentReader().read(document, read_proof_body=True)
 
-    proof = Proof.parse(path.open().read())
+    if problem.embedding is not None:
+        collector = NonDegeneracyPredicateCollector()
+        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
+        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
 
-    if proof.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
-        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
-        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
-
-    checker = ProofChecker(proof)
+    checker = ProofChecker(problem)
     try:
         checker.check(False)
         print(f'Successfully loaded proof steps.')

@@ -1,10 +1,14 @@
 from pathlib import Path
 import time
-
 from tqdm import tqdm
 
-from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPrediateCollector
-from ..proof import CommentStep, Proof
+from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
+from ..proof.document.document_section import DocumentSection
+from ..proof.document.geometry_document import GeometryDocument
+from ..proof.document.reader.document_reader import DocumentReader
+from ..proof.document.writer.document_writer import DocumentWriter
+from ..proof.geometry_problem import GeometryProblem
+from ..proof.steps import CommentStep
 from ..proof_checker import ProofChecker
 from ..rule_utils import ProofCheckError
 
@@ -12,33 +16,33 @@ MIN_CHECKPOINT_STEPS = 2
 
 
 class ProofTrimmer:
-    proof: Proof
-    trimmed_proof: Proof
+    problem: GeometryProblem
+    trimmed_problem: GeometryProblem
     checkpoints: list[ProofChecker]
 
-    def __init__(self, proof: Proof):
-        self.proof = proof
-        self.trimmed_proof = self.proof.shallow_copy()
+    def __init__(self, problem: GeometryProblem):
+        self.problem = problem
+        self.trimmed_problem = self.problem.shallow_copy()
         self.checkpoints = []
 
-    def trim(self) -> Proof:
+    def trim(self) -> GeometryProblem:
         """
         Attempts to shorten a proof as much as possible,
         while still keeping the proof valid.
         """
-        end = len(self.proof.steps)
+        end = len(self.problem.proof.steps)
         slice_length = 1
 
-        ProofChecker(self.proof).check()
+        ProofChecker(self.problem).check()
 
-        for i in tqdm(range(len(self.proof.steps), 0, -1)):
+        for i in tqdm(range(len(self.problem.proof.steps), 0, -1)):
             if i > end:
                 continue
 
             slice_length = self.trim_longest_tail(end, slice_length)
 
             if slice_length > 0:
-                del self.trimmed_proof.steps[end - slice_length : end]
+                del self.trimmed_problem.proof.steps[end - slice_length : end]
                 end -= slice_length
                 slice_length *= 2
                 slice_length = min(slice_length, end)
@@ -46,7 +50,7 @@ class ProofTrimmer:
                 end -= 1
                 slice_length = 1
 
-        return self.trimmed_proof.shallow_copy()
+        return self.trimmed_problem.shallow_copy()
 
     def get_checker_at_step(self, step: int) -> ProofChecker:
         """
@@ -64,29 +68,12 @@ class ProofTrimmer:
         I did not give enough thought to the usage:
         We perform a binary search, which gives a more complex access pattern, and might remove too many checkpoints.
         """
-        # Loading the first checkpoint.
-        # if len(self.checkpoints) == 0:
-        #     res = ProofChecker(self.trimmed_proof.shallow_copy())
-        #     res.load_proof()
-        #     self.checkpoints.append(res)
+        checker = ProofChecker(self.trimmed_problem.shallow_copy())
+        checker.load_proof()
 
-        # while self.checkpoints[-1].checked_steps > step:
-        #     self.checkpoints.pop()
-
-        # res = self.checkpoints[-1].shallow_copy()
-
-        res = ProofChecker(self.trimmed_proof.shallow_copy())
-        res.load_proof()
-
-        # for _ in range(2):
-        #     if (step - res.checked_steps) >= 2 * MIN_CHECKPOINT_STEPS:
-        #         checkpoint_step = (res.checked_steps + step) // 2
-        #         res.check_until_step(checkpoint_step, skim=True)
-        #         self.checkpoints.append(res.shallow_copy())
-
-        res.check_until_step(step, skim=True)
-        res.proof = self.trimmed_proof.shallow_copy()
-        return res
+        checker.check_until_step(step, skim=True)
+        checker.problem = self.trimmed_problem.shallow_copy()
+        return checker
 
     def trim_longest_tail(self, end: int, slice_length: int) -> int:
         """
@@ -104,8 +91,8 @@ class ProofTrimmer:
             checker = self.get_checker_at_step(end - slice_length)
 
             proof_slice = slice(end - slice_length, end)
-            if not any([isinstance(step, CommentStep) for step in checker.proof.steps[proof_slice]]):
-                del checker.proof.steps[end - slice_length : end]
+            if not any([isinstance(step, CommentStep) for step in checker.problem.proof.steps[proof_slice]]):
+                del checker.problem.proof.steps[end - slice_length : end]
                 try:
                     checker.check_steps()
                     checker.check_proof_finished()
@@ -130,23 +117,25 @@ def main():
     )
 
     args = parser.parse_args()
-    path = Proof.get_full_proof_path(args.path)
-    proof = Proof.parse(path.open().read())
 
-    if proof.embedding is not None:
-        collector = NonDegeneracyPrediateCollector()
-        non_degenerecy_predicates = collector.collect(proof.assumption_objects, proof.embedding)
-        proof.auxiliary_predicates.extend(non_degenerecy_predicates)
+    document = GeometryDocument.open(args.path)
+    problem = DocumentReader().read(document, read_proof_body=True)
 
-    t0 = time.time()
-    trimmer = ProofTrimmer(proof)
-    trimmed_proof = trimmer.trim()
+    if problem.embedding is not None:
+        collector = NonDegeneracyPredicateCollector()
+        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
+        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
 
-    proof_text = trimmed_proof.to_language_format()
+    start_time = time.time()
+    trimmer = ProofTrimmer(problem)
+    trimmed_problem = trimmer.trim()
+
+    DocumentWriter().write_sections(trimmed_problem, document, DocumentSection.PROOF)
 
     if args.overwrite:
-        open(path, 'w').write(proof_text)
+        document.save()
     else:
-        print(proof_text)
+        for line in document.get_section_content(DocumentSection.PROOF):
+            print(line)
 
-    print(f'Trimmed in {round(time.time() - t0, 2)} seconds')
+    print(f'Trimmed in {round(time.time() - start_time, 2)} seconds')

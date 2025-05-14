@@ -1,16 +1,12 @@
 import heapq
 from typing import Optional
 
+from .. import rule_utils
+
 from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
-
-from .linear_algebra_tracker import LinearAlgebraTracker
-
 from ..predicates.predicate_factory import predicate_from_args
-
 from ..theorem import Theorem
-
 from ..embeddings import Embedding
-
 from ..proof_checker_utils import (
     ADD_CFG,
     CHECK_CFG,
@@ -22,11 +18,6 @@ from ..proof_checker_utils import (
     unpack_predicate_minimal,
 )
 from ..rust_code.rust_sparse_linear import BaseSolver
-
-from ..proof import Proof
-
-from .. import rule_utils
-from .numeric_tracker import NumericTracker
 from ..rule_utils import (
     ANGLE,
     LITERAL,
@@ -42,8 +33,11 @@ from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject
 from ..predicates.predicate import Predicate
 from ..predicates.implementations.macro_predicate import MacroPredicate
+from ..proof.geometry_problem import GeometryProblem
 from ..union_find import UnionFind
 
+from .numeric_tracker import NumericTracker
+from .linear_algebra_tracker import LinearAlgebraTracker
 
 NUMERIC_PRECISION = 1e-3
 """
@@ -141,13 +135,12 @@ class GeometryTracker:
 
         self.numeric_tracker = NumericTracker(NUMERIC_PRECISION)
 
-
-    def load_embeds(self, proof: Proof):
+    def load_embedding(self, problem: GeometryProblem):
         """
         Loads the data of the known point embeddings.
         """
-        if proof.embedding is not None:
-            self.embedding_tracker = proof.embedding.shallow_copy()
+        if problem.embedding is not None:
+            self.embedding_tracker = problem.embedding.shallow_copy()
 
     def get_object(self, obj: GeoObject, config: StepConfig) -> GeoObject:
         """
@@ -359,7 +352,11 @@ class GeometryTracker:
             case rule_utils.ORIENTATION:
                 self.process_orientation(obj)
 
-        if self.embedding_tracker is not None and isinstance(obj, ConstructionObject) and obj.name not in self.embedding_tracker:
+        if (
+            self.embedding_tracker is not None
+            and isinstance(obj, ConstructionObject)
+            and obj.name not in self.embedding_tracker
+        ):
             try:
                 embedded_construction_object_options = self.embedding_tracker.evaluate_construction_object(obj)
                 if len(embedded_construction_object_options) == 1:
@@ -822,7 +819,7 @@ class GeometryTracker:
         res.numeric_tracker = self.numeric_tracker.clone()
         return res
 
-    def load_assumptions(self, proof: Proof):
+    def load_assumptions(self, problem: GeometryProblem):
         """
         Loads all assumption data from the problem into the checker.
         The assumption data includes:
@@ -830,14 +827,14 @@ class GeometryTracker:
         2. Predicates on these objects.
         3. Embeddings of the objects into R^2, if they are present.
         """
-        self.load_embeds(proof)
+        self.load_embedding(problem)
         # Adding the objects defined by the proof.
-        for obj in proof.all_objects.values():
+        for obj in problem.statement.assumption_objects.values():
             self.get_object(obj, ADD_CFG)
 
         # Adding the assumptions of the proof.
-        for pred in proof.assumption_predicates:
+        for pred in problem.statement.assumption_predicates:
             self.add_predicate(pred, ADD_CFG, 'Assumption predicate')
 
-        for pred in proof.auxiliary_predicates:
+        for pred in problem.statement.auxiliary_predicates:
             self.add_predicate(pred, ADD_CFG, 'Auxiliary predicate')

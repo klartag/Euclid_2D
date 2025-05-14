@@ -2,7 +2,12 @@ from pathlib import Path
 from typing import List
 
 from .theorem import Theorem
-from .proof import AssertStep, Proof, TheoremStep
+from .proof.document.document_section import DocumentSection
+from .proof.document.geometry_document import GeometryDocument
+from .proof.document.reader.document_reader import DocumentReader
+from .proof.document.writer.document_writer import DocumentWriter
+from .proof.proof import Proof
+from .proof.steps import AssertStep, TheoremStep
 
 
 class ProofPrettifier:
@@ -47,15 +52,15 @@ def main():
     )
 
     args = parser.parse_args()
-    path = Proof.get_full_proof_path(args.path)
-    proof = Proof.parse(path.open().read())
+    document = GeometryDocument.open(args.path)
+    problem = DocumentReader().read(document, read_proof_body=True)
 
     prettifier = ProofPrettifier()
-    pretty_proof = prettifier.prettify(proof)
+    problem.proof = prettifier.prettify(problem.proof)
 
-    proof_text = pretty_proof.to_language_format()
-
+    DocumentWriter().write_sections(problem, document, DocumentSection.PROOF)
     if args.overwrite:
-        open(path, 'w').write(proof_text)
+        document.save()
     else:
-        print(proof_text)
+        for line in document.get_section_content(DocumentSection.PROOF):
+            print(line)

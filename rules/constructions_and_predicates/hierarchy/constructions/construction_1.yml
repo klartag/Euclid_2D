@@ -12,6 +12,26 @@ direction:
   inputs:
   - {'A, B': Point}
   where: [A != B, 'exists(Line(A, B))']
+excenter:
+  conclude: ['P in external_angle_bisector(A, C, B), external_angle_bisector(A, B,
+      C), internal_angle_bisector(B, A, C)', 'P == line_intersection(external_angle_bisector(A,
+      C, B), external_angle_bisector(A, B, C))']
+  construct:
+  - {P: Point}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: swap
+  where: ['not_collinear(A, B, C)']
+incenter:
+  conclude: ['P in internal_angle_bisector(A, B, C), internal_angle_bisector(A, C,
+      B), internal_angle_bisector(C, A, B)', 'P == line_intersection(internal_angle_bisector(A,
+      B, C), internal_angle_bisector(A, C, B))']
+  construct:
+  - {P: Point}
+  inputs:
+  - {'A, B, C': Point}
+  preprocess: symmetric
+  where: ['not_collinear(A, B, C)']
 midpoint:
   conclude: ['between(A, O, B)', 'distance(A, O) == distance(B, O)', 'distance(A,
       O) == distance(A, B)/2']

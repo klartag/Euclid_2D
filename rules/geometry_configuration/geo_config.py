@@ -2,21 +2,24 @@ if __name__ == '__main__':
     # Dealing with path issues.
     from os.path import dirname, abspath
     import sys
+
     sys.path.append(dirname(dirname(abspath(__file__))))
-    
-#from rules.predicate import *
-from rules.geometry_objects.geo_object import GeoObject
-from rules.geometry_objects.construction_object import ConstructionObject
-from .evaluate_geo_object import *
+
 from matplotlib import pyplot as plt
-import scipy
-import numpy as np
-import math
-from typing import List, Dict
+from typing import Dict
 from adjustText import adjust_text
-from .torch_geo.geometry_entities import *
 import random
+import torch
 from tqdm import tqdm
+
+from torch_geo.geometry_entities import Circle, Line, Point, Triangle
+
+from ..predicates.predicate import PREDICATE_SIGNATURES, Predicate
+from ..geometry_objects.geo_object import GeoObject
+from ..geometry_objects.construction_object import ConstructionObject
+
+from .evaluate_geo_object import evaluate_construction
+
 
 def fully_unpack_predicate(predicate):
 
@@ -42,7 +45,6 @@ class GeoConfig:
         for pred in predicates:
             self.predicates.extend(fully_unpack_predicate(pred))
 
-
         self.num_params = 0
         for name, geo_object in self.obj_map.items():
             if isinstance(geo_object, ConstructionObject):
@@ -63,7 +65,6 @@ class GeoConfig:
                 case "Scalar":
                     self.num_params += 1
 
-
     def get_torch_objects(self, params):
         torch_obj_map = {}
         idx = 0
@@ -79,16 +80,20 @@ class GeoConfig:
                     torch_object = params[idx]
                     idx += 1
                 case "Point":
-                    torch_object = Point(params[idx], params[idx+1])
+                    torch_object = Point(params[idx], params[idx + 1])
                     idx += 2
                 case "Line":
-                    torch_object = Line(Point(params[idx], params[idx+1]), Point(params[idx+2], params[idx+3]))
+                    torch_object = Line(Point(params[idx], params[idx + 1]), Point(params[idx + 2], params[idx + 3]))
                     idx += 4
                 case "Triangle":
-                    torch_object = Triangle(Point(params[idx], params[idx+1]), Point(params[idx+2], params[idx+3]), Point(params[idx+4], params[idx+5]))
+                    torch_object = Triangle(
+                        Point(params[idx], params[idx + 1]),
+                        Point(params[idx + 2], params[idx + 3]),
+                        Point(params[idx + 4], params[idx + 5]),
+                    )
                     idx += 6
                 case "Circle":
-                    torch_object = Circle(Point(params[idx], params[idx+1]), torch.abs(params[idx+2]))
+                    torch_object = Circle(Point(params[idx], params[idx + 1]), torch.abs(params[idx + 2]))
                     idx += 3
                 case "Scalar":
                     torch_object = params[idx]
@@ -98,9 +103,8 @@ class GeoConfig:
         for name, geo_object in self.obj_map.items():
             if isinstance(geo_object, ConstructionObject):
                 torch_obj_map[name] = evaluate_construction(geo_object, torch_obj_map)
-                
-        return torch_obj_map
 
+        return torch_obj_map
 
     def compute_loss(self, params):
         torch_obj_map = self.get_torch_objects(params)
@@ -112,7 +116,7 @@ class GeoConfig:
     def batch_sgd(self, all_params, max_iter=1000, lr=1, momentum=0.5, weight_decay=1e-4):
 
         batch_compute_loss = torch.vmap(self.compute_loss)
-        
+
         optimizer = torch.optim.SGD([all_params], lr=lr, momentum=momentum, weight_decay=weight_decay)
         for it in tqdm(range(max_iter), disable=True):
             optimizer.zero_grad()
@@ -125,7 +129,6 @@ class GeoConfig:
 
         return losses, all_params
 
-
     def hessian(self, params):
         hessian = torch.autograd.functional.hessian(self.compute_loss, params)
         return hessian
@@ -135,14 +138,12 @@ class GeoConfig:
         for it in range(num_steps):
             grad = torch.autograd.functional.jacobian(self.compute_loss, params)
             hessian = torch.autograd.functional.hessian(self.compute_loss, params)
-            hessian_inv = torch.linalg.inv(hessian + weight_decay*torch.eye(hessian.size(0), device=hessian.device))
-            params.data -=  hessian_inv @ grad
-
+            hessian_inv = torch.linalg.inv(hessian + weight_decay * torch.eye(hessian.size(0), device=hessian.device))
+            params.data -= hessian_inv @ grad
 
         with torch.no_grad():
             loss = func(self.torch_params)
             return loss.item()
-
 
     def verify_predicates(self, predicates, params, eps=0):
         with torch.no_grad():
@@ -150,12 +151,12 @@ class GeoConfig:
             all_predicates = []
             for pred in predicates:
                 all_predicates.extend(fully_unpack_predicate(pred))
-                
+
             return {p: p.potential(torch_obj_map, eps=eps).item() for p in all_predicates}
 
     def plot(self, params, fig=None):
         with torch.no_grad():
-            #self.torch_obj_map = self.get_torch_objects(self.obj_map, self.torch_params)
+            # self.torch_obj_map = self.get_torch_objects(self.obj_map, self.torch_params)
             torch_obj_map = self.get_torch_objects(params)
             # for p in self.predicates:
             #     p.potential(torch_obj_map) / len(self.predicates)
@@ -172,20 +173,23 @@ class GeoConfig:
                     ax.plot(x, y, marker='o')
                     if "(" not in name:
                         texts.append(ax.text(x, y, name))
-                    #ax.annotate(name, (x+0.05, y+0.05)) 
+                    # ax.annotate(name, (x+0.05, y+0.05))
                 elif isinstance(object, Line):
                     p1, p2 = object.p1, object.p2
                     ax.plot([p1.x.item(), p2.x.item()], [p1.y.item(), p2.y.item()])
                     if "(" not in name:
-                        texts.append(ax.text((p1.x.item()+p2.x.item())/2, (p1.y.item()+p2.y.item())/2, name))
+                        texts.append(ax.text((p1.x.item() + p2.x.item()) / 2, (p1.y.item() + p2.y.item()) / 2, name))
                 elif isinstance(object, Triangle):
                     p1, p2, p3 = object.p1, object.p2, object.p3
-                    ax.plot([p1.x.item(), p2.x.item(), p3.x.item(), p1.x.item()], [p1.y.item(), p2.y.item(), p3.y.item(), p1.y.item()])
+                    ax.plot(
+                        [p1.x.item(), p2.x.item(), p3.x.item(), p1.x.item()],
+                        [p1.y.item(), p2.y.item(), p3.y.item(), p1.y.item()],
+                    )
                 elif isinstance(object, Circle):
                     center = object.center
                     radius = object.radius.item()
                     Ox, Oy = center.x.item(), center.y.item()
-                    patch=plt.Circle((Ox, Oy), radius, fill=False)
+                    patch = plt.Circle((Ox, Oy), radius, fill=False)
                     if "(" not in name:
                         texts.append(ax.text(Ox, Oy, f"O_{name}"))
                         ax.add_patch(patch)
@@ -193,6 +197,7 @@ class GeoConfig:
             adjust_text(texts, arrowprops=dict(arrowstyle='->', color='red'))
             ax.set_aspect('equal')
             return fig
+
 
 def sample_theorem_assumptions(candidate_theorems=None, num_samples=2):
     sampled_theorems = random.choices(candidate_theorems, k=num_samples)

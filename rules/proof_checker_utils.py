@@ -111,7 +111,7 @@ class StepConfig:
     The configuration has two components: `trusted` and `add_obj`.
     The `trusted` configuration specifies if all construction objects involved in the predicate are known to exist.
     This is known for predicates that are the result of theorems, or are in the assumption.
-    It is not known for objects appearing as the parameters of theorems, or in IfSteps.
+    It is not known for objects appearing as the parameters of theorems.
 
     The `add_obj` configuration specifies if all construction objects involved should
     be added to the proof checker as new tracked objects.

@@ -1,7 +1,9 @@
 from typing import Mapping
-from rules.symmetry import Symmetry
-from ...geometry_objects.geo_object import GeoObject
+
 from ..predicate import Predicate
+
+from ...geometry_objects.geo_object import GeoObject
+from ...symmetry import Symmetry
 from ...rule_utils import CIRCLE, LINE, POINT
 
 
