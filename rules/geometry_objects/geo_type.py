@@ -13,3 +13,5 @@ class GeoType(Enum):
 
 R_EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE)
 EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE, GeoType.LITERAL, GeoType.ORIENTATION)
+
+Signature = dict[str, GeoType]
