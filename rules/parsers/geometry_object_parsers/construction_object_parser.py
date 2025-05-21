@@ -38,7 +38,7 @@ class ConstructionObjectParser(DelayedGeometryObjectParser[Construction, Constru
 
         comma_locations.append(len(argument_string))
         arguments = tuple(
-            [argument_string[start + 1 : end] for (start, end) in zip(comma_locations, comma_locations[1:])]
+            [argument_string[start + 1 : end].strip() for (start, end) in zip(comma_locations, comma_locations[1:])]
         )
         return (construction, arguments)
 
