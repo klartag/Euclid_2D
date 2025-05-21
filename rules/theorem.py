@@ -126,7 +126,7 @@ class Theorem:
                         obj_map[name] = g
                         signature.append(g)
 
-                signature_objects = tuple(x for x in signature if x.type not in ['Scalar', 'Angle'])
+                signature_objects = tuple(x for x in signature if x.type not in [GeoType.SCALAR, GeoType.ANGLE])
                 required_predicates.append(predicate_from_args('exists', signature_objects))
 
                 # The construction part is the third part, and not the second. We parse it second to get the result object definitions.
