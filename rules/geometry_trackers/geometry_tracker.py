@@ -16,13 +16,8 @@ from ..proof_checker_utils import (
     unpack_predicate_minimal,
 )
 from ..rust_code.rust_sparse_linear import BaseSolver
-from ..rule_utils import (
-    GeoType,
-    GeometryError,
-    IllegalObjectError,
-    ProofCheckError,
-    R_EQN_TYPES,
-)
+from ..errors import GeometryError, IllegalObjectError, ProofCheckError
+from ..geometry_objects.geo_type import GeoType, R_EQN_TYPES
 from ..geometry_objects.atom import Atom
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.literal import ONE, Literal

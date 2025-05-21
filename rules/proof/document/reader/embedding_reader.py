@@ -1,11 +1,12 @@
 import json
 
-from ....rule_utils import ProofParseError, GeoType
+from ....errors import ProofParseError
 from ....embeddings.embedded_objects.circle import EmbeddedCircle
 from ....embeddings.embedded_objects.line import EmbeddedLine
 from ....embeddings.embedded_objects.point import EmbeddedPoint
 from ....embeddings.embedded_objects.scalar import EmbeddedScalar
 from ....embeddings.embedding import Embedding
+from ....geometry_objects.geo_type import GeoType
 from ....geometry_objects.geo_object import GeoObject
 
 

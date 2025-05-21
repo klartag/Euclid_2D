@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import dataclasses
 
 
-from .rule_utils import GeoType
+from .geometry_objects.geo_type import GeoType
 from .geometry_objects.geo_object import GeoObject
 from .predicates.predicate import Predicate
 

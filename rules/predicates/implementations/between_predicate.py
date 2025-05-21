@@ -1,6 +1,6 @@
 from typing import Mapping
 
-from ...rule_utils import GeoType
+from ...geometry_objects.geo_type import GeoType
 from .symmetric_predicate import SymmetricPredicate
 from ...geometry_objects.geo_object import GeoObject
 from ..predicate import Predicate

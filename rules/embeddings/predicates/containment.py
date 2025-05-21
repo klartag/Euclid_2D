@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from ...rule_utils import GeoType
+from ...geometry_objects.geo_type import GeoType
 
 from ..embedded_objects import EmbeddedObject
 

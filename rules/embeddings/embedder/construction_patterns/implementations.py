@@ -1,6 +1,6 @@
 from typing import List
 
-from ....rule_utils import GeoType
+from ....geometry_objects.geo_type import GeoType
 
 from ...constructions.circle_intersection import line_circle_intersection, circle_circle_intersection
 from ...method_dictionaries import (

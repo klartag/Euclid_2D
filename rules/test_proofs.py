@@ -16,7 +16,7 @@ from .geometry_objects.atom import Atom
 from .geometry_objects.parse import parse_geo_object
 
 from .geometry_objects.construction_object import ConstructionObject
-from .rule_utils import GeoType
+from .geometry_objects.geo_type import GeoType
 from .proof_checker import ProofChecker, check_proof
 from .proof_gen.proof_generator import prove
 

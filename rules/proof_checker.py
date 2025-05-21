@@ -22,7 +22,8 @@ from .proof.document.reader.document_reader import DocumentReader
 from .proof.geometry_problem import GeometryProblem
 from .proof.steps import AlmostAlwaysStep, AssertStep, CommentStep, ObjDefineStep, Step, TheoremStep
 
-from .rule_utils import ProofCheckError, R_EQN_TYPES, GeoType
+from .errors import ProofCheckError
+from .geometry_objects.geo_type import R_EQN_TYPES, GeoType
 from .geometry_objects.geo_object import GeoObject
 from .geometry_objects.equation_object import EquationObject
 from .geometry_objects.construction_object import ConstructionObject

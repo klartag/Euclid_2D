@@ -2,9 +2,10 @@ from mpmath import mpf
 from typing import Mapping
 from mpmath import mp
 
-from ..rule_utils import GeoType, GeometryError
+from ..errors import GeometryError
 
 from .eq_op import EqOp
+from .geo_type import GeoType
 from .geo_object import GeoObject
 from .literal import ZERO, ONE, Literal
 

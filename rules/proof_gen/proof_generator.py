@@ -25,7 +25,8 @@ from ..proof.steps import CommentStep, ObjDefineStep, Step, TheoremStep
 from ..proof_checker import CHECK_CFG, TRUST_NO_ADD_CFG, ProofChecker, involved_objects
 from ..proof_checker_utils import KNOWN_KEYS
 from ..signature_dag import IntersectPattern, SignatureDag
-from ..rule_utils import GeoType, GeometryError, ProofCheckError
+from ..errors import GeometryError, ProofCheckError
+from ..geometry_objects.geo_type import GeoType
 from ..theorem import Theorem
 
 from .gen_utils import is_trivial

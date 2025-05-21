@@ -4,9 +4,9 @@ from typing import DefaultDict, Iterator, KeysView, List, Optional, ItemsView, S
 from mpmath import mpf
 from collections import defaultdict
 
-from ..rule_utils import GeoType
 from ..predicates.predicate import Predicate
 
+from ..geometry_objects.geo_type import GeoType
 from ..geometry_objects.construction_object import ConstructionObject
 from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.eq_op import EqOp

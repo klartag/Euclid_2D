@@ -23,7 +23,8 @@ from .proof_checker_utils import (
     unpack_predicate_full,
     unpack_predicate_minimal,
 )
-from .rule_utils import EQN_TYPES, GeoType, GeometryError
+from .errors import GeometryError
+from .geometry_objects.geo_type import EQN_TYPES, GeoType
 from .theorem import Theorem
 from .union_find import UnionFind
 from .rust_code.rust_match import RustMatch

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Mapping
 
-from ..rule_utils import GeoType
+from .geo_type import GeoType
 
 
 class GeoObject(ABC):

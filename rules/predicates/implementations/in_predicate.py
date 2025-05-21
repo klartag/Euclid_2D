@@ -4,7 +4,7 @@ from ..predicate import Predicate
 
 from ...geometry_objects.geo_object import GeoObject
 from ...symmetry import Symmetry
-from ...rule_utils import GeoType
+from ...geometry_objects.geo_type import GeoType
 
 
 class InPredicate(Predicate):

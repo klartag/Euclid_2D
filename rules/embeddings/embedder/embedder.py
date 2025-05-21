@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Iterator, List, Optional
 from tqdm import tqdm
-from ...rule_utils import GeoType
+from ...geometry_objects.geo_type import GeoType
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ...geometry_objects.geo_object import GeoObject
 from ...geometry_objects.construction_object import ConstructionObject

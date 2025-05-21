@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Dict
 
 
-from ....rule_utils import GeoType
+from ....geometry_objects.geo_type import GeoType
 from ....predicates.global_predicates import get_constructions
 
 from ...types import ConstructionMethod, normalize_return_type

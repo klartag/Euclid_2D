@@ -1,7 +1,6 @@
 import abc
 from typing import Any, Generic, TypeVar
 from . import linear_b
-from ..rule_utils import GeometryError
 
 T = TypeVar('T', float, int, bool)
 

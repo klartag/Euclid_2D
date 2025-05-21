@@ -4,7 +4,9 @@ from pathlib import Path
 
 from util import BASE_PATH
 
-from .rule_utils import ProofParseError, GeoType, unpack_dict
+from .rule_utils import unpack_dict
+from .errors import ProofParseError
+from .geometry_objects.geo_type import GeoType
 from .geometry_objects.atom import Atom
 from .geometry_objects.geo_object import GeoObject
 from .predicates.predicate import Predicate

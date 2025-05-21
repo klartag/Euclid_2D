@@ -12,7 +12,8 @@ from ..geometry_objects.equation_object import EquationObject
 from ..geometry_objects.construction_object import Construction, ConstructionObject
 from ..proof.steps import ObjDefineStep, TheoremStep
 from ..proof_checker import ProofChecker, unpack_predicate_full
-from ..rule_utils import GeometryError, union
+from ..errors import GeometryError
+from ..rule_utils import union
 from ..theorem import Theorem
 
 # A small score is good.

@@ -8,7 +8,7 @@ from ..geometry_objects.construction_object import ConstructionObject
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
 from ..predicates.predicate import Predicate
-from ..rule_utils import GeoType
+from ..geometry_objects.geo_type import GeoType
 
 from torch_geo.geometry_entities import Circle, Embed, Line, Point, Triangle, det
 from torch_geo.imprecise import ImpreciseTensor

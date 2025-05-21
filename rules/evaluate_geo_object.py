@@ -1,6 +1,6 @@
 import sympy
 
-from .rule_utils import GeoType
+from .geometry_objects.geo_type import GeoType
 from .geometry_objects.atom import Atom
 from .geometry_objects.construction_object import ConstructionObject
 from .geometry_objects.equation_object import EquationObject

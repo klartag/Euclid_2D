@@ -8,7 +8,8 @@ if TYPE_CHECKING:
 
 from ..geometry_configuration.torch_geo.geometry_entities import torch_hinge_loss
 from ..symmetry import Symmetry
-from ..rule_utils import GeoType, union
+from ..rule_utils import union
+from ..geometry_objects.geo_type import GeoType
 
 
 # CONSTRUCTIONS: Optional[dict[str, Construction]] = {}

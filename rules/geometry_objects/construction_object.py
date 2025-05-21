@@ -3,9 +3,11 @@ from mpmath import mp
 
 from ..predicates.global_predicates import get_constructions
 from ..symmetry import Symmetry
-from ..rule_utils import GeoType, ProofCheckError, union, GeometryError
+from ..rule_utils import union
+from ..errors import ProofCheckError, GeometryError
 
 from .atom import Atom
+from .geo_type import GeoType
 from .geo_object import GeoObject
 from .literal import ONE, ZERO
 from .equation_object import EquationObject

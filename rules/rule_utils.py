@@ -1,53 +1,8 @@
 from typing import Iterable, TypeVar
-from enum import Enum
 
-K = TypeVar('K')
 V = TypeVar('V')
 
 EPSILON = 1e-9
-
-
-class GeoType(Enum):
-    SCALAR = 'Scalar'
-    POINT = 'Point'
-    LINE = 'Line'
-    ANGLE = 'Angle'
-    ORIENTATION = 'Orientation'
-    LITERAL = 'Literal'
-    CIRCLE = 'Circle'
-
-
-R_EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE)
-EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE, GeoType.LITERAL, GeoType.ORIENTATION)
-
-
-class GeometryError(RuntimeError):
-    """
-    A generic error for the geometry project.
-    """
-
-
-class ProofParseError(GeometryError):
-    """
-    An error raised when attempting to parse data results in invalid objects.
-    """
-
-
-class ProofCheckError(GeometryError):
-    """
-    An error in proof checking. Shows that the proof is incorrect.
-    """
-
-
-class IllegalObjectError(ProofCheckError):
-    """
-    An error in proof checking. Shows that the proof is incorrect.
-    """
-
-
-#####################
-# General Utilities #
-#####################
 
 
 def count(iter: Iterable) -> int:

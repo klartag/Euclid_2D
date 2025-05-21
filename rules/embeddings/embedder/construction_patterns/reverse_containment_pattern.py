@@ -1,6 +1,6 @@
 from typing import Type, List, Optional
 
-from ....rule_utils import GeoType
+from ....geometry_objects.geo_type import GeoType
 
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate

@@ -1,6 +1,6 @@
 from re import Match
 
-from ......rule_utils import ProofParseError
+from ......errors import ProofParseError
 from ......geometry_objects.atom import Atom
 from ......geometry_objects.geo_object import GeoObject
 from ......geometry_objects.parse import parse_geo_object

@@ -1,5 +1,6 @@
 from .....geometry_objects.geo_object import GeoObject
-from .....rule_utils import ProofParseError, preprocess_lines
+from .....rule_utils import preprocess_lines
+from .....errors import ProofParseError
 
 from ....steps.step import Step
 from ....proof import Proof

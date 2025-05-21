@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from mpmath import mpf
 from typing import Self
 
-from ...rule_utils import GeoType
+from ...geometry_objects.geo_type import GeoType
 
 from .embedded_object import EmbeddedObject, EPSILON
 

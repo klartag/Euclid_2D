@@ -2,7 +2,8 @@ import re
 
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.parse import parse_geo_object
-from ..rule_utils import ProofParseError, split_args
+from ..rule_utils import split_args
+from ..errors import ProofParseError
 
 from .implementations.between_predicate import BetweenPredicate
 from .implementations.convex_predicate import ConvexPredicate
