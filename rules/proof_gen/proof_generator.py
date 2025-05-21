@@ -25,7 +25,7 @@ from ..proof.steps import CommentStep, ObjDefineStep, Step, TheoremStep
 from ..proof_checker import CHECK_CFG, TRUST_NO_ADD_CFG, ProofChecker, involved_objects
 from ..proof_checker_utils import KNOWN_KEYS
 from ..signature_dag import IntersectPattern, SignatureDag
-from ..rule_utils import LITERAL, GeometryError, ProofCheckError
+from ..rule_utils import GeoType, GeometryError, ProofCheckError
 from ..theorem import Theorem
 
 from .gen_utils import is_trivial
@@ -253,7 +253,7 @@ class ProofGenerator:
             for step in updated_steps:
                 heapq.heappush(self.step_queue, step)
 
-        # points = [obj for obj in unprocessed_unique if obj.type == POINT]
+        # points = [obj for obj in unprocessed_unique if obj.type == GeoType.POINT]
 
         # for p in points:
         #     for old_p in points:
@@ -341,7 +341,7 @@ def validate_proof(problem: GeometryProblem):
                     if isinstance(obj, EquationObject):
                         continue
                     obj = obj.substitute(subs)
-                    if obj not in proof_gen.checker.geometry_tracker._processed_objects and obj.type != LITERAL:
+                    if obj not in proof_gen.checker.geometry_tracker._processed_objects and obj.type != GeoType.LITERAL:
                         proof_gen.checker.geometry_tracker.get_object(obj, CHECK_CFG)
                         print(f'Adding object {obj}')
 

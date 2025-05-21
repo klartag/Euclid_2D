@@ -4,7 +4,7 @@ from typing import DefaultDict, Iterator, KeysView, List, Optional, ItemsView, S
 from mpmath import mpf
 from collections import defaultdict
 
-from ..rule_utils import LITERAL
+from ..rule_utils import GeoType
 from ..predicates.predicate import Predicate
 
 from ..geometry_objects.construction_object import ConstructionObject
@@ -64,7 +64,7 @@ class Embedding:
             return self.evaluate_construction_object(obj)
         elif isinstance(obj, EquationObject):
             return self.evaluate_equation_object(obj)
-        elif obj.type == LITERAL:
+        elif obj.type == GeoType.LITERAL:
             return (EmbeddedScalar(mpf(obj.name)),)
         else:
             raise UndefinedEmbeddingError()

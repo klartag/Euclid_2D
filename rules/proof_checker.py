@@ -22,8 +22,7 @@ from .proof.document.reader.document_reader import DocumentReader
 from .proof.geometry_problem import GeometryProblem
 from .proof.steps import AlmostAlwaysStep, AssertStep, CommentStep, ObjDefineStep, Step, TheoremStep
 
-from . import rule_utils
-from .rule_utils import ProofCheckError, R_EQN_TYPES
+from .rule_utils import ProofCheckError, R_EQN_TYPES, GeoType
 from .geometry_objects.geo_object import GeoObject
 from .geometry_objects.equation_object import EquationObject
 from .geometry_objects.construction_object import ConstructionObject
@@ -163,9 +162,9 @@ class ProofChecker:
                 )
 
         match obj.type:
-            case rule_utils.ANGLE:
+            case GeoType.ANGLE:
                 self.process_angle(obj)
-            case rule_utils.ORIENTATION:
+            case GeoType.ORIENTATION:
                 self.process_orientation(obj)
 
     def _add_obj_define_step(self, step: ObjDefineStep):

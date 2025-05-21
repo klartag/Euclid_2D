@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from .....rule_utils import POINT
+from .....rule_utils import GeoType
 from .....predicates.predicate import Predicate
 from .....predicates.predicate_factory import predicate_from_args
 
@@ -13,18 +13,16 @@ class InPredicateSplitter(PredicatePreprocessingPattern):
             return None
 
         for i in range(len(predicate.components) - 1):
-            if predicate.components[i].type != POINT and predicate.components[i + 1].type == POINT:
+            if predicate.components[i].type != GeoType.POINT and predicate.components[i + 1].type == GeoType.POINT:
                 return None
 
-        point_indices = [i for i in range(len(predicate.components)) if predicate.components[i].type == POINT]
-        curve_indices = [i for i in range(len(predicate.components)) if predicate.components[i].type != POINT]
+        point_indices = [i for i in range(len(predicate.components)) if predicate.components[i].type == GeoType.POINT]
+        curve_indices = [i for i in range(len(predicate.components)) if predicate.components[i].type != GeoType.POINT]
 
         containment_predicates = []
         for i in point_indices:
             for j in curve_indices:
                 containment_predicates.append(
-                    predicate_from_args(
-                        'in', (predicate.components[i], predicate.components[j])
-                    )
+                    predicate_from_args('in', (predicate.components[i], predicate.components[j]))
                 )
         return containment_predicates

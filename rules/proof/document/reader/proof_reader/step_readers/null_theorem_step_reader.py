@@ -1,6 +1,6 @@
 from re import Match
 
-from ......rule_utils import ProofParseError, split_args
+from ......rule_utils import ProofParseError, GeoType, split_args
 from ......geometry_objects.geo_object import GeoObject
 from ......geometry_objects.atom import Atom
 from ......predicates.predicate_factory import parse_predicate
@@ -33,7 +33,7 @@ class NullTheoremStepReader(AbstractStepReader[NullTheoremStep]):
             typ = typ.strip()
             if name in obj_map:
                 raise ProofParseError(f'Object {name} defined twice!')
-            res_obj = Atom(name, typ)
+            res_obj = Atom(name, GeoType(typ))
             result_objects.append(res_obj)
             obj_map[name] = res_obj
 

@@ -16,7 +16,7 @@ from .geometry_objects.atom import Atom
 from .geometry_objects.parse import parse_geo_object
 
 from .geometry_objects.construction_object import ConstructionObject
-from .rule_utils import POINT, SCALAR
+from .rule_utils import GeoType
 from .proof_checker import ProofChecker, check_proof
 from .proof_gen.proof_generator import prove
 
@@ -163,11 +163,11 @@ def test_constructions():
 
 def test_parsing():
     objects = {
-        'A': Atom('A', POINT),
-        'B': Atom('B', POINT),
-        'C': Atom('C', POINT),
-        'r': Atom('r', SCALAR),
-        's': Atom('s', SCALAR),
+        'A': Atom('A', GeoType.POINT),
+        'B': Atom('B', GeoType.POINT),
+        'C': Atom('C', GeoType.POINT),
+        'r': Atom('r', GeoType.SCALAR),
+        's': Atom('s', GeoType.SCALAR),
     }
     p = parse_geo_object('2*(r) * s', objects)
     ConstructionObject.from_args('log', (p,))

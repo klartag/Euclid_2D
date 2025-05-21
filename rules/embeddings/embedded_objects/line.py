@@ -1,10 +1,9 @@
 from dataclasses import dataclass
-from mpmath import mp, mpf
-from typing import Optional, Self
+from typing import Self
 
-from ...rule_utils import LINE
+from ...rule_utils import GeoType
 
-from .embedded_object import EPSILON, EmbeddedObject
+from .embedded_object import EmbeddedObject
 from .embedded_curve import EmbeddedCurve
 from .point import EmbeddedPoint
 
@@ -20,10 +19,10 @@ class EmbeddedLine(EmbeddedCurve):
     direction: EmbeddedPoint
 
     def _type(self) -> str:
-        return LINE
+        return GeoType.LINE
 
     def is_equal(self, other: EmbeddedObject):
-        if other._type() != LINE:
+        if other._type() != GeoType.LINE:
             return False
 
         if self.point.is_equal(other.point):

@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 
 from ..geometry_configuration.torch_geo.geometry_entities import torch_hinge_loss
 from ..symmetry import Symmetry
-from ..rule_utils import POINT, LINE, SCALAR, ANGLE, ORIENTATION, LITERAL, CIRCLE, union, unpack_dict
+from ..rule_utils import GeoType, union
 
 
 # CONSTRUCTIONS: Optional[dict[str, Construction]] = {}
@@ -21,45 +21,54 @@ RESULT_PREDICATE_LABEL = 'conclude'
 POSS_CONCLUSIONS_LABEL = 'possible_conclusions'
 
 PREDICATE_SIGNATURES = {
-    'between': [[POINT, POINT, POINT]],
+    'between': [[GeoType.POINT, GeoType.POINT, GeoType.POINT]],
     'equals': [
-        [POINT, POINT],
-        [SCALAR, SCALAR],
-        [SCALAR, LITERAL],
-        [LITERAL, SCALAR],
-        [ANGLE, ANGLE],
-        [ANGLE, LITERAL],
-        [LITERAL, ANGLE],
-        [CIRCLE, CIRCLE],
-        [LINE, LINE],
-        [ORIENTATION, ORIENTATION],
-        [ORIENTATION, LITERAL],
-        [LITERAL, ORIENTATION],
+        [GeoType.POINT, GeoType.POINT],
+        [GeoType.SCALAR, GeoType.SCALAR],
+        [GeoType.SCALAR, GeoType.LITERAL],
+        [GeoType.LITERAL, GeoType.SCALAR],
+        [GeoType.ANGLE, GeoType.ANGLE],
+        [GeoType.ANGLE, GeoType.LITERAL],
+        [GeoType.LITERAL, GeoType.ANGLE],
+        [GeoType.CIRCLE, GeoType.CIRCLE],
+        [GeoType.LINE, GeoType.LINE],
+        [GeoType.ORIENTATION, GeoType.ORIENTATION],
+        [GeoType.ORIENTATION, GeoType.LITERAL],
+        [GeoType.LITERAL, GeoType.ORIENTATION],
     ],
-    'equals_mod_360': [[ANGLE, ANGLE], [ANGLE, LITERAL], [LITERAL, ANGLE]],
+    'equals_mod_360': [
+        [GeoType.ANGLE, GeoType.ANGLE],
+        [GeoType.ANGLE, GeoType.LITERAL],
+        [GeoType.LITERAL, GeoType.ANGLE],
+    ],
     'not_equals': [
-        [POINT, POINT],
-        [SCALAR, SCALAR],
-        [SCALAR, LITERAL],
-        [LITERAL, SCALAR],
-        [ANGLE, ANGLE],
-        [ANGLE, LITERAL],
-        [LITERAL, ANGLE],
-        [CIRCLE, CIRCLE],
-        [LINE, LINE],
-        [ORIENTATION, ORIENTATION],
-        [ORIENTATION, LITERAL],
-        [LITERAL, ORIENTATION],
-        [LITERAL, LITERAL],
+        [GeoType.POINT, GeoType.POINT],
+        [GeoType.SCALAR, GeoType.SCALAR],
+        [GeoType.SCALAR, GeoType.LITERAL],
+        [GeoType.LITERAL, GeoType.SCALAR],
+        [GeoType.ANGLE, GeoType.ANGLE],
+        [GeoType.ANGLE, GeoType.LITERAL],
+        [GeoType.LITERAL, GeoType.ANGLE],
+        [GeoType.CIRCLE, GeoType.CIRCLE],
+        [GeoType.LINE, GeoType.LINE],
+        [GeoType.ORIENTATION, GeoType.ORIENTATION],
+        [GeoType.ORIENTATION, GeoType.LITERAL],
+        [GeoType.LITERAL, GeoType.ORIENTATION],
+        [GeoType.LITERAL, GeoType.LITERAL],
     ],
-    'not_equals_mod_360': [[ANGLE, ANGLE], [ANGLE, LITERAL], [LITERAL, ANGLE], [LITERAL, LITERAL]],
-    'in': [[POINT, LINE], [POINT, CIRCLE]],
-    'tangent': [[LINE, CIRCLE], [CIRCLE, CIRCLE]],
-    'not_in': [[POINT, LINE], [POINT, CIRCLE]],
-    'convex': [[POINT] * 3, [POINT] * 4, [POINT] * 5],
-    'not_collinear': [[POINT] * 3],
+    'not_equals_mod_360': [
+        [GeoType.ANGLE, GeoType.ANGLE],
+        [GeoType.ANGLE, GeoType.LITERAL],
+        [GeoType.LITERAL, GeoType.ANGLE],
+        [GeoType.LITERAL, GeoType.LITERAL],
+    ],
+    'in': [[GeoType.POINT, GeoType.LINE], [GeoType.POINT, GeoType.CIRCLE]],
+    'tangent': [[GeoType.LINE, GeoType.CIRCLE], [GeoType.CIRCLE, GeoType.CIRCLE]],
+    'not_in': [[GeoType.POINT, GeoType.LINE], [GeoType.POINT, GeoType.CIRCLE]],
+    'convex': [[GeoType.POINT] * 3, [GeoType.POINT] * 4, [GeoType.POINT] * 5],
+    'not_collinear': [[GeoType.POINT] * 3],
     'false': [[]],
-    'exists': [[POINT], [LINE], [CIRCLE], [SCALAR], [ORIENTATION]],
+    'exists': [[GeoType.POINT], [GeoType.LINE], [GeoType.CIRCLE], [GeoType.SCALAR], [GeoType.ORIENTATION]],
 }
 
 
@@ -147,7 +156,7 @@ class Predicate:
             case 'equals':
                 assert len(args) == 2
                 if isinstance(args[0], Tensor) or isinstance(args[1], Tensor):
-                    if self.components[0].type == ANGLE or self.components[1].type == ANGLE:
+                    if self.components[0].type == GeoType.ANGLE or self.components[1].type == GeoType.ANGLE:
                         loss = torch.abs((args[0] - args[1]) / 180) ** 2  # type: ignore
                     else:
                         loss = torch.abs(args[0] - args[1]) ** 2  # type: ignore
@@ -160,7 +169,7 @@ class Predicate:
                 elif isinstance(args[0], Circle):
                     expr = args[0].center.distance(args[1].center)  # type: ignore
                     loss = torch.abs(args[0].radius - args[1].radius) ** 2  # type: ignore
-                elif self.components[0].type == ORIENTATION or self.components[1].type == ORIENTATION:
+                elif self.components[0].type == GeoType.ORIENTATION or self.components[1].type == GeoType.ORIENTATION:
                     expr = args[0] * args[1]  # type: ignore
                     loss = torch_hinge_loss(expr, eps) ** 2  # type: ignore
                 else:
@@ -178,7 +187,7 @@ class Predicate:
                     expr = (line.distance(p1) + line.distance(p2)) / 2  # type: ignore
                 elif isinstance(args[0], Circle):
                     expr = (args[0].center.distance(args[1].center) + torch.abs(args[0].radius - args[1].radius)) / 2  # type: ignore
-                elif self.components[0].type == ORIENTATION:
+                elif self.components[0].type == GeoType.ORIENTATION:
                     expr = -args[0] * args[1]  # type: ignore
                 else:
                     raise NotImplementedError()
@@ -327,7 +336,7 @@ class Predicate:
                     return f'{self.components[0].to_language_format()} in {self.components[1].to_language_format()}'
                 else:
                     idx = 0
-                    while self.components[idx].type == POINT:
+                    while self.components[idx].type == GeoType.POINT:
                         idx += 1
                     return f'{", ".join(comp.to_language_format() for comp in self.components[:idx])} in {", ".join(comp.to_language_format() for comp in self.components[idx:])}'
             case 'not_in':

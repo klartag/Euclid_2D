@@ -1,11 +1,13 @@
 from abc import ABC, abstractmethod
 from typing import Mapping
 
+from ..rule_utils import GeoType
+
 
 class GeoObject(ABC):
     __slots__ = 'name', 'type', 'id', 'depth'
     name: str
-    type: str
+    type: GeoType
     id: int
     depth: int
 

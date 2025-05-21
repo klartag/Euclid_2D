@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Iterator, List, Optional
 from tqdm import tqdm
-from ...rule_utils import LITERAL
+from ...rule_utils import GeoType
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ...geometry_objects.geo_object import GeoObject
 from ...geometry_objects.construction_object import ConstructionObject
@@ -159,7 +159,7 @@ class DiagramEmbedder:
             involved_names = [
                 obj.name
                 for obj in predicate.involved_objects()
-                if not isinstance(obj, ConstructionObject) and not obj.type == LITERAL
+                if not isinstance(obj, ConstructionObject) and not obj.type == GeoType.LITERAL
             ]
             stage = max([name_to_stage[name] for name in involved_names])
             predicates_by_step[stage].append(predicate)

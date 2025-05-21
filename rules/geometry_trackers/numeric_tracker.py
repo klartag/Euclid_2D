@@ -8,8 +8,8 @@ from ..geometry_objects.construction_object import ConstructionObject
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.equation_object import EquationObject
 from ..predicates.predicate import Predicate
+from ..rule_utils import GeoType
 
-from .. import rule_utils
 from torch_geo.geometry_entities import Circle, Embed, Line, Point, Triangle, det
 from torch_geo.imprecise import ImpreciseTensor
 
@@ -73,26 +73,26 @@ class NumericTracker:
         res = []
 
         match obj_1.type, obj_2.type:
-            case rule_utils.POINT, rule_utils.POINT:
+            case GeoType.POINT, GeoType.POINT:
                 assert isinstance(emb_1, Point) and isinstance(
                     emb_2, Point
                 ), f'_get_predicates_asym received embed {obj_1} => {emb_1} and {obj_2} => {emb_2}'
                 if self.approx_nonzero(emb_1.distance_sqr(emb_2)):
                     res.append(predicate_from_args('not_equals', (obj_1, obj_2)))
-            case rule_utils.POINT, rule_utils.LINE:
+            case GeoType.POINT, GeoType.LINE:
                 assert isinstance(emb_1, Point) and isinstance(
                     emb_2, Line
                 ), f'_get_predicates_asym received embed {obj_1} => {emb_1} and {obj_2} => {emb_2}'
                 dist = emb_1.line_distance_sqr(emb_2)
                 if self.approx_nonzero(emb_1.line_distance_sqr(emb_2)):
                     res.append(predicate_from_args('not_in', (obj_1, obj_2)))
-            case rule_utils.POINT, rule_utils.CIRCLE:
+            case GeoType.POINT, GeoType.CIRCLE:
                 assert isinstance(emb_1, Point) and isinstance(
                     emb_2, Circle
                 ), f'_get_predicates_asym received embed {obj_1} => {emb_1} and {obj_2} => {emb_2}'
                 if self.approx_nonzero(emb_2.eval_equation(emb_1)):
                     res.append(predicate_from_args('not_in', (obj_1, obj_2)))
-            case rule_utils.LINE, rule_utils.LINE:
+            case GeoType.LINE, GeoType.LINE:
                 assert isinstance(emb_1, Line) and isinstance(
                     emb_2, Line
                 ), f'_get_predicates_asym received embed {obj_1} => {emb_1} and {obj_2} => {emb_2}'
@@ -103,7 +103,7 @@ class NumericTracker:
                     # dist = emb_2.p1.line_distance_sqr(emb_1)
                     # print(f'For {obj_1} and {obj_2}: angle_diff=({angle_diff.mean, angle_diff.variance}) dist={dist.mean, dist.variance}')
                     res.append(predicate_from_args('not_equals', (obj_1, obj_2)))
-            case rule_utils.CIRCLE, rule_utils.CIRCLE:
+            case GeoType.CIRCLE, GeoType.CIRCLE:
                 assert isinstance(emb_1, Circle) and isinstance(
                     emb_2, Circle
                 ), f'_get_predicates_asym received embed {obj_1} => {emb_1} and {obj_2} => {emb_2}'
@@ -111,13 +111,13 @@ class NumericTracker:
                     emb_2.radius, emb_1.radius
                 ):
                     res.append(predicate_from_args('not_equals', (obj_1, obj_2)))
-            case rule_utils.SCALAR, rule_utils.SCALAR:
+            case GeoType.SCALAR, GeoType.SCALAR:
                 assert isinstance(emb_1, ImpreciseTensor) and isinstance(
                     emb_2, ImpreciseTensor
                 ), f'_get_predicates_asym received embed {obj_1} => {emb_1} and {obj_2} => {emb_2}'
                 if self.approx_different(emb_1, emb_2):
                     res.append(predicate_from_args('not_equals', (obj_1, obj_2)))
-            case rule_utils.ANGLE, rule_utils.ANGLE:
+            case GeoType.ANGLE, GeoType.ANGLE:
                 assert isinstance(emb_1, ImpreciseTensor) and isinstance(
                     emb_2, ImpreciseTensor
                 ), f'_get_predicates_asym received embed {obj_1} => {emb_1} and {obj_2} => {emb_2}'
@@ -147,13 +147,13 @@ class NumericTracker:
         Adds the embedding of the object.
         """
         match obj.type:
-            case rule_utils.POINT:
+            case GeoType.POINT:
                 assert isinstance(embed, Point)
-            case rule_utils.LINE:
+            case GeoType.LINE:
                 assert isinstance(embed, Line)
-            case rule_utils.CIRCLE:
+            case GeoType.CIRCLE:
                 assert isinstance(embed, Circle)
-            case rule_utils.SCALAR | rule_utils.ANGLE:
+            case GeoType.SCALAR | GeoType.ANGLE:
                 assert isinstance(embed, Tensor)
 
         self.embeds[obj] = embed
@@ -188,20 +188,26 @@ class NumericTracker:
                 embed = arg_embeds[0].distance(arg_embeds[1])
             case 'Line' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point):
                 embed = Line(arg_embeds[0], arg_embeds[1])
-            case 'Circle' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'Circle' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 embed = Triangle(arg_embeds[0], arg_embeds[1], arg_embeds[2]).circumcircle()
-            case 'circumcenter' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'circumcenter' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 embed = Triangle(arg_embeds[0], arg_embeds[1], arg_embeds[2]).circumcenter()
             case 'center' if isinstance(arg_embeds[0], Circle):
                 embed = arg_embeds[0].center
             case 'radius' if isinstance(arg_embeds[0], Circle):
                 embed = arg_embeds[0].radius
-            case 'angle' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'angle' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 embed = rad_to_degree(Point.angle_between(arg_embeds[0], arg_embeds[1], arg_embeds[2]))
             case 'exp' if isinstance(arg_embeds[0], ImpreciseTensor):
@@ -210,8 +216,10 @@ class NumericTracker:
             #     embed = arg_embeds[0].log()
             case 'abs' if isinstance(arg_embeds[0], ImpreciseTensor):
                 embed = arg_embeds[0].abs()
-            case 'abs_angle' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'abs_angle' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 embed = rad_to_degree(Point.angle_between(arg_embeds[0], arg_embeds[1], arg_embeds[2]))
                 embed = small_rem(embed, T360)
@@ -226,12 +234,16 @@ class NumericTracker:
                 embed = Circle(arg_embeds[0], arg_embeds[1])
             case 'parallel_line' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Line):
                 embed = Line(arg_embeds[0], arg_embeds[1].p2 - arg_embeds[1].p1 + arg_embeds[0])
-            case 'median' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'median' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 embed = Line(arg_embeds[0], (arg_embeds[1] + arg_embeds[2]) / 2)
-            case 'midline' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'midline' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 embed = Line((arg_embeds[0] + arg_embeds[1]) / 2, (arg_embeds[0] + arg_embeds[2]) / 2)
             case 'point_reflection' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point):
@@ -239,33 +251,45 @@ class NumericTracker:
             case 'line_reflection' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Line):
                 proj = arg_embeds[1].projection(arg_embeds[0])
                 embed = proj * 2 - arg_embeds[0]
-            case 'centroid' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'centroid' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 embed = (arg_embeds[0] + arg_embeds[1] + arg_embeds[2]) / 3
-            case 'parallelogram_point' if isinstance(arg_embeds[0], Point) and isinstance(
-                arg_embeds[1], Point
-            ) and isinstance(arg_embeds[2], Point):
+            case 'parallelogram_point' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
+            ):
                 embed = arg_embeds[2] + arg_embeds[0] - arg_embeds[1]
             case 'radical_axis' if isinstance(arg_embeds[0], Circle) and isinstance(arg_embeds[1], Circle):
                 embed = arg_embeds[0].radical_axis(arg_embeds[1])
-            case 'internal_angle_bisector' if isinstance(arg_embeds[0], Point) and isinstance(
-                arg_embeds[1], Point
-            ) and isinstance(arg_embeds[2], Point):
+            case 'internal_angle_bisector' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
+            ):
                 embed = Point.internal_bisector(arg_embeds[0], arg_embeds[1], arg_embeds[2])
-            case 'external_angle_bisector' if isinstance(arg_embeds[0], Point) and isinstance(
-                arg_embeds[1], Point
-            ) and isinstance(arg_embeds[2], Point):
+            case 'external_angle_bisector' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
+            ):
                 embed = Point.external_bisector(arg_embeds[0], arg_embeds[1], arg_embeds[2])
-            case 'incircle' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'incircle' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 a = arg_embeds[0]
                 b = arg_embeds[1]
                 c = arg_embeds[2]
                 embed = Triangle(a, b, c).incircle()
-            case 'excircle' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'excircle' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 a = arg_embeds[0]
                 b = arg_embeds[1]
@@ -288,8 +312,10 @@ class NumericTracker:
             #     embed = max(inters, key=lambda p: p.distance(arg_embeds[0]))  # type: ignore
             case 'perpendicular_line' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Line):
                 embed = Line(arg_embeds[0], arg_embeds[0] + arg_embeds[1].unit_orthogonal_direction())
-            case 'altitude' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'altitude' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 embed = Line(arg_embeds[0], arg_embeds[0] + (arg_embeds[2] - arg_embeds[1]).rotate90())
             case 'distance_from_line' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Line):
@@ -304,9 +330,11 @@ class NumericTracker:
                 arg_embeds[1], Circle
             ):
                 embed = arg_embeds[0].projection(arg_embeds[1].center)
-            case 'nine_points_circle' if isinstance(arg_embeds[0], Point) and isinstance(
-                arg_embeds[1], Point
-            ) and isinstance(arg_embeds[2], Point):
+            case 'nine_points_circle' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
+            ):
                 embed = Triangle(
                     (arg_embeds[0] + arg_embeds[1]) / 2,
                     (arg_embeds[1] + arg_embeds[2]) / 2,
@@ -314,8 +342,10 @@ class NumericTracker:
                 ).circumcircle()
             case 'perpendicular_bisector' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point):
                 embed = Point.perpendicular_bisector(arg_embeds[0], arg_embeds[1])
-            case 'orthocenter' if isinstance(arg_embeds[0], Point) and isinstance(arg_embeds[1], Point) and isinstance(
-                arg_embeds[2], Point
+            case 'orthocenter' if (
+                isinstance(arg_embeds[0], Point)
+                and isinstance(arg_embeds[1], Point)
+                and isinstance(arg_embeds[2], Point)
             ):
                 raw_ortho = Triangle(arg_embeds[0], arg_embeds[1], arg_embeds[2]).orthocenter()
                 if raw_ortho is None:
@@ -371,7 +401,7 @@ class NumericTracker:
         for other_obj in self.embeds:
             res += self.get_pair_predicates(obj, other_obj)
         # print(f'Numeric predicates found: {res}')
-        if obj.type == rule_utils.POINT:
+        if obj.type == GeoType.POINT:
             eo = self.embeds[obj]
             assert isinstance(eo, Point)
             for (p1, e1), (p2, e2) in itertools.combinations(self.points(), 2):

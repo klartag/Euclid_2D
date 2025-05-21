@@ -1,4 +1,5 @@
 from typing import Iterable, TypeVar
+from enum import Enum
 
 K = TypeVar('K')
 V = TypeVar('V')
@@ -6,20 +7,18 @@ V = TypeVar('V')
 EPSILON = 1e-9
 
 
-# Types
-SCALAR = 'Scalar'
-POINT = 'Point'
-LINE = 'Line'
-ANGLE = 'Angle'
-ORIENTATION = 'Orientation'
-LITERAL = 'Literal'
-CIRCLE = 'Circle'
-NULL = 'Null'
-"""The null type is the type of GeoObjects which are just placeholders for other things."""
+class GeoType(Enum):
+    SCALAR = 'Scalar'
+    POINT = 'Point'
+    LINE = 'Line'
+    ANGLE = 'Angle'
+    ORIENTATION = 'Orientation'
+    LITERAL = 'Literal'
+    CIRCLE = 'Circle'
 
-R_EQN_TYPES = (SCALAR, ANGLE)
-EQN_TYPES = (SCALAR, ANGLE, LITERAL, ORIENTATION)
-ALL_TYPES = (SCALAR, POINT, LINE, ANGLE, ORIENTATION, LITERAL, CIRCLE, NULL)
+
+R_EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE)
+EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE, GeoType.LITERAL, GeoType.ORIENTATION)
 
 
 class GeometryError(RuntimeError):

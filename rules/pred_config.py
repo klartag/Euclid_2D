@@ -10,7 +10,7 @@ from .geometry_objects.atom import Atom
 from .geometry_objects.construction_object import Construction, LogConstruction
 from .geometry_objects.geo_object import GeoObject
 from .geometry_objects.literal import Literal
-from .rule_utils import SCALAR, ProofParseError, unpack_dict
+from .rule_utils import GeoType, ProofParseError, unpack_dict
 from .symmetry import Symmetry
 from util import BASE_PATH
 
@@ -37,13 +37,13 @@ def load_constructions_and_macros() -> None:
     Loads the constructions and the macros.
     """
 
-    log_arg_0 = Atom('arg_0', SCALAR)
+    log_arg_0 = Atom('arg_0', GeoType.SCALAR)
     global_constructions: dict[str, Construction] = {
         'log': LogConstruction(
             'log',
             [log_arg_0],
             Symmetry.NONE,
-            Atom('res', SCALAR),
+            Atom('res', GeoType.SCALAR),
             [predicate_from_args('not_equals', (log_arg_0, Literal('0')))],
             [],
         ),
@@ -108,7 +108,7 @@ def read_constructions(path: Path) -> list[Construction]:
             for name in names.split(','):
                 name = name.strip()
                 assert name not in obj_map, f'In theorem {construction_name}, object name {name} appears twice!'
-                g = Atom(name, typ)
+                g = Atom(name, GeoType(typ))
                 obj_map[name] = g
                 signature.append(g)
 
@@ -133,7 +133,7 @@ def read_constructions(path: Path) -> list[Construction]:
 
         res_name, res_typ = unpack_dict(res)
         assert res_name not in obj_map, f'In construction {construction_name}, object name {res_name} appears twice!'
-        res_obj = Atom(res_name, res_typ)
+        res_obj = Atom(res_name, GeoType(res_typ))
         obj_map[res_name] = res_obj
 
         # 5. Parsing the result predicate.
@@ -238,7 +238,7 @@ def read_macros(path: Path) -> 'list[MacroData]':
                 for name in names.split(','):
                     name = name.strip()
                     assert name not in obj_map, f'In macro {macro_name}, object name {name} appears twice!'
-                    g = Atom(name, typ)
+                    g = Atom(name, GeoType(typ))
                     obj_map[name] = g
                     signature.append(g)
             # 2. Parsing the preprocess type.

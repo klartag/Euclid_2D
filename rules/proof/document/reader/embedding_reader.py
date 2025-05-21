@@ -1,13 +1,12 @@
 import json
 
-from ....rule_utils import ProofParseError
+from ....rule_utils import ProofParseError, GeoType
 from ....embeddings.embedded_objects.circle import EmbeddedCircle
 from ....embeddings.embedded_objects.line import EmbeddedLine
 from ....embeddings.embedded_objects.point import EmbeddedPoint
 from ....embeddings.embedded_objects.scalar import EmbeddedScalar
 from ....embeddings.embedding import Embedding
 from ....geometry_objects.geo_object import GeoObject
-from rules import rule_utils
 
 
 class EmbeddingReader:
@@ -26,13 +25,13 @@ class EmbeddingReader:
                 raise ProofParseError(f'Embed given for unknown object: {name}')
             embedded_object = None
             match obj_map[name].type:
-                case rule_utils.POINT:
+                case GeoType.POINT:
                     embedded_object = EmbeddedPoint.from_dict(data)
-                case rule_utils.LINE:
+                case GeoType.LINE:
                     embedded_object = EmbeddedLine.from_dict(data)
-                case rule_utils.CIRCLE:
+                case GeoType.CIRCLE:
                     embedded_object = EmbeddedCircle.from_dict(data)
-                case rule_utils.ANGLE | rule_utils.SCALAR:
+                case GeoType.ANGLE | GeoType.SCALAR:
                     embedded_object = EmbeddedScalar.from_dict(data)
 
             embedding[name] = embedded_object

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Dict
 
 
-from ....rule_utils import POINT, LINE, CIRCLE
+from ....rule_utils import GeoType
 from ....predicates.global_predicates import get_constructions
 
 from ...types import ConstructionMethod, normalize_return_type
@@ -48,15 +48,24 @@ _EMBEDDED_GEO_OBJECT_CIRCLE_CONSTRUCTIONS: Dict[str, ConstructionMethod] = {
 EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY: Dict[str, ConstructionData] = {}
 
 EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY.update(
-    [(name, ConstructionData(POINT, method)) for (name, method) in _EMBEDDED_GEO_OBJECT_POINT_CONSTRUCTIONS.items()]
+    [
+        (name, ConstructionData(GeoType.POINT, method))
+        for (name, method) in _EMBEDDED_GEO_OBJECT_POINT_CONSTRUCTIONS.items()
+    ]
 )
 
 EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY.update(
-    [(name, ConstructionData(LINE, method)) for (name, method) in _EMBEDDED_GEO_OBJECT_LINE_CONSTRUCTIONS.items()]
+    [
+        (name, ConstructionData(GeoType.LINE, method))
+        for (name, method) in _EMBEDDED_GEO_OBJECT_LINE_CONSTRUCTIONS.items()
+    ]
 )
 
 EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY.update(
-    [(name, ConstructionData(CIRCLE, method)) for (name, method) in _EMBEDDED_GEO_OBJECT_CIRCLE_CONSTRUCTIONS.items()]
+    [
+        (name, ConstructionData(GeoType.CIRCLE, method))
+        for (name, method) in _EMBEDDED_GEO_OBJECT_CIRCLE_CONSTRUCTIONS.items()
+    ]
 )
 
 for name in EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY:

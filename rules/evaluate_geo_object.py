@@ -1,12 +1,11 @@
 import sympy
 
-from .rule_utils import POINT, SCALAR
+from .rule_utils import GeoType
 from .geometry_objects.atom import Atom
 from .geometry_objects.construction_object import ConstructionObject
 from .geometry_objects.equation_object import EquationObject
 from .geo_config import get_sympy_objects
 from .geometry_objects.parse import parse_geo_object
-from .geometry_objects.geo_object import GeoObject
 
 
 def evaluate(object, obj_map):
@@ -89,11 +88,11 @@ def evaluate_construction(object, obj_map):
 
 def test_evaluation():
     obj_map = {
-        'A': Atom('A', POINT),
-        'B': Atom('B', POINT),
-        'C': Atom('C', POINT),
-        'D': Atom('D', POINT),
-        'r': Atom('r', SCALAR),
+        'A': Atom('A', GeoType.POINT),
+        'B': Atom('B', GeoType.POINT),
+        'C': Atom('C', GeoType.POINT),
+        'D': Atom('D', GeoType.POINT),
+        'r': Atom('r', GeoType.SCALAR),
     }
     geo_object = parse_geo_object('angle(A, B, C) - angle(B, C, D)', obj_map)
     sympy_obj_map, sympy_symbols = get_sympy_objects(obj_map)

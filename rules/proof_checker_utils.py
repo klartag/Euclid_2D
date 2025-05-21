@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import dataclasses
 
 
-from .rule_utils import LITERAL
+from .rule_utils import GeoType
 from .geometry_objects.geo_object import GeoObject
 from .predicates.predicate import Predicate
 
@@ -30,7 +30,7 @@ def get_linear_eqn_factors(pred: Predicate) -> dict[GeoObject, float] | None:
     if res is None:
         return None
     assert not any(
-        obj.type == LITERAL and obj.name != '1' for obj in res
+        obj.type == GeoType.LITERAL and obj.name != '1' for obj in res
     ), f'Illegal unpack: {pred.to_language_format()} => {res}'
     return res
 
@@ -48,7 +48,7 @@ def get_log_eqn_factors(pred: Predicate) -> dict[GeoObject, float] | None:
     for obj, factor in right_log.items():
         left_log[obj] = left_log.get(obj, 0) - factor
     assert not any(
-        obj.type == LITERAL and obj.name != '1' for obj in left_log
+        obj.type == GeoType.LITERAL and obj.name != '1' for obj in left_log
     ), f'Illegal unpack: {pred.to_language_format()} => {left_log}'
     return left_log
 
