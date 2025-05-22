@@ -7,7 +7,7 @@ from rules.parsers.predicate_parser.predicate_parser import PredicateParser
 from ...theorem import CONDITION_LABEL, CONSTRUCTION_LABEL, POSS_CONCLUSIONS_LABEL, RESULT_PREDICATE_LABEL
 from ..predicate import INPUT_LABEL, PREPROCESS_LABEL, Predicate
 from ..implementations.macro_predicate import MacroData
-from ..predicate_factory import parse_predicate, predicate_from_args
+from ..predicate_factory import predicate_from_args
 from ...geometry_objects.atom import Atom
 from ...geometry_objects.construction_object import Construction, LogConstruction
 from ...geometry_objects.geo_object import GeoObject
