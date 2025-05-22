@@ -1,12 +1,11 @@
-from .embeddings.embedded_objects.embedded_object import EmbeddedObject
+from .parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
+from .parsers.predicate_parser.predicate_parser import PredicateParser
+
 from .embeddings.undefined_embedding_error import UndefinedEmbeddingError
-
+from .geometry_objects.atom import Atom
 from .geometry_objects.geo_object import GeoObject
-from .geometry_objects.parse import parse_geo_object
 from .geometry_trackers.geometry_tracker import GeometryTracker
-
 from .predicates.predicate import Predicate
-from .predicates.predicate_factory import parse_predicate
 
 
 class InteractivePredicateChecker:
@@ -16,27 +15,35 @@ class InteractivePredicateChecker:
         self.geometry_tracker = geometry_tracker
 
     def run(self):
-        object_map = {o.name: o for o in self.geometry_tracker.all_objects() if o.name.isalnum()}
+        signature = {atom.name: atom.type for atom in self.geometry_tracker.all_objects() if isinstance(atom, Atom)}
+
+        predicate_parser = PredicateParser(signature)
+        geometry_object_parser = GeometryObjectParser(signature)
+
         while True:
             try:
-                data = input('>> ')
-                if data == 'quit()':
+                text = input('>> ')
+                if text == 'quit()':
                     break
                 try:
-                    predicate = parse_predicate(data, object_map)
+                    predicate = predicate_parser.try_parse(text)
+                    if predicate is None:
+                        raise ValueError("User input was not a predicate.")
                     print(self.check_predicate(predicate))
                 except Exception as e0:
                     try:
-                        geo_object = parse_geo_object(data, object_map)
+                        geo_object = geometry_object_parser.try_parse(text)
                         self.print_geometry_object(geo_object)
                     except Exception as e1:
-                        print(f'Failed to evaluate as either construction or predicate due to the following exceptions:')
+                        print(
+                            f'Failed to evaluate as either geometry object or predicate due to the following exceptions:'
+                        )
                         print(e0)
                         if str(e0) != str(e1):
                             print(e1)
             except KeyboardInterrupt:
                 print()
-    
+
     def check_predicate(self, predicate: Predicate) -> str:
         is_predicate_proved = self.geometry_tracker.contains_predicate(predicate)
         if self.geometry_tracker.embedding_tracker is None:

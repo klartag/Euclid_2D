@@ -48,7 +48,7 @@ def remove_extra_parenthesis(text: str) -> str:
             break
         if text[0] != '(' or text[-1] != ')':
             break
-        if not is_valid_parenthesis(text[1:-1]):
+        if not is_valid_parenthesis(text[1:-1].strip()):
             break
         text = text[1:-1]
     return text

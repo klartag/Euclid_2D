@@ -34,7 +34,7 @@ class EmbeddedScalar(EmbeddedObject):
     def __mul__(self, other: Self) -> Self:
         return EmbeddedScalar(self.value * other.value)
 
-    def __div__(self, other: Self) -> Self:
+    def __truediv__(self, other: Self) -> Self:
         return EmbeddedScalar(self.value / other.value)
 
     def to_dict(self) -> dict:

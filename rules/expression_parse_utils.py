@@ -36,6 +36,10 @@ def split_args(text: str) -> Optional[list[str]]:
 
 
 def alternating_merge_string(lines0: list[str], lines1: list[str]) -> str:
+    if len(lines0) < len(lines1):
+        lines0.extend([''] * (len(lines1) - len(lines0)))
+    if len(lines0) > len(lines1):
+        lines1.extend([''] * (len(lines0) - len(lines1)))
     return ''.join([x + y for (x, y) in zip(lines0, lines1)])
 
 
