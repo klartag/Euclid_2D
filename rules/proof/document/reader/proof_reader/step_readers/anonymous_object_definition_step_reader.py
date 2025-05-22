@@ -3,9 +3,6 @@ from re import Match
 from rules.geometry_objects.geo_type import Signature
 from rules.parsers.predicate_parser.predicate_parser import PredicateParser
 
-from ......geometry_objects.geo_object import GeoObject
-from ......geometry_objects.parse import parse_geo_object
-
 from .....steps.object_define_step import ObjDefineStep
 
 from ..abstract_step_reader import AbstractStepReader
