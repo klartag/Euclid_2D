@@ -18,8 +18,8 @@ class PredicateParser(AbstractGeometryParser[Predicate]):
             InfixPredicateParser(geometry_object_parsing_func, 'not_equals', '!='),
             InfixPredicateParser(geometry_object_parsing_func, 'equals_mod_360', '==', ' mod 360'),
             InfixPredicateParser(geometry_object_parsing_func, 'not_equals_mod_360', '!=', ' mod 360'),
-            InfixPredicateParser(geometry_object_parsing_func, 'in', ' in '),
-            InfixPredicateParser(geometry_object_parsing_func, 'not_in', ' not in '),
+            InfixPredicateParser(geometry_object_parsing_func, 'in', ' in ', allow_multiple_arguments=True),
+            InfixPredicateParser(geometry_object_parsing_func, 'not_in', ' not in ', allow_multiple_arguments=True),
             FunctionPredicateParser(geometry_object_parsing_func),
         ]
 
@@ -28,4 +28,5 @@ class PredicateParser(AbstractGeometryParser[Predicate]):
             predicate = parser.try_parse(text)
             if predicate is not None:
                 return predicate
+        raise Exception("cannot none")
         return None

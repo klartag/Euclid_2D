@@ -1,7 +1,7 @@
 from typing import Optional
 
 from rules.expression_parse_utils import alternating_merge_string, generic_split_args, is_valid_parenthesis
-from rules.geometry_objects.geo_type import GeoType
+from rules.geometry_objects.geo_type import EQN_TYPES
 
 from ....geometry_objects.geo_object import GeoObject
 from ....geometry_objects.equation_object import EqOp, EquationObject
@@ -34,7 +34,7 @@ class EquationObjectParser(AbstractRecursiveGeometryParser[EquationObject, EqOp,
                 f"Equation objects require 2 components as inputs, but {len(components)} components were found."
             )
         for component in components:
-            if not component.type in (GeoType.LITERAL, GeoType.SCALAR):
+            if not component.type in EQN_TYPES:
                 raise ValueError(f"Components should all be scalars, but {component} is a {component.type}.")
         return EquationObject(components[0], components[1], data)
 
