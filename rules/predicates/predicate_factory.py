@@ -1,9 +1,4 @@
-import re
-
 from ..geometry_objects.geo_object import GeoObject
-from ..geometry_objects.parse import parse_geo_object
-from ..expression_parse_utils import split_args
-from ..errors import ProofParseError
 
 from .implementations.between_predicate import BetweenPredicate
 from .implementations.convex_predicate import ConvexPredicate
@@ -59,73 +54,3 @@ def predicate_from_args(name: str, objects: tuple[GeoObject, ...]) -> Predicate:
             return MacroPredicate(name, objects)
         case _:
             return Predicate(name, objects)
-
-
-def parse_predicate(predicate_data: str, obj_map: dict[str, GeoObject]) -> Predicate:
-    """
-    Parses a string representation of a predicate.
-    The string representation of the predicate is in the format name(x, y, z).
-    The names in the predicate might include unnamed objects, such as Line(a, b) or distance(a, b).
-
-    There are four special predicate formats:
-    - equals, which can be stated as ==
-    - not_equals, which can be stated as !=
-    - equals_mod, which can be stated as A == B mod C
-    - in, which can be stated as A in B.
-    """
-    predicate_data = predicate_data.strip()
-    # Attempting to match A == B mod C
-    if (match := re.fullmatch(PREDICATE_EQ_MOD_PATTERN, predicate_data)) is not None:
-        left, right, mod = match.groups()
-        left = parse_geo_object(left, obj_map)
-        right = parse_geo_object(right, obj_map)
-        return predicate_from_args(f'equals_mod_{mod}', (left, right))
-
-    # Attempting to match A == B
-    if (match := re.fullmatch(PREDICATE_EQ_PATTERN, predicate_data)) is not None:
-        left, right = match.groups()
-        left = parse_geo_object(left, obj_map)
-        right = parse_geo_object(right, obj_map)
-        return predicate_from_args('equals', (left, right))
-
-    # Attempting to match A != B mod C
-    if (match := re.fullmatch(PREDICATE_NE_MOD_PATTERN, predicate_data)) is not None:
-        left, right, mod = match.groups()
-        left = parse_geo_object(left, obj_map)
-        right = parse_geo_object(right, obj_map)
-        return predicate_from_args(f'not_equals_mod_{mod}', (left, right))
-
-    # Attempting to match A != B
-    if (match := re.fullmatch(PREDICATE_NE_PATTERN, predicate_data)) is not None:
-        left, right = match.groups()
-        left = parse_geo_object(left, obj_map)
-        right = parse_geo_object(right, obj_map)
-        return predicate_from_args('not_equals', (left, right))
-
-    # Attempting to match A in B
-    if (match := re.fullmatch(PREDICATE_NOT_IN_PATTERN, predicate_data)) is not None:
-        left, right = match.groups()
-        left = parse_geo_object(left, obj_map)
-        right = parse_geo_object(right, obj_map)
-        return predicate_from_args('not_in', (left, right))
-
-    # Attempting to match A in B
-    if (match := re.fullmatch(PREDICATE_IN_PATTERN, predicate_data)) is not None:
-        left, right = match.groups()
-        args = []
-        for l in split_args(left):
-            args.append(parse_geo_object(l, obj_map))
-        for r in split_args(right):
-            args.append(parse_geo_object(r, obj_map))
-        return predicate_from_args('in', tuple(args))
-    # Matching the general pattern.
-    match = re.fullmatch(PREDICATE_GENERAL_PATTERN, predicate_data)
-    if match is None:
-        raise ProofParseError(f'Failed to parse predicate: {predicate_data}!')
-
-    name, args = match.groups()
-    if args.strip():
-        objects = tuple(parse_geo_object(arg, obj_map) for arg in split_args(args))
-    else:
-        objects = ()
-    return predicate_from_args(name, objects)
