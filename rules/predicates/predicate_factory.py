@@ -14,15 +14,6 @@ from .implementations.symmetric_predicate import SIMPLE_SYMMETRIC_PREDICATE_NAME
 from .implementations.tangent_predicate import TangentPredicate
 
 
-PREDICATE_EQ_MOD_PATTERN = r'(.*) == (.*) mod (\d+)'
-PREDICATE_NE_MOD_PATTERN = r'(.*) != (.*) mod (\d+)'
-PREDICATE_NOT_IN_PATTERN = r'(.*) not in (.*)'
-PREDICATE_IN_PATTERN = r'(.*) in (.*)'
-PREDICATE_EQ_PATTERN = r'(.*) == (.*)'
-PREDICATE_NE_PATTERN = r'(.*) != (.*)'
-PREDICATE_GENERAL_PATTERN = r'(.*?)\((.*)\)'
-
-
 def predicate_from_args(name: str, objects: tuple[GeoObject, ...]) -> Predicate:
     """
     Constructs a predicate.
