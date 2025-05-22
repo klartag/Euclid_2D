@@ -1,12 +1,14 @@
 from typing import Optional
 
+from rules.geometry_objects.geo_type import GeoType
+
 from ....geometry_objects.geo_object import GeoObject
 from ....geometry_objects.equation_object import EqOp, EquationObject
 
 from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParser
 
 
-class EquationObjectParser(AbstractRecursiveGeometryParser[EqOp, EquationObject]):
+class EquationObjectParser(AbstractRecursiveGeometryParser[EquationObject, EqOp, GeoObject]):
     def _try_split_components(self, text: str) -> Optional[tuple[EqOp, tuple[str, ...]]]:
         parenthesis_depth = 0
         operation_data: Optional[tuple[int, EqOp]] = None
@@ -38,6 +40,9 @@ class EquationObjectParser(AbstractRecursiveGeometryParser[EqOp, EquationObject]
             raise ValueError(
                 f"Equation objects require 2 components as inputs, but {len(components)} components were found."
             )
+        for component in components:
+            if component.type != GeoType.LITERAL or component.type != GeoType.SCALAR:
+                raise ValueError(f"Components should all be scalars, but {component} is a {component.type}.")
         return EquationObject(components[0], components[1], data)
 
 
