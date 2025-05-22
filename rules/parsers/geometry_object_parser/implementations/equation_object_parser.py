@@ -34,7 +34,7 @@ class EquationObjectParser(AbstractRecursiveGeometryParser[EquationObject, EqOp,
                 f"Equation objects require 2 components as inputs, but {len(components)} components were found."
             )
         for component in components:
-            if component.type != GeoType.LITERAL or component.type != GeoType.SCALAR:
+            if not component.type in (GeoType.LITERAL, GeoType.SCALAR):
                 raise ValueError(f"Components should all be scalars, but {component} is a {component.type}.")
         return EquationObject(components[0], components[1], data)
 

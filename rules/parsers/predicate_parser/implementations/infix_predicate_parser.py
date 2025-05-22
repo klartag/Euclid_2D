@@ -27,6 +27,6 @@ class InfixPredicateParser(AbstractRecursiveGeometryParser[Predicate, None, GeoO
 
     def get_regex_matcher(self):
         if self.suffix is None:
-            return f"(.*) {self.infix} (.*)"
+            return f"(.*){self.infix}(.*)"
         else:
-            return F"(.*) {self.infix} (.*) {self.suffix}"
+            return F"(.*){self.infix}(.*){self.suffix}"

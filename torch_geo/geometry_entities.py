@@ -2,6 +2,7 @@ if __name__ == '__main__':
     # Dealing with path issues.
     from os.path import dirname, abspath
     import sys
+
     sys.path.append(dirname(dirname(abspath(__file__))))
 
 
@@ -10,13 +11,12 @@ import torch
 from torch import Tensor, tensor
 from typing import Generic, TypeVar, Union
 
-from rules.rule_utils import split_args
+from rules.expression_parse_utils import split_args
 from torch_geo.imprecise import ImpreciseTensor
 
 PI = torch.tensor(torch.pi)
 
 T = TypeVar('T', Tensor, ImpreciseTensor)
-
 
 
 def det(p1: 'Point[T]', p2: 'Point[T]', p3: 'Point[T]') -> T:
@@ -26,6 +26,7 @@ def det(p1: 'Point[T]', p2: 'Point[T]', p3: 'Point[T]') -> T:
     d1 = p2 - p1
     d2 = p3 - p1
     return d1.x * d2.y - d1.y * d2.x
+
 
 class Point(Generic[T]):
     x: T
@@ -37,12 +38,11 @@ class Point(Generic[T]):
 
     def distance_sqr(self, other: 'Point[T]') -> T:
         px, py = other.x, other.y
-        return ((self.x - px)**2 + (self.y - py)**2)
-    
+        return (self.x - px) ** 2 + (self.y - py) ** 2
 
     def distance(self, other: 'Point[T]') -> T:
         return self.distance_sqr(other).sqrt()
-    
+
     def norm(self) -> T:
         return (self.x**2 + self.y**2).sqrt()
 
@@ -55,19 +55,19 @@ class Point(Generic[T]):
     def __sub__(self, other: 'Point[T]') -> 'Point[T]':
         return Point(self.x - other.x, self.y - other.y)
 
-    def __mul__(self, l: Union[float,T]) -> 'Point[T]':
+    def __mul__(self, l: Union[float, T]) -> 'Point[T]':
         if isinstance(l, Tensor):
             assert l.numel() == 1, str(l.numel())
-        return Point(self.x*l, self.y*l)
-    
-    def __truediv__(self, l: Union[float,T]):
+        return Point(self.x * l, self.y * l)
+
+    def __truediv__(self, l: Union[float, T]):
         if isinstance(l, Tensor):
             assert l.numel() == 1, str(l.numel())
-        return Point(self.x/l, self.y/l)
-    
+        return Point(self.x / l, self.y / l)
+
     def line_distance_sqr(self, other: 'Line[T]') -> T:
         return self.distance_sqr(other.projection(self))
-    
+
     def line_distance(self, other: 'Line[T]') -> T:
         return self.distance(other.projection(self))
 
@@ -78,7 +78,9 @@ class Point(Generic[T]):
         """
         Rotates the point by the given angle in radians.
         """
-        return Point(self.x * rad_angle.cos() - self.y * rad_angle.sin(), self.x * rad_angle.sin() + self.y * rad_angle.cos())
+        return Point(
+            self.x * rad_angle.cos() - self.y * rad_angle.sin(), self.x * rad_angle.sin() + self.y * rad_angle.cos()
+        )
 
     def rotate90(self) -> 'Point[T]':
         neg_y = -self.y
@@ -98,21 +100,22 @@ class Point(Generic[T]):
     @staticmethod
     def angle_between(p1: 'Point[T]', p2: 'Point[T]', p3: 'Point[T]') -> T:
         return (p3 - p2).angle() - (p1 - p2).angle()
-    
+
     @staticmethod
     def internal_bisector(p1: 'Point[T]', p2: 'Point[T]', p3: 'Point[T]') -> 'Line[T]':
         angle = Point.angle_between(p1, p2, p3)
         return Line(p2, (p1 - p2).rotate(angle / 2) + p2)
-    
+
     @staticmethod
     def external_bisector(p1: 'Point[T]', p2: 'Point[T]', p3: 'Point[T]') -> 'Line[T]':
         angle = Point.angle_between(p1, p2, p3) + PI
         return Line(p2, (p1 - p2).rotate(angle / 2) + p2)
+
     @staticmethod
     def perpendicular_bisector(p1: 'Point[T]', p2: 'Point[T]') -> 'Line[T]':
         mid = (p1 + p2) / 2
         return Line(mid, mid + (p2 - p1).rotate90())
-    
+
     @staticmethod
     def parse_imprecise(s: str) -> 'Point[ImpreciseTensor]':
         """
@@ -125,12 +128,12 @@ class Point(Generic[T]):
             s = s[1:-1]
         x, y = split_args(s)
         return Point(ImpreciseTensor(float(x)), ImpreciseTensor(float(y)))
-    
+
     def to_language_format(self) -> str:
         return f'({self.x}, {self.y})'
+
     def __repr__(self) -> str:
         return self.to_language_format()
-    
 
 
 class Line(Generic[T]):
@@ -142,16 +145,16 @@ class Line(Generic[T]):
         self.p2 = p2
 
     def equation_coefficients(self) -> tuple[T, T, T]:
-        return self.p1.y - self.p2.y, self.p2.x - self.p1.x, self.p1.x*self.p2.y - self.p1.y*self.p2.x
-    
+        return self.p1.y - self.p2.y, self.p2.x - self.p1.x, self.p1.x * self.p2.y - self.p1.y * self.p2.x
+
     def eval_equation(self, other: Point[T]) -> T:
         px, py = other.x, other.y
         a, b, c = self.equation_coefficients()
-        return a*px + b*py + c
+        return a * px + b * py + c
 
     def direction(self) -> Point[T]:
         return self.p2 - self.p1
-    
+
     def unit_direction(self) -> Point[T]:
         v = self.p2 - self.p1
         return v / v.norm()
@@ -163,22 +166,30 @@ class Line(Generic[T]):
         px, py = other.x, other.y
         a, b, c = self.equation_coefficients()
 
-        return (a*px + b*py + c).abs() / (a**2 + b**2).sqrt()
+        return (a * px + b * py + c).abs() / (a**2 + b**2).sqrt()
 
     def projection(self, other: Point[T]) -> Point[T]:
         px, py = other.x, other.y
         a, b, c = self.equation_coefficients()
-        x = (b*(b*px - a*py) - a*c) / (a**2 + b**2)
-        y = (a*(-b*px + a*py) - b*c) / (a**2 + b**2)
+        x = (b * (b * px - a * py) - a * c) / (a**2 + b**2)
+        y = (a * (-b * px + a * py) - b * c) / (a**2 + b**2)
         return Point(x, y)
 
-
     def intersect_line(self, other: 'Line[T]') -> Point[T]:
-        x1, y1, x2, y2 = self.p1.x, self.p1.y, self.p2.x, self.p2.y, 
+        x1, y1, x2, y2 = (
+            self.p1.x,
+            self.p1.y,
+            self.p2.x,
+            self.p2.y,
+        )
         x3, y3, x4, y4 = other.p1.x, other.p1.y, other.p2.x, other.p2.y
 
-        x = ((x1*y2-y1*x2)*(x3-x4)-(x1-x2)*(x3*y4-y3*x4)) / ((x1-x2)*(y3-y4) - (y1-y2)*(x3-x4))
-        y = ((x1*y2-y1*x2)*(y3-y4)-(y1-y2)*(x3*y4-y3*x4)) / ((x1-x2)*(y3-y4) - (y1-y2)*(x3-x4))
+        x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / (
+            (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+        )
+        y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / (
+            (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+        )
 
         return Point(x, y)
 
@@ -197,11 +208,11 @@ class Line(Generic[T]):
     def angle_between(self, other: 'Line[T]') -> T:
         v1, v2 = self.unit_direction(), other.unit_direction()
         return v1.dot(v2).acos()
-    
+
     def smallest_angle_between(self, other: 'Line[T]') -> T:
         v1, v2 = self.unit_direction(), other.unit_direction()
         return v1.dot(v2).abs().acos()
-    
+
     def angle(self) -> T:
         return self.direction().angle()
 
@@ -220,6 +231,7 @@ class Line(Generic[T]):
 
     def to_language_format(self) -> str:
         return f'({self.p1}, {self.p2})'
+
     def __repr__(self) -> str:
         return self.to_language_format()
 
@@ -231,12 +243,12 @@ class Line(Generic[T]):
         p = self.projection(c.center)
         dir = self.unit_direction()
 
-        rem_norm = (c.radius**2 - p.distance(c.center)**2).sqrt()
+        rem_norm = (c.radius**2 - p.distance(c.center) ** 2).sqrt()
 
         dir = dir * rem_norm
 
         return (p + dir, p - dir)
-        
+
 
 class Triangle(Generic[T]):
     p1: Point[T]
@@ -254,15 +266,21 @@ class Triangle(Generic[T]):
         x1, y1 = self.p1.x, self.p1.y
         x2, y2 = self.p2.x, self.p2.y
         x3, y3 = self.p3.x, self.p3.y
-        return (x1*y2 - x1*y3 - x2*y1 + x2*y3 + x3*y1 - x3*y2) / 2
+        return (x1 * y2 - x1 * y3 - x2 * y1 + x2 * y3 + x3 * y1 - x3 * y2) / 2
 
     @functools.cache
     def circumcenter(self) -> Point[T]:
         x1, y1 = self.p1.x, self.p1.y
         x2, y2 = self.p2.x, self.p2.y
         x3, y3 = self.p3.x, self.p3.y
-        x = ((x1 + x2)*(x1*y2 - x1*y3 - x2*y1 + x2*y3 + x3*y1 - x3*y2)/2 + (y1 - y2)*(x1*x2 - x1*x3 - x2*x3 + x3**2 + y1*y2 - y1*y3 - y2*y3 + y3**2)/2)/(x1*y2 - x1*y3 - x2*y1 + x2*y3 + x3*y1 - x3*y2)
-        y = (-(x1 - x2)*(x1*x2 - x1*x3 - x2*x3 + x3**2 + y1*y2 - y1*y3 - y2*y3 + y3**2)/2 + (y1 + y2)*(x1*y2 - x1*y3 - x2*y1 + x2*y3 + x3*y1 - x3*y2)/2)/(x1*y2 - x1*y3 - x2*y1 + x2*y3 + x3*y1 - x3*y2)
+        x = (
+            (x1 + x2) * (x1 * y2 - x1 * y3 - x2 * y1 + x2 * y3 + x3 * y1 - x3 * y2) / 2
+            + (y1 - y2) * (x1 * x2 - x1 * x3 - x2 * x3 + x3**2 + y1 * y2 - y1 * y3 - y2 * y3 + y3**2) / 2
+        ) / (x1 * y2 - x1 * y3 - x2 * y1 + x2 * y3 + x3 * y1 - x3 * y2)
+        y = (
+            -(x1 - x2) * (x1 * x2 - x1 * x3 - x2 * x3 + x3**2 + y1 * y2 - y1 * y3 - y2 * y3 + y3**2) / 2
+            + (y1 + y2) * (x1 * y2 - x1 * y3 - x2 * y1 + x2 * y3 + x3 * y1 - x3 * y2) / 2
+        ) / (x1 * y2 - x1 * y3 - x2 * y1 + x2 * y3 + x3 * y1 - x3 * y2)
         return Point(x, y)
 
     def circumcircle(self) -> 'Circle[T]':
@@ -272,9 +290,11 @@ class Triangle(Generic[T]):
         return Circle(center, radius)
 
     def altitudes(self) -> list[Line]:
-        altitudes = [Line(self.p2, self.p3).perpendicular_line_at(self.p1), 
-                     Line(self.p3, self.p1).perpendicular_line_at(self.p2),
-                     Line(self.p1, self.p2).perpendicular_line_at(self.p3)]
+        altitudes = [
+            Line(self.p2, self.p3).perpendicular_line_at(self.p1),
+            Line(self.p3, self.p1).perpendicular_line_at(self.p2),
+            Line(self.p1, self.p2).perpendicular_line_at(self.p3),
+        ]
         return altitudes
 
     def orthocenter(self) -> Point[T] | None:
@@ -287,8 +307,24 @@ class Triangle(Generic[T]):
         x2, y2 = self.p2.x, self.p2.y
         x3, y3 = self.p3.x, self.p3.y
 
-        px = (x1*((x2 - x3)**2 + (y2 - y3)**2).sqrt() + x2*((x1 - x3)**2 + (y1 - y3)**2).sqrt() + x3*((x1 - x2)**2 + (y1 - y2)**2).sqrt())/(((x1 - x2)**2 + (y1 - y2)**2).sqrt() + ((x1 - x3)**2 + (y1 - y3)**2).sqrt() + ((x2 - x3)**2 + (y2 - y3)**2).sqrt())
-        py = (y1*((x2 - x3)**2 + (y2 - y3)**2).sqrt() + y2*((x1 - x3)**2 + (y1 - y3)**2).sqrt() + y3*((x1 - x2)**2 + (y1 - y2)**2).sqrt())/(((x1 - x2)**2 + (y1 - y2)**2).sqrt() + ((x1 - x3)**2 + (y1 - y3)**2).sqrt() + ((x2 - x3)**2 + (y2 - y3)**2).sqrt())
+        px = (
+            x1 * ((x2 - x3) ** 2 + (y2 - y3) ** 2).sqrt()
+            + x2 * ((x1 - x3) ** 2 + (y1 - y3) ** 2).sqrt()
+            + x3 * ((x1 - x2) ** 2 + (y1 - y2) ** 2).sqrt()
+        ) / (
+            ((x1 - x2) ** 2 + (y1 - y2) ** 2).sqrt()
+            + ((x1 - x3) ** 2 + (y1 - y3) ** 2).sqrt()
+            + ((x2 - x3) ** 2 + (y2 - y3) ** 2).sqrt()
+        )
+        py = (
+            y1 * ((x2 - x3) ** 2 + (y2 - y3) ** 2).sqrt()
+            + y2 * ((x1 - x3) ** 2 + (y1 - y3) ** 2).sqrt()
+            + y3 * ((x1 - x2) ** 2 + (y1 - y2) ** 2).sqrt()
+        ) / (
+            ((x1 - x2) ** 2 + (y1 - y2) ** 2).sqrt()
+            + ((x1 - x3) ** 2 + (y1 - y3) ** 2).sqrt()
+            + ((x2 - x3) ** 2 + (y2 - y3) ** 2).sqrt()
+        )
         return Point(px, py)
 
     def incircle(self) -> 'Circle[T]':
@@ -299,11 +335,13 @@ class Triangle(Generic[T]):
 
     def incircle_tangent_points(self) -> list[Point]:
         center = self.incenter()
-        tangent_points = [Line(self.p1, self.p2).projection(center),
-                          Line(self.p2, self.p3).projection(center),
-                          Line(self.p3, self.p1).projection(center)]
+        tangent_points = [
+            Line(self.p1, self.p2).projection(center),
+            Line(self.p2, self.p3).projection(center),
+            Line(self.p3, self.p1).projection(center),
+        ]
         return tangent_points
-    
+
     def isogonal_conjugate(self, point: Point[T]) -> Point[T]:
         """
         Computes the isogonal conjugate of the given point with respect to `self`.
@@ -319,7 +357,6 @@ class Triangle(Generic[T]):
         return res
 
 
-
 class Circle(Generic[T]):
     center: Point[T]
     radius: T
@@ -333,20 +370,27 @@ class Circle(Generic[T]):
 
     def circumference(self) -> T:
         return self.radius * (2 * torch.pi)
-    
+
     def radical_axis(self, other: 'Circle[T]') -> Line[T]:
         """
         The line where the power of points with respect to the two circles are equal.
         """
         a = (other.center.x - self.center.x) * 2
         b = (other.center.y - self.center.y) * 2
-        c = self.center.x**2 + self.center.y**2 - self.radius**2 - other.center.x**2 - other.center.y**2 +other.radius**2
+        c = (
+            self.center.x**2
+            + self.center.y**2
+            - self.radius**2
+            - other.center.x**2
+            - other.center.y**2
+            + other.radius**2
+        )
         # When the line is not x == k
         zero = self.center.x * 0
         one = zero + 1
-        
-        p1 = Point(zero, -c/b)
-        p2 = Point(one, -(c + a)/b)
+
+        p1 = Point(zero, -c / b)
+        p2 = Point(one, -(c + a) / b)
 
         return Line(p1, p2)
 
@@ -365,13 +409,13 @@ class Circle(Generic[T]):
 
     def to_language_format(self) -> str:
         return f'({self.center}, {self.radius})'
-    
+
     def __repr__(self) -> str:
         return self.to_language_format()
 
     def intersect_line(self, l: Line[T]) -> tuple[Point[T], Point[T]]:
         return l.intersect_circle(self)
-    
+
     def intersect_circle(self, c: 'Circle[T]') -> tuple[Point[T], Point[T]]:
         diff = c.center - self.center
         d = diff.norm()
@@ -385,7 +429,8 @@ class Circle(Generic[T]):
             self.center + diff * a + diff.rotate90() * h,
             self.center + diff * a - diff.rotate90() * h,
         )
-    
+
+
 Embed = Point[ImpreciseTensor] | Line[ImpreciseTensor] | Circle[ImpreciseTensor] | ImpreciseTensor
 
 
@@ -394,7 +439,7 @@ def main():
     Manually testing the geometric constructions.
     """
     p1 = Point(ImpreciseTensor(-0.7051842212677002), ImpreciseTensor(0.942358672618866))
-    p2 = Point(ImpreciseTensor(0.3496091067790985), ImpreciseTensor( -1.1898506879806519))
+    p2 = Point(ImpreciseTensor(0.3496091067790985), ImpreciseTensor(-1.1898506879806519))
     p3 = Point(ImpreciseTensor(-0.35358646512031555), ImpreciseTensor(0.23162223398685455))
 
     l = Line(p2, p1)
