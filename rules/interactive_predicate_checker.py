@@ -15,10 +15,8 @@ class InteractivePredicateChecker:
         self.geometry_tracker = geometry_tracker
 
     def run(self):
-        signature = {atom.name: atom.type for atom in self.geometry_tracker.all_objects() if isinstance(atom, Atom)}
-
-        predicate_parser = PredicateParser(signature)
-        geometry_object_parser = GeometryObjectParser(signature)
+        predicate_parser = PredicateParser(self.geometry_tracker.signature)
+        geometry_object_parser = GeometryObjectParser(self.geometry_tracker.signature)
 
         while True:
             try:

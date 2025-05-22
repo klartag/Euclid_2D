@@ -17,7 +17,7 @@ from ..proof_checker_utils import (
 )
 from ..rust_code.rust_sparse_linear import BaseSolver
 from ..errors import GeometryError, IllegalObjectError, ProofCheckError
-from ..geometry_objects.geo_type import GeoType, R_EQN_TYPES
+from ..geometry_objects.geo_type import GeoType, R_EQN_TYPES, Signature
 from ..geometry_objects.atom import Atom
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.literal import ONE, Literal
@@ -101,6 +101,7 @@ class GeometryTracker:
     A class that checks that a proof is valid.
     """
 
+    signature: Signature
     _objects: UnionFind[GeoObject]
     """All legal objects currently used by the proof."""
     _processed_objects: set[GeoObject]
@@ -118,6 +119,7 @@ class GeometryTracker:
     """A new numeric tracker to track 2D embeddings of the geometric configurations."""
 
     def __init__(self):
+        self.signature = {}
         self._objects = UnionFind()
         self._processed_objects = set()
         self._drawn_objects = set()
@@ -182,6 +184,9 @@ class GeometryTracker:
             res = self._objects[obj]
             assert res <= obj, f'ProofChecker::get_object increased the value: {obj} => {res}'
             return res
+
+        if isinstance(obj, Atom):
+            self.signature[obj.name] = obj.type
 
         # If the object is a construct, we substitute the components.
         # A construction object must always satisfy that the substitution of its components to the canonical components
@@ -808,6 +813,7 @@ class GeometryTracker:
         Returns a copy of the geometry tracker.
         """
         res = GeometryTracker()
+        res.signature = self.signature.copy()
         res._objects = self._objects.shallow_copy()
         res._processed_objects = set(self._processed_objects)
         res._predicates = set(self._predicates)
