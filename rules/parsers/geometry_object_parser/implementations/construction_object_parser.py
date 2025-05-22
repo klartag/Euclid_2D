@@ -1,5 +1,6 @@
 from typing import Optional
 
+from rules.expression_parse_utils import split_args
 from rules.geometry_objects.geo_object import GeoObject
 from rules.predicates.global_predicates import get_constructions
 
@@ -10,7 +11,6 @@ from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParse
 
 class ConstructionObjectParser(AbstractRecursiveGeometryParser[ConstructionObject, Construction, GeoObject]):
     def _try_split_components(self, data: str) -> Optional[tuple[Construction, tuple[str, ...]]]:
-        data = data.strip()
         if '(' not in data:
             return None
         if data[-1] != ')':
@@ -21,26 +21,10 @@ class ConstructionObjectParser(AbstractRecursiveGeometryParser[ConstructionObjec
         construction = get_constructions().get(construction_name, None)
         if construction is None:
             return None
-
-        parenthesis_depth = 0
-        comma_locations = [-1]
-        for i, c in enumerate(argument_string):
-            match c:
-                case '(':
-                    parenthesis_depth += 1
-                case ')':
-                    parenthesis_depth -= 1
-                case ',':
-                    if parenthesis_depth == 0:
-                        comma_locations.append(i)
-            if parenthesis_depth < 0:
-                return None
-
-        comma_locations.append(len(argument_string))
-        arguments = tuple(
-            [argument_string[start + 1 : end].strip() for (start, end) in zip(comma_locations, comma_locations[1:])]
-        )
-        return (construction, arguments)
+        arguments = split_args(argument_string)
+        if arguments is None:
+            return None
+        return (construction, tuple(arguments))
 
     def _build(self, data: Construction, components: tuple[GeoObject, ...]) -> ConstructionObject:
         return data(*components)

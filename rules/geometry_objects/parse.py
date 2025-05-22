@@ -1,4 +1,4 @@
-from ..rule_utils import split_args
+from ..expression_parse_utils import split_args
 
 from .geo_object import GeoObject
 from .literal import Literal

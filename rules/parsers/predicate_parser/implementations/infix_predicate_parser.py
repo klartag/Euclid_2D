@@ -1,0 +1,32 @@
+from dataclasses import dataclass
+import re
+from typing import Optional
+from rules.geometry_objects.geo_object import GeoObject
+from rules.parsers.abstract_recursive_geometry_parser import AbstractRecursiveGeometryParser
+from rules.predicates.predicate import Predicate
+from rules.predicates.predicate_factory import predicate_from_args
+
+
+@dataclass
+class InfixPredicateParser(AbstractRecursiveGeometryParser[Predicate, None, GeoObject]):
+    predicate_name: str
+    infix: str
+    suffix: Optional[str] = None
+
+    def _try_split_components(self, text: str) -> Optional[tuple[None, tuple[str, ...]]]:
+        regex = self.get_regex_matcher()
+        match = re.fullmatch(regex, text)
+        if match is None:
+            return None
+        components_text = match.groups()
+        components_text = tuple([component_text.strip() for component_text in components_text])
+        return (None, components_text)
+
+    def _build(self, _: None, components: tuple[GeoObject, ...]):
+        return predicate_from_args(self.predicate_name, components)
+
+    def get_regex_matcher(self):
+        if self.suffix is None:
+            return f"(.*) {self.infix} (.*)"
+        else:
+            return F"(.*) {self.infix} (.*) {self.suffix}"

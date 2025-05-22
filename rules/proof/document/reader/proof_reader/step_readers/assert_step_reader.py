@@ -1,6 +1,6 @@
 from re import Match
 
-from ......rule_utils import split_args
+from ......expression_parse_utils import split_args
 from ......geometry_objects.geo_object import GeoObject
 from ......predicates.predicate_factory import parse_predicate
 

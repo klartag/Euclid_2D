@@ -20,25 +20,6 @@ def unpack_dict(d: dict[str, str]) -> tuple[str, str]:
     return next(iter(d.items()))
 
 
-def split_args(s: str) -> list[str]:
-    """
-    Splits the given string using commas, while ignoring commas inside parentheses.
-    """
-    paren_depth = 0
-    split_indices = [-1]
-    for idx, c in enumerate(s):
-        match c:
-            case ',':
-                if paren_depth == 0:
-                    split_indices.append(idx)
-            case '(' | '[' | '{':
-                paren_depth += 1
-            case ')' | ']' | '}':
-                paren_depth -= 1
-    split_indices.append(len(s))
-    return [s[i + 1 : j].strip() for i, j in zip(split_indices, split_indices[1:])]
-
-
 def union(sets: Iterable[set[V]]) -> set[V]:
     """
     Computes the union of all given sets.
