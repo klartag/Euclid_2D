@@ -6,7 +6,7 @@ from .trimmers.new_trimmer import main as new_trimmer_main
 from .embeddings.embedder.embedder import main as embedder_main
 from .trimmers.trimmer import main as trimmer_main
 from .proof_prettifier import main as prettifier_main
-from .pred_config import load_constructions_and_macros
+from .predicates.loader.pred_config import load_constructions_and_macros
 
 
 HELP_MESSAGE = """\
