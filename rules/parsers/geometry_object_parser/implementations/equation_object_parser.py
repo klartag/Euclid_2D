@@ -1,13 +1,13 @@
 from typing import Optional
 
-from ...geometry_objects.geo_object import GeoObject
-from ...geometry_objects.equation_object import EqOp, EquationObject
+from ....geometry_objects.geo_object import GeoObject
+from ....geometry_objects.equation_object import EqOp, EquationObject
 
-from ..delayed_geometry_object_parser import DelayedGeometryObjectParser
+from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParser
 
 
-class EquationObjectParser(DelayedGeometryObjectParser[EqOp, EquationObject]):
-    def try_split_components(self, text: str) -> Optional[tuple[EqOp, tuple[str, ...]]]:
+class EquationObjectParser(AbstractRecursiveGeometryParser[EqOp, EquationObject]):
+    def _try_split_components(self, text: str) -> Optional[tuple[EqOp, tuple[str, ...]]]:
         parenthesis_depth = 0
         operation_data: Optional[tuple[int, EqOp]] = None
         for i, c in enumerate(text):
@@ -33,7 +33,7 @@ class EquationObjectParser(DelayedGeometryObjectParser[EqOp, EquationObject]):
 
         return (operation_data[1], (left_text, right_text))
 
-    def build(self, data: EqOp, components: tuple[GeoObject, ...]) -> EquationObject:
+    def _build(self, data: EqOp, components: tuple[GeoObject, ...]) -> EquationObject:
         if len(components) != 2:
             raise ValueError(
                 f"Equation objects require 2 components as inputs, but {len(components)} components were found."

@@ -3,13 +3,13 @@ from typing import Optional
 from rules.geometry_objects.geo_object import GeoObject
 from rules.predicates.global_predicates import get_constructions
 
-from ...geometry_objects.construction_object import Construction, ConstructionObject
+from ....geometry_objects.construction_object import Construction, ConstructionObject
 
-from ..delayed_geometry_object_parser import DelayedGeometryObjectParser
+from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParser
 
 
-class ConstructionObjectParser(DelayedGeometryObjectParser[Construction, ConstructionObject]):
-    def try_split_components(self, data: str) -> Optional[tuple[Construction, tuple[str, ...]]]:
+class ConstructionObjectParser(AbstractRecursiveGeometryParser[ConstructionObject, Construction, GeoObject]):
+    def _try_split_components(self, data: str) -> Optional[tuple[Construction, tuple[str, ...]]]:
         data = data.strip()
         if '(' not in data:
             return None
@@ -42,5 +42,5 @@ class ConstructionObjectParser(DelayedGeometryObjectParser[Construction, Constru
         )
         return (construction, arguments)
 
-    def build(self, data: Construction, components: tuple[GeoObject, ...]) -> ConstructionObject:
+    def _build(self, data: Construction, components: tuple[GeoObject, ...]) -> ConstructionObject:
         return data(*components)
