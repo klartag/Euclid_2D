@@ -1,6 +1,8 @@
 import itertools
 from pathlib import Path
 
+from rules.parsers.predicate_parser.predicate_parser import PredicateParser
+
 
 from ...theorem import CONDITION_LABEL, CONSTRUCTION_LABEL, POSS_CONCLUSIONS_LABEL, RESULT_PREDICATE_LABEL
 from ..predicate import INPUT_LABEL, PREPROCESS_LABEL, Predicate
@@ -11,7 +13,7 @@ from ...geometry_objects.construction_object import Construction, LogConstructio
 from ...geometry_objects.geo_object import GeoObject
 from ...geometry_objects.literal import Literal
 from ...rule_utils import unpack_dict
-from ...geometry_objects.geo_type import GeoType
+from ...geometry_objects.geo_type import GeoType, Signature
 from ...errors import ProofParseError
 from ...symmetry import Symmetry
 from util import BASE_PATH
@@ -231,18 +233,21 @@ def read_macros(path: Path) -> 'list[MacroData]':
 
     for macro_name, data in macro_data.items():
         try:
-            signature: 'list[GeoObject]' = []
+            objects: list[GeoObject] = []
+            signature: Signature = {}
             unpack_predicates: list[Predicate] = []
-            obj_map: dict[str, GeoObject] = {}
             conclude_self = False
             # 1. Parsing the inputs.
-            for names, typ in map(unpack_dict, data.get(INPUT_LABEL, [])):
+            for names, type_ in map(unpack_dict, data.get(INPUT_LABEL, [])):
                 for name in names.split(','):
                     name = name.strip()
-                    assert name not in obj_map, f'In macro {macro_name}, object name {name} appears twice!'
-                    g = Atom(name, GeoType(typ))
-                    obj_map[name] = g
-                    signature.append(g)
+                    assert name not in signature, f'In macro {macro_name}, object name {name} appears twice!'
+                    g = Atom(name, GeoType(type_))
+                    objects.append(g)
+                    signature[name] = GeoType(type_)
+
+            predicate_parser = PredicateParser(signature)
+
             # 2. Parsing the preprocess type.
             preprocess = Symmetry.parse(data.get(PREPROCESS_LABEL, 'none'))
             # 3. Parsing the result predicates.
@@ -252,7 +257,7 @@ def read_macros(path: Path) -> 'list[MacroData]':
                     # Unnamed predicates
                     case dict():
                         name, predicate_data = unpack_dict(predicate_block)
-                        pred = parse_predicate(predicate_data, obj_map)
+                        pred = predicate_parser.try_parse(predicate_data)
                         predicate_map[name] = pred
                     case str():
                         assert (
@@ -264,7 +269,7 @@ def read_macros(path: Path) -> 'list[MacroData]':
                         if predicate_block == 'self':
                             conclude_self = True
                         else:
-                            pred = parse_predicate(predicate_block, obj_map)
+                            pred = predicate_parser.try_parse(predicate_block)
                             unpack_predicates.append(pred)
                     case _:
                         raise ProofParseError(
@@ -288,13 +293,13 @@ def read_macros(path: Path) -> 'list[MacroData]':
 
                 left_parts = [part.strip() for part in left.split('&')]
                 left_preds = [
-                    predicate_map[part] if part in predicate_map else parse_predicate(part, obj_map)
+                    predicate_map[part] if part in predicate_map else predicate_parser.try_parse(part)
                     for part in left_parts
                 ]
 
                 right_parts = [part.strip() for part in right.split('&')]
                 right_preds = [
-                    predicate_map[part] if part in predicate_map else parse_predicate(part, obj_map)
+                    predicate_map[part] if part in predicate_map else predicate_parser.try_parse(part)
                     for part in right_parts
                 ]
 
@@ -316,7 +321,7 @@ def read_macros(path: Path) -> 'list[MacroData]':
                 MacroData(
                     macro_name,
                     preprocess,
-                    signature,
+                    objects,
                     unpack_predicates,
                     possible_conclusions,
                     conclude_self,
