@@ -6,12 +6,16 @@ from ....embeddings.embedded_objects.line import EmbeddedLine
 from ....embeddings.embedded_objects.point import EmbeddedPoint
 from ....embeddings.embedded_objects.scalar import EmbeddedScalar
 from ....embeddings.embedding import Embedding
-from ....geometry_objects.geo_type import GeoType
-from ....geometry_objects.geo_object import GeoObject
+from ....geometry_objects.geo_type import GeoType, Signature
 
 
 class EmbeddingReader:
-    def read(self, data: list[str], obj_map: dict[str, GeoObject]) -> Embedding:
+    signature: Signature
+
+    def __init__(self, signature: Signature):
+        self.signature = signature
+
+    def read(self, data: list[str]) -> Embedding:
         """
         Parses the embedding section of the proof.
         """
@@ -22,10 +26,10 @@ class EmbeddingReader:
             name, data = line.split(':=')
             name = name.strip()
             data = json.loads(data)
-            if name not in obj_map:
-                raise ProofParseError(f'Embed given for unknown object: {name}')
+            if name not in self.signature:
+                raise ProofParseError(f'Embed given for unknown atom: {name}')
             embedded_object = None
-            match obj_map[name].type:
+            match self.signature[name]:
                 case GeoType.POINT:
                     embedded_object = EmbeddedPoint.from_dict(data)
                 case GeoType.LINE:

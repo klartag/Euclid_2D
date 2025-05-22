@@ -1,11 +1,12 @@
 from re import Match
 
+from rules.geometry_objects.geo_type import Signature
+from rules.parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
+from rules.parsers.predicate_parser.predicate_parser import PredicateParser
+
 from ......expression_parse_utils import split_args
 from ......errors import ProofParseError
 from ......geometry_objects.atom import Atom
-from ......geometry_objects.geo_object import GeoObject
-from ......geometry_objects.parse import parse_geo_object
-from ......predicates.predicate_factory import parse_predicate
 from ......theorem import Theorem
 
 from .....steps.theorem_step import TheoremStep
@@ -16,7 +17,14 @@ from ..abstract_step_reader import AbstractStepReader
 class TheoremStepReader(AbstractStepReader[TheoremStep]):
     pattern = r'By (\w+)( on )?(.*) we get (.*)$'
 
-    def read(self, line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> TheoremStep:
+    geometry_object_parser: GeometryObjectParser
+    predicate_parser: PredicateParser
+
+    def __init__(self, signature: Signature):
+        self.geometry_object_parser = GeometryObjectParser(signature)
+        self.predicate_parser = PredicateParser(signature)
+
+    def read(self, line: str, match: Match[str]) -> TheoremStep:
         # Matching a theorem step using a named theorem.
         name, _, args, results = match.groups()
         args = split_args(args) if args else []
@@ -28,7 +36,7 @@ class TheoremStepReader(AbstractStepReader[TheoremStep]):
         if theorem is None:
             raise ProofParseError(f'In line {line}, theorem {name} is unknown!')
 
-        inputs = [parse_geo_object(arg.strip(), obj_map) for arg in args]
+        inputs = [self.geometry_object_parser.try_parse(arg.strip()) for arg in args]
         if len(inputs) > len(theorem.signature):
             raise ProofParseError(f'In line {line}, too many arguments for theorem {name}!')
         if len(inputs) < len(theorem.signature):
@@ -50,5 +58,7 @@ class TheoremStepReader(AbstractStepReader[TheoremStep]):
             obj_map[cons_name] = res
             result_objects.append(res)
 
-        result_predicates = [parse_predicate(result, obj_map) for result in results[len(theorem.result_objects) :]]
+        result_predicates = [
+            self.predicate_parser.try_parse(result) for result in results[len(theorem.result_objects) :]
+        ]
         return TheoremStep(name, inputs, result_objects, result_predicates, '')

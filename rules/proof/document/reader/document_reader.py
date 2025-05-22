@@ -11,26 +11,24 @@ from .problem_statement_reader import ProblemStatementReader
 
 
 class DocumentReader:
-    def __init__(self):
-        self.problem_statement_reader = ProblemStatementReader()
-        self.proof_reader = ProofReader()
-        self.embedding_reader = EmbeddingReader()
-
     def read(self, document: GeometryDocument, read_proof_body: bool) -> GeometryProblem:
         """
         Parses a string representing a proof.
         """
-        statement = self.problem_statement_reader.read(document)
+        problem_statement_reader = ProblemStatementReader()
+        statement = problem_statement_reader.read(document)
+
+        proof_reader = ProofReader(statement.signature)
+        embedding_reader = EmbeddingReader(statement.signature)
+
         proof = (
-            self.proof_reader.read(document.get_section_content(DocumentSection.PROOF), statement.get_all_objects())
+            proof_reader.read(document.get_section_content(DocumentSection.PROOF), statement.get_all_objects())
             if read_proof_body
             else None
         )
         embedding_lines = document.get_section_content(DocumentSection.EMBEDDING)
         embedding = (
-            self.embedding_reader.read(embedding_lines, statement.assumption_objects)
-            if len(embedding_lines) > 0
-            else None
+            embedding_reader.read(embedding_lines, statement.assumption_objects) if len(embedding_lines) > 0 else None
         )
         return GeometryProblem(statement, embedding, proof)
 

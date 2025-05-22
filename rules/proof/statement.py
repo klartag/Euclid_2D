@@ -1,11 +1,14 @@
 from dataclasses import dataclass
 
+from rules.geometry_objects.geo_type import Signature
+
 from ..geometry_objects.geo_object import GeoObject
 from ..predicates.predicate import Predicate
 
 
 @dataclass
 class Statement:
+    signature: Signature
     assumption_objects: dict[str, GeoObject]
     assumption_predicates: list[Predicate]
     auxiliary_predicates: list[Predicate]
@@ -20,6 +23,7 @@ class Statement:
 
     def shallow_copy(self) -> 'Statement':
         return Statement(
+            dict(self.signature),
             dict(self.assumption_objects),
             list(self.assumption_predicates),
             list(self.auxiliary_predicates),

@@ -4,7 +4,7 @@ from typing import Mapping, NamedTuple
 from ....rule_utils import preprocess_lines
 from ....errors import ProofParseError
 from ....geometry_objects.atom import Atom
-from ....geometry_objects.geo_type import GeoType
+from ....geometry_objects.geo_type import GeoType, Signature
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
 from ....predicates.predicate_factory import parse_predicate, predicate_from_args
@@ -30,7 +30,15 @@ class ProblemStatementReader:
         )
         auxiliary_predicates = self.create_auxiliary_predicates(assumption_predicate_data, target_predicate_data)
 
+        atoms = set(
+            [atom for atom in assumption_predicate_data.objects if isinstance(atom, Atom)]
+            + [atom for atom in target_predicate_data.objects if isinstance(atom, Atom)]
+        )
+
+        signature = {atom.name: atom.type for atom in atoms}
+
         return Statement(
+            signature,
             assumption_predicate_data.objects,
             assumption_predicate_data.predicates,
             auxiliary_predicates,
