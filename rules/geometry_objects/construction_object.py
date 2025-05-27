@@ -72,7 +72,7 @@ class Construction:
         return f'Construction({self.name})'
 
 
-class ConstructionObject(Atom):
+class ConstructionObject(GeoObject):
     """
     A geometric object constructed from several sub-objects.
     """
@@ -109,6 +109,9 @@ class ConstructionObject(Atom):
     def __repr__(self) -> str:
         return self.name
 
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, ConstructionObject) and self.name == other.name
+
     def requirements(self) -> 'list[Predicate]':
         """
         Returns the list of predicates required by the construction object.
@@ -137,11 +140,20 @@ class ConstructionObject(Atom):
             for left, right in self.constructor.possible_conclusions
         ]
 
+    def as_literal(self) -> float | None:
+        return None
+
+    def as_linear_equation(self) -> 'dict[GeoObject, float] | None':
+        return {self: 1}
+
+    def __hash__(self) -> int:
+        return self.id
+
     def clone(self) -> 'ConstructionObject':
         return ConstructionObject(self.name, self.type, self.constructor, self.components)
 
     def involved_objects(self) -> set[GeoObject]:
-        return super().involved_objects() | union(comp.involved_objects() for comp in self.components)
+        return {self} | union(comp.involved_objects() for comp in self.components)
 
 
 @dataclass(frozen=True)
