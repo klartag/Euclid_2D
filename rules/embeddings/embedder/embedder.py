@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Iterator, List, Optional
 from tqdm import tqdm
-from ...geometry_objects.geo_type import GeoType
+from ...geometry_objects.geo_type import GeoType, Signature
 from ...embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ...geometry_objects.geo_object import GeoObject
 from ...geometry_objects.construction_object import ConstructionObject
@@ -30,13 +30,15 @@ EMBEDDING_ATTEMPTS = 50
 
 
 class DiagramEmbedder:
-    def is_assumption_necessary(self, assumption: Predicate, assumptions: List[Predicate]) -> bool:
+    def is_assumption_necessary(
+        self, signature: Signature, assumption: Predicate, assumptions: List[Predicate]
+    ) -> bool:
         try:
             assumption_objects = {
                 obj.name: obj for pred in assumptions + [assumption] for obj in pred.involved_objects()
             }
 
-            problem_statement = Statement(assumption_objects, assumptions, [], {}, [assumption])
+            problem_statement = Statement(signature, assumption_objects, assumptions, [], {}, [assumption])
 
             problem = GeometryProblem(problem_statement, None, None)
             proof_generator = ProofGenerator(problem, actions_per_step=10000)
@@ -48,10 +50,10 @@ class DiagramEmbedder:
             else:
                 raise
 
-    def remove_necessary_assumptions(self, assumptions: List[Predicate]) -> List[Predicate]:
+    def remove_necessary_assumptions(self, signature: Signature, assumptions: List[Predicate]) -> List[Predicate]:
         necessary_assumptions = []
         for assumption in tqdm(assumptions):
-            if self.is_assumption_necessary(assumption, necessary_assumptions):
+            if self.is_assumption_necessary(signature, assumption, necessary_assumptions):
                 necessary_assumptions.append(assumption)
         return necessary_assumptions
 
@@ -146,7 +148,7 @@ class DiagramEmbedder:
         processed_predicates = SequencingPreprocessor(INEQUALITY_REMOVAL_PATTERNS).preprocess_assumptions(
             split_predicates
         )
-        processed_predicates = self.remove_necessary_assumptions(processed_predicates)
+        processed_predicates = self.remove_necessary_assumptions(problem.statement.signature, processed_predicates)
 
         constructions = self.sequence_assumptions(objects, processed_predicates)
 
