@@ -2,6 +2,9 @@ from typing import Optional
 
 
 def generic_split_args(text: str, separator_chars: str) -> Optional[tuple[list[str], list[str]]]:
+    text = text.strip()
+    if len(text) == 0:
+        return ([], [])
     parenthesis_depth = 0
     split_indices = [-1]
     for i, c in enumerate(text):

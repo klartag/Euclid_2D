@@ -12,9 +12,11 @@ from .implementations.equation_object_parser import EquationObjectParser
 
 
 class GeometryObjectParser(AbstractGeometryParser[GeoObject]):
+    signature: Signature
     parsers: list[AbstractGeometryParser[GeoObject]]
 
     def __init__(self, signature: Signature):
+        self.signature = signature
         self.parsers = [
             AtomParser(signature),
             LiteralParser(),

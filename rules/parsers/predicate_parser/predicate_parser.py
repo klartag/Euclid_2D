@@ -8,11 +8,13 @@ from rules.predicates.predicate import Predicate
 
 
 class PredicateParser(AbstractGeometryParser[Predicate]):
+    signature: Signature
     parsers: list[AbstractGeometryParser[Predicate]]
 
     def __init__(self, signature: Signature):
         geometry_object_parsing_func = GeometryObjectParser(signature).try_parse
 
+        self.signature = signature
         self.parsers = [
             InfixPredicateParser(geometry_object_parsing_func, 'equals', '=='),
             InfixPredicateParser(geometry_object_parsing_func, 'not_equals', '!='),

@@ -21,11 +21,7 @@ class DocumentReader:
         proof_reader = ProofReader(statement.signature)
         embedding_reader = EmbeddingReader(statement.signature)
 
-        proof = (
-            proof_reader.read(document.get_section_content(DocumentSection.PROOF), statement.get_all_objects())
-            if read_proof_body
-            else None
-        )
+        proof = proof_reader.read(document.get_section_content(DocumentSection.PROOF)) if read_proof_body else None
         embedding_lines = document.get_section_content(DocumentSection.EMBEDDING)
         embedding = (
             embedding_reader.read(embedding_lines, statement.assumption_objects) if len(embedding_lines) > 0 else None

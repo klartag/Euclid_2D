@@ -54,8 +54,8 @@ power_of_a_point_tangent_converse:
     - A != B
     - Line(O, A) != Line(O, C)
   possible_conclusions:
-    - orientation(O, A, C) == 90 mod 360 & orientation(O, B, C) == 90 mod 360 =>tangent(Line(O, C), Circle(A, B, C))
-    - orientation(O, A, C) == -90 mod 360 & orientation(O, B, C) == -90 mod 360 =>tangent(Line(O, C), Circle(A, B, C))
+    - orientation(O, A, C) == 90 mod 360 & orientation(O, B, C) == 90 mod 360 => tangent(Line(O, C), Circle(A, B, C))
+    - orientation(O, A, C) == -90 mod 360 & orientation(O, B, C) == -90 mod 360 => tangent(Line(O, C), Circle(A, B, C))
 
 power_of_a_point_on_circle:
   inputs:

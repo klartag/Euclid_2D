@@ -194,6 +194,14 @@ line_circle_tangent_point:
   conclude:
     - P in l, c
 
+circle_circle_tangent_point:
+  inputs:
+    - c, d: Circle
+  construct:
+    - P: Point
+  conclude:
+    - P in c, d
+
 point_circle_tangent_line:
   inputs:
     - P: Point

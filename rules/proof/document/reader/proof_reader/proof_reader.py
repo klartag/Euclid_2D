@@ -25,13 +25,13 @@ class ProofReader:
     def __init__(self, signature: Signature):
         self.signature = signature
         self.step_readers = [
-            AlmostAlwaysStepReader(),
+            AlmostAlwaysStepReader(signature),
             CommentStepReader(),
-            AnonymousObjectDefinitionStepReader(),
+            AnonymousObjectDefinitionStepReader(signature),
             # The assert pattern has the same prefix as the null theorem, so it must come first.
-            AssertStepReader(),
-            ObjectDefinitionStepReader(),
-            TheoremStepReader(),
+            AssertStepReader(signature),
+            ObjectDefinitionStepReader(signature),
+            TheoremStepReader(signature),
         ]
 
     def read(self, lines: list[str]) -> Proof:
@@ -41,14 +41,14 @@ class ProofReader:
         try:
             steps = []
             for line in preprocess_lines(lines):
-                steps.append(self.read_step(line, obj_map))
+                steps.append(self.read_step(line))
             return Proof(steps)
         except Exception as e:
             raise ProofParseError(f'Error when parsing line {line} ====> Because of {e}') from e
 
-    def read_step(self, line: str, obj_map: dict[str, GeoObject]) -> Step:
+    def read_step(self, line: str) -> Step:
         for reader in self.step_readers:
-            step = reader.try_read(line, obj_map)
+            step = reader.try_read(line)
             if step is not None:
                 return step
         raise ProofParseError(f'Failed to parse proof: line {line} fits no pattern!')

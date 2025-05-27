@@ -36,8 +36,6 @@ class Theorem:
     """The predicates the objects should satisfy."""
     required_embedding_predicates: list[Predicate]
     """The predicates the objects should satisfy."""
-    result_objects: list[GeoObject]
-    """The objects constructed by the theorem."""
     result_predicates: list[Predicate]
     """The predicates constructed by the theorem."""
     trivial_if_equal_conditions: list[list[list[str]]]
@@ -57,7 +55,6 @@ class Theorem:
         signature: list[GeoObject],
         required_predicates: list[Predicate],
         required_embedding_predicates: list[Predicate],
-        result_objects: list[GeoObject],
         result_predicates: list[Predicate],
         trivial_if_equal_conditions: list[list[list[str]]],
         rank: int,
@@ -69,7 +66,6 @@ class Theorem:
         self.signature = signature
         self.required_predicates = required_predicates
         self.required_embedding_predicates = required_embedding_predicates
-        self.result_objects = result_objects
         self.result_predicates = result_predicates
         self.trivial_if_equal_conditions = trivial_if_equal_conditions
         self.rank = rank
@@ -103,7 +99,6 @@ class Theorem:
                 type_signature: Signature = {}
                 required_predicates: list[Predicate] = []
                 required_embedding_predicates: list[Predicate] = []
-                result_objects: list[GeoObject] = []
                 result_predicates: list[Predicate] = []
                 conclusion_flows: dict[str, str] = {}
                 trivial_if_equal_conditions = []
@@ -120,15 +115,6 @@ class Theorem:
 
                 signature_objects = tuple(x for x in signature if x.type not in [GeoType.SCALAR, GeoType.ANGLE])
                 required_predicates.append(predicate_from_args('exists', signature_objects))
-
-                # The construction part is the third part, and not the second. We parse it second to get the result object definitions.
-                for names, type_ in map(unpack_dict, data.get(CONSTRUCTION_LABEL, [])):
-                    for name in names.split(','):
-                        name = name.strip()
-                        assert name not in signature, f'In theorem {theorem_name}, object name {name} appears twice!'
-                        g = Atom(name, GeoType(type_))
-                        type_signature[name] = GeoType(type_)
-                        result_objects.append(g)
 
                 predicate_parser = PredicateParser(type_signature)
 
@@ -212,7 +198,7 @@ class Theorem:
 
                 # Building the base theorem, without any conclusion flows.
                 # We build it only if there are results not using the conclusion flows.
-                if len(result_predicates) > 0 or len(result_objects) > 0:
+                if len(result_predicates) > 0:
                     res.append(
                         Theorem(
                             theorem_name,
@@ -220,7 +206,6 @@ class Theorem:
                             signature,
                             required_predicates,
                             required_embedding_predicates,
-                            result_objects,
                             result_predicates,
                             trivial_if_equal_conditions,
                             rank,
@@ -266,7 +251,6 @@ class Theorem:
                                 signature,
                                 required_predicates + right_preds,
                                 required_embedding_predicates,
-                                result_objects,
                                 result_predicates + left_preds,
                                 trivial_if_equal_conditions,
                                 rank,
@@ -282,7 +266,6 @@ class Theorem:
                                 signature,
                                 required_predicates + left_preds,
                                 required_embedding_predicates,
-                                result_objects,
                                 result_predicates + right_preds,
                                 trivial_if_equal_conditions,
                                 rank,

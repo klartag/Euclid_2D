@@ -1,13 +1,15 @@
 import re
 from typing import Mapping, NamedTuple
 
+from rules.parsers.predicate_parser.predicate_parser import PredicateParser
+
 from ....rule_utils import preprocess_lines
 from ....errors import ProofParseError
 from ....geometry_objects.atom import Atom
 from ....geometry_objects.geo_type import GeoType, Signature
 from ....geometry_objects.geo_object import GeoObject
 from ....predicates.predicate import Predicate
-from ....predicates.predicate_factory import parse_predicate, predicate_from_args
+from ....predicates.predicate_factory import predicate_from_args
 
 from ...statement import Statement
 
@@ -24,15 +26,19 @@ PredicateData = NamedTuple('PredicateData', [("objects", dict[str, GeoObject]), 
 
 class ProblemStatementReader:
     def read(self, document: GeometryDocument) -> Statement:
-        assumption_predicate_data = self.read_assumptions(document.get_section_content(DocumentSection.ASSUMPTION))
+        signature: Signature = {}
+
+        assumption_predicate_data = self.read_assumptions(
+            document.get_section_content(DocumentSection.ASSUMPTION), signature
+        )
         target_predicate_data = self.read_targets(
-            document.get_section_content(DocumentSection.TARGET), assumption_predicate_data.objects
+            document.get_section_content(DocumentSection.TARGET), signature, assumption_predicate_data.objects
         )
         auxiliary_predicates = self.create_auxiliary_predicates(assumption_predicate_data, target_predicate_data)
 
         atoms = set(
-            [atom for atom in assumption_predicate_data.objects if isinstance(atom, Atom)]
-            + [atom for atom in target_predicate_data.objects if isinstance(atom, Atom)]
+            [atom for atom in assumption_predicate_data.objects.values() if isinstance(atom, Atom)]
+            + [atom for atom in target_predicate_data.objects.values() if isinstance(atom, Atom)]
         )
 
         signature = {atom.name: atom.type for atom in atoms}
@@ -61,7 +67,7 @@ class ProblemStatementReader:
 
         return auxiliary_preds
 
-    def read_assumptions(self, data: list[str]) -> PredicateData:
+    def read_assumptions(self, data: list[str], signature: Signature) -> PredicateData:
         """
         Parses the assumptions segment of the proof.
         Returns a proof with only the assumptions.
@@ -72,17 +78,19 @@ class ProblemStatementReader:
         for line in preprocess_lines(data):
             if ':' in line:
                 # Checking if the line contains object definitions.
-                self.read_object_definition_line(line, assumption_objects)
+                self.read_object_definition_line(line, signature, assumption_objects)
             else:
                 # Parsing a predicate.
-                pred = parse_predicate(line, assumption_objects)
+                pred = PredicateParser(signature).try_parse(line)
                 if not pred.is_valid():
                     raise ProofParseError(f'Found invalid predicate {pred} in proof assumptions!')
                 assumption_predicates.append(pred)
 
         return PredicateData(assumption_objects, assumption_predicates)
 
-    def read_targets(self, data: list[str], assumption_objects: Mapping[str, GeoObject]) -> PredicateData:
+    def read_targets(
+        self, data: list[str], signature: Signature, assumption_objects: Mapping[str, GeoObject]
+    ) -> PredicateData:
         """
         Parses the targets section of the proof.
         @return: A proof with an updated object map and only the target predicates set.
@@ -93,10 +101,10 @@ class ProblemStatementReader:
         for line in preprocess_lines(data):
             if ':' in line:
                 # Checking if the line contains object definitions.
-                self.read_object_definition_line(line, assumption_objects)
+                self.read_object_definition_line(line, signature, assumption_objects)
             else:
                 # Parsing a predicate.
-                pred = parse_predicate(line, assumption_objects)
+                pred = PredicateParser(signature).try_parse(line)
                 if not pred.is_valid():
                     raise ProofParseError(f'Found invalid predicate {pred} in proof targets!')
 
@@ -106,7 +114,7 @@ class ProblemStatementReader:
 
         return PredicateData(target_objects, target_predicates)
 
-    def read_object_definition_line(self, line: str, assumption_objects: Mapping[str, GeoObject]):
+    def read_object_definition_line(self, line: str, signature: Signature, assumption_objects: Mapping[str, GeoObject]):
         """
         Parses a line defining objects.
         @param line: The line. Should be of the format a, b, c: Type
@@ -129,4 +137,5 @@ class ProblemStatementReader:
             if name in assumption_objects:
                 raise ProofParseError(f'Object {name} redefined in line {line}!')
 
+            signature[name] = GeoType(type_)
             assumption_objects[name] = Atom(name, GeoType(type_))
