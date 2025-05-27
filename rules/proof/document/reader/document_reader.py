@@ -23,9 +23,7 @@ class DocumentReader:
 
         proof = proof_reader.read(document.get_section_content(DocumentSection.PROOF)) if read_proof_body else None
         embedding_lines = document.get_section_content(DocumentSection.EMBEDDING)
-        embedding = (
-            embedding_reader.read(embedding_lines, statement.assumption_objects) if len(embedding_lines) > 0 else None
-        )
+        embedding = embedding_reader.read(embedding_lines) if len(embedding_lines) > 0 else None
         return GeometryProblem(statement, embedding, proof)
 
     def remove_comments(self, lines: Iterable[str]) -> Iterable[str]:

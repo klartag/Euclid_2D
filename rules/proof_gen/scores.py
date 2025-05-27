@@ -116,10 +116,8 @@ def get_constructions(
 
         case TheoremStep():
             inputs = union(get_constructions(inp) for inp in step.inputs)
-            res = union(get_constructions(res) for res in step.result_objects) | union(
-                get_constructions(res) for res in step.result_predicates
-            )
-            return res - inputs
+            results = union(get_constructions(res) for res in step.result_predicates)
+            return results - inputs
 
 
 @functools.cache
@@ -191,9 +189,7 @@ def get_result_predicates(step: TheoremStep | Theorem | ConstructionObject | Con
             # Ditto.
             return set(step.conclusions()) - set(step.requirements())
         case Theorem():
-            return get_result_predicates(
-                TheoremStep(step.name, step.signature, step.result_objects, step.result_predicates)
-            )
+            return get_result_predicates(TheoremStep(step.name, step.signature, step.result_predicates))
         case TheoremStep():
             theo = Theorem.all_theorems()[step.theorem_name]
 
@@ -203,9 +199,7 @@ def get_result_predicates(step: TheoremStep | Theorem | ConstructionObject | Con
             )
             all_required_objects = union(get_required_predicates(obj) for obj in step.inputs)
 
-            all_result_predicates = union(get_all_predicates(obj) for obj in step.result_objects) | union(
-                get_all_predicates(pred) for pred in step.result_predicates
-            )
+            all_result_predicates = union(get_all_predicates(pred) for pred in step.result_predicates)
 
             return all_result_predicates - (all_required_objects | all_required_predicates)
 
@@ -299,7 +293,6 @@ class StepSuggestion:
             return construction_penalty(self.step, checker) + 5  # I'd rather add theorems than constructions.
         assert isinstance(self.step, Theorem)
 
-        direct_construction_count = len(self.step.result_objects)
         pred_score = theorem_score(self.step)
         constructions = [c.substitute(self.inputs) for c in cached_constructions(self.step)]
         indirect_constructions = [c for c in constructions if not checker.geometry_tracker.contains_object(c)]
@@ -309,13 +302,8 @@ class StepSuggestion:
             if construction_penalty(c, checker) > 0
         }
         if verb:
-            print(f'{direct_construction_count=} {pred_score=} {self.construction_penalties=}')
-        return (
-            direct_construction_count * CONSTRUCTION_PENALTY
-            + sum(self.construction_penalties.values())
-            + pred_score
-            - self.step.rank * 10
-        )
+            print(f'{pred_score=} {self.construction_penalties=}')
+        return sum(self.construction_penalties.values()) + pred_score - self.step.rank * 10
 
     def update_score(self, checker: ProofChecker):
         """
@@ -348,13 +336,9 @@ class StepSuggestion:
         if isinstance(self.step, Construction):
             return ObjDefineStep(self.step(*[self.inputs[sig] for sig in self.step.signature]))
         elif isinstance(self.step, Theorem):
-            res_objects = [Atom(gen_name(all_names), res.type) for res in self.step.result_objects]
-            full_sub = self.inputs | {out: res for out, res in zip(self.step.result_objects, res_objects)}
-            res_predicates = [pred.substitute(full_sub) for pred in self.step.result_predicates]
+            res_predicates = [pred.substitute(self.inputs) for pred in self.step.result_predicates]
 
-        return TheoremStep(
-            self.step.name, [self.inputs[sig] for sig in self.step.signature], res_objects, res_predicates
-        )
+        return TheoremStep(self.step.name, [self.inputs[sig] for sig in self.step.signature], res_predicates)
 
     def __hash__(self) -> int:
         return hash((self.step, self.inputs))

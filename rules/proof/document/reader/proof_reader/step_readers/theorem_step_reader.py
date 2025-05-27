@@ -42,23 +42,5 @@ class TheoremStepReader(AbstractStepReader[TheoremStep]):
         if len(inputs) < len(theorem.signature):
             raise ProofParseError(f'In line {line}, too few arguments for theorem {name}!')
 
-        # The first outputs are objects constructed by the theorem.
-        # We make sure enough objects were constructed.
-        construct_names = results[: len(theorem.result_objects)]
-        if len(construct_names) < len(theorem.result_objects):
-            raise ProofParseError(f'In line {line}, not enough objects are built by the theorem!')
-
-        # Adding the constructed objects.
-        result_objects = []
-        for cons_name, theorem_out in zip(construct_names, theorem.result_objects):
-            if cons_name in obj_map:
-                raise ProofParseError(f'Line {line} redefines the object {cons_name}!')
-            typ = theorem_out.type
-            res = Atom(cons_name, typ)
-            obj_map[cons_name] = res
-            result_objects.append(res)
-
-        result_predicates = [
-            self.predicate_parser.try_parse(result) for result in results[len(theorem.result_objects) :]
-        ]
-        return TheoremStep(name, inputs, result_objects, result_predicates, '')
+        result_predicates = [self.predicate_parser.try_parse(result) for result in results]
+        return TheoremStep(name, inputs, result_predicates, '')
