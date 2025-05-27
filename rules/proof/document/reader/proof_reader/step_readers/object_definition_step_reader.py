@@ -1,11 +1,9 @@
 from re import Match
 
-from rules.geometry_objects.geo_type import Signature
-from rules.parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
-
 from ......errors import ProofParseError
+from ......parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
 from ......geometry_objects.atom import Atom
-from ......geometry_objects.geo_object import GeoObject
+from ......geometry_objects.geo_type import Signature
 
 from .....steps.object_define_step import ObjDefineStep
 

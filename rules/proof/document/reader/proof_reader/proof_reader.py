@@ -1,5 +1,4 @@
-from rules.geometry_objects.geo_type import Signature
-from .....geometry_objects.geo_object import GeoObject
+from .....geometry_objects.geo_type import Signature
 from .....rule_utils import preprocess_lines
 from .....errors import ProofParseError
 

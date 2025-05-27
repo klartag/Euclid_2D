@@ -1,13 +1,13 @@
 from re import Match
 
-from rules.geometry_objects.geo_type import Signature
-from rules.parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
-from rules.parsers.predicate_parser.predicate_parser import PredicateParser
 
 from ......expression_parse_utils import split_args
 from ......errors import ProofParseError
-from ......geometry_objects.atom import Atom
+from ......parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
+from ......parsers.predicate_parser.predicate_parser import PredicateParser
+
 from ......theorem import Theorem
+from ......geometry_objects.geo_type import Signature
 
 from .....steps.theorem_step import TheoremStep
 

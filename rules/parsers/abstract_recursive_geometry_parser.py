@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Callable, Optional, Tuple, TypeVar
 from abc import abstractmethod
 
-from rules.parsers.abstract_geometry_parser import AbstractGeometryParser
+from .abstract_geometry_parser import AbstractGeometryParser
 
 G = TypeVar("G")
 '''The type of object to parse'''

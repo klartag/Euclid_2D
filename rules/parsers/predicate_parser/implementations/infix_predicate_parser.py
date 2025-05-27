@@ -1,11 +1,13 @@
 from dataclasses import dataclass
 import re
 from typing import Optional
-from rules.expression_parse_utils import split_args
-from rules.geometry_objects.geo_object import GeoObject
-from rules.parsers.abstract_recursive_geometry_parser import AbstractRecursiveGeometryParser
-from rules.predicates.predicate import Predicate
-from rules.predicates.predicate_factory import predicate_from_args
+
+from ....expression_parse_utils import split_args
+from ....geometry_objects.geo_object import GeoObject
+from ....predicates.predicate import Predicate
+from ....predicates.predicate_factory import predicate_from_args
+
+from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParser
 
 
 @dataclass

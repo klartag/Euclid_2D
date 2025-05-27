@@ -1,10 +1,10 @@
 import re
 from typing import Mapping, NamedTuple
 
-from rules.parsers.predicate_parser.predicate_parser import PredicateParser
-
 from ....rule_utils import preprocess_lines
 from ....errors import ProofParseError
+from ....parsers.predicate_parser.predicate_parser import PredicateParser
+
 from ....geometry_objects.atom import Atom
 from ....geometry_objects.geo_type import GeoType, Signature
 from ....geometry_objects.geo_object import GeoObject

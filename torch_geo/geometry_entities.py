@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
 import functools
 import torch
-from torch import Tensor, tensor
+from torch import Tensor
 from typing import Generic, TypeVar, Union
 
 from rules.expression_parse_utils import split_args

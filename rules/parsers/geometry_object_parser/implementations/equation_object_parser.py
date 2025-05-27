@@ -1,8 +1,7 @@
 from typing import Optional
 
-from rules.expression_parse_utils import alternating_merge_string, generic_split_args, is_valid_parenthesis
-from rules.geometry_objects.geo_type import EQN_TYPES
-
+from ....expression_parse_utils import alternating_merge_string, generic_split_args, is_valid_parenthesis
+from ....geometry_objects.geo_type import EQN_TYPES
 from ....geometry_objects.geo_object import GeoObject
 from ....geometry_objects.equation_object import EqOp, EquationObject
 

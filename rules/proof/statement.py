@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 
-from rules.geometry_objects.geo_type import Signature
-
+from ..geometry_objects.geo_type import Signature
 from ..geometry_objects.geo_object import GeoObject
 from ..predicates.predicate import Predicate
 

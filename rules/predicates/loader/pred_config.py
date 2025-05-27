@@ -1,24 +1,26 @@
 import itertools
 from pathlib import Path
 
-from rules.parsers.predicate_parser.predicate_parser import PredicateParser
+from util import BASE_PATH
 
-
+from ...rule_utils import unpack_dict
+from ...parsers.predicate_parser.predicate_parser import PredicateParser
 from ...theorem import CONDITION_LABEL, CONSTRUCTION_LABEL, POSS_CONCLUSIONS_LABEL, RESULT_PREDICATE_LABEL
-from ..predicate import INPUT_LABEL, PREPROCESS_LABEL, Predicate
-from ..implementations.macro_predicate import MacroData
-from ..predicate_factory import predicate_from_args
+from ...errors import ProofParseError
+from ...symmetry import Symmetry
+
 from ...geometry_objects.atom import Atom
 from ...geometry_objects.construction_object import Construction, LogConstruction
 from ...geometry_objects.geo_object import GeoObject
 from ...geometry_objects.literal import Literal
-from ...rule_utils import unpack_dict
 from ...geometry_objects.geo_type import GeoType, Signature
-from ...errors import ProofParseError
-from ...symmetry import Symmetry
-from util import BASE_PATH
 
 from .. import global_predicates
+
+from ..predicate import INPUT_LABEL, PREPROCESS_LABEL, Predicate
+from ..implementations.macro_predicate import MacroData
+from ..predicate_factory import predicate_from_args
+
 
 MACRO_FOLDER = BASE_PATH / 'rules' / 'constructions_and_predicates' / 'hierarchy' / 'predicates'
 CONSTRUCTION_FOLDER = BASE_PATH / 'rules' / 'constructions_and_predicates' / 'hierarchy' / 'constructions'

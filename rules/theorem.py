@@ -2,7 +2,6 @@ import functools
 import itertools
 from pathlib import Path
 
-from rules.parsers.predicate_parser.predicate_parser import PredicateParser
 from util import BASE_PATH
 
 from .rule_utils import unpack_dict
@@ -12,6 +11,7 @@ from .geometry_objects.atom import Atom
 from .geometry_objects.geo_object import GeoObject
 from .predicates.predicate import Predicate
 from .predicates.predicate_factory import predicate_from_args
+from .parsers.predicate_parser.predicate_parser import PredicateParser
 
 THEOREM_FOLDER = BASE_PATH / 'rules' / 'theorems'
 

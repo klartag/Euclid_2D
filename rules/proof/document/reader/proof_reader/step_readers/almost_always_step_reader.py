@@ -1,8 +1,7 @@
 from re import Match
 
-from rules.geometry_objects.geo_type import Signature
-from rules.parsers.predicate_parser.predicate_parser import PredicateParser
-
+from ......geometry_objects.geo_type import Signature
+from ......parsers.predicate_parser.predicate_parser import PredicateParser
 from ......expression_parse_utils import split_args
 
 from .....steps.almost_always_step import AlmostAlwaysStep

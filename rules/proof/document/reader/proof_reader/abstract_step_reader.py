@@ -4,8 +4,6 @@ from re import Match
 import re
 from typing import Optional, TypeVar
 
-from rules.geometry_objects.geo_type import Signature
-
 from ....steps.step import Step
 
 S = TypeVar('S', bound=Step)

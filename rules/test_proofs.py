@@ -5,13 +5,11 @@ It should absolutely never be imported.
 
 import pytest
 
-from rules.parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
-
 from .proof.document.geometry_document import GeometryDocument
 from .proof.document.reader.document_reader import DocumentReader
+from .parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
 
 from .predicates.loader.pred_config import load_constructions_and_macros
-
 from .predicates.global_predicates import get_constructions
 
 from .geometry_objects.construction_object import ConstructionObject

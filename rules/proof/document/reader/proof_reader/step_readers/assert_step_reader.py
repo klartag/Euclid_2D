@@ -1,8 +1,7 @@
 from inspect import Signature
 from re import Match
 
-from rules.parsers.predicate_parser.predicate_parser import PredicateParser
-
+from ......parsers.predicate_parser.predicate_parser import PredicateParser
 from ......expression_parse_utils import split_args
 
 from .....steps.assert_step import AssertStep

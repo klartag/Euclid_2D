@@ -1,9 +1,8 @@
 from typing import Optional
 
-from rules.expression_parse_utils import split_args
-from rules.geometry_objects.geo_object import GeoObject
-from rules.predicates.global_predicates import get_constructions
-
+from ....expression_parse_utils import split_args
+from ....geometry_objects.geo_object import GeoObject
+from ....predicates.global_predicates import get_constructions
 from ....geometry_objects.construction_object import Construction, ConstructionObject
 
 from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParser

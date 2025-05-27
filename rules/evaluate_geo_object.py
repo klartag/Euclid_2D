@@ -1,11 +1,10 @@
 import sympy
 
-from rules.parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
-
 from .geometry_objects.geo_type import GeoType
 from .geometry_objects.construction_object import ConstructionObject
 from .geometry_objects.equation_object import EquationObject
 from .geo_config import get_sympy_objects
+from .parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
 
 
 def evaluate(object, obj_map):

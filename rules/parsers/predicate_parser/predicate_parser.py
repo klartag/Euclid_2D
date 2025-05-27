@@ -1,10 +1,13 @@
 from typing import Optional
-from rules.geometry_objects.geo_type import Signature
-from rules.parsers.abstract_geometry_parser import AbstractGeometryParser
-from rules.parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
-from rules.parsers.predicate_parser.implementations.function_predicate_parser import FunctionPredicateParser
-from rules.parsers.predicate_parser.implementations.infix_predicate_parser import InfixPredicateParser
-from rules.predicates.predicate import Predicate
+
+from ...predicates.predicate import Predicate
+from ...geometry_objects.geo_type import Signature
+
+from ..abstract_geometry_parser import AbstractGeometryParser
+from ..geometry_object_parser.geometry_object_parser import GeometryObjectParser
+
+from .implementations.function_predicate_parser import FunctionPredicateParser
+from .implementations.infix_predicate_parser import InfixPredicateParser
 
 
 class PredicateParser(AbstractGeometryParser[Predicate]):
