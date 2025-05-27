@@ -2,9 +2,10 @@ from mpmath import mpf
 from typing import Mapping
 from mpmath import mp
 
-from ..rule_utils import LITERAL, GeometryError
+from ..errors import GeometryError
 
 from .eq_op import EqOp
+from .geo_type import GeoType
 from .geo_object import GeoObject
 from .literal import ZERO, ONE, Literal
 
@@ -19,12 +20,12 @@ class EquationObject(GeoObject):
     op: EqOp
 
     def __init__(self, left: GeoObject, right: GeoObject, op: EqOp):
-        if left.type != LITERAL:
+        if left.type != GeoType.LITERAL:
             self.type = left.type
-        elif right.type != LITERAL:
+        elif right.type != GeoType.LITERAL:
             self.type = right.type
         else:
-            self.type = LITERAL
+            self.type = GeoType.LITERAL
 
         self.left = left
         self.right = right
@@ -134,7 +135,7 @@ class EquationObject(GeoObject):
         """
         Attempts to transform the equation to a scalar.
         """
-        if self.type != LITERAL:
+        if self.type != GeoType.LITERAL:
             return None
         left_scalar = self.left.as_literal()
         right_scalar = self.right.as_literal()
@@ -156,7 +157,7 @@ class EquationObject(GeoObject):
         Attempts to tranfsorm the equation to a dictionary mapping geoobjects to their coefficient in the equation.
         If it fails (For example, if there is a A*B factor), it returns None.
         """
-        if self.type == LITERAL:
+        if self.type == GeoType.LITERAL:
             val = self.as_literal()
             if val is None:
                 return None
@@ -182,12 +183,12 @@ class EquationObject(GeoObject):
                 return left_factors
 
             case EqOp.MUL:
-                if self.left.type == LITERAL:
+                if self.left.type == GeoType.LITERAL:
                     left_val = self.left.as_literal()
                     if left_val is None:
                         return None
                     return {obj: coef * left_val for obj, coef in right_factors.items()}
-                if self.right.type == LITERAL:
+                if self.right.type == GeoType.LITERAL:
                     right_val = self.right.as_literal()
                     if right_val is None:
                         return None
@@ -205,7 +206,7 @@ class EquationObject(GeoObject):
         Attempts to tranfsorm the equation to a dictionary mapping geoobjects to their coefficient in the equation.
         If it fails (For example, if there is a A*B factor), it returns None.
         """
-        if self.type == LITERAL:
+        if self.type == GeoType.LITERAL:
             val = self.as_literal()
             if (val is None) or (val == 0):
                 return None

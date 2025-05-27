@@ -11,15 +11,12 @@ from .step import Step
 class TheoremStep(Step):
     theorem_name: str
     inputs: list[GeoObject]
-    result_objects: list[GeoObject]
     result_predicates: list[Predicate]
     comment: str = field(compare=False, default='')
 
     def to_language_format(self) -> str:
         input_str = ', '.join(obj.name for obj in self.inputs)
-        result_str = ', '.join(
-            [obj.name for obj in self.result_objects] + [pred.to_language_format() for pred in self.result_predicates]
-        )
+        result_str = ', '.join([pred.to_language_format() for pred in self.result_predicates])
 
         comment = f'  # {self.comment}' if self.comment else ''
 
@@ -29,7 +26,6 @@ class TheoremStep(Step):
         return TheoremStep(
             self.theorem_name,
             [g.substitute(subs) for g in self.inputs],
-            [g.substitute(subs) for g in self.result_objects],
             [pred.substitute(subs) for pred in self.result_predicates],
             self.comment,
         )

@@ -22,8 +22,8 @@ from .proof.document.reader.document_reader import DocumentReader
 from .proof.geometry_problem import GeometryProblem
 from .proof.steps import AlmostAlwaysStep, AssertStep, CommentStep, ObjDefineStep, Step, TheoremStep
 
-from . import rule_utils
-from .rule_utils import ProofCheckError, R_EQN_TYPES
+from .errors import ProofCheckError
+from .geometry_objects.geo_type import R_EQN_TYPES, GeoType
 from .geometry_objects.geo_object import GeoObject
 from .geometry_objects.equation_object import EquationObject
 from .geometry_objects.construction_object import ConstructionObject
@@ -163,9 +163,9 @@ class ProofChecker:
                 )
 
         match obj.type:
-            case rule_utils.ANGLE:
+            case GeoType.ANGLE:
                 self.process_angle(obj)
-            case rule_utils.ORIENTATION:
+            case GeoType.ORIENTATION:
                 self.process_orientation(obj)
 
     def _add_obj_define_step(self, step: ObjDefineStep):
@@ -250,8 +250,6 @@ class ProofChecker:
         # All predicates are satisfied, and all objects are legal.
         # The results are known to exist.
 
-        outputs = [self.geometry_tracker.get_object(step_out, CHECK_CFG) for step_out in step.result_objects]
-
         for result_predicate in theorem.result_predicates:
             pred = result_predicate.substitute(substitutions)
             if self.geometry_tracker.embedding_tracker is not None:
@@ -261,20 +259,6 @@ class ProofChecker:
             for obj in pred.involved_objects():
                 predicate = predicate_from_args('exists', (obj,))
                 self.geometry_tracker.add_predicate(predicate, ADD_CFG, 'Marking a processed object as existing')
-
-        for result_object in theorem.result_objects:
-            obj = result_object.substitute(substitutions)
-            predicate = predicate_from_args('exists', (obj,))
-            self.geometry_tracker.add_predicate(predicate, ADD_CFG, 'Marking a processed object as existing')
-
-        # Making sure that the output types are correct.
-        if not skim:
-            if len(step.result_objects) != len(theorem.result_objects):
-                return f'In step {step}, not enough objects were constructed.'
-            for theorem_out, step_out in zip(theorem.result_objects, outputs):
-                if theorem_out.type != step_out.type:
-                    return f'In step {step}, constructed object had incorrect type.'
-                substitutions[theorem_out] = step_out
 
         # Making sure that the predicates specified by the step follow from the theorem, and adding them.
         # The step is allowed (And probably encouraged) not to use all predicates proved by the theorem.

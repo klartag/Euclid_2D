@@ -23,7 +23,8 @@ from .proof_checker_utils import (
     unpack_predicate_full,
     unpack_predicate_minimal,
 )
-from .rule_utils import ANGLE, CIRCLE, EQN_TYPES, LINE, LITERAL, ORIENTATION, POINT, SCALAR, GeometryError
+from .errors import GeometryError
+from .geometry_objects.geo_type import EQN_TYPES, GeoType
 from .theorem import Theorem
 from .union_find import UnionFind
 from .rust_code.rust_match import RustMatch
@@ -55,7 +56,15 @@ def extended_type(obj: GeoObject) -> str:
         return obj.type
 
 
-TYPE_NAMES = {POINT: 'P', LINE: 'L', CIRCLE: 'C', ORIENTATION: 'O', ANGLE: 'A', SCALAR: 'S', LITERAL: 'LIT_'}
+TYPE_NAMES = {
+    GeoType.POINT: 'P',
+    GeoType.LINE: 'L',
+    GeoType.CIRCLE: 'C',
+    GeoType.ORIENTATION: 'O',
+    GeoType.ANGLE: 'A',
+    GeoType.SCALAR: 'S',
+    GeoType.LITERAL: 'LIT_',
+}
 
 T = TypeVar('T', GeoObject, Predicate)
 
@@ -70,7 +79,7 @@ def normalize(
     Parameters:
     * `obj`: The object to normalize. Could be a GeoObject, which will be converted to a semi-canonical form
              `(Atom('A', 'Point')` will be converted to `Atom('Point_0', 'Point')`).
-    * `keys`: A mapping from all keys in the resulting object to the original keys, ro be used in a `RekeyPattern`.
+    * `keys`: A mapping from all keys in the resulting object to the original keys, to be used in a `RekeyPattern`.
               When converting `Line(A, B)` to `Line(Point_0, Point_1)`, this will map the key of `Point_0` to the key of `A`,
               the key of `Point_1` to the key of `B`, and the key of `Line(Point_0, Point_1)` to the key of `Line(A, B)`.
     * `names`: The names we have added, so that we don't add the same name twice.
@@ -111,7 +120,7 @@ def normalize(
     elif isinstance(obj, GeoObject):
         if obj in subs:
             return subs[obj]
-        if obj.type == LITERAL:
+        if obj.type == GeoType.LITERAL:
             return obj
         i = 0
         while f'{TYPE_NAMES[obj.type]}{i}' in names:
@@ -129,7 +138,11 @@ def normalize(
         for sub_pred in preds:
             if sub_pred != obj:
                 normalize(sub_pred, keys, names, subs)
-            if sub_pred.name == 'equals' and sub_pred.components[0].type in (LITERAL, SCALAR, ANGLE):
+            if sub_pred.name == 'equals' and sub_pred.components[0].type in (
+                GeoType.LITERAL,
+                GeoType.SCALAR,
+                GeoType.ANGLE,
+            ):
                 factors = get_linear_eqn_factors(sub_pred)
                 if factors is None:
                     factors = get_log_eqn_factors(sub_pred)
@@ -413,7 +426,7 @@ class RawPredicatePattern(Pattern):
         self.pred = theorem_pred
         assert self.pred.name != 'equals_mod_360'
         if self.pred.name == 'equals':
-            assert self.pred.components[0].type in (POINT, LINE, CIRCLE)
+            assert self.pred.components[0].type in (GeoType.POINT, GeoType.LINE, GeoType.CIRCLE)
         self.name = f'RawPredPattern{theorem_pred.name}'
 
     def add_predicate(self, pred: Predicate):
@@ -784,11 +797,11 @@ class SignatureDag:
         if eqn_factors is None:
             raise GeometryError(f'Predicate could not be converted to an equation: {pred}!')
 
-        type_ = pred.components[0].type if pred.components[0].type != LITERAL else pred.components[1].type
+        type_ = pred.components[0].type if pred.components[0].type != GeoType.LITERAL else pred.components[1].type
 
-        if pred.name == 'not_equals' and type_ in (ANGLE, SCALAR, LITERAL):
+        if pred.name == 'not_equals' and type_ in (GeoType.ANGLE, GeoType.SCALAR, GeoType.LITERAL):
             mod = None
-        elif pred.name == 'not_equals' and type_ == ORIENTATION:
+        elif pred.name == 'not_equals' and type_ == GeoType.ORIENTATION:
             mod = 2
         elif pred.name == 'not_equals_mod_360':
             mod = 360
@@ -833,11 +846,11 @@ class SignatureDag:
         if eqn_factors is None:
             raise GeometryError(f'Predicate could not be converted to an equation: {pred}!')
 
-        type_ = pred.components[0].type if pred.components[0].type != LITERAL else pred.components[1].type
+        type_ = pred.components[0].type if pred.components[0].type != GeoType.LITERAL else pred.components[1].type
 
-        if pred.name == 'equals' and type_ in (ANGLE, SCALAR, LITERAL):
+        if pred.name == 'equals' and type_ in (GeoType.ANGLE, GeoType.SCALAR, GeoType.LITERAL):
             mod = None
-        elif pred.name == 'equals' and type_ == ORIENTATION:
+        elif pred.name == 'equals' and type_ == GeoType.ORIENTATION:
             mod = 2
         elif pred.name == 'equals_mod_360':
             mod = 360

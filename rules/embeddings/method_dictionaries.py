@@ -29,7 +29,7 @@ from .constructions.projection import project
 from .constructions.radical_axis import radical_axis
 from .constructions.reflection import reflect_point
 from .constructions.scalars import angle, orientation, distance, direction, power_of_a_point, radius, log
-from .constructions.tangent import line_circle_tangent_point, point_circle_tangent_line
+from .constructions.tangent import line_circle_tangent_point, circle_circle_tangent_point, point_circle_tangent_line
 
 from .predicates.bisect import bisect
 from .predicates.collinear import collinear, between, collinear_and_not_between, not_collinear
@@ -73,6 +73,7 @@ _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ExtendedConstructionMethod] = 
     'isogonal_conjugate': isogonal_conjugate,
     'line_circle_other_intersection': line_circle_other_intersection,
     'line_circle_tangent_point': line_circle_tangent_point,
+    'circle_circle_tangent_point': circle_circle_tangent_point,
     'line_intersection': line_intersection,
     'Line': line,
     'log': log,

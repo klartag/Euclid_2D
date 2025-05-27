@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from mpmath import mpf
 from typing import Self
 
-from ...rule_utils import POINT
+from ...geometry_objects.geo_type import GeoType
 from .embedded_object import EmbeddedObject, EPSILON
 
 
@@ -17,10 +17,10 @@ class EmbeddedPoint(EmbeddedObject):
     y: mpf
 
     def _type(self) -> str:
-        return POINT
+        return GeoType.POINT
 
     def is_equal(self, other: EmbeddedObject) -> bool:
-        return other._type() == POINT and abs(self.x - other.x) < EPSILON and abs(self.y - other.y) < EPSILON
+        return other._type() == GeoType.POINT and abs(self.x - other.x) < EPSILON and abs(self.y - other.y) < EPSILON
 
     def __add__(self, other: 'EmbeddedPoint') -> 'EmbeddedPoint':
         return EmbeddedPoint(self.x + other.x, self.y + other.y)

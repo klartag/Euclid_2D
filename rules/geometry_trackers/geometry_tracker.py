@@ -1,8 +1,6 @@
 import heapq
 from typing import Optional
 
-from .. import rule_utils
-
 from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ..predicates.predicate_factory import predicate_from_args
 from ..theorem import Theorem
@@ -18,16 +16,8 @@ from ..proof_checker_utils import (
     unpack_predicate_minimal,
 )
 from ..rust_code.rust_sparse_linear import BaseSolver
-from ..rule_utils import (
-    ANGLE,
-    LITERAL,
-    ORIENTATION,
-    SCALAR,
-    GeometryError,
-    IllegalObjectError,
-    ProofCheckError,
-    R_EQN_TYPES,
-)
+from ..errors import GeometryError, IllegalObjectError, ProofCheckError
+from ..geometry_objects.geo_type import GeoType, R_EQN_TYPES, Signature
 from ..geometry_objects.atom import Atom
 from ..geometry_objects.geo_object import GeoObject
 from ..geometry_objects.literal import ONE, Literal
@@ -71,7 +61,11 @@ def involved_objects(
                 involved_objects(pred, res)
         case Predicate():
             for sub_pred in unpack_predicate_minimal(obj):
-                if sub_pred.name == 'equals' and sub_pred.components[0].type in (LITERAL, SCALAR, ANGLE):
+                if sub_pred.name == 'equals' and sub_pred.components[0].type in (
+                    GeoType.LITERAL,
+                    GeoType.SCALAR,
+                    GeoType.ANGLE,
+                ):
                     factors = get_linear_eqn_factors(sub_pred)
                     if factors is None:
                         factors = get_log_eqn_factors(sub_pred)
@@ -107,6 +101,7 @@ class GeometryTracker:
     A class that checks that a proof is valid.
     """
 
+    signature: Signature
     _objects: UnionFind[GeoObject]
     """All legal objects currently used by the proof."""
     _processed_objects: set[GeoObject]
@@ -124,6 +119,7 @@ class GeometryTracker:
     """A new numeric tracker to track 2D embeddings of the geometric configurations."""
 
     def __init__(self):
+        self.signature = {}
         self._objects = UnionFind()
         self._processed_objects = set()
         self._drawn_objects = set()
@@ -188,6 +184,9 @@ class GeometryTracker:
             res = self._objects[obj]
             assert res <= obj, f'ProofChecker::get_object increased the value: {obj} => {res}'
             return res
+
+        if isinstance(obj, Atom):
+            self.signature[obj.name] = obj.type
 
         # If the object is a construct, we substitute the components.
         # A construction object must always satisfy that the substitution of its components to the canonical components
@@ -350,9 +349,9 @@ class GeometryTracker:
                 self.process_object(self.get_object(comp, ADD_CFG))
 
         match obj.type:
-            case rule_utils.ANGLE:
+            case GeoType.ANGLE:
                 self.process_angle(obj)
-            case rule_utils.ORIENTATION:
+            case GeoType.ORIENTATION:
                 self.process_orientation(obj)
 
         if (
@@ -640,13 +639,13 @@ class GeometryTracker:
                 assert len(pred.components) == 2
 
                 match (pred.components[0].type, pred.components[1].type):
-                    case (rule_utils.SCALAR, _) | (_, rule_utils.SCALAR):
+                    case (GeoType.SCALAR, _) | (_, GeoType.SCALAR):
                         # Handling a scalar equation.
                         self.add_equal_scalar(pred)
-                    case (rule_utils.ANGLE, _) | (_, rule_utils.ANGLE):
+                    case (GeoType.ANGLE, _) | (_, GeoType.ANGLE):
                         # Handling an angle equation with no modulus.
                         self.add_equal_angle(pred, None)
-                    case (rule_utils.ORIENTATION, _) | (_, rule_utils.ORIENTATION):
+                    case (GeoType.ORIENTATION, _) | (_, GeoType.ORIENTATION):
                         self.add_equal_bool(pred)
                     case _:
                         # Generic object equality.
@@ -657,13 +656,13 @@ class GeometryTracker:
             case 'not_equals':
                 assert len(pred.components) == 2
                 match (pred.components[0].type, pred.components[1].type):
-                    case (rule_utils.SCALAR, _) | (_, rule_utils.SCALAR):
+                    case (GeoType.SCALAR, _) | (_, GeoType.SCALAR):
                         # Handling a scalar equation.
                         self.add_not_equal_scalar(pred)
-                    case (rule_utils.ANGLE, _) | (_, rule_utils.ANGLE):
+                    case (GeoType.ANGLE, _) | (_, GeoType.ANGLE):
                         # Handling an angle equation with no modulus.
                         self.add_not_equal_angle(pred, None)
-                    case (rule_utils.ORIENTATION, _) | (_, rule_utils.ORIENTATION):
+                    case (GeoType.ORIENTATION, _) | (_, GeoType.ORIENTATION):
                         self.add_not_equal_bool(pred)
                     case _:
                         self._predicates.add(pred)
@@ -758,7 +757,7 @@ class GeometryTracker:
         match pred.name:
             case 'equals':
                 a, b = pred.components
-                typ = a.type if a.type != LITERAL else b.type
+                typ = a.type if a.type != GeoType.LITERAL else b.type
                 if typ in R_EQN_TYPES:
                     if (
                         factors := get_linear_eqn_factors(pred)
@@ -770,7 +769,7 @@ class GeometryTracker:
                         return True
                     return False
 
-                if typ == ORIENTATION:
+                if typ == GeoType.ORIENTATION:
                     return (
                         factors := get_linear_eqn_factors(pred)
                     ) is not None and self._linear_algebra._bool_equations.contains_relation(factors)
@@ -782,9 +781,9 @@ class GeometryTracker:
                 ) is not None and self._linear_algebra._mod_360_equations.contains_relation(factors)
             case 'not_equals':
                 a, b = pred.components
-                typ = a.type if a.type != LITERAL else b.type
+                typ = a.type if a.type != GeoType.LITERAL else b.type
 
-                if typ in (SCALAR, ANGLE, LITERAL):
+                if typ in (GeoType.SCALAR, GeoType.ANGLE, GeoType.LITERAL):
                     # Note: We don't check if log(a) != log(b) when checking if a != b, since:
                     # 1. It isn't yet implemented in the generator.
                     # 2. It never happens.
@@ -793,7 +792,7 @@ class GeometryTracker:
                         factors := get_linear_eqn_factors(pred)
                     ) is not None and self._linear_algebra._real_equations.contains_nonzero(factors)
 
-                if typ == ORIENTATION:
+                if typ == GeoType.ORIENTATION:
                     return (
                         factors := get_linear_eqn_factors(pred)
                     ) is not None and self._linear_algebra._bool_equations.contains_nonzero(factors)
@@ -814,6 +813,7 @@ class GeometryTracker:
         Returns a copy of the geometry tracker.
         """
         res = GeometryTracker()
+        res.signature = self.signature.copy()
         res._objects = self._objects.shallow_copy()
         res._processed_objects = set(self._processed_objects)
         res._predicates = set(self._predicates)

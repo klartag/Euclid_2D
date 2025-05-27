@@ -7,7 +7,7 @@ perpendicular_lines_draw_intersection:
     - exists(line_intersection(k, l))
   metadata: auto
 
-draw_point_of_tangency:
+draw_line_circle_tangency:
   inputs:
     - l: Line
     - c: Circle
@@ -15,6 +15,15 @@ draw_point_of_tangency:
     - tangent(l, c)
   conclude:
     - exists(line_circle_tangent_point(l, c))
+  metadata: auto
+
+draw_circle_circle_tangency:
+  inputs:
+    - c, d: Circle
+  where:
+    - tangent(c, d)
+  conclude:
+    - exists(circle_circle_tangent_point(c, d))
   metadata: auto
 
 angle_bisector_draw_angle:

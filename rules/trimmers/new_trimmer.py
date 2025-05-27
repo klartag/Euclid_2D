@@ -12,7 +12,7 @@ from ..proof.document.writer.document_writer import DocumentWriter
 from ..proof.geometry_problem import GeometryProblem
 from ..proof.steps import CommentStep
 from ..proof_checker import ProofChecker
-from ..rule_utils import ProofCheckError
+from ..errors import ProofCheckError
 
 
 class ProofTrimmer:

@@ -1,10 +1,9 @@
 from typing import Mapping
-from .macro_predicate import MacroPredicate
 from .symmetric_predicate import SymmetricPredicate
 from ...geometry_objects.construction_object import ConstructionObject
 from ...geometry_objects.geo_object import GeoObject
 from ..predicate import Predicate
-from ...rule_utils import POINT
+from ...geometry_objects.geo_type import GeoType
 from ...symmetry import Symmetry
 
 
@@ -18,7 +17,7 @@ class ConvexPredicate(Predicate):
         return ConvexPredicate(tuple(obj.substitute(replacements) for obj in self.components))
 
     def is_valid(self) -> bool:
-        return all(obj.type == POINT for obj in self.components)
+        return all(obj.type == GeoType.POINT for obj in self.components)
 
     def unpack(self) -> list[Predicate]:
         """

@@ -1,13 +1,3 @@
-circle_tangency_definition:
-  inputs:
-    - e, f: Circle
-  where:
-    - tangent(e, f)
-  construct:
-    - A: Point
-  conclude:
-    - A in e, f
-
 circle_tangency_unique_intersection:
   inputs:
     - A, B: Point

@@ -1,11 +1,13 @@
 from re import Match
 
-from ......rule_utils import ProofParseError, split_args
-from ......geometry_objects.atom import Atom
-from ......geometry_objects.geo_object import GeoObject
-from ......geometry_objects.parse import parse_geo_object
-from ......predicates.predicate_factory import parse_predicate
+
+from ......expression_parse_utils import split_args
+from ......errors import ProofParseError
+from ......parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
+from ......parsers.predicate_parser.predicate_parser import PredicateParser
+
 from ......theorem import Theorem
+from ......geometry_objects.geo_type import Signature
 
 from .....steps.theorem_step import TheoremStep
 
@@ -15,7 +17,14 @@ from ..abstract_step_reader import AbstractStepReader
 class TheoremStepReader(AbstractStepReader[TheoremStep]):
     pattern = r'By (\w+)( on )?(.*) we get (.*)$'
 
-    def read(self, line: str, match: Match[str], obj_map: dict[str, GeoObject]) -> TheoremStep:
+    geometry_object_parser: GeometryObjectParser
+    predicate_parser: PredicateParser
+
+    def __init__(self, signature: Signature):
+        self.geometry_object_parser = GeometryObjectParser(signature)
+        self.predicate_parser = PredicateParser(signature)
+
+    def read(self, line: str, match: Match[str]) -> TheoremStep:
         # Matching a theorem step using a named theorem.
         name, _, args, results = match.groups()
         args = split_args(args) if args else []
@@ -27,27 +36,11 @@ class TheoremStepReader(AbstractStepReader[TheoremStep]):
         if theorem is None:
             raise ProofParseError(f'In line {line}, theorem {name} is unknown!')
 
-        inputs = [parse_geo_object(arg.strip(), obj_map) for arg in args]
+        inputs = [self.geometry_object_parser.try_parse(arg.strip()) for arg in args]
         if len(inputs) > len(theorem.signature):
             raise ProofParseError(f'In line {line}, too many arguments for theorem {name}!')
         if len(inputs) < len(theorem.signature):
             raise ProofParseError(f'In line {line}, too few arguments for theorem {name}!')
 
-        # The first outputs are objects constructed by the theorem.
-        # We make sure enough objects were constructed.
-        construct_names = results[: len(theorem.result_objects)]
-        if len(construct_names) < len(theorem.result_objects):
-            raise ProofParseError(f'In line {line}, not enough objects are built by the theorem!')
-
-        # Adding the constructed objects.
-        result_objects = []
-        for cons_name, theorem_out in zip(construct_names, theorem.result_objects):
-            if cons_name in obj_map:
-                raise ProofParseError(f'Line {line} redefines the object {cons_name}!')
-            typ = theorem_out.type
-            res = Atom(cons_name, typ)
-            obj_map[cons_name] = res
-            result_objects.append(res)
-
-        result_predicates = [parse_predicate(result, obj_map) for result in results[len(theorem.result_objects) :]]
-        return TheoremStep(name, inputs, result_objects, result_predicates, '')
+        result_predicates = [self.predicate_parser.try_parse(result) for result in results]
+        return TheoremStep(name, inputs, result_predicates, '')

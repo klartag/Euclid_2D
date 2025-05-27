@@ -1,13 +1,12 @@
 from typing import Tuple
 
-from ...rule_utils import POINT
+from ...geometry_objects.geo_type import GeoType
 
-from ..embedded_objects import EmbeddedPoint, EmbeddedObject
-from ..embedded_objects.embedded_curve import EmbeddedCurve
+from ..embedded_objects import EmbeddedObject
 
 
 def _in(*objects: Tuple[EmbeddedObject, ...]) -> bool:
-    points = [point for point in objects if point._type() == POINT]
+    points = [point for point in objects if point._type() == GeoType.POINT]
     curves = [curve for curve in objects if curve not in points]
     return all([curve.contains_point(point) for curve in curves for point in points])
 

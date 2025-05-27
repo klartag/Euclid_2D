@@ -1,10 +1,11 @@
 from typing import Mapping
 
+from .geo_type import GeoType
 from .geo_object import GeoObject
 
 
 class Atom(GeoObject):
-    def __init__(self, name: str, type_: str) -> None:
+    def __init__(self, name: str, type_: GeoType) -> None:
         self.name = name
         self.type = type_
         self.id = hash((self.name, self.type))

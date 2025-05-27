@@ -1,8 +1,7 @@
 import re
 from typing import Mapping
 
-from ..rule_utils import LITERAL
-
+from .geo_type import GeoType
 from .geo_object import GeoObject
 
 
@@ -12,8 +11,8 @@ LITERAL_PATTERN = r'(-?\d+(\.\d+)?)'
 class Literal(GeoObject):
     def __init__(self, name: str) -> None:
         self.name = name
-        self.type = LITERAL
-        self.id = hash((self.name, LITERAL))
+        self.type = GeoType.LITERAL
+        self.id = hash((self.name, GeoType.LITERAL))
         self.depth = 1
 
     def substitute(self, replacements: 'Mapping[GeoObject, GeoObject]', ignore_self=False) -> 'GeoObject':

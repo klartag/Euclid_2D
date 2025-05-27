@@ -3,9 +3,11 @@ from mpmath import mp
 
 from ..predicates.global_predicates import get_constructions
 from ..symmetry import Symmetry
-from ..rule_utils import LITERAL, SCALAR, ANGLE, ProofCheckError, union, GeometryError
+from ..rule_utils import union
+from ..errors import ProofCheckError, GeometryError
 
 from .atom import Atom
+from .geo_type import GeoType
 from .geo_object import GeoObject
 from .literal import ONE, ZERO
 from .equation_object import EquationObject
@@ -57,7 +59,7 @@ class Construction:
         Constructs an object using the given arguments.
         """
         if len(args) != len(self.signature) or not all(
-            arg.type == sig.type or (arg.type == LITERAL and sig.type in [SCALAR, ANGLE])
+            arg.type == sig.type or (arg.type == GeoType.LITERAL and sig.type in [GeoType.SCALAR, GeoType.ANGLE])
             for arg, sig in zip(args, self.signature)
         ):
             raise ProofCheckError(f'Construction {self.name} received illegal arguments: {args}')
@@ -168,7 +170,7 @@ def as_log_equation(self) -> dict[GeoObject, float] | None:
         if val <= 0:
             return None
         return {ONE: mp.log(val)}
-    if self.type == SCALAR:
+    if self.type == GeoType.SCALAR:
         return {ConstructionObject.from_args('log', (self,)): 1}
     return None
 

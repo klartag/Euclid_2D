@@ -1,6 +1,6 @@
 from typing import List
 
-from ....rule_utils import POINT, LINE, CIRCLE
+from ....geometry_objects.geo_type import GeoType
 
 from ...constructions.circle_intersection import line_circle_intersection, circle_circle_intersection
 from ...method_dictionaries import (
@@ -28,12 +28,12 @@ from ..embedded_constructions.generalized_embedded_construction import Generaliz
 
 
 CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
-    EmptyPattern(POINT, new_point),
-    EmptyPattern(LINE, new_line),
-    EmptyPattern(CIRCLE, new_circle),
-    # ReverseContainmentPattern(1, LINE, GeneralizedEmbeddedConstruction, line_on_point),
-    # ReverseContainmentPattern(2, LINE, ExplicitEmbeddedConstruction, line),
-    ReverseContainmentPattern(3, CIRCLE, ExplicitEmbeddedConstruction, circumcircle),
+    EmptyPattern(GeoType.POINT, new_point),
+    EmptyPattern(GeoType.LINE, new_line),
+    EmptyPattern(GeoType.CIRCLE, new_circle),
+    # ReverseContainmentPattern(1, GeoType.LINE, GeneralizedEmbeddedConstruction, line_on_point),
+    # ReverseContainmentPattern(2, GeoType.LINE, ExplicitEmbeddedConstruction, line),
+    ReverseContainmentPattern(3, GeoType.CIRCLE, ExplicitEmbeddedConstruction, circumcircle),
     SimpleSymmetricPredicatePattern(
         GeneralizedEmbeddedConstruction,
         lambda objects, line0, line1: line_on_point(objects, line_intersection(line0, line1)),

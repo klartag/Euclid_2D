@@ -1,20 +1,26 @@
 import itertools
 from pathlib import Path
 
-
-from .theorem import CONDITION_LABEL, CONSTRUCTION_LABEL, POSS_CONCLUSIONS_LABEL, RESULT_PREDICATE_LABEL
-from .predicates.predicate import INPUT_LABEL, PREPROCESS_LABEL, Predicate
-from .predicates.implementations.macro_predicate import MacroData
-from .predicates.predicate_factory import parse_predicate, predicate_from_args
-from .geometry_objects.atom import Atom
-from .geometry_objects.construction_object import Construction, LogConstruction
-from .geometry_objects.geo_object import GeoObject
-from .geometry_objects.literal import Literal
-from .rule_utils import SCALAR, ProofParseError, unpack_dict
-from .symmetry import Symmetry
 from util import BASE_PATH
 
-from .predicates import global_predicates
+from ...rule_utils import unpack_dict
+from ...parsers.predicate_parser.predicate_parser import PredicateParser
+from ...theorem import CONDITION_LABEL, CONSTRUCTION_LABEL, POSS_CONCLUSIONS_LABEL, RESULT_PREDICATE_LABEL
+from ...errors import ProofParseError
+from ...symmetry import Symmetry
+
+from ...geometry_objects.atom import Atom
+from ...geometry_objects.construction_object import Construction, LogConstruction
+from ...geometry_objects.geo_object import GeoObject
+from ...geometry_objects.literal import Literal
+from ...geometry_objects.geo_type import GeoType, Signature
+
+from .. import global_predicates
+
+from ..predicate import INPUT_LABEL, PREPROCESS_LABEL, Predicate
+from ..implementations.macro_predicate import MacroData
+from ..predicate_factory import predicate_from_args
+
 
 MACRO_FOLDER = BASE_PATH / 'rules' / 'constructions_and_predicates' / 'hierarchy' / 'predicates'
 CONSTRUCTION_FOLDER = BASE_PATH / 'rules' / 'constructions_and_predicates' / 'hierarchy' / 'constructions'
@@ -37,13 +43,13 @@ def load_constructions_and_macros() -> None:
     Loads the constructions and the macros.
     """
 
-    log_arg_0 = Atom('arg_0', SCALAR)
+    log_arg_0 = Atom('arg_0', GeoType.SCALAR)
     global_constructions: dict[str, Construction] = {
         'log': LogConstruction(
             'log',
             [log_arg_0],
             Symmetry.NONE,
-            Atom('res', SCALAR),
+            Atom('res', GeoType.SCALAR),
             [predicate_from_args('not_equals', (log_arg_0, Literal('0')))],
             [],
         ),
@@ -98,26 +104,28 @@ def read_constructions(path: Path) -> list[Construction]:
     all_constructions: list[Construction] = []
 
     for construction_name, data in construction_data.items():
-        signature: list[GeoObject] = []
+        objects: list[GeoObject] = []
+        signature: Signature = {}
         required_predicates: list[Predicate] = []
         result_predicates: list[Predicate] = []
-        obj_map: dict[str, GeoObject] = {}
 
         # 1. Parsing the inputs.
-        for names, typ in map(unpack_dict, data.get(INPUT_LABEL, [])):
+        for names, type_ in map(unpack_dict, data.get(INPUT_LABEL, [])):
             for name in names.split(','):
                 name = name.strip()
-                assert name not in obj_map, f'In theorem {construction_name}, object name {name} appears twice!'
-                g = Atom(name, typ)
-                obj_map[name] = g
-                signature.append(g)
+                assert name not in signature, f'In theorem {construction_name}, object name {name} appears twice!'
+                g = Atom(name, GeoType(type_))
+                signature[name] = GeoType(type_)
+                objects.append(g)
+
+        predicate_parser = PredicateParser(signature)
 
         # 2. Parsing the preprocess type.
         preprocess = Symmetry.parse(data.get(PREPROCESS_LABEL, 'none'))
 
         # 3. Parsing the conditions.
         for pred in data.get(CONDITION_LABEL, []):
-            parsed_pred: Predicate = parse_predicate(pred, obj_map)
+            parsed_pred: Predicate = predicate_parser.try_parse(pred)
             required_predicates.append(parsed_pred)
 
         # 4. Parsing the constructed object.
@@ -132,9 +140,12 @@ def read_constructions(path: Path) -> list[Construction]:
             raise ProofParseError(f'Unrecognized result object in construction {construction_name}: {res}')
 
         res_name, res_typ = unpack_dict(res)
-        assert res_name not in obj_map, f'In construction {construction_name}, object name {res_name} appears twice!'
-        res_obj = Atom(res_name, res_typ)
-        obj_map[res_name] = res_obj
+        assert res_name not in signature, f'In construction {construction_name}, object name {res_name} appears twice!'
+        res_obj = Atom(res_name, GeoType(res_typ))
+        signature[res_name] = GeoType(res_typ)
+
+        # Updating the Predicate Parser to work with the updated signature
+        predicate_parser = PredicateParser(signature)
 
         # 5. Parsing the result predicate.
         predicate_map = {}
@@ -143,7 +154,7 @@ def read_constructions(path: Path) -> list[Construction]:
                 # Unnamed predicates
                 case dict():
                     name, predicate_data = unpack_dict(predicate_block)
-                    pred = parse_predicate(predicate_data, obj_map)
+                    pred = predicate_parser.try_parse(predicate_data)
                     predicate_map[name] = pred
                 case str():
                     assert (
@@ -152,7 +163,7 @@ def read_constructions(path: Path) -> list[Construction]:
                     assert (
                         '<=' not in predicate_block
                     ), f'<= is not allowed in a conclusion statement. Did you mean to use it in a {POSS_CONCLUSIONS_LABEL} block?'
-                    pred = parse_predicate(predicate_block, obj_map)
+                    pred = predicate_parser.try_parse(predicate_block)
                     result_predicates.append(pred)
                 case _:
                     raise NotImplementedError(
@@ -176,12 +187,14 @@ def read_constructions(path: Path) -> list[Construction]:
 
             left_parts = [part.strip() for part in left.split('&')]
             left_preds = [
-                predicate_map[part] if part in predicate_map else parse_predicate(part, obj_map) for part in left_parts
+                predicate_map[part] if part in predicate_map else predicate_parser.try_parse(part)
+                for part in left_parts
             ]
 
             right_parts = [part.strip() for part in right.split('&')]
             right_preds = [
-                predicate_map[part] if part in predicate_map else parse_predicate(part, obj_map) for part in right_parts
+                predicate_map[part] if part in predicate_map else predicate_parser.try_parse(part)
+                for part in right_parts
             ]
 
             match symbol:
@@ -201,7 +214,7 @@ def read_constructions(path: Path) -> list[Construction]:
         all_constructions.append(
             Construction(
                 construction_name,
-                signature,
+                objects,
                 preprocess,
                 res_obj,
                 required_predicates,
@@ -229,18 +242,21 @@ def read_macros(path: Path) -> 'list[MacroData]':
 
     for macro_name, data in macro_data.items():
         try:
-            signature: 'list[GeoObject]' = []
+            objects: list[GeoObject] = []
+            signature: Signature = {}
             unpack_predicates: list[Predicate] = []
-            obj_map: dict[str, GeoObject] = {}
             conclude_self = False
             # 1. Parsing the inputs.
-            for names, typ in map(unpack_dict, data.get(INPUT_LABEL, [])):
+            for names, type_ in map(unpack_dict, data.get(INPUT_LABEL, [])):
                 for name in names.split(','):
                     name = name.strip()
-                    assert name not in obj_map, f'In macro {macro_name}, object name {name} appears twice!'
-                    g = Atom(name, typ)
-                    obj_map[name] = g
-                    signature.append(g)
+                    assert name not in signature, f'In macro {macro_name}, object name {name} appears twice!'
+                    g = Atom(name, GeoType(type_))
+                    objects.append(g)
+                    signature[name] = GeoType(type_)
+
+            predicate_parser = PredicateParser(signature)
+
             # 2. Parsing the preprocess type.
             preprocess = Symmetry.parse(data.get(PREPROCESS_LABEL, 'none'))
             # 3. Parsing the result predicates.
@@ -250,7 +266,7 @@ def read_macros(path: Path) -> 'list[MacroData]':
                     # Unnamed predicates
                     case dict():
                         name, predicate_data = unpack_dict(predicate_block)
-                        pred = parse_predicate(predicate_data, obj_map)
+                        pred = predicate_parser.try_parse(predicate_data)
                         predicate_map[name] = pred
                     case str():
                         assert (
@@ -262,7 +278,7 @@ def read_macros(path: Path) -> 'list[MacroData]':
                         if predicate_block == 'self':
                             conclude_self = True
                         else:
-                            pred = parse_predicate(predicate_block, obj_map)
+                            pred = predicate_parser.try_parse(predicate_block)
                             unpack_predicates.append(pred)
                     case _:
                         raise ProofParseError(
@@ -286,13 +302,13 @@ def read_macros(path: Path) -> 'list[MacroData]':
 
                 left_parts = [part.strip() for part in left.split('&')]
                 left_preds = [
-                    predicate_map[part] if part in predicate_map else parse_predicate(part, obj_map)
+                    predicate_map[part] if part in predicate_map else predicate_parser.try_parse(part)
                     for part in left_parts
                 ]
 
                 right_parts = [part.strip() for part in right.split('&')]
                 right_preds = [
-                    predicate_map[part] if part in predicate_map else parse_predicate(part, obj_map)
+                    predicate_map[part] if part in predicate_map else predicate_parser.try_parse(part)
                     for part in right_parts
                 ]
 
@@ -314,7 +330,7 @@ def read_macros(path: Path) -> 'list[MacroData]':
                 MacroData(
                     macro_name,
                     preprocess,
-                    signature,
+                    objects,
                     unpack_predicates,
                     possible_conclusions,
                     conclude_self,

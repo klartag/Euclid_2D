@@ -41,10 +41,8 @@ radical_axis_of_tangent_circles:
     - l: Line
     - c, d: Circle
   where:
-    - tangent(c, d)
-    - O in l, c, d
-  where_embedding:
-    - c != d
+    - O == circle_circle_tangent_point(c, d)
+    - O in l
   possible_conclusions:
     - tangent(l, c) => radical_axis(c, d) == l & tangent(l, d)
     - radical_axis(c, d) == l => tangent(l, c) & tangent(l, d)

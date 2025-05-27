@@ -4,11 +4,14 @@ from pathlib import Path
 
 from util import BASE_PATH
 
-from .rule_utils import ProofParseError, unpack_dict
+from .rule_utils import unpack_dict
+from .errors import ProofParseError
+from .geometry_objects.geo_type import GeoType, Signature
 from .geometry_objects.atom import Atom
 from .geometry_objects.geo_object import GeoObject
 from .predicates.predicate import Predicate
-from .predicates.predicate_factory import parse_predicate, predicate_from_args
+from .predicates.predicate_factory import predicate_from_args
+from .parsers.predicate_parser.predicate_parser import PredicateParser
 
 THEOREM_FOLDER = BASE_PATH / 'rules' / 'theorems'
 
@@ -33,8 +36,6 @@ class Theorem:
     """The predicates the objects should satisfy."""
     required_embedding_predicates: list[Predicate]
     """The predicates the objects should satisfy."""
-    result_objects: list[GeoObject]
-    """The objects constructed by the theorem."""
     result_predicates: list[Predicate]
     """The predicates constructed by the theorem."""
     trivial_if_equal_conditions: list[list[list[str]]]
@@ -54,7 +55,6 @@ class Theorem:
         signature: list[GeoObject],
         required_predicates: list[Predicate],
         required_embedding_predicates: list[Predicate],
-        result_objects: list[GeoObject],
         result_predicates: list[Predicate],
         trivial_if_equal_conditions: list[list[list[str]]],
         rank: int,
@@ -66,21 +66,11 @@ class Theorem:
         self.signature = signature
         self.required_predicates = required_predicates
         self.required_embedding_predicates = required_embedding_predicates
-        self.result_objects = result_objects
         self.result_predicates = result_predicates
         self.trivial_if_equal_conditions = trivial_if_equal_conditions
         self.rank = rank
         self.metadata = metadata
         self.path = path
-
-    def get_type_object_map(self):
-        type_obj_map = {}
-        for object in self.signature:
-            if object.type not in type_obj_map:
-                type_obj_map[object.type] = [object]
-            else:
-                type_obj_map[object.type].append(object)
-        return type_obj_map
 
     def __repr__(self):
         return f'Theorem({self.name})'
@@ -106,45 +96,37 @@ class Theorem:
         for theorem_name, data in theorem_data.items():
             try:
                 signature: list[GeoObject] = []
+                type_signature: Signature = {}
                 required_predicates: list[Predicate] = []
                 required_embedding_predicates: list[Predicate] = []
-                result_objects: list[GeoObject] = []
                 result_predicates: list[Predicate] = []
                 conclusion_flows: dict[str, str] = {}
-                obj_map: dict[str, GeoObject] = {}
                 trivial_if_equal_conditions = []
                 predicate_map = {}
 
                 # Parsing.
-                for names, typ in map(unpack_dict, data.get(INPUT_LABEL, [])):
+                for names, type_ in map(unpack_dict, data.get(INPUT_LABEL, [])):
                     for name in names.split(','):
                         name = name.strip()
-                        assert name not in obj_map, f'In theorem {theorem_name}, object name {name} appears twice!'
-                        g = Atom(name, typ)
-                        obj_map[name] = g
+                        assert name not in signature, f'In theorem {theorem_name}, object name {name} appears twice!'
+                        g = Atom(name, GeoType(type_))
+                        type_signature[name] = GeoType(type_)
                         signature.append(g)
 
-                signature_objects = tuple(x for x in signature if x.type not in ['Scalar', 'Angle'])
+                signature_objects = tuple(x for x in signature if x.type not in [GeoType.SCALAR, GeoType.ANGLE])
                 required_predicates.append(predicate_from_args('exists', signature_objects))
 
-                # The construction part is the third part, and not the second. We parse it second to get the result object definitions.
-                for names, typ in map(unpack_dict, data.get(CONSTRUCTION_LABEL, [])):
-                    for name in names.split(','):
-                        name = name.strip()
-                        assert name not in obj_map, f'In theorem {theorem_name}, object name {name} appears twice!'
-                        g = Atom(name, typ)
-                        obj_map[name] = g
-                        result_objects.append(g)
+                predicate_parser = PredicateParser(type_signature)
 
                 for predicate_block in data.get(CONDITION_LABEL, []):
                     match predicate_block:
                         # Named predicates
                         case dict():
                             name, predicate_data = unpack_dict(predicate_block)
-                            predicate = parse_predicate(predicate_data, obj_map)
+                            predicate = predicate_parser.try_parse(predicate_data)
                             predicate_map[name] = predicate
                         case str():
-                            predicate = parse_predicate(predicate_block, obj_map)
+                            predicate = predicate_parser.try_parse(predicate_block)
                             required_predicates.append(predicate)
                         case _:
                             raise NotImplementedError(
@@ -155,7 +137,7 @@ class Theorem:
                     match predicate_block:
                         # Named predicates
                         case str():
-                            predicate = parse_predicate(predicate_block, obj_map)
+                            predicate = predicate_parser.try_parse(predicate_block)
                             required_embedding_predicates.append(predicate)
                         case _:
                             raise NotImplementedError(
@@ -167,7 +149,7 @@ class Theorem:
                         # Unnamed predicates
                         case dict():
                             name, predicate_data = unpack_dict(predicate_block)
-                            predicate = parse_predicate(predicate_data, obj_map)
+                            predicate = predicate_parser.try_parse(predicate_data)
                             predicate_map[name] = predicate
                         case str():
                             assert (
@@ -176,7 +158,7 @@ class Theorem:
                             assert (
                                 '<=' not in predicate_block
                             ), f'<= is not allowed in a conclusion statement. Did you mean to use it in a {POSS_CONCLUSIONS_LABEL} block?'
-                            predicate = parse_predicate(predicate_block, obj_map)
+                            predicate = predicate_parser.try_parse(predicate_block)
                             result_predicates.append(predicate)
                         case _:
                             raise NotImplementedError(
@@ -216,7 +198,7 @@ class Theorem:
 
                 # Building the base theorem, without any conclusion flows.
                 # We build it only if there are results not using the conclusion flows.
-                if len(result_predicates) > 0 or len(result_objects) > 0:
+                if len(result_predicates) > 0:
                     res.append(
                         Theorem(
                             theorem_name,
@@ -224,7 +206,6 @@ class Theorem:
                             signature,
                             required_predicates,
                             required_embedding_predicates,
-                            result_objects,
                             result_predicates,
                             trivial_if_equal_conditions,
                             rank,
@@ -249,13 +230,13 @@ class Theorem:
 
                     left_parts = [part.strip() for part in left.split('&')]
                     left_preds = [
-                        predicate_map[part] if part in predicate_map else parse_predicate(part, obj_map)
+                        predicate_map[part] if part in predicate_map else predicate_parser.try_parse(part)
                         for part in left_parts
                     ]
 
                     right_parts = [part.strip() for part in right.split('&')]
                     right_preds = [
-                        predicate_map[part] if part in predicate_map else parse_predicate(part, obj_map)
+                        predicate_map[part] if part in predicate_map else predicate_parser.try_parse(part)
                         for part in right_parts
                     ]
 
@@ -270,7 +251,6 @@ class Theorem:
                                 signature,
                                 required_predicates + right_preds,
                                 required_embedding_predicates,
-                                result_objects,
                                 result_predicates + left_preds,
                                 trivial_if_equal_conditions,
                                 rank,
@@ -286,7 +266,6 @@ class Theorem:
                                 signature,
                                 required_predicates + left_preds,
                                 required_embedding_predicates,
-                                result_objects,
                                 result_predicates + right_preds,
                                 trivial_if_equal_conditions,
                                 rank,

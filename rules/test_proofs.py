@@ -7,16 +7,13 @@ import pytest
 
 from .proof.document.geometry_document import GeometryDocument
 from .proof.document.reader.document_reader import DocumentReader
+from .parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
 
-from .pred_config import load_constructions_and_macros
-
+from .predicates.loader.pred_config import load_constructions_and_macros
 from .predicates.global_predicates import get_constructions
 
-from .geometry_objects.atom import Atom
-from .geometry_objects.parse import parse_geo_object
-
 from .geometry_objects.construction_object import ConstructionObject
-from .rule_utils import POINT, SCALAR
+from .geometry_objects.geo_type import GeoType
 from .proof_checker import ProofChecker, check_proof
 from .proof_gen.proof_generator import prove
 
@@ -162,15 +159,17 @@ def test_constructions():
 
 
 def test_parsing():
-    objects = {
-        'A': Atom('A', POINT),
-        'B': Atom('B', POINT),
-        'C': Atom('C', POINT),
-        'r': Atom('r', SCALAR),
-        's': Atom('s', SCALAR),
+    signature = {
+        'A': GeoType.POINT,
+        'B': GeoType.POINT,
+        'C': GeoType.POINT,
+        'r': GeoType.SCALAR,
+        's': GeoType.SCALAR,
     }
-    p = parse_geo_object('2*(r) * s', objects)
+    parser = GeometryObjectParser(signature)
+    p = parser.try_parse('2*(r) * s')
+    assert p
     ConstructionObject.from_args('log', (p,))
 
-    parse_geo_object('2*(r+s) + s/1.5', objects)
-    parse_geo_object('-r', objects)
+    assert parser.try_parse('2*(r+s) + s/1.5')
+    assert parser.try_parse('-r')

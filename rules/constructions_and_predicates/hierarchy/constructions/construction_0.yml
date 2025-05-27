@@ -34,6 +34,12 @@ circle_circle_other_intersection:
   - {P: Point}
   - {'c, d': Circle}
   where: ['P in c, d']
+circle_circle_tangent_point:
+  conclude: ['P in c, d']
+  construct:
+  - {P: Point}
+  inputs:
+  - {'c, d': Circle}
 distance:
   construct:
   - {d: Scalar}
