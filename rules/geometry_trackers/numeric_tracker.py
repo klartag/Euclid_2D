@@ -410,12 +410,6 @@ class NumericTracker:
 
         return res
 
-    def is_nonzero(self, eq: EquationObject):
-        """
-        Checks if the given equation is known to be nonzero.
-        """
-        ...
-
     def clone(self) -> 'NumericTracker':
         """
         Returns a deep copy of the numeric tracker.

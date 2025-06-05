@@ -54,15 +54,8 @@ class BaseSolver(abc.ABC, Generic[T, O]):
     def add_relation(self, v: dict[O, Any]):
         return self.solver.add_relation(self.normalize_rel(v))
 
-    def add_nonzero(self, v: dict[O, Any]):
-        return self.solver.add_nonzero(self.normalize_rel(v))
-
     def contains_relation(self, v: dict[O, Any]) -> bool:
         return self.solver.contains_relation(self.normalize_rel(v))
-
-    def contains_nonzero(self, v: dict[O, Any]):
-        res = self.solver.contains_nonzero(self.normalize_rel(v))
-        return res
 
     def contains(self, obj: O):
         return self.solver.contains(self.get_id(obj))
@@ -91,8 +84,6 @@ class BaseSolver(abc.ABC, Generic[T, O]):
         rels: list[list[tuple[int, T]]] = self.solver.relations()
         for rel in rels:
             print(sparse_repr({self.id_map.backward(k): v for k, v in rel}))
-        print('Nonzeroes:')
-        nonz: list[list[tuple[int, T]]] = self.solver.nonzeroes()
         for rel in nonz:
             print(sparse_repr({self.id_map.backward(k): v for k, v in rel}), '!= 0')
 

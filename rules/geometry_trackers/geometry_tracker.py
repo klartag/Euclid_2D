@@ -389,25 +389,6 @@ class GeometryTracker:
             case _:
                 raise NotImplementedError(f'Equality mod {mod} in predicate {pred} is not implemented!')
 
-    def add_not_equal_angle(self, pred: Predicate, mod: int | None):
-        """
-        Handles an angle inequality.
-        @param angle: A predicate stating that some linear combination of angles is not 0.
-        @param mod: The modulus under which the inequality is valid.
-        """
-        factors = get_linear_eqn_factors(pred)
-        if factors is None:
-            raise GeometryError(f'Failed to convert equation {pred.to_language_format()} to a linear equation!')
-
-        match mod:
-            case None:
-                self._linear_algebra._real_equations.add_nonzero(factors)
-            case 360:
-                self._linear_algebra._real_equations.add_nonzero(factors)
-                self._linear_algebra._mod_360_equations.add_nonzero(factors)
-            case _:
-                raise NotImplementedError(f'Inequality mod {mod} in predicate {pred} is not implemented!')
-
     def add_equal_scalar(self, pred: Predicate):
         """
         Handles an equality of scalars.
@@ -417,18 +398,11 @@ class GeometryTracker:
             self._linear_algebra._real_equations.add_relation(factors)
 
         # Adding the equation as a log equation.
-        # We do this by default only to equations that are not normal equations, since logs are also nonzero.
+        # We do this by default only to equations that are not normal equations, since logs are also non-zero.
         elif (log_factors := get_log_eqn_factors(pred)) is not None:
             for factor in log_factors:
                 self.get_object(factor, ADD_CFG)
             self._linear_algebra._real_equations.add_relation(log_factors)
-
-    def add_not_equal_scalar(self, pred: Predicate):
-        """
-        Handles an equality of scalars.
-        """
-        if (factors := get_linear_eqn_factors(pred)) is not None:
-            self._linear_algebra._real_equations.add_nonzero(factors)
 
     def add_equal_bool(self, pred: Predicate):
         """
@@ -436,13 +410,6 @@ class GeometryTracker:
         """
         if (factors := get_linear_eqn_factors(pred)) is not None:
             self._linear_algebra._bool_equations.add_relation(factors)
-
-    def add_not_equal_bool(self, pred: Predicate):
-        """
-        Handles an inequality of orientations.
-        """
-        if (factors := get_linear_eqn_factors(pred)) is not None:
-            self._linear_algebra._bool_equations.add_nonzero(factors)
 
     def _add_equal_objects_nonrecursive(self, a: GeoObject, b: GeoObject):
         """
@@ -654,20 +621,9 @@ class GeometryTracker:
             case 'equals_mod_360':
                 self.add_equal_angle(pred, 360)
             case 'not_equals':
-                assert len(pred.components) == 2
-                match (pred.components[0].type, pred.components[1].type):
-                    case (GeoType.SCALAR, _) | (_, GeoType.SCALAR):
-                        # Handling a scalar equation.
-                        self.add_not_equal_scalar(pred)
-                    case (GeoType.ANGLE, _) | (_, GeoType.ANGLE):
-                        # Handling an angle equation with no modulus.
-                        self.add_not_equal_angle(pred, None)
-                    case (GeoType.ORIENTATION, _) | (_, GeoType.ORIENTATION):
-                        self.add_not_equal_bool(pred)
-                    case _:
-                        self._predicates.add(pred)
+                raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
             case 'not_equals_mod_360':
-                self.add_not_equal_angle(pred, 360)
+                raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
         if pred.name != 'exists':
             for obj in pred.involved_objects():
                 predicate = predicate_from_args('exists', (obj,))
@@ -780,28 +736,9 @@ class GeometryTracker:
                     factors := get_linear_eqn_factors(pred)
                 ) is not None and self._linear_algebra._mod_360_equations.contains_relation(factors)
             case 'not_equals':
-                a, b = pred.components
-                typ = a.type if a.type != GeoType.LITERAL else b.type
-
-                if typ in (GeoType.SCALAR, GeoType.ANGLE, GeoType.LITERAL):
-                    # Note: We don't check if log(a) != log(b) when checking if a != b, since:
-                    # 1. It isn't yet implemented in the generator.
-                    # 2. It never happens.
-                    # 3. The future embedding dependent system will take care of that.
-                    return (
-                        factors := get_linear_eqn_factors(pred)
-                    ) is not None and self._linear_algebra._real_equations.contains_nonzero(factors)
-
-                if typ == GeoType.ORIENTATION:
-                    return (
-                        factors := get_linear_eqn_factors(pred)
-                    ) is not None and self._linear_algebra._bool_equations.contains_nonzero(factors)
-
-                return pred in self._predicates
+                raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
             case 'not_equals_mod_360':
-                return (
-                    factors := get_linear_eqn_factors(pred)
-                ) is not None and self._linear_algebra._mod_360_equations.contains_nonzero(factors)
+                raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
             case 'between' | 'collinear':
                 if pred.components[0] == pred.components[1] or pred.components[2] == pred.components[1]:
                     return True

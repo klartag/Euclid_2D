@@ -20,13 +20,9 @@ class LinearAlgebraTracker:
     def __init__(self):
         one_key = get_eqn_key(ONE)
         self._real_equations = RLinearSolver(one_key)
-        self._real_equations.add_nonzero({ONE: 1})
 
         self._mod_360_equations = ModLinearSolver(one_key)
         self._mod_360_equations.add_relation({ONE: 360})
-        self._mod_360_equations.add_nonzero({ONE: 180})
-        self._mod_360_equations.add_nonzero({ONE: 120})
-        self._mod_360_equations.add_nonzero({ONE: 72})
 
         self._bool_equations = BoolLinearSolver(one_key)
         self._bool_equations.add_objects([ONE])
@@ -46,16 +42,6 @@ class LinearAlgebraTracker:
 
     def add_bool_relation(self, relation):
         self._bool_equations.add_relation(relation)
-
-    def add_real_nonzero(self, relation):
-        self._real_equations.add_nonzero(relation)
-
-    def add_mod_360_nonzero(self, relation):
-        self._real_equations.add_nonzero(relation)
-        self._mod_360_equations.add_nonzero(relation)
-
-    def add_bool_nonzero(self, relation):
-        self._bool_equations.add_nonzero(relation)
 
     def clone(self) -> 'LinearAlgebraTracker':
         """
