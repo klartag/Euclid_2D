@@ -84,8 +84,6 @@ class BaseSolver(abc.ABC, Generic[T, O]):
         rels: list[list[tuple[int, T]]] = self.solver.relations()
         for rel in rels:
             print(sparse_repr({self.id_map.backward(k): v for k, v in rel}))
-        for rel in nonz:
-            print(sparse_repr({self.id_map.backward(k): v for k, v in rel}), '!= 0')
 
     def find_combinations(self, coefficients: list, const_coefficient, coef_objects: list[list[O]]) -> list[list[O]]:
         """
