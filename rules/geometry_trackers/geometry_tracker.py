@@ -28,7 +28,6 @@ from ..predicates.implementations.macro_predicate import MacroPredicate
 from ..proof.geometry_problem import GeometryProblem
 from ..union_find import UnionFind
 
-from .numeric_tracker import NumericTracker
 from .linear_algebra_tracker import LinearAlgebraTracker
 
 NUMERIC_PRECISION = 1e-3
@@ -113,10 +112,8 @@ class GeometryTracker:
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
     _linear_algebra: LinearAlgebraTracker
 
-    numeric_tracker: NumericTracker
-    """Tracks 2D embeddings of the geometric configurations."""
     embedding_tracker: Optional[Embedding]
-    """A new numeric tracker to track 2D embeddings of the geometric configurations."""
+    """Tracks 2D embeddings of the geometric configurations."""
 
     def __init__(self):
         self.signature = {}
@@ -131,8 +128,6 @@ class GeometryTracker:
         self.get_object(ONE, ADD_CFG)
 
         self._linear_algebra = LinearAlgebraTracker()
-
-        self.numeric_tracker = NumericTracker(NUMERIC_PRECISION)
 
     def load_embedding(self, problem: GeometryProblem):
         """
@@ -341,9 +336,6 @@ class GeometryTracker:
                     for pred in res_preds:
                         self.add_predicate(pred, ADD_CFG, f'Possible conclusion of {obj}')
 
-            for pred in self.numeric_tracker.add_construction(obj):
-                self.add_predicate(pred, ADD_CFG, 'From numeric tracker')
-
         if isinstance(obj, EquationObject):
             for comp in involved_objects(obj):
                 self.process_object(self.get_object(comp, ADD_CFG))
@@ -428,10 +420,6 @@ class GeometryTracker:
         2. Mark the object as equals in the union-find tree.
 
         3. Mark the objects as equal in the linear algebra trackers.
-
-        4. Marking the objects as equal in the numeric tracker (If one object has a known embedding in R^2 and the other doesn't,
-        we can use the second embedding.) This can be useful when the embedding of one object is not defined for some reason.
-            TODO: Use the embedding with higher precision for both objects.
         """
         if a == b:
             return
@@ -461,13 +449,6 @@ class GeometryTracker:
             # Note: Since we know that a is set to become b, we don't need to add the relation if a is nonexistent.
             if tracker.contains(a):
                 tracker.add_relation({a: 1, b: -1})
-
-        # Step 4.
-        # Moving the numeric tracking to the proper object.
-        # This should ideally not happen.
-        if a in self.numeric_tracker.embeds and b not in self.numeric_tracker.embeds:
-            self.numeric_tracker.embeds[b] = self.numeric_tracker.embeds[a]
-            del self.numeric_tracker.embeds[a]
 
     def add_equal_object(self, g1: GeoObject, g2: GeoObject):
         """
@@ -756,7 +737,6 @@ class GeometryTracker:
         res._predicates = set(self._predicates)
         res._asserted_predicates = set(self._asserted_predicates)
         res._linear_algebra = self._linear_algebra.clone()
-        res.numeric_tracker = self.numeric_tracker.clone()
         return res
 
     def load_assumptions(self, problem: GeometryProblem):

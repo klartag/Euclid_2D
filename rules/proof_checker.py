@@ -153,9 +153,6 @@ class ProofChecker:
                     for pred in res_preds:
                         self.geometry_tracker.add_predicate(pred, ADD_CFG, f'Possible conclusion of {obj}')
 
-            for pred in self.geometry_tracker.numeric_tracker.add_construction(obj):
-                self.geometry_tracker.add_predicate(pred, ADD_CFG, 'From numeric tracker')
-
         if isinstance(obj, EquationObject):
             for comp in involved_objects(obj):
                 self.process_object(
