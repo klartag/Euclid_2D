@@ -507,11 +507,11 @@ class EquationPattern(InternalNodePattern):
         """
         match self.mod:
             case 2:
-                tracker = self.geometry_tracker._linear_algebra._bool_equations
+                tracker = self.geometry_tracker._linear_algebra.bool_equations
             case 360:
-                tracker = self.geometry_tracker._linear_algebra._mod_360_equations
+                tracker = self.geometry_tracker._linear_algebra.mod_360_equations
             case None:
-                tracker = self.geometry_tracker._linear_algebra._real_equations
+                tracker = self.geometry_tracker._linear_algebra.real_equations
             case _:
                 raise NotImplementedError(f'Equations mod {self.mod} are not implemented!')
 

@@ -253,9 +253,9 @@ class GeometryTracker:
         Returns the list of trackers of the proof checker.
         """
         return [
-            self._linear_algebra._bool_equations,
-            self._linear_algebra._mod_360_equations,
-            self._linear_algebra._real_equations,
+            self._linear_algebra.bool_equations,
+            self._linear_algebra.mod_360_equations,
+            self._linear_algebra.real_equations,
         ]
 
     def process_angle(self, angle: GeoObject):
@@ -281,8 +281,8 @@ class GeometryTracker:
         if a != c:
             rev_angle = self.get_object(ConstructionObject.from_args('angle', (c, b, a)), ADD_CFG)
             assert rev_angle in self._processed_objects and rev_angle in self._objects
-            self._linear_algebra._real_equations.add_relation({angle: 1, rev_angle: 1})
-            self._linear_algebra._mod_360_equations.add_relation({angle: 1, rev_angle: 1})
+            self._linear_algebra.real_equations.add_relation({angle: 1, rev_angle: 1})
+            self._linear_algebra.mod_360_equations.add_relation({angle: 1, rev_angle: 1})
 
     def process_orientation(self, ori: GeoObject):
         """
@@ -303,10 +303,10 @@ class GeometryTracker:
         assert rev in self._processed_objects and rev in self._objects
 
         if ori != rev:
-            self._linear_algebra._bool_equations.add_relation({ori: True, rev: True, ONE: True})
+            self._linear_algebra.bool_equations.add_relation({ori: True, rev: True, ONE: True})
         else:
             # We get a contradiction, and properly add it.
-            self._linear_algebra._bool_equations.add_relation({ONE: True})
+            self._linear_algebra.bool_equations.add_relation({ONE: True})
 
     def process_object(self, obj: GeoObject):
         """
@@ -374,10 +374,10 @@ class GeometryTracker:
 
         match mod:
             case None:
-                self._linear_algebra._real_equations.add_relation(factors)
-                self._linear_algebra._mod_360_equations.add_relation(factors)
+                self._linear_algebra.real_equations.add_relation(factors)
+                self._linear_algebra.mod_360_equations.add_relation(factors)
             case 360:
-                self._linear_algebra._mod_360_equations.add_relation(factors)
+                self._linear_algebra.mod_360_equations.add_relation(factors)
             case _:
                 raise NotImplementedError(f'Equality mod {mod} in predicate {pred} is not implemented!')
 
@@ -387,21 +387,21 @@ class GeometryTracker:
         """
         # Adding the equation as a normal equation.
         if (factors := get_linear_eqn_factors(pred)) is not None:
-            self._linear_algebra._real_equations.add_relation(factors)
+            self._linear_algebra.real_equations.add_relation(factors)
 
         # Adding the equation as a log equation.
         # We do this by default only to equations that are not normal equations, since logs are also non-zero.
         elif (log_factors := get_log_eqn_factors(pred)) is not None:
             for factor in log_factors:
                 self.get_object(factor, ADD_CFG)
-            self._linear_algebra._real_equations.add_relation(log_factors)
+            self._linear_algebra.real_equations.add_relation(log_factors)
 
     def add_equal_bool(self, pred: Predicate):
         """
         Handles an equality of orientations.
         """
         if (factors := get_linear_eqn_factors(pred)) is not None:
-            self._linear_algebra._bool_equations.add_relation(factors)
+            self._linear_algebra.bool_equations.add_relation(factors)
 
     def _add_equal_objects_nonrecursive(self, a: GeoObject, b: GeoObject):
         """
@@ -698,24 +698,24 @@ class GeometryTracker:
                 if typ in R_EQN_TYPES:
                     if (
                         factors := get_linear_eqn_factors(pred)
-                    ) is not None and self._linear_algebra._real_equations.contains_relation(factors):
+                    ) is not None and self._linear_algebra.real_equations.contains_relation(factors):
                         return True
                     if (
                         factors := get_log_eqn_factors(pred)
-                    ) is not None and self._linear_algebra._real_equations.contains_relation(factors):
+                    ) is not None and self._linear_algebra.real_equations.contains_relation(factors):
                         return True
                     return False
 
                 if typ == GeoType.ORIENTATION:
                     return (
                         factors := get_linear_eqn_factors(pred)
-                    ) is not None and self._linear_algebra._bool_equations.contains_relation(factors)
+                    ) is not None and self._linear_algebra.bool_equations.contains_relation(factors)
 
                 return self.get_object(a, config) == self.get_object(b, config)
             case 'equals_mod_360':
                 return (
                     factors := get_linear_eqn_factors(pred)
-                ) is not None and self._linear_algebra._mod_360_equations.contains_relation(factors)
+                ) is not None and self._linear_algebra.mod_360_equations.contains_relation(factors)
             case 'not_equals':
                 raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
             case 'not_equals_mod_360':

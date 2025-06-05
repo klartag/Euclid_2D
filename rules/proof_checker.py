@@ -69,8 +69,8 @@ class ProofChecker:
         if a != c:
             rev_angle = self.geometry_tracker.get_object(ConstructionObject.from_args('angle', (c, b, a)), ADD_CFG)
             assert rev_angle in self.geometry_tracker._processed_objects and rev_angle in self.geometry_tracker._objects
-            self.geometry_tracker._linear_algebra._real_equations.add_relation({angle: 1, rev_angle: 1})
-            self.geometry_tracker._linear_algebra._mod_360_equations.add_relation({angle: 1, rev_angle: 1})
+            self.geometry_tracker._linear_algebra.real_equations.add_relation({angle: 1, rev_angle: 1})
+            self.geometry_tracker._linear_algebra.mod_360_equations.add_relation({angle: 1, rev_angle: 1})
 
     def process_orientation(self, ori: GeoObject):
         """

@@ -11,44 +11,34 @@ class LinearAlgebraTracker:
     """
 
     """An object tracking linear equations in R."""
-    _real_equations: RLinearSolver[GeoObject]
+    real_equations: RLinearSolver[GeoObject]
     """An object tracking linear equations in Z/360."""
-    _mod_360_equations: ModLinearSolver[GeoObject]
+    mod_360_equations: ModLinearSolver[GeoObject]
     """An object tracking linear equations over the booleans."""
-    _bool_equations: BoolLinearSolver[GeoObject]
+    bool_equations: BoolLinearSolver[GeoObject]
 
     def __init__(self):
         one_key = get_eqn_key(ONE)
-        self._real_equations = RLinearSolver(one_key)
+        self.real_equations = RLinearSolver(one_key)
 
-        self._mod_360_equations = ModLinearSolver(one_key)
-        self._mod_360_equations.add_relation({ONE: 360})
+        self.mod_360_equations = ModLinearSolver(one_key)
+        self.mod_360_equations.add_relation({ONE: 360})
 
-        self._bool_equations = BoolLinearSolver(one_key)
-        self._bool_equations.add_objects([ONE])
+        self.bool_equations = BoolLinearSolver(one_key)
+        self.bool_equations.add_objects([ONE])
 
     def trackers(self) -> list[BaseSolver]:
         """
         Returns the list of trackers of the proof checker.
         """
-        return [self._bool_equations, self._mod_360_equations, self._real_equations]
-
-    def add_real_relation(self, relation):
-        self._real_equations.add_relation(relation)
-        self._mod_360_equations.add_relation(relation)
-
-    def add_mod_360_relation(self, relation):
-        self._mod_360_equations.add_relation(relation)
-
-    def add_bool_relation(self, relation):
-        self._bool_equations.add_relation(relation)
+        return [self.bool_equations, self.mod_360_equations, self.real_equations]
 
     def clone(self) -> 'LinearAlgebraTracker':
         """
         Returns a deep copy of the linear algebra tracker.
         """
         res = LinearAlgebraTracker()
-        res._real_equations = self._real_equations.clone()
-        res._mod_360_equations = self._mod_360_equations.clone()
-        res._bool_equations = self._bool_equations.clone()
+        res.real_equations = self.real_equations.clone()
+        res.mod_360_equations = self.mod_360_equations.clone()
+        res.bool_equations = self.bool_equations.clone()
         return res
