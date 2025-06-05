@@ -1,6 +1,7 @@
 import heapq
 from typing import Optional
 
+from ..embeddings.embedded_predicate_value import EmbeddedPredicateValue
 from ..embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from ..predicates.predicate_factory import predicate_from_args
 from ..theorem import Theorem
@@ -601,9 +602,7 @@ class GeometryTracker:
                         self.add_equal_object(a, b)
             case 'equals_mod_360':
                 self.add_equal_angle(pred, 360)
-            case 'not_equals':
-                raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
-            case 'not_equals_mod_360':
+            case 'not_equals' | 'not_equals_mod_360':
                 raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
         if pred.name != 'exists':
             for obj in pred.involved_objects():
@@ -716,10 +715,8 @@ class GeometryTracker:
                 return (
                     factors := get_linear_eqn_factors(pred)
                 ) is not None and self._linear_algebra.mod_360_equations.contains_relation(factors)
-            case 'not_equals':
-                raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
-            case 'not_equals_mod_360':
-                raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
+            case 'not_equals' | 'not_equals_mod_360':
+                return self.embedding_tracker.evaluate_predicate(pred) == EmbeddedPredicateValue.Correct
             case 'between' | 'collinear':
                 if pred.components[0] == pred.components[1] or pred.components[2] == pred.components[1]:
                     return True
