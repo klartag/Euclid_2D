@@ -41,7 +41,7 @@ def extended_type(obj: GeoObject) -> str:
     """
     The type of the object, with more metadata on the construction:
     The extended type of `line_angle(l)` would be `line_angle` instead of the more generic `Angle`.
-    This is used to search for fewer combinations in Equation and Nonzero patterns.
+    This is used to search for fewer combinations in Equation patterns.
 
     Parameters:
     * `obj`: A geometric object.
@@ -507,11 +507,11 @@ class EquationPattern(InternalNodePattern):
         """
         match self.mod:
             case 2:
-                tracker = self.geometry_tracker._linear_algebra._bool_equations
+                tracker = self.geometry_tracker._linear_algebra.bool_equations
             case 360:
-                tracker = self.geometry_tracker._linear_algebra._mod_360_equations
+                tracker = self.geometry_tracker._linear_algebra.mod_360_equations
             case None:
-                tracker = self.geometry_tracker._linear_algebra._real_equations
+                tracker = self.geometry_tracker._linear_algebra.real_equations
             case _:
                 raise NotImplementedError(f'Equations mod {self.mod} are not implemented!')
 
@@ -523,92 +523,6 @@ class EquationPattern(InternalNodePattern):
         combination_indices = [[get_eqn_key(o) for o in lst] for lst in combinations]
 
         new_matches = RustMatch.raw(self.coef_keys, combination_indices).subtract(self.all_matches)
-        self.new_matches.extend(new_matches)
-        self.all_matches.extend(new_matches)
-
-    def full_repr(self, idx=0) -> str:
-        return (
-            '\t' * idx
-            + f'Eq({self.types}, keys={self.coef_keys} factors={self.eqn_factors}, const={self.const_factor}) (len={len(self)})'
-        )
-
-
-class NonzeroPattern(InternalNodePattern):
-    """
-    A pattern representing a not-equals condition, such as X + Y - Z != 0.
-    """
-
-    geometry_tracker: GeometryTracker
-    eqn_factors: list[int]
-    const_factor: int
-    mod: int | None
-    types: list[
-        str
-    ]  # The types are either the raw types, for GeoObjects, or the constructor names. This should capture everything.
-    found_nonzeros: set[tuple[GeoObject, ...]]
-
-    def __init__(
-        self,
-        geometry_tracker: GeometryTracker,
-        coef_keys: list[int],
-        eqn_factors: list[int],
-        const_factor: int,
-        mod: int | None,
-        types: list[str],
-    ):
-        """
-        Initializes the equation pattern.
-
-        Parameters:
-        * `checker`: The ProofChecker containing the linear algebra trackers.
-        * `coef_keys`: The equation keys of the objects in the nonzero. In the example above, this would be (get_eqn_key(X), get_eqn_key(Y), get_eqn_key(Z)).
-        * `const_factor`: If there is a constant factor in the equation. In `X - 90 != 0`, this would be `-90`.
-        * `mod`: The modulus of the equation.
-        * `type`: The type of the objects in the equation, such as Angle or Scalar.
-        """
-        assert isinstance(coef_keys, list)
-        super().__init__()
-        self.geometry_tracker = geometry_tracker
-        self.coef_keys = coef_keys
-        self.eqn_factors = eqn_factors
-        self.const_factor = const_factor
-        self.mod = mod
-        self.types = types
-        self.name = f'NonzeroPattern({coef_keys=}, {const_factor=}, {mod=}, {types=})'
-        self.found_nonzeros = set()
-
-    def update(self):
-        """
-        Updates the equation pattern using the proof geometry tracker.
-        """
-        match self.mod:
-            case 2:
-                tracker = self.geometry_tracker._linear_algebra._bool_equations
-            case 360:
-                tracker = self.geometry_tracker._linear_algebra._mod_360_equations
-            case None:
-                tracker = self.geometry_tracker._linear_algebra._real_equations
-            case _:
-                raise NotImplementedError(f'Equations mod {self.mod} are not implemented!')
-
-        objects = [[u for u in self.geometry_tracker.unique_objects() if extended_type(u) == typ] for typ in self.types]
-
-        res: list[list[int]] = []
-        for curr_objs in itertools.product(*objects):
-            key = tuple(curr_objs)
-            if key in self.found_nonzeros:
-                continue
-
-            comb = {}
-            for obj, val in zip(curr_objs, self.eqn_factors):
-                comb[obj] = comb.get(obj, 0) + val
-
-            if tracker.contains_nonzero(comb):
-                curr_objs = [get_eqn_key(obj) if obj is not None else get_eqn_key(ONE) for obj in curr_objs]
-                res.append(curr_objs)
-                self.found_nonzeros.add(key)
-
-        new_matches = RustMatch.raw(self.coef_keys, res).subtract(self.all_matches)
         self.new_matches.extend(new_matches)
         self.all_matches.extend(new_matches)
 
@@ -677,8 +591,6 @@ class SignatureDag:
     """The patterns of all GeoObjects."""
     raw_predicate_patterns: dict[Predicate, RawPredicatePattern]
     """The raw predicates in the DAG."""
-    raw_nonzero_patterns: dict[tuple[tuple[int, ...], int, int | None, tuple[str, ...]], NonzeroPattern]
-    """The raw patterns of nonzero combinations."""
     raw_equation_patterns: dict[tuple[tuple[int, ...], int, int | None, tuple[str, ...]], EquationPattern]
     """The raw patterns of combinations that are zero."""
 
@@ -705,7 +617,6 @@ class SignatureDag:
         self.step_patterns = {}
         self.raw_object_patterns = {}
         self.raw_predicate_patterns = {}
-        self.raw_nonzero_patterns = {}
         self.raw_equation_patterns = {}
         self.object_patterns = {}
         self.predicate_patterns = {}
@@ -787,58 +698,9 @@ class SignatureDag:
         self.raw_predicate_patterns[pred] = raw_pred
         return raw_pred
 
-    def get_raw_nonzero_pattern(self, pred: Predicate) -> Pattern:
-        """
-        Gets a pattern matching a nonzero predicate.
-        """
-        eqn_factors = get_linear_eqn_factors(pred)
-        if eqn_factors is None:
-            eqn_factors = get_log_eqn_factors(pred)
-        if eqn_factors is None:
-            raise GeometryError(f'Predicate could not be converted to an equation: {pred}!')
-
-        type_ = pred.components[0].type if pred.components[0].type != GeoType.LITERAL else pred.components[1].type
-
-        if pred.name == 'not_equals' and type_ in (GeoType.ANGLE, GeoType.SCALAR, GeoType.LITERAL):
-            mod = None
-        elif pred.name == 'not_equals' and type_ == GeoType.ORIENTATION:
-            mod = 2
-        elif pred.name == 'not_equals_mod_360':
-            mod = 360
-        else:
-            raise GeometryError(f'Illegal predicate: {pred}')
-
-        const_factor = 0
-        if ONE in eqn_factors:
-            const_factor = eqn_factors.pop(ONE)
-        assert abs(const_factor - round(const_factor)) < 1e-3
-        const_factor = int(round(const_factor))
-
-        coef_keys = []
-        coef_values = []
-        for obj, val in eqn_factors.items():
-            coef_keys.append(obj)
-            coef_values.append(val)
-
-        types = [extended_type(obj) for obj in coef_keys]
-        coef_keys = [get_eqn_key(obj) for obj in coef_keys]
-
-        key = (tuple(coef_values), const_factor, mod, tuple(types))
-
-        if key in self.raw_nonzero_patterns:
-            old_pat = self.raw_nonzero_patterns[key]
-            res = RekeyPattern(old_pat, {old_key: curr_key for old_key, curr_key in zip(old_pat.coef_keys, coef_keys)})
-            self.sorted_patterns.append(res)
-            return res
-
-        res = NonzeroPattern(self.geometry_tracker, coef_keys, coef_values, const_factor, mod, types)
-        self.sorted_patterns.append(res)
-        self.raw_nonzero_patterns[key] = res
-        return res
-
     def get_raw_equation_pattern(self, pred: Predicate) -> Pattern:
         """
-        Gets a pattern matching a nonzero predicate.
+        Gets a pattern matching a linear equation predicate.
         """
         eqn_factors = get_linear_eqn_factors(pred)
         if eqn_factors is None:
@@ -942,30 +804,6 @@ class SignatureDag:
             coef_keys = [get_eqn_key(obj) for obj in coef_keys]
 
             eq_pat = self.get_raw_equation_pattern(pred)
-            pred_pattern = IntersectPattern([eq_pat] + obj_pats, pred.to_language_format())
-            self.predicate_patterns[pred] = pred_pattern
-            self.sorted_patterns.append(pred_pattern)
-            return pred_pattern
-
-        elif pred.name in ('not_equals', 'not_equals_mod_360') and (
-            pred.components[0].type in EQN_TYPES or pred.components[1] in EQN_TYPES
-        ):
-            eqn_factors = get_linear_eqn_factors(pred)
-            if eqn_factors is None:
-                eqn_factors = get_log_eqn_factors(pred)
-            if eqn_factors is None:
-                raise GeometryError(f'Predicate could not be converted to an equation: {pred}!')
-
-            coef_keys = []
-            coef_values = []
-            for obj, val in eqn_factors.items():
-                coef_keys.append(obj)
-                coef_values.append(val)
-
-            obj_pats: list[Pattern] = [self.get_object_pattern(obj) for obj in coef_keys]
-            coef_keys = [get_eqn_key(obj) for obj in coef_keys]
-
-            eq_pat = self.get_raw_nonzero_pattern(pred)
             pred_pattern = IntersectPattern([eq_pat] + obj_pats, pred.to_language_format())
             self.predicate_patterns[pred] = pred_pattern
             self.sorted_patterns.append(pred_pattern)

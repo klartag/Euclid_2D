@@ -25,7 +25,7 @@ def get_linear_eqn_factors(pred: Predicate) -> dict[GeoObject, float] | None:
     """
     Gets the predicate as a linear equation.
     """
-    assert pred.name.startswith('equals') or pred.name.startswith('not_equals')
+    assert pred.name.startswith('equals')
     res = (pred.components[0] - pred.components[1]).as_linear_equation()
     if res is None:
         return None
@@ -40,7 +40,7 @@ def get_log_eqn_factors(pred: Predicate) -> dict[GeoObject, float] | None:
     Gets the predicate as a log equation.
     This is not defined for equals_mod.
     """
-    assert pred.name == 'equals' or pred.name == 'not_equals'
+    assert pred.name == 'equals'
     left_log = pred.components[0].as_log_equation()
     right_log = pred.components[1].as_log_equation()
     if left_log is None or right_log is None:

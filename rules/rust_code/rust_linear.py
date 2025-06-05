@@ -53,15 +53,8 @@ class BaseSolver(abc.ABC, Generic[T]):
     def add_relation(self, v: dict[int, Any]):
         return self.solver.add_relation(self.normalize_rel(v))
 
-    def add_nonzero(self, v: dict[int, Any]):
-        return self.solver.add_nonzero(self.normalize_rel(v))
-
     def contains_relation(self, v: dict[int, Any]) -> bool:
         return self.solver.contains_relation(self.normalize_rel(v))
-
-    def contains_nonzero(self, v: dict[int, Any]):
-        res = self.solver.contains_nonzero(self.normalize_rel(v))
-        return res
 
     def contains(self, obj_idx: int):
         return self.solver.contains(obj_idx)
@@ -74,9 +67,6 @@ class BaseSolver(abc.ABC, Generic[T]):
 
     def relations(self) -> list[list[T]]:
         return self.solver.relations()
-
-    def nonzeroes(self) -> list[list[T]]:
-        return self.solver.nonzeroes()
 
     def normalize(self, v: Any) -> T:
         return self.dtype()(v)
@@ -101,18 +91,6 @@ class BaseSolver(abc.ABC, Generic[T]):
 
         for rel in relations:
             print(repr_row(rel, pos_to_name) + ' == 0')
-
-    def print_nonzeroes(self, names_dict: dict[int, str]):
-        """
-        Prints all nonzeroes in the linear algebra tracker.
-        """
-        indices: dict[int, int] = self.indices()
-        nonzeroes: list[list[T]] = self.nonzeroes()
-
-        pos_to_name = {pos: names_dict.get(idx, f'?({idx%1000})') for idx, pos in indices.items()}
-
-        for rel in nonzeroes:
-            print(repr_row(rel, pos_to_name) + ' != 0')
 
 
 class RLinearSolver(BaseSolver[float]):

@@ -24,7 +24,7 @@ class AssumptionsWriter(DocumentSectionWriter[Statement]):
         object_declaration_lines = []
 
         for type_, objects in objects_by_type.items():
-            object_declaration_lines.append(', '.join(obj.name for obj in objects) + ': ' + type_)
+            object_declaration_lines.append(', '.join(obj.name for obj in objects) + ': ' + type_.value)
 
         predicate_lines = [predicate.to_language_format() for predicate in statement.assumption_predicates]
 
