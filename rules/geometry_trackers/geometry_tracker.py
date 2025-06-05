@@ -668,7 +668,7 @@ class GeometryTracker:
 
         3. Checking in the appropriate tracker if the predicate is known to be true,
             or if the predicate is trivial.
-            Here, if the predicate is an equation (`equals`, `not_equals_mod_180`, etc.)
+            Here, if the predicate is an equation (`equals`, `equals_mod_360`)
             it is dispatched to the appropriate linear algebra tracker.
             Otherwise, we just check if it is contained in the set of predicates.
         """

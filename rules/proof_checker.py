@@ -30,33 +30,6 @@ from .geometry_objects.construction_object import ConstructionObject
 from .predicates.predicate import Predicate
 
 
-def all_possibilities(pred: Predicate) -> set[Predicate]:
-    """
-    Finds a minimal set of predicates containing the given predicate, such that one of the predicates in the set is always true.
-    Used in If-Steps to determine all conditions that should be checked.
-    """
-    match pred.name:
-        case 'in' | 'not_in':
-            return {predicate_from_args('in', pred.components), predicate_from_args('not_in', pred.components)}
-        case 'equals' | 'not_equals':
-            return {predicate_from_args('not_equals', pred.components), predicate_from_args('equals', pred.components)}
-        case 'equals_mod_360' | 'not_equals_mod_360':
-            return {
-                predicate_from_args('equals_mod_360', pred.components),
-                predicate_from_args('not_equals_mod_360', pred.components),
-            }
-        case 'between':
-            a, b, c = pred.components
-            return {
-                predicate_from_args('between', (a, b, c)),
-                predicate_from_args('between', (b, a, c)),
-                predicate_from_args('between', (a, c, b)),
-                predicate_from_args('not_in', (a, ConstructionObject.from_args('Line', (b, c)))),
-            }
-        case _:  # TODO: This seems to be a bug. The correct thing would be to return None here.
-            return set()
-
-
 class ProofChecker:
     """
     A class that checks that a proof is valid.
