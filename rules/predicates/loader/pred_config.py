@@ -50,7 +50,7 @@ def load_constructions_and_macros() -> None:
             [log_arg_0],
             Symmetry.NONE,
             Atom('res', GeoType.SCALAR),
-            [predicate_from_args('not_equals', (log_arg_0, Literal('0')))],
+            [],
             [],
         ),
     }
