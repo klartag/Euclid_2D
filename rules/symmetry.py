@@ -1,6 +1,6 @@
 from enum import Enum, auto
 import itertools
-from typing import TypeVar, Protocol, runtime_checkable
+from typing import TypeVar, Protocol
 
 
 class Sortable(Protocol):

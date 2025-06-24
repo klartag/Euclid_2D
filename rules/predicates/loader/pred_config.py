@@ -12,14 +12,12 @@ from ...symmetry import Symmetry
 from ...geometry_objects.atom import Atom
 from ...geometry_objects.construction_object import Construction, LogConstruction
 from ...geometry_objects.geo_object import GeoObject
-from ...geometry_objects.literal import Literal
 from ...geometry_objects.geo_type import GeoType, Signature
 
 from .. import global_predicates
 
 from ..predicate import INPUT_LABEL, PREPROCESS_LABEL, Predicate
 from ..implementations.macro_predicate import MacroData
-from ..predicate_factory import predicate_from_args
 
 
 MACRO_FOLDER = BASE_PATH / 'rules' / 'constructions_and_predicates' / 'hierarchy' / 'predicates'

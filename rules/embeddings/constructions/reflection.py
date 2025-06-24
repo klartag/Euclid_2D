@@ -1,5 +1,3 @@
-from mpmath import mpf
-
 from ..embedded_objects import EmbeddedPoint, EmbeddedLine
 
 from .projection import project
@@ -8,6 +6,7 @@ from .projection import project
 def reflect_point(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedPoint:
     projection = project(point, line)
     return projection + projection - point
+
 
 def reflect_line(line0: EmbeddedLine, line1: EmbeddedLine) -> EmbeddedLine:
     reflected_point0 = reflect_point(line0.point, line1)

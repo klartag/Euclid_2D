@@ -8,7 +8,7 @@ from ....predicates.predicate import Predicate
 from ...constructions.circle_intersection import circle_circle_intersection, line_circle_intersection
 from ...constructions.line_intersection import line_intersection
 from ...constructions.object_on_object import point_on_circle, point_on_line
-from ...constructions.polarity import polar, pole
+from ...constructions.polarity import polar
 from ...embedded_objects.embedded_object import EmbeddedObject
 from ...types import ConstructionMethod, normalize_return_type
 

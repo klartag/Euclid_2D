@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, TypeVar
+from typing import Optional
 
 from ...geometry_problem import GeometryProblem
 

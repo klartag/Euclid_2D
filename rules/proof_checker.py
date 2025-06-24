@@ -27,7 +27,6 @@ from .geometry_objects.geo_type import R_EQN_TYPES, GeoType
 from .geometry_objects.geo_object import GeoObject
 from .geometry_objects.equation_object import EquationObject
 from .geometry_objects.construction_object import ConstructionObject
-from .predicates.predicate import Predicate
 
 
 class ProofChecker:

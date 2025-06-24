@@ -1,6 +1,5 @@
 from re import Match
 
-
 from ......expression_parse_utils import split_args
 from ......errors import ProofParseError
 from ......parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser

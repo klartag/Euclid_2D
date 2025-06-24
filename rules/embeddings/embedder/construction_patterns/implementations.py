@@ -2,17 +2,13 @@ from typing import List
 
 from ....geometry_objects.geo_type import GeoType
 
-from ...constructions.circle_intersection import line_circle_intersection, circle_circle_intersection
 from ...method_dictionaries import (
     circumcircle,
-    line,
     line_intersection,
     line_on_point,
     new_point,
     new_line,
     new_circle,
-    point_on_line,
-    point_on_circle,
 )
 
 from .construction_pattern import ConstructionPattern

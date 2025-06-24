@@ -1,5 +1,4 @@
 from typing import Mapping
-from ...symmetry import Symmetry
 from ...geometry_objects.geo_object import GeoObject
 from ..predicate import Predicate
 from .symmetric_predicate import SymmetricPredicate

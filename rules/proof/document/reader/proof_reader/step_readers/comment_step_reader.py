@@ -1,7 +1,5 @@
 from re import Match
 
-from ......geometry_objects.geo_object import GeoObject
-
 from .....steps.comment_step import CommentStep
 
 from ..abstract_step_reader import AbstractStepReader

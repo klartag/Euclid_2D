@@ -1,8 +1,6 @@
 import itertools
 from typing import Mapping
 
-from ...symmetry import Symmetry
-
 from ...geometry_objects.geo_object import GeoObject
 
 from ..predicate import Predicate

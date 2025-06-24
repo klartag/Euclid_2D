@@ -1,4 +1,4 @@
-from typing import Optional, TypeVar
+from typing import Optional
 
 from ...geometry_objects.geo_type import Signature
 from ...geometry_objects.geo_object import GeoObject

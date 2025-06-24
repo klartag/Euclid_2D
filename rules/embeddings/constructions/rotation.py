@@ -1,8 +1,9 @@
-from mpmath import mp, mpf
+from mpmath import mp
 
 from ..embedded_objects import EmbeddedPoint, EmbeddedScalar, PI
 
 from .scalars import direction
+
 
 def rotate_point(point0: EmbeddedPoint, point1: EmbeddedPoint, angle: EmbeddedScalar) -> EmbeddedPoint:
     new_angle = direction(point0, point1) + angle

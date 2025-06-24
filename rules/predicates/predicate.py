@@ -3,8 +3,6 @@ from typing import TYPE_CHECKING, Mapping
 if TYPE_CHECKING:
     from ..geometry_objects.geo_object import GeoObject
     from ..geometry_configuration.torch_geo.geometry_entities import Point, Line, Circle, Triangle
-    from ..geometry_objects.construction_object import Construction
-    from .implementations.macro_predicate import MacroData
 
 from ..geometry_configuration.torch_geo.geometry_entities import torch_hinge_loss
 from ..symmetry import Symmetry

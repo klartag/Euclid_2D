@@ -1,4 +1,3 @@
-from typing import Optional
 from mpmath import mpf
 
 from ..embedded_objects import EmbeddedPoint, EmbeddedLine

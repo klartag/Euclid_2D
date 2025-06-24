@@ -2,7 +2,6 @@ from .parsers.geometry_object_parser.geometry_object_parser import GeometryObjec
 from .parsers.predicate_parser.predicate_parser import PredicateParser
 
 from .embeddings.undefined_embedding_error import UndefinedEmbeddingError
-from .geometry_objects.atom import Atom
 from .geometry_objects.geo_object import GeoObject
 from .geometry_trackers.geometry_tracker import GeometryTracker
 from .predicates.predicate import Predicate
