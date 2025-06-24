@@ -11,10 +11,17 @@ from .proof.steps import AssertStep, TheoremStep
 
 
 class ProofPrettifier:
+    """
+    TODO: Document
+    """
+
     def __init__(self):
         pass
 
     def prettify(self, proof: Proof) -> Proof:
+        """
+        TODO: Document
+        """
         pretty_steps = []
 
         for step in proof.steps:
@@ -30,6 +37,9 @@ class ProofPrettifier:
         return pretty_proof
 
     def generate_assert_steps(self, step: TheoremStep) -> List[AssertStep]:
+        """
+        TODO: Document
+        """
         theorem = Theorem.from_name(step.theorem_name)
 
         substitutions = {

@@ -198,13 +198,21 @@ class Pattern(abc.ABC):
         self.new_matches = RustMatch.zero()
 
     @abc.abstractmethod
-    def full_repr(self, depth=0) -> str: ...
+    def full_repr(self, depth=0) -> str:
+        """
+        TODO: Document
+        """
+        ...
 
     def __repr__(self) -> str:
         return self.name
 
 
 class InternalNodePattern(Pattern):
+    """
+    TODO: Document
+    """
+
     @abc.abstractmethod
     def update(self):
         """
@@ -636,6 +644,9 @@ class SignatureDag:
                 raise TypeError(f'SignatureDag received unknown step: {step}!')
 
     def get_rekey_pattern(self, pattern: Pattern, keys: dict[int, int]) -> RekeyPattern:
+        """
+        TODO: Document
+        """
         res = RekeyPattern(pattern, keys)
         self.sorted_patterns.append(res)
         return res
@@ -689,6 +700,9 @@ class SignatureDag:
         return res
 
     def get_raw_predicate_pattern(self, pred: Predicate) -> RawPredicatePattern:
+        """
+        TODO: Document
+        """
         if pred in self.raw_predicate_patterns:
             return self.raw_predicate_patterns[pred]
 
@@ -819,6 +833,9 @@ class SignatureDag:
             return res
 
     def make_theorem_pattern(self, theorem: Theorem):
+        """
+        TODO: Document
+        """
         for obj in involved_objects(theorem):
             self.step_key_to_obj[get_eqn_key(obj)] = obj
         patterns = []
@@ -837,6 +854,9 @@ class SignatureDag:
         self.step_patterns[theorem_pattern] = theorem
 
     def make_construction_pattern(self, construction: Construction):
+        """
+        TODO: Document
+        """
         for obj in involved_objects(construction):
             self.step_key_to_obj[get_eqn_key(obj)] = obj
 

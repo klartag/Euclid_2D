@@ -50,6 +50,9 @@ def get_log_eqn_factors(pred: Predicate) -> dict[GeoObject, float] | None:
 
 
 def get_raw_eqn_factors(factors: dict[GeoObject, float]) -> dict[int, float]:
+    """
+    TODO: Document
+    """
     return {get_eqn_key(key): val for key, val in factors.items()}
 
 

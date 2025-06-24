@@ -2,6 +2,9 @@ from typing import Optional
 
 
 def generic_split_args(text: str, separator_chars: str) -> Optional[tuple[list[str], list[str]]]:
+    """
+    TODO: Document
+    """
     text = text.strip()
     if len(text) == 0:
         return ([], [])
@@ -39,6 +42,9 @@ def split_args(text: str) -> Optional[list[str]]:
 
 
 def alternating_merge_string(lines0: list[str], lines1: list[str]) -> str:
+    """
+    TODO: Document
+    """
     if len(lines0) < len(lines1):
         lines0.extend([''] * (len(lines1) - len(lines0)))
     if len(lines0) > len(lines1):
@@ -47,4 +53,7 @@ def alternating_merge_string(lines0: list[str], lines1: list[str]) -> str:
 
 
 def is_valid_parenthesis(text: str) -> bool:
+    """
+    TODO: Document
+    """
     return generic_split_args(text[1:-1], '') is not None

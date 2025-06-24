@@ -8,6 +8,9 @@ from .parsers.geometry_object_parser.geometry_object_parser import GeometryObjec
 
 
 def evaluate(object, obj_map):
+    """
+    TODO: Document
+    """
     if object.name in obj_map:
         return obj_map[object.name]
     elif object.type == "Literal":
@@ -22,10 +25,16 @@ def evaluate(object, obj_map):
 
 
 def evaluate_equation(object, obj_map):
+    """
+    TODO: Document
+    """
     return sum(val * evaluate(component, obj_map) for component, val in object.components)
 
 
 def evaluate_construction(object, obj_map):
+    """
+    TODO: Document
+    """
     args = [(component.name, evaluate(component, obj_map)) for component in object.components]
     match object.constructor.name:
         case "distance":

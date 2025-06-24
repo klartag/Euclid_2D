@@ -8,12 +8,19 @@ from .predicates.predicate import Predicate
 
 
 class InteractivePredicateChecker:
+    """
+    TODO: Document
+    """
+
     geometry_tracker: GeometryTracker
 
     def __init__(self, geometry_tracker: GeometryTracker):
         self.geometry_tracker = geometry_tracker
 
     def run(self):
+        """
+        TODO: Document
+        """
         predicate_parser = PredicateParser(self.geometry_tracker.signature)
         geometry_object_parser = GeometryObjectParser(self.geometry_tracker.signature)
 
@@ -42,6 +49,9 @@ class InteractivePredicateChecker:
                 print()
 
     def check_predicate(self, predicate: Predicate) -> str:
+        """
+        TODO: Document
+        """
         is_predicate_proved = self.geometry_tracker.contains_predicate(predicate, can_add=False)
         if self.geometry_tracker.embedding_tracker is None:
             return f'{is_predicate_proved}'
@@ -50,6 +60,9 @@ class InteractivePredicateChecker:
         return f'{is_predicate_proved} ({is_predicate_true_in_embedding.value} in embedding)'
 
     def print_geometry_object(self, obj: GeoObject) -> str:
+        """
+        TODO: Document
+        """
         if self.geometry_tracker.embedding_tracker is None:
             print('Failed to evaluate.')
         else:

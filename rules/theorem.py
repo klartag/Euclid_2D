@@ -28,6 +28,10 @@ METADATA_LABEL = 'metadata'
 
 
 class Theorem:
+    """
+    TODO: Document
+    """
+
     name: str
     data: str
     signature: list[GeoObject]
@@ -77,6 +81,9 @@ class Theorem:
 
     @staticmethod
     def read(path: Path) -> 'list[Theorem]':
+        """
+        TODO: Document
+        """
         assert (
             path.suffix == '.yml' or path.suffix == '.yaml'
         ), f'Theorems must be stored in YAML files! Tried to open {path}'

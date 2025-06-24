@@ -16,6 +16,10 @@ from ..errors import ProofCheckError
 
 
 class ProofTrimmer:
+    """
+    TODO: Document
+    """
+
     problem: GeometryProblem
     trimmed_problem: GeometryProblem
 

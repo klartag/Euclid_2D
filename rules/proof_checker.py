@@ -332,6 +332,9 @@ class ProofChecker:
         self.geometry_tracker.load_assumptions(self.problem)
 
     def check_proof_finished(self):
+        """
+        TODO: Document
+        """
         # If we have found a contradiction, then the proof is valid.
         for pred in self.geometry_tracker._predicates:
             if pred.name == 'false':
@@ -344,6 +347,9 @@ class ProofChecker:
                 raise ProofCheckError(f'Required predicate {pred} was not proved.')
 
     def check_until_step(self, step, skim=False, verbose=False):
+        """
+        TODO: Document
+        """
         step_count = step - self.checked_steps
 
         if step_count < 0:
@@ -385,6 +391,9 @@ class ProofChecker:
 
 
 def check_proof(path: Path, verbose=False, interactive: bool = False):
+    """
+    TODO: Document
+    """
     document = GeometryDocument.open(path)
     problem = DocumentReader().read(document, read_proof_body=True)
     if problem.embedding is not None:
@@ -423,6 +432,9 @@ def main():
 
 
 def interactive_main():
+    """
+    TODO: Document
+    """
     import argparse
 
     parser = argparse.ArgumentParser(description='Loads a proof into the Interactive Predicate Checker.')

@@ -11,6 +11,9 @@ from .geometry_objects.geo_object import GeoObject
 
 
 def get_sympy_objects(obj_map):
+    """
+    TODO: Document
+    """
     sympy_obj_map = {}
     sympy_symbols = []
     for name, geo_object in obj_map.items():
@@ -44,6 +47,10 @@ def get_sympy_objects(obj_map):
 
 
 class GeoConfig:
+    """
+    TODO: Document
+    """
+
     def __init__(self, obj_map: Dict[str, GeoObject]):
 
         self.sympy_obj_map, self.sympy_symbols = get_sympy_objects(obj_map)
@@ -51,6 +58,9 @@ class GeoConfig:
         self.predicates: list[Predicate] = []
 
     def solve(self, predicates):
+        """
+        TODO: Document
+        """
         for p in predicates:
             unpacked = p.unpack()
             if isinstance(unpacked, List):
@@ -84,6 +94,9 @@ class GeoConfig:
             return False, result
 
     def verify_predicates(self, predicates):
+        """
+        TODO: Document
+        """
         assert self.pairs is not None
         all_predicates = []
         for p in predicates:
@@ -95,6 +108,9 @@ class GeoConfig:
         return [N(p.potential(self.sympy_obj_map).subs(self.pairs)) for p in all_predicates]
 
     def plot(self, fig=None):
+        """
+        TODO: Document
+        """
         assert self.pairs is not None
         if not fig:
             fig, ax = plt.subplots()

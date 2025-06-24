@@ -77,12 +77,21 @@ class UnionFind(Generic[T]):
         return key in self.to_representative
 
     def all_objects(self) -> Iterable[T]:
+        """
+        TODO: Document
+        """
         return self.to_representative.keys()
 
     def get_representatives(self) -> Iterable[T]:
+        """
+        TODO: Document
+        """
         return self.equivalences.keys()
 
     def get_equivalences(self, key: T) -> set[T]:
+        """
+        TODO: Document
+        """
         return self.equivalences.get(key, set())
 
     def shallow_copy(self) -> 'UnionFind[T]':

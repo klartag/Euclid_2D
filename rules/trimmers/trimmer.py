@@ -16,6 +16,10 @@ MIN_CHECKPOINT_STEPS = 2
 
 
 class ProofTrimmer:
+    """
+    TODO: Document
+    """
+
     problem: GeometryProblem
     trimmed_problem: GeometryProblem
     checkpoints: list[ProofChecker]

@@ -38,6 +38,9 @@ class Symmetry(Enum):
     )  # abcxyz = acbxzy = bacyxz = bcayzx = cabzxy = cbazyx = xyzabc = xzyacb = yxzbac = yzxbca = zxycab = zyxcba
 
     def all_orders(self, inputs: tuple[T, ...]) -> list[tuple[T, ...]]:
+        """
+        TODO: Document
+        """
         match self:
             case Symmetry.NONE:
                 return [inputs]
@@ -114,7 +117,8 @@ class Symmetry(Enum):
 
     def canonical_order(self, inputs: tuple[T, ...]) -> tuple[T, ...]:
         """
-        Returns a unique representation of the inputs."""
+        Returns a unique representation of the inputs.
+        """
         match self:
             case Symmetry.NONE:
                 return inputs
