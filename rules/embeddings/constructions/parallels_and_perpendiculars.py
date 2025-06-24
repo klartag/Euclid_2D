@@ -8,48 +8,48 @@ from .line_intersection import line_intersection
 from .line import line
 
 
-def parallel_line(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedLine:
+def parallel_line(A: EmbeddedPoint, l: EmbeddedLine) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns a line through A and parallel to l.
     """
-    return EmbeddedLine(point, line.direction)
+    return EmbeddedLine(A, l.direction)
 
 
-def perpendicular_line(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedLine:
+def perpendicular_line(A: EmbeddedPoint, l: EmbeddedLine) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns a line through A and perpendicular to l.
     """
-    orthogonal_direction = EmbeddedPoint(line.direction.y, -line.direction.x)
-    return EmbeddedLine(point, orthogonal_direction)
+    orthogonal_direction = EmbeddedPoint(l.direction.y, -l.direction.x)
+    return EmbeddedLine(A, orthogonal_direction)
 
 
-def perpendicular_bisector(point0: EmbeddedPoint, point1: EmbeddedPoint) -> EmbeddedLine:
+def perpendicular_bisector(A: EmbeddedPoint, B: EmbeddedPoint) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns the perpendicular bisector of the segment AB.
     """
-    if point0.is_equal(point1):
+    if A.is_equal(B):
         raise UndefinedEmbeddingError("Cannot calculate perpendicular bisector of two identical points.")
-    midpoint = (point0 + point1).scale(mpf('0.5'))
-    direction = point1 - point0
+    midpoint = (A + B).scale(mpf('0.5'))
+    direction = B - A
     orthogonal_direction = EmbeddedPoint(direction.y, -direction.x)
     return EmbeddedLine(midpoint, orthogonal_direction)
 
 
-def altitude(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedLine:
+def altitude(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns the altitude from A of the triangle ABC.
     """
-    if collinear(point0, point1, point2):
+    if collinear(A, B, C):
         raise UndefinedEmbeddingError("Cannot calculate altitude of triangle with collinear vertices.")
-    return perpendicular_line(point0, line(point1, point2))
+    return perpendicular_line(A, line(B, C))
 
 
-def orthocenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedPoint:
+def orthocenter(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedPoint:
     """
-    TODO: Document
+    Returns the orthocenter of triangle ABC.
     """
-    if collinear(point0, point1, point2):
+    if collinear(A, B, C):
         raise UndefinedEmbeddingError("Cannot calculate orthocenter of triangle with collinear vertices.")
-    altitude0 = altitude(point0, point1, point2)
-    altitude1 = altitude(point1, point2, point0)
+    altitude0 = altitude(A, B, C)
+    altitude1 = altitude(B, C, A)
     return line_intersection(altitude0, altitude1)

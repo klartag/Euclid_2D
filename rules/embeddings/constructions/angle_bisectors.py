@@ -2,35 +2,35 @@ from ..undefined_embedding_error import UndefinedEmbeddingError
 from ..embedded_objects import EmbeddedPoint, EmbeddedLine
 
 
-def internal_angle_bisector(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedLine:
+def internal_angle_bisector(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns the internal bisector of ∠ABC.
     """
-    if point0.is_equal(point1) or point1.is_equal(point2):
+    if A.is_equal(B) or B.is_equal(C):
         raise UndefinedEmbeddingError("Cannot evaluate internal angle bisector when two points are equal.")
 
-    direction0 = (point0 - point1).normalize()
-    direction1 = (point2 - point1).normalize()
+    direction0 = (A - B).normalize()
+    direction1 = (C - B).normalize()
 
     if direction0.is_equal(-direction1):
         orthogonal_direction = EmbeddedPoint(direction0.y, -direction0.x)
-        return EmbeddedLine(point1, orthogonal_direction)
+        return EmbeddedLine(B, orthogonal_direction)
     else:
-        return EmbeddedLine(point1, direction0 + direction1)
+        return EmbeddedLine(B, direction0 + direction1)
 
 
-def external_angle_bisector(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedLine:
+def external_angle_bisector(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns the external bisector of ∠ABC.
     """
-    if point0.is_equal(point1) or point1.is_equal(point2):
+    if A.is_equal(B) or B.is_equal(C):
         raise UndefinedEmbeddingError("Cannot evaluate external angle bisector when two points are equal.")
 
-    direction0 = (point0 - point1).normalize()
-    direction1 = (point2 - point1).normalize()
+    direction0 = (A - B).normalize()
+    direction1 = (C - B).normalize()
 
     if direction0.is_equal(direction1):
         orthogonal_direction = EmbeddedPoint(direction0.y, -direction0.x)
-        return EmbeddedLine(point1, orthogonal_direction)
+        return EmbeddedLine(B, orthogonal_direction)
     else:
-        return EmbeddedLine(point1, direction0 - direction1)
+        return EmbeddedLine(B, direction0 - direction1)

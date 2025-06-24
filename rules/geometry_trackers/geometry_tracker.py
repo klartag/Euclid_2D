@@ -354,7 +354,7 @@ class GeometryTracker:
             and obj.name not in self.embedding_tracker
         ):
             try:
-                embedded_construction_object_options = self.embedding_tracker.evaluate_construction_object(obj)
+                embedded_construction_object_options = self.embedding_tracker._evaluate_construction_object(obj)
                 if len(embedded_construction_object_options) == 1:
                     self.embedding_tracker[obj.name] = embedded_construction_object_options[0]
             except UndefinedEmbeddingError:

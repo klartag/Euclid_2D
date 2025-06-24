@@ -8,41 +8,41 @@ from .line_intersection import line_intersection
 from .angle_bisectors import internal_angle_bisector, external_angle_bisector
 
 
-def incenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedPoint:
+def incenter(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedPoint:
     """
-    TODO: Document
+    Returns the incenter of triangle ABC.
     """
-    if collinear(point0, point1, point2):
+    if collinear(A, B, C):
         raise UndefinedEmbeddingError("Cannot calculate incenter of collinear points.")
-    angle_bisector0 = internal_angle_bisector(point0, point1, point2)
-    angle_bisector1 = internal_angle_bisector(point1, point2, point0)
+    angle_bisector0 = internal_angle_bisector(A, B, C)
+    angle_bisector1 = internal_angle_bisector(B, C, A)
     return line_intersection(angle_bisector0, angle_bisector1)
 
 
-def excenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedPoint:
+def excenter(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedPoint:
     """
-    TODO: Document
+    Returns the excenter of triangle ABC in front of the vertex A.
     """
-    if collinear(point0, point1, point2):
+    if collinear(A, B, C):
         raise UndefinedEmbeddingError("Cannot calculate excenter of collienar points.")
-    angle_bisector0 = external_angle_bisector(point0, point1, point2)
-    angle_bisector1 = external_angle_bisector(point1, point2, point0)
+    angle_bisector0 = external_angle_bisector(A, B, C)
+    angle_bisector1 = external_angle_bisector(B, C, A)
     return line_intersection(angle_bisector0, angle_bisector1)
 
 
-def incircle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedCircle:
+def incircle(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedCircle:
     """
-    TODO: Document
+    Returns the incircle of triangle ABC.
     """
-    center = incenter(point0, point1, point2)
-    radius_squared = (project(center, line(point1, point2)) - center).length_squared()
+    center = incenter(A, B, C)
+    radius_squared = (project(center, line(B, C)) - center).length_squared()
     return EmbeddedCircle(center, radius_squared)
 
 
-def excircle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedCircle:
+def excircle(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedCircle:
     """
-    TODO: Document
+    Returns the excircle of triangle ABC in front of the vertex A.
     """
-    center = excenter(point0, point1, point2)
-    radius_squared = (project(center, line(point1, point2)) - center).length_squared()
+    center = excenter(A, B, C)
+    radius_squared = (project(center, line(B, C)) - center).length_squared()
     return EmbeddedCircle(center, radius_squared)

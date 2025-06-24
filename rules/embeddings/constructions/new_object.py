@@ -7,7 +7,7 @@ from ..embedded_objects import EmbeddedPoint, EmbeddedLine, EmbeddedCircle, PI
 
 def new_point() -> EmbeddedPoint:
     """
-    TODO: Document
+    Returns a random new point.
     """
     radius = 10 * uniform(0, 1) ** 0.5
     angle = 2 * PI * uniform(0, 1)
@@ -16,13 +16,13 @@ def new_point() -> EmbeddedPoint:
 
 def new_line() -> EmbeddedLine:
     """
-    TODO: Document
+    Returns a random new line.
     """
     return EmbeddedLine(new_point(), new_point())
 
 
 def new_circle() -> EmbeddedCircle:
     """
-    TODO: Document
+    Returns a random new circle.
     """
     return EmbeddedCircle(new_point(), mpf(uniform(2, 7) ** 2))

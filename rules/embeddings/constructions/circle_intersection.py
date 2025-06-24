@@ -12,7 +12,8 @@ def line_circle_other_intersection(
     first_intersection: EmbeddedPoint, line: EmbeddedLine, circle: EmbeddedCircle
 ) -> EmbeddedPoint:
     """
-    TODO: Document
+    Given a line and a circle which intersect at `first_intersection`, and that intersect in a second different point,
+    returns the second point of intersection.
     """
     orthogonal_direction = EmbeddedPoint(line.direction.y, -line.direction.x)
     symmetry_line = EmbeddedLine(circle.center, orthogonal_direction)
@@ -26,7 +27,8 @@ def circle_circle_other_intersection(
     first_intersection: EmbeddedPoint, circle0: EmbeddedCircle, circle1: EmbeddedCircle
 ) -> EmbeddedPoint:
     """
-    TODO: Document
+    Given two circles which intersect at `first_intersection`, and that intersect in a second different point,
+    returns the second point of intersection.
     """
     if circle0.center.is_equal(circle1.center):
         raise UndefinedEmbeddingError("The circles are concentric and do not have valid intersections.")
@@ -39,7 +41,8 @@ def circle_circle_other_intersection(
 
 def quadratic_equation_solutions(a: mpf, b: mpf, c: mpf) -> Tuple[mpf, ...]:
     """
-    TODO: Document
+    Returns all solutions to the quadratic equation `a*x^2 + b*x + c = 0`.
+    (If there is no solution, raises an `UndefinedEmbeddingError`)
     """
     determinant = b**2 - 4 * a * c
     if abs(determinant) < EPSILON**2:
@@ -52,7 +55,7 @@ def quadratic_equation_solutions(a: mpf, b: mpf, c: mpf) -> Tuple[mpf, ...]:
 
 def line_circle_intersection(line: EmbeddedLine, circle: EmbeddedCircle) -> Tuple[EmbeddedPoint, ...]:
     """
-    TODO: Document
+    Returns all intersections between a line and circle.
     """
     a = line.direction.length_squared()
     b = 2 * line.direction.scalar_product(line.point - circle.center)
@@ -64,7 +67,7 @@ def line_circle_intersection(line: EmbeddedLine, circle: EmbeddedCircle) -> Tupl
 
 def circle_circle_intersection(circle0: EmbeddedCircle, circle1: EmbeddedCircle) -> Tuple[EmbeddedPoint, ...]:
     """
-    TODO: Document
+    Returns all intersections between two circles.
     """
     axis = radical_axis(circle0, circle1)
     return line_circle_intersection(axis, circle0)

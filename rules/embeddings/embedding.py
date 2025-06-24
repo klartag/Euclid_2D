@@ -21,7 +21,7 @@ from .undefined_embedding_error import UndefinedEmbeddingError
 
 class Embedding:
     """
-    TODO: Document
+    Contains a mapping between names of objects and their location in euclidean space.
     """
 
     embedding: DefaultDict[str, Optional[EmbeddedObject]]
@@ -59,27 +59,47 @@ class Embedding:
             copied_embedding[object_name] = embedded_object
         return copied_embedding
 
+    def evaluate_predicate(self, predicate: Predicate) -> EmbeddedPredicateValue:
+        if predicate.name in PREDICATE_METHOD_DICTIONARY:
+            predicate_method = PREDICATE_METHOD_DICTIONARY[predicate.name]
+            embedded_parameter_options: List[Tuple[EmbeddedObject, ...]] = []
+            for component in predicate.components:
+                try:
+                    parameter_options = self.evaluate_object(component)
+                    embedded_parameter_options.append(parameter_options)
+                except UndefinedEmbeddingError:
+                    return EmbeddedPredicateValue.Undefined
+
+            results = []
+            for parameters in itertools.product(*embedded_parameter_options):
+                try:
+                    results.append(predicate_method(*parameters))
+                except UndefinedEmbeddingError:
+                    results.append(EmbeddedPredicateValue.Undefined)
+            if all(results):
+                return EmbeddedPredicateValue.Correct
+            else:
+                ### TODO: What if *some* of the results are correct, and some aren't?
+                ### TODO: Can we give partial results even if some objects are undefined? (instead of raising an error, return an empty tuple?)
+                return EmbeddedPredicateValue.Incorrect
+        else:
+            raise Exception(f'Predicate {predicate.name} not recognized.')
+
     def evaluate_object(self, obj: ExtendedGeoObject) -> Tuple[EmbeddedObject, ...]:
-        """
-        TODO: Document
-        """
         if isinstance(obj, EmbeddedGeoObject):
-            return self.evaluate_embedded_geo_object(obj)
+            return self._evaluate_embedded_geo_object(obj)
         elif obj.name in self.embedding:
             return (self.embedding[obj.name],)
         elif isinstance(obj, ConstructionObject):
-            return self.evaluate_construction_object(obj)
+            return self._evaluate_construction_object(obj)
         elif isinstance(obj, EquationObject):
-            return self.evaluate_equation_object(obj)
+            return self._evaluate_equation_object(obj)
         elif obj.type == GeoType.LITERAL:
             return (EmbeddedScalar(mpf(obj.name)),)
         else:
             raise UndefinedEmbeddingError()
 
-    def evaluate_construction_object(self, obj: ConstructionObject) -> Tuple[EmbeddedObject, ...]:
-        """
-        TODO: Document
-        """
+    def _evaluate_construction_object(self, obj: ConstructionObject) -> Tuple[EmbeddedObject, ...]:
         if obj.constructor.name not in CONSTRUCTION_METHOD_DICTIONARY:
             raise UndefinedEmbeddingError(f'Unknown construction name: {obj.constructor.name}')
         construction_method = CONSTRUCTION_METHOD_DICTIONARY[obj.constructor.name]
@@ -93,10 +113,7 @@ class Embedding:
             )
         )
 
-    def evaluate_embedded_geo_object(self, obj: EmbeddedGeoObject) -> Tuple[EmbeddedObject, ...]:
-        """
-        TODO: Document
-        """
+    def _evaluate_embedded_geo_object(self, obj: EmbeddedGeoObject) -> Tuple[EmbeddedObject, ...]:
         construction_method = obj.construction_method()
         embedded_parameter_options: List[Tuple[EmbeddedObject, ...]] = []
         for component in obj.components:
@@ -108,10 +125,7 @@ class Embedding:
             )
         )
 
-    def evaluate_equation_object(self, eqn: EquationObject) -> Tuple[EmbeddedScalar]:
-        """
-        TODO: Document
-        """
+    def _evaluate_equation_object(self, eqn: EquationObject) -> Tuple[EmbeddedScalar]:
         lhs_options = self.evaluate_object(eqn.left)
         rhs_options = self.evaluate_object(eqn.right)
 
@@ -146,32 +160,3 @@ class Embedding:
                         )
 
         return tuple(results)
-
-    def evaluate_predicate(self, predicate: Predicate) -> EmbeddedPredicateValue:
-        """
-        TODO: Document
-        """
-        if predicate.name in PREDICATE_METHOD_DICTIONARY:
-            predicate_method = PREDICATE_METHOD_DICTIONARY[predicate.name]
-            embedded_parameter_options: List[Tuple[EmbeddedObject, ...]] = []
-            for component in predicate.components:
-                try:
-                    parameter_options = self.evaluate_object(component)
-                    embedded_parameter_options.append(parameter_options)
-                except UndefinedEmbeddingError:
-                    return EmbeddedPredicateValue.Undefined
-
-            results = []
-            for parameters in itertools.product(*embedded_parameter_options):
-                try:
-                    results.append(predicate_method(*parameters))
-                except UndefinedEmbeddingError:
-                    results.append(EmbeddedPredicateValue.Undefined)
-            if all(results):
-                return EmbeddedPredicateValue.Correct
-            else:
-                ### TODO: What if *some* of the results are correct, and some aren't?
-                ### TODO: Can we give partial results even if some objects are undefined? (instead of raising an error, return an empty tuple?)
-                return EmbeddedPredicateValue.Incorrect
-        else:
-            raise Exception(f'Predicate {predicate.name} not recognized.')

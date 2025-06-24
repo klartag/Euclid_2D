@@ -6,7 +6,7 @@ from .parallels_and_perpendiculars import perpendicular_line
 
 def radical_axis(circle0: EmbeddedCircle, circle1: EmbeddedCircle) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns the radical axis of two circles.
     """
     center_line = line(circle0.center, circle1.center)
 

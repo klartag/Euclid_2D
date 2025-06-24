@@ -7,26 +7,26 @@ from ..predicates.collinear import collinear
 from .line import line
 
 
-def midpoint(point0: EmbeddedPoint, point1: EmbeddedPoint) -> EmbeddedPoint:
+def midpoint(A: EmbeddedPoint, B: EmbeddedPoint) -> EmbeddedPoint:
     """
-    TODO: Document
+    Returns the midpoint of the line segment `AB`.
     """
-    return (point0 + point1).scale(mpf('0.5'))
+    return (A + B).scale(mpf('0.5'))
 
 
-def median(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedLine:
+def median(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns the median through A in triangle ABC.
     """
-    if collinear(point0, point1, point2):
+    if collinear(A, B, C):
         raise UndefinedEmbeddingError("Cannot calculate median of triangle with collinear vertices.")
-    return line(point0, midpoint(point1, point2))
+    return line(A, midpoint(B, C))
 
 
-def centroid(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedPoint:
+def centroid(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedPoint:
     """
-    TODO: Document
+    Returns the centroid of triangle ABC.
     """
-    if collinear(point0, point1, point2):
+    if collinear(A, B, C):
         raise UndefinedEmbeddingError("Cannot calculate centroid of triangle with collinear vertices.")
-    return (point0 + point1 + point2).scale(mpf('1/3'))
+    return (A + B + C).scale(mpf('1/3'))

@@ -11,7 +11,7 @@ ORIGIN = EmbeddedPoint(mpf(0), mpf(0))
 
 def pole(line: EmbeddedLine) -> EmbeddedPoint:
     """
-    TODO: Document
+    Returns the pole point to a line with respect to the unit circle.
     """
     if line.contains_point(ORIGIN):
         raise UndefinedEmbeddingError("Poles are undefined for lines through the origin.")
@@ -21,7 +21,7 @@ def pole(line: EmbeddedLine) -> EmbeddedPoint:
 
 def polar(point: EmbeddedPoint) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns the polar line to a point with respect to the unit circle.
     """
     if point.is_equal(ORIGIN):
         raise UndefinedEmbeddingError("Poles are undefined for lines through the origin.")
@@ -32,7 +32,7 @@ def polar(point: EmbeddedPoint) -> EmbeddedLine:
 
 def line_from_origin(point: EmbeddedPoint) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns a line through the origin passing through a point.
     """
     if point.is_equal(ORIGIN):
         raise UndefinedEmbeddingError("Poles are undefined for lines through the origin.")

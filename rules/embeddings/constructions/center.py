@@ -3,6 +3,6 @@ from ..embedded_objects import EmbeddedPoint, EmbeddedCircle
 
 def center(circle: EmbeddedCircle) -> EmbeddedPoint:
     """
-    TODO: Document
+    Returns the center of a circle.
     """
     return circle.center

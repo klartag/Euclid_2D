@@ -3,18 +3,18 @@ from ..embedded_objects import EmbeddedPoint, EmbeddedLine
 from .projection import project
 
 
-def reflect_point(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedPoint:
+def reflect_point(A: EmbeddedPoint, l: EmbeddedLine) -> EmbeddedPoint:
     """
-    TODO: Document
+    Returns the reflection of the point A around the line l.
     """
-    projection = project(point, line)
-    return projection + projection - point
+    projection = project(A, l)
+    return projection + projection - A
 
 
-def reflect_line(line0: EmbeddedLine, line1: EmbeddedLine) -> EmbeddedLine:
+def reflect_line(l: EmbeddedLine, m: EmbeddedLine) -> EmbeddedLine:
     """
-    TODO: Document
+    Returns the reflection of the line l around the line m.
     """
-    reflected_point0 = reflect_point(line0.point, line1)
-    reflected_point1 = reflect_point(line0.point + line0.direction, line1)
+    reflected_point0 = reflect_point(l.point, m)
+    reflected_point1 = reflect_point(l.point + l.direction, m)
     return EmbeddedLine(reflected_point0, reflected_point1 - reflected_point0)
