@@ -9,4 +9,8 @@ from ...embedded_geo_objects.embedded_geo_object import ExtendedGeoObject
 
 class LocusPattern(ABC):
     @abstractmethod
-    def match(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]: ...
+    def match(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]:
+        """
+        TODO: Document
+        """
+        ...

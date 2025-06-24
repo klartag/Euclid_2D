@@ -12,6 +12,10 @@ from ..embedded_constructions.explicit_embedded_construction import ExplicitEmbe
 
 
 class EmptyPattern(ConstructionPattern):
+    """
+    TODO: Document
+    """
+
     object_type: str
     construction_method: ConstructionMethod
 

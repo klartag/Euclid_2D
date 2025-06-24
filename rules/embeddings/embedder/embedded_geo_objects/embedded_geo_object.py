@@ -11,6 +11,10 @@ from .method_dictionary import EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY
 
 @dataclass
 class EmbeddedGeoObject:
+    """
+    TODO: Document
+    """
+
     type: str = field(init=False)
     is_in_construction_dictionary: bool = field(init=False)
     construction_name: str
@@ -32,6 +36,9 @@ class EmbeddedGeoObject:
             raise ValueError(f"Construction name '{self.construction_name}' not recognized.")
 
     def construction_method(self):
+        """
+        TODO: Document
+        """
         if self.is_in_construction_dictionary:
             return CONSTRUCTION_METHOD_DICTIONARY[self.construction_name]
         else:

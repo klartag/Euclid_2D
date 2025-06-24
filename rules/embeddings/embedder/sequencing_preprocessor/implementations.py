@@ -11,17 +11,19 @@ from .pattern_implementations.rectangle_splitter import RectangleSplitter
 from .pattern_implementations.parallelogram_splitter import ParallelogramSplitter
 from .pattern_implementations.orientation_equality_remover import OrientationEqualityRemover
 
+# TODO: Document
 SPLITTING_PATTERNS: List[PredicatePreprocessingPattern] = [
     DistinctPredicateSplitter(),
     InPredicateSplitter(),
     CurveEqualityDeconstructor(),
     ExplicitIntersectionSplitter(),
     ParallelogramSplitter(),
-    RectangleSplitter()
+    RectangleSplitter(),
 ]
 
+# TODO: Document
 INEQUALITY_REMOVAL_PATTERNS: List[PredicatePreprocessingPattern] = [
     OpenPredicateRemovalPattern(),
     CollinearInequalityRemover(),
-    OrientationEqualityRemover()
+    OrientationEqualityRemover(),
 ]

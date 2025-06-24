@@ -3,6 +3,9 @@ from ..embedded_objects import EmbeddedPoint, EmbeddedLine
 
 
 def line_intersection(line0: EmbeddedLine, line1: EmbeddedLine) -> EmbeddedPoint:
+    """
+    TODO: Document
+    """
     if line0.direction.is_proportional(line1.direction):
         raise UndefinedEmbeddingError("Cannot calculate line intersection of parallel lines.")
     delta = line1.point - line0.point

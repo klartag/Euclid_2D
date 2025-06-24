@@ -23,9 +23,11 @@ from .construction_pattern import ConstructionPattern
 from .locus_patterns.implementations import LOCUS_PATTERNS, DUAL_LOCUS_PATTERNS
 
 
+# TODO: Document
 SINGLE_LOCUS_TYPE_PATTERNS = {GeoType.LINE: point_on_line, GeoType.CIRCLE: point_on_circle}
 
 
+# TODO: Document
 LOCUS_INTERSECTION_TYPE_PATTERNS = {
     (GeoType.LINE, GeoType.LINE): line_intersection,
     (GeoType.LINE, GeoType.CIRCLE): line_circle_intersection,
@@ -34,6 +36,10 @@ LOCUS_INTERSECTION_TYPE_PATTERNS = {
 
 
 def concatenate_polar(func: ConstructionMethod) -> ConstructionMethod:
+    """
+    TODO: Document
+    """
+
     def wrapper(*parameters: Tuple[EmbeddedObject, ...]) -> Tuple[EmbeddedObject, ...]:
         construction_result = func(*parameters)
         return tuple([polar(point) for point in construction_result])
@@ -43,6 +49,10 @@ def concatenate_polar(func: ConstructionMethod) -> ConstructionMethod:
 
 
 class ContainmentPattern(ConstructionPattern):
+    """
+    TODO: Document
+    """
+
     def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[EmbeddedConstruction]:
         if object_.type not in [GeoType.POINT, GeoType.LINE]:
             return None
@@ -76,6 +86,9 @@ class ContainmentPattern(ConstructionPattern):
         return None
 
     def parse_containment_predicate(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]:
+        """
+        TODO: Document
+        """
         patterns = []
         if object_.type == GeoType.POINT:
             patterns = LOCUS_PATTERNS

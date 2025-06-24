@@ -6,10 +6,16 @@ from ..embedded_objects import EmbeddedObject
 
 
 def _in(*objects: Tuple[EmbeddedObject, ...]) -> bool:
+    """
+    TODO: Document
+    """
     points = [point for point in objects if point._type() == GeoType.POINT]
     curves = [curve for curve in objects if curve not in points]
     return all([curve.contains_point(point) for curve in curves for point in points])
 
 
 def not_in(*objects: Tuple[EmbeddedObject, ...]) -> bool:
+    """
+    TODO: Document
+    """
     return not _in(*objects)

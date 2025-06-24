@@ -6,10 +6,15 @@ from .....predicates.predicate_factory import predicate_from_args
 from ..pattern import PredicatePreprocessingPattern
 
 
+# TODO: Document
 COLLINEAR_INEQUALITY_PREDICATE_NAMES = ['between', 'collinear_and_not_between']
 
 
 class CollinearInequalityRemover(PredicatePreprocessingPattern):
+    """
+    TODO: Document
+    """
+
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name in COLLINEAR_INEQUALITY_PREDICATE_NAMES:
             return [

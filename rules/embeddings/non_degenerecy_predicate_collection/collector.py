@@ -12,10 +12,14 @@ from ...geometry_objects.literal import Literal
 
 
 class NonDegeneracyPredicateCollector:
-    def __init__(self):
-        pass
+    """
+    TODO: Document
+    """
 
     def collect(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
+        """
+        TODO: Document
+        """
         triangle_non_degenerecy_predicates = self.collect_triangle_non_degenerecy_predicates(
             assumption_objects, embedding
         )
@@ -25,6 +29,9 @@ class NonDegeneracyPredicateCollector:
     def collect_triangle_non_degenerecy_predicates(
         self, assumption_objects: dict[str, GeoObject], embedding: Embedding
     ) -> List[Predicate]:
+        """
+        TODO: Document
+        """
         predicates = []
 
         points = {name: point for (name, point) in embedding.items() if isinstance(point, EmbeddedPoint)}
@@ -65,6 +72,9 @@ class NonDegeneracyPredicateCollector:
     def collect_probably_between_predicates(
         self, assumption_objects: dict[str, GeoObject], embedding: Embedding
     ) -> List[Predicate]:
+        """
+        TODO: Document
+        """
         predicates = []
 
         points = {name: point for (name, point) in embedding.items() if isinstance(point, EmbeddedPoint)}

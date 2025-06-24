@@ -11,6 +11,9 @@ from .radical_axis import radical_axis
 def line_circle_other_intersection(
     first_intersection: EmbeddedPoint, line: EmbeddedLine, circle: EmbeddedCircle
 ) -> EmbeddedPoint:
+    """
+    TODO: Document
+    """
     orthogonal_direction = EmbeddedPoint(line.direction.y, -line.direction.x)
     symmetry_line = EmbeddedLine(circle.center, orthogonal_direction)
     other_intersection = reflect_point(first_intersection, symmetry_line)
@@ -22,6 +25,9 @@ def line_circle_other_intersection(
 def circle_circle_other_intersection(
     first_intersection: EmbeddedPoint, circle0: EmbeddedCircle, circle1: EmbeddedCircle
 ) -> EmbeddedPoint:
+    """
+    TODO: Document
+    """
     if circle0.center.is_equal(circle1.center):
         raise UndefinedEmbeddingError("The circles are concentric and do not have valid intersections.")
     symmetry_line = EmbeddedLine(circle0.center, circle1.center - circle0.center)
@@ -32,9 +38,12 @@ def circle_circle_other_intersection(
 
 
 def quadratic_equation_solutions(a: mpf, b: mpf, c: mpf) -> Tuple[mpf, ...]:
+    """
+    TODO: Document
+    """
     determinant = b**2 - 4 * a * c
-    if abs(determinant) < EPSILON ** 2:
-        return (-b / (2*a),)
+    if abs(determinant) < EPSILON**2:
+        return (-b / (2 * a),)
     elif determinant < 0:
         raise UndefinedEmbeddingError("No solution was found for the quadratic equation.")
     else:
@@ -42,6 +51,9 @@ def quadratic_equation_solutions(a: mpf, b: mpf, c: mpf) -> Tuple[mpf, ...]:
 
 
 def line_circle_intersection(line: EmbeddedLine, circle: EmbeddedCircle) -> Tuple[EmbeddedPoint, ...]:
+    """
+    TODO: Document
+    """
     a = line.direction.length_squared()
     b = 2 * line.direction.scalar_product(line.point - circle.center)
     c = (line.point - circle.center).length_squared() - circle.radius_squared
@@ -51,5 +63,8 @@ def line_circle_intersection(line: EmbeddedLine, circle: EmbeddedCircle) -> Tupl
 
 
 def circle_circle_intersection(circle0: EmbeddedCircle, circle1: EmbeddedCircle) -> Tuple[EmbeddedPoint, ...]:
+    """
+    TODO: Document
+    """
     axis = radical_axis(circle0, circle1)
     return line_circle_intersection(axis, circle0)

@@ -11,6 +11,10 @@ from .construction_pattern import ConstructionPattern
 
 
 class SimpleSymmetricPredicatePattern(ConstructionPattern):
+    """
+    TODO: Document
+    """
+
     construction_type: Type[EmbeddedConstruction]
     construction_method: ConstructionMethod
     predicate_name: str

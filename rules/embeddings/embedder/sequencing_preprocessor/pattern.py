@@ -5,5 +5,13 @@ from ....predicates.predicate import Predicate
 
 
 class PredicatePreprocessingPattern(ABC):
+    """
+    TODO: Document
+    """
+
     @abstractmethod
-    def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]: ...
+    def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
+        """
+        TODO: Document
+        """
+        ...

@@ -14,6 +14,10 @@ from .construction_pattern import ConstructionPattern
 
 
 class ReverseContainmentPattern(ConstructionPattern):
+    """
+    TODO: Document
+    """
+
     contained_point_count: int
     return_type: str
     construction_type: Type[EmbeddedConstruction]

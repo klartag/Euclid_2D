@@ -19,6 +19,10 @@ from ...constructions.tangent import tangent_line
 
 @dataclass
 class ConstructionData:
+    """
+    TODO: Document
+    """
+
     type: str
     method: ConstructionMethod
 

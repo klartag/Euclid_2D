@@ -8,9 +8,16 @@ from .unpacking_predicate_locus import UnpackingPredicateLocus
 
 from ...embedded_geo_objects.embedded_geo_object import ExtendedGeoObject
 
+
 @dataclass
 class SimplePredicateLocus(UnpackingPredicateLocus):
-    def match_predicate_parameter_option(self, object_: GeoObject, predicate: Predicate, parameter_index: int) -> Optional[ExtendedGeoObject]:
+    """
+    TODO: Document
+    """
+
+    def match_predicate_parameter_option(
+        self, object_: GeoObject, predicate: Predicate, parameter_index: int
+    ) -> Optional[ExtendedGeoObject]:
         if predicate.name != self.predicate_name:
             return None
 

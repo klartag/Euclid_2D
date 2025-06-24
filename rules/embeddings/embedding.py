@@ -20,6 +20,10 @@ from .undefined_embedding_error import UndefinedEmbeddingError
 
 
 class Embedding:
+    """
+    TODO: Document
+    """
+
     embedding: DefaultDict[str, Optional[EmbeddedObject]]
 
     def __init__(self):
@@ -56,6 +60,9 @@ class Embedding:
         return copied_embedding
 
     def evaluate_object(self, obj: ExtendedGeoObject) -> Tuple[EmbeddedObject, ...]:
+        """
+        TODO: Document
+        """
         if isinstance(obj, EmbeddedGeoObject):
             return self.evaluate_embedded_geo_object(obj)
         elif obj.name in self.embedding:
@@ -70,6 +77,9 @@ class Embedding:
             raise UndefinedEmbeddingError()
 
     def evaluate_construction_object(self, obj: ConstructionObject) -> Tuple[EmbeddedObject, ...]:
+        """
+        TODO: Document
+        """
         if obj.constructor.name not in CONSTRUCTION_METHOD_DICTIONARY:
             raise UndefinedEmbeddingError(f'Unknown construction name: {obj.constructor.name}')
         construction_method = CONSTRUCTION_METHOD_DICTIONARY[obj.constructor.name]
@@ -84,6 +94,9 @@ class Embedding:
         )
 
     def evaluate_embedded_geo_object(self, obj: EmbeddedGeoObject) -> Tuple[EmbeddedObject, ...]:
+        """
+        TODO: Document
+        """
         construction_method = obj.construction_method()
         embedded_parameter_options: List[Tuple[EmbeddedObject, ...]] = []
         for component in obj.components:
@@ -96,6 +109,9 @@ class Embedding:
         )
 
     def evaluate_equation_object(self, eqn: EquationObject) -> Tuple[EmbeddedScalar]:
+        """
+        TODO: Document
+        """
         lhs_options = self.evaluate_object(eqn.left)
         rhs_options = self.evaluate_object(eqn.right)
 
@@ -132,6 +148,9 @@ class Embedding:
         return tuple(results)
 
     def evaluate_predicate(self, predicate: Predicate) -> EmbeddedPredicateValue:
+        """
+        TODO: Document
+        """
         if predicate.name in PREDICATE_METHOD_DICTIONARY:
             predicate_method = PREDICATE_METHOD_DICTIONARY[predicate.name]
             embedded_parameter_options: List[Tuple[EmbeddedObject, ...]] = []

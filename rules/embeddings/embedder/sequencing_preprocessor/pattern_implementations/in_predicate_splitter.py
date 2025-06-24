@@ -8,6 +8,10 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class InPredicateSplitter(PredicatePreprocessingPattern):
+    """
+    TODO: Document
+    """
+
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name != 'in':
             return None

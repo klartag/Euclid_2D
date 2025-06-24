@@ -1,6 +1,11 @@
 from enum import Enum
 
+
 class EmbeddedPredicateValue(Enum):
+    """
+    TODO: Document
+    """
+
     Correct = 'True'
-    Incorrect= 'False'
+    Incorrect = 'False'
     Undefined = 'Undefined'

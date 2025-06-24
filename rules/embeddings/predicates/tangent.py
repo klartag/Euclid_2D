@@ -6,6 +6,9 @@ from ..constructions.projection import project
 
 
 def tangent(curve0: EmbeddedCurve, curve1: EmbeddedCurve) -> bool:
+    """
+    TODO: Document
+    """
     if isinstance(curve0, EmbeddedCircle) and isinstance(curve1, EmbeddedCircle):
         return circle_tangency(curve0, curve1)
     elif isinstance(curve0, EmbeddedLine) and isinstance(curve1, EmbeddedCircle):
@@ -17,11 +20,17 @@ def tangent(curve0: EmbeddedCurve, curve1: EmbeddedCurve) -> bool:
 
 
 def circle_tangency(circle0: EmbeddedCircle, circle1: EmbeddedCircle) -> bool:
+    """
+    TODO: Document
+    """
     center_distance = (circle0.center - circle1.center).length()
-    radius0 = circle0.radius_squared ** 0.5
-    radius1 = circle1.radius_squared ** 0.5    
+    radius0 = circle0.radius_squared**0.5
+    radius1 = circle1.radius_squared**0.5
     return abs(radius0 + radius1 - center_distance) < EPSILON or abs(abs(radius0 - radius1) - center_distance) < EPSILON
 
 
 def line_tangency(line: EmbeddedLine, circle: EmbeddedCircle) -> bool:
+    """
+    TODO: Document
+    """
     return abs((project(circle.center, line) - circle.center).length_squared() - circle.radius_squared) < EPSILON**2

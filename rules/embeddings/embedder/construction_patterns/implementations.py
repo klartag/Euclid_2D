@@ -23,6 +23,7 @@ from ..embedded_constructions.explicit_embedded_construction import ExplicitEmbe
 from ..embedded_constructions.generalized_embedded_construction import GeneralizedEmbeddedConstruction
 
 
+# TODO: Document
 CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
     EmptyPattern(GeoType.POINT, new_point),
     EmptyPattern(GeoType.LINE, new_line),

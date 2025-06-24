@@ -5,16 +5,25 @@ from ..embedded_objects import EmbeddedPoint, EPSILON
 
 
 def collinear(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
+    """
+    TODO: Document
+    """
     if point0.is_equal(point1) or point0.is_equal(point2):
         return True
     return (point1 - point0).is_proportional(point2 - point0)
 
 
 def not_collinear(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
+    """
+    TODO: Document
+    """
     return not collinear(point0, point1, point2)
 
 
 def between(*points: Tuple[EmbeddedPoint, ...]) -> bool:
+    """
+    TODO: Document
+    """
     for i in range(len(points) - 2):
         point0, point1, point2 = points[i : i + 3]
         if not collinear(point0, point1, point2):
@@ -27,8 +36,14 @@ def between(*points: Tuple[EmbeddedPoint, ...]) -> bool:
 
 
 def collinear_and_not_between(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> bool:
+    """
+    TODO: Document
+    """
     return collinear(point0, point1, point2) and not between(point0, point1, point2)
 
 
 def is_scalar_between(x: mpf, y: mpf, z: mpf) -> bool:
+    """
+    TODO: Document
+    """
     return x - EPSILON <= y <= z + EPSILON or x + EPSILON >= y >= z - EPSILON

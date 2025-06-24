@@ -12,6 +12,10 @@ from .construction_pattern import ConstructionPattern
 
 
 class ExplicitConstructionPattern(ConstructionPattern):
+    """
+    TODO: Document
+    """
+
     def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[ExplicitEmbeddedConstruction]:
         if len(predicates) != 1:
             return None

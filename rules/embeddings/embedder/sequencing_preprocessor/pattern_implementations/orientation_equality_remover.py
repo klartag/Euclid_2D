@@ -7,6 +7,10 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class OrientationEqualityRemover(PredicatePreprocessingPattern):
+    """
+    TODO: Document
+    """
+
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name not in ['equals', 'equals_mod_360', 'identical']:
             return None

@@ -32,6 +32,9 @@ class EmbeddedPoint(EmbeddedObject):
         return EmbeddedPoint(-self.x, -self.y)
 
     def is_proportional(self, other: 'EmbeddedPoint') -> bool:
+        """
+        TODO: Document
+        """
         if abs(self.x) < EPSILON or abs(other.x) < EPSILON:
             return abs(self.x) < EPSILON and abs(other.x) < EPSILON
 
@@ -41,18 +44,33 @@ class EmbeddedPoint(EmbeddedObject):
         return abs(self.x * other.y - self.y * other.x) < EPSILON**2
 
     def scalar_product(self, other: 'EmbeddedPoint') -> mpf:
+        """
+        TODO: Document
+        """
         return self.x * other.x + self.y * other.y
 
     def length_squared(self) -> mpf:
+        """
+        TODO: Document
+        """
         return self.scalar_product(self)
 
     def length(self) -> mpf:
+        """
+        TODO: Document
+        """
         return self.length_squared().sqrt()
 
     def scale(self, ratio: mpf) -> 'EmbeddedPoint':
+        """
+        TODO: Document
+        """
         return EmbeddedPoint(self.x * ratio, self.y * ratio)
 
     def normalize(self) -> 'EmbeddedPoint':
+        """
+        TODO: Document
+        """
         return self.scale(1 / self.length())
 
     def to_dict(self) -> dict:

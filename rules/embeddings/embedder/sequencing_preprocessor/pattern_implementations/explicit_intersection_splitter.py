@@ -8,19 +8,18 @@ from .....predicates.predicate_factory import predicate_from_args
 from ..pattern import PredicatePreprocessingPattern
 
 
-EXPLICIT_INTERSECTION_PREDICATE_NAMES = [
-    'line_intersection',
-    'line_line_intersection',
-    'line_circle_intersection'
-]
+# TODO: Document
+EXPLICIT_INTERSECTION_PREDICATE_NAMES = ['line_intersection', 'line_line_intersection', 'line_circle_intersection']
 
-EXPLICIT_OTHER_INTERSECTION_PREDICATE_NAMES = [
-    'line_line_other_intersection',
-    'line_circle_other_intersection'
-]
+# TODO: Document
+EXPLICIT_OTHER_INTERSECTION_PREDICATE_NAMES = ['line_line_other_intersection', 'line_circle_other_intersection']
 
 
 class ExplicitIntersectionSplitter(PredicatePreprocessingPattern):
+    """
+    TODO: Document
+    """
+
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name != 'equals' or len(predicate.components) != 2:
             return None
@@ -30,17 +29,25 @@ class ExplicitIntersectionSplitter(PredicatePreprocessingPattern):
             lhs, rhs = rhs, lhs
         if not self.is_explicit_intersection_object(rhs):
             return None
-        
+
         containing_components = self.extract_containing_components(cast(ConstructionObject, rhs))
         return [predicate_from_args('in', (lhs, component)) for component in containing_components]
 
     def is_explicit_intersection_object(self, obj: GeoObject) -> bool:
+        """
+        TODO: Document
+        """
         if not isinstance(obj, ConstructionObject):
             return False
-        return obj.constructor.name in EXPLICIT_INTERSECTION_PREDICATE_NAMES or \
-            obj.constructor.name in EXPLICIT_OTHER_INTERSECTION_PREDICATE_NAMES
+        return (
+            obj.constructor.name in EXPLICIT_INTERSECTION_PREDICATE_NAMES
+            or obj.constructor.name in EXPLICIT_OTHER_INTERSECTION_PREDICATE_NAMES
+        )
 
     def extract_containing_components(self, obj: ConstructionObject) -> List[GeoObject]:
+        """
+        TODO: Document
+        """
         if obj.constructor.name in EXPLICIT_OTHER_INTERSECTION_PREDICATE_NAMES:
             return obj.components[1:]
         else:

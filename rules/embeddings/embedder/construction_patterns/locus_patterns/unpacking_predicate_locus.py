@@ -12,6 +12,10 @@ from .locus_pattern_matcher import LocusPattern
 
 @dataclass
 class UnpackingPredicateLocus(LocusPattern):
+    """
+    TODO: Document
+    """
+
     locus_construction_method: Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], EmbeddedGeoObject]
     predicate_name: str
     parameter_index_options: Union[int, Sequence[int], None]
@@ -24,9 +28,21 @@ class UnpackingPredicateLocus(LocusPattern):
         return None
 
     @abstractmethod
-    def match_predicate_parameter_option(self, object_: GeoObject, predicate: Predicate, parameter_index: int) -> Optional[ExtendedGeoObject]: ...
+    def match_predicate_parameter_option(
+        self, object_: GeoObject, predicate: Predicate, parameter_index: int
+    ) -> Optional[ExtendedGeoObject]:
+        """
+        TODO: Document
+        """
+        ...
 
-def unpack_index_options(parameter_index_options: Union[int, Sequence[int], None], component_count: int) -> Sequence[int]:
+
+def unpack_index_options(
+    parameter_index_options: Union[int, Sequence[int], None], component_count: int
+) -> Sequence[int]:
+    """
+    TODO: Document
+    """
     if parameter_index_options is None:
         return list(range(component_count))
     elif isinstance(parameter_index_options, Sequence):

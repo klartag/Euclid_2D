@@ -8,10 +8,17 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class RectangleSplitter(PredicatePreprocessingPattern):
+    """
+    TODO: Document
+    """
+
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name != 'rectangle':
             return None
-        
-        lines = [ConstructionObject.from_args('Line', (predicate.components[i], predicate.components[(i + 1) % 4])) for i in range(4)]
-        
+
+        lines = [
+            ConstructionObject.from_args('Line', (predicate.components[i], predicate.components[(i + 1) % 4]))
+            for i in range(4)
+        ]
+
         return [predicate_from_args('perpendicular', (lines[i], lines[(i + 1) % 4])) for i in range(4)]
