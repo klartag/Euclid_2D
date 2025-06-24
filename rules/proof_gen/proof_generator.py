@@ -189,7 +189,7 @@ class ProofGenerator:
                 if all(
                     pred in found_predicates
                     or is_trivial(pred)
-                    or self.checker.geometry_tracker.contains_predicate(pred)
+                    or self.checker.geometry_tracker.contains_predicate(pred, can_add=False)
                     for pred in fin_step.result_predicates
                 ):
                     continue
@@ -259,21 +259,23 @@ class ProofGenerator:
         # for p in points:
         #     for old_p in points:
         #         dist = ConstructionObject.from_args('distance', (p, old_p))
-        #         self.checker._geometry_tracker.get_object(dist, True)
+        #         self.checker._geometry_tracker.get_object(dist, can_add=True)
 
     def check_finished(self) -> bool:
         """
         Returns whether the proof generator managed to prove the target theorem.
         """
         # If we have proved a contradiction, we are done.
-        if self.checker.geometry_tracker.contains_predicate(predicate_from_args('false', ())):
+        if self.checker.geometry_tracker.contains_predicate(predicate_from_args('false', ()), can_add=False):
             raise ProofGeneratorError(ProofGeneratorErrorType.Contradiction)
 
         if self.target_predicates is not None:
             mapped_predicates = [
-                self.checker.geometry_tracker.get_predicate(pred, True) for pred in self.target_predicates
+                self.checker.geometry_tracker.get_predicate(pred, can_add=True) for pred in self.target_predicates
             ]
-            return all(self.checker.geometry_tracker.contains_predicate(pred) for pred in mapped_predicates)
+            return all(
+                self.checker.geometry_tracker.contains_predicate(pred, can_add=False) for pred in mapped_predicates
+            )
 
         return False
 
@@ -303,8 +305,8 @@ class ProofGenerator:
             for lhs, rhs in zip(*condition):
                 lhs_index = obj_names.index(lhs)
                 rhs_index = obj_names.index(rhs)
-                lhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[lhs_index], False)
-                rhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[rhs_index], False)
+                lhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[lhs_index], can_add=False)
+                rhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[rhs_index], can_add=False)
                 if lhs_sub != rhs_sub:
                     break
             else:
@@ -333,7 +335,8 @@ def validate_proof(problem: GeometryProblem):
             assert theorem is not None
 
             subs = {
-                sig: checker.geometry_tracker.get_object(inp, False) for sig, inp in zip(theorem.signature, step.inputs)
+                sig: checker.geometry_tracker.get_object(inp, can_add=False)
+                for sig, inp in zip(theorem.signature, step.inputs)
             }
 
             for pred in theorem.required_predicates:
@@ -342,10 +345,10 @@ def validate_proof(problem: GeometryProblem):
                         continue
                     obj = obj.substitute(subs)
                     if obj not in proof_gen.checker.geometry_tracker._processed_objects and obj.type != GeoType.LITERAL:
-                        proof_gen.checker.geometry_tracker.get_object(obj, False)
+                        proof_gen.checker.geometry_tracker.get_object(obj, can_add=False)
                         print(f'Adding object {obj}')
 
-            if all(checker.geometry_tracker.contains_predicate(pred) for pred in step.result_predicates):
+            if all(checker.geometry_tracker.contains_predicate(pred, can_add=False) for pred in step.result_predicates):
                 continue
             print(f'Attempting to match {step.to_language_format()}')
             proof_gen.sig_dag.update()

@@ -43,7 +43,7 @@ class InteractivePredicateChecker:
                 print()
 
     def check_predicate(self, predicate: Predicate) -> str:
-        is_predicate_proved = self.geometry_tracker.contains_predicate(predicate)
+        is_predicate_proved = self.geometry_tracker.contains_predicate(predicate, can_add=False)
         if self.geometry_tracker.embedding_tracker is None:
             return f'{is_predicate_proved}'
 

@@ -67,7 +67,7 @@ class ProofChecker:
 
         a, b, c = angle.components
         if a != c:
-            rev_angle = self.geometry_tracker.get_object(ConstructionObject.from_args('angle', (c, b, a)), True)
+            rev_angle = self.geometry_tracker.get_object(ConstructionObject.from_args('angle', (c, b, a)), can_add=True)
             assert rev_angle in self.geometry_tracker._processed_objects and rev_angle in self.geometry_tracker._objects
             self.geometry_tracker._linear_algebra.real_equations.add_relation({angle: 1, rev_angle: 1})
             self.geometry_tracker._linear_algebra.mod_360_equations.add_relation({angle: 1, rev_angle: 1})
@@ -87,10 +87,12 @@ class ProofChecker:
 
         a, b, c = ori.components
         self.geometry_tracker.add_predicate(
-            predicate_from_args('not_collinear', (a, b, c)), True, 'Since they have an orientation.'
+            predicate_from_args('not_collinear', (a, b, c)), reason='Since they have an orientation.'
         )
 
-        rev = self.geometry_tracker.get_object(ConstructionObject.from_args('orientation', ori.components[::-1]), True)
+        rev = self.geometry_tracker.get_object(
+            ConstructionObject.from_args('orientation', ori.components[::-1]), can_add=True
+        )
         assert rev in self.geometry_tracker._processed_objects and rev in self.geometry_tracker._objects
 
     def process_object(self, obj: GeoObject):
@@ -111,23 +113,23 @@ class ProofChecker:
         if isinstance(obj, ConstructionObject):
             # We add the requirements, since objects in the assumptions might not have all requirements.
             for req in obj.requirements():
-                self.geometry_tracker.add_predicate(req, True, f'Requirement of {obj}')
+                self.geometry_tracker.add_predicate(req, f'Requirement of {obj}')
             for comp in obj.components:
                 self.process_object(
-                    self.geometry_tracker.get_object(comp, True),
+                    self.geometry_tracker.get_object(comp, can_add=True),
                 )
             for pred in obj.conclusions():
-                self.geometry_tracker.add_predicate(pred, True, f'conclusion of {obj}')
+                self.geometry_tracker.add_predicate(pred, f'conclusion of {obj}')
 
             for req_preds, res_preds in obj.possible_conclusions():
-                if all(self.geometry_tracker.contains_predicate(pred) for pred in req_preds):
+                if all(self.geometry_tracker.contains_predicate(pred, can_add=False) for pred in req_preds):
                     for pred in res_preds:
-                        self.geometry_tracker.add_predicate(pred, True, f'Possible conclusion of {obj}')
+                        self.geometry_tracker.add_predicate(pred, f'Possible conclusion of {obj}')
 
         if isinstance(obj, EquationObject):
             for comp in involved_objects(obj):
                 self.process_object(
-                    self.geometry_tracker.get_object(comp, True),
+                    self.geometry_tracker.get_object(comp, can_add=True),
                 )
 
         match obj.type:
@@ -152,11 +154,10 @@ class ProofChecker:
             reason = f'object definition in the step: {step}'
             self.geometry_tracker.add_predicate(
                 predicate_from_args('equals', (step.left_hand, step.right_hand)),
-                True,
                 reason,
             )
         else:
-            self.geometry_tracker.get_object(step.left_hand, True)
+            self.geometry_tracker.get_object(step.left_hand, can_add=True)
 
         defined_objects = (
             involved_objects(step.left_hand) | involved_objects(step.right_hand)
@@ -164,9 +165,7 @@ class ProofChecker:
             else involved_objects(step.left_hand)
         )
         predicate = predicate_from_args('exists', tuple(defined_objects))
-        self.geometry_tracker.add_predicate(
-            predicate, True, 'Objects we introduce or define should be marked as existing'
-        )
+        self.geometry_tracker.add_predicate(predicate, 'Objects we introduce or define should be marked as existing')
         print(f'draw {defined_objects} since we define them in {step}')
 
     def _add_theorem_step(self, step: TheoremStep, skim: bool) -> str | None:
@@ -182,7 +181,7 @@ class ProofChecker:
         if theorem is None:
             return f'Theorem {step.theorem_name} does not exist.'
 
-        inputs = [self.geometry_tracker.get_object(step_inp, True) for step_inp in step.inputs]
+        inputs = [self.geometry_tracker.get_object(step_inp, can_add=True) for step_inp in step.inputs]
 
         # Making sure that the theorem was applied on the correct number of inputs.
         if len(inputs) != len(theorem.signature):
@@ -226,7 +225,7 @@ class ProofChecker:
                     return f'In step {step}, result predicate {pred} is not satisfied in the embedding.\n{pred.name} {pred.name == "equals"}'
             for obj in pred.involved_objects():
                 predicate = predicate_from_args('exists', (obj,))
-                self.geometry_tracker.add_predicate(predicate, True, 'Marking a processed object as existing')
+                self.geometry_tracker.add_predicate(predicate, 'Marking a processed object as existing')
 
         # Making sure that the predicates specified by the step follow from the theorem, and adding them.
         # The step is allowed (And probably encouraged) not to use all predicates proved by the theorem.
@@ -234,11 +233,11 @@ class ProofChecker:
         # and the identity of the predicates changed after that.
 
         real_result_predicates = {
-            self.geometry_tracker.get_predicate(pred.substitute(substitutions), True)
+            self.geometry_tracker.get_predicate(pred.substitute(substitutions), can_add=True)
             for pred in theorem.result_predicates
         }
         needed_result_predicates = [
-            self.geometry_tracker.get_predicate(step_pred, True) for step_pred in step.result_predicates
+            self.geometry_tracker.get_predicate(step_pred, can_add=True) for step_pred in step.result_predicates
         ]
 
         # Adding the results of all theorems.
@@ -251,10 +250,10 @@ class ProofChecker:
                     f'\nIn step {step}:\n'
                     f'Predicate {step_pred} does not follow from theorem. \n'
                     f'Theorem results: {[self.geometry_tracker.get_predicate(res_pred.substitute(substitutions), True) for res_pred in theorem.result_predicates]}\n'
-                    f'Substitutions: { {obj: self.geometry_tracker.get_object(obj, True) for obj in step_pred.components} }'
+                    f'Substitutions: { {obj: self.geometry_tracker.get_object(obj, can_add=True) for obj in step_pred.components} }'
                 )
             reason = f'consequence of the theorem step: {step.theorem_name}'
-            self.geometry_tracker.add_predicate(step_pred, True, reason)  # .deeper(False)
+            self.geometry_tracker.add_predicate(step_pred, reason)  # .deeper(False)
 
         return None
 
@@ -270,7 +269,7 @@ class ProofChecker:
             # Although the predicate might have been proved implicitly, such as by a linear algebra tracker,
             # here we state it has been proved for If steps (Which could also stand to have a "Thus" section to do this).
             self.geometry_tracker._asserted_predicates.add(pred)
-            self.geometry_tracker.add_unpacked_predicate(pred, True, reason='assertion predicate')  # .deeper(False)
+            self.geometry_tracker.add_unpacked_predicate(pred, reason='assertion predicate')  # .deeper(False)
 
     def _add_almost_always_step(self, step: AlmostAlwaysStep):
         """
@@ -281,9 +280,9 @@ class ProofChecker:
                 raise ProofCheckError(f'Step {step} claimed that a closed condition {pred} is almost always true.')
             # Attempting to add the objects. They are not trusted.
             for obj in pred.components:
-                self.geometry_tracker.get_object(obj, True)
+                self.geometry_tracker.get_object(obj, can_add=True)
 
-            self.geometry_tracker.add_predicate(pred, True, 'Asserted in almost always step.')  # .deeper(False)
+            self.geometry_tracker.add_predicate(pred, 'Asserted in almost always step.')  # .deeper(False)
 
     def shallow_copy(self) -> 'ProofChecker':
         """
@@ -341,8 +340,8 @@ class ProofChecker:
 
         # Making sure that the results follow.
         for pred in self.problem.statement.target_predicates:
-            if not self.geometry_tracker.contains_predicate(pred):
-                self.geometry_tracker.contains_predicate(pred)
+            if not self.geometry_tracker.contains_predicate(pred, can_add=False):
+                self.geometry_tracker.contains_predicate(pred, can_add=False)
                 raise ProofCheckError(f'Required predicate {pred} was not proved.')
 
     def check_until_step(self, step, skim=False, verbose=False):

@@ -122,7 +122,7 @@ class GeometryTracker:
         self._asserted_predicates = set()
         self.embedding_tracker = None
 
-        self.get_object(ONE, True)
+        self.get_object(ONE, can_add=True)
 
         self._linear_algebra = LinearAlgebraTracker()
 
@@ -133,7 +133,7 @@ class GeometryTracker:
         if problem.embedding is not None:
             self.embedding_tracker = problem.embedding.shallow_copy()
 
-    def get_object(self, obj: GeoObject, can_add: bool) -> GeoObject:
+    def get_object(self, obj: GeoObject, *, can_add: bool) -> GeoObject:
         """
         Gets the canonical representative object in the proof checker associated with the given object by the equality system (This is important).
         This function also handles the processing of construction objects, which is bad and should be refactored (TODO).
@@ -184,10 +184,10 @@ class GeometryTracker:
         # A construction object must always satisfy that the substitution of its components to the canonical components
         # is also in the system.
         if isinstance(obj, ConstructionObject):
-            res = obj.substitute({comp: self.get_object(comp, can_add) for comp in obj.components})
+            res = obj.substitute({comp: self.get_object(comp, can_add=can_add) for comp in obj.components})
             if res != obj:
                 # print(f'Substituted {obj} => {res}')
-                res = self.get_object(res, can_add)
+                res = self.get_object(res, can_add=can_add)
                 # Logging the object and its substituted version for future reference.
                 assert res <= obj, f'Illegal substitution: {obj} => {res}'
 
@@ -196,16 +196,18 @@ class GeometryTracker:
                     self.add_equal_object(obj, res)
 
                 # The new object might already be known, or might have non-trivial equalities.
-                return self.get_object(res, can_add)
+                return self.get_object(res, can_add=can_add)
 
         # If the object is an equation, we substitute the components.
         if isinstance(obj, EquationObject):
-            return EquationObject(self.get_object(obj.left, can_add), self.get_object(obj.right, can_add), obj.op)
+            return EquationObject(
+                self.get_object(obj.left, can_add=can_add), self.get_object(obj.right, can_add=can_add), obj.op
+            )
 
         # We now have an new unknown object that shouldn't be substituted.
         if isinstance(obj, ConstructionObject) and not can_add:
             for pred in obj.requirements():
-                if not self.contains_predicate(pred):
+                if not self.contains_predicate(pred, can_add=False):
                     raise IllegalObjectError(
                         f'Attempted to add the construction object {obj} without the ' f'requirement {pred}!'
                     )
@@ -275,7 +277,7 @@ class GeometryTracker:
 
         a, b, c = angle.components
         if a != c:
-            rev_angle = self.get_object(ConstructionObject.from_args('angle', (c, b, a)), True)
+            rev_angle = self.get_object(ConstructionObject.from_args('angle', (c, b, a)), can_add=True)
             assert rev_angle in self._processed_objects and rev_angle in self._objects
             self._linear_algebra.real_equations.add_relation({angle: 1, rev_angle: 1})
             self._linear_algebra.mod_360_equations.add_relation({angle: 1, rev_angle: 1})
@@ -293,9 +295,9 @@ class GeometryTracker:
             return
 
         a, b, c = ori.components
-        self.add_predicate(predicate_from_args('not_collinear', (a, b, c)), True, 'Since they have an orientation.')
+        self.add_predicate(predicate_from_args('not_collinear', (a, b, c)), 'Since they have an orientation.')
 
-        rev = self.get_object(ConstructionObject.from_args('orientation', ori.components[::-1]), True)
+        rev = self.get_object(ConstructionObject.from_args('orientation', ori.components[::-1]), can_add=True)
         assert rev in self._processed_objects and rev in self._objects
 
         if ori != rev:
@@ -321,20 +323,20 @@ class GeometryTracker:
         if isinstance(obj, ConstructionObject):
             # We add the requirements, since objects in the assumptions might not have all requirements.
             for req in obj.requirements():
-                self.add_predicate(req, True, f'Requirement of {obj}')
+                self.add_predicate(req, f'Requirement of {obj}')
             for comp in obj.components:
-                self.process_object(self.get_object(comp, True))
+                self.process_object(self.get_object(comp, can_add=True))
             for pred in obj.conclusions():
-                self.add_predicate(pred, True, f'conclusion of {obj}')
+                self.add_predicate(pred, f'conclusion of {obj}')
 
             for req_preds, res_preds in obj.possible_conclusions():
-                if all(self.contains_predicate(pred) for pred in req_preds):
+                if all(self.contains_predicate(pred, can_add=False) for pred in req_preds):
                     for pred in res_preds:
-                        self.add_predicate(pred, True, f'Possible conclusion of {obj}')
+                        self.add_predicate(pred, f'Possible conclusion of {obj}')
 
         if isinstance(obj, EquationObject):
             for comp in involved_objects(obj):
-                self.process_object(self.get_object(comp, True))
+                self.process_object(self.get_object(comp, can_add=True))
 
         match obj.type:
             case GeoType.ANGLE:
@@ -389,7 +391,7 @@ class GeometryTracker:
         # We do this by default only to equations that are not normal equations, since logs are also non-zero.
         elif (log_factors := get_log_eqn_factors(pred)) is not None:
             for factor in log_factors:
-                self.get_object(factor, True)
+                self.get_object(factor, can_add=True)
             self._linear_algebra.real_equations.add_relation(log_factors)
 
     def add_equal_bool(self, pred: Predicate):
@@ -486,7 +488,7 @@ class GeometryTracker:
                         ConstructionObject.from_args(
                             obj.constructor.name, tuple(self._objects[comp] for comp in obj.components)
                         ),
-                        True,
+                        can_add=True,
                     )
 
                     # The substituted object is already known to exist and be in the correct equivalence class.
@@ -514,21 +516,19 @@ class GeometryTracker:
 
         self._predicates = new_predicates
 
-    def add_predicate(self, pred: Predicate, can_add: bool, reason: str):
+    def add_predicate(self, pred: Predicate, reason: str):  # TODO: Why is `reason` unused?
         """
         Adds the given predicate to the list of known predicates.
         @param pred: A predicate to add.
         @param config: Whether all construction objects specified by the predicate are known to exist.
         @param reason: The context in which the predicate was added.
         """
-        assert can_add, f'add_predicate called with {can_add=}!'
-
         if pred not in self._predicates:
-            pred = self.get_predicate(pred, can_add)
+            pred = self.get_predicate(pred, can_add=True)
             for sub_pred in unpack_predicate_full(pred):
-                self.add_unpacked_predicate(sub_pred, can_add, reason=f'unpack of {pred}')
+                self.add_unpacked_predicate(sub_pred, reason=f'unpack of {pred}')
 
-    def add_unpacked_predicate(self, pred: Predicate, can_add: bool, reason=''):
+    def add_unpacked_predicate(self, pred: Predicate, reason=''):
         """
         Adds predicates to the proof checker without attempting to unpack them first (See Predicate::unpack).
 
@@ -546,17 +546,15 @@ class GeometryTracker:
             If the predicate is a macro predicate, we attempt to add the possible conclusions.
         3. Dispatching the predicate to the linear algebra trackers if it is an equation, and directly adding it otherwise.
         """
-        assert can_add, f'add_unpacked_predicate called with {can_add=}!'
-
         # Optimization: If the predicate is already known, be don't have to add it.
         if pred in self._predicates:
             return
 
         # The predicate could refer to objects that were merged, so we need to update the predicate to use the newer objects.
-        pred = self.get_predicate(pred, can_add)
+        pred = self.get_predicate(pred, can_add=True)
         if pred in self._predicates:
             return
-        # if self.contains_predicate(pred):
+        # if self.contains_predicate(pred, can_add=False):
         #     return
 
         # Macro predicates might have possible conclusions, that also have to be added.
@@ -566,11 +564,10 @@ class GeometryTracker:
                     for conc_pred in conc_preds:
                         self.add_predicate(
                             conc_pred,
-                            can_add,
-                            reason=f'Possible conclusion of {pred}',
+                            'Possible conclusion of {pred}',
                         )
 
-        if self.contains_predicate(pred):
+        if self.contains_predicate(pred, can_add=False):
             return
 
         # After this line, the predicate refers to legal objects, so it is trusted.
@@ -602,12 +599,12 @@ class GeometryTracker:
         if pred.name != 'exists':
             for obj in pred.involved_objects():
                 predicate = predicate_from_args('exists', (obj,))
-                self.add_predicate(predicate, True, 'Marking an object involve in some proved predicate as existing')
+                self.add_predicate(predicate, 'Marking an object involve in some proved predicate as existing')
 
         # We add the predicate to self anyway.
         self._predicates.add(pred)
 
-    def get_predicate(self, pred: Predicate, can_add: bool) -> Predicate:
+    def get_predicate(self, pred: Predicate, *, can_add: bool) -> Predicate:
         """
         Gets the predicate, substituted to use the canonical representative (See Self::get_object) of each object.
         For example, if it is known that `A == B` and `C == D`,
@@ -620,9 +617,9 @@ class GeometryTracker:
         canonical representative of the original predicate.
         """
         for obj in pred.components:
-            self.get_object(obj, can_add)
+            self.get_object(obj, can_add=can_add)
 
-        subs = {obj: self.get_object(obj, can_add) for obj in pred.components}
+        subs = {obj: self.get_object(obj, can_add=can_add) for obj in pred.components}
 
         # if config.add_obj:
         #     print(f'get_predicate: {pred} {subs} {pred.substitute(subs)}')
@@ -638,7 +635,7 @@ class GeometryTracker:
         """
         return obj in self._processed_objects
 
-    def contains_predicate(self, pred: Predicate, *, can_add=False) -> bool:
+    def contains_predicate(self, pred: Predicate, *, can_add: bool) -> bool:
         """
         Checks if the given predicate is contained in the proof checker.
 
@@ -680,7 +677,7 @@ class GeometryTracker:
         # Preprocessing all the object and updating the predicate to use the representative objects.
         # Since this is a query, we do not trust that all objects in the predicate are legal.
         try:
-            pred = self.get_predicate(pred, can_add)
+            pred = self.get_predicate(pred, can_add=can_add)
         except IllegalObjectError:
             return False
 
@@ -705,7 +702,7 @@ class GeometryTracker:
                         factors := get_linear_eqn_factors(pred)
                     ) is not None and self._linear_algebra.bool_equations.contains_relation(factors)
 
-                return self.get_object(a, can_add) == self.get_object(b, can_add)
+                return self.get_object(a, can_add=can_add) == self.get_object(b, can_add=can_add)
             case 'equals_mod_360':
                 return (
                     factors := get_linear_eqn_factors(pred)
@@ -742,11 +739,11 @@ class GeometryTracker:
         self.load_embedding(problem)
         # Adding the objects defined by the proof.
         for obj in problem.statement.assumption_objects.values():
-            self.get_object(obj, True)
+            self.get_object(obj, can_add=True)
 
         # Adding the assumptions of the proof.
         for pred in problem.statement.assumption_predicates:
-            self.add_predicate(pred, True, 'Assumption predicate')
+            self.add_predicate(pred, 'Assumption predicate')
 
         for pred in problem.statement.auxiliary_predicates:
-            self.add_predicate(pred, True, 'Auxiliary predicate')
+            self.add_predicate(pred, 'Auxiliary predicate')
