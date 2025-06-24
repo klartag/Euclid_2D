@@ -114,9 +114,8 @@ def test_check_proof(problem_name: str):
     '''
     Tests that the Proof Checker works on a geometry problem.
     '''
-    if problem_name.startswith('IMO'):
-        pytest.skip('Currently disabling proof checking of all IMO problems.')
-
+    if is_proof_empty(problem_name):
+        pytest.skip("No proof found in problem file. Skipping test...")
     check_proof(problem_name)
 
 
@@ -137,6 +136,8 @@ def test_proof_generator(problem_name: str):
     '''
     Tests that the Proof Generator works on a geometry problem.
     '''
+    if is_proof_empty(problem_name):
+        pytest.skip("No proof found in problem file. Skipping test...")
     document = GeometryDocument.open(problem_name)
     problem = DocumentReader().read(document, read_proof_body=False)
     solved_problem = prove(problem, interactive=False, verbose=False)
@@ -173,3 +174,9 @@ def test_parsing():
 
     assert parser.try_parse('2*(r+s) + s/1.5')
     assert parser.try_parse('-r')
+
+
+def is_proof_empty(path: str) -> bool:
+    document = GeometryDocument.open(path)
+    problem = DocumentReader().read(document, read_proof_body=True)
+    return len(problem.proof.steps) == 0

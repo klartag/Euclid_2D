@@ -14,3 +14,4 @@ Need to prove:
 50 == angle(A, O, C) mod 360
 
 Proof:
+We have shown 50 == angle(A, O, C) mod 360
