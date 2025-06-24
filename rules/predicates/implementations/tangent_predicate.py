@@ -8,6 +8,10 @@ from ...symmetry import Symmetry
 
 
 class TangentPredicate(Predicate):
+    """
+    TODO: Document
+    """
+
     NAME = 'tangent'
 
     def __init__(self, objects: tuple[GeoObject, ...]):

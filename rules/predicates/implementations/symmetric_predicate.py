@@ -4,6 +4,7 @@ from ..predicate import Predicate
 from ...symmetry import Symmetry
 
 
+# TODO: Document
 SIMPLE_SYMMETRIC_PREDICATE_NAMES: set[str] = {
     'equals',
     'equals_mod_360',
@@ -13,6 +14,10 @@ SIMPLE_SYMMETRIC_PREDICATE_NAMES: set[str] = {
 
 
 class SymmetricPredicate(Predicate):
+    """
+    TODO: Document
+    """
+
     def __init__(self, name: str, objects: tuple[GeoObject, ...]):
         super().__init__(name, objects, Symmetry.ALL)
 

@@ -16,6 +16,10 @@ C = TypeVar("C")
 
 @dataclass
 class AbstractRecursiveGeometryParser[G, D, C](AbstractGeometryParser[G]):
+    """
+    TODO: Document
+    """
+
     component_parsing_func: Callable[[str], Optional[C]]
 
     def try_parse(self, text: str) -> Optional[G]:
@@ -34,7 +38,15 @@ class AbstractRecursiveGeometryParser[G, D, C](AbstractGeometryParser[G]):
         return self._build(data, tuple(components))
 
     @abstractmethod
-    def _try_split_components(self, text: str) -> Optional[Tuple[D, Tuple[str, ...]]]: ...
+    def _try_split_components(self, text: str) -> Optional[Tuple[D, Tuple[str, ...]]]:
+        """
+        TODO: Document
+        """
+        ...
 
     @abstractmethod
-    def _build(self, data: D, components: Tuple[C, ...]) -> G: ...
+    def _build(self, data: D, components: Tuple[C, ...]) -> G:
+        """
+        TODO: Document
+        """
+        ...

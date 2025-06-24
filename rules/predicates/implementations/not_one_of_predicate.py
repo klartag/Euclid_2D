@@ -6,6 +6,10 @@ from ...symmetry import Symmetry
 
 
 class NotOneOfPredicate(Predicate):
+    """
+    TODO: Document
+    """
+
     NAME = 'not_one_of'
 
     def __init__(self, objects: 'tuple[GeoObject, ...]'):

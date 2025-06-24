@@ -5,6 +5,10 @@ from .symmetric_predicate import SymmetricPredicate
 
 
 class ExistsPredicate(SymmetricPredicate):
+    """
+    TODO: Document
+    """
+
     NAME = 'exists'
 
     def __init__(self, objects: tuple[GeoObject, ...]):

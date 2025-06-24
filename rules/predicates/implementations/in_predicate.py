@@ -8,6 +8,10 @@ from ...geometry_objects.geo_type import GeoType
 
 
 class InPredicate(Predicate):
+    """
+    TODO: Document
+    """
+
     NAME = 'in'
 
     SHAPES = [GeoType.LINE, GeoType.CIRCLE]

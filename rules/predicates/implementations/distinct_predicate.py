@@ -8,6 +8,10 @@ from .symmetric_predicate import SymmetricPredicate
 
 
 class DistinctPredicate(SymmetricPredicate):
+    """
+    TODO: Document
+    """
+
     NAME = 'distinct'
 
     def __init__(self, objects: tuple[GeoObject, ...]):

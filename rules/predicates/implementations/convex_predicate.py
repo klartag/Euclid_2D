@@ -8,6 +8,10 @@ from ...symmetry import Symmetry
 
 
 class ConvexPredicate(Predicate):
+    """
+    TODO: Document
+    """
+
     NAME = 'convex'
 
     def __init__(self, objects: tuple[GeoObject, ...]):

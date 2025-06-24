@@ -9,6 +9,10 @@ from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParse
 
 
 class EquationObjectParser(AbstractRecursiveGeometryParser[EquationObject, EqOp, GeoObject]):
+    """
+    TODO: Document
+    """
+
     def _try_split_components(self, text: str) -> Optional[tuple[EqOp, tuple[str, ...]]]:
         result = generic_split_args(text, '+-')
         if result is None or len(result[0]) == 1:
@@ -39,6 +43,9 @@ class EquationObjectParser(AbstractRecursiveGeometryParser[EquationObject, EqOp,
 
 
 def remove_extra_parenthesis(text: str) -> str:
+    """
+    TODO: Document
+    """
     length = len(text) + 1
     while length > len(text):
         length = len(text)

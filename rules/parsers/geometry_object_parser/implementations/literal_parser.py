@@ -10,6 +10,10 @@ LITERAL_PATTERN = r'(-?\d+(\.\d+)?)'
 
 
 class LiteralParser(AbstractGeometryParser[Literal]):
+    """
+    TODO: Document
+    """
+
     def try_parse(self, text: str) -> Optional[Literal]:
         if re.fullmatch(LITERAL_PATTERN, text) is None:
             return None

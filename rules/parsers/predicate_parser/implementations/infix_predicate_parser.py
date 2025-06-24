@@ -12,6 +12,10 @@ from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParse
 
 @dataclass
 class InfixPredicateParser(AbstractRecursiveGeometryParser[Predicate, None, GeoObject]):
+    """
+    TODO: Document
+    """
+
     predicate_name: str
     infix: str
     suffix: Optional[str] = None
@@ -37,6 +41,9 @@ class InfixPredicateParser(AbstractRecursiveGeometryParser[Predicate, None, GeoO
         return predicate_from_args(self.predicate_name, components)
 
     def get_regex_matcher(self):
+        """
+        TODO: Document
+        """
         if self.suffix is None:
             return f"(.*){self.infix}(.*)"
         else:

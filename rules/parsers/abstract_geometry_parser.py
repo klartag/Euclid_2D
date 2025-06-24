@@ -6,5 +6,13 @@ G = TypeVar("G")
 
 
 class AbstractGeometryParser[G](ABC):
+    """
+    TODO: Document
+    """
+
     @abstractmethod
-    def try_parse(self, text: str) -> Optional[G]: ...
+    def try_parse(self, text: str) -> Optional[G]:
+        """
+        TODO: Document
+        """
+        ...

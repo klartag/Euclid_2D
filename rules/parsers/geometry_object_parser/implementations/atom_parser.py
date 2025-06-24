@@ -11,6 +11,10 @@ ATOM_PATTERN = r'[A-Za-z_][A-Za-z_0-9\']*'
 
 
 class AtomParser(AbstractGeometryParser[Atom]):
+    """
+    TODO: Document
+    """
+
     signature: Signature
 
     def __init__(self, signature: Signature):

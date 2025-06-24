@@ -8,6 +8,10 @@ from .symmetric_predicate import SymmetricPredicate
 
 
 class IdenticalPredicate(SymmetricPredicate):
+    """
+    TODO: Document
+    """
+
     NAME = 'identical'
 
     def __init__(self, objects: tuple[GeoObject, ...]):

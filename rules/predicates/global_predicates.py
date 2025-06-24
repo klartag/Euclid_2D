@@ -11,6 +11,9 @@ _MACROS: Optional[dict[str, 'MacroData']] = {}
 
 
 def get_constructions() -> dict[str, 'Construction']:
+    """
+    TODO: Document
+    """
     if _CONSTRUCTIONS == None:
         raise Exception(
             "_CONSTRUCTIONS has not yet been loaded. Did you remember to call `pred_config.load_constructions_and_macros`?"
@@ -19,6 +22,9 @@ def get_constructions() -> dict[str, 'Construction']:
 
 
 def get_macros() -> dict[str, 'MacroData']:
+    """
+    TODO: Document
+    """
     if _MACROS == None:
         raise Exception(
             "_MACROS has not yet been loaded. Did you remember to call `pred_config.load_constructions_and_macros`?"

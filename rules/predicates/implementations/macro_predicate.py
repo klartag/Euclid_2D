@@ -11,6 +11,10 @@ from ...symmetry import Symmetry
 
 @dataclass
 class MacroData:
+    """
+    TODO: Document
+    """
+
     name: str
     symmetry: Symmetry
     objects: list[GeoObject]

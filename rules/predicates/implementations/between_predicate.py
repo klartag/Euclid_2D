@@ -8,6 +8,10 @@ from ...symmetry import Symmetry
 
 
 class BetweenPredicate(Predicate):
+    """
+    TODO: Document
+    """
+
     NAME = 'between'
 
     """
