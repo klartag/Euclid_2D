@@ -33,8 +33,12 @@ class EmbeddedPoint(EmbeddedObject):
 
     def is_proportional(self, other: 'EmbeddedPoint') -> bool:
         """
-        TODO: Document
+        Returns whether two points lie on the same line through the origin.
+        (If any of the points equals the origin, returns whether both points equal the origin.)
         """
+        if self.length_squared() < EPSILON**2 or other.length_squared() < EPSILON**2:
+            return self.length_squared() < EPSILON**2 and other.length_squared() < EPSILON**2
+
         if abs(self.x) < EPSILON or abs(other.x) < EPSILON:
             return abs(self.x) < EPSILON and abs(other.x) < EPSILON
 
@@ -45,31 +49,31 @@ class EmbeddedPoint(EmbeddedObject):
 
     def scalar_product(self, other: 'EmbeddedPoint') -> mpf:
         """
-        TODO: Document
+        Returns the dot product of two points.
         """
         return self.x * other.x + self.y * other.y
 
     def length_squared(self) -> mpf:
         """
-        TODO: Document
+        Returns the square of the distance of this point to the origin.
         """
         return self.scalar_product(self)
 
     def length(self) -> mpf:
         """
-        TODO: Document
+        Returns the distance from this point to the origin.
         """
         return self.length_squared().sqrt()
 
     def scale(self, ratio: mpf) -> 'EmbeddedPoint':
         """
-        TODO: Document
+        Scales the point by a scalar with respect to the origin.
         """
         return EmbeddedPoint(self.x * ratio, self.y * ratio)
 
     def normalize(self) -> 'EmbeddedPoint':
         """
-        TODO: Document
+        Scales this point with respect to the origin so that it lies on the unit circle.
         """
         return self.scale(1 / self.length())
 

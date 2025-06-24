@@ -4,40 +4,42 @@ from ..undefined_embedding_error import UndefinedEmbeddingError
 from ..embedded_objects import EmbeddedPoint, EmbeddedScalar, EmbeddedCircle
 
 
-def distance(point0: EmbeddedPoint, point1: EmbeddedPoint) -> EmbeddedScalar:
+def distance(A: EmbeddedPoint, B: EmbeddedPoint) -> EmbeddedScalar:
     """
-    TODO: Document
+    Returns the length of the segment AB.
     """
-    return EmbeddedScalar((point0 - point1).length())
+    return EmbeddedScalar((A - B).length())
 
 
-def direction(point0: EmbeddedPoint, point1: EmbeddedPoint) -> EmbeddedScalar:
+def direction(A: EmbeddedPoint, B: EmbeddedPoint) -> EmbeddedScalar:
     """
-    TODO: Document
+    Returns the angle of the ray starting at A and passing through B.
     """
-    if point0.is_equal(point1):
+    if A.is_equal(B):
         raise UndefinedEmbeddingError("Cannot calculate direction between two identical points.")
-    diff = point1 - point0
+    diff = B - A
     return EmbeddedScalar((mp.atan2(diff.y, diff.x) * 180 / pi) % 360)
 
 
-def angle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedScalar:
+def angle(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedScalar:
     """
-    TODO: Document
+    Returns the value of the angle ∠ABC.
+    The value is in the range (-180°, 180°]
     """
-    direction0 = direction(point1, point0)
-    direction2 = direction(point1, point2)
+    direction0 = direction(B, A)
+    direction2 = direction(B, C)
     angle = (direction2.value - direction0.value) % 360
     if angle > 180:
         angle -= 360
     return EmbeddedScalar(angle)
 
 
-def orientation(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedScalar:
+def orientation(A: EmbeddedPoint, B: EmbeddedPoint, C: EmbeddedPoint) -> EmbeddedScalar:
     """
-    TODO: Document
+    Returns whichever of the values 90° and -90° is nearest the value of ∠ABC.
+    (If A, B, C are collinear, returns 90°.)
     """
-    embedded_angle = angle(point0, point1, point2)
+    embedded_angle = angle(A, B, C)
     if embedded_angle.value >= 0 and embedded_angle.value <= 180:
         return EmbeddedScalar(mpf(90))
     else:
@@ -46,21 +48,21 @@ def orientation(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPo
 
 def power_of_a_point(point: EmbeddedPoint, circle: EmbeddedCircle) -> EmbeddedScalar:
     """
-    TODO: Document
+    Returns the power of a point with respect to a circle.
     """
     return EmbeddedScalar(abs((point - circle.center).length_squared() - circle.radius_squared))
 
 
 def radius(circle: EmbeddedCircle) -> EmbeddedScalar:
     """
-    TODO: Document
+    Returns the radius of a circle.
     """
     return EmbeddedScalar(circle.radius_squared.sqrt())
 
 
 def log(scalar: EmbeddedScalar) -> EmbeddedScalar:
     """
-    TODO: Document
+    Returns the natural logarithm of a scalar.
     """
     if scalar.value <= 0:
         raise UndefinedEmbeddingError("Cannot calculate log of negative scalar")

@@ -12,19 +12,20 @@ class EmbeddedObject(ABC):
     @abstractmethod
     def _type(self) -> str:
         """
-        TODO: Document
+        The `GeoType` this object represents.
         """
         ...
 
     @abstractmethod
     def is_equal(self, other: Self) -> bool:
         """
-        TODO: Document
+        Returns whether two objects are equal.
+        (An error of `EPSILON` is allowed.)
         """
         ...
 
     @abstractmethod
-    def to_dict(self) -> str:
+    def to_dict(self) -> dict:
         """
         TODO: Document
         """

@@ -11,7 +11,7 @@ from .line import line
 
 def line_circle_tangent_point(line: EmbeddedLine, circle: EmbeddedCircle) -> EmbeddedPoint:
     """
-    TODO: Document
+    Given a line tangent to a circle, returns the point of tangency.
     """
     projection = project(circle.center, line)
     if not circle.contains_point(projection):
@@ -21,7 +21,7 @@ def line_circle_tangent_point(line: EmbeddedLine, circle: EmbeddedCircle) -> Emb
 
 def circle_circle_tangent_point(circle0: EmbeddedCircle, circle1: EmbeddedCircle) -> EmbeddedPoint:
     """
-    TODO: Document
+    Given two tangent circles, returns the point of tangency.
     """
     center_line = line(circle0.center, circle1.center)
     potential_tangency_candidates = line_circle_intersection(center_line, circle0)
@@ -34,7 +34,7 @@ def circle_circle_tangent_point(circle0: EmbeddedCircle, circle1: EmbeddedCircle
 
 def point_circle_tangent_line(point: EmbeddedPoint, circle: EmbeddedCircle) -> EmbeddedLine:
     """
-    TODO: Document
+    Given a point on a circle, returns a line tangent to that circle through the point.
     """
     if not circle.contains_point(point):
         raise UndefinedEmbeddingError("Cannot calculate tangent line from point not on the circle")
@@ -44,7 +44,7 @@ def point_circle_tangent_line(point: EmbeddedPoint, circle: EmbeddedCircle) -> E
 
 def tangent_line(point: EmbeddedPoint, circle: EmbeddedCircle) -> Tuple[EmbeddedLine]:
     """
-    TODO: Document
+    Returns all lines tangent to a circle through a given point.
     """
     power_of_a_point = (circle.center - point).length_squared() - circle.radius_squared
     if abs(power_of_a_point) < EPSILON**2:

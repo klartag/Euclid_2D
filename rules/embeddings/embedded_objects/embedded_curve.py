@@ -8,6 +8,6 @@ class EmbeddedCurve(EmbeddedObject):
     @abstractmethod
     def contains_point(self, point: EmbeddedPoint) -> bool:
         """
-        TODO: Document
+        Returns whether a given point is on this curve.
         """
         ...
