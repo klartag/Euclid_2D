@@ -214,6 +214,9 @@ def cached_constructions(step: Theorem | Construction) -> set[ConstructionObject
 
 @functools.cache
 def theorem_score(theo: Theorem) -> float:
+    """
+    TODO: Document
+    """
     return -max(predicate_score(pred) for pred in theo.result_predicates)
 
 
@@ -282,6 +285,9 @@ class StepSuggestion:
         self.construction_penalties = out_names
 
     def is_ready(self) -> bool:
+        """
+        TODO: Document
+        """
         return self.phase == 2
 
     def step_score(self, checker: ProofChecker, *, verb=False) -> float:

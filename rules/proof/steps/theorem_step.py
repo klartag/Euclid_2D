@@ -9,6 +9,10 @@ from .step import Step
 
 @dataclass
 class TheoremStep(Step):
+    """
+    TODO: Document
+    """
+
     theorem_name: str
     inputs: list[GeoObject]
     result_predicates: list[Predicate]

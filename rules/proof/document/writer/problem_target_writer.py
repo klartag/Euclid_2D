@@ -9,6 +9,10 @@ from .document_section_writer import DocumentSectionWriter
 
 
 class ProblemTargetWriter(DocumentSectionWriter[Statement]):
+    """
+    TODO: Document
+    """
+
     section = DocumentSection.TARGET
 
     def get_section_value(self, problem: GeometryProblem) -> Optional[Statement]:

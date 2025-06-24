@@ -8,17 +8,36 @@ from ..geometry_document import GeometryDocument
 
 
 class DocumentSectionWriter[T](ABC):
+    """
+    TODO: Document
+    """
+
     @property
     @abstractmethod
-    def section(self) -> DocumentSection: ...
+    def section(self) -> DocumentSection:
+        """
+        TODO: Document
+        """
+        ...
 
     @abstractmethod
-    def get_section_value(self, problem: GeometryProblem) -> Optional[T]: ...
+    def get_section_value(self, problem: GeometryProblem) -> Optional[T]:
+        """
+        TODO: Document
+        """
+        ...
 
     @abstractmethod
-    def to_lines(self, section_value: T) -> list[str]: ...
+    def to_lines(self, section_value: T) -> list[str]:
+        """
+        TODO: Document
+        """
+        ...
 
     def write(self, problem: GeometryProblem, document: GeometryDocument):
+        """
+        TODO: Document
+        """
         section_value = self.get_section_value(problem)
 
         if section_value is None:
@@ -34,4 +53,7 @@ class DocumentSectionWriter[T](ABC):
         document.sections[self.section] = lines
 
     def are_all_lines_empty(self, lines: str) -> bool:
+        """
+        TODO: Document
+        """
         return not any([line.strip() for line in lines])

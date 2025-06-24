@@ -34,6 +34,10 @@ from .scores import StepSuggestion, get_result_predicates
 
 
 class ProofGeneratorErrorType(Enum):
+    """
+    TODO: Document
+    """
+
     NoMoreSteps = ('There were no more steps to run',)
     Timeout = 'The proof generator reached its timeout'
     Contradiction = 'A contradiction was found'
@@ -42,6 +46,10 @@ class ProofGeneratorErrorType(Enum):
 
 @dataclass
 class ProofGeneratorError(Exception):
+    """
+    TODO: Document
+    """
+
     error: ProofGeneratorErrorType
 
 
@@ -290,6 +298,9 @@ class ProofGenerator:
                 heapq.heappush(self.step_queue, new_step)
 
     def should_skip_theorem_step(self, theorem_step: TheoremStep) -> bool:
+        """
+        TODO: Document
+        """
         theorem = Theorem.all_theorems()[theorem_step.theorem_name]
 
         if len(theorem.required_embedding_predicates) > 0 and self.checker.geometry_tracker.embedding_tracker is None:
@@ -402,6 +413,9 @@ def validate_proof(problem: GeometryProblem):
 
 
 def prove(problem: GeometryProblem, interactive: bool, verbose: bool) -> GeometryProblem:
+    """
+    TODO: Document
+    """
     if problem.embedding is not None:
         collector = NonDegeneracyPredicateCollector()
         non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)

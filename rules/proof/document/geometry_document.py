@@ -9,17 +9,27 @@ from .document_section import DocumentSection
 
 @dataclass
 class GeometryDocument:
+    """
+    TODO: Document
+    """
+
     path: Path
     sections: Dict[DocumentSection, List[str]]
 
     @staticmethod
     def open(path: str) -> 'GeometryDocument':
+        """
+        TODO: Document
+        """
         path = GeometryDocument.get_full_problem_path(path)
         text = open(path, 'r').read()
         sections = GeometryDocument.parse_sections(text)
         return GeometryDocument(path, sections)
 
     def get_text(self) -> str:
+        """
+        TODO: Document
+        """
         lines = []
         for section in DocumentSection:
             if section in self.sections:
@@ -29,19 +39,31 @@ class GeometryDocument:
         return '\n'.join(lines)
 
     def get_section_header(self, section: DocumentSection) -> List[str]:
+        """
+        TODO: Document
+        """
         if section == DocumentSection.DEFAULT or section not in self.sections:
             return []
         return [f'{section.value}:']
 
     def get_section_content(self, section: DocumentSection) -> List[str]:
+        """
+        TODO: Document
+        """
         return self.sections.get(section, [])
 
     def save(self):
+        """
+        TODO: Document
+        """
         text = self.get_text()
         open(self.path, 'w').write(text)
 
     @staticmethod
     def get_full_problem_path(path_base: str) -> Path:
+        """
+        TODO: Document
+        """
         full_path_options = [BASE_PATH / 'rules' / 'proof_samples' / path_base, BASE_PATH / path_base, Path(path_base)]
 
         for path_base in full_path_options:
@@ -52,6 +74,9 @@ class GeometryDocument:
 
     @staticmethod
     def parse_sections(text: str) -> Dict[DocumentSection, List[str]]:
+        """
+        TODO: Document
+        """
         sections = {}
         current_header = DocumentSection.DEFAULT
         for line in text.splitlines():
@@ -66,6 +91,9 @@ class GeometryDocument:
 
     @staticmethod
     def try_parse_section_header(header: str) -> Optional[DocumentSection]:
+        """
+        TODO: Document
+        """
         header = header.strip()
         if not (len(header) > 0 and header[-1] == ':'):
             return None

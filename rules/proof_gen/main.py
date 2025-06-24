@@ -18,6 +18,9 @@ from .proof_generator import validate_proof, prove
 
 
 def validate_main():
+    """
+    TODO: Document
+    """
     parser = argparse.ArgumentParser(
         description='''Tries to validate that a proof can be found by the proof generator,
 without actually running the proof generator.'''

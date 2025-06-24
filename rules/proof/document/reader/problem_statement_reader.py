@@ -25,6 +25,10 @@ PredicateData = NamedTuple('PredicateData', [("objects", dict[str, GeoObject]), 
 
 
 class ProblemStatementReader:
+    """
+    TODO: Document
+    """
+
     def read(self, document: GeometryDocument) -> Statement:
         signature: Signature = {}
 
@@ -55,6 +59,9 @@ class ProblemStatementReader:
     def create_auxiliary_predicates(
         self, assumption_data: PredicateData, target_data: PredicateData
     ) -> list[Predicate]:
+        """
+        TODO: Document
+        """
         auxiliary_preds: list[Predicate] = []
 
         exist_objects: set[GeoObject] = set(assumption_data.objects.values()) | set(target_data.objects.values())

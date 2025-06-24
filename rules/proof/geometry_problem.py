@@ -9,6 +9,10 @@ from .proof import Proof
 
 @dataclass
 class GeometryProblem:
+    """
+    TODO: Document
+    """
+
     statement: Optional[Statement]
     embedding: Optional[Embedding]
     proof: Optional[Proof]

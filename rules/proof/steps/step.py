@@ -7,6 +7,10 @@ from ...geometry_objects.geo_object import GeoObject
 
 @dataclass
 class Step(abc.ABC):
+    """
+    TODO: Document
+    """
+
     @abc.abstractmethod
     def to_language_format(self) -> str:
         """

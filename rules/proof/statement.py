@@ -7,6 +7,10 @@ from ..predicates.predicate import Predicate
 
 @dataclass
 class Statement:
+    """
+    TODO: Document
+    """
+
     signature: Signature
     assumption_objects: dict[str, GeoObject]
     assumption_predicates: list[Predicate]
@@ -15,9 +19,15 @@ class Statement:
     target_predicates: list[Predicate]
 
     def get_all_objects(self) -> dict[str, GeoObject]:
+        """
+        TODO: Document
+        """
         return self.assumption_objects | self.target_objects
 
     def starting_predicates(self) -> list[Predicate]:
+        """
+        TODO: Document
+        """
         return self.assumption_predicates + self.auxiliary_predicates
 
     def shallow_copy(self) -> 'Statement':
