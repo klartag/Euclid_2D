@@ -9,6 +9,10 @@ LITERAL_PATTERN = r'(-?\d+(\.\d+)?)'
 
 
 class Literal(GeoObject):
+    """
+    TODO: Document
+    """
+
     def __init__(self, name: str) -> None:
         self.name = name
         self.type = GeoType.LITERAL

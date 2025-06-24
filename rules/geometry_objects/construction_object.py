@@ -6,7 +6,6 @@ from ..symmetry import Symmetry
 from ..rule_utils import union
 from ..errors import ProofCheckError, GeometryError
 
-from .atom import Atom
 from .geo_type import GeoType
 from .geo_object import GeoObject
 from .literal import ONE, ZERO
@@ -98,6 +97,9 @@ class ConstructionObject(GeoObject):
 
     @staticmethod
     def from_args(const_name: str, args: tuple[GeoObject, ...]) -> 'GeoObject':
+        """
+        TODO: Document
+        """
         const = get_constructions().get(const_name, None)
 
         if const is None:
@@ -178,6 +180,9 @@ class LogConstruction(Construction):
 
 
 def as_log_equation(self) -> dict[GeoObject, float] | None:
+    """
+    TODO: Document
+    """
     if (val := self.as_literal()) is not None:
         if val <= 0:
             return None

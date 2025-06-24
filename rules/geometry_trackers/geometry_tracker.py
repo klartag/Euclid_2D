@@ -29,6 +29,7 @@ from .linear_algebra_tracker import LinearAlgebraTracker
 
 NUMERIC_PRECISION = 1e-3
 """
+TODO: Document
 """
 
 
@@ -94,23 +95,23 @@ def involved_objects(
 
 class GeometryTracker:
     """
-    A class that checks that a proof is valid.
+    TODO: Document
     """
 
     signature: Signature
     _objects: UnionFind[GeoObject]
-    """All legal objects currently used by the proof."""
+    """TODO: Document"""  # """All legal objects currently used by the proof."""
     _processed_objects: set[GeoObject]
-    """All legal objects that can be used by the proof, but not yet. 
-    They are logged, but their conclusions haven't been added."""
+    """TODO: Document"""  # """All legal objects that can be used by the proof, but not yet.
+    """TODO: Document"""  # #They are logged, but their conclusions haven't been added."""
     _predicates: set[Predicate]
-    """All predicates known to be true."""
+    """TODO: Document"""  # """All predicates known to be true."""
     _asserted_predicates: set[Predicate]
-    """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
+    """TODO: Document"""  # """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
     _linear_algebra: LinearAlgebraTracker
-
+    """TODO: Document"""
     embedding_tracker: Optional[Embedding]
-    """Tracks 2D embeddings of the geometric configurations."""
+    """TODO: Document"""  # """Tracks 2D embeddings of the geometric configurations."""
 
     def __init__(self):
         self.signature = {}
@@ -134,6 +135,9 @@ class GeometryTracker:
             self.embedding_tracker = problem.embedding.shallow_copy()
 
     def get_object(self, obj: GeoObject, *, can_add: bool) -> GeoObject:
+        """
+        TODO: Document
+        """
         """
         Gets the canonical representative object in the proof checker associated with the given object by the equality system (This is important).
         This function also handles the processing of construction objects, which is bad and should be refactored (TODO).

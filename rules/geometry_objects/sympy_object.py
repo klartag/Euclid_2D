@@ -6,12 +6,18 @@ from .geo_object import GeoObject
 
 @dataclass(frozen=True, order=True)
 class SympyObject(GeoObject):
+    """
+    TODO: Document
+    """
 
     sympy_object: Union[sympy.Point2D, sympy.Line2D, sympy.Triangle, sympy.Circle]
     symbols: Optional[List[sympy.Symbol]]
 
     @classmethod
     def from_geo_object(cls, geo_object):
+        """
+        TODO: Document
+        """
         name = geo_object.name
         type = geo_object.type
         match type:

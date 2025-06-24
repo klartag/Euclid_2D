@@ -2,6 +2,10 @@ from enum import Enum
 
 
 class GeoType(Enum):
+    """
+    TODO: Document
+    """
+
     SCALAR = 'Scalar'
     POINT = 'Point'
     LINE = 'Line'

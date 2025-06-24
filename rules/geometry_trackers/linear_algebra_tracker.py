@@ -7,15 +7,15 @@ from ..rust_code.rust_sparse_linear import BaseSolver, BoolLinearSolver, ModLine
 
 class LinearAlgebraTracker:
     """
-    A class that checks that a proof is valid.
+    TODO: Document
     """
 
-    """An object tracking linear equations in R."""
     real_equations: RLinearSolver[GeoObject]
-    """An object tracking linear equations in Z/360."""
+    """An object tracking linear equations in R."""
     mod_360_equations: ModLinearSolver[GeoObject]
-    """An object tracking linear equations over the booleans."""
+    """An object tracking linear equations in Z/360."""
     bool_equations: BoolLinearSolver[GeoObject]
+    """An object tracking linear equations over the booleans."""
 
     def __init__(self):
         one_key = get_eqn_key(ONE)
