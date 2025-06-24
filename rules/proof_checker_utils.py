@@ -1,7 +1,3 @@
-from dataclasses import dataclass
-import dataclasses
-
-
 from .geometry_objects.geo_type import GeoType
 from .geometry_objects.geo_object import GeoObject
 from .predicates.predicate import Predicate
@@ -101,33 +97,3 @@ def unpack_predicate_minimal(pred: Predicate) -> set[Predicate]:
             stack.extend(unpacked_top)
 
     return res
-
-
-@dataclass
-class StepConfig:
-    """
-    The configuration for adding and checking predicates and objects.
-
-    The configuration has two components: `trusted` and `add_obj`.
-    The `trusted` configuration specifies if all construction objects involved in the predicate are known to exist.
-    This is known for predicates that are the result of theorems, or are in the assumption.
-    It is not known for objects appearing as the parameters of theorems.
-
-    The `add_obj` configuration specifies if all construction objects involved should
-    be added to the proof checker as new tracked objects.
-    This is again true for objects in the results of theorems,
-    but not when querying the ProofChecker if a predicate is known to be true.
-    """
-
-    trusted: bool = dataclasses.field(default=False)
-    add_obj: bool = dataclasses.field(default=False)
-
-
-ADD_CFG = StepConfig(True, True)
-"""Used to add new objects and predicates."""
-TRUST_NO_ADD_CFG = StepConfig(True, False)
-"""Used in the merging of equal objects operation."""
-ADD_NO_TRUST_CFG = StepConfig(False, True)
-"""Used in if steps and object definition steps."""
-CHECK_CFG = StepConfig(False, False)
-"""Used when checking if objects and predicates exist."""

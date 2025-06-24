@@ -22,7 +22,7 @@ from ..proof.document.writer.document_writer import DocumentWriter
 from ..proof.proof import Proof
 from ..proof.geometry_problem import GeometryProblem
 from ..proof.steps import CommentStep, ObjDefineStep, Step, TheoremStep
-from ..proof_checker import CHECK_CFG, TRUST_NO_ADD_CFG, ProofChecker, involved_objects
+from ..proof_checker import ProofChecker, involved_objects
 from ..proof_checker_utils import KNOWN_KEYS
 from ..signature_dag import IntersectPattern, SignatureDag
 from ..errors import GeometryError, ProofCheckError
@@ -259,7 +259,7 @@ class ProofGenerator:
         # for p in points:
         #     for old_p in points:
         #         dist = ConstructionObject.from_args('distance', (p, old_p))
-        #         self.checker._geometry_tracker.get_object(dist, ADD_CFG)
+        #         self.checker._geometry_tracker.get_object(dist, True)
 
     def check_finished(self) -> bool:
         """
@@ -271,7 +271,7 @@ class ProofGenerator:
 
         if self.target_predicates is not None:
             mapped_predicates = [
-                self.checker.geometry_tracker.get_predicate(pred, TRUST_NO_ADD_CFG) for pred in self.target_predicates
+                self.checker.geometry_tracker.get_predicate(pred, True) for pred in self.target_predicates
             ]
             return all(self.checker.geometry_tracker.contains_predicate(pred) for pred in mapped_predicates)
 
@@ -303,8 +303,8 @@ class ProofGenerator:
             for lhs, rhs in zip(*condition):
                 lhs_index = obj_names.index(lhs)
                 rhs_index = obj_names.index(rhs)
-                lhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[lhs_index], CHECK_CFG)
-                rhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[rhs_index], CHECK_CFG)
+                lhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[lhs_index], False)
+                rhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[rhs_index], False)
                 if lhs_sub != rhs_sub:
                     break
             else:
@@ -333,8 +333,7 @@ def validate_proof(problem: GeometryProblem):
             assert theorem is not None
 
             subs = {
-                sig: checker.geometry_tracker.get_object(inp, CHECK_CFG)
-                for sig, inp in zip(theorem.signature, step.inputs)
+                sig: checker.geometry_tracker.get_object(inp, False) for sig, inp in zip(theorem.signature, step.inputs)
             }
 
             for pred in theorem.required_predicates:
@@ -343,7 +342,7 @@ def validate_proof(problem: GeometryProblem):
                         continue
                     obj = obj.substitute(subs)
                     if obj not in proof_gen.checker.geometry_tracker._processed_objects and obj.type != GeoType.LITERAL:
-                        proof_gen.checker.geometry_tracker.get_object(obj, CHECK_CFG)
+                        proof_gen.checker.geometry_tracker.get_object(obj, False)
                         print(f'Adding object {obj}')
 
             if all(checker.geometry_tracker.contains_predicate(pred) for pred in step.result_predicates):

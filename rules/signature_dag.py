@@ -16,7 +16,6 @@ from .geometry_objects.literal import ONE, ZERO
 from .geometry_objects.equation_object import EquationObject
 from .proof_checker_utils import (
     KNOWN_KEYS,
-    TRUST_NO_ADD_CFG,
     get_eqn_key,
     get_linear_eqn_factors,
     get_log_eqn_factors,
@@ -869,8 +868,7 @@ class SignatureDag:
         new_objects = [
             obj
             for obj in self.geometry_tracker.all_objects()
-            if obj not in self.processed_objects
-            or self.processed_objects[obj] != self.checker.get_object(obj, TRUST_NO_ADD_CFG)
+            if obj not in self.processed_objects or self.processed_objects[obj] != self.checker.get_object(obj, True)
         ]
         new_predicates = [pred for pred in self.geometry_tracker.all_predicates() - self.processed_predicates] + [
             predicate_from_args('equals', (obj, obj)) for obj in new_objects
@@ -886,13 +884,13 @@ class SignatureDag:
         # Step 1.2. Adding new objects to the object patterns.
         for new_obj in new_objects:
             if isinstance(new_obj, ConstructionObject) and any(
-                comp != self.geometry_tracker.get_object(comp, TRUST_NO_ADD_CFG) for comp in new_obj.components
+                comp != self.geometry_tracker.get_object(comp, True) for comp in new_obj.components
             ):
                 # If one of the components is not substituted, there is no point in adding the representation.
                 # Note that this object should always exists, as described in the equality system specification.
                 continue
 
-            new_repr = self.geometry_tracker.get_object(new_obj, TRUST_NO_ADD_CFG)
+            new_repr = self.geometry_tracker.get_object(new_obj, True)
             for obj_pattern in self.raw_object_patterns.values():
                 obj_pattern.add_object(new_repr, new_obj)
         # Step 2. Pushing all the data.
