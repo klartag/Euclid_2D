@@ -48,6 +48,9 @@ class AbstractVector(ABC):
     def first_nonzero_index(self) -> Optional[int]: ...
 
     @abstractmethod
+    def count_nonzero_indices(self, max_index: Optional[int] = None) -> int: ...
+
+    @abstractmethod
     def __str__(self) -> str: ...
 
     @abstractmethod

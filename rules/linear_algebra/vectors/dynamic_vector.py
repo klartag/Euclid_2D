@@ -66,6 +66,9 @@ class DynamicVector(AbstractVector):
     def first_nonzero_index(self) -> Optional[int]:
         return self.inner.first_nonzero_index()
 
+    def count_nonzero_indices(self, max_index: Optional[int] = None) -> int:
+        return self.inner.count_nonzero_indices(max_index)
+
     def extend_length(self, amount: int):
         self.inner.extend_length(amount)
         self.normalize()

@@ -39,6 +39,9 @@ class DenseVector(AbstractVector):
                 return i
         return None
 
+    def count_nonzero_indices(self, max_index: Optional[int] = None) -> int:
+        return sum([1 for value in self.inner[:max_index] if value != 0])
+
     def extend_length(self, amount: int):
         self.inner.extend([0 for _ in range(amount)])
 
