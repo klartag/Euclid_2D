@@ -53,6 +53,9 @@ class AbstractVector(ABC):
     @abstractmethod
     def __str__(self) -> str: ...
 
+    def __bool__(self) -> str:
+        return self.first_nonzero_index() is not None
+
     @abstractmethod
     def inner_repr(self) -> str: ...
 

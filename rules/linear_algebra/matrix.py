@@ -2,18 +2,22 @@ from numbers import Rational
 from typing import Dict, List, TypeVar, Generic
 
 from .vectors.abstract_vector import AbstractVector
+from .vectors.augmented_vector import AugmentedVector
 
-V = TypeVar('V', bound=AbstractVector)
+A = TypeVar('A', bound=AbstractVector)
+C = TypeVar('C')
+V = TypeVar('V', bound=AugmentedVector[A, C])
 
 
 class Matrix(Generic[V]):
-    diagonal_indices: list[int]
-    rows: list[V]
+    diagonal_indices: List[int]
+    rows: List[V]
     row_length: int
 
     def __init__(self, row_length: int):
         self.diagonal_indices = []
         self.rows = []
+        self.constants = []
         self.row_length = row_length
 
     def extend_row_length(self, amount: int):
@@ -31,9 +35,10 @@ class Matrix(Generic[V]):
         return vector
 
     def in_span(self, row: V):
-        return self.project_to_orthogonal_complement(row).first_nonzero_index() is None
+        projected_row = self.project_to_orthogonal_complement(row)
+        return projected_row.first_nonzero_index() is None and not projected_row.constant
 
-    def add_row(self, row: V):
+    def add_row(self, row: V, constant: C):
         row = self.project_to_orthogonal_complement(row)
 
         first_nonzero_index = row.first_nonzero_index()
