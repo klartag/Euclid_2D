@@ -1,8 +1,6 @@
-from typing import Generic, Literal, Optional, Self, TypeVar, Union
+from typing import Generic, Literal, Optional, Self, TypeVar
 
 from .abstract_vector import AbstractVector, Rational
-from .dense_vector import DenseVector
-from .sparse_vector import SparseVector
 
 
 DENSE_THRESHOLD = 1 / 4
@@ -34,6 +32,9 @@ class AugmentedVector(Generic[V, C], AbstractVector):
     def __mul__(self, x: Rational) -> Self:
         return AugmentedVector(self.vector * x, self.constant * x)
 
+    def __truediv__(self, x: Rational) -> Self:
+        return AugmentedVector(self.vector / x, self.constant / x)
+
     def __add__(self, other: Self) -> Self:
         return AugmentedVector(self.vector + other.vector, self.constant + other.constant)
 
@@ -60,3 +61,6 @@ class AugmentedVector(Generic[V, C], AbstractVector):
 
     def inner_repr(self) -> str:
         return f'{self.vector.inner_repr()}, {self.constant}'
+
+    def taxicab_norm(self, max_index: Optional[int] = None) -> Rational:
+        return self.vector.taxicab_norm(max_index)

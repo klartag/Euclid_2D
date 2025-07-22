@@ -78,3 +78,6 @@ class DynamicVector(AbstractVector):
 
     def inner_repr(self) -> str:
         return self.inner.inner_repr()
+
+    def taxicab_norm(self, max_index: Optional[int] = None) -> Rational:
+        return self.inner.taxicab_norm(max_index)

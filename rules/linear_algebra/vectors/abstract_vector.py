@@ -61,3 +61,6 @@ class AbstractVector(ABC):
 
     def __str__(self) -> str:
         return f'{self.type_name}({self.inner_repr()})'
+
+    @abstractmethod
+    def taxicab_norm(self, max_index: Optional[int] = None) -> Rational: ...

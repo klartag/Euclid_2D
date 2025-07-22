@@ -68,3 +68,6 @@ class SparseVector(AbstractVector):
     def inner_repr(self) -> str:
         rational_reprs = [f'{k}: {str(v)}' for (k, v) in self.inner.items()]
         return f'{{{', '.join(rational_reprs)}}}'
+
+    def taxicab_norm(self, max_index: Optional[int] = None) -> Rational:
+        return sum([abs(v) for (k, v) in self.inner.items() if max_index is None or k < max_index])

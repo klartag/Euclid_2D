@@ -54,3 +54,6 @@ class DenseVector(AbstractVector):
     def inner_repr(self) -> str:
         rational_reprs = [str(x) for x in self.inner]
         return f'[{', '.join(rational_reprs)}]'
+
+    def taxicab_norm(self, max_index: Optional[int] = None) -> Rational:
+        return sum([abs(x) for x in self.inner[:max_index]])
