@@ -25,7 +25,7 @@ from ..predicates.implementations.macro_predicate import MacroPredicate
 from ..proof.geometry_problem import GeometryProblem
 from ..union_find import UnionFind
 
-from .linear_algebra_tracker import LinearAlgebraTracker
+from .old_linear_algebra_tracker import OldLinearAlgebraTracker as LinearAlgebraTracker
 
 NUMERIC_PRECISION = 1e-3
 """

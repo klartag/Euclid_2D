@@ -60,33 +60,39 @@ class Matrix(Generic[A, C]):
         self.diagonal_indices.insert(row_index, first_nonzero_index)
         self.rows.insert(row_index, row)
 
-    def get_sparse_integer_linear_combinations(self, coefficient_sum: int) -> List[Dict[int, Rational]]:
-        combinations: List[AugmentedVector[SparseVector, AugmentedVector[A, C]]] = []
+    def get_sparse_integer_linear_combinations(
+        self, max_coefficient_count: int, max_coefficient_sum: int
+    ) -> List[Dict[int, Rational]]:
+        combinations: List[AugmentedVector[A, C]] = []
         for row_index in range(len(self.rows)):
-            diagonal_index_bound = (
+            diagonal_index_start = self.diagonal_indices[row_index]
+            diagonal_index_end = (
                 self.diagonal_indices[row_index + 1] if row_index < len(self.rows) - 1 else self.row_length
             )
-            new_combinations: List[AugmentedVector[SparseVector, AugmentedVector[A, C]]] = []
+            new_combinations: List[AugmentedVector[A, C]] = []
 
-            row = AugmentedVector(SparseVector({row_index: 1}, self.row_length), self.rows[row_index])
-            first_nonzero_index = row.constant.first_nonzero_index()
-            if first_nonzero_index is None:
-                continue
-            for i in range(coefficient_sum // row.constant.taxicab_norm(diagonal_index_bound)):
-                new_combinations.append(row * (i + 1))
+            row = self.rows[row_index]
+            # `row *= gcd([x.denominator for x in row[:diagonal_index_bound]])` # So that we end up with an *integer* combination.
+            if row.count_nonzero_indices(diagonal_index_end) <= max_coefficient_count:
+                for i in range(max_coefficient_sum // row.taxicab_norm(diagonal_index_end)):
+                    new_combinations.append(row * (i + 1))
             for old_combination in combinations:
-                old_combination -= row * old_combination[first_nonzero_index]
-                for i in range(-coefficient_sum, coefficient_sum + 1):
+                old_combination -= row * old_combination[diagonal_index_start]
+                for i in range(-max_coefficient_sum, max_coefficient_sum + 1):
                     potential_new_combination = old_combination + row * i
-                    if potential_new_combination.constant.taxicab_norm(diagonal_index_bound) <= coefficient_sum:
+                    if (
+                        potential_new_combination.count_nonzero_indices(diagonal_index_end) <= max_coefficient_count
+                        and potential_new_combination.taxicab_norm(diagonal_index_end) <= max_coefficient_sum
+                    ):
                         new_combinations.append(potential_new_combination)
             combinations = new_combinations
             print(len(combinations))
 
         combinations = [
-            combination.constant
+            combination
             for combination in combinations
-            if combination.constant.vector.taxicab_norm() <= coefficient_sum
+            if combination.vector.count_nonzero_indices() <= max_coefficient_count
+            and combination.vector.taxicab_norm() <= max_coefficient_sum
         ]
         return combinations
 
@@ -96,9 +102,9 @@ class Matrix(Generic[A, C]):
             return ''
         table = [nonzero_keys] + [[row[i] or '' for i in nonzero_keys] for row in self.rows]
         table_repr = [[str(cell) for cell in row] for row in table]
-        column_lengths = [max([len(repr(row[i])) for row in table]) for i in range(len(nonzero_keys))]
+        column_lengths = [max([len(str(row[i])) for row in table]) for i in range(len(nonzero_keys))]
         padded_table_reprs = [
-            [f'{cell:<{column_lengths[column_index] + 4}}' for (column_index, cell) in enumerate(row)]
+            [f'{cell:>{column_lengths[column_index] + 4}}' for (column_index, cell) in enumerate(row)]
             for row in table_repr
         ]
         table_row_reprs = [''.join(row) for row in padded_table_reprs]

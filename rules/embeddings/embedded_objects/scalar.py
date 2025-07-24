@@ -22,6 +22,9 @@ class EmbeddedScalar(EmbeddedObject):
     def is_equal(self, other: 'EmbeddedScalar') -> bool:
         return abs(self.value - other.value) < EPSILON
 
+    def is_equal_mod(self, other: 'EmbeddedScalar', modulus: 'EmbeddedScalar') -> bool:
+        return abs((self.value - other.value) % modulus.value) < EPSILON
+
     def __add__(self, other: Self) -> Self:
         return EmbeddedScalar(self.value + other.value)
 

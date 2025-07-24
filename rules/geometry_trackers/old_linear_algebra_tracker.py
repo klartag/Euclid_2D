@@ -5,7 +5,7 @@ from ..proof_checker_utils import get_eqn_key
 from ..rust_code.rust_sparse_linear import BaseSolver, BoolLinearSolver, ModLinearSolver, RLinearSolver
 
 
-class LinearAlgebraTracker:
+class OldLinearAlgebraTracker:
     """
     A class that checks that a proof is valid.
     """
@@ -33,11 +33,11 @@ class LinearAlgebraTracker:
         """
         return [self.bool_equations, self.mod_360_equations, self.real_equations]
 
-    def clone(self) -> 'LinearAlgebraTracker':
+    def clone(self) -> 'OldLinearAlgebraTracker':
         """
         Returns a deep copy of the linear algebra tracker.
         """
-        res = LinearAlgebraTracker()
+        res = OldLinearAlgebraTracker()
         res.real_equations = self.real_equations.clone()
         res.mod_360_equations = self.mod_360_equations.clone()
         res.bool_equations = self.bool_equations.clone()

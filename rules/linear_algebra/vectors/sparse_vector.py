@@ -51,7 +51,7 @@ class SparseVector(AbstractVector):
         return min(self.inner.keys()) if len(self.inner) > 0 else None
 
     def count_nonzero_indices(self, max_index: Optional[int] = None) -> int:
-        return len([index for index in self.inner.keys() if index < max_index])
+        return len([index for index in self.inner.keys() if max_index is None or index < max_index])
 
     def extend_length(self, amount: int):
         self._length += amount
