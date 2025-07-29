@@ -33,8 +33,8 @@ incenter:
   preprocess: symmetric
   where: ['not_collinear(A, B, C)']
 midpoint:
-  conclude: ['between(A, O, B)', 'distance(A, O) == distance(B, O)', 'distance(A,
-      O) == distance(A, B)/2']
+  conclude: ['between(A, O, B)', 'distance(A, O) == distance(B, O)', '2 * distance(A,
+      O) == distance(A, B)']
   construct:
   - {O: Point}
   inputs:

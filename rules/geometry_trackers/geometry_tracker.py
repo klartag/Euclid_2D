@@ -26,6 +26,8 @@ from ..proof.geometry_problem import GeometryProblem
 from ..union_find import UnionFind
 
 from .old_linear_algebra_tracker import OldLinearAlgebraTracker as LinearAlgebraTracker
+from .linear_algebra_tracker.linear_algebra_tracker import LinearAlgebraTracker as NewLinearAlgebraTracker
+from .linear_algebra_tracker.linear_expression import LinearExpression
 
 NUMERIC_PRECISION = 1e-3
 """
@@ -108,6 +110,7 @@ class GeometryTracker:
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
     _linear_algebra: LinearAlgebraTracker
+    _new_linear_algebra: NewLinearAlgebraTracker
 
     embedding_tracker: Optional[Embedding]
     """Tracks 2D embeddings of the geometric configurations."""
@@ -125,6 +128,7 @@ class GeometryTracker:
         self.get_object(ONE, can_add=True)
 
         self._linear_algebra = LinearAlgebraTracker()
+        self._new_linear_algebra = NewLinearAlgebraTracker()
 
     def load_embedding(self, problem: GeometryProblem):
         """
@@ -282,6 +286,10 @@ class GeometryTracker:
             self._linear_algebra.real_equations.add_relation({angle: 1, rev_angle: 1})
             self._linear_algebra.mod_360_equations.add_relation({angle: 1, rev_angle: 1})
 
+            self._new_linear_algebra.add_relation_mod(
+                LinearExpression({angle: 1, rev_angle: 1}), 0, 360, self.embedding_tracker
+            )
+
     def process_orientation(self, ori: GeoObject):
         """
         Adds automatic theorems to an orientation.
@@ -379,6 +387,11 @@ class GeometryTracker:
             case _:
                 raise NotImplementedError(f'Equality mod {mod} in predicate {pred} is not implemented!')
 
+        if mod is None:
+            self._new_linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
+        else:
+            self._new_linear_algebra.add_relation_mod(LinearExpression(factors), 0, mod, self.embedding_tracker)
+
     def add_equal_scalar(self, pred: Predicate):
         """
         Handles an equality of scalars.
@@ -386,6 +399,7 @@ class GeometryTracker:
         # Adding the equation as a normal equation.
         if (factors := get_linear_eqn_factors(pred)) is not None:
             self._linear_algebra.real_equations.add_relation(factors)
+            self._new_linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
 
         # Adding the equation as a log equation.
         # We do this by default only to equations that are not normal equations, since logs are also non-zero.
@@ -393,6 +407,7 @@ class GeometryTracker:
             for factor in log_factors:
                 self.get_object(factor, can_add=True)
             self._linear_algebra.real_equations.add_relation(log_factors)
+            self._new_linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker)
 
     def add_equal_bool(self, pred: Predicate):
         """
@@ -447,6 +462,8 @@ class GeometryTracker:
             # Note: Since we know that a is set to become b, we don't need to add the relation if a is nonexistent.
             if tracker.contains(a):
                 tracker.add_relation({a: 1, b: -1})
+        if self._new_linear_algebra.contains_key(a):
+            self._new_linear_algebra.add_relation(LinearExpression({a: 1, b: -1}), 0, self.embedding_tracker)
 
     def add_equal_object(self, g1: GeoObject, g2: GeoObject):
         """
@@ -726,6 +743,7 @@ class GeometryTracker:
         res._predicates = set(self._predicates)
         res._asserted_predicates = set(self._asserted_predicates)
         res._linear_algebra = self._linear_algebra.clone()
+        res._new_linear_algebra = self._new_linear_algebra.clone()
         return res
 
     def load_assumptions(self, problem: GeometryProblem):

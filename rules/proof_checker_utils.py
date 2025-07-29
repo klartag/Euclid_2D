@@ -1,3 +1,5 @@
+from fractions import Fraction
+
 from .geometry_objects.geo_type import GeoType
 from .geometry_objects.geo_object import GeoObject
 from .predicates.predicate import Predicate
@@ -17,7 +19,7 @@ def get_eqn_key(obj: GeoObject) -> int:
     return hash(obj)
 
 
-def get_linear_eqn_factors(pred: Predicate) -> dict[GeoObject, float] | None:
+def get_linear_eqn_factors(pred: Predicate) -> dict[GeoObject, Fraction] | None:
     """
     Gets the predicate as a linear equation.
     """
@@ -31,7 +33,7 @@ def get_linear_eqn_factors(pred: Predicate) -> dict[GeoObject, float] | None:
     return res
 
 
-def get_log_eqn_factors(pred: Predicate) -> dict[GeoObject, float] | None:
+def get_log_eqn_factors(pred: Predicate) -> dict[GeoObject, Fraction] | None:
     """
     Gets the predicate as a log equation.
     This is not defined for equals_mod.
@@ -49,7 +51,7 @@ def get_log_eqn_factors(pred: Predicate) -> dict[GeoObject, float] | None:
     return left_log
 
 
-def get_raw_eqn_factors(factors: dict[GeoObject, float]) -> dict[int, float]:
+def get_raw_eqn_factors(factors: dict[GeoObject, Fraction]) -> dict[int, Fraction]:
     return {get_eqn_key(key): val for key, val in factors.items()}
 
 

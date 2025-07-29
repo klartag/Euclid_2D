@@ -4,6 +4,8 @@ import time
 
 from tqdm import trange
 
+from .geometry_trackers.linear_algebra_tracker.linear_expression import LinearExpression
+
 from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
@@ -70,6 +72,9 @@ class ProofChecker:
             assert rev_angle in self.geometry_tracker._processed_objects and rev_angle in self.geometry_tracker._objects
             self.geometry_tracker._linear_algebra.real_equations.add_relation({angle: 1, rev_angle: 1})
             self.geometry_tracker._linear_algebra.mod_360_equations.add_relation({angle: 1, rev_angle: 1})
+            self.geometry_tracker._new_linear_algebra.add_relation(
+                LinearExpression({angle: 1, rev_angle: 1}), 0, self.geometry_tracker.embedding_tracker
+            )
 
     def process_orientation(self, ori: GeoObject):
         """

@@ -3,8 +3,6 @@ from typing import Iterator, Optional, Self
 
 from fractions import Fraction
 
-Rational = Fraction | int
-
 
 class AbstractVector(ABC):
     @property
@@ -15,13 +13,13 @@ class AbstractVector(ABC):
     def __len__(self) -> int: ...
 
     @abstractmethod
-    def __getitem__(self, i: int) -> Rational: ...
+    def __getitem__(self, i: int) -> Fraction: ...
 
     @abstractmethod
-    def __mul__(self, x: Rational) -> Self: ...
+    def __mul__(self, x: Fraction) -> Self: ...
 
     @abstractmethod
-    def __truediv__(self, x: Rational) -> Self: ...
+    def __truediv__(self, x: Fraction) -> Self: ...
 
     @abstractmethod
     def __add__(self, other: Self) -> Self: ...
@@ -41,7 +39,7 @@ class AbstractVector(ABC):
     @abstractmethod
     def __eq__(self, other: Self) -> bool: ...
 
-    def __iter__(self) -> Iterator[Rational]:
+    def __iter__(self) -> Iterator[Fraction]:
         return (self[i] for i in range(len(self)))
 
     @abstractmethod
@@ -63,4 +61,4 @@ class AbstractVector(ABC):
         return f'{self.type_name}({self.inner_repr()})'
 
     @abstractmethod
-    def taxicab_norm(self, max_index: Optional[int] = None) -> Rational: ...
+    def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction: ...

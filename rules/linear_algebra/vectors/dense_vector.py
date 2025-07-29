@@ -1,28 +1,28 @@
 from fractions import Fraction
 from typing import Literal, Optional, Self
 
-from .abstract_vector import AbstractVector, Rational
+from .abstract_vector import AbstractVector
 
 
 class DenseVector(AbstractVector):
     type_name: Literal['Dense'] = 'Dense'
 
-    inner: list[Rational]
+    inner: list[Fraction]
 
-    def __init__(self, values: list[Rational]):
-        self.inner = list(values)
+    def __init__(self, values: list[int | Fraction]):
+        self.inner = [Fraction(x) for x in values]
 
     def __len__(self) -> int:
         return len(self.inner)
 
-    def __getitem__(self, i: int) -> Rational:
+    def __getitem__(self, i: int) -> Fraction:
         return self.inner[i]
 
-    def __mul__(self, x: Rational) -> Self:
+    def __mul__(self, x: Fraction) -> Self:
         return DenseVector([x * f for f in self.inner])
 
-    def __truediv__(self, x: Rational) -> Self:
-        return DenseVector([Fraction(1, x) * f for f in self.inner])
+    def __truediv__(self, x: Fraction) -> Self:
+        return DenseVector([f / x for f in self.inner])
 
     def __add__(self, other: Self) -> Self:
         return DenseVector([self[i] + other[i] for i in range(len(self))])
@@ -55,5 +55,5 @@ class DenseVector(AbstractVector):
         rational_reprs = [str(x) for x in self.inner]
         return f'[{', '.join(rational_reprs)}]'
 
-    def taxicab_norm(self, max_index: Optional[int] = None) -> Rational:
+    def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return sum([abs(x) for x in self.inner[:max_index]])

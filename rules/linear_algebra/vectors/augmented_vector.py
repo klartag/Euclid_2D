@@ -1,6 +1,7 @@
+from fractions import Fraction
 from typing import Generic, Literal, Optional, Self, TypeVar
 
-from .abstract_vector import AbstractVector, Rational
+from .abstract_vector import AbstractVector
 
 
 DENSE_THRESHOLD = 1 / 4
@@ -26,13 +27,13 @@ class AugmentedVector(Generic[V, C], AbstractVector):
     def __len__(self) -> int:
         return len(self.vector)
 
-    def __getitem__(self, i: int) -> Rational:
+    def __getitem__(self, i: int) -> Fraction:
         return self.vector[i]
 
-    def __mul__(self, x: Rational) -> Self:
+    def __mul__(self, x: Fraction) -> Self:
         return AugmentedVector(self.vector * x, self.constant * x)
 
-    def __truediv__(self, x: Rational) -> Self:
+    def __truediv__(self, x: Fraction) -> Self:
         return AugmentedVector(self.vector / x, self.constant / x)
 
     def __add__(self, other: Self) -> Self:
@@ -62,5 +63,5 @@ class AugmentedVector(Generic[V, C], AbstractVector):
     def inner_repr(self) -> str:
         return f'{self.vector.inner_repr()}, {self.constant}'
 
-    def taxicab_norm(self, max_index: Optional[int] = None) -> Rational:
+    def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return self.vector.taxicab_norm(max_index)

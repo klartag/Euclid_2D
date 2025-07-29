@@ -1,6 +1,7 @@
+from fractions import Fraction
 from typing import Literal, Optional, Self, Union
 
-from .abstract_vector import AbstractVector, Rational
+from .abstract_vector import AbstractVector
 from .dense_vector import DenseVector
 from .sparse_vector import SparseVector
 
@@ -36,10 +37,10 @@ class DynamicVector(AbstractVector):
     def __len__(self) -> int:
         return len(self.inner)
 
-    def __getitem__(self, i: int) -> Rational:
+    def __getitem__(self, i: int) -> Fraction:
         return self.inner[i]
 
-    def __mul__(self, x: Rational) -> Self:
+    def __mul__(self, x: Fraction) -> Self:
         return DynamicVector(self.inner * x)
 
     def __add__(self, other: Self) -> Self:
@@ -79,5 +80,5 @@ class DynamicVector(AbstractVector):
     def inner_repr(self) -> str:
         return self.inner.inner_repr()
 
-    def taxicab_norm(self, max_index: Optional[int] = None) -> Rational:
+    def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return self.inner.taxicab_norm(max_index)

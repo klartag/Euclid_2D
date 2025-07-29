@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING, Mapping
-from mpmath import mp
+from fractions import Fraction
 
 from ..predicates.global_predicates import get_constructions
 from ..symmetry import Symmetry
@@ -140,10 +140,10 @@ class ConstructionObject(GeoObject):
             for left, right in self.constructor.possible_conclusions
         ]
 
-    def as_literal(self) -> float | None:
+    def as_literal(self) -> Fraction | None:
         return None
 
-    def as_linear_equation(self) -> 'dict[GeoObject, float] | None':
+    def as_linear_equation(self) -> 'dict[GeoObject, Fraction] | None':
         return {self: 1}
 
     def __hash__(self) -> int:
@@ -177,11 +177,11 @@ class LogConstruction(Construction):
         return super().__call__(*args)
 
 
-def as_log_equation(self) -> dict[GeoObject, float] | None:
+def as_log_equation(self) -> dict[GeoObject, Fraction] | None:
     if (val := self.as_literal()) is not None:
         if val <= 0:
             return None
-        return {ONE: mp.log(val)}
+        return {ConstructionObject.from_args('log', (self,)): 1}
     if self.type == GeoType.SCALAR:
         return {ConstructionObject.from_args('log', (self,)): 1}
     return None

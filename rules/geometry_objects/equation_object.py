@@ -1,4 +1,4 @@
-from mpmath import mpf
+from fractions import Fraction
 from typing import Mapping
 from mpmath import mp
 
@@ -131,7 +131,7 @@ class EquationObject(GeoObject):
     def clone(self) -> 'EquationObject':
         return self.substitute({})  # type: ignore
 
-    def as_literal(self) -> float | None:
+    def as_literal(self) -> Fraction | None:
         """
         Attempts to transform the equation to a scalar.
         """
@@ -152,7 +152,7 @@ class EquationObject(GeoObject):
             case EqOp.DIV:
                 return left_scalar / right_scalar
 
-    def as_linear_equation(self) -> dict[GeoObject, float] | None:
+    def as_linear_equation(self) -> 'dict[GeoObject, Fraction] | None':
         """
         Attempts to tranfsorm the equation to a dictionary mapping geoobjects to their coefficient in the equation.
         If it fails (For example, if there is a A*B factor), it returns None.
@@ -199,9 +199,9 @@ class EquationObject(GeoObject):
                 right_val = self.right.as_literal()
                 if right_val is None:
                     return None
-                return {obj: coef / right_val for obj, coef in left_factors.items()}
+                return {obj: Fraction(coef) / Fraction(right_val) for obj, coef in left_factors.items()}
 
-    def as_log_equation(self) -> dict[GeoObject, float] | None:
+    def as_log_equation(self) -> dict[GeoObject, Fraction] | None:
         """
         Attempts to tranfsorm the equation to a dictionary mapping geoobjects to their coefficient in the equation.
         If it fails (For example, if there is a A*B factor), it returns None.
@@ -259,32 +259,29 @@ def __neg__(self) -> EquationObject:
     return EquationObject(ZERO, self, EqOp.SUB)
 
 
-def __add__(self, other: GeoObject | int | float) -> EquationObject:
-    if isinstance(other, int) or isinstance(other, float) or isinstance(other, mpf):
-        other = Literal(str(other))
+def __add__(self, other: GeoObject | int | Fraction) -> EquationObject:
+    if not isinstance(other, GeoObject):
+        other = Literal(other)
 
     return EquationObject(self, other, EqOp.ADD)
 
 
-def __sub__(self, other: GeoObject | int | float) -> EquationObject:
-    if isinstance(other, int) or isinstance(other, float) or isinstance(other, mpf):
-        other = Literal(str(other))
+def __sub__(self, other: GeoObject | int | Fraction) -> EquationObject:
+    if not isinstance(other, GeoObject):
+        other = Literal(other)
     return EquationObject(self, other, EqOp.SUB)
 
 
-def __mul__(self, other: GeoObject | int | float) -> EquationObject:
-    if isinstance(other, int) or isinstance(other, float) or isinstance(other, mpf):
-        other = Literal(str(other))
+def __mul__(self, other: GeoObject | int | Fraction) -> EquationObject:
+    if not isinstance(other, GeoObject):
+        other = Literal(other)
 
     return EquationObject(self, other, EqOp.MUL)
 
 
-def __truediv__(self, other: GeoObject | int | float) -> 'EquationObject':
-    """
-    Attempts to divide the two equations.
-    """
-    if isinstance(other, int) or isinstance(other, float) or isinstance(other, mpf):
-        other = Literal(str(other))
+def __truediv__(self, other: GeoObject | int | Fraction) -> 'EquationObject':
+    if not isinstance(other, GeoObject):
+        other = Literal(other)
     return EquationObject(self, other, EqOp.DIV)
 
 
