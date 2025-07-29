@@ -1,7 +1,7 @@
 from fractions import Fraction
 from typing import Mapping
-from mpmath import mp
 
+from ..geometry_objects.construction_object import ConstructionObject
 from ..errors import GeometryError
 
 from .eq_op import EqOp
@@ -207,10 +207,11 @@ class EquationObject(GeoObject):
         If it fails (For example, if there is a A*B factor), it returns None.
         """
         if self.type == GeoType.LITERAL:
-            val = self.as_literal()
-            if (val is None) or (val == 0):
-                return None
-            return {ONE: mp.log(val)}
+            if (val := self.as_literal()) is not None:
+                if val <= 0:
+                    return None
+                return {ConstructionObject.from_args('log', (self,)): 1}
+            return {ConstructionObject.from_args('log', (self,)): 1}
 
         left_factors = self.left.as_log_equation()
         right_factors = self.right.as_log_equation()

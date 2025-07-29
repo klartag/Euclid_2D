@@ -253,7 +253,7 @@ class ProofChecker:
                 return (
                     f'\nIn step {step}:\n'
                     f'Predicate {step_pred} does not follow from theorem. \n'
-                    f'Theorem results: {[self.geometry_tracker.get_predicate(res_pred.substitute(substitutions), True) for res_pred in theorem.result_predicates]}\n'
+                    f'Theorem results: {[self.geometry_tracker.get_predicate(res_pred.substitute(substitutions), can_add=False) for res_pred in theorem.result_predicates]}\n'
                     f'Substitutions: { {obj: self.geometry_tracker.get_object(obj, can_add=True) for obj in step_pred.components} }'
                 )
             reason = f'consequence of the theorem step: {step.theorem_name}'
