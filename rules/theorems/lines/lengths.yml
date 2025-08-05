@@ -14,7 +14,7 @@ log_of_2_times_distance:
   where:
     - distance(A, B) == 2 * distance(C, D)
   conclude:
-    - log(distance(A, B)) == log(2 * distance(C, D))
+    - log(distance(A, B)) == log(2) + log(distance(C, D))
 
 log_of_3_times_distance:
   inputs:
@@ -22,7 +22,7 @@ log_of_3_times_distance:
   where:
     - distance(A, B) == 3 * distance(C, D)
   conclude:
-    - log(distance(A, B)) == log(3 * distance(C, D))
+    - log(distance(A, B)) == log(3) + log(distance(C, D))
 
 log_of_4_times_distance:
   inputs:
@@ -30,4 +30,4 @@ log_of_4_times_distance:
   where:
     - distance(A, B) == 4 * distance(C, D)
   conclude:
-    - log(distance(A, B)) == log(4 * distance(C, D))
+    - log(distance(A, B)) == log(4) + log(distance(C, D))
