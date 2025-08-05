@@ -30,4 +30,4 @@ log_of_4_times_distance:
   where:
     - distance(A, B) == 4 * distance(C, D)
   conclude:
-    - log(distance(A, B)) == log(4) + log(distance(C, D))
+    - log(distance(A, B)) == 2 * log(2) + log(distance(C, D))
