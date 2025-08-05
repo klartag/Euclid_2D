@@ -85,6 +85,9 @@ class LinearAlgebraTracker:
         self.add_relation(linear_expression, value)
 
     def try_evaluate(self, linear_expression: LinearExpression) -> Optional[Fraction]:
+        if not all([k in self._reverse_keys for k in linear_expression.keys()]):
+            return None
+
         row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length)
         projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector(row, 0))
 
