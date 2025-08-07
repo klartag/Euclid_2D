@@ -388,9 +388,9 @@ class GeometryTracker:
                 raise NotImplementedError(f'Equality mod {mod} in predicate {pred} is not implemented!')
 
         if mod is None:
-            self._new_linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
+            self._new_linear_algebra.add_relation(factors, 0, self.embedding_tracker)
         else:
-            self._new_linear_algebra.add_relation_mod(LinearExpression(factors), 0, mod, self.embedding_tracker)
+            self._new_linear_algebra.add_relation_mod(factors, 0, mod, self.embedding_tracker)
 
     def add_equal_scalar(self, pred: Predicate):
         """
@@ -399,15 +399,15 @@ class GeometryTracker:
         # Adding the equation as a normal equation.
         if (factors := get_linear_eqn_factors(pred)) is not None:
             self._linear_algebra.real_equations.add_relation(factors)
-            self._new_linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
+            self._new_linear_algebra.add_relation(factors, 0, self.embedding_tracker)
 
         # Adding the equation as a log equation.
         # We do this by default only to equations that are not normal equations, since logs are also non-zero.
         elif (log_factors := get_log_eqn_factors(pred)) is not None:
             for factor in log_factors:
                 self.get_object(factor, can_add=True)
-            self._linear_algebra.real_equations.add_relation(log_factors)
-            self._new_linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker)
+            self._linear_algebra.real_equations.add_relation(log_factors.inner)
+            self._new_linear_algebra.add_relation(log_factors, 0, self.embedding_tracker)
 
     def add_equal_bool(self, pred: Predicate):
         """
@@ -712,6 +712,14 @@ class GeometryTracker:
                         factors
                     ) == 0:
                         return True
+                    if (
+                        factors := get_linear_eqn_factors(pred)
+                    ) is not None and self._linear_algebra.real_equations.contains_relation(factors.inner):
+                        return True
+                    if (
+                        factors := get_log_eqn_factors(pred)
+                    ) is not None and self._linear_algebra.real_equations.contains_relation(factors.inner):
+                        return True
                     return False
 
                 if typ == GeoType.ORIENTATION:
@@ -725,9 +733,11 @@ class GeometryTracker:
                 if factors is None:
                     return False
                 res = self._new_linear_algebra.try_evaluate(factors)
-                if res is None:
-                    return False
-                return res % 360 == 0
+                if res is not None and res % 360 == 0:
+                    return True
+                if self._linear_algebra.mod_360_equations.contains_relation(factors.inner):
+                    return True
+                return False
             case 'not_equals' | 'not_equals_mod_360':
                 return self.embedding_tracker.evaluate_predicate(pred) == EmbeddedPredicateValue.Correct
             case 'between' | 'collinear':

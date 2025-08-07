@@ -15,8 +15,26 @@ class LinearExpression:
     def __init__(self, inner: Dict[GeoObject, Fraction]):
         self.inner = inner
 
+    def keys(self):
+        return self.inner.keys()
+
+    def values(self):
+        return self.inner.values()
+
     def items(self):
         return self.inner.items()
+
+    def __iter__(self):
+        return iter(self.inner)
+
+    def __contains__(self, key: GeoObject) -> bool:
+        return key in self.inner
+
+    def pop(self, key: GeoObject) -> Fraction:
+        return self.inner.pop(key)
+
+    def __getitem__(self, key: GeoObject) -> Fraction:
+        return self.inner.get(key, Fraction(0))
 
     def to_equation_object(self) -> EquationObject | Literal:
         if len(self.inner) == 0:

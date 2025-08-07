@@ -5,6 +5,14 @@ from ..proof_checker_utils import get_eqn_key
 from ..rust_code.rust_sparse_linear import BaseSolver, BoolLinearSolver, ModLinearSolver, RLinearSolver
 
 
+# class OldLinearAlgebraTracker:
+#     def __getattribute__(self, name):
+#         return self
+
+#     def __call__(self, *args, **kwds):
+#         return self
+
+
 class OldLinearAlgebraTracker:
     """
     A class that checks that a proof is valid.

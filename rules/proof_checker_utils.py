@@ -1,5 +1,7 @@
 from fractions import Fraction
+from typing import Optional
 
+from .geometry_trackers.linear_algebra_tracker.linear_expression import LinearExpression
 from .geometry_objects.geo_type import GeoType
 from .geometry_objects.geo_object import GeoObject
 from .predicates.predicate import Predicate
@@ -19,7 +21,7 @@ def get_eqn_key(obj: GeoObject) -> int:
     return hash(obj)
 
 
-def get_linear_eqn_factors(pred: Predicate) -> dict[GeoObject, Fraction] | None:
+def get_linear_eqn_factors(pred: Predicate) -> Optional[LinearExpression]:
     """
     Gets the predicate as a linear equation.
     """
@@ -30,10 +32,10 @@ def get_linear_eqn_factors(pred: Predicate) -> dict[GeoObject, Fraction] | None:
     assert not any(
         obj.type == GeoType.LITERAL and obj.name != '1' for obj in res
     ), f'Illegal unpack: {pred.to_language_format()} => {res}'
-    return res
+    return LinearExpression(res)
 
 
-def get_log_eqn_factors(pred: Predicate) -> dict[GeoObject, Fraction] | None:
+def get_log_eqn_factors(pred: Predicate) -> Optional[LinearExpression]:
     """
     Gets the predicate as a log equation.
     This is not defined for equals_mod.
@@ -48,7 +50,7 @@ def get_log_eqn_factors(pred: Predicate) -> dict[GeoObject, Fraction] | None:
     assert not any(
         obj.type == GeoType.LITERAL and obj.name != '1' for obj in left_log
     ), f'Illegal unpack: {pred.to_language_format()} => {left_log}'
-    return left_log
+    return LinearExpression(left_log)
 
 
 def get_raw_eqn_factors(factors: dict[GeoObject, Fraction]) -> dict[int, Fraction]:
