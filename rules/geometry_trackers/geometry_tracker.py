@@ -397,23 +397,27 @@ class GeometryTracker:
         Handles an equality of scalars.
         """
         # Adding the equation as a normal equation.
-        if (factors := get_linear_eqn_factors(pred)) is not None:
+        factors = get_linear_eqn_factors(pred)
+        if factors is not None:
             self._linear_algebra.real_equations.add_relation(factors)
             self._new_linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
 
         # Adding the equation as a log equation.
         # We do this by default only to equations that are not normal equations, since logs are also non-zero.
-        elif (log_factors := get_log_eqn_factors(pred)) is not None:
-            for factor in log_factors:
-                self.get_object(factor, can_add=True)
-            self._linear_algebra.real_equations.add_relation(log_factors)
-            self._new_linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker)
+        else:
+            log_factors = get_log_eqn_factors(pred)
+            if log_factors is not None:
+                for factor in log_factors:
+                    self.get_object(factor, can_add=True)
+                self._linear_algebra.real_equations.add_relation(log_factors)
+                self._new_linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker)
 
     def add_equal_bool(self, pred: Predicate):
         """
         Handles an equality of orientations.
         """
-        if (factors := get_linear_eqn_factors(pred)) is not None:
+        factors = get_linear_eqn_factors(pred)
+        if factors is not None:
             self._linear_algebra.bool_equations.add_relation(factors)
 
     def _add_equal_objects_nonrecursive(self, a: GeoObject, b: GeoObject):
@@ -688,7 +692,8 @@ class GeometryTracker:
 
         # If the predicate does not appear in the unpacking, then it is a macro, and it is both sufficient and necessary for all
         # unpacked predicates to be contained.
-        if pred not in (unpacked := unpack_predicate_minimal(pred)):
+        unpacked = unpack_predicate_minimal(pred)
+        if pred not in unpacked:
             return all(self.contains_predicate(sub_pred, can_add=can_add) for sub_pred in unpacked)
 
         # Preprocessing all the object and updating the predicate to use the representative objects.
@@ -704,26 +709,22 @@ class GeometryTracker:
                 a, b = pred.components
                 typ = a.type if a.type != GeoType.LITERAL else b.type
                 if typ in R_EQN_TYPES:
-                    if (
-                        factors := get_linear_eqn_factors(pred)
-                    ) is not None and self._linear_algebra.real_equations.contains_relation(factors):
+                    factors = get_linear_eqn_factors(pred)
+                    if factors is not None and self._linear_algebra.real_equations.contains_relation(factors):
                         return True
-                    if (
-                        factors := get_log_eqn_factors(pred)
-                    ) is not None and self._linear_algebra.real_equations.contains_relation(factors):
+                    factors = get_log_eqn_factors(pred)
+                    if factors is not None and self._linear_algebra.real_equations.contains_relation(factors):
                         return True
                     return False
 
                 if typ == GeoType.ORIENTATION:
-                    return (
-                        factors := get_linear_eqn_factors(pred)
-                    ) is not None and self._linear_algebra.bool_equations.contains_relation(factors)
+                    factors = get_linear_eqn_factors(pred)
+                    return factors is not None and self._linear_algebra.bool_equations.contains_relation(factors)
 
                 return self.get_object(a, can_add=can_add) == self.get_object(b, can_add=can_add)
             case 'equals_mod_360':
-                return (
-                    factors := get_linear_eqn_factors(pred)
-                ) is not None and self._linear_algebra.mod_360_equations.contains_relation(factors)
+                factors = get_linear_eqn_factors(pred)
+                return factors is not None and self._linear_algebra.mod_360_equations.contains_relation(factors)
             case 'not_equals' | 'not_equals_mod_360':
                 return self.embedding_tracker.evaluate_predicate(pred) == EmbeddedPredicateValue.Correct
             case 'between' | 'collinear':
