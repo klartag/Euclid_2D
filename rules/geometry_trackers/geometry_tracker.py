@@ -710,19 +710,35 @@ class GeometryTracker:
                 typ = a.type if a.type != GeoType.LITERAL else b.type
                 if typ in R_EQN_TYPES:
                     factors = get_linear_eqn_factors(pred)
-                    if factors is not None and self._new_linear_algebra.try_evaluate(factors) == 0:
+                    if (
+                        factors is not None
+                        and self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
+                        == 0
+                    ):
                         return True
                     factors = get_log_eqn_factors(pred)
-                    return factors is not None and self._new_linear_algebra.try_evaluate(factors) == 0
+                    return (
+                        factors is not None
+                        and self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
+                        == 0
+                    )
 
                 if typ == GeoType.ORIENTATION:
                     factors = get_linear_eqn_factors(pred)
-                    return factors is not None and self._new_linear_algebra.try_evaluate(LinearExpression(factors)) == 0
+                    return (
+                        factors is not None
+                        and self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
+                        == 0
+                    )
 
                 return self.get_object(a, can_add=can_add) == self.get_object(b, can_add=can_add)
             case 'equals_mod_360':
                 factors = get_linear_eqn_factors(pred)
-                return factors is not None and self._linear_algebra.mod_360_equations.contains_relation(factors)
+                if factors is None:
+                    return False
+                result = self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
+                return result is not None and result % 360 == 0
+
             case 'not_equals' | 'not_equals_mod_360':
                 return self.embedding_tracker.evaluate_predicate(pred) == EmbeddedPredicateValue.Correct
             case 'between' | 'collinear':

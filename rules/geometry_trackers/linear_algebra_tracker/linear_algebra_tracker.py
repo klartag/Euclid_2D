@@ -90,8 +90,13 @@ class LinearAlgebraTracker:
 
         self.add_relation(linear_expression, value, embedding)
 
-    def try_evaluate(self, linear_expression: LinearExpression) -> Optional[Fraction]:
+    def try_evaluate(self, linear_expression: LinearExpression, embedding: Embedding) -> Optional[Fraction]:
         linear_expression = LinearExpression({k: v for (k, v) in linear_expression.items() if v != 0})
+
+        (linear_expression, automatic_residue) = self.evaluate_automatic_part_of_expression(
+            linear_expression, embedding
+        )
+
         if any([k not in self._reverse_keys for k in linear_expression]):
             return None
 
@@ -100,7 +105,7 @@ class LinearAlgebraTracker:
 
         if projected_row.first_nonzero_index() is not None:
             return None
-        return -projected_row.constant
+        return automatic_residue - projected_row.constant
 
     def evaluate_automatic_part_of_expression(
         self, linear_expression: LinearExpression, embedding: Embedding
