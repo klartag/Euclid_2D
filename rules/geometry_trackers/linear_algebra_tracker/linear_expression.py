@@ -18,6 +18,18 @@ class LinearExpression:
     def items(self):
         return self.inner.items()
 
+    def keys(self):
+        return self.inner.keys()
+
+    def values(self):
+        return self.inner.values()
+
+    def __iter__(self):
+        return iter(self.inner)
+
+    def __contains__(self, k: GeoObject) -> bool:
+        return k in self.inner
+
     def to_equation_object(self) -> EquationObject | Literal:
         if len(self.inner) == 0:
             return Literal('0')
