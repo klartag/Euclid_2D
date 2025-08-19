@@ -710,16 +710,14 @@ class GeometryTracker:
                 typ = a.type if a.type != GeoType.LITERAL else b.type
                 if typ in R_EQN_TYPES:
                     factors = get_linear_eqn_factors(pred)
-                    if factors is not None and self._linear_algebra.real_equations.contains_relation(factors):
+                    if factors is not None and self._new_linear_algebra.try_evaluate(factors) == 0:
                         return True
                     factors = get_log_eqn_factors(pred)
-                    if factors is not None and self._linear_algebra.real_equations.contains_relation(factors):
-                        return True
-                    return False
+                    return factors is not None and self._new_linear_algebra.try_evaluate(factors) == 0
 
                 if typ == GeoType.ORIENTATION:
                     factors = get_linear_eqn_factors(pred)
-                    return factors is not None and self._linear_algebra.bool_equations.contains_relation(factors)
+                    return factors is not None and self._new_linear_algebra.try_evaluate(LinearExpression(factors)) == 0
 
                 return self.get_object(a, can_add=can_add) == self.get_object(b, can_add=can_add)
             case 'equals_mod_360':
