@@ -514,6 +514,11 @@ class EquationPattern(InternalNodePattern):
             case _:
                 raise NotImplementedError(f'Equations mod {self.mod} are not implemented!')
 
+        combinations = self.geometry_tracker._new_linear_algebra.update_sparse_integer_linear_combinations(4, 4)
+
+        if len(combinations) > 10:
+            debug = 1
+
         r_inputs = [
             [obj for obj in self.geometry_tracker.unique_objects() if extended_type(obj) == typ] for typ in self.types
         ]
