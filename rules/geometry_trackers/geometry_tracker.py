@@ -656,7 +656,7 @@ class GeometryTracker:
         """
         return obj in self._processed_objects
 
-    def contains_predicate(self, pred: Predicate, *, can_add: bool) -> bool:
+    def contains_predicate(self, pred: Predicate, *, can_add: bool, old_method: bool = False) -> bool:
         """
         Checks if the given predicate is contained in the proof checker.
 
@@ -737,7 +737,10 @@ class GeometryTracker:
                 if factors is None:
                     return False
                 result = self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
-                return result is not None and result % 360 == 0
+                # TODO: Return b0 instead (once we swap the ProofGenerator uses of linear algebra)
+                b0 = result is not None and result % 360 == 0
+                b1 = self._linear_algebra.mod_360_equations.contains_relation(factors)
+                return b1
 
             case 'not_equals' | 'not_equals_mod_360':
                 return self.embedding_tracker.evaluate_predicate(pred) == EmbeddedPredicateValue.Correct

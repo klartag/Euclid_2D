@@ -1,14 +1,14 @@
 import abc
+from fractions import Fraction
 import functools
-import itertools
 from typing import Sequence, TypeVar
 import warnings
 from frozendict import frozendict
 
-
 from .predicates.predicate_factory import predicate_from_args
 
 from .geometry_objects.atom import Atom
+from .geometry_trackers.linear_algebra_tracker.linear_algebra_tracker import LinearAlgebraTracker
 from .geometry_trackers.geometry_tracker import GeometryTracker, involved_objects
 from .geometry_objects.construction_object import Construction, ConstructionObject
 from .geometry_objects.geo_object import GeoObject
@@ -306,6 +306,9 @@ class IntersectPattern(InternalNodePattern):
         Accumulates the new additions to the sub-patterns into the current pattern.
         """
         # print(f'IntersectPattern: {self.repr()}')
+        
+        if 'angles_on_chord' in self.name:
+            debug = 1
 
         if not any(comp.has_unpushed_data() for comp in self.components):
             return
@@ -470,20 +473,18 @@ class EquationPattern(InternalNodePattern):
     """
     A pattern representing an equation, such as X + Y - Z.
     """
-
     geometry_tracker: GeometryTracker
     coef_keys: list[int]
     eqn_factors: list[int]
-    const_factor: int
     mod: int | None
     types: list[str]
 
     def __init__(
         self,
+        name: str,
         geometry_tracker: GeometryTracker,
         coef_keys: list[int],
         eqn_factors: list[int],
-        const_factor: int,
         mod: int | None,
         types: list[str],
     ):
@@ -492,35 +493,22 @@ class EquationPattern(InternalNodePattern):
         """
         assert isinstance(coef_keys, list)
         super().__init__()
+        self.name = name
         self.geometry_tracker = geometry_tracker
         self.coef_keys = coef_keys
         self.eqn_factors = eqn_factors
-        self.const_factor = const_factor
         self.mod = mod
         self.types = types
-        self.name = f'EqPattern({coef_keys=}, {const_factor=}, {mod=}, {types=})'
 
     def update(self):
         """
         Updates the equation pattern using the proof checker.
         """
-        match self.mod:
-            case 2:
-                tracker = self.geometry_tracker._linear_algebra.bool_equations
-            case 360:
-                tracker = self.geometry_tracker._linear_algebra.mod_360_equations
-            case None:
-                tracker = self.geometry_tracker._linear_algebra.real_equations
-            case _:
-                raise NotImplementedError(f'Equations mod {self.mod} are not implemented!')
-
-        r_inputs = [
-            [obj for obj in self.geometry_tracker.unique_objects() if extended_type(obj) == typ] for typ in self.types
-        ]
-
-        combinations = tracker.find_combinations(self.eqn_factors, self.const_factor, r_inputs)
+        combinations = self.geometry_tracker._new_linear_algebra.get_sparse_integer_linear_combinations(self.eqn_factors)
         combination_indices = [[get_eqn_key(o) for o in lst] for lst in combinations]
-
+        
+        print(f'[Equation Pattern] {self.name} - {len(combination_indices)}')
+        
         new_matches = RustMatch.raw(self.coef_keys, combination_indices).subtract(self.all_matches)
         self.new_matches.extend(new_matches)
         self.all_matches.extend(new_matches)
@@ -528,7 +516,7 @@ class EquationPattern(InternalNodePattern):
     def full_repr(self, idx=0) -> str:
         return (
             '\t' * idx
-            + f'Eq({self.types}, keys={self.coef_keys} factors={self.eqn_factors}, const={self.const_factor}) (len={len(self)})'
+            + f'Eq({self.types}, keys={self.coef_keys} factors={self.eqn_factors}) (len={len(self)})'
         )
 
 
@@ -590,7 +578,7 @@ class SignatureDag:
     """The patterns of all GeoObjects."""
     raw_predicate_patterns: dict[Predicate, RawPredicatePattern]
     """The raw predicates in the DAG."""
-    raw_equation_patterns: dict[tuple[tuple[int, ...], int, int | None, tuple[str, ...]], EquationPattern]
+    raw_equation_patterns: dict[tuple[tuple[int, ...], int | None, tuple[str, ...]], EquationPattern]
     """The raw patterns of combinations that are zero."""
 
     predicate_patterns: dict[Predicate, Pattern]
@@ -707,23 +695,18 @@ class SignatureDag:
         if eqn_factors is None:
             raise GeometryError(f'Predicate could not be converted to an equation: {pred}!')
 
-        type_ = pred.components[0].type if pred.components[0].type != GeoType.LITERAL else pred.components[1].type
-
-        if pred.name == 'equals' and type_ in (GeoType.ANGLE, GeoType.SCALAR, GeoType.LITERAL):
+        if pred.name == 'equals':
             mod = None
-        elif pred.name == 'equals' and type_ == GeoType.ORIENTATION:
-            mod = 2
         elif pred.name == 'equals_mod_360':
             mod = 360
         else:
             raise GeometryError(f'Illegal predicate: {pred}')
 
         # Step 1. Gathering the data.
-        const_factor = 0
-        if ONE in eqn_factors:
-            const_factor = eqn_factors.pop(ONE)
-        assert abs(const_factor - round(const_factor)) < 1e-3
-        const_factor = int(round(const_factor))
+        automatic_eqn_factors: dict[GeoObject, Fraction] = {}
+        for key in list(eqn_factors.keys()):
+            if LinearAlgebraTracker.is_automatically_evaluated(key):
+                automatic_eqn_factors[key] = eqn_factors.pop(key)
         coef_keys = []
         coef_values = []
         for obj, val in eqn_factors.items():
@@ -737,7 +720,7 @@ class SignatureDag:
         types = [types[ord[i]] for i in range(len(types))]
         coef_keys = [coef_keys[ord[i]] for i in range(len(coef_keys))]
         coef_values = [coef_values[ord[i]] for i in range(len(coef_keys))]
-        key = (tuple(coef_values), const_factor, mod, tuple(types))
+        key = (tuple(coef_values), mod, tuple(types))
 
         if key in self.raw_equation_patterns:
             old_pat = self.raw_equation_patterns[key]
@@ -745,7 +728,7 @@ class SignatureDag:
             self.sorted_patterns.append(res)
             return res
 
-        res = EquationPattern(self.geometry_tracker, coef_keys, coef_values, const_factor, mod, types)
+        res = EquationPattern(str(pred), self.geometry_tracker, coef_keys, coef_values, mod, types)
         self.sorted_patterns.append(res)
         self.raw_equation_patterns[key] = res
         return res

@@ -65,3 +65,6 @@ class AugmentedVector(Generic[V, C], AbstractVector):
 
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return self.vector.taxicab_norm(max_index)
+    
+    def __str__(self) -> str:
+        return f'Augmented[{self.vector} | {self.constant}]'

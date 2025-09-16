@@ -71,3 +71,6 @@ class SparseVector(AbstractVector):
 
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return sum([abs(v) for (k, v) in self.inner.items() if max_index is None or k < max_index])
+
+    def __str__(self) -> str:
+        return f'Sparse[{self.inner}]'
