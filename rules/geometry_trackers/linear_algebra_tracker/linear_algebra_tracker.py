@@ -1,5 +1,7 @@
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Self, Tuple
 from fractions import Fraction
+
+from ...permutations import try_match_permutation
 
 from ...embeddings.embedding import Embedding
 from ...embeddings.embedded_objects.scalar import EmbeddedScalar
@@ -21,6 +23,8 @@ class LinearAlgebraTracker:
 
     _keys: List[GeoObject]
     _reverse_keys: Dict[GeoObject, int]
+
+    cached_sparse_combinations: Optional[List[LinearExpression]] = None
 
     def __init__(self):
         self.matrix = Matrix(0)
@@ -64,6 +68,8 @@ class LinearAlgebraTracker:
         if not scalar.is_equal(EmbeddedScalar(value)):
             raise ValueError("The` embedding does not agree with the correctness of the relation.")
 
+        self.cached_sparse_combinations = None
+
         self.matrix.add_row(
             AugmentedVector(
                 SparseVector(
@@ -101,7 +107,7 @@ class LinearAlgebraTracker:
             return None
 
         row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length)
-        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector(row, 0))
+        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector(row, Fraction(0)))
 
         if projected_row.first_nonzero_index() is not None:
             return None
@@ -111,7 +117,7 @@ class LinearAlgebraTracker:
         self, linear_expression: LinearExpression, embedding: Embedding
     ) -> Tuple[LinearExpression, int]:
         automatic_part = LinearExpression(
-            {k: v for (k, v) in linear_expression.items() if self.is_automatically_evaluated(k)}
+            {k: v for (k, v) in linear_expression.items() if LinearAlgebraTracker.is_automatically_evaluated(k)}
         )
 
         residue = LinearExpression({k: v for (k, v) in linear_expression.items() if k not in automatic_part})
@@ -127,23 +133,54 @@ class LinearAlgebraTracker:
 
         return (residue, rounded_scalar)
 
-    def is_automatically_evaluated(self, obj: GeoObject) -> bool:
+    @staticmethod
+    def is_automatically_evaluated(obj: GeoObject) -> bool:
         if isinstance(obj, Literal):
             return True
         if isinstance(obj, ConstructionObject):
             return obj.constructor.name == 'orientation'
         elif isinstance(obj, EquationObject):
-            return self.is_automatically_evaluated(obj.left) and self.is_automatically_evaluated(obj.right)
+            return LinearAlgebraTracker.is_automatically_evaluated(obj.left) and LinearAlgebraTracker.is_automatically_evaluated(obj.right)
         return False
 
-    def get_sparse_integer_linear_combinations(
+    def get_sparse_integer_linear_combinations(self, factors: List[int]) -> List[List[GeoObject]]:
+        if self.cached_sparse_combinations is None:
+            self.cached_sparse_combinations = self.update_sparse_integer_linear_combinations(4, 4)
+
+        combinations: List[List[GeoObject]] = []
+        for linear_expression in self.cached_sparse_combinations:
+            factor_match = self.try_match_factors(linear_expression, factors)
+            if factor_match is not None:
+                combinations.append(factor_match)
+
+        return combinations
+
+    def try_match_factors(self, linear_expression: LinearExpression, factors: List[int]) -> Optional[List[GeoObject]]:
+        if len(linear_expression) != len(factors):
+            return None
+        expression_items = list(linear_expression.items())
+        expression_items.sort(key=lambda item: item[0])
+        
+        expression_factors = [item[1] for item in expression_items]
+        
+        permutation = try_match_permutation(expression_factors, [Fraction(i) for i in factors])
+        if permutation is None:
+            return None
+        
+        return [expression_items[i][0] for i in permutation]
+
+
+    def update_sparse_integer_linear_combinations(
         self, max_coefficient_count: int, max_coefficient_sum: int
     ) -> List[LinearExpression]:
         combinations = self.matrix.get_sparse_integer_linear_combinations(max_coefficient_count, max_coefficient_sum)
-        return [{self._keys[k]: v for (k, v) in combination.items()} for combination in combinations]
+        return [
+            LinearExpression({self._keys[k]: v for (k, v) in combination.vector.inner.items()}) for combination in combinations
+        ]
 
     def clone(self) -> 'LinearAlgebraTracker':
         cloned_tracker = LinearAlgebraTracker()
         cloned_tracker.matrix = self.matrix.clone()
         cloned_tracker._keys = self._keys[:]
         cloned_tracker._reverse_keys = dict(self._reverse_keys)
+        return cloned_tracker

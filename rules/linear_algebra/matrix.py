@@ -66,7 +66,7 @@ class Matrix(Generic[A]):
 
     def get_sparse_integer_linear_combinations(
         self, max_coefficient_count: int, max_coefficient_sum: int
-    ) -> List[Dict[int, Fraction]]:
+    ) -> List[AugmentedVector[A, Fraction]]:
         combinations: List[AugmentedVector[A, Fraction]] = []
         for row_index in range(len(self.rows)):
             diagonal_index_start = self.diagonal_indices[row_index]

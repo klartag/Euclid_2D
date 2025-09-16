@@ -26,7 +26,7 @@ without actually running the proof generator.'''
     args = parser.parse_args()
 
     document = GeometryDocument.open(args.path)
-    problem = DocumentReader().read(document, read_proof_body=False)
+    problem = DocumentReader().read(document, read_proof_body=True)
     validate_proof(problem)
 
 
