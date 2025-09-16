@@ -70,7 +70,7 @@ class ProofChecker:
         if a != c:
             rev_angle = self.geometry_tracker.get_object(ConstructionObject.from_args('angle', (c, b, a)), can_add=True)
             assert rev_angle in self.geometry_tracker._processed_objects and rev_angle in self.geometry_tracker._objects
-            self.geometry_tracker._new_linear_algebra.add_relation(
+            self.geometry_tracker._linear_algebra.add_relation(
                 LinearExpression({angle: 1, rev_angle: 1}), 0, self.geometry_tracker.embedding_tracker
             )
 

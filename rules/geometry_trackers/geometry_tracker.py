@@ -107,7 +107,7 @@ class GeometryTracker:
     """All predicates known to be true."""
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
-    _new_linear_algebra: LinearAlgebraTracker
+    _linear_algebra: LinearAlgebraTracker
 
     embedding_tracker: Optional[Embedding]
     """Tracks 2D embeddings of the geometric configurations."""
@@ -124,7 +124,7 @@ class GeometryTracker:
 
         self.get_object(ONE, can_add=True)
 
-        self._new_linear_algebra = LinearAlgebraTracker()
+        self._linear_algebra = LinearAlgebraTracker()
 
     def load_embedding(self, problem: GeometryProblem):
         """
@@ -269,7 +269,7 @@ class GeometryTracker:
         if a != c:
             rev_angle = self.get_object(ConstructionObject.from_args('angle', (c, b, a)), can_add=True)
             assert rev_angle in self._processed_objects and rev_angle in self._objects
-            self._new_linear_algebra.add_relation_mod(
+            self._linear_algebra.add_relation_mod(
                 LinearExpression({angle: 1, rev_angle: 1}), 0, 360, self.embedding_tracker
             )
 
@@ -336,9 +336,9 @@ class GeometryTracker:
                     raise ProofCheckError(f'In predicate {pred}, recived fractional value!')
 
         if mod is None:
-            self._new_linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
+            self._linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
         else:
-            self._new_linear_algebra.add_relation_mod(LinearExpression(factors), 0, mod, self.embedding_tracker)
+            self._linear_algebra.add_relation_mod(LinearExpression(factors), 0, mod, self.embedding_tracker)
 
     def add_equal_scalar(self, pred: Predicate):
         """
@@ -347,7 +347,7 @@ class GeometryTracker:
         # Adding the equation as a normal equation.
         factors = get_linear_eqn_factors(pred)
         if factors is not None:
-            self._new_linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
+            self._linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
 
         # Adding the equation as a log equation.
         # We do this by default only to equations that are not normal equations, since logs are also non-zero.
@@ -356,7 +356,7 @@ class GeometryTracker:
             if log_factors is not None:
                 for factor in log_factors:
                     self.get_object(factor, can_add=True)
-                self._new_linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker)
+                self._linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker)
 
     def _add_equal_objects_nonrecursive(self, a: GeoObject, b: GeoObject):
         """
@@ -400,8 +400,8 @@ class GeometryTracker:
         # Adding the equality relation to any tracker where at least one object appears.
         # Since one of the old objects will no longer be accessible, we only have to add an equality relation
         # If the old object was tracked in some form.
-        if self._new_linear_algebra.contains_key(a):
-            self._new_linear_algebra.add_relation(LinearExpression({a: 1, b: -1}), 0, self.embedding_tracker)
+        if self._linear_algebra.contains_key(a):
+            self._linear_algebra.add_relation(LinearExpression({a: 1, b: -1}), 0, self.embedding_tracker)
 
     def add_equal_object(self, g1: GeoObject, g2: GeoObject):
         """
@@ -646,14 +646,14 @@ class GeometryTracker:
                     factors = get_linear_eqn_factors(pred)
                     if (
                         factors is not None
-                        and self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
+                        and self._linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
                         == 0
                     ):
                         return True
                     factors = get_log_eqn_factors(pred)
                     return (
                         factors is not None
-                        and self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
+                        and self._linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
                         == 0
                     )
 
@@ -661,7 +661,7 @@ class GeometryTracker:
                     factors = get_linear_eqn_factors(pred)
                     return (
                         factors is not None
-                        and self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
+                        and self._linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
                         == 0
                     )
 
@@ -670,7 +670,7 @@ class GeometryTracker:
                 factors = get_linear_eqn_factors(pred)
                 if factors is None:
                     return False
-                result = self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
+                result = self._linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
                 return result is not None and result % 360 == 0
 
             case 'not_equals' | 'not_equals_mod_360':
@@ -691,7 +691,7 @@ class GeometryTracker:
         res._processed_objects = set(self._processed_objects)
         res._predicates = set(self._predicates)
         res._asserted_predicates = set(self._asserted_predicates)
-        res._new_linear_algebra = self._new_linear_algebra.clone()
+        res._linear_algebra = self._linear_algebra.clone()
         return res
 
     def load_assumptions(self, problem: GeometryProblem):

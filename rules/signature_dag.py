@@ -507,7 +507,7 @@ class EquationPattern(InternalNodePattern):
         """
         Updates the equation pattern using the proof checker.
         """
-        combinations = self.geometry_tracker._new_linear_algebra.get_sparse_integer_linear_combinations(self.eqn_factors)
+        combinations = self.geometry_tracker._linear_algebra.get_sparse_integer_linear_combinations(self.eqn_factors)
         combination_indices = [[get_eqn_key(o) for o in lst] for lst in combinations]
         
         # print(f'[Equation Pattern] {self.name} - {len(combination_indices)}')
