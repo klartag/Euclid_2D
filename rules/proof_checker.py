@@ -329,7 +329,7 @@ class ProofChecker:
             else:
                 e.args = (error_message,)
             # raise e
-            print(e)
+            # print(e)
 
     def load_proof(self):
         """

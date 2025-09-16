@@ -90,7 +90,7 @@ class Matrix(Generic[A]):
                     ):
                         new_combinations.append(potential_new_combination)
             combinations = new_combinations
-            print(len(combinations))
+            # print(len(combinations))
 
         combinations = [
             combination

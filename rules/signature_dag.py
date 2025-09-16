@@ -1,9 +1,12 @@
 import abc
 from fractions import Fraction
 import functools
-from typing import Sequence, TypeVar
+import itertools
+from typing import Optional, Sequence, TypeVar
 import warnings
 from frozendict import frozendict
+
+from rules.geometry_objects.eq_op import EqOp
 
 from .predicates.predicate_factory import predicate_from_args
 
@@ -12,7 +15,7 @@ from .geometry_trackers.linear_algebra_tracker.linear_algebra_tracker import Lin
 from .geometry_trackers.geometry_tracker import GeometryTracker, involved_objects
 from .geometry_objects.construction_object import Construction, ConstructionObject
 from .geometry_objects.geo_object import GeoObject
-from .geometry_objects.literal import ONE, ZERO
+from .geometry_objects.literal import ONE, ZERO, Literal
 from .geometry_objects.equation_object import EquationObject
 from .proof_checker_utils import (
     KNOWN_KEYS,
@@ -307,7 +310,7 @@ class IntersectPattern(InternalNodePattern):
         """
         # print(f'IntersectPattern: {self.repr()}')
         
-        if 'angles_on_chord' in self.name:
+        if 'Theorem(angles_on_chord_v0)' == self.name:
             debug = 1
 
         if not any(comp.has_unpushed_data() for comp in self.components):
@@ -507,7 +510,7 @@ class EquationPattern(InternalNodePattern):
         combinations = self.geometry_tracker._new_linear_algebra.get_sparse_integer_linear_combinations(self.eqn_factors)
         combination_indices = [[get_eqn_key(o) for o in lst] for lst in combinations]
         
-        print(f'[Equation Pattern] {self.name} - {len(combination_indices)}')
+        # print(f'[Equation Pattern] {self.name} - {len(combination_indices)}')
         
         new_matches = RustMatch.raw(self.coef_keys, combination_indices).subtract(self.all_matches)
         self.new_matches.extend(new_matches)
@@ -800,14 +803,57 @@ class SignatureDag:
             self.sorted_patterns.append(res)
             self.predicate_patterns[pred] = res
             return res
+        
+    def filter_predicate(self, predicate: Predicate) -> Optional[Predicate]:
+        if predicate.name in ['equals', 'equals_mod_360']:
+            left = self.filter_equation_object(predicate.components[0])
+            right = self.filter_equation_object(predicate.components[1])
+            if isinstance(left, Literal) and isinstance(right, Literal):
+                return None
+            return predicate_from_args(predicate.name, (left, right))
+        elif predicate.name == 'exists':
+            objects = [
+                component for component in predicate.components
+                if not LinearAlgebraTracker.is_automatically_evaluated(component)
+            ]
+            if len(objects) == 0:
+                return None
+            return predicate_from_args('exists', tuple(objects))
+        else:
+            return predicate
+            
+    def filter_equation_object(self, obj: GeoObject) -> GeoObject:
+        if isinstance(obj, EquationObject):
+            left = self.filter_equation_object(obj.left)
+            right = self.filter_equation_object(obj.right)
+            if isinstance(left, Literal) and isinstance(right, Literal):
+                return Literal(Fraction(0))
+            elif isinstance(right, Literal):
+                return left
+            elif isinstance(left, Literal) and obj.op != EqOp.DIV:
+                return right
+            else:
+                return EquationObject(left, right, obj.op)
+        elif isinstance(obj, Literal):
+            return Literal(Fraction(0))
+        elif isinstance(obj, ConstructionObject) and obj.constructor.name == 'orientation':
+            return Literal(Fraction(0))
+        else:
+            return obj
 
     def make_theorem_pattern(self, theorem: Theorem):
-        for obj in involved_objects(theorem):
+        if theorem.name == 'angles_on_chord_v0':
+            debug = 1
+        filtered_required_predicates = list(filter(None, [self.filter_predicate(pred) for pred in theorem.required_predicates]))
+        involved_theorem_objects = list(itertools.chain(
+            *[involved_objects(x) for x in theorem.signature] + [involved_objects(x) for x in filtered_required_predicates]
+        ))
+        for obj in involved_theorem_objects:
             self.step_key_to_obj[get_eqn_key(obj)] = obj
         patterns = []
-        for comp in involved_objects(theorem):
+        for comp in involved_theorem_objects:
             patterns.append(self.get_object_pattern(comp))
-        for pred in theorem.required_predicates:
+        for pred in filtered_required_predicates:
             # Large open predicates, such as distinct(A, B, C, D, E), tend to take up a lot of resources.
             # By unpacking them, we can intersect them with closed predicates and avoid the blow-up.
             if pred.is_open() or pred.name in {'in', 'exists'}:
