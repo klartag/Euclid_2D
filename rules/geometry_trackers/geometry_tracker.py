@@ -12,7 +12,6 @@ from ..proof_checker_utils import (
     unpack_predicate_full,
     unpack_predicate_minimal,
 )
-from ..rust_code.rust_sparse_linear import BaseSolver
 from ..errors import GeometryError, IllegalObjectError, ProofCheckError
 from ..geometry_objects.geo_type import GeoType, R_EQN_TYPES, Signature
 from ..geometry_objects.atom import Atom
@@ -25,8 +24,7 @@ from ..predicates.implementations.macro_predicate import MacroPredicate
 from ..proof.geometry_problem import GeometryProblem
 from ..union_find import UnionFind
 
-from .old_linear_algebra_tracker import OldLinearAlgebraTracker as LinearAlgebraTracker
-from .linear_algebra_tracker.linear_algebra_tracker import LinearAlgebraTracker as NewLinearAlgebraTracker
+from .linear_algebra_tracker.linear_algebra_tracker import LinearAlgebraTracker
 from .linear_algebra_tracker.linear_expression import LinearExpression
 
 NUMERIC_PRECISION = 1e-3
@@ -109,8 +107,7 @@ class GeometryTracker:
     """All predicates known to be true."""
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
-    _linear_algebra: LinearAlgebraTracker
-    _new_linear_algebra: NewLinearAlgebraTracker
+    _new_linear_algebra: LinearAlgebraTracker
 
     embedding_tracker: Optional[Embedding]
     """Tracks 2D embeddings of the geometric configurations."""
@@ -127,8 +124,7 @@ class GeometryTracker:
 
         self.get_object(ONE, can_add=True)
 
-        self._linear_algebra = LinearAlgebraTracker()
-        self._new_linear_algebra = NewLinearAlgebraTracker()
+        self._new_linear_algebra = LinearAlgebraTracker()
 
     def load_embedding(self, problem: GeometryProblem):
         """
@@ -250,16 +246,6 @@ class GeometryTracker:
         Returns all predicates known by the checker."""
         return self._predicates | self._asserted_predicates
 
-    def trackers(self) -> list[BaseSolver]:
-        """
-        Returns the list of trackers of the proof checker.
-        """
-        return [
-            self._linear_algebra.bool_equations,
-            self._linear_algebra.mod_360_equations,
-            self._linear_algebra.real_equations,
-        ]
-
     def process_angle(self, angle: GeoObject):
         """
         Adds automatic theorems to an angle.
@@ -283,36 +269,9 @@ class GeometryTracker:
         if a != c:
             rev_angle = self.get_object(ConstructionObject.from_args('angle', (c, b, a)), can_add=True)
             assert rev_angle in self._processed_objects and rev_angle in self._objects
-            self._linear_algebra.real_equations.add_relation({angle: 1, rev_angle: 1})
-            self._linear_algebra.mod_360_equations.add_relation({angle: 1, rev_angle: 1})
-
             self._new_linear_algebra.add_relation_mod(
                 LinearExpression({angle: 1, rev_angle: 1}), 0, 360, self.embedding_tracker
             )
-
-    def process_orientation(self, ori: GeoObject):
-        """
-        Adds automatic theorems to an orientation.
-        The single theorem currenlt added is:
-        * `orientation(A, B, C) != orientation(C, B, A)`
-
-        Parameters:
-        * `ori`: An orientation to add theorems to.
-        """
-        if not isinstance(ori, ConstructionObject) or ori.constructor.name != 'orientation':
-            return
-
-        a, b, c = ori.components
-        self.add_predicate(predicate_from_args('not_collinear', (a, b, c)), 'Since they have an orientation.')
-
-        rev = self.get_object(ConstructionObject.from_args('orientation', ori.components[::-1]), can_add=True)
-        assert rev in self._processed_objects and rev in self._objects
-
-        if ori != rev:
-            self._linear_algebra.bool_equations.add_relation({ori: True, rev: True, ONE: True})
-        else:
-            # We get a contradiction, and properly add it.
-            self._linear_algebra.bool_equations.add_relation({ONE: True})
 
     def process_object(self, obj: GeoObject):
         """
@@ -349,8 +308,6 @@ class GeometryTracker:
         match obj.type:
             case GeoType.ANGLE:
                 self.process_angle(obj)
-            case GeoType.ORIENTATION:
-                self.process_orientation(obj)
 
         if (
             self.embedding_tracker is not None
@@ -378,15 +335,6 @@ class GeometryTracker:
                 if abs(v - round(v)) > 1e-3:
                     raise ProofCheckError(f'In predicate {pred}, recived fractional value!')
 
-        match mod:
-            case None:
-                self._linear_algebra.real_equations.add_relation(factors)
-                self._linear_algebra.mod_360_equations.add_relation(factors)
-            case 360:
-                self._linear_algebra.mod_360_equations.add_relation(factors)
-            case _:
-                raise NotImplementedError(f'Equality mod {mod} in predicate {pred} is not implemented!')
-
         if mod is None:
             self._new_linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
         else:
@@ -399,7 +347,6 @@ class GeometryTracker:
         # Adding the equation as a normal equation.
         factors = get_linear_eqn_factors(pred)
         if factors is not None:
-            self._linear_algebra.real_equations.add_relation(factors)
             self._new_linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
 
         # Adding the equation as a log equation.
@@ -409,16 +356,7 @@ class GeometryTracker:
             if log_factors is not None:
                 for factor in log_factors:
                     self.get_object(factor, can_add=True)
-                self._linear_algebra.real_equations.add_relation(log_factors)
                 self._new_linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker)
-
-    def add_equal_bool(self, pred: Predicate):
-        """
-        Handles an equality of orientations.
-        """
-        factors = get_linear_eqn_factors(pred)
-        if factors is not None:
-            self._linear_algebra.bool_equations.add_relation(factors)
 
     def _add_equal_objects_nonrecursive(self, a: GeoObject, b: GeoObject):
         """
@@ -462,10 +400,6 @@ class GeometryTracker:
         # Adding the equality relation to any tracker where at least one object appears.
         # Since one of the old objects will no longer be accessible, we only have to add an equality relation
         # If the old object was tracked in some form.
-        for tracker in self.trackers():
-            # Note: Since we know that a is set to become b, we don't need to add the relation if a is nonexistent.
-            if tracker.contains(a):
-                tracker.add_relation({a: 1, b: -1})
         if self._new_linear_algebra.contains_key(a):
             self._new_linear_algebra.add_relation(LinearExpression({a: 1, b: -1}), 0, self.embedding_tracker)
 
@@ -608,7 +542,7 @@ class GeometryTracker:
                         # Handling an angle equation with no modulus.
                         self.add_equal_angle(pred, None)
                     case (GeoType.ORIENTATION, _) | (_, GeoType.ORIENTATION):
-                        self.add_equal_bool(pred)
+                        pass
                     case _:
                         # Generic object equality.
                         a, b = pred.components
@@ -737,10 +671,7 @@ class GeometryTracker:
                 if factors is None:
                     return False
                 result = self._new_linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
-                # TODO: Return b0 instead (once we swap the ProofGenerator uses of linear algebra)
-                b0 = result is not None and result % 360 == 0
-                b1 = self._linear_algebra.mod_360_equations.contains_relation(factors)
-                return b1
+                return result is not None and result % 360 == 0
 
             case 'not_equals' | 'not_equals_mod_360':
                 return self.embedding_tracker.evaluate_predicate(pred) == EmbeddedPredicateValue.Correct
@@ -760,7 +691,6 @@ class GeometryTracker:
         res._processed_objects = set(self._processed_objects)
         res._predicates = set(self._predicates)
         res._asserted_predicates = set(self._asserted_predicates)
-        res._linear_algebra = self._linear_algebra.clone()
         res._new_linear_algebra = self._new_linear_algebra.clone()
         return res
 
