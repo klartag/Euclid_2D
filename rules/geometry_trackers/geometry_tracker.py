@@ -327,6 +327,8 @@ class GeometryTracker:
         @param angle: A predicate stating that some linear combination of angles is 0.
         @param mod: The modulus under which the equality is valid.
         """
+        if self.embedding_tracker is None: return
+        
         factors = get_linear_eqn_factors(pred)
         if factors is None:
             raise GeometryError(f'Failed to convert equation {pred.to_language_format()} to a linear equation!')
@@ -345,6 +347,7 @@ class GeometryTracker:
         Handles an equality of scalars.
         """
         # Adding the equation as a normal equation.
+        if self.embedding_tracker is None: return
         factors = get_linear_eqn_factors(pred)
         if factors is not None:
             self._linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
@@ -550,7 +553,8 @@ class GeometryTracker:
             case 'equals_mod_360':
                 self.add_equal_angle(pred, 360)
             case 'not_equals' | 'not_equals_mod_360':
-                raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
+                pass
+                # raise NotImplementedError("The Geometry Tracker does not track not_equals predicates.")
         if pred.name != 'exists':
             for obj in pred.involved_objects():
                 predicate = predicate_from_args('exists', (obj,))
@@ -643,6 +647,8 @@ class GeometryTracker:
                 a, b = pred.components
                 typ = a.type if a.type != GeoType.LITERAL else b.type
                 if typ in R_EQN_TYPES:
+                    if self.embedding_tracker is None:
+                        return False
                     factors = get_linear_eqn_factors(pred)
                     if (
                         factors is not None
@@ -658,6 +664,8 @@ class GeometryTracker:
                     )
 
                 if typ == GeoType.ORIENTATION:
+                    if self.embedding_tracker is None:
+                        return False
                     factors = get_linear_eqn_factors(pred)
                     return (
                         factors is not None
@@ -667,13 +675,17 @@ class GeometryTracker:
 
                 return self.get_object(a, can_add=can_add) == self.get_object(b, can_add=can_add)
             case 'equals_mod_360':
+                if self.embedding_tracker is None:
+                        return False
                 factors = get_linear_eqn_factors(pred)
                 if factors is None:
                     return False
+                if self.embedding_tracker is None: return False
                 result = self._linear_algebra.try_evaluate(LinearExpression(factors), self.embedding_tracker)
                 return result is not None and result % 360 == 0
 
             case 'not_equals' | 'not_equals_mod_360':
+                if self.embedding_tracker is None: return False
                 return self.embedding_tracker.evaluate_predicate(pred) == EmbeddedPredicateValue.Correct
             case 'between' | 'collinear':
                 if pred.components[0] == pred.components[1] or pred.components[2] == pred.components[1]:
