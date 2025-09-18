@@ -269,9 +269,10 @@ class GeometryTracker:
         if a != c:
             rev_angle = self.get_object(ConstructionObject.from_args('angle', (c, b, a)), can_add=True)
             assert rev_angle in self._processed_objects and rev_angle in self._objects
-            self._linear_algebra.add_relation_mod(
-                LinearExpression({angle: 1, rev_angle: 1}), 0, 360, self.embedding_tracker
-            )
+            if self.embedding_tracker is not None:
+                self._linear_algebra.add_relation_mod(
+                    LinearExpression({angle: 1, rev_angle: 1}), 0, 360, self.embedding_tracker
+                )
 
     def process_object(self, obj: GeoObject):
         """
