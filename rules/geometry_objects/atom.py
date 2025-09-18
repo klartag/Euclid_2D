@@ -1,4 +1,5 @@
 from typing import Mapping
+from fractions import Fraction
 
 from .geo_type import GeoType
 from .geo_object import GeoObject
@@ -24,10 +25,10 @@ class Atom(GeoObject):
     def clone(self) -> 'GeoObject':
         return Atom(self.name, self.type)
 
-    def as_literal(self) -> float | None:
+    def as_literal(self) -> Fraction | None:
         return None
 
-    def as_linear_equation(self) -> 'dict[GeoObject, float] | None':
+    def as_linear_equation(self) -> 'dict[GeoObject, Fraction] | None':
         return {self: 1}
 
     def involved_objects(self) -> 'set[GeoObject]':

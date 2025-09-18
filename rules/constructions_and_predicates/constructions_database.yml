@@ -116,7 +116,7 @@ midpoint:
   conclude:
     - between(A, O, B)
     - distance(A, O) == distance(B, O)
-    - distance(A, O) == distance(A, B)/2
+    - 2 * distance(A, O) == distance(A, B)
   possible_conclusions:
     - A != B => distinct(A, O, B)
 

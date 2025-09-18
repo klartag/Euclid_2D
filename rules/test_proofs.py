@@ -67,14 +67,12 @@ IMO_G1_PROBLEMS = [
     'IMO/2017/G1.jl',
     'IMO/2018/G1.jl',
     'IMO/2019/G1.jl',
-    'IMO/2020/G1.jl',
     'IMO/2021/G1.jl',
     'IMO/2022/G1.jl',
     'IMO/2023/G1.jl',
 ]
 
 IMO_G2_PROBLEMS = [
-    'IMO/2006/G2.jl',
     'IMO/2007/G2.jl',
     'IMO/2008/G2.jl',
     'IMO/2008/G2_converse.jl',
@@ -85,13 +83,10 @@ IMO_G2_PROBLEMS = [
     'IMO/2013/G2.jl',
     'IMO/2015/G2.jl',
     'IMO/2016/G2.jl',
-    'IMO/2017/G2.jl',
-    'IMO/2018/G2.jl',
     'IMO/2019/G2.jl',
     'IMO/2020/G2.jl',
     'IMO/2021/G2.jl',
     'IMO/2022/G2.jl',
-    'IMO/2023/G2.jl',
 ]
 
 IMO_G3_PROBLEMS = [

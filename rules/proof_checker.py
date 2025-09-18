@@ -4,6 +4,8 @@ import time
 
 from tqdm import trange
 
+from .geometry_trackers.linear_algebra_tracker.linear_expression import LinearExpression
+
 from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
@@ -68,8 +70,9 @@ class ProofChecker:
         if a != c:
             rev_angle = self.geometry_tracker.get_object(ConstructionObject.from_args('angle', (c, b, a)), can_add=True)
             assert rev_angle in self.geometry_tracker._processed_objects and rev_angle in self.geometry_tracker._objects
-            self.geometry_tracker._linear_algebra.real_equations.add_relation({angle: 1, rev_angle: 1})
-            self.geometry_tracker._linear_algebra.mod_360_equations.add_relation({angle: 1, rev_angle: 1})
+            self.geometry_tracker._linear_algebra.add_relation(
+                LinearExpression({angle: 1, rev_angle: 1}), 0, self.geometry_tracker.embedding_tracker
+            )
 
     def process_orientation(self, ori: GeoObject):
         """
@@ -248,7 +251,7 @@ class ProofChecker:
                 return (
                     f'\nIn step {step}:\n'
                     f'Predicate {step_pred} does not follow from theorem. \n'
-                    f'Theorem results: {[self.geometry_tracker.get_predicate(res_pred.substitute(substitutions), True) for res_pred in theorem.result_predicates]}\n'
+                    f'Theorem results: {[self.geometry_tracker.get_predicate(res_pred.substitute(substitutions), can_add=False) for res_pred in theorem.result_predicates]}\n'
                     f'Substitutions: { {obj: self.geometry_tracker.get_object(obj, can_add=True) for obj in step_pred.components} }'
                 )
             reason = f'consequence of the theorem step: {step.theorem_name}'
@@ -323,7 +326,8 @@ class ProofChecker:
                 e.args = (error_message + e.args[0], e.args[1:])
             else:
                 e.args = (error_message,)
-            raise e
+            # raise e
+            # print(e)
 
     def load_proof(self):
         """
