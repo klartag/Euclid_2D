@@ -63,42 +63,10 @@ class Matrix(Generic[A]):
 
         self.diagonal_indices.insert(row_index, first_nonzero_index)
         self.rows.insert(row_index, row)
-
-    def get_sparse_integer_linear_combinations(
-        self, max_coefficient_count: int, max_coefficient_sum: int
-    ) -> List[AugmentedVector[A, Fraction]]:
-        combinations: List[AugmentedVector[A, Fraction]] = []
-        for row_index in range(len(self.rows)):
-            diagonal_index_start = self.diagonal_indices[row_index]
-            diagonal_index_end = (
-                self.diagonal_indices[row_index + 1] if row_index < len(self.rows) - 1 else self.row_length
-            )
-            new_combinations: List[AugmentedVector[A, Fraction]] = []
-
-            row = self.rows[row_index]
-            # `row *= gcd([x.denominator for x in row[:diagonal_index_bound]])` # So that we end up with an *integer* combination.
-            if row.count_nonzero_indices(diagonal_index_end) <= max_coefficient_count:
-                for i in range(max_coefficient_sum // row.taxicab_norm(diagonal_index_end)):
-                    new_combinations.append(row * (i + 1))
-            for old_combination in combinations:
-                old_combination -= row * old_combination[diagonal_index_start]
-                for i in range(-max_coefficient_sum, max_coefficient_sum + 1):
-                    potential_new_combination = old_combination + row * i
-                    if (
-                        potential_new_combination.count_nonzero_indices(diagonal_index_end) <= max_coefficient_count
-                        and potential_new_combination.taxicab_norm(diagonal_index_end) <= max_coefficient_sum
-                    ):
-                        new_combinations.append(potential_new_combination)
-            combinations = new_combinations
-            # print(len(combinations))
-
-        combinations = [
-            combination
-            for combination in combinations
-            if combination.vector.count_nonzero_indices() <= max_coefficient_count
-            and combination.vector.taxicab_norm() <= max_coefficient_sum
-        ]
-        return combinations
+        
+    def get_sparse_integer_linear_combinations(self, factors: List[int]) -> List[List[int]]:
+        # TODO: Implement
+        raise NotImplementedError()
 
     def __str__(self) -> str:
         nonzero_keys = [i for i in range(self.row_length) if any([row[i] != 0 for row in self.rows])]
