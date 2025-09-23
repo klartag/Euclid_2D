@@ -52,7 +52,7 @@ class DiagramEmbedder:
 
     def remove_necessary_assumptions(self, signature: Signature, assumptions: List[Predicate]) -> List[Predicate]:
         necessary_assumptions = []
-        for assumption in tqdm(assumptions):
+        for assumption in assumptions:
             if self.is_assumption_necessary(signature, assumption, necessary_assumptions):
                 necessary_assumptions.append(assumption)
         return necessary_assumptions

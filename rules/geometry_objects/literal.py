@@ -1,3 +1,4 @@
+from fractions import Fraction
 import re
 from typing import Mapping
 
@@ -9,8 +10,8 @@ LITERAL_PATTERN = r'(-?\d+(\.\d+)?)'
 
 
 class Literal(GeoObject):
-    def __init__(self, name: str) -> None:
-        self.name = name
+    def __init__(self, name: str | Fraction) -> None:
+        self.name = str(name)
         self.type = GeoType.LITERAL
         self.id = hash((self.name, GeoType.LITERAL))
         self.depth = 1
@@ -28,10 +29,10 @@ class Literal(GeoObject):
     def clone(self) -> 'GeoObject':
         return Literal(self.name)
 
-    def as_literal(self) -> float | None:
-        return float(self.name)
+    def as_literal(self) -> Fraction | None:
+        return Fraction(self.name)
 
-    def as_linear_equation(self) -> 'dict[GeoObject, float] | None':
+    def as_linear_equation(self) -> 'dict[GeoObject, Fraction] | None':
         return {ONE: self.as_literal()}
 
     def involved_objects(self) -> 'set[GeoObject]':

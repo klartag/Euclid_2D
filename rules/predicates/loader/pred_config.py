@@ -10,7 +10,8 @@ from ...errors import ProofParseError
 from ...symmetry import Symmetry
 
 from ...geometry_objects.atom import Atom
-from ...geometry_objects.construction_object import Construction, LogConstruction
+from ...geometry_objects.construction_object import Construction
+from ...geometry_objects.log_construction import LogConstruction
 from ...geometry_objects.geo_object import GeoObject
 from ...geometry_objects.geo_type import GeoType, Signature
 
