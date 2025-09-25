@@ -37,12 +37,6 @@ class Matrix(Generic[A]):
         return projected_row.first_nonzero_index() is None and not projected_row.constant
 
     def add_row(self, row: AugmentedVector[A, Fraction]):
-        if not isinstance(row.constant, Fraction) or not all(
-            [isinstance(row.vector[i], Fraction) for i in range(len(row.vector))]
-        ):
-            a = 1
-
-        temp_row = row
         row = self.project_to_orthogonal_complement(row)
 
         if not row.vector and row.constant:
