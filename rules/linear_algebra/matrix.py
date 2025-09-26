@@ -3,6 +3,10 @@ from typing import Dict, List, TypeVar, Generic
 
 from .vectors.abstract_vector import AbstractVector
 from .vectors.augmented_vector import AugmentedVector
+from fractions import Fraction
+from collections import defaultdict
+from .vectors.sparse_vector import SparseVector
+
 
 A = TypeVar('A', bound=AbstractVector)
 
@@ -63,10 +67,102 @@ class Matrix(Generic[A]):
 
         self.diagonal_indices.insert(row_index, first_nonzero_index)
         self.rows.insert(row_index, row)
-        
+
     def get_sparse_integer_linear_combinations(self, factors: List[int]) -> List[List[int]]:
-        # TODO: Implement
-        raise NotImplementedError()
+        """
+        Return all index tuples [i1, ..., ij] (1 <= j <= 4) such that
+            sum_t factors[t] * e_{i_t}  ≡  0  (mod span(self.rows))
+        where equivalence is checked by projecting basis vectors to the orthogonal
+        complement using self.project_to_orthogonal_complement and comparing only
+        the vector part (ignore constants).
+        """
+
+        # --------- Local helpers ---------
+        def is_zero_vec(v: SparseVector) -> bool:
+            return v.first_nonzero_index() is None
+
+        def sig(v: SparseVector):
+            # Hashable signature of a sparse vector: sorted tuple of (index, coeff)
+            inner = v.inner  # type: ignore[attr-defined]
+            if not inner:
+                return ()
+            return tuple(sorted((k, inner[k]) for k in inner.keys() if inner[k] != 0))
+        # ---------------------------------
+
+        j = len(factors)
+        if j < 1 or j > 4:
+            return []
+        if any(f == 0 for f in factors):
+            # avoid degenerate explosions when a factor is zero.
+            return []
+
+        coeffs = [Fraction(f) for f in factors]
+        n = self.row_length
+
+        # --- Precompute P_i = projection of basis column i (vector part only, constants ignored) ---
+        P: List[SparseVector] = []
+        for i in range(n):
+            basis = AugmentedVector(SparseVector({i: 1}, self.row_length), Fraction(0))
+            proj = self.project_to_orthogonal_complement(basis).vector  # type: ignore[assignment]
+            # proj is a SparseVector in our usage
+            P.append(proj)  # type: ignore[arg-type]
+
+        results: list[list[int]] = []
+
+        if j == 1:
+            # c1 * P[i] == 0  <=>  P[i] == 0 (since c1 != 0)
+            for i in range(n):
+                if is_zero_vec(P[i]):
+                    results.append([i])
+            return results
+
+        if j == 2:
+            c1, c2 = coeffs
+            right_map: dict[tuple, list[int]] = defaultdict(list)
+            for j2 in range(n):
+                v = P[j2] * (-c2)
+                right_map[sig(v)].append(j2)
+            for i1 in range(n):
+                v = P[i1] * c1
+                lst = right_map.get(sig(v))
+                if lst:
+                    for j2 in lst:
+                        results.append([i1, j2])
+            return results
+
+        if j == 3:
+            c1, c2, c3 = coeffs
+            right_map: dict[tuple, list[int]] = defaultdict(list)
+            for k in range(n):
+                v = P[k] * (-c3)
+                right_map[sig(v)].append(k)
+            for i1 in range(n):
+                v1 = P[i1] * c1
+                for j2 in range(n):
+                    v = v1 + (P[j2] * c2)
+                    lst = right_map.get(sig(v))
+                    if lst:
+                        for k in lst:
+                            results.append([i1, j2, k])
+            return results
+
+        # j == 4
+        c1, c2, c3, c4 = coeffs
+        right_map: dict[tuple, list[tuple[int, int]]] = defaultdict(list)
+        for k in range(n):
+            vk = P[k] * c3
+            for l in range(n):
+                v = (vk + (P[l] * c4)) * Fraction(-1)
+                right_map[sig(v)].append((k, l))
+        for i1 in range(n):
+            v1 = P[i1] * c1
+            for j2 in range(n):
+                v = v1 + (P[j2] * c2)
+                pairs = right_map.get(sig(v))
+                if pairs:
+                    for (k, l) in pairs:
+                        results.append([i1, j2, k, l])
+        return results
 
     def __str__(self) -> str:
         nonzero_keys = [i for i in range(self.row_length) if any([row[i] != 0 for row in self.rows])]
