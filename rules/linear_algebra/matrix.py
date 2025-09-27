@@ -1,11 +1,10 @@
-from fractions import Fraction
-from typing import Dict, List, TypeVar, Generic
-
+from typing import List, TypeVar, Generic
 from .vectors.abstract_vector import AbstractVector
-from .vectors.augmented_vector import AugmentedVector
 from fractions import Fraction
 from collections import defaultdict
+from itertools import product
 from .vectors.sparse_vector import SparseVector
+from .vectors.augmented_vector import AugmentedVector
 
 
 A = TypeVar('A', bound=AbstractVector)
@@ -72,97 +71,99 @@ class Matrix(Generic[A]):
         """
         Return all index tuples [i1, ..., ij] (1 <= j <= 4) such that
             sum_t factors[t] * e_{i_t}  ≡  0  (mod span(self.rows))
-        where equivalence is checked by projecting basis vectors to the orthogonal
-        complement using self.project_to_orthogonal_complement and comparing only
-        the vector part (ignore constants).
+        Equivalence is tested by projecting basis columns with
+        project_to_orthogonal_complement and comparing only the vector part
+        (ignore constants).
         """
 
-        # --------- Local helpers ---------
-        def is_zero_vec(v: SparseVector) -> bool:
-            return v.first_nonzero_index() is None
-
-        def sig(v: SparseVector):
-            # Hashable signature of a sparse vector: sorted tuple of (index, coeff)
-            inner = v.inner  # type: ignore[attr-defined]
-            if not inner:
-                return ()
-            return tuple(sorted((k, inner[k]) for k in inner.keys() if inner[k] != 0))
-        # ---------------------------------
-
         j = len(factors)
-        if j < 1 or j > 4:
+        if not (1 <= j <= 4):
             return []
         if any(f == 0 for f in factors):
-            # avoid degenerate explosions when a factor is zero.
+            # Avoid degenerate blowups when a factor is zero.
             return []
 
         coeffs = [Fraction(f) for f in factors]
         n = self.row_length
 
-        # --- Precompute P_i = projection of basis column i (vector part only, constants ignored) ---
-        P: List[SparseVector] = []
+        # --- Precompute P_i = projection of basis column i (vector part only) ---
+        P: list[SparseVector] = []
         for i in range(n):
             basis = AugmentedVector(SparseVector({i: 1}, self.row_length), Fraction(0))
-            proj = self.project_to_orthogonal_complement(basis).vector  # type: ignore[assignment]
-            # proj is a SparseVector in our usage
-            P.append(proj)  # type: ignore[arg-type]
+            proj = self.project_to_orthogonal_complement(basis).vector
+            # proj is a SparseVector
+            P.append(proj)
 
-        results: list[list[int]] = []
+        # --- Local helpers  ---
+        def zero_vec() -> SparseVector:
+            return SparseVector({}, self.row_length)
 
-        if j == 1:
-            # c1 * P[i] == 0  <=>  P[i] == 0 (since c1 != 0)
-            for i in range(n):
-                if is_zero_vec(P[i]):
-                    results.append([i])
-            return results
+        def sig(v: SparseVector) -> tuple[tuple[int, Fraction], ...]:
+            """Canonical, hashable signature of a sparse vector."""
+            inner = v.inner
+            if not inner:
+                return ()
+            return tuple(sorted((k, inner[k]) for k in inner.keys() if inner[k] != 0))
 
-        if j == 2:
-            c1, c2 = coeffs
-            right_map: dict[tuple, list[int]] = defaultdict(list)
-            for j2 in range(n):
-                v = P[j2] * (-c2)
-                right_map[sig(v)].append(j2)
-            for i1 in range(n):
-                v = P[i1] * c1
-                lst = right_map.get(sig(v))
-                if lst:
-                    for j2 in lst:
-                        results.append([i1, j2])
-            return results
+        # Enumerate all weighted sums for a block of coefficients,
+        # returning a map: signature -> list of index-tuples (preserving order within the block).
+        def enumerate_block(block_coeffs: list[Fraction]) -> dict[tuple, list[tuple[int, ...]]]:
+            if not block_coeffs:  # empty block → one option: zero sum with empty index tuple
+                return {(): [()]}
+            m = len(block_coeffs)
+            out: dict[tuple, list[tuple[int, ...]]] = defaultdict(list)
+            for idxs in product(range(n), repeat=m):
+                v = zero_vec()
+                # accumulate c_t * P[idx_t]
+                for c, idx in zip(block_coeffs, idxs):
+                    # scaling first reduces intermediate sparsity growth
+                    v = v + (P[idx] * c)
+                out[sig(v)].append(tuple(idxs))
+            return out
 
-        if j == 3:
-            c1, c2, c3 = coeffs
-            right_map: dict[tuple, list[int]] = defaultdict(list)
-            for k in range(n):
-                v = P[k] * (-c3)
-                right_map[sig(v)].append(k)
-            for i1 in range(n):
-                v1 = P[i1] * c1
-                for j2 in range(n):
-                    v = v1 + (P[j2] * c2)
-                    lst = right_map.get(sig(v))
-                    if lst:
-                        for k in lst:
-                            results.append([i1, j2, k])
-            return results
+        # --- Meet-in-the-middle join ---
+        k = j // 2
+        left_coeffs = coeffs[:k]
+        right_coeffs = coeffs[k:]
 
-        # j == 4
-        c1, c2, c3, c4 = coeffs
-        right_map: dict[tuple, list[tuple[int, int]]] = defaultdict(list)
-        for k in range(n):
-            vk = P[k] * c3
-            for l in range(n):
-                v = (vk + (P[l] * c4)) * Fraction(-1)
-                right_map[sig(v)].append((k, l))
-        for i1 in range(n):
-            v1 = P[i1] * c1
-            for j2 in range(n):
-                v = v1 + (P[j2] * c2)
-                pairs = right_map.get(sig(v))
-                if pairs:
-                    for (k, l) in pairs:
-                        results.append([i1, j2, k, l])
-        return results
+        left_map = enumerate_block(left_coeffs)
+        # For the right map we store signatures of the NEGATED sum so that
+        # we can match left_sum == -(right_sum).
+        right_map_raw = enumerate_block(right_coeffs)
+        right_map: dict[tuple, list[tuple[int, ...]]] = defaultdict(list)
+        for s, idx_lists in right_map_raw.items():
+            # Reconstruct a SparseVector to negate its signature robustly
+            if s == ():
+                neg_sig = ()
+            else:
+                # s is a tuple[(i, val)], all Fractions → negation is trivial
+                neg_sig = tuple((i, -val) for (i, val) in s)
+            right_map[neg_sig].extend(idx_lists)
+
+        # Join and build results in original order (left part then right part)
+        results_set: set[tuple[int, ...]] = set()
+        if not left_coeffs:
+            # Entire tuple is on the right side
+            for s, r_lists in right_map.items():
+                if s == ():  # only zero sums survive
+                    for r in r_lists:
+                        results_set.add(tuple(r))
+        elif not right_coeffs:
+            # Entire tuple is on the left side
+            for s, l_lists in left_map.items():
+                if s == ():
+                    for l in l_lists:
+                        results_set.add(tuple(l))
+        else:
+            for s, l_lists in left_map.items():
+                r_lists = right_map.get(s)
+                if not r_lists:
+                    continue
+                for l in l_lists:
+                    for r in r_lists:
+                        results_set.add(tuple(l + r))
+
+        return [list(t) for t in results_set]
 
     def __str__(self) -> str:
         nonzero_keys = [i for i in range(self.row_length) if any([row[i] != 0 for row in self.rows])]
