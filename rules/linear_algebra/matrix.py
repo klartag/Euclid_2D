@@ -105,18 +105,30 @@ class Matrix(Generic[A]):
                 return ()
             return tuple(sorted((k, inner[k]) for k in inner.keys() if inner[k] != 0))
 
-        # Enumerate all weighted sums for a block of coefficients,
-        # returning a map: signature -> list of index-tuples (preserving order within the block).
         def enumerate_block(block_coeffs: list[Fraction]) -> dict[tuple, list[tuple[int, ...]]]:
-            if not block_coeffs:  # empty block → one option: zero sum with empty index tuple
+            """
+            Enumerate weighted sums for a contiguous block of coefficients,
+            keeping only index-tuples that are strictly increasing across the block
+            (this implies within-block distinctness).
+            Returns: signature -> list of index tuples (in block order).
+            """
+            if not block_coeffs:
                 return {(): [()]}
-            m = len(block_coeffs)
             out: dict[tuple, list[tuple[int, ...]]] = defaultdict(list)
-            for idxs in product(range(n), repeat=m):
-                v = zero_vec()
-                # accumulate c_t * P[idx_t]
+            n = self.row_length
+
+            for idxs in product(range(n), repeat=len(block_coeffs)):
+                # STRICTLY INCREASING across the whole block
+                ok = True
+                for a, b in zip(idxs, idxs[1:]):
+                    if not (a < b):
+                        ok = False
+                        break
+                if not ok:
+                    continue
+
+                v = SparseVector({}, self.row_length)
                 for c, idx in zip(block_coeffs, idxs):
-                    # scaling first reduces intermediate sparsity growth
                     v = v + (P[idx] * c)
                 out[sig(v)].append(tuple(idxs))
             return out
@@ -143,13 +155,13 @@ class Matrix(Generic[A]):
         # Join and build results in original order (left part then right part)
         results_set: set[tuple[int, ...]] = set()
         if not left_coeffs:
-            # Entire tuple is on the right side
+            # whole thing on the right; nothing to join
             for s, r_lists in right_map.items():
-                if s == ():  # only zero sums survive
+                if s == ():
                     for r in r_lists:
+                        # r already canonical within its block; just accept (no left side)
                         results_set.add(tuple(r))
         elif not right_coeffs:
-            # Entire tuple is on the left side
             for s, l_lists in left_map.items():
                 if s == ():
                     for l in l_lists:
@@ -161,6 +173,9 @@ class Matrix(Generic[A]):
                     continue
                 for l in l_lists:
                     for r in r_lists:
+                        # STRICT GLOBAL ORDER: all l’s then all r’s must be increasing
+                        if l and r and not (l[-1] < r[0]):
+                            continue
                         results_set.add(tuple(l + r))
 
         return [list(t) for t in results_set]
