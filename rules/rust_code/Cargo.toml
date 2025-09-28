@@ -10,14 +10,14 @@ edition = "2021"
 
 [lib]
 name = "linear_b"
-crate-type = ["cdylib"]
+crate-type = ["cdylib","rlib"]
 src = "src/lib.rs"
 
 [dependencies]
 elsa = "1.10.0"
 itertools = "0.14.0"
 num-traits = "0.2.18"
-pyo3 = { version = "0.21.2", features = ["extension-module", "abi3-py310", "smallvec"] }
+pyo3 = { version = "0.21.2", features = ["extension-module", "smallvec"] }
 rand = "0.8.5"
 rustc-hash = "1.1.0"
 smallvec = "1.13.2"
