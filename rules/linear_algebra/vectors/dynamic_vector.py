@@ -21,13 +21,13 @@ class DynamicVector(AbstractIterableVector):
     def normalize(self) -> 'DynamicVector':
         vector = self.inner.clone()
         if vector.type_name == 'Sparse':
-            vector = SparseVector({k: v for (k, v) in vector.inner.items() if v != 0}, vector.length)
+            vector = SparseVector({k: v for (k, v) in vector.inner.items() if v != 0}, len(vector))
         match vector.type_name:
             case 'Sparse':
                 if len(vector.inner) > DENSE_THRESHOLD * len(vector):
                     vector = DenseVector(list(iter(vector)))
             case 'Dense':
-                if len(vector) - vector.inner.count(0) < SPARSE_THRESHOLD * len(vector):
+                if len(vector) - vector.inner.count(Fraction(0)) < SPARSE_THRESHOLD * len(vector):
                     vector = SparseVector({i: vector[i] for i in range(len(vector)) if vector[i] != 0}, len(vector))
         return DynamicVector(vector)
 
@@ -47,21 +47,28 @@ class DynamicVector(AbstractIterableVector):
         return DynamicVector(self.inner / x)
 
     def __add__(self, other: Self) -> 'DynamicVector':
-        if self.inner.type_name == other.inner.type_name:
+        
+        if self.inner.type_name == 'Dense' and other.inner.type_name == 'Dense':
+            return DynamicVector(self.inner + other.inner).normalize()
+        if self.inner.type_name == 'Sparse' and other.inner.type_name == 'Sparse':
             return DynamicVector(self.inner + other.inner).normalize()
         inner0 = self.inner if self.inner.type_name == 'Dense' else self.inner.to_dense_vector()
         inner1 = other.inner if other.inner.type_name == 'Dense' else other.inner.to_dense_vector()
         return DynamicVector(inner0 + inner1).normalize()
 
     def __sub__(self, other: Self) -> 'DynamicVector':
-        if self.inner.type_name == other.inner.type_name:
+        if self.inner.type_name == 'Dense' and other.inner.type_name == 'Dense':
+            return DynamicVector(self.inner - other.inner).normalize()
+        if self.inner.type_name == 'Sparse' and other.inner.type_name == 'Sparse':
             return DynamicVector(self.inner - other.inner).normalize()
         inner0 = self.inner if self.inner.type_name == 'Dense' else self.inner.to_dense_vector()
         inner1 = other.inner if other.inner.type_name == 'Dense' else other.inner.to_dense_vector()
         return DynamicVector(inner0 - inner1).normalize()
 
     def __eq__(self, other: Self) -> bool:
-        if self.inner.type_name == other.inner.type_name:
+        if self.inner.type_name == 'Dense' and other.inner.type_name == 'Dense':
+            return self.inner == other.inner
+        if self.inner.type_name == 'Sparse' and other.inner.type_name == 'Sparse':
             return self.inner == other.inner
         inner0 = self.inner if self.inner.type_name == 'Dense' else self.inner.to_dense_vector()
         inner1 = other.inner if other.inner.type_name == 'Dense' else other.inner.to_dense_vector()

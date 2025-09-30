@@ -3,7 +3,7 @@ from fractions import Fraction
 from typing import Dict, List, TypeVar, Generic
 
 from ..vectors.abstract_vector import AbstractVector
-from ..vectors.augmented_vectors.augmented_vector import AugmentedVector
+from ..vectors.augmented_vectors.augmented_vector_2 import AugmentedVector2
 
 A = TypeVar('A', bound=AbstractVector)
 
@@ -25,17 +25,17 @@ class AbstractMatrix[V](ABC):
     def permute_columns(self, permutation: list[int]):
         self.rows = [row.permute(permutation) for row in self.rows]
 
-    def project_to_orthogonal_complement(self, vector: AugmentedVector[A, Fraction]) -> AugmentedVector[A, Fraction]:
+    def project_to_orthogonal_complement(self, vector: AugmentedVector2[A, Fraction]) -> AugmentedVector2[A, Fraction]:
         for i in range(len(self.rows)):
             if vector[self.diagonal_indices[i]] != 0:
                 vector -= self.rows[i] * vector[self.diagonal_indices[i]]
         return vector
 
-    def in_span(self, row: AugmentedVector[A, Fraction]):
+    def in_span(self, row: AugmentedVector2[A, Fraction]):
         projected_row = self.project_to_orthogonal_complement(row)
         return projected_row.first_nonzero_index() is None and not projected_row.constant
 
-    def add_row(self, row: AugmentedVector[A, Fraction]):
+    def add_row(self, row: AugmentedVector2[A, Fraction]):
         row = self.project_to_orthogonal_complement(row)
 
         if not row.vector and row.constant:
@@ -59,14 +59,14 @@ class AbstractMatrix[V](ABC):
 
     def get_sparse_integer_linear_combinations(
         self, max_coefficient_count: int, max_coefficient_sum: int
-    ) -> List[AugmentedVector[A, Fraction]]:
-        combinations: List[AugmentedVector[A, Fraction]] = []
+    ) -> List[AugmentedVector2[A, Fraction]]:
+        combinations: List[AugmentedVector2[A, Fraction]] = []
         for row_index in range(len(self.rows)):
             diagonal_index_start = self.diagonal_indices[row_index]
             diagonal_index_end = (
                 self.diagonal_indices[row_index + 1] if row_index < len(self.rows) - 1 else self.row_length
             )
-            new_combinations: List[AugmentedVector[A, Fraction]] = []
+            new_combinations: List[AugmentedVector2[A, Fraction]] = []
 
             row = self.rows[row_index]
             # `row *= gcd([x.denominator for x in row[:diagonal_index_bound]])` # So that we end up with an *integer* combination.

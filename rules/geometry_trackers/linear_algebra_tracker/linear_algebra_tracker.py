@@ -12,7 +12,7 @@ from ...geometry_objects.equation_object import EquationObject
 from ...geometry_objects.geo_object import GeoObject
 
 from ...linear_algebra.matrix import Matrix
-from ...linear_algebra.vectors.augmented_vectors.augmented_vector import AugmentedVector
+from ...linear_algebra.vectors.augmented_vectors.augmented_vector_2 import AugmentedVector2
 from ...linear_algebra.vectors.sparse_vector import SparseVector
 
 from .linear_expression import LinearExpression
@@ -71,7 +71,7 @@ class LinearAlgebraTracker:
         self.cached_sparse_combinations = None
 
         self.matrix.add_row(
-            AugmentedVector(
+            AugmentedVector2(
                 SparseVector(
                     {self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length
                 ),
@@ -107,7 +107,7 @@ class LinearAlgebraTracker:
             return None
 
         row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length)
-        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector(row, Fraction(0)))
+        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, Fraction(0)))
 
         if projected_row.first_nonzero_index() is not None:
             return None
