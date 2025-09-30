@@ -7,11 +7,10 @@ from .vectors.augmented_vectors.augmented_vector_2 import AugmentedVector2
 from .vectors.augmented_vectors.augmented_vector_3 import AugmentedVector3
 
 V = TypeVar('V', bound=AbstractIterableVector)
-C = TypeVar('C', bound=ConstantVector)
 
-class Matrix(Generic[V, C]):
+class Matrix(Generic[V]):
     diagonal_indices: List[int]
-    rows: List[AugmentedVector2[V, C]]
+    rows: List[AugmentedVector2[V, ConstantVector]]
     row_length: int
 
     def __init__(self, row_length: int):
@@ -24,17 +23,17 @@ class Matrix(Generic[V, C]):
             row.inner0.extend_length(amount)
         self.row_length += amount
 
-    def project_to_orthogonal_complement(self, vector: AugmentedVector2[V, C]) -> AugmentedVector2[V, C]:
+    def project_to_orthogonal_complement(self, vector: AugmentedVector2[V, ConstantVector]) -> AugmentedVector2[V, ConstantVector]:
         for i in range(len(self.rows)):
             if vector.inner0[self.diagonal_indices[i]] != 0:
                 vector -= self.rows[i] * vector.inner0[self.diagonal_indices[i]]
         return vector
 
-    def in_span(self, row: AugmentedVector2[V, C]):
+    def in_span(self, row: AugmentedVector2[V, ConstantVector]):
         projected_row = self.project_to_orthogonal_complement(row)
         return projected_row.inner0.first_nonzero_index() is None and not projected_row.inner1
 
-    def add_row(self, row: AugmentedVector2[V, C]):
+    def add_row(self, row: AugmentedVector2[V, ConstantVector]):
         row = self.project_to_orthogonal_complement(row)
 
         if not row.inner0 and row.inner1:
@@ -58,14 +57,14 @@ class Matrix(Generic[V, C]):
 
     def get_sparse_integer_linear_combinations(
         self, max_coefficient_count: int, max_coefficient_sum: int
-    ) -> List[AugmentedVector2[V, C]]:
-        combinations: List[AugmentedVector2[V, C]] = []
+    ) -> List[AugmentedVector2[V, ConstantVector]]:
+        combinations: List[AugmentedVector2[V, ConstantVector]] = []
         for row_index in range(len(self.rows)):
             diagonal_index_start = self.diagonal_indices[row_index]
             diagonal_index_end = (
                 self.diagonal_indices[row_index + 1] if row_index < len(self.rows) - 1 else self.row_length
             )
-            new_combinations: List[AugmentedVector2[V, C]] = []
+            new_combinations: List[AugmentedVector2[V, ConstantVector]] = []
 
             row = self.rows[row_index]
             if row.inner0.count_nonzero_indices(diagonal_index_end) <= max_coefficient_count:
@@ -105,7 +104,7 @@ class Matrix(Generic[V, C]):
         table_row_reprs.insert(1, '-' * len(table_row_reprs[0]))
         return '\n'.join(table_row_reprs)
 
-    def clone(self) -> 'Matrix[V, C]':
+    def clone(self) -> 'Matrix[V]':
         cloned_matrix = Matrix(self.row_length)
         cloned_matrix.diagonal_indices = self.diagonal_indices[:]
         cloned_matrix.rows = self.rows[:]

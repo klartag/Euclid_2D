@@ -14,6 +14,7 @@ from ...geometry_objects.geo_object import GeoObject
 from ...linear_algebra.matrix import Matrix
 from ...linear_algebra.vectors.augmented_vectors.augmented_vector_2 import AugmentedVector2
 from ...linear_algebra.vectors.sparse_vector import SparseVector
+from ...linear_algebra.vectors.constant_vector import ConstantVector
 
 from .linear_expression import LinearExpression
 
@@ -75,7 +76,7 @@ class LinearAlgebraTracker:
                 SparseVector(
                     {self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length
                 ),
-                value,
+                ConstantVector(value),
             )
         )
 
@@ -107,11 +108,11 @@ class LinearAlgebraTracker:
             return None
 
         row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length)
-        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, Fraction(0)))
+        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
 
-        if projected_row.first_nonzero_index() is not None:
+        if projected_row.inner0.first_nonzero_index() is not None:
             return None
-        return automatic_residue - projected_row.constant
+        return automatic_residue - projected_row.inner1.inner
 
     def evaluate_automatic_part_of_expression(
         self, linear_expression: LinearExpression, embedding: Embedding
@@ -175,7 +176,7 @@ class LinearAlgebraTracker:
     ) -> List[LinearExpression]:
         combinations = self.matrix.get_sparse_integer_linear_combinations(max_coefficient_count, max_coefficient_sum)
         return [
-            LinearExpression({self._keys[k]: v for (k, v) in combination.vector.inner.items()}) for combination in combinations
+            LinearExpression({self._keys[k]: v for (k, v) in combination.inner0.inner.items()}) for combination in combinations
         ]
 
     def clone(self) -> 'LinearAlgebraTracker':
