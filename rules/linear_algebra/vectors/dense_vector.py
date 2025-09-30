@@ -1,15 +1,15 @@
 from fractions import Fraction
-from typing import Literal, Optional, Self
+from typing import Literal, Optional, Self, Sequence
 
-from .abstract_vector import AbstractVector
+from .abstract_iterable_vector import AbstractIterableVector
 
 
-class DenseVector(AbstractVector):
+class DenseVector(AbstractIterableVector):
     type_name: Literal['Dense'] = 'Dense'
 
     inner: list[Fraction]
 
-    def __init__(self, values: list[int | Fraction]):
+    def __init__(self, values: Sequence[int | Fraction]):
         self.inner = [Fraction(x) for x in values]
 
     def __len__(self) -> int:
@@ -18,16 +18,16 @@ class DenseVector(AbstractVector):
     def __getitem__(self, i: int) -> Fraction:
         return self.inner[i]
 
-    def __mul__(self, x: Fraction) -> Self:
+    def __mul__(self, x: Fraction) -> 'DenseVector':
         return DenseVector([x * f for f in self.inner])
 
-    def __truediv__(self, x: Fraction) -> Self:
+    def __truediv__(self, x: Fraction) -> 'DenseVector':
         return DenseVector([f / x for f in self.inner])
 
-    def __add__(self, other: Self) -> Self:
+    def __add__(self, other: Self) -> 'DenseVector':
         return DenseVector([self[i] + other[i] for i in range(len(self))])
 
-    def __sub__(self, other: Self) -> Self:
+    def __sub__(self, other: Self) -> 'DenseVector':
         return DenseVector([self[i] - other[i] for i in range(len(self))])
 
     def __eq__(self, other: Self) -> bool:
@@ -43,12 +43,12 @@ class DenseVector(AbstractVector):
         return sum([1 for value in self.inner[:max_index] if value != 0])
 
     def extend_length(self, amount: int):
-        self.inner.extend([0 for _ in range(amount)])
+        self.inner.extend([Fraction(0) for _ in range(amount)])
 
-    def permute(self, permutation: list[int]) -> Self:
-        return DenseVector([self.inner[permutation[i]] for i in range(len(Self))])
+    def permute(self, permutation: list[int]) -> 'DenseVector':
+        return DenseVector([self.inner[permutation[i]] for i in range(len(self))])
 
-    def clone(self) -> Self:
+    def clone(self) -> 'DenseVector':
         return DenseVector(self.inner)
 
     def inner_repr(self) -> str:
@@ -56,4 +56,4 @@ class DenseVector(AbstractVector):
         return f'[{', '.join(rational_reprs)}]'
 
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
-        return sum([abs(x) for x in self.inner[:max_index]])
+        return sum([abs(x) for x in self.inner[:max_index]], Fraction(0))

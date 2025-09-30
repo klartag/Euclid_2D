@@ -1,20 +1,20 @@
-from typing import Literal, Optional, Self
+from typing import Literal, Mapping, Optional, Self
 
 from itertools import chain
 from fractions import Fraction
 
-from .abstract_vector import AbstractVector
+from .abstract_iterable_vector import AbstractIterableVector
 from .dense_vector import DenseVector
 
 
-class SparseVector(AbstractVector):
+class SparseVector(AbstractIterableVector):
     type_name: Literal['Sparse'] = 'Sparse'
 
     inner: dict[int, Fraction]
 
     _length: int
 
-    def __init__(self, values: dict[int, int | Fraction], length: int):
+    def __init__(self, values: Mapping[int, int | Fraction], length: int):
         self.inner = {k: Fraction(v) for (k, v) in values.items() if v != 0}
         self._length = length
 
@@ -24,21 +24,21 @@ class SparseVector(AbstractVector):
     def __getitem__(self, i: int) -> Fraction:
         return self.inner.get(i, Fraction(0))
 
-    def __mul__(self, x: Fraction) -> Self:
+    def __mul__(self, x: Fraction) -> 'SparseVector':
         if x == 0:
             return SparseVector({}, self._length)
         return SparseVector({k: v * x for (k, v) in self.inner.items()}, len(self))
 
-    def __truediv__(self, x: Fraction) -> Self:
+    def __truediv__(self, x: Fraction) -> 'SparseVector':
         return SparseVector({k: v / x for (k, v) in self.inner.items()}, len(self))
 
-    def __add__(self, other: Self) -> Self:
+    def __add__(self, other: Self) -> 'SparseVector':
         return SparseVector(
             {k: self[k] + other[k] for k in chain(self.inner.keys(), other.inner.keys()) if self[k] + other[k] != 0},
             len(self),
         )
 
-    def __sub__(self, other: Self) -> Self:
+    def __sub__(self, other: Self) -> 'SparseVector':
         return SparseVector(
             {k: self[k] - other[k] for k in chain(self.inner.keys(), other.inner.keys()) if self[k] - other[k] != 0},
             len(self),
@@ -56,21 +56,18 @@ class SparseVector(AbstractVector):
     def extend_length(self, amount: int):
         self._length += amount
 
-    def permute(self, permutation: list[int]) -> Self:
+    def permute(self, permutation: list[int]) -> 'SparseVector':
         return SparseVector({permutation[k]: v for (k, v) in self.inner.items()}, len(self))
 
-    def clone(self) -> Self:
+    def clone(self) -> 'SparseVector':
         return SparseVector(self.inner, len(self))
 
     def to_dense_vector(self) -> DenseVector:
-        return DenseVector(iter(self))
+        return DenseVector(list(self))
 
     def inner_repr(self) -> str:
         rational_reprs = [f'{k}: {str(v)}' for (k, v) in self.inner.items()]
         return f'{{{', '.join(rational_reprs)}}}'
 
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
-        return sum([abs(v) for (k, v) in self.inner.items() if max_index is None or k < max_index])
-
-    def __str__(self) -> str:
-        return f'Sparse[{self.inner}]'
+        return sum([abs(v) for (k, v) in self.inner.items() if max_index is None or k < max_index], Fraction(0))

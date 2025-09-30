@@ -12,7 +12,7 @@ from ...geometry_objects.equation_object import EquationObject
 from ...geometry_objects.geo_object import GeoObject
 
 from ...linear_algebra.matrix import Matrix
-from ...linear_algebra.vectors.augmented_vector import AugmentedVector
+from ...linear_algebra.vectors.augmented_vectors.augmented_vector import AugmentedVector
 from ...linear_algebra.vectors.sparse_vector import SparseVector
 
 from .linear_expression import LinearExpression

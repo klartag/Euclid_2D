@@ -1,28 +1,24 @@
 from fractions import Fraction
-from typing import Generic, Literal, Optional, Self, TypeVar
+from typing import Generic, Literal, Optional, Self, Tuple, TypeVar, TypeVarTuple, Union
 
 from .abstract_vector import AbstractVector
 
 
-DENSE_THRESHOLD = 1 / 4
-SPARSE_THRESHOLD = 1 / 20
-
 V = TypeVar('V', bound=AbstractVector)
 C = TypeVar('C')
 
+Vs = TypeVar('Vs', bound=Union[TypeV, int])
 
-class AugmentedVector(Generic[V, C], AbstractVector):
+class MultipleAugmentedVector(Generic[*Vs], AbstractVector):
     type_name: Literal['Augmented'] = 'Augmented'
 
-    vector: V
-    constant: C
+    vectors: Tuple[*Vs]
 
-    def __init__(self, vector: V, constant: C):
-        self.vector = vector
-        self.constant = constant
+    def __init__(self, vectors: Tuple[*Vs]):
+        self.vectors = vectors
 
     def clone(self) -> Self:
-        return AugmentedVector(self.vector.clone(), self.constant)
+        return MultipleAugmentedVector(tuple([v.clone() for v in self.vectors]))
 
     def __len__(self) -> int:
         return len(self.vector)
@@ -31,13 +27,13 @@ class AugmentedVector(Generic[V, C], AbstractVector):
         return self.vector[i]
 
     def __mul__(self, x: Fraction) -> Self:
-        return AugmentedVector(self.vector * x, self.constant * x)
+        return MultipleAugmentedVector(self.vector * x, self.constant * x)
 
     def __truediv__(self, x: Fraction) -> Self:
-        return AugmentedVector(self.vector / x, self.constant / x)
+        return MultipleAugmentedVector(self.vector / x, self.constant / x)
 
     def __add__(self, other: Self) -> Self:
-        return AugmentedVector(self.vector + other.vector, self.constant + other.constant)
+        return MultipleAugmentedVector(self.vector + other.vector, self.constant + other.constant)
 
     def __sub__(self, other: Self) -> Self:
         return AugmentedVector(self.vector - other.vector, self.constant - other.constant)
