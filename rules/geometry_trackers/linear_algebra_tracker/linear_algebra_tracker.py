@@ -3,6 +3,8 @@ from fractions import Fraction
 
 from ...permutations import try_match_permutation
 
+from ...predicates.predicate import Predicate
+
 from ...embeddings.embedding import Embedding
 from ...embeddings.embedded_objects.scalar import EmbeddedScalar
 
@@ -24,6 +26,8 @@ class LinearAlgebraTracker:
 
     _keys: List[GeoObject]
     _reverse_keys: Dict[GeoObject, int]
+    
+    predicates: list[Predicate]
 
     cached_sparse_combinations: Optional[List[LinearExpression]] = None
 
@@ -41,7 +45,7 @@ class LinearAlgebraTracker:
     def contains_key(self, key: GeoObject):
         return key in self._reverse_keys
 
-    def add_relation(self, linear_expression: LinearExpression, value: int | Fraction, embedding: Embedding):
+    def add_relation(self, linear_expression: LinearExpression, value: int | Fraction, embedding: Embedding, predicate: Optional[Predicate]):
         '''
         TODO: The `embedding` parameter is not required,
         but we will keep it here *for now* because it allows us to raise an error whenever we add an incorrect relation.
@@ -71,17 +75,18 @@ class LinearAlgebraTracker:
 
         self.cached_sparse_combinations = None
 
-        self.matrix.add_row(
+        if self.matrix.add_row(
             AugmentedVector2(
                 SparseVector(
                     {self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length
                 ),
                 ConstantVector(value),
             )
-        )
+        ) and predicate is not None:
+            self.predicates.append(predicate)
 
     def add_relation_mod(
-        self, linear_expression: LinearExpression, value: int | Fraction, modulus: int, embedding: Embedding
+        self, linear_expression: LinearExpression, value: int | Fraction, modulus: int, embedding: Embedding, predicate: Optional[Predicate]
     ):
         value = Fraction(value)
 
@@ -95,7 +100,7 @@ class LinearAlgebraTracker:
 
         value += Fraction(round((scalar.value - value) / modulus) * modulus)
 
-        self.add_relation(linear_expression, value, embedding)
+        self.add_relation(linear_expression, value, embedding, predicate)
 
     def try_evaluate(self, linear_expression: LinearExpression, embedding: Embedding) -> Optional[Fraction]:
         linear_expression = LinearExpression({k: v for (k, v) in linear_expression.items() if v != 0})

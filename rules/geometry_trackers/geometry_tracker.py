@@ -271,7 +271,7 @@ class GeometryTracker:
             assert rev_angle in self._processed_objects and rev_angle in self._objects
             if self.embedding_tracker is not None:
                 self._linear_algebra.add_relation_mod(
-                    LinearExpression({angle: 1, rev_angle: 1}), 0, 360, self.embedding_tracker
+                    LinearExpression({angle: 1, rev_angle: 1}), 0, 360, self.embedding_tracker, None
                 )
 
     def process_object(self, obj: GeoObject):
@@ -339,9 +339,9 @@ class GeometryTracker:
                     raise ProofCheckError(f'In predicate {pred}, recived fractional value!')
 
         if mod is None:
-            self._linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
+            self._linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker, pred)
         else:
-            self._linear_algebra.add_relation_mod(LinearExpression(factors), 0, mod, self.embedding_tracker)
+            self._linear_algebra.add_relation_mod(LinearExpression(factors), 0, mod, self.embedding_tracker, pred)
 
     def add_equal_scalar(self, pred: Predicate):
         """
@@ -351,7 +351,7 @@ class GeometryTracker:
         if self.embedding_tracker is None: return
         factors = get_linear_eqn_factors(pred)
         if factors is not None:
-            self._linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker)
+            self._linear_algebra.add_relation(LinearExpression(factors), 0, self.embedding_tracker, pred)
 
         # Adding the equation as a log equation.
         # We do this by default only to equations that are not normal equations, since logs are also non-zero.
@@ -360,7 +360,7 @@ class GeometryTracker:
             if log_factors is not None:
                 for factor in log_factors:
                     self.get_object(factor, can_add=True)
-                self._linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker)
+                self._linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker, pred)
 
     def _add_equal_objects_nonrecursive(self, a: GeoObject, b: GeoObject):
         """

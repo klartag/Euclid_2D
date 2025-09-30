@@ -1,5 +1,5 @@
 from fractions import Fraction
-from typing import List, TypeVar, Generic
+from typing import List, Optional, TypeVar, Generic
 
 from .vectors.abstract_iterable_vector import AbstractIterableVector
 from .vectors.constant_vector import ConstantVector
@@ -36,7 +36,7 @@ class Matrix(Generic[V]):
         projected_row = self.project_to_orthogonal_complement(row)
         return projected_row.inner0.first_nonzero_index() is None and not projected_row.inner1
 
-    def add_row(self, row: AugmentedVector2[V, ConstantVector]):
+    def add_row(self, row: AugmentedVector2[V, ConstantVector]) -> Optional[int]:
         projected_row = self.project_to_orthogonal_complement(row)
 
         if not projected_row.inner0 and projected_row.inner1:
@@ -44,7 +44,7 @@ class Matrix(Generic[V]):
 
         first_nonzero_index = projected_row.inner0.first_nonzero_index()
         if first_nonzero_index is None:
-            return
+            return None
         
         for matrix_row in self.rows:
             matrix_row.inner2.extend_length(1)
@@ -62,6 +62,7 @@ class Matrix(Generic[V]):
 
         self.diagonal_indices.insert(row_index, first_nonzero_index)
         self.rows.insert(row_index, projected_row)
+        return len(self.rows) - 1
 
     def get_sparse_integer_linear_combinations(
         self, max_coefficient_count: int, max_coefficient_sum: int
