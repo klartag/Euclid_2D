@@ -23,6 +23,10 @@ class SparseVector(AbstractIterableVector):
 
     def __getitem__(self, i: int) -> Fraction:
         return self.inner.get(i, Fraction(0))
+    
+    def __setitem__(self, i: int, value: Fraction):
+        if value != 0:
+            self.inner[i] = value
 
     def __mul__(self, x: Fraction) -> 'SparseVector':
         if x == 0:
@@ -71,3 +75,7 @@ class SparseVector(AbstractIterableVector):
 
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return sum([abs(v) for (k, v) in self.inner.items() if max_index is None or k < max_index], Fraction(0))
+
+    @staticmethod
+    def zero(length: int) -> 'SparseVector':
+        return SparseVector({}, length)

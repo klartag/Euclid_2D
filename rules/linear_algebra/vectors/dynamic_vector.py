@@ -39,6 +39,9 @@ class DynamicVector(AbstractIterableVector):
 
     def __getitem__(self, i: int) -> Fraction:
         return self.inner[i]
+    
+    def __setitem__(self, i: int, value: Fraction):
+        self.inner[i] = value
 
     def __mul__(self, x: Fraction) -> 'DynamicVector':
         return DynamicVector(self.inner * x)
@@ -92,3 +95,7 @@ class DynamicVector(AbstractIterableVector):
 
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return self.inner.taxicab_norm(max_index)
+
+    @staticmethod
+    def zero(length: int) -> 'DynamicVector':
+        return DynamicVector(SparseVector({}, length))

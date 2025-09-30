@@ -17,6 +17,9 @@ class DenseVector(AbstractIterableVector):
 
     def __getitem__(self, i: int) -> Fraction:
         return self.inner[i]
+    
+    def __setitem__(self, i: int, value: Fraction):
+        self.inner[i] = value
 
     def __mul__(self, x: Fraction) -> 'DenseVector':
         return DenseVector([x * f for f in self.inner])
@@ -57,3 +60,7 @@ class DenseVector(AbstractIterableVector):
 
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return sum([abs(x) for x in self.inner[:max_index]], Fraction(0))
+
+    @staticmethod
+    def zero(length: int) -> 'DenseVector':
+        return DenseVector([0] * length)

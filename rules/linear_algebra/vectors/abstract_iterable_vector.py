@@ -11,6 +11,9 @@ class AbstractIterableVector(AbstractVector):
 
     @abstractmethod
     def __getitem__(self, i: int) -> Fraction: ...
+    
+    @abstractmethod
+    def __setitem__(self, i: int, value: Fraction): ...
 
     @abstractmethod
     def extend_length(self, amount: int): ...
@@ -32,3 +35,7 @@ class AbstractIterableVector(AbstractVector):
 
     @abstractmethod
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction: ...
+
+    @staticmethod
+    @abstractmethod
+    def zero(length: int) -> Self: ...

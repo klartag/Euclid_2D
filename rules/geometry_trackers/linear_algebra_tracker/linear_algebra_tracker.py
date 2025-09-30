@@ -28,7 +28,7 @@ class LinearAlgebraTracker:
     cached_sparse_combinations: Optional[List[LinearExpression]] = None
 
     def __init__(self):
-        self.matrix = Matrix(0)
+        self.matrix = Matrix(SparseVector, 0)
         self._keys = []
         self._reverse_keys = {}
         self._add_key(ONE)
