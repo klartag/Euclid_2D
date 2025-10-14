@@ -10,7 +10,7 @@ edition = "2021"
 
 [lib]
 name = "linear_b"
-crate-type = ["cdylib","rlib"]
+crate-type = ["cdylib", "rlib"]
 src = "src/lib.rs"
 
 [dependencies]
