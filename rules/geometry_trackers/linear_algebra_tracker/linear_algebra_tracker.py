@@ -36,6 +36,7 @@ class LinearAlgebraTracker:
         self._keys = []
         self._reverse_keys = {}
         self._add_key(ONE)
+        self.predicates = []
 
     def _add_key(self, key: GeoObject):
         self._reverse_keys[key] = len(self._keys)
@@ -82,7 +83,7 @@ class LinearAlgebraTracker:
                 ),
                 ConstantVector(value),
             )
-        ) and predicate is not None:
+        ) is not None and predicate is not None:
             self.predicates.append(predicate)
 
     def add_relation_mod(
@@ -101,6 +102,12 @@ class LinearAlgebraTracker:
         value += Fraction(round((scalar.value - value) / modulus) * modulus)
 
         self.add_relation(linear_expression, value, embedding, predicate)
+
+    def explain_relation(self, linear_expression: LinearExpression) -> List[Predicate]:
+        row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items() if v != 0}, self.matrix.row_length)
+        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
+        predicate_indices = [i for i in range(len(projected_row.inner2)) if projected_row.inner2[i] != 0]
+        return [self.predicates[i] for i in predicate_indices]
 
     def try_evaluate(self, linear_expression: LinearExpression, embedding: Embedding) -> Optional[Fraction]:
         linear_expression = LinearExpression({k: v for (k, v) in linear_expression.items() if v != 0})
