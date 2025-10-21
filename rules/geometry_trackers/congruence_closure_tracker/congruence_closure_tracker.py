@@ -24,7 +24,7 @@ class CongruenceClosureTracker[T]:
     def propogate(self):
         raise NotImplementedError()
     
-    def normalize(self) -> T:
+    def normalize(self, value: T) -> T:
         raise NotImplementedError()
     
     def explain(self, left: T, right: T):
