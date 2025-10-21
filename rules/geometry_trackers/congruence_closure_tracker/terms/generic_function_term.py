@@ -3,17 +3,14 @@ from typing import Optional, Sequence
 
 from ..terms.basic_function_term import BasicFunctionTerm
 
-from .abstract_term import AbstractTerm
-from .constant_term import ConstantTerm
-
 
 @dataclass
-class GenericFunctionTerm[T](AbstractTerm[T]):
+class GenericFunctionTerm[T]:
     function: str
-    parameters: Sequence['GenericFunctionTerm[T]' | ConstantTerm[T]]
+    parameters: Sequence['GenericFunctionTerm[T]' | T]
     
     def try_to_basic_term(self) -> Optional[BasicFunctionTerm[T]]:
-        parameters: list[ConstantTerm[T]] = []
+        parameters: list[T] = []
         for parameter in self.parameters:
             if isinstance(parameter, GenericFunctionTerm):
                 return None
