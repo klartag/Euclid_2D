@@ -1,11 +1,11 @@
-from rules.geometry_trackers.linear_algebra_tracker.linear_expression import LinearExpression
-from rules.proof_checker_utils import get_linear_eqn_factors
 from .parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
 from .parsers.predicate_parser.predicate_parser import PredicateParser
+from .proof_checker_utils import get_linear_eqn_factors
 
 from .embeddings.undefined_embedding_error import UndefinedEmbeddingError
 from .geometry_objects.geo_object import GeoObject
 from .geometry_trackers.geometry_tracker import GeometryTracker
+from .geometry_trackers.linear_algebra_tracker.linear_expression import LinearExpression
 from .predicates.predicate import Predicate
 
 
@@ -40,7 +40,7 @@ class InteractivePredicateChecker:
                         explanation = self.geometry_tracker._linear_algebra.explain_relation(LinearExpression(factors))
                         print('\n'.join([str(p) for p in explanation]))
                         continue
-                    except ValueError:
+                    except:
                         pass
 
                 try:
@@ -49,7 +49,7 @@ class InteractivePredicateChecker:
                         raise ValueError("User input was not a predicate.")
                     print(self.check_predicate(predicate))
                     continue
-                except ValueError:
+                except:
                     pass
                 
                 try:
@@ -58,7 +58,7 @@ class InteractivePredicateChecker:
                         raise ValueError("User input was not a geometry object.")
                     self.print_geometry_object(geo_object)
                     continue
-                except ValueError:
+                except:
                     pass
                 
                 print("An error occured.")
@@ -76,7 +76,7 @@ class InteractivePredicateChecker:
     def explain_predicate(self, predicate: Predicate) -> str:
         raise NotImplementedError()
 
-    def print_geometry_object(self, obj: GeoObject) -> str:
+    def print_geometry_object(self, obj: GeoObject):
         if self.geometry_tracker.embedding_tracker is None:
             print('Failed to evaluate.')
         else:
