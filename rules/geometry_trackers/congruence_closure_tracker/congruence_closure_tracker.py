@@ -14,10 +14,10 @@ class CongruenceClosureTracker[T]:
         self.class_lists = {}
         self.use_lists = {}
         self.lookup_table = {}
-        
+
     def merge(self, left: T, right: T):
         raise NotImplementedError()
-    
+
     def are_congruent(self, left: T, right: T) -> bool:
         raise NotImplementedError()
     
@@ -26,9 +26,9 @@ class CongruenceClosureTracker[T]:
     
     def normalize(self, value: T) -> T:
         raise NotImplementedError()
-    
+
     def explain(self, left: T, right: T):
         raise NotImplementedError()
-    
+
     def explain_along_path(self, left: T, right: T):
         raise NotImplementedError()
