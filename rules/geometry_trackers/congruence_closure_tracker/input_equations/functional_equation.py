@@ -4,7 +4,7 @@ from .abstract_input_equation import AbstractInputEquation
 
 
 @dataclass
-class FunctionalEquation[str, T](AbstractInputEquation[T]):
+class FunctionalEquation[T](AbstractInputEquation[T]):
     '''
     Represents an equation of the form `F(a_1, a_2, ..., a_n) = b`.
     Where `F` is held in `function`,
