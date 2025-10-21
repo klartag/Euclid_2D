@@ -15,7 +15,7 @@ class CongruenceClosureTracker[T]:
         self.use_lists = {}
         self.lookup_table = {}
         
-    def merge(self, equation: SimpleEquation[T]):
+    def merge(self, left: T, right: T):
         raise NotImplementedError()
     
     def are_congruent(self, left: T, right: T) -> bool:
