@@ -1,8 +1,12 @@
-from .input_equations.simple_equation import SimpleEquation
-from .input_equations.functional_equation import FunctionalEquation
+from .terms.basic_function_term import BasicFunctionTerm
+from .terms.constant_term import ConstantTerm
+from .terms.generic_function_term import GenericFunctionTerm
 
 class CongruenceClosureTracker[T]:
-    pending: list[SimpleEquation[T] | tuple[FunctionalEquation[T], FunctionalEquation[T]]]
+    pending: list[
+        tuple[ConstantTerm[T], ConstantTerm[T]]
+        | tuple[BasicFunctionTerm[T], ConstantTerm[T], BasicFunctionTerm[T], ConstantTerm[T]]
+    ]
     representatives: dict[T, T]
     class_lists: dict[T, list[T]]
     use_lists: dict[T, list[FunctionalEquation[T]]]
