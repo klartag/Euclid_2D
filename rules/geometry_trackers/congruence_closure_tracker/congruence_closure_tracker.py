@@ -32,6 +32,3 @@ class CongruenceClosureTracker[T]:
     
     def explain_along_path(self, left: T, right: T):
         raise NotImplementedError()
-    
-    
-    
