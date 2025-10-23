@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 from ..terms.basic_function_term import BasicFunctionTerm
 
 
-@dataclass
+@dataclass(frozen=True)
 class GenericFunctionTerm[T]:
     function: str
     parameters: Sequence['GenericFunctionTerm[T]' | T]

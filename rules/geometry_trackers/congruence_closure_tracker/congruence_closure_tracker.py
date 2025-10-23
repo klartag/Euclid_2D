@@ -6,7 +6,7 @@ class CongruenceClosureTracker[T]:
     representatives: dict[T, T]
     class_lists: dict[T, list[T]]
     use_lists: dict[T, list[tuple[BasicFunctionTerm[T], T]]]
-    lookup_table: dict[tuple[T, T], tuple[BasicFunctionTerm[T], T]]
+    lookup_table: dict[tuple[T, ...], tuple[BasicFunctionTerm[T], T]]
 
     def __init__(self):
         self.pending = []
