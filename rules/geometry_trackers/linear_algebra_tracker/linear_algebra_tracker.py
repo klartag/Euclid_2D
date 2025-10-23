@@ -1,5 +1,7 @@
-from typing import Dict, List, Optional, Self, Tuple
+from typing import Dict, List, Optional, Self, Tuple, TypeVar
 from fractions import Fraction
+
+from ...indexed_set import IndexedSet
 
 from ...permutations import try_match_permutation
 
@@ -20,31 +22,23 @@ from ...linear_algebra.vectors.constant_vector import ConstantVector
 
 from .linear_expression import LinearExpression
 
-
 class LinearAlgebraTracker:
     matrix: Matrix[SparseVector]
 
-    _keys: List[GeoObject]
-    _reverse_keys: Dict[GeoObject, int]
-    
+    keys: IndexedSet[GeoObject]
     predicates: list[Predicate]
 
     cached_sparse_combinations: Optional[List[LinearExpression]] = None
 
     def __init__(self):
         self.matrix = Matrix(SparseVector, 0)
-        self._keys = []
-        self._reverse_keys = {}
+        self.keys = IndexedSet()
         self._add_key(ONE)
         self.predicates = []
 
     def _add_key(self, key: GeoObject):
-        self._reverse_keys[key] = len(self._keys)
-        self._keys.append(key)
+        self.keys.add(ONE)
         self.matrix.extend_row_length(1)
-
-    def contains_key(self, key: GeoObject):
-        return key in self._reverse_keys
 
     def add_relation(self, linear_expression: LinearExpression, value: int | Fraction, embedding: Embedding, predicate: Optional[Predicate]):
         '''
@@ -54,7 +48,7 @@ class LinearAlgebraTracker:
         value = Fraction(value)
 
         for geo_object in linear_expression.inner.keys():
-            if geo_object not in self._reverse_keys:
+            if geo_object not in self.keys:
                 self._add_key(geo_object)
 
         (linear_expression, automatic_residue) = self.evaluate_automatic_part_of_expression(
@@ -79,7 +73,7 @@ class LinearAlgebraTracker:
         if self.matrix.add_row(
             AugmentedVector2(
                 SparseVector(
-                    {self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length
+                    {self.keys.index(k): v for (k, v) in linear_expression.items()}, self.matrix.row_length
                 ),
                 ConstantVector(value),
             )
@@ -104,7 +98,7 @@ class LinearAlgebraTracker:
         self.add_relation(linear_expression, value, embedding, predicate)
 
     def explain_relation(self, linear_expression: LinearExpression) -> List[Predicate]:
-        row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items() if v != 0}, self.matrix.row_length)
+        row = SparseVector({self.keys.index(k): v for (k, v) in linear_expression.items() if v != 0}, self.matrix.row_length)
         projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
         predicate_indices = [i for i in range(len(projected_row.inner2)) if projected_row.inner2[i] != 0]
         return [self.predicates[i] for i in predicate_indices]
@@ -116,10 +110,10 @@ class LinearAlgebraTracker:
             linear_expression, embedding
         )
 
-        if any([k not in self._reverse_keys for k in linear_expression]):
+        if any([k not in self.keys for k in linear_expression]):
             return None
 
-        row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length)
+        row = SparseVector({self.keys.index(k): v for (k, v) in linear_expression.items()}, self.matrix.row_length)
         projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
 
         if projected_row.inner0.first_nonzero_index() is not None:
@@ -188,12 +182,11 @@ class LinearAlgebraTracker:
     ) -> List[LinearExpression]:
         combinations = self.matrix.get_sparse_integer_linear_combinations(max_coefficient_count, max_coefficient_sum)
         return [
-            LinearExpression({self._keys[k]: v for (k, v) in combination.inner0.inner.items()}) for combination in combinations
+            LinearExpression({self.keys[k]: v for (k, v) in combination.inner0.inner.items()}) for combination in combinations
         ]
 
     def clone(self) -> 'LinearAlgebraTracker':
         cloned_tracker = LinearAlgebraTracker()
         cloned_tracker.matrix = self.matrix.clone()
-        cloned_tracker._keys = self._keys[:]
-        cloned_tracker._reverse_keys = dict(self._reverse_keys)
+        cloned_tracker.keys = self.keys.clone()
         return cloned_tracker
