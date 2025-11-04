@@ -1,3 +1,5 @@
+from typing import cast
+
 from ...indexed_set import IndexedSet
 
 from .equations.equation import Equation
@@ -8,8 +10,7 @@ from .terms.generic_function_term import GenericFunctionTerm
 
 Constant = int
 BasicFunctionEquation = Equation[BasicFunctionTerm[Constant], Constant]
-Term = Constant | GenericFunctionTerm[Constant]
-
+Term = Constant | BasicFunctionTerm[Constant]
 
 class CongruenceClosureTracker[T]:
     tokens: IndexedSet[T | BasicFunctionTerm[Constant]]
@@ -43,7 +44,7 @@ class CongruenceClosureTracker[T]:
         else:
             self.merge_complex_equation(left, right)
     
-    def merge_complex_equation(self, left: GenericFunctionTerm[Constant], right: Term):
+    def merge_complex_equation(self, left: BasicFunctionTerm[Constant], right: Term):
         '''
         Adds the equation `left == right` to the Congruence Closure Tracker,
         where the equation is of the form `function(a1, a2, ...) = a`.
