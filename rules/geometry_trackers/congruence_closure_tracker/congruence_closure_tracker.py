@@ -5,10 +5,11 @@ from .terms.generic_function_term import GenericFunctionTerm
 
 
 Token = int
+GenericToken = Token | GenericFunctionTerm[Token]
 
 
 class CongruenceClosureTracker[T]:
-    tokens: IndexedSet[T | BasicFunctionTerm[T]]
+    tokens: IndexedSet[T | BasicFunctionTerm[Token]]
     pending: list[tuple[Token, Token] | tuple[BasicFunctionTerm[Token], Token, BasicFunctionTerm[Token], Token]]
     representatives: dict[Token, Token]
     class_lists: dict[Token, list[Token]]
@@ -23,20 +24,31 @@ class CongruenceClosureTracker[T]:
         self.use_lists = {}
         self.lookup_table = {}
 
-    def merge(self, left: Token, right: Token):
+    def merge(self, left: GenericToken, right: GenericToken):
+        if isinstance(left, Token) and isinstance(right, Token):
+            self.pending.append((left, right))
+            self.propogate()
+            return
+        
+        if isinstance(right, Token):
+            left, right = right, left
+        
         raise NotImplementedError()
 
-    def are_congruent(self, left: Token, right: Token) -> bool:
+    def are_congruent(self, left: GenericToken, right: GenericToken) -> bool:
         raise NotImplementedError()
     
     def propogate(self):
         raise NotImplementedError()
     
-    def normalize(self, value: Token) -> Token:
+    def normalize(self, value: GenericToken) -> GenericToken:
         raise NotImplementedError()
 
-    def explain(self, left: Token, right: Token):
+    def explain(self, left: GenericToken, right: GenericToken):
         raise NotImplementedError()
 
-    def explain_along_path(self, left: Token, right: Token):
+    def explain_along_path(self, left: GenericToken, right: GenericToken):
+        raise NotImplementedError()
+    
+    def is_constant(self, term: GenericToken) -> bool:
         raise NotImplementedError()
