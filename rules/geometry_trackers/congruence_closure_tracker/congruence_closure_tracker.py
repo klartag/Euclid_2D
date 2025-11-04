@@ -1,4 +1,4 @@
-from typing import cast
+from typing import cast, overload
 
 from ...indexed_set import IndexedSet
 
@@ -18,7 +18,7 @@ class CongruenceClosureTracker[T]:
     representatives: dict[Constant, Constant]
     class_lists: dict[Constant, list[Constant]]
     use_lists: dict[Constant, list[BasicFunctionEquation]]
-    lookup_table: dict[tuple[Constant, ...], BasicFunctionEquation]
+    lookup_table: dict[tuple[str, tuple[Constant, ...]], BasicFunctionEquation]
     proof_forest: list[tuple[Constant, Constant, BasicFunctionEquation]] # Replace this with a proper data structure later.
 
     def __init__(self):
@@ -44,22 +44,22 @@ class CongruenceClosureTracker[T]:
         else:
             self.merge_complex_equation(left, right)
     
-    def merge_complex_equation(self, left: BasicFunctionTerm[Constant], right: Term):
+    def merge_complex_equation(self, left: BasicFunctionTerm[Constant], right: Constant):
         '''
         Adds the equation `left == right` to the Congruence Closure Tracker,
         where the equation is of the form `function(a1, a2, ...) = a`.
         '''
-        lookup_key = tuple([self.representatives[x] for x in left.parameters])
+        lookup_key = (left.function, tuple([self.representatives[x] for x in left.parameters]))
         if lookup_key in self.lookup_table:
-            (lookup_function_term, lookup_result) = self.lookup_table[lookup_key]
-            self.pending.append((left, right, lookup_function_term, lookup_result))
+            basic_function_equation = self.lookup_table[lookup_key]
+            self.pending.append(EquationPair(left, right, basic_function_equation.left, basic_function_equation.right))
             self.propogate()
         else:
-            self.lookup_table[lookup_key] = (left, right)
-            for parameter in lookup_key:
+            self.lookup_table[lookup_key] = Equation(left, right)
+            for parameter in lookup_key[1]:
                 if parameter not in self.use_lists:
                     self.use_lists[parameter] = []
-                self.use_lists[parameter].append((left, right))
+                self.use_lists[parameter].append(Equation(left, right))
 
     def are_congruent(self, left: Term, right: Term) -> bool:
         '''
@@ -85,20 +85,50 @@ class CongruenceClosureTracker[T]:
         (introducing new constants if necessary),
         then returns the equivalent `BasicFunctionTerm`.
         '''
+        
         raise NotImplementedError()
     
-    def normalize(self, value: Term) -> Term:
+    def as_token(self, term: BasicFunctionTerm[Constant]) -> Constant:
+        self.tokens.add(term)
+        return self.tokens.index(term)
+    
+    @overload
+    def normalize(self, value: Constant) -> Term:
+        ...
+        
+    @overload
+    def normalize(self, value: BasicFunctionTerm[Constant]) -> Term:
+        ...
+        
+    @overload
+    def normalize(self, value: GenericFunctionTerm[Constant]) -> Term:
+        ...
+
+    def normalize(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Term:
         '''
         TODO: Document
         '''
         if isinstance(value, Constant):
             return self.representatives[value]
+        
+        if isinstance(value, BasicFunctionTerm):
+            value = GenericFunctionTerm.from_basic_term(value)
+        
         normalized_parameters = [self.normalize(p) for p in value.parameters]
-        if all([isinstance(p, Constant) for p in normalized_parameters]):
-            normalized_parameters = cast(list[Constant], normalized_parameters)
-            lookup = self.lookup_table.get(tuple(normalized_parameters))
-            if lookup is not None:
-                return self.representatives[lookup[1]]
+        
+        for (i, parameter) in enumerate(normalized_parameters):
+            if isinstance(parameter, BasicFunctionTerm):
+                normalized_parameters[i] = self.as_token(parameter)
+                
+        normalized_parameters = cast(list[Constant], normalized_parameters)
+
+        lookup = self.lookup_table.get(tuple(normalized_parameters))
+        if lookup is not None:
+            return self.representatives[lookup[1]]
+            
+        for i in range(len(normalized_parameters)):
+            if isinstance(normalized_parameters[i], BasicFunctionTerm):
+                
         return GenericFunctionTerm(value.function, normalized_parameters)
 
     def explain(self, left: Term, right: Term) -> list[object]:
