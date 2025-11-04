@@ -1,3 +1,4 @@
+from typing import cast
 from ...indexed_set import IndexedSet
 
 from .terms.basic_function_term import BasicFunctionTerm
@@ -58,7 +59,15 @@ class CongruenceClosureTracker[T]:
             raise NotImplementedError()
     
     def normalize(self, value: GenericToken) -> GenericToken:
-        raise NotImplementedError()
+        if isinstance(value, Token):
+            return self.representatives[value]
+        normalized_parameters = [self.normalize(p) for p in value.parameters]
+        if all([isinstance(p, Token) for p in normalized_parameters]):
+            normalized_parameters = cast(list[Token], normalized_parameters)
+            lookup = self.lookup_table.get(tuple(normalized_parameters))
+            if lookup is not None:
+                return self.representatives[lookup[1]]
+        return GenericFunctionTerm(value.function, normalized_parameters)
 
     def explain(self, left: GenericToken, right: GenericToken):
         raise NotImplementedError()
