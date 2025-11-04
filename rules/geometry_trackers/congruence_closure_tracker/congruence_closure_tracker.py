@@ -74,6 +74,3 @@ class CongruenceClosureTracker[T]:
 
     def explain_along_path(self, left: GenericToken, right: GenericToken):
         raise NotImplementedError()
-    
-    def is_constant(self, term: GenericToken) -> bool:
-        raise NotImplementedError()
