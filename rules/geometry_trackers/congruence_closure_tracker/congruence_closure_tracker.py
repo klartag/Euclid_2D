@@ -7,6 +7,7 @@ from .terms.generic_function_term import GenericFunctionTerm
 
 
 Constant = int
+BasicFunctionEquation = Equation[BasicFunctionTerm[Constant], Constant]
 Term = Constant | GenericFunctionTerm[Constant]
 
 
@@ -15,9 +16,9 @@ class CongruenceClosureTracker[T]:
     pending: list[Equation[Constant, Constant] | EquationPair[Constant]]
     representatives: dict[Constant, Constant]
     class_lists: dict[Constant, list[Constant]]
-    use_lists: dict[Constant, list[tuple[BasicFunctionTerm[Constant], Constant]]]
-    lookup_table: dict[tuple[Constant, ...], Equation[BasicFunctionTerm[Constant], Constant]]
-    proof_forest: list[tuple[Constant, Constant, Equation[BasicFunctionTerm[Constant], Constant]]] # Replace this with a proper data structure later.
+    use_lists: dict[Constant, list[BasicFunctionEquation]]
+    lookup_table: dict[tuple[Constant, ...], BasicFunctionEquation]
+    proof_forest: list[tuple[Constant, Constant, BasicFunctionEquation]] # Replace this with a proper data structure later.
 
     def __init__(self):
         self.tokens = IndexedSet()
