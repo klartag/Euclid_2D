@@ -28,6 +28,9 @@ class CongruenceClosureTracker[T]:
         self.proof_forest = []
 
     def merge(self, left: GenericToken, right: GenericToken):
+        '''
+        Adds the equation `left == right` to the Congruence Closure Tracker.
+        '''
         if isinstance(left, Token):
             if isinstance(right, Token):
                 self.pending.append((left, right))
@@ -38,6 +41,10 @@ class CongruenceClosureTracker[T]:
             self.merge_complex_equation(left, right)
     
     def merge_complex_equation(self, left: GenericFunctionTerm[Token], right: GenericToken):
+        '''
+        Adds the equation `left == right` to the Congruence Closure Tracker,
+        where the equation is of the form `function(a1, a2, ...) = a`.
+        '''
         lookup_key = tuple([self.representatives[x] for x in left.parameters])
         if lookup_key in self.lookup_table:
             (lookup_function_term, lookup_result) = self.lookup_table[lookup_key]
@@ -51,16 +58,35 @@ class CongruenceClosureTracker[T]:
                 self.use_lists[parameter].append((left, right))
 
     def are_congruent(self, left: GenericToken, right: GenericToken) -> bool:
+        '''
+        Returns whether `left == right` can be deduced from the equations input so far.
+        '''
         left_normalized = self.normalize(left)
         right_normalized = self.normalize(right)
         return left_normalized == right_normalized
     
     def propogate(self):
+        '''
+        TODO: Document
+        '''
         while len(self.pending) > 0:
             pending_equation = self.pending.pop()
             raise NotImplementedError()
+        
+    def flatten(self, term: GenericFunctionTerm[Token]) -> BasicFunctionTerm[Token]:
+        '''
+        TODO: Do we need this? Maybe this should immediately output a `Token`?
+        
+        Makes sure there is a `BasicFunctionTerm` equivalent to the given `GenericFunctionTerm`
+        (introducing new constants if necessary),
+        then returns the equivalent `BasicFunctionTerm`.
+        '''
+        raise NotImplementedError()
     
     def normalize(self, value: GenericToken) -> GenericToken:
+        '''
+        TODO: Document
+        '''
         if isinstance(value, Token):
             return self.representatives[value]
         normalized_parameters = [self.normalize(p) for p in value.parameters]
@@ -71,8 +97,14 @@ class CongruenceClosureTracker[T]:
                 return self.representatives[lookup[1]]
         return GenericFunctionTerm(value.function, normalized_parameters)
 
-    def explain(self, left: GenericToken, right: GenericToken):
+    def explain(self, left: GenericToken, right: GenericToken) -> list[object]:
+        '''
+        Returns an explanation as to why `left == right` is true.
+        '''
         raise NotImplementedError()
 
-    def explain_along_path(self, left: GenericToken, right: GenericToken):
+    def explain_along_path(self, left: GenericToken, right: GenericToken) -> list[object]:
+        '''
+        TODO: Document
+        '''
         raise NotImplementedError()
