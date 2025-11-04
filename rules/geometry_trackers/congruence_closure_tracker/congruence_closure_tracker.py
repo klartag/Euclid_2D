@@ -51,7 +51,9 @@ class CongruenceClosureTracker[T]:
                 self.use_lists[parameter].append((left, right))
 
     def are_congruent(self, left: GenericToken, right: GenericToken) -> bool:
-        raise NotImplementedError()
+        left_normalized = self.normalize(left)
+        right_normalized = self.normalize(right)
+        return left_normalized == right_normalized
     
     def propogate(self):
         while len(self.pending) > 0:
