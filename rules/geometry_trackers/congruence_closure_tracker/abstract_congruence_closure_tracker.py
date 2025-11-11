@@ -35,13 +35,22 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
         
     @abstractmethod
     def deconstruct(self, value: Atom | NonAtom) -> Atom | GenericFunctionTerm[Atom]:
+        '''
+        TODO: Document
+        '''
         ...
         
     @abstractmethod
     def reconstruct_function(self, function: str, parameters: list[Atom | NonAtom]) -> Atom | NonAtom:
+        '''
+        TODO: Document
+        '''
         ...
         
     def reconstruct(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Atom | NonAtom:
+        '''
+        TODO: Document
+        '''
         if isinstance(value, Constant):
             token = self.tokens[value]
             if isinstance(token, BasicFunctionTerm):
@@ -65,6 +74,9 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
     def project_atom_type(self, value: GenericFunctionTerm[Atom]) -> GenericFunctionTerm[Constant]: ...
 
     def project_atom_type(self, value: Atom | BasicFunctionTerm[Atom] | GenericFunctionTerm[Atom]) -> Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]:
+        '''
+        TODO: Document
+        '''
         if isinstance(value, BasicFunctionTerm):
             parameters = [self.project_atom_type(atom) for atom in value.parameters]
             return BasicFunctionTerm(value.function, tuple(parameters))
@@ -81,6 +93,9 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
             return self.tokens.index(value)
 
     def merge(self, left: Atom | NonAtom, right: Atom | NonAtom):
+        '''
+        TODO: Document
+        '''
         deconstructed_left = self.deconstruct(left)
         deconstructed_right = self.deconstruct(right)
         _left = self.project_atom_type(deconstructed_left)
@@ -119,6 +134,9 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
                 self.use_lists[parameter].append(Equation(left, right))
 
     def are_congruent(self, left: Atom | NonAtom, right: Atom | NonAtom) -> bool:
+        '''
+        TODO: Document
+        '''
         deconstructed_left = self.deconstruct(left)
         deconstructed_right = self.deconstruct(right)
         _left = self.project_atom_type(deconstructed_left)
@@ -170,20 +188,35 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
             del self.use_lists[old_a_prime]
 
     def _get_lookup_key(self, term: BasicFunctionTerm[Constant]) -> tuple[str, tuple[Constant, ...]]:
+        '''
+        TODO: Document
+        '''
         representatives = tuple([self.representatives[parameter] for parameter in term.parameters])
         return (term.function, representatives)
         
     def _lookup(self, term: BasicFunctionTerm[Constant]) -> BasicFunctionEquation | None:
+        '''
+        TODO: Document
+        '''
         return self.lookup_table.get(self._get_lookup_key(term), None)
     
     def _set_lookup(self, term: BasicFunctionTerm[Constant], equation: BasicFunctionEquation):
+        '''
+        TODO: Document
+        '''
         self.lookup_table[self._get_lookup_key(term)] = equation        
 
     def _semi_flatten(self, term: GenericFunctionTerm[Constant]) -> BasicFunctionTerm[Constant]:
+        '''
+        TODO: Document
+        '''
         parameters = [self._flatten(parameter) for parameter in term.parameters]
         return BasicFunctionTerm(term.function, tuple(parameters))
 
     def _flatten(self, term: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Constant:
+        '''
+        TODO: Document
+        '''
         if isinstance(term, Constant):
             return term
         if isinstance(term, GenericFunctionTerm):
@@ -192,6 +225,9 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
         return self.tokens.index(term)
 
     def normalize(self, value: Atom | NonAtom) -> Atom | NonAtom:
+        '''
+        TODO: Document
+        '''
         deconstucted_value = self.deconstruct(value)
         _value = self.project_atom_type(deconstucted_value)
         normalized_token_value = self._normalize(_value)
