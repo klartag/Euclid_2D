@@ -42,7 +42,7 @@ class CongruenceClosureTracker[T]:
             else:
                 self.merge_complex_equation(right, left)
         else:
-            self.merge_complex_equation(left, right)
+            self.merge_complex_equation(left, self.flatten(right))
     
     def merge_complex_equation(self, left: BasicFunctionTerm[Constant], right: Constant):
         '''
