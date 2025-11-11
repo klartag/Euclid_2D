@@ -36,8 +36,7 @@ class CongruenceClosureTracker[T]:
         '''
         if isinstance(left, Constant):
             if isinstance(right, Constant):
-                equation = Equation(left, right)
-                self.pending.append(equation)
+                self.pending.append(Equation(left, right))
                 self.propogate()
             else:
                 self.merge_complex_equation(right, left)
@@ -52,7 +51,7 @@ class CongruenceClosureTracker[T]:
         lookup_key = (left.function, tuple([self.representatives[x] for x in left.parameters]))
         if lookup_key in self.lookup_table:
             basic_function_equation = self.lookup_table[lookup_key]
-            self.pending.append(EquationPair(left, right, basic_function_equation.left, basic_function_equation.right))
+            self.pending.append(EquationPair(right, basic_function_equation.right, left, basic_function_equation.left))
             self.propogate()
         else:
             self.lookup_table[lookup_key] = Equation(left, right)
