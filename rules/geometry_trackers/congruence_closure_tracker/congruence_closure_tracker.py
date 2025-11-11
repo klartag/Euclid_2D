@@ -74,11 +74,43 @@ class CongruenceClosureTracker[T]:
         '''
         while len(self.pending) > 0:
             pending_equation = self.pending.pop()
-            raise NotImplementedError()
+            a, b = pending_equation.left, pending_equation.right
+            a_prime, b_prime = self.representatives[a], self.representatives[b]
+            
+            if a_prime == b_prime:
+                continue
+            if len(self.class_lists[a_prime]) > len(self.class_lists[b_prime]):
+                a, b = b, a
+                a_prime, b_prime = b_prime, a_prime
+            
+            old_a_prime = a_prime
+            for c in self.class_lists[old_a_prime]:
+                self.representatives[c] = b_prime
+            self.class_lists[b_prime].extend(self.class_lists[old_a_prime])
+            del self.class_lists[old_a_prime]
+            while len(self.use_lists[old_a_prime]) > 0:
+                use = self.use_lists[old_a_prime].pop()
+                lookup = self.lookup(use.left)
+                if lookup is not None:
+                    self.pending.append(EquationPair(use.right, lookup.right, use.left, lookup.left))
+                else:
+                    self.set_lookup(use.left, use)
+                    self.use_lists[b_prime].append(use)
+            del self.use_lists[old_a_prime]
+
+    def get_lookup_key(self, term: BasicFunctionTerm[Constant]) -> tuple[str, tuple[Constant, ...]]:
+        representatives = tuple([self.representatives[parameter] for parameter in term.parameters])
+        return (term.function, representatives)
+        
+    def lookup(self, term: BasicFunctionTerm[Constant]) -> BasicFunctionEquation | None:
+        return self.lookup_table.get(self.get_lookup_key(term), None)
     
+    def set_lookup(self, term: BasicFunctionTerm[Constant], equation: BasicFunctionEquation):
+        self.lookup_table[self.get_lookup_key(term)] = equation        
+
     def semi_flatten(self, term: GenericFunctionTerm[Constant]) -> BasicFunctionTerm[Constant]:
         parameters = [self.flatten(parameter) for parameter in term.parameters]
-        return BasicFunctionTerm(term.function, parameters)
+        return BasicFunctionTerm(term.function, tuple(parameters))
 
     def flatten(self, term: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Constant:
         if isinstance(term, Constant):
@@ -110,7 +142,7 @@ class CongruenceClosureTracker[T]:
         if lookup is not None:
             return self.representatives[lookup.right]
         
-        return BasicFunctionTerm(value.function, normalized_parameters)
+        return BasicFunctionTerm(value.function, tuple(normalized_parameters))
 
     def explain(self, left: Term, right: Term) -> list[object]:
         '''

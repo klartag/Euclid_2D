@@ -5,7 +5,7 @@ from typing import Self, Sequence
 @dataclass(frozen=True)
 class BasicFunctionTerm[T]:
     function: str
-    parameters: Sequence[T]
+    parameters: tuple[T, ...]
 
     def __eq__(self, other: Self) -> bool:
         return self.function == other.function and \
