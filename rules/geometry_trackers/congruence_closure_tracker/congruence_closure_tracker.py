@@ -76,22 +76,18 @@ class CongruenceClosureTracker[T]:
         while len(self.pending) > 0:
             pending_equation = self.pending.pop()
             raise NotImplementedError()
-        
-    def flatten(self, term: GenericFunctionTerm[Constant]) -> BasicFunctionTerm[Constant]:
-        '''
-        TODO: Do we need this? Maybe this should immediately output a `Token`?
-        
-        Makes sure there is a `BasicFunctionTerm` equivalent to the given `GenericFunctionTerm`
-        (introducing new constants if necessary),
-        then returns the equivalent `BasicFunctionTerm`.
-        '''
-        
-        raise NotImplementedError()
     
-    def as_token(self, term: BasicFunctionTerm[Constant]) -> Constant:
+    def semi_flatten(self, term: GenericFunctionTerm[Constant]) -> BasicFunctionTerm[Constant]:
+        parameters = [self.flatten(parameter) for parameter in term.parameters]
+        return BasicFunctionTerm(term.function, parameters)
+
+    def flatten(self, term: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Constant:
+        if isinstance(term, Constant):
+            return term
+        if isinstance(term, GenericFunctionTerm):
+            term = self.semi_flatten(term)
         self.tokens.add(term)
         return self.tokens.index(term)
-    
 
     def normalize(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Term:
         '''
@@ -107,7 +103,7 @@ class CongruenceClosureTracker[T]:
         
         for (i, parameter) in enumerate(normalized_parameters):
             if isinstance(parameter, BasicFunctionTerm):
-                normalized_parameters[i] = self.as_token(parameter)
+                normalized_parameters[i] = self.flatten(parameter)
                 
         normalized_parameters = cast(list[Constant], normalized_parameters)
 
