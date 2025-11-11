@@ -4,4 +4,5 @@ from .abstract_equation import AbstractEquation
 
 @dataclass
 class Equation[S, T](AbstractEquation[S, T]):
-    pass
+    def __str__(self) -> str:
+        return f'{self.left} = {self.right}'

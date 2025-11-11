@@ -11,7 +11,7 @@ class IndexedSet[T]:
         self.reverse_key_dict = {self.values[i]: i for i in range(len(self.values))}
         
     def add(self, value: T):
-        if value in self:
+        if value not in self:
             self.reverse_key_dict[value] = len(self.values)
             self.values.append(value)
             
@@ -26,3 +26,6 @@ class IndexedSet[T]:
 
     def clone(self) -> 'IndexedSet[T]':
         return IndexedSet(*self.values)
+
+    def __str__(self) -> str:
+        return f'IndexedSet{self.values}'

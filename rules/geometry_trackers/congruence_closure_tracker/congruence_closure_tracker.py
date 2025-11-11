@@ -1,5 +1,7 @@
 from typing import cast
+from collections import defaultdict
 
+from ...extended_default_dict import ExtendedDefaultDict
 from ...indexed_set import IndexedSet
 
 from .equations.equation import Equation
@@ -15,18 +17,18 @@ Term = Constant | BasicFunctionTerm[Constant]
 class CongruenceClosureTracker[T]:
     tokens: IndexedSet[T | BasicFunctionTerm[Constant]]
     pending: list[Equation[Constant, Constant] | EquationPair[Constant]]
-    representatives: dict[Constant, Constant]
-    class_lists: dict[Constant, list[Constant]]
-    use_lists: dict[Constant, list[BasicFunctionEquation]]
+    representatives: ExtendedDefaultDict[Constant, Constant]
+    class_lists: ExtendedDefaultDict[Constant, list[Constant]]
+    use_lists: defaultdict[Constant, list[BasicFunctionEquation]]
     lookup_table: dict[tuple[str, tuple[Constant, ...]], BasicFunctionEquation]
     proof_forest: list[tuple[Constant, Constant, BasicFunctionEquation]] # Replace this with a proper data structure later.
 
     def __init__(self):
         self.tokens = IndexedSet()
         self.pending = []
-        self.representatives = {}
-        self.class_lists = {}
-        self.use_lists = {}
+        self.representatives = ExtendedDefaultDict(lambda c: c)
+        self.class_lists = ExtendedDefaultDict(lambda c: [c])
+        self.use_lists = defaultdict(list)
         self.lookup_table = {}
         self.proof_forest = []
 
@@ -48,24 +50,26 @@ class CongruenceClosureTracker[T]:
         Adds the equation `left == right` to the Congruence Closure Tracker,
         where the equation is of the form `function(a1, a2, ...) = a`.
         '''
-        lookup_key = (left.function, tuple([self.representatives[x] for x in left.parameters]))
-        if lookup_key in self.lookup_table:
-            basic_function_equation = self.lookup_table[lookup_key]
-            self.pending.append(EquationPair(right, basic_function_equation.right, left, basic_function_equation.left))
+        lookup = self.lookup(left)
+        if lookup is not None:
+            self.pending.append(EquationPair(right, lookup.right, left, lookup.left))
             self.propogate()
         else:
-            self.lookup_table[lookup_key] = Equation(left, right)
-            for parameter in lookup_key[1]:
-                if parameter not in self.use_lists:
-                    self.use_lists[parameter] = []
+            self.set_lookup(left, Equation(left, right))
+            for parameter in self.get_lookup_key(left)[1]:
                 self.use_lists[parameter].append(Equation(left, right))
 
-    def are_congruent(self, left: Term, right: Term) -> bool:
+    def are_congruent(
+        self,
+        left: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant],
+        right: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]
+    ) -> bool:
         '''
         Returns whether `left == right` can be deduced from the equations input so far.
         '''
         left_normalized = self.normalize(left)
         right_normalized = self.normalize(right)
+
         return left_normalized == right_normalized
 
     def propogate(self):
@@ -87,7 +91,8 @@ class CongruenceClosureTracker[T]:
             for c in self.class_lists[old_a_prime]:
                 self.representatives[c] = b_prime
             self.class_lists[b_prime].extend(self.class_lists[old_a_prime])
-            del self.class_lists[old_a_prime]
+            if old_a_prime in self.class_lists:
+                del self.class_lists[old_a_prime]
             while len(self.use_lists[old_a_prime]) > 0:
                 use = self.use_lists[old_a_prime].pop()
                 lookup = self.lookup(use.left)
