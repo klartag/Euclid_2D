@@ -12,7 +12,7 @@ same_angle:
     - orientation(A, O, C) == 90 mod 360 & orientation(B, O, C) == 90 mod 360 => angle(A, O, C) == angle(B, O, C) mod 360
     - orientation(A, O, C) == -90 mod 360 & orientation(B, O, C) == -90 mod 360 => angle(A, O, C) == angle(B, O, C) mod 360
     - orientation(A, O, C) == 90 mod 360 & orientation(B, O, C) == -90 mod 360 => angle(A, O, C) == angle(B, O, C) + 180 mod 360
-    - orientation(A, O, C) == 90 mod 360 & orientation(B, O, C) == -90 mod 360 => angle(A, O, C) == angle(B, O, C) + 180 mod 360
+    - orientation(A, O, C) == -90 mod 360 & orientation(B, O, C) == 90 mod 360 => angle(A, O, C) == angle(B, O, C) + 180 mod 360
   rank: 2
 
 same_angle_converse:

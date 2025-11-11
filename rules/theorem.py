@@ -259,9 +259,10 @@ class Theorem:
                             )
                         )
                     if symbol[-1] == '>':
+                        rev_name = f'{flow_name}_l' if symbol[0] == '<' else flow_name
                         res.append(
                             Theorem(
-                                flow_name,
+                                rev_name,
                                 data,
                                 signature,
                                 required_predicates + left_preds,
