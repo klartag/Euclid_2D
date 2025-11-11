@@ -1,4 +1,4 @@
-from typing import cast, overload
+from typing import cast
 
 from ...indexed_set import IndexedSet
 
@@ -68,7 +68,7 @@ class CongruenceClosureTracker[T]:
         left_normalized = self.normalize(left)
         right_normalized = self.normalize(right)
         return left_normalized == right_normalized
-    
+
     def propogate(self):
         '''
         TODO: Document
@@ -92,17 +92,6 @@ class CongruenceClosureTracker[T]:
         self.tokens.add(term)
         return self.tokens.index(term)
     
-    @overload
-    def normalize(self, value: Constant) -> Term:
-        ...
-        
-    @overload
-    def normalize(self, value: BasicFunctionTerm[Constant]) -> Term:
-        ...
-        
-    @overload
-    def normalize(self, value: GenericFunctionTerm[Constant]) -> Term:
-        ...
 
     def normalize(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Term:
         '''
