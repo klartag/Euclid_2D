@@ -20,5 +20,5 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, 
         else:
             raise ValueError("Cannot deconstruct an object that isn't an Atom, Literal, or ConstructionObject.")
 
-    def construct_function(self, function: str, parameters: list[Atom | Literal | GeoObject]) -> Atom | Literal | GeoObject:
+    def reconstruct_function(self, function: str, parameters: list[Atom | Literal | GeoObject]) -> Atom | Literal | GeoObject:
         return ConstructionObject.from_args(function, tuple(parameters))

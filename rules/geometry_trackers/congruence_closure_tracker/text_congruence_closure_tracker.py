@@ -18,5 +18,5 @@ class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, Never])
         parsed_parameters = [self.deconstruct(parameter) for parameter in unparsed_parameters]
         return GenericFunctionTerm(function, tuple(parsed_parameters))
 
-    def construct_function(self, function: str, parameters: list[str]) -> str:
+    def reconstruct_function(self, function: str, parameters: list[str]) -> str:
         return f'{function}{tuple(parameters)}'

@@ -38,22 +38,22 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
         ...
         
     @abstractmethod
-    def construct_function(self, function: str, parameters: list[Atom | NonAtom]) -> Atom | NonAtom:
+    def reconstruct_function(self, function: str, parameters: list[Atom | NonAtom]) -> Atom | NonAtom:
         ...
         
-    def construct(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Atom | NonAtom:
+    def reconstruct(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Atom | NonAtom:
         if isinstance(value, Constant):
             token = self.tokens[value]
             if isinstance(token, BasicFunctionTerm):
-                return self.construct(token)
+                return self.reconstruct(token)
             else:
                 return token
             
         if isinstance(value, BasicFunctionTerm):
             value = GenericFunctionTerm.from_basic_term(value)
             
-        constructed_parameters = [self.construct(parameter) for parameter in value.parameters]
-        return self.construct_function(value.function, constructed_parameters)
+        constructed_parameters = [self.reconstruct(parameter) for parameter in value.parameters]
+        return self.reconstruct_function(value.function, constructed_parameters)
 
     @overload
     def project_atom_type(self, value: Atom) -> Constant: ...
@@ -195,7 +195,7 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
         deconstucted_value = self.deconstruct(value)
         _value = self.project_atom_type(deconstucted_value)
         normalized_token_value = self._normalize(_value)
-        return self.construct(normalized_token_value)
+        return self.reconstruct(normalized_token_value)
 
     def _normalize(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> SimpleTerm:
         '''
