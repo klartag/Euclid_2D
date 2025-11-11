@@ -15,7 +15,7 @@ Constant = int
 BasicFunctionEquation = Equation[BasicFunctionTerm[Constant], Constant]
 SimpleTerm = Constant | BasicFunctionTerm[Constant]
 
-class AbstractCongruenceClosureTracker[Atom, Object](ABC):
+class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
     tokens: IndexedSet[Atom | BasicFunctionTerm[Constant]]
     pending: list[Equation[Constant, Constant] | EquationPair[Constant]]
     representatives: ExtendedDefaultDict[Constant, Constant]
@@ -34,8 +34,26 @@ class AbstractCongruenceClosureTracker[Atom, Object](ABC):
         self.proof_forest = []
         
     @abstractmethod
-    def deconstruct(self, value: Object) -> Atom | GenericFunctionTerm[Atom]:
+    def deconstruct(self, value: Atom | NonAtom) -> Atom | GenericFunctionTerm[Atom]:
         ...
+        
+    @abstractmethod
+    def construct_function(self, function: str, parameters: list[Atom | NonAtom]) -> Atom | NonAtom:
+        ...
+        
+    def construct(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Atom | NonAtom:
+        if isinstance(value, Constant):
+            token = self.tokens[value]
+            if isinstance(token, BasicFunctionTerm):
+                return self.construct(token)
+            else:
+                return token
+            
+        if isinstance(value, BasicFunctionTerm):
+            value = GenericFunctionTerm.from_basic_term(value)
+            
+        constructed_parameters = [self.construct(parameter) for parameter in value.parameters]
+        return self.construct_function(value.function, constructed_parameters)
 
     @overload
     def project_atom_type(self, value: Atom) -> Constant: ...
@@ -62,7 +80,7 @@ class AbstractCongruenceClosureTracker[Atom, Object](ABC):
             self.tokens.add(value)
             return self.tokens.index(value)
 
-    def merge(self, left: Object, right: Object):
+    def merge(self, left: Atom | NonAtom, right: Atom | NonAtom):
         deconstructed_left = self.deconstruct(left)
         deconstructed_right = self.deconstruct(right)
         _left = self.project_atom_type(deconstructed_left)
@@ -100,7 +118,7 @@ class AbstractCongruenceClosureTracker[Atom, Object](ABC):
             for parameter in self._get_lookup_key(left)[1]:
                 self.use_lists[parameter].append(Equation(left, right))
 
-    def are_congruent(self, left: Object, right: Object) -> bool:
+    def are_congruent(self, left: Atom | NonAtom, right: Atom | NonAtom) -> bool:
         deconstructed_left = self.deconstruct(left)
         deconstructed_right = self.deconstruct(right)
         _left = self.project_atom_type(deconstructed_left)
@@ -172,6 +190,12 @@ class AbstractCongruenceClosureTracker[Atom, Object](ABC):
             term = self._semi_flatten(term)
         self.tokens.add(term)
         return self.tokens.index(term)
+
+    def normalize(self, value: Atom | NonAtom) -> Atom | NonAtom:
+        deconstucted_value = self.deconstruct(value)
+        _value = self.project_atom_type(deconstucted_value)
+        normalized_token_value = self._normalize(_value)
+        return self.construct(normalized_token_value)
 
     def _normalize(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> SimpleTerm:
         '''

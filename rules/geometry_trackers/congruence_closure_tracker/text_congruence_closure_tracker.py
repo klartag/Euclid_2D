@@ -1,10 +1,11 @@
+from typing import Never
 from ...expression_parse_utils import split_args
 
 from .abstract_congruence_closure_tracker import AbstractCongruenceClosureTracker
 from .terms.generic_function_term import GenericFunctionTerm
 
 
-class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, str]):
+class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, Never]):
     def deconstruct(self, value: str) -> str | GenericFunctionTerm[str]:
         assert value.count('(') == value.count(')')
         if '(' not in value:
@@ -16,3 +17,6 @@ class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, str]):
         assert unparsed_parameters is not None
         parsed_parameters = [self.deconstruct(parameter) for parameter in unparsed_parameters]
         return GenericFunctionTerm(function, tuple(parsed_parameters))
+
+    def construct_function(self, function: str, parameters: list[str]) -> str:
+        return f'{function}{tuple(parameters)}'
