@@ -111,14 +111,11 @@ class CongruenceClosureTracker[T]:
                 
         normalized_parameters = cast(list[Constant], normalized_parameters)
 
-        lookup = self.lookup_table.get(tuple(normalized_parameters))
+        lookup = self.lookup_table.get((value.function, tuple(normalized_parameters)))
         if lookup is not None:
-            return self.representatives[lookup[1]]
-            
-        for i in range(len(normalized_parameters)):
-            if isinstance(normalized_parameters[i], BasicFunctionTerm):
-                
-        return GenericFunctionTerm(value.function, normalized_parameters)
+            return self.representatives[lookup.right]
+        
+        return BasicFunctionTerm(value.function, normalized_parameters)
 
     def explain(self, left: Term, right: Term) -> list[object]:
         '''
