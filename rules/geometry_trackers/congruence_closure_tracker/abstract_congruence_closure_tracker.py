@@ -46,7 +46,7 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
         TODO: Document
         '''
         ...
-        
+
     def reconstruct(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Atom | NonAtom:
         '''
         TODO: Document
@@ -221,8 +221,12 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
             return term
         if isinstance(term, GenericFunctionTerm):
             term = self._semi_flatten(term)
-        self.tokens.add(term)
+        if self.tokens.add(term):
+            self.post_process_token_addition(term)
         return self.tokens.index(term)
+
+    def post_process_token_addition(self, term: BasicFunctionTerm[Constant]):
+        pass
 
     def normalize(self, value: Atom | NonAtom) -> Atom | NonAtom:
         '''

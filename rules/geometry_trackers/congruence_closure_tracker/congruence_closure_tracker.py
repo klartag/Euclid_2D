@@ -1,3 +1,4 @@
+from ...predicates.global_predicates import get_constructions
 
 from ...geometry_objects.atom import Atom
 from ...geometry_objects.literal import Literal
@@ -5,6 +6,7 @@ from ...geometry_objects.construction_object import ConstructionObject
 from ...geometry_objects.geo_object import GeoObject
 
 from .abstract_congruence_closure_tracker import AbstractCongruenceClosureTracker
+from .terms.basic_function_term import BasicFunctionTerm
 from .terms.generic_function_term import GenericFunctionTerm
 
 
@@ -19,6 +21,12 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, 
             return GenericFunctionTerm(function, deconsructed_parameters)
         else:
             raise ValueError("Cannot deconstruct an object that isn't an Atom, Literal, or ConstructionObject.")
+
+    def post_process_token_addition(self, term: BasicFunctionTerm[int]):
+        symmetrical_orders = get_constructions()[term.function].symmetry.all_orders(term.parameters)
+        symmetrical_terms = [BasicFunctionTerm(term.function, order) for order in symmetrical_orders]
+        for i in range(len(symmetrical_terms) - 1):
+            self._merge(symmetrical_terms[i], symmetrical_terms[i + 1])
 
     def reconstruct_function(self, function: str, parameters: list[Atom | Literal | GeoObject]) -> Atom | Literal | GeoObject:
         return ConstructionObject.from_args(function, tuple(parameters))

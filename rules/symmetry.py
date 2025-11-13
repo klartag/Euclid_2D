@@ -1,14 +1,13 @@
 from enum import Enum, auto
 import itertools
-from typing import TypeVar, Protocol
-
+from typing import TypeVar, Protocol, Self
 
 class Sortable(Protocol):
     """
     A bound for types that can be sorted.
     """
 
-    def __lt__(self, other) -> bool: ...
+    def __lt__(self, other: Self, /) -> bool: ...
 
 
 T = TypeVar('T', bound=Sortable)

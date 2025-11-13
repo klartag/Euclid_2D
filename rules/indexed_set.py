@@ -10,10 +10,12 @@ class IndexedSet[T]:
         self.values = list(values)
         self.reverse_key_dict = {self.values[i]: i for i in range(len(self.values))}
         
-    def add(self, value: T):
-        if value not in self:
-            self.reverse_key_dict[value] = len(self.values)
-            self.values.append(value)
+    def add(self, value: T) -> bool:
+        if value in self:
+            return False
+        self.reverse_key_dict[value] = len(self.values)
+        self.values.append(value)
+        return True
             
     def __contains__(self, value: T) -> bool:
         return value in self.reverse_key_dict
