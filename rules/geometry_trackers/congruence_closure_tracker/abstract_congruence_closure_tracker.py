@@ -24,7 +24,7 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
     class_lists: ExtendedDefaultDict[Constant, list[Constant]]
     use_lists: defaultdict[Constant, list[BasicFunctionEquation]]
     lookup_table: dict[tuple[str, tuple[Constant, ...]], BasicFunctionEquation]
-    proof_forest: ProofForest[Constant, object]
+    proof_forest: ProofForest[Constant]
 
     def __init__(self):
         self.tokens = IndexedSet()
