@@ -14,7 +14,6 @@ class ProofForest[T: Hashable]:
     forest: DiGraph
     
     def __init__(self):
-        self.inner_union_find = UnionFind()
         self.forest = DiGraph()
         
     def add(self, v0: T, v1: T, e: Equation[T, T] | EquationPair[T]):
@@ -22,9 +21,6 @@ class ProofForest[T: Hashable]:
         
     def get_edge(self, v0: T, v1: T) -> Equation[T, T] | EquationPair[T] | None:
         return self.forest.get_edge_data(v0, v1)[EDGE_LABEL]
-
-    def reset(self):
-        self.inner_union_find = UnionFind()
 
     def explain(self, c1: T, c2: T) -> list[Equation[T, T] | EquationPair[T]]:
         union_find = UnionFind[T]()
