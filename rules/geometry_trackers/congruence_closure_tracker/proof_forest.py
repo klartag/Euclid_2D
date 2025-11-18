@@ -48,6 +48,7 @@ class ProofForest[T: Hashable]:
                     pending_proofs.append((a_parameter, b_parameter))
             union_find[a] = b
             a = self.get_highest_node(b)
+        return proof
     
     def nearest_common_ancestor(self, v0: T, v1: T) -> T:
         raise NotImplementedError()
