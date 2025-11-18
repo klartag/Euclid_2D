@@ -10,6 +10,8 @@ from .equations.equation_pair import EquationPair
 from .terms.basic_function_term import BasicFunctionTerm
 from .terms.generic_function_term import GenericFunctionTerm
 
+from .proof_forest import ProofForest
+
 
 Constant = int
 BasicFunctionEquation = Equation[BasicFunctionTerm[Constant], Constant]
@@ -22,7 +24,7 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
     class_lists: ExtendedDefaultDict[Constant, list[Constant]]
     use_lists: defaultdict[Constant, list[BasicFunctionEquation]]
     lookup_table: dict[tuple[str, tuple[Constant, ...]], BasicFunctionEquation]
-    proof_forest: list[tuple[Constant, Constant, BasicFunctionEquation]] # Replace this with a proper data structure later.
+    proof_forest: ProofForest[Constant, object]
 
     def __init__(self):
         self.tokens = IndexedSet()
@@ -31,7 +33,7 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
         self.class_lists = ExtendedDefaultDict(lambda c: [c])
         self.use_lists = defaultdict(list)
         self.lookup_table = {}
-        self.proof_forest = []
+        self.proof_forest = ProofForest()
         
     @abstractmethod
     def deconstruct(self, value: Atom | NonAtom) -> Atom | GenericFunctionTerm[Atom]:
@@ -172,6 +174,8 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
                 a_prime, b_prime = b_prime, a_prime
             
             old_a_prime = a_prime
+            self.proof_forest.add(a, b, pending_equation)
+            
             for c in self.class_lists[old_a_prime]:
                 self.representatives[c] = b_prime
             self.class_lists[b_prime].extend(self.class_lists[old_a_prime])
