@@ -16,17 +16,13 @@ Need to prove:
 concyclic(A, B, C, Ha)
 
 Proof:
-It is almost always true that exists(line_intersection(Line(B, H), Line(A, C)))
 By in_imply_collinear on line_intersection(Line(B, H), Line(A, C)), B, H we get collinear(line_intersection(Line(B, H), Line(A, C)), B, H)
 By same_angle_v0 on H, B, line_intersection(Line(B, H), Line(A, C)), C we get angle(B, H, C) == angle(line_intersection(Line(B, H), Line(A, C)), H, C) mod 360
-It is almost always true that exists(line_intersection(Line(C, H), Line(A, B)))
 By in_imply_collinear on line_intersection(Line(C, H), Line(A, B)), C, H we get collinear(line_intersection(Line(C, H), Line(A, B)), C, H)
 By same_angle_v1 on H, C, line_intersection(Line(C, H), Line(A, B)), line_intersection(Line(B, H), Line(A, C)) we get angle(C, H, line_intersection(Line(B, H), Line(A, C))) == angle(line_intersection(Line(C, H), Line(A, B)), H, line_intersection(Line(B, H), Line(A, C))) mod 360
 
-It is almost always true that exists(line_intersection(Line(H, Ha), Line(B, C)))
 By in_imply_collinear on line_intersection(Line(H, Ha), Line(B, C)), H, Ha we get collinear(line_intersection(Line(H, Ha), Line(B, C)), H, Ha)
 By same_angle_v3 on line_intersection(Line(H, Ha), Line(B, C)), H, Ha, B we get angle(H, line_intersection(Line(H, Ha), Line(B, C)), B) == angle(Ha, line_intersection(Line(H, Ha), Line(B, C)), B) + 180 mod 360
-It is almost always true that exists(distance(line_intersection(Line(H, Ha), Line(B, C)), B))
 By point_on_perpendicular_bisector on H, Ha, line_intersection(Line(H, Ha), Line(B, C)), Line(B, C) we get distance(H, line_intersection(Line(H, Ha), Line(B, C))) == distance(Ha, line_intersection(Line(H, Ha), Line(B, C)))
 By perpendicular_bisector_properties on H, Ha we get perpendicular(Line(H, Ha), Line(B, C))
 By line_uniqueness on H, line_intersection(Line(H, Ha), Line(B, C)), Line(H, line_intersection(Line(H, Ha), Line(B, C))), Line(H, Ha) we get Line(H, line_intersection(Line(H, Ha), Line(B, C))) == Line(H, Ha)
@@ -35,16 +31,75 @@ By line_uniqueness on B, line_intersection(Line(H, Ha), Line(B, C)), Line(B, lin
 By perpendicular_angle_conditions_v0_l on H, line_intersection(Line(H, Ha), Line(B, C)), B we get angle(H, line_intersection(Line(H, Ha), Line(B, C)), B) == orientation(H, line_intersection(Line(H, Ha), Line(B, C)), B) mod 360
 By sas_anti_congruence on H, line_intersection(Line(H, Ha), Line(B, C)), B, Ha, line_intersection(Line(H, Ha), Line(B, C)), B we get anti_congruent_triangles(H, line_intersection(Line(H, Ha), Line(B, C)), B, Ha, line_intersection(Line(H, Ha), Line(B, C)), B)
 
-It is almost always true that exists(angle(H, B, C))
-It is almost always true that exists(angle(C, B, Ha))
-It is almost always true that exists(distance(C, B))
-By asa_anti_congruence on C, B, H, C, B, Ha we get anti_congruent_triangles(C, B, H, C, B, Ha)
-# Comment: perpendicular_lines_draw_intersection
-# Comment: Line_definition we get Line == Line
-# Comment: By ... we get angle == orientation
-# By orthocenter_definition on A, B, C we get orthocenter(A, B, C) in altitude(B, C, A)
-# By perpendicular_direction_conditions_v0_r on A, C, B, H we get 2 * direction(A, C) - 2 * direction(B, H) == 180 mod 360
-# Comment: By asa_congruence on B, H, C, B, Ha, C we get congruent_triangles(B, H, C, B, Ha, C)
-# Comment: By asa_congruence on B, H, C, B, Ha, C we get congruent_triangles(B, H, C, B, Ha, C)
-# Comment: By congruent_triangles on B, H, C, B, Ha, C we get angle(B, H, C) == angle(C, Ha, B) mod 360
-# Comment: By concyclic_sufficient_conditions on A, B, C, Ha we get concyclic(A, B, C, Ha)
+By same_angle_v3 on B, line_intersection(Line(H, Ha), Line(B, C)), C, H we get angle(line_intersection(Line(H, Ha), Line(B, C)), B, H) == angle(C, B, H) + 180 mod 360
+By same_angle_v2 on B, line_intersection(Line(H, Ha), Line(B, C)), C, Ha we get angle(line_intersection(Line(H, Ha), Line(B, C)), B, Ha) == angle(C, B, Ha) + 180 mod 360
+By sas_anti_congruence on C, B, H, C, B, Ha we get anti_congruent_triangles(C, B, H, C, B, Ha)
+
+By orthocenter_definition on A, B, C we get H in altitude(B, C, A)
+By line_definition on B, H, altitude(B, C, A) we get altitude(B, C, A) == Line(B, H)
+By perpendicular_direction_conditions_v0_r on A, C, B, H we get 2 * direction(A, C) - 2 * direction(B, H) == 180 mod 360
+By line_uniqueness on H, line_intersection(Line(B, H), Line(A, C)), Line(H, line_intersection(Line(B, H), Line(A, C))), Line(B, H) we get Line(H, line_intersection(Line(B, H), Line(A, C))) == Line(B, H)
+By line_uniqueness on A, line_intersection(Line(B, H), Line(A, C)), Line(A, line_intersection(Line(B, H), Line(A, C))), Line(A, C) we get Line(A, line_intersection(Line(B, H), Line(A, C))) == Line(A, C)
+By perpendicular_angle_conditions_v0_l on H, line_intersection(Line(B, H), Line(A, C)), A we get angle(H, line_intersection(Line(B, H), Line(A, C)), A) == orientation(H, line_intersection(Line(B, H), Line(A, C)), A) mod 360
+
+By orthocenter_definition on A, B, C we get H in altitude(C, A, B)
+By line_definition on C, H, altitude(C, A, B) we get altitude(C, A, B) == Line(C, H)
+By perpendicular_direction_conditions_v0_r on A, B, C, H we get 2 * direction(A, B) - 2 * direction(C, H) == 180 mod 360
+By line_uniqueness on H, line_intersection(Line(C, H), Line(A, B)), Line(H, line_intersection(Line(C, H), Line(A, B))), Line(C, H) we get Line(H, line_intersection(Line(C, H), Line(A, B))) == Line(C, H)
+By line_uniqueness on A, line_intersection(Line(C, H), Line(A, B)), Line(A, line_intersection(Line(C, H), Line(A, B))), Line(A, B) we get Line(A, line_intersection(Line(C, H), Line(A, B))) == Line(A, B)
+By perpendicular_angle_conditions_v0_l on H, line_intersection(Line(C, H), Line(A, B)), A we get angle(H, line_intersection(Line(C, H), Line(A, B)), A) == orientation(H, line_intersection(Line(C, H), Line(A, B)), A) mod 360
+
+By reverse_direction on A, B we get direction(A, B) - direction(B, A) == 180 mod 360
+By reverse_direction on A, C we get direction(A, C) - direction(C, A) == 180 mod 360
+
+By reverse_direction on H, line_intersection(Line(C, H), Line(A, B)) we get direction(H, line_intersection(Line(C, H), Line(A, B))) - direction(line_intersection(Line(C, H), Line(A, B)), H) == 180 mod 360
+By reverse_direction on H, line_intersection(Line(B, H), Line(A, C)) we get direction(H, line_intersection(Line(B, H), Line(A, C))) - direction(line_intersection(Line(B, H), Line(A, C)), H) == 180 mod 360
+By in_imply_collinear on line_intersection(Line(B, H), Line(A, C)), A, C we get collinear(line_intersection(Line(B, H), Line(A, C)), A, C)
+By in_imply_collinear on line_intersection(Line(C, H), Line(A, B)), A, B we get collinear(line_intersection(Line(C, H), Line(A, B)), A, B)
+By line_uniqueness on A, line_intersection(Line(B, H), Line(A, C)), Line(A, line_intersection(Line(B, H), Line(A, C))), Line(A, C) we get Line(A, line_intersection(Line(B, H), Line(A, C))) == Line(A, C)
+By line_uniqueness on A, line_intersection(Line(C, H), Line(A, B)), Line(A, line_intersection(Line(C, H), Line(A, B))), Line(A, B) we get Line(A, line_intersection(Line(C, H), Line(A, B))) == Line(A, B)
+
+By same_angle_v0 on A, line_intersection(Line(B, H), Line(A, C)), C, line_intersection(Line(C, H), Line(A, B)) we get angle(line_intersection(Line(B, H), Line(A, C)), A, line_intersection(Line(C, H), Line(A, B))) == angle(C, A, line_intersection(Line(C, H), Line(A, B))) mod 360
+By same_angle_v1 on A, line_intersection(Line(C, H), Line(A, B)), B, line_intersection(Line(B, H), Line(A, C)) we get angle(line_intersection(Line(C, H), Line(A, B)), A, line_intersection(Line(B, H), Line(A, C))) == angle(B, A, line_intersection(Line(B, H), Line(A, C))) mod 360
+
+By reverse_direction on A, line_intersection(Line(C, H), Line(A, B)) we get direction(A, line_intersection(Line(C, H), Line(A, B))) - direction(line_intersection(Line(C, H), Line(A, B)), A) == 180 mod 360
+By reverse_direction on A, line_intersection(Line(B, H), Line(A, C)) we get direction(A, line_intersection(Line(B, H), Line(A, C))) - direction(line_intersection(Line(B, H), Line(A, C)), A) == 180 mod 360
+
+By concyclic_sufficient_conditions_v0 on C, A, B, Ha we get concyclic(C, A, B, Ha)
+
+
+# ====== Trimmed: ==========
+#
+# By in_imply_collinear on line_intersection(Line(A, C), Line(B, H)), B, H we get collinear(B, H, line_intersection(Line(A, C), Line(B, H)))
+# By same_angle_v0 on H, B, line_intersection(Line(A, C), Line(B, H)), C we get angle(B, H, C) == angle(line_intersection(Line(A, C), Line(B, H)), H, C) mod 360
+# By in_imply_collinear on line_intersection(Line(A, B), Line(C, H)), C, H we get collinear(C, H, line_intersection(Line(A, B), Line(C, H)))
+# By same_angle_v1 on H, C, line_intersection(Line(A, B), Line(C, H)), line_intersection(Line(A, C), Line(B, H)) we get angle(C, H, line_intersection(Line(A, C), Line(B, H))) == angle(line_intersection(Line(A, B), Line(C, H)), H, line_intersection(Line(A, C), Line(B, H))) mod 360
+# By in_imply_collinear on line_intersection(Line(B, C), Line(H, Ha)), H, Ha we get collinear(H, Ha, line_intersection(Line(B, C), Line(H, Ha)))
+# By same_angle_v3 on line_intersection(Line(B, C), Line(H, Ha)), H, Ha, B we get angle(H, line_intersection(Line(B, C), Line(H, Ha)), B) == angle(Ha, line_intersection(Line(B, C), Line(H, Ha)), B) + 180 mod 360
+# By point_on_perpendicular_bisector on H, Ha, line_intersection(Line(B, C), Line(H, Ha)), Line(B, C) we get distance(H, line_intersection(Line(B, C), Line(H, Ha))) == distance(Ha, line_intersection(Line(B, C), Line(H, Ha)))
+# By line_uniqueness on H, line_intersection(Line(B, C), Line(H, Ha)), Line(H, line_intersection(Line(B, C), Line(H, Ha))), Line(H, Ha) we get Line(H, Ha) == Line(H, line_intersection(Line(B, C), Line(H, Ha)))
+# By in_imply_collinear on line_intersection(Line(B, C), Line(H, Ha)), B, C we get collinear(B, C, line_intersection(Line(B, C), Line(H, Ha)))
+# By line_uniqueness on B, line_intersection(Line(B, C), Line(H, Ha)), Line(B, line_intersection(Line(B, C), Line(H, Ha))), Line(B, C) we get Line(B, C) == Line(B, line_intersection(Line(B, C), Line(H, Ha)))
+# By perpendicular_angle_conditions_v0_l on H, line_intersection(Line(B, C), Line(H, Ha)), B we get angle(H, line_intersection(Line(B, C), Line(H, Ha)), B) == orientation(B, H, line_intersection(Line(B, C), Line(H, Ha))) mod 360
+# By sas_anti_congruence on H, line_intersection(Line(B, C), Line(H, Ha)), B, Ha, line_intersection(Line(B, C), Line(H, Ha)), B we get anti_congruent_triangles(B, H, line_intersection(Line(B, C), Line(H, Ha)), B, Ha, line_intersection(Line(B, C), Line(H, Ha))) !!!
+# By same_angle_v3 on B, line_intersection(Line(B, C), Line(H, Ha)), C, H we get angle(C, B, H) + 180 == angle(line_intersection(Line(B, C), Line(H, Ha)), B, H) mod 360
+# By sas_anti_congruence on C, B, H, C, B, Ha we get anti_congruent_triangles(B, C, H, B, C, Ha)   !!!
+# By orthocenter_definition on A, B, C we get H in altitude(B, A, C)
+# By line_definition on B, H, altitude(B, A, C) we get Line(B, H) == altitude(B, A, C)
+# By line_uniqueness on H, line_intersection(Line(A, C), Line(B, H)), Line(H, line_intersection(Line(A, C), Line(B, H))), Line(B, H) we get Line(B, H) == Line(H, line_intersection(Line(A, C), Line(B, H)))
+# By line_uniqueness on A, line_intersection(Line(A, C), Line(B, H)), Line(A, line_intersection(Line(A, C), Line(B, H))), Line(A, C) we get Line(A, C) == Line(A, line_intersection(Line(A, C), Line(B, H)))
+# By perpendicular_angle_conditions_v0_l on H, line_intersection(Line(A, C), Line(B, H)), A we get angle(H, line_intersection(Line(A, C), Line(B, H)), A) == orientation(A, H, line_intersection(Line(A, C), Line(B, H))) mod 360
+# By orthocenter_definition on A, B, C we get H in altitude(C, A, B)
+# By line_definition on C, H, altitude(C, A, B) we get Line(C, H) == altitude(C, A, B)
+# By line_uniqueness on H, line_intersection(Line(A, B), Line(C, H)), Line(H, line_intersection(Line(A, B), Line(C, H))), Line(C, H) we get Line(C, H) == Line(H, line_intersection(Line(A, B), Line(C, H)))
+# By line_uniqueness on A, line_intersection(Line(A, B), Line(C, H)), Line(A, line_intersection(Line(A, B), Line(C, H))), Line(A, B) we get Line(A, B) == Line(A, line_intersection(Line(A, B), Line(C, H)))
+# By perpendicular_angle_conditions_v0_l on H, line_intersection(Line(A, B), Line(C, H)), A we get angle(H, line_intersection(Line(A, B), Line(C, H)), A) == orientation(A, H, line_intersection(Line(A, B), Line(C, H))) mod 360
+# By reverse_direction on H, line_intersection(Line(A, B), Line(C, H)) we get 180 == direction(H, line_intersection(Line(A, B), Line(C, H))) - direction(line_intersection(Line(A, B), Line(C, H)), H) mod 360
+# By reverse_direction on H, line_intersection(Line(A, C), Line(B, H)) we get 180 == direction(H, line_intersection(Line(A, C), Line(B, H))) - direction(line_intersection(Line(A, C), Line(B, H)), H) mod 360
+# By in_imply_collinear on line_intersection(Line(A, C), Line(B, H)), A, C we get collinear(A, C, line_intersection(Line(A, C), Line(B, H)))
+# By in_imply_collinear on line_intersection(Line(A, B), Line(C, H)), A, B we get collinear(A, B, line_intersection(Line(A, B), Line(C, H)))
+# By same_angle_v0 on A, line_intersection(Line(A, C), Line(B, H)), C, line_intersection(Line(A, B), Line(C, H)) we get angle(C, A, line_intersection(Line(A, B), Line(C, H))) == angle(line_intersection(Line(A, C), Line(B, H)), A, line_intersection(Line(A, B), Line(C, H))) mod 360
+# By same_angle_v1 on A, line_intersection(Line(A, B), Line(C, H)), B, line_intersection(Line(A, C), Line(B, H)) we get angle(B, A, line_intersection(Line(A, C), Line(B, H))) == angle(line_intersection(Line(A, B), Line(C, H)), A, line_intersection(Line(A, C), Line(B, H))) mod 360
+# By reverse_direction on A, line_intersection(Line(A, B), Line(C, H)) we get 180 == direction(A, line_intersection(Line(A, B), Line(C, H))) - direction(line_intersection(Line(A, B), Line(C, H)), A) mod 360
+# By reverse_direction on A, line_intersection(Line(A, C), Line(B, H)) we get 180 == direction(A, line_intersection(Line(A, C), Line(B, H))) - direction(line_intersection(Line(A, C), Line(B, H)), A) mod 360
+# By concyclic_sufficient_conditions_v0 on C, A, B, Ha we get concyclic(A, B, C, Ha)

@@ -13,7 +13,6 @@ perpendicular_angle_conditions:
     - A, B, C: Point
   possible_conclusions:
     - perpendicular(Line(A, B), Line(B, C)) <=> angle(A, B, C) == orientation(A, B, C) mod 360
-    - angle(A, B, C) == orientation(A, B, C) mod 360 <=> perpendicular(Line(A, B), Line(B, C))
 
 perpendicular_line_definition:
   inputs:

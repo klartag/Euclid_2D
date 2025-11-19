@@ -327,7 +327,6 @@ class ProofChecker:
             else:
                 e.args = (error_message,)
             # raise e
-            # print(e)
 
     def load_proof(self):
         """
@@ -377,7 +376,7 @@ class ProofChecker:
                 self.checked_steps += 1
             except ProofCheckError as e:
                 e.args = (f'In line {i}, step={step}:\n{e.args[0]}',)
-                raise
+                raise e
 
     def check(self, verbose=False):
         """
