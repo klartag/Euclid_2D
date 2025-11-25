@@ -283,8 +283,3 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
         '''
         raise NotImplementedError()
 
-    def explain_along_path(self, left: SimpleTerm, right: SimpleTerm) -> list[object]:
-        '''
-        TODO: Document
-        '''
-        raise NotImplementedError()

@@ -59,7 +59,7 @@ class ProofForest[T: Hashable]:
         proof: list[Equation[T, T] | EquationPair[T]] = []
         while a != c:
             b = list(self.forest.predecessors(a))[0]
-            edge = self.get_edge(a, b)
+            edge = self.get_edge(b, a)
             if isinstance(edge, Equation):
                 proof.append(edge)
             elif isinstance(edge, EquationPair):

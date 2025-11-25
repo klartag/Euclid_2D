@@ -49,7 +49,7 @@ class LabelledUnionFind[T, L](UnionFind[T]):
         self.delete_label(key)
         self.delete_label(value)
 
-        super()[key] = value
+        super().__setitem__(key, value)
         
         self.set_label(key, new_label)
 
