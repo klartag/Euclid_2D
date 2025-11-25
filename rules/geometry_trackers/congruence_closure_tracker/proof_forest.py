@@ -1,5 +1,5 @@
 from typing import Hashable
-from networkx import DiGraph
+from networkx import DiGraph, lowest_common_ancestor
 
 from ...union_find import UnionFind
 
@@ -48,7 +48,7 @@ class ProofForest[T: Hashable]:
         
         while len(pending_proofs) > 0:
             (a, b) = pending_proofs.pop()
-            c = self.nearest_common_ancestor(a, b)
+            c = lowest_common_ancestor(self.forest, a, b)
             proof.extend(self.explain_along_path(union_find, pending_proofs, a, c))
             proof.extend(self.explain_along_path(union_find, pending_proofs, b, c))
         return proof
@@ -57,7 +57,7 @@ class ProofForest[T: Hashable]:
         a = self.get_highest_node(a)
         proof: list[Equation[T, T] | EquationPair[T]] = []
         while a != c:
-            b = self.parent(a)
+            b = list(self.forest.predecessors(a))[0]
             edge = self.get_edge(a, b)
             if isinstance(edge, Equation):
                 proof.append(edge)
@@ -69,14 +69,8 @@ class ProofForest[T: Hashable]:
             a = self.get_highest_node(b)
         return proof
     
-    def nearest_common_ancestor(self, v0: T, v1: T) -> T:
-        raise NotImplementedError()
-    
     def get_highest_node(self, v: T) -> T:
         raise NotImplementedError()
     
     def set_highest_node(self, v0: T, v1: T):
-        raise NotImplementedError()
-    
-    def parent(self, v: T) -> T:
         raise NotImplementedError()
