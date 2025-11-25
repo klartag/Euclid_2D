@@ -24,8 +24,6 @@ class ProofForest[T: Hashable]:
     def add(self, v_src: T, v_dst: T, e: Equation[T, T] | EquationPair[T]):
         if len(self.union_find.get_equivalences(v_src)) > len(self.union_find.get_equivalences(v_dst)):
             v_src, v_dst = v_dst, v_src
-        
-        print('Adding', v_src, v_dst)
 
         path_to_root = [v_dst]
         if path_to_root[-1] in self.forest.nodes:
@@ -35,9 +33,7 @@ class ProofForest[T: Hashable]:
                     break
                 assert len(parents) == 1
                 path_to_root.append(parents[0])
-        print(path_to_root)
         for (dst, src) in zip(path_to_root, path_to_root[1:]):
-            print('Flipping', dst, src)
             attrs = self.forest[src][dst]
             self.forest.remove_edge(src, dst)
             self.forest.add_edge(dst, src, **attrs)
@@ -55,28 +51,19 @@ class ProofForest[T: Hashable]:
         
         while len(pending_proofs) > 0:
             (a, b) = pending_proofs.pop()
-            print(f'Explaining {a} == {b}')
             if a == b:
                 continue
             c = lowest_common_ancestor(self.forest, a, b)
-            print(f'LCA is {c}')
-            print(f'Explaining path {a} == {c}')
             proof.extend(self.explain_along_path(additional_union_find, pending_proofs, a, c))
-            print(proof)
-            print(f'Explaining path {b} == {c}')
             proof.extend(self.explain_along_path(additional_union_find, pending_proofs, b, c))
-            print(proof)
         return proof
     
     def explain_along_path(self, additional_union_find: LabelledUnionFind[T, T], pending_proofs: list[tuple[T, T]], a: T, c: T) -> list[Equation[T, T] | EquationPair[T]]:
         a = additional_union_find.get_label(a)
         c = additional_union_find.get_label(c)
         proof: list[Equation[T, T] | EquationPair[T]] = []
-        print(f'{a=}, {c=}')
         while a != c:
             b = list(self.forest.predecessors(a))[0]
-            print(f'{list(self.forest.predecessors(a))=}')
-            print(f'{a=}, {b=}, {c=}')
             edge = self.get_edge(b, a)
             if isinstance(edge, Equation):
                 proof.append(edge)
