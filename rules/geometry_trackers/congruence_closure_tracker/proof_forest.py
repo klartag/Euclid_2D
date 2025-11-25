@@ -2,6 +2,7 @@ from typing import Hashable
 from networkx import DiGraph, lowest_common_ancestor
 
 from ...union_find.union_find import UnionFind
+from ...union_find.labelled_union_find import LabelledUnionFind
 
 from .equations.equation import Equation
 from .equations.equation_pair import EquationPair
@@ -42,19 +43,19 @@ class ProofForest[T: Hashable]:
         return self.forest.get_edge_data(v0, v1)[EDGE_LABEL]
 
     def explain(self, c1: T, c2: T) -> list[Equation[T, T] | EquationPair[T]]:
-        union_find = UnionFind[T]()
+        additional_union_find = LabelledUnionFind(lambda t: t, lambda t1, l1, t2, l2: l2)
         pending_proofs = [(c1, c2)]
         proof: list[Equation[T, T] | EquationPair[T]] = []
         
         while len(pending_proofs) > 0:
             (a, b) = pending_proofs.pop()
             c = lowest_common_ancestor(self.forest, a, b)
-            proof.extend(self.explain_along_path(union_find, pending_proofs, a, c))
-            proof.extend(self.explain_along_path(union_find, pending_proofs, b, c))
+            proof.extend(self.explain_along_path(additional_union_find, pending_proofs, a, c))
+            proof.extend(self.explain_along_path(additional_union_find, pending_proofs, b, c))
         return proof
     
-    def explain_along_path(self, union_find: UnionFind[T], pending_proofs: list[tuple[T, T]], a: T, c: T) -> list[Equation[T, T] | EquationPair[T]]:
-        a = self.get_highest_node(a)
+    def explain_along_path(self, additional_union_find: LabelledUnionFind[T, T], pending_proofs: list[tuple[T, T]], a: T, c: T) -> list[Equation[T, T] | EquationPair[T]]:
+        a = additional_union_find.get_label(a)
         proof: list[Equation[T, T] | EquationPair[T]] = []
         while a != c:
             b = list(self.forest.predecessors(a))[0]
@@ -65,12 +66,6 @@ class ProofForest[T: Hashable]:
                 proof.append(edge)
                 for (a_parameter, b_parameter) in zip(edge.left_term.parameters, edge.right_term.parameters):
                     pending_proofs.append((a_parameter, b_parameter))
-            union_find[a] = b
-            a = self.get_highest_node(b)
+            additional_union_find[a] = b
+            a = additional_union_find.get_label(b)
         return proof
-    
-    def get_highest_node(self, v: T) -> T:
-        raise NotImplementedError()
-    
-    def set_highest_node(self, v0: T, v1: T):
-        raise NotImplementedError()
