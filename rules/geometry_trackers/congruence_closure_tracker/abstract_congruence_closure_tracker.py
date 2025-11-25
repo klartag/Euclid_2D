@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import cast, overload
+from typing import Any, cast, overload
 from collections import defaultdict
 
 from ...extended_default_dict import ExtendedDefaultDict
@@ -277,9 +277,13 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
         
         return BasicFunctionTerm(value.function, tuple(normalized_parameters))
 
-    def explain(self, left: SimpleTerm, right: SimpleTerm) -> list[object]:
+    def explain(self, left: Atom | NonAtom, right: Atom | NonAtom) -> list[Any]:
         '''
         Returns an explanation as to why `left == right` is true.
         '''
-        raise NotImplementedError()
-
+        if not self.are_congruent(left, right):
+            raise ValueError("Attempted to explain a false equality.")
+        left_atom = self._flatten(self.project_atom_type(self.deconstruct(left)))
+        right_atom = self._flatten(self.project_atom_type(self.deconstruct(right)))
+        
+        return self.proof_forest.explain(left_atom, right_atom)
