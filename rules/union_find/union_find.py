@@ -1,23 +1,9 @@
-from typing import Generic, Iterable, TypeVar
+from typing import Iterable
 
-T = TypeVar('T')
-
-
-class Box(Generic[T]):
-    """
-    A class that is effectively just a pointer to an object.
-    """
-
-    inner: T
-
-    def __init__(self, value: T):
-        self.inner = value
-
-    def __eq__(self, other: 'Box[T]'):
-        return self.inner == other.inner
+from .box import Box
 
 
-class UnionFind(Generic[T]):
+class UnionFind[T]:
     """
     A disjoint-set-union data structure.
     """

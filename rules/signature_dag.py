@@ -28,7 +28,7 @@ from .proof_checker_utils import (
 from .errors import GeometryError
 from .geometry_objects.geo_type import EQN_TYPES, GeoType
 from .theorem import Theorem
-from .union_find import UnionFind
+from .union_find.union_find import UnionFind
 from .rust_code.rust_match import RustMatch
 from .predicates.predicate import Predicate
 

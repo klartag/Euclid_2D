@@ -22,7 +22,7 @@ from ..geometry_objects.construction_object import Construction, ConstructionObj
 from ..predicates.predicate import Predicate
 from ..predicates.implementations.macro_predicate import MacroPredicate
 from ..proof.geometry_problem import GeometryProblem
-from ..union_find import UnionFind
+from ..union_find.union_find import UnionFind
 
 from .linear_algebra_tracker.linear_algebra_tracker import LinearAlgebraTracker
 from .linear_algebra_tracker.linear_expression import LinearExpression

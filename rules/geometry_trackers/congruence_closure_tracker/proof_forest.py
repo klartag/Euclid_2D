@@ -1,7 +1,7 @@
 from typing import Hashable
 from networkx import DiGraph, lowest_common_ancestor
 
-from ...union_find import UnionFind
+from ...union_find.union_find import UnionFind
 
 from .equations.equation import Equation
 from .equations.equation_pair import EquationPair
