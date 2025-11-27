@@ -13,14 +13,7 @@ from ..proof.document.reader.document_reader import DocumentReader
 from ..embeddings.embedder.embedder import DiagramEmbedder
 from ..embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
-from ..predicates.loader.pred_config import load_constructions_and_macros
-
 from .test_proofs import GEVA_PROBLEM_NAMES, FIGURES_PROBLEM_NAMES, IMO_SHORTLIST_PROBLEMS
-
-
-@pytest.fixture(autouse=True)
-def load_constructions_and_macros_for_tests():
-    load_constructions_and_macros()
 
 
 RANDOM_SAMPLE_INCORRECT_PROBLEMS = [

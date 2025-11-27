@@ -9,15 +9,20 @@ from .document_section import DocumentSection
 
 @dataclass
 class GeometryDocument:
-    path: Path
+    path: Path | None
     sections: Dict[DocumentSection, List[str]]
 
     @staticmethod
     def open(path: str) -> 'GeometryDocument':
-        path = GeometryDocument.get_full_problem_path(path)
+        full_path = GeometryDocument.get_full_problem_path(path)
         text = open(path, 'r').read()
         sections = GeometryDocument.parse_sections(text)
-        return GeometryDocument(path, sections)
+        return GeometryDocument(full_path, sections)
+    
+    @staticmethod
+    def from_text(text: str) -> 'GeometryDocument':
+        sections = GeometryDocument.parse_sections(text)
+        return GeometryDocument(None, sections)
 
     def get_text(self) -> str:
         lines = []

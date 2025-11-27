@@ -9,7 +9,6 @@ from ..proof.document.geometry_document import GeometryDocument
 from ..proof.document.reader.document_reader import DocumentReader
 from ..parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
 
-from ..predicates.loader.pred_config import load_constructions_and_macros
 from ..predicates.global_predicates import get_constructions
 
 from ..geometry_objects.construction_object import ConstructionObject
@@ -94,11 +93,6 @@ IMO_G3_PROBLEMS = [
 ]
 
 IMO_SHORTLIST_PROBLEMS = IMO_G1_PROBLEMS + IMO_G2_PROBLEMS + IMO_G3_PROBLEMS
-
-
-@pytest.fixture(autouse=True)
-def load_constructions_and_macros_for_tests():
-    load_constructions_and_macros()
 
 
 @pytest.mark.parametrize(
