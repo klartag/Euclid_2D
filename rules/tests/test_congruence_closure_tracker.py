@@ -1,7 +1,10 @@
 import pytest
 
+from ..geometry_objects.geo_object import GeoObject
+
 from ..geometry_trackers.congruence_closure_tracker.text_congruence_closure_tracker import TextCongruenceClosureTracker
 from ..geometry_trackers.congruence_closure_tracker.congruence_closure_tracker import CongruenceClosureTracker
+
 
 @pytest.mark.parametrize(['input_congruences', 'output_congruences'],
     [
@@ -33,6 +36,20 @@ from ..geometry_trackers.congruence_closure_tracker.congruence_closure_tracker i
 )
 def test_text_congruence_closure_tracker(input_congruences: list[tuple[str, str]], output_congruences: list[tuple[str, str]]):
     congruence_closure_tracker = TextCongruenceClosureTracker()
+    
+    for input_congruence in input_congruences:
+        congruence_closure_tracker.merge(input_congruence[0], input_congruence[1])
+        
+    for output_congruence in output_congruences:
+        assert congruence_closure_tracker.are_congruent(output_congruence[0], output_congruence[1])
+
+
+@pytest.mark.parametrize(['input_congruences', 'output_congruences'],
+    [
+    ]
+)
+def test_geometry_congruence_closure_tracker(input_congruences: list[tuple[GeoObject, GeoObject]], output_congruences: list[tuple[GeoObject, GeoObject]]):
+    congruence_closure_tracker = CongruenceClosureTracker()
     
     for input_congruence in input_congruences:
         congruence_closure_tracker.merge(input_congruence[0], input_congruence[1])
