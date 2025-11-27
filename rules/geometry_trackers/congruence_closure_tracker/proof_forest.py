@@ -10,8 +10,7 @@ from .equations.equation import Equation
 from .equations.equation_pair import EquationPair
 
 
-EQUATION_ATTRIBUTE = 'equation'
-LABEL_ATTRIBUTE = 'label'
+EDGE_ATTRIBUTE = 'edge'
 
 
 class ProofForest[T: Hashable, L]:
@@ -22,7 +21,7 @@ class ProofForest[T: Hashable, L]:
         self.union_find = UnionFind()
         self.forest = DiGraph()
 
-    def add(self, v_src: T, v_dst: T, edge: Equation[T, T, L] | EquationPair[T, L], label: L | None=None):
+    def add(self, v_src: T, v_dst: T, edge: Equation[T, T, L] | EquationPair[T, L]):
         if len(self.union_find.get_equivalences(v_src)) > len(self.union_find.get_equivalences(v_dst)):
             v_src, v_dst = v_dst, v_src
 
@@ -39,14 +38,11 @@ class ProofForest[T: Hashable, L]:
             self.forest.remove_edge(src, dst)
             self.forest.add_edge(dst, src, **attrs)
         
-        self.forest.add_edge(v_src, v_dst, **{EQUATION_ATTRIBUTE: edge, LABEL_ATTRIBUTE: label})
+        self.forest.add_edge(v_src, v_dst, **{EDGE_ATTRIBUTE: edge})
         self.union_find[v_src] = v_dst
 
     def get_edge(self, v0: T, v1: T) -> Equation[T, T, L] | EquationPair[T, L] | None:
-        return self.forest.get_edge_data(v0, v1)[EQUATION_ATTRIBUTE]
-
-    def get_label(self, v0: T, v1: T) -> L | None:
-        return self.forest.get_edge_data(v0, v1)[LABEL_ATTRIBUTE]
+        return self.forest.get_edge_data(v0, v1)[EDGE_ATTRIBUTE]
 
     def explain(self, c1: T, c2: T) -> list[L]:
         additional_union_find = LabelledUnionFind(lambda t: t, lambda t1, l1, t2, l2: l2)
@@ -69,9 +65,8 @@ class ProofForest[T: Hashable, L]:
         while a != c:
             b = list(self.forest.predecessors(a))[0]
             edge = self.get_edge(b, a)
-            label = self.get_label(b, a)
-            if label is not None:
-                proof.append(label)
+            if edge is not None and edge.label is not None:
+                proof.append(edge.label)
             if isinstance(edge, EquationPair):
                 for (a_parameter, b_parameter) in zip(edge.left_term.parameters, edge.right_term.parameters):
                     pending_proofs.append((a_parameter, b_parameter))
@@ -81,7 +76,7 @@ class ProofForest[T: Hashable, L]:
 
     def debug_draw(self):
         pos = nx.spring_layout(self.forest, k=5)
-        edge_labels = dict([((n1, n2), str(self.forest[n1][n2][EQUATION_ATTRIBUTE])) for n1, n2 in self.forest.edges])
+        edge_labels = dict([((n1, n2), str(self.forest[n1][n2][EDGE_ATTRIBUTE])) for n1, n2 in self.forest.edges])
         nx.draw_networkx(self.forest, pos)
         nx.draw_networkx_edge_labels(self.forest, pos, edge_labels=edge_labels)
         plt.show()
