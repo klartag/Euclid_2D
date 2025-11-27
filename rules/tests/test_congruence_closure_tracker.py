@@ -1,4 +1,3 @@
-from typing import NamedTuple
 import pytest
 
 from ..predicates.predicate import Predicate
