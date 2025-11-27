@@ -98,7 +98,7 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Label]):
             self.tokens.add(value)
             return self.tokens.index(value)
 
-    def merge(self, left: Atom | NonAtom, right: Atom | NonAtom):
+    def merge(self, left: Atom | NonAtom, right: Atom | NonAtom, label: Label | None=None):
         '''
         TODO: Document
         '''
@@ -110,15 +110,15 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Label]):
             _left = self._semi_flatten(_left)
         if isinstance(_right, GenericFunctionTerm):
             _right = self._semi_flatten(_right)
-        self._merge(_left, _right)
+        self._merge(_left, _right, label)
 
-    def _merge(self, left: SimpleTerm, right: SimpleTerm):
+    def _merge(self, left: SimpleTerm, right: SimpleTerm, label: Label | None):
         '''
         Adds the equation `left == right` to the Congruence Closure Tracker.
         '''
         if isinstance(left, Constant):
             if isinstance(right, Constant):
-                self.pending.append(Equation(left, right))
+                self.pending.append(Equation(left, right, label=label))
                 self._propogate()
             else:
                 self._merge_complex_equation(right, left)
