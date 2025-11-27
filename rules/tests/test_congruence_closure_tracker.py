@@ -66,7 +66,7 @@ def test_congruence_closure_explanation(problem: CongruenceClosureProblem):
 
     for congruence in problem.output_predicates:
         left, right = congruence_closure_tracker.deconstruct_predicate(congruence)
-        explanation = congruence_closure_tracker.explain(left, right)
+        explanation = congruence_closure_tracker._explain(left, right)
         
         checker = tracker_from_predicates(problem.tracker_class, explanation)
         assert checker.are_congruent(left, right)
@@ -82,7 +82,7 @@ def test_congruence_closure_explanation_minimality(problem: CongruenceClosurePro
     for congruence in problem.output_predicates:
         left, right = congruence_closure_tracker.deconstruct_predicate(congruence)
         explanation = congruence_closure_tracker.explain(left, right)
-        
+
         for i in range(len(explanation)):
             smaller_explanation = explanation[:]
             del smaller_explanation[i]

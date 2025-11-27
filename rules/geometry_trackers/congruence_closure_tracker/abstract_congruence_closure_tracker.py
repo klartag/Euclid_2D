@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Generic, TypeVar, cast, overload
+from typing import Generic, TypeVar, cast, overload
 from collections import defaultdict
 
 from ...extended_default_dict import ExtendedDefaultDict
@@ -292,7 +292,16 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         
         return BasicFunctionTerm(value.function, tuple(normalized_parameters))
 
-    def explain(self, left: Atom | NonAtom, right: Atom | NonAtom) -> list[Any]:
+    def explain(self, left: Atom | NonAtom, right: Atom | NonAtom) -> list[Predicate]:
+        '''
+        Returns a minimal explanation as to why `left == right` is true.
+        '''
+        explanation = self._explain(left, right)
+        minimal_explanation = self._minimize_explanation(left, right, explanation)
+        return minimal_explanation
+
+
+    def _explain(self, left: Atom | NonAtom, right: Atom | NonAtom) -> list[Predicate]:
         '''
         Returns an explanation as to why `left == right` is true.
         '''
@@ -302,3 +311,23 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         right_atom = self._flatten(self.project_atom_type(self.deconstruct(right)))
         
         return self.proof_forest.explain(left_atom, right_atom)
+
+    def _minimize_explanation(self, left: Atom | NonAtom, right: Atom | NonAtom, explanation: list[Predicate]) -> list[Predicate]:
+        '''
+        TODO: Document
+        TODO: Check if the Fast Congruence Closure paper has anything to say on whether their algorithm should already output a minimal explanation.
+        '''
+        minimal_explanation = explanation[:]
+        
+        for i in range(len(explanation) - 1, 0, -1):
+            test_explanation = minimal_explanation[:]
+            del test_explanation[i]
+            
+            checker = type(self)()
+            for predicate in test_explanation:
+                checker.merge(predicate)
+            
+            if checker.are_congruent(left, right):
+                del minimal_explanation[i]
+        
+        return minimal_explanation

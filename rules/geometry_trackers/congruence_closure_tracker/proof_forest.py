@@ -47,16 +47,20 @@ class ProofForest[T: Hashable, L]:
     def explain(self, c1: T, c2: T) -> list[L]:
         additional_union_find = LabelledUnionFind(lambda t: t, lambda t1, l1, t2, l2: l2)
         pending_proofs = [(c1, c2)]
-        proof: list[L] = []
+        proof: set[L] = set()
         
         while len(pending_proofs) > 0:
             (a, b) = pending_proofs.pop()
             if a == b:
                 continue
             c = lowest_common_ancestor(self.forest, a, b)
-            proof.extend(self.explain_along_path(additional_union_find, pending_proofs, a, c))
-            proof.extend(self.explain_along_path(additional_union_find, pending_proofs, b, c))
-        return proof
+            path = self.explain_along_path(additional_union_find, pending_proofs, a, c)
+            print(a, c, path)
+            proof.update(path)
+            path = self.explain_along_path(additional_union_find, pending_proofs, b, c)
+            print(b, c, path)
+            proof.update(path)
+        return list(proof)
     
     def explain_along_path(self, additional_union_find: LabelledUnionFind[T, T], pending_proofs: list[tuple[T, T]], a: T, c: T) -> list[L]:
         a = additional_union_find.get_label(a)
