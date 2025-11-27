@@ -1,4 +1,5 @@
 from typing import Never
+
 from ...expression_parse_utils import split_args
 
 from .abstract_congruence_closure_tracker import AbstractCongruenceClosureTracker

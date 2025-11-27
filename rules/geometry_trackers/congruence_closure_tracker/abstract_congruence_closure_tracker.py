@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, cast, overload
+from typing import Any, Generic, TypeVar, cast, overload
 from collections import defaultdict
 
 from ...extended_default_dict import ExtendedDefaultDict
@@ -13,18 +13,22 @@ from .terms.generic_function_term import GenericFunctionTerm
 from .proof_forest import ProofForest
 
 
+Atom = TypeVar('Atom')
+NonAtom = TypeVar('NonAtom')
+Label = TypeVar('Label')
+
 Constant = int
-BasicFunctionEquation = Equation[BasicFunctionTerm[Constant], Constant]
+BasicFunctionEquation = Equation[BasicFunctionTerm[Constant], Constant, Label]
 SimpleTerm = Constant | BasicFunctionTerm[Constant]
 
-class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
+class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Label]):
     tokens: IndexedSet[Atom | BasicFunctionTerm[Constant]]
-    pending: list[Equation[Constant, Constant] | EquationPair[Constant]]
+    pending: list[Equation[Constant, Constant, Label] | EquationPair[Constant, Label]]
     representatives: ExtendedDefaultDict[Constant, Constant]
     class_lists: ExtendedDefaultDict[Constant, list[Constant]]
     use_lists: defaultdict[Constant, list[BasicFunctionEquation]]
     lookup_table: dict[tuple[str, tuple[Constant, ...]], BasicFunctionEquation]
-    proof_forest: ProofForest[Constant]
+    proof_forest: ProofForest[Constant, Label]
 
     def __init__(self):
         self.tokens = IndexedSet()
@@ -128,7 +132,7 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
         '''
         lookup = self._lookup(left)
         if lookup is not None:
-            self.pending.append(EquationPair(right, lookup.right, left, lookup.left))
+            self.pending.append(EquationPair(left=right, left_term=left, right=lookup.right, right_term=lookup.left))
             self._propogate()
         else:
             self._set_lookup(left, Equation(left, right))
@@ -185,7 +189,7 @@ class AbstractCongruenceClosureTracker[Atom, NonAtom](ABC):
                 use = self.use_lists[old_a_prime].pop()
                 lookup = self._lookup(use.left)
                 if lookup is not None:
-                    self.pending.append(EquationPair(use.right, lookup.right, use.left, lookup.left))
+                    self.pending.append(EquationPair(left=use.right, left_term=use.left, right=lookup.right, right_term=lookup.left))
                 else:
                     self._set_lookup(use.left, use)
                     self.use_lists[b_prime].append(use)
