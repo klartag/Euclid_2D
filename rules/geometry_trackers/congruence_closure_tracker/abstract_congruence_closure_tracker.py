@@ -152,8 +152,8 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         '''
         deconstructed_left = self.deconstruct(left)
         deconstructed_right = self.deconstruct(right)
-        _left = self.project_atom_type(deconstructed_left)
-        _right = self.project_atom_type(deconstructed_right)
+        _left = self._flatten(self.project_atom_type(deconstructed_left))
+        _right = self._flatten(self.project_atom_type(deconstructed_right))
         return self._are_congruent(_left, _right)
 
     def _are_congruent(
