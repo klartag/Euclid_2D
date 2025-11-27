@@ -7,7 +7,7 @@ from ..geometry_trackers.congruence_closure_tracker.congruence_closure_tracker i
     [
         (
             [('b', 'd'), ('f(b)', 'd'), ('f(d)', 'a')],
-            [('a', 'b')]
+            [('a', 'b'), ('f(f(f(f(f(f(f(f(f(f(b))))))))))', 'f(f(f(f(f(f(f(f(f(f(f(f(f(f(f(f(f(f(f(f(d))))))))))))))))))))')]
         ),
         (    
             [('1', '8'), ('7', '2'), ('3', '13'), ('7', '1'), ('6', '7'), ('9', '5'), ('9', '3'), ('14', '11'), ('10', '4'), ('12', '9'), ('4', '11'), ('10', '7')],
@@ -15,7 +15,7 @@ from ..geometry_trackers.congruence_closure_tracker.congruence_closure_tracker i
         ),
         (
             [('f(g, h)', 'd'), ('c', 'd'), ('f(g, d)', 'a'), ('e', 'c'), ('e', 'b'), ('b', 'h')],
-            [('a', 'b')]
+            [('a', 'b'), ('f(g, f(g, f(g, f(g, f(g, h)))))', 'c')]
         ),
         (
             [('a', 'b1'), ('b1', 'b2'), ('b2', 'b3'), ('b3', 'c')],
@@ -23,11 +23,11 @@ from ..geometry_trackers.congruence_closure_tracker.congruence_closure_tracker i
         ),
         (
             [('f(a1, a1)', 'a'), ('f(c1, c1)', 'c'), ('a1', 'c1')],
-            [('a', 'c')]
+            [('a', 'c'), ('f(a1, c1)', 'f(c1, a1)')]
         ),
         (
             [('a', 'b1'), ('b1', 'b2'), ('b2', 'b3'), ('b3', 'c'), ('f(a1, a1)', 'a'), ('f(c1, c1)', 'c'), ('a1', 'c1')],
-            [('a', 'c')]
+            [('a', 'c'), ('f(a1, c1)', 'f(c1, a1)')]
         )
     ]
 )
