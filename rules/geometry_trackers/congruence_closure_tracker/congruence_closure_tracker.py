@@ -32,10 +32,16 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, 
             raise ValueError("Cannot deconstruct an object that isn't an Atom, Literal, or ConstructionObject.")
 
     def post_process_token_addition(self, term: BasicFunctionTerm[int]):
+        if term.function == 'centroid':
+            import ipdb
+            ipdb.set_trace()
         symmetrical_orders = get_constructions()[term.function].symmetry.all_orders(term.parameters)
         symmetrical_terms = [BasicFunctionTerm(term.function, order) for order in symmetrical_orders]
-        for i in range(len(symmetrical_terms) - 1):
-            self._merge(symmetrical_terms[i], symmetrical_terms[i + 1], None)
+        symmetrical_terms.remove(term)
+        print('Merging symmetrical terms:', symmetrical_terms)
+        term_atom = self._flatten(term)
+        for symmetrical_term in symmetrical_terms:
+            self._merge(term_atom, symmetrical_term, None)
 
     def reconstruct_function(self, function: str, parameters: list[Atom | Literal | GeoObject]) -> Atom | Literal | GeoObject:
         return ConstructionObject.from_args(function, tuple(parameters))

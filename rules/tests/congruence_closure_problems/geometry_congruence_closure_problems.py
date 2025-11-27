@@ -23,6 +23,24 @@ Need to prove:
 c == Circle(midpoint(B2, B1), midpoint(C2, C1), midpoint(A2, A1))
 c == Circle(midpoint(C2, C1), midpoint(B2, B1), midpoint(A2, A1))
 c == Circle(midpoint(B2, B1), midpoint(A1, A2), midpoint(C2, C1))
+''',
+'''
+Assumptions:
+A, B, C, D, E, F, M: Point
+
+D == midpoint(B, C)
+E == midpoint(C, A)
+F == midpoint(A, B)
+
+M == line_intersection(Line(A, D), Line(B, E))
+M == line_intersection(Line(C, F), Line(A, D))
+M == line_intersection(Line(B, E), Line(C, F))
+M == centroid(A, B, C)
+M == centroid(D, E, F)
+
+Need to prove:
+centroid(midpoint(B, A), midpoint(B, C), E) == centroid(F, midpoint(A, C), D)
+centroid(A, B, C) == centroid(midpoint(A, B), midpoint(B, C), midpoint(A, C))
 '''
 ]
 

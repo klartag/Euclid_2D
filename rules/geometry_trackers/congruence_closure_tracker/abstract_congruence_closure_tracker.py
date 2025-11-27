@@ -241,8 +241,8 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         if isinstance(term, GenericFunctionTerm):
             term = self._semi_flatten(term)
         if self.tokens.add(term):
-            self._merge(term, self.tokens.index(term), None)
             self.post_process_token_addition(term)
+            self._merge(term, self.tokens.index(term), None)
         return self.tokens.index(term)
 
     def post_process_token_addition(self, term: BasicFunctionTerm[Constant]):
