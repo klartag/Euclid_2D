@@ -37,7 +37,12 @@ _TEXT_CONGRUENCE_PROBLEMS: list[tuple[list[str], list[str]]] = [
     )
 ]
 
-_GEOMETRY_CONGRUENCE_PROBLEMS: list[tuple[list[Predicate], list[Predicate]]] = []
+_GEOMETRY_CONGRUENCE_PROBLEMS: list[tuple[list[Predicate], list[Predicate]]] = [
+    (
+        [],
+        []
+    )
+]
 
 TEXT_CONGRUENCE_PROBLEMS = [CongruenceClosureProblem(TextCongruenceClosureTracker, problem[0], problem[1]) for problem in _TEXT_CONGRUENCE_PROBLEMS]
 GEOMETRY_CONGRUENCE_PROBLEMS = [CongruenceClosureProblem(CongruenceClosureTracker, problem[0], problem[1]) for problem in _GEOMETRY_CONGRUENCE_PROBLEMS]

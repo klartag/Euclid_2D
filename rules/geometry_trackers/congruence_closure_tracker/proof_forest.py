@@ -54,12 +54,8 @@ class ProofForest[T: Hashable, L]:
             if a == b:
                 continue
             c = lowest_common_ancestor(self.forest, a, b)
-            path = self.explain_along_path(additional_union_find, pending_proofs, a, c)
-            print(a, c, path)
-            proof.update(path)
-            path = self.explain_along_path(additional_union_find, pending_proofs, b, c)
-            print(b, c, path)
-            proof.update(path)
+            proof.update(self.explain_along_path(additional_union_find, pending_proofs, a, c))
+            proof.update(self.explain_along_path(additional_union_find, pending_proofs, b, c))
         return list(proof)
     
     def explain_along_path(self, additional_union_find: LabelledUnionFind[T, T], pending_proofs: list[tuple[T, T]], a: T, c: T) -> list[L]:
