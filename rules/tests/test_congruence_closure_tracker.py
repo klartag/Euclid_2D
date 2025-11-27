@@ -64,3 +64,31 @@ def test_geometry_congruence_closure_tracker(problem: GeometryCongruenceProblem)
     for congruence in problem.output:
         left, right = congruence_closure_tracker.deconstruct_predicate(congruence)
         assert congruence_closure_tracker.are_congruent(left, right)
+
+@pytest.mark.parametrize('problem', TEXT_CONGRUENCE_PROBLEMS)
+def test_text_congruence_closure_explaining(problem: TextCongruenceProblem):
+    congruence_closure_tracker = TextCongruenceClosureTracker()
+    
+    for congruence in problem.input:
+        congruence_closure_tracker.merge(congruence)
+        
+    for congruence in problem.output:
+        left, right = congruence_closure_tracker.deconstruct_predicate(congruence)
+        explanation = congruence_closure_tracker.explain(left, right)
+        
+        checker = TextCongruenceClosureTracker()
+        for explanation_predicate in explanation:
+            assert explanation_predicate in problem.input
+            checker.merge(explanation_predicate)
+        
+        assert checker.are_congruent(left, right)
+        
+        for i in range(len(explanation)):
+            smaller_explanation = explanation[:]
+            del smaller_explanation[i]
+            
+            checker = TextCongruenceClosureTracker()
+            for explanation_predicate in smaller_explanation:
+                checker.merge(explanation_predicate)
+            
+            assert not checker.are_congruent(left, right)
