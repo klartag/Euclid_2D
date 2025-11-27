@@ -5,17 +5,17 @@ It should absolutely never be imported.
 
 import pytest
 
-from .proof.document.geometry_document import GeometryDocument
-from .proof.document.reader.document_reader import DocumentReader
-from .parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
+from ..proof.document.geometry_document import GeometryDocument
+from ..proof.document.reader.document_reader import DocumentReader
+from ..parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
 
-from .predicates.loader.pred_config import load_constructions_and_macros
-from .predicates.global_predicates import get_constructions
+from ..predicates.loader.pred_config import load_constructions_and_macros
+from ..predicates.global_predicates import get_constructions
 
-from .geometry_objects.construction_object import ConstructionObject
-from .geometry_objects.geo_type import GeoType
-from .proof_checker import ProofChecker, check_proof
-from .proof_gen.proof_generator import prove
+from ..geometry_objects.construction_object import ConstructionObject
+from ..geometry_objects.geo_type import GeoType
+from ..proof_checker import ProofChecker, check_proof
+from ..proof_gen.proof_generator import prove
 
 
 # Problems from Yoel Geva
