@@ -38,7 +38,7 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         self.use_lists = defaultdict(list)
         self.lookup_table = {}
         self.proof_forest = ProofForest()
-        
+
     @abstractmethod
     def deconstruct_predicate(self, predicate: Predicate) -> tuple[Atom | NonAtom, Atom | NonAtom]:
         '''

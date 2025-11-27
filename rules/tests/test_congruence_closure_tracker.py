@@ -4,6 +4,7 @@ import pytest
 from ..predicates.predicate import Predicate
 from ..geometry_objects.geo_object import GeoObject
 
+from ..geometry_trackers.congruence_closure_tracker.abstract_congruence_closure_tracker import AbstractCongruenceClosureTracker
 from ..geometry_trackers.congruence_closure_tracker.text_congruence_closure_tracker import TextCongruenceClosureTracker
 from ..geometry_trackers.congruence_closure_tracker.congruence_closure_tracker import CongruenceClosureTracker
 
@@ -44,11 +45,8 @@ GEOMETRY_CONGRUENCE_PROBLEMS: list[GeometryCongruenceProblem] = []
 
 @pytest.mark.parametrize('problem', TEXT_CONGRUENCE_PROBLEMS)
 def test_text_congruence_closure_tracker(problem: TextCongruenceProblem):
-    congruence_closure_tracker = TextCongruenceClosureTracker()
-    
-    for congruence in problem.input:
-        congruence_closure_tracker.merge(congruence)
-        
+    congruence_closure_tracker = tracker_from_predicates(TextCongruenceClosureTracker, problem.input)
+
     for congruence in problem.output:
         left, right = congruence_closure_tracker.deconstruct_predicate(congruence)
         assert congruence_closure_tracker.are_congruent(left, right)
@@ -56,39 +54,43 @@ def test_text_congruence_closure_tracker(problem: TextCongruenceProblem):
 
 @pytest.mark.parametrize('problem', GEOMETRY_CONGRUENCE_PROBLEMS)
 def test_geometry_congruence_closure_tracker(problem: GeometryCongruenceProblem):
-    congruence_closure_tracker = CongruenceClosureTracker()
-    
-    for congruence in problem.input:
-        congruence_closure_tracker.merge(congruence)
-        
+    congruence_closure_tracker = tracker_from_predicates(CongruenceClosureTracker, problem.input)
+
     for congruence in problem.output:
         left, right = congruence_closure_tracker.deconstruct_predicate(congruence)
         assert congruence_closure_tracker.are_congruent(left, right)
 
+
 @pytest.mark.parametrize('problem', TEXT_CONGRUENCE_PROBLEMS)
-def test_text_congruence_closure_explaining(problem: TextCongruenceProblem):
-    congruence_closure_tracker = TextCongruenceClosureTracker()
-    
-    for congruence in problem.input:
-        congruence_closure_tracker.merge(congruence)
-        
+def test_text_congruence_closure_explanation(problem: TextCongruenceProblem):
+    congruence_closure_tracker = tracker_from_predicates(TextCongruenceClosureTracker, problem.input)
+
     for congruence in problem.output:
         left, right = congruence_closure_tracker.deconstruct_predicate(congruence)
         explanation = congruence_closure_tracker.explain(left, right)
         
-        checker = TextCongruenceClosureTracker()
-        for explanation_predicate in explanation:
-            assert explanation_predicate in problem.input
-            checker.merge(explanation_predicate)
-        
+        checker = tracker_from_predicates(TextCongruenceClosureTracker, explanation)
         assert checker.are_congruent(left, right)
+
+
+@pytest.mark.parametrize('problem', TEXT_CONGRUENCE_PROBLEMS)
+def test_text_congruence_closure_explanation_minimality(problem: TextCongruenceProblem):
+    congruence_closure_tracker = tracker_from_predicates(TextCongruenceClosureTracker, problem.input)
+
+    for congruence in problem.output:
+        left, right = congruence_closure_tracker.deconstruct_predicate(congruence)
+        explanation = congruence_closure_tracker.explain(left, right)
         
         for i in range(len(explanation)):
             smaller_explanation = explanation[:]
             del smaller_explanation[i]
             
-            checker = TextCongruenceClosureTracker()
-            for explanation_predicate in smaller_explanation:
-                checker.merge(explanation_predicate)
-            
+            checker = tracker_from_predicates(TextCongruenceClosureTracker, smaller_explanation)
             assert not checker.are_congruent(left, right)
+
+
+def tracker_from_predicates[Atom, NonAtom, Predicate](congruence_closure_tracker_class: type[AbstractCongruenceClosureTracker[Atom, NonAtom, Predicate]], predicates: list[Predicate]) -> AbstractCongruenceClosureTracker[Atom, NonAtom, Predicate]:
+        congruence_closure_tracker = congruence_closure_tracker_class()
+        for predicate in predicates:
+            congruence_closure_tracker.merge(predicate)
+        return congruence_closure_tracker
