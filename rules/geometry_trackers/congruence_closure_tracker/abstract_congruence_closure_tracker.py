@@ -15,20 +15,20 @@ from .proof_forest import ProofForest
 
 Atom = TypeVar('Atom')
 NonAtom = TypeVar('NonAtom')
-Label = TypeVar('Label')
+Predicate = TypeVar('Predicate')
 
 Constant = int
-BasicFunctionEquation = Equation[BasicFunctionTerm[Constant], Constant, Label]
+BasicFunctionEquation = Equation[BasicFunctionTerm[Constant], Constant, Predicate]
 SimpleTerm = Constant | BasicFunctionTerm[Constant]
 
-class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Label]):
+class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
     tokens: IndexedSet[Atom | BasicFunctionTerm[Constant]]
-    pending: list[Equation[Constant, Constant, Label] | EquationPair[Constant, Label]]
+    pending: list[Equation[Constant, Constant, Predicate] | EquationPair[Constant, Predicate]]
     representatives: ExtendedDefaultDict[Constant, Constant]
     class_lists: ExtendedDefaultDict[Constant, list[Constant]]
     use_lists: defaultdict[Constant, list[BasicFunctionEquation]]
     lookup_table: dict[tuple[str, tuple[Constant, ...]], BasicFunctionEquation]
-    proof_forest: ProofForest[Constant, Label]
+    proof_forest: ProofForest[Constant, Predicate]
 
     def __init__(self):
         self.tokens = IndexedSet()
@@ -38,6 +38,13 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Label]):
         self.use_lists = defaultdict(list)
         self.lookup_table = {}
         self.proof_forest = ProofForest()
+        
+    @abstractmethod
+    def deconstruct_predicate(self, predicate: Predicate) -> tuple[Atom | NonAtom, Atom | NonAtom]:
+        '''
+        TODO: Document
+        '''
+        ...
         
     @abstractmethod
     def deconstruct(self, value: Atom | NonAtom) -> Atom | GenericFunctionTerm[Atom]:
@@ -97,8 +104,12 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Label]):
         else:
             self.tokens.add(value)
             return self.tokens.index(value)
+        
+    def merge(self, predicate: Predicate):
+        left, right = self.deconstruct_predicate(predicate)
+        self.merge_atoms(left, right, predicate)
 
-    def merge(self, left: Atom | NonAtom, right: Atom | NonAtom, label: Label | None=None):
+    def merge_atoms(self, left: Atom | NonAtom, right: Atom | NonAtom, predicate: Predicate | None=None):
         '''
         TODO: Document
         '''
@@ -110,15 +121,15 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Label]):
             _left = self._semi_flatten(_left)
         if isinstance(_right, GenericFunctionTerm):
             _right = self._semi_flatten(_right)
-        self._merge(_left, _right, label)
+        self._merge(_left, _right, predicate)
 
-    def _merge(self, left: SimpleTerm, right: SimpleTerm, label: Label | None):
+    def _merge(self, left: SimpleTerm, right: SimpleTerm, predicate: Predicate | None):
         '''
         Adds the equation `left == right` to the Congruence Closure Tracker.
         '''
         if isinstance(left, Constant):
             if isinstance(right, Constant):
-                self.pending.append(Equation(left, right, label=label))
+                self.pending.append(Equation(left, right, predicate=predicate))
                 self._propogate()
             else:
                 self._merge_complex_equation(right, left)

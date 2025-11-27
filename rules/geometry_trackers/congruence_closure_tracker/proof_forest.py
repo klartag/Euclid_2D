@@ -65,8 +65,8 @@ class ProofForest[T: Hashable, L]:
         while a != c:
             b = list(self.forest.predecessors(a))[0]
             edge = self.get_edge(b, a)
-            if edge is not None and edge.label is not None:
-                proof.append(edge.label)
+            if edge is not None and edge.predicate is not None:
+                proof.append(edge.predicate)
             if isinstance(edge, EquationPair):
                 for (a_parameter, b_parameter) in zip(edge.left_term.parameters, edge.right_term.parameters):
                     pending_proofs.append((a_parameter, b_parameter))

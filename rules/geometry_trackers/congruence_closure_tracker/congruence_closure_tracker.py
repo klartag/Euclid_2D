@@ -12,14 +12,14 @@ from .terms.generic_function_term import GenericFunctionTerm
 
 
 class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, GeoObject, Predicate]):
-    def merge(self, predicate: Predicate):
+    def deconstruct_predicate(self, predicate: Predicate) -> tuple[GeoObject, GeoObject]:
         if predicate.name != 'equals':
             raise ValueError('Can only merge equality predicates.')
         if len(predicate.components) != 2:
             raise ValueError('Can only merge equality predicates between two objects.')
         left, right = predicate.components[0], predicate.components[1]
-        super().merge(left, right, predicate)
-    
+        return (left, right)
+
     def deconstruct(self, value: GeoObject) -> Atom | Literal | GenericFunctionTerm[Atom | Literal]:
         if isinstance(value, (Atom, Literal)):
             return value

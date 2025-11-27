@@ -6,13 +6,14 @@ from .abstract_congruence_closure_tracker import AbstractCongruenceClosureTracke
 from .terms.generic_function_term import GenericFunctionTerm
 
 
-class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, Never, str]):
-    def merge(self, predicate: str):
+class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, Never, str]):    
+    def deconstruct_predicate(self, predicate: str) -> tuple[str, str]:
         if predicate.count('=') != 1:
             raise ValueError('Predicate must contain precisely one equals ("=") symbol.')
         components = predicate.split('=')
         left, right = components[0].strip(), components[1].strip()
-        super().merge(left, right, predicate)
+        return (left, right)
+        
 
     def deconstruct(self, value: str) -> str | GenericFunctionTerm[str]:
         assert value.count('(') == value.count(')')

@@ -2,7 +2,7 @@ from abc import ABC
 from dataclasses import dataclass
 
 @dataclass
-class AbstractEquation[S, T, L](ABC):
+class AbstractEquation[S, T, P](ABC):
     left: S
     right: T
-    label: L | None = None
+    predicate: P | None = None
