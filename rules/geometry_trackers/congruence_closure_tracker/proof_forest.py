@@ -68,6 +68,8 @@ class ProofForest[T: Hashable, L]:
             if edge is not None and edge.predicate is not None:
                 proof.append(edge.predicate)
             if isinstance(edge, EquationPair):
+                if edge.second_predicate is not None:
+                    proof.append(edge.second_predicate)
                 for (a_parameter, b_parameter) in zip(edge.left_term.parameters, edge.right_term.parameters):
                     pending_proofs.append((a_parameter, b_parameter))
             additional_union_find[a] = b

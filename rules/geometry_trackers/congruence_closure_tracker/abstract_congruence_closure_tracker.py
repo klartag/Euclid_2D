@@ -129,26 +129,26 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         '''
         if isinstance(left, Constant):
             if isinstance(right, Constant):
-                self.pending.append(Equation(left, right, predicate=predicate))
+                self.pending.append(Equation(left=left, right=right, predicate=predicate))
                 self._propogate()
             else:
-                self._merge_complex_equation(right, left)
+                self._merge_complex_equation(right, left, predicate)
         else:
-            self._merge_complex_equation(left, self._flatten(right))
+            self._merge_complex_equation(left, self._flatten(right), predicate)
     
-    def _merge_complex_equation(self, left: BasicFunctionTerm[Constant], right: Constant):
+    def _merge_complex_equation(self, left: BasicFunctionTerm[Constant], right: Constant, predicate: Predicate | None):
         '''
         Adds the equation `left == right` to the Congruence Closure Tracker,
         where the equation is of the form `function(a1, a2, ...) = a`.
         '''
         lookup = self._lookup(left)
         if lookup is not None:
-            self.pending.append(EquationPair(left=right, left_term=left, right=lookup.right, right_term=lookup.left))
+            self.pending.append(EquationPair(left=right, left_term=left, right=lookup.right, right_term=lookup.left, predicate=predicate, second_predicate=lookup.predicate))
             self._propogate()
         else:
-            self._set_lookup(left, Equation(left, right))
+            self._set_lookup(left, Equation(left=left, right=right, predicate=predicate))
             for parameter in self._get_lookup_key(left)[1]:
-                self.use_lists[parameter].append(Equation(left, right))
+                self.use_lists[parameter].append(Equation(left=left, right=right, predicate=predicate))
 
     def are_congruent(self, left: Atom | NonAtom, right: Atom | NonAtom) -> bool:
         '''
@@ -200,7 +200,7 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
                 use = self.use_lists[old_a_prime].pop()
                 lookup = self._lookup(use.left)
                 if lookup is not None:
-                    self.pending.append(EquationPair(left=use.right, left_term=use.left, right=lookup.right, right_term=lookup.left))
+                    self.pending.append(EquationPair(left=use.right, left_term=use.left, right=lookup.right, right_term=lookup.left, predicate=use.predicate, second_predicate=lookup.predicate))
                 else:
                     self._set_lookup(use.left, use)
                     self.use_lists[b_prime].append(use)
@@ -241,7 +241,7 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         if isinstance(term, GenericFunctionTerm):
             term = self._semi_flatten(term)
         if self.tokens.add(term):
-            self._merge(term, self.tokens.index(term))
+            self._merge(term, self.tokens.index(term), None)
             self.post_process_token_addition(term)
         return self.tokens.index(term)
 
