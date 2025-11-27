@@ -319,7 +319,7 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         '''
         minimal_explanation = explanation[:]
         
-        for i in range(len(explanation) - 1, 0, -1):
+        for i in range(len(explanation) - 1, -1, -1):
             test_explanation = minimal_explanation[:]
             del test_explanation[i]
             

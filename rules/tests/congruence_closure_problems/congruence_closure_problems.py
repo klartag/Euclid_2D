@@ -1,0 +1,4 @@
+from .text_congruence_closure_problems import TEXT_CONGRUENCE_PROBLEMS
+from .geometry_congruence_closure_problems import GEOMETRY_CONGRUENCE_PROBLEMS
+
+CONGRUENCE_CLOSURE_PROBLEMS = TEXT_CONGRUENCE_PROBLEMS + GEOMETRY_CONGRUENCE_PROBLEMS
