@@ -15,7 +15,7 @@ class GeometryDocument:
     @staticmethod
     def open(path: str) -> 'GeometryDocument':
         full_path = GeometryDocument.get_full_problem_path(path)
-        text = open(path, 'r').read()
+        text = open(full_path, 'r').read()
         sections = GeometryDocument.parse_sections(text)
         return GeometryDocument(full_path, sections)
     
