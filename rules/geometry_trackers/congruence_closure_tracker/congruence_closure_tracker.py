@@ -4,6 +4,8 @@ from ...predicates.predicate import Predicate
 from ...geometry_objects.atom import Atom
 from ...geometry_objects.literal import Literal
 from ...geometry_objects.construction_object import ConstructionObject
+from ...geometry_objects.equation_object import EquationObject
+from ...geometry_objects.eq_op import EqOp
 from ...geometry_objects.geo_object import GeoObject
 
 from .abstract_congruence_closure_tracker import AbstractCongruenceClosureTracker
@@ -41,3 +43,24 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, 
 
     def reconstruct_function(self, function: str, parameters: list[Atom | Literal | GeoObject]) -> Atom | Literal | GeoObject:
         return ConstructionObject.from_args(function, tuple(parameters))
+
+    def clone(self) -> 'CongruenceClosureTracker':
+        clone = CongruenceClosureTracker()
+        clone.tokens = self.tokens.clone()
+        clone.pending = self.pending[:]
+        
+        for (k, v) in self.representatives.items():
+            clone.representatives[k] = v
+
+        for (k, v) in self.class_lists.items():
+            clone.class_lists[k] = v[:]
+            
+        for (k, v) in self.use_lists.items():
+            clone.use_lists[k] = v[:]
+            
+        for (k, v) in self.lookup_table.items():
+            clone.lookup_table[k] = v
+        
+        clone.proof_forest = self.proof_forest.clone()
+        
+        return clone

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Generic, TypeVar, cast, overload
+from typing import Generic, Self, TypeVar, cast, overload
 from collections import defaultdict
 
 from ...extended_default_dict import ExtendedDefaultDict

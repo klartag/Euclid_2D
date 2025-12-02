@@ -24,6 +24,8 @@ from ..predicates.implementations.macro_predicate import MacroPredicate
 from ..proof.geometry_problem import GeometryProblem
 from ..union_find.union_find import UnionFind
 
+from .congruence_closure_tracker.congruence_closure_tracker import CongruenceClosureTracker
+
 from .linear_algebra_tracker.linear_algebra_tracker import LinearAlgebraTracker
 from .linear_algebra_tracker.linear_expression import LinearExpression
 
@@ -108,6 +110,9 @@ class GeometryTracker:
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
     _linear_algebra: LinearAlgebraTracker
+    
+    equality_tracker: CongruenceClosureTracker
+    """Tracks equalities of Geometry Objects up to a relation with congruence closure."""
 
     embedding_tracker: Optional[Embedding]
     """Tracks 2D embeddings of the geometric configurations."""
@@ -120,9 +125,12 @@ class GeometryTracker:
 
         self._predicates = set()
         self._asserted_predicates = set()
+
+        self.equality_tracker = CongruenceClosureTracker()
         self.embedding_tracker = None
 
         self.get_object(ONE, can_add=True)
+        
 
         self._linear_algebra = LinearAlgebraTracker()
 
@@ -705,6 +713,9 @@ class GeometryTracker:
         res._predicates = set(self._predicates)
         res._asserted_predicates = set(self._asserted_predicates)
         res._linear_algebra = self._linear_algebra.clone()
+        res.equality_tracker = self.equality_tracker.clone()
+        if self.embedding_tracker is not None:
+            res.embedding_tracker = self.embedding_tracker.shallow_copy()
         return res
 
     def load_assumptions(self, problem: GeometryProblem):

@@ -76,6 +76,12 @@ class ProofForest[T: Hashable, P]:
             additional_union_find[a] = b
             a = additional_union_find.get_label(b)
         return proof
+    
+    def clone(self) -> 'ProofForest[T, P]':
+        clone: ProofForest[T, P] = ProofForest()
+        clone.union_find = self.union_find.shallow_copy()
+        clone.forest = self.forest.copy()
+        return clone
 
     def debug_draw(self):
         pos = nx.spring_layout(self.forest, k=5)
