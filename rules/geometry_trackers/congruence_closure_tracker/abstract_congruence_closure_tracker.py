@@ -252,7 +252,6 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Function, Pre
         class_list = self.class_lists[_normalized_value]
         return list(set(self.reconstruct(token) for token in class_list))
 
-
     def normalize(self, value: Atom | NonAtom) -> Atom | NonAtom:
         '''
         TODO: Document

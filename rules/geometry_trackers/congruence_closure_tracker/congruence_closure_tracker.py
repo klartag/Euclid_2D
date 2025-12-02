@@ -15,6 +15,7 @@ from .terms.generic_function_term import GenericFunctionTerm
 
 Function = str | EqOp
 
+# TODO: Make this tracker check Predicates as well
 class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, GeoObject, Function, Predicate]):
     def deconstruct_predicate(self, predicate: Predicate) -> tuple[GeoObject, GeoObject]:
         if predicate.name != 'equals':

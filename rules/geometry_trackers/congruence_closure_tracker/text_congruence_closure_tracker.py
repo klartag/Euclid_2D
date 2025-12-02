@@ -28,4 +28,4 @@ class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, Never, 
         return GenericFunctionTerm(function, tuple(parsed_parameters))
 
     def reconstruct_function(self, function: str, parameters: list[str]) -> str:
-        return f'{function}{tuple(parameters)}'
+        return f'{function}({', '.join([str(p) for p in parameters])})'
