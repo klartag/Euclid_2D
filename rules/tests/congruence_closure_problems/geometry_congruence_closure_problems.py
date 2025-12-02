@@ -46,6 +46,7 @@ M == centroid(D, E, F)
 Need to prove:
 centroid(midpoint(B, A), midpoint(B, C), E) == centroid(F, midpoint(A, C), D)
 centroid(A, B, C) == centroid(midpoint(A, B), midpoint(B, C), midpoint(A, C))
+angle(A, B, C) + distance(A, B) == angle(midpoint(B, C), midpoint(A, C), midpoint(A, B)) + distance(midpoint(B, C), midpoint(A, C))
 '''
 ]
 
