@@ -1,4 +1,4 @@
-from typing import Hashable, Literal, cast
+from typing import Hashable, cast
 from networkx import DiGraph, lowest_common_ancestor
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -14,15 +14,15 @@ from .equations.equation_pair import EquationPair
 EDGE_ATTRIBUTE = 'edge'
 
 
-class ProofForest[T: Hashable, P]:
-    union_find: UnionFind[T]
+class ProofForest[Function, Term: Hashable, Predicate]:
+    union_find: UnionFind[Term]
     forest: DiGraph
     
     def __init__(self):
         self.union_find = UnionFind()
         self.forest = DiGraph()
 
-    def add(self, v_src: T, v_dst: T, edge: Equation[T, T, P] | EquationPair[T, P]):
+    def add(self, v_src: Term, v_dst: Term, edge: Equation[Term, Term, Predicate] | EquationPair[Function, Term, Predicate]):
         if len(self.union_find.get_equivalences(v_src)) > len(self.union_find.get_equivalences(v_dst)):
             v_src, v_dst = v_dst, v_src
 
@@ -42,13 +42,13 @@ class ProofForest[T: Hashable, P]:
         self.forest.add_edge(v_src, v_dst, **{EDGE_ATTRIBUTE: edge})
         self.union_find[v_src] = v_dst
 
-    def get_edge(self, v0: T, v1: T) -> Equation[T, T, P] | EquationPair[T, P] | None:
+    def get_edge(self, v0: Term, v1: Term) -> Equation[Term, Term, Predicate] | EquationPair[Function, Term, Predicate] | None:
         return self.forest.get_edge_data(v0, v1)[EDGE_ATTRIBUTE]
 
-    def explain(self, c1: T, c2: T) -> list[P]:
+    def explain(self, c1: Term, c2: Term) -> list[Predicate]:
         additional_union_find = LabelledUnionFind(lambda t: t, lambda t1, l1, t2, l2: l2)
         pending_proofs = [(c1, c2)]
-        proof: set[P] = set()
+        proof: set[Predicate] = set()
         
         while len(pending_proofs) > 0:
             (a, b) = pending_proofs.pop()
@@ -59,10 +59,10 @@ class ProofForest[T: Hashable, P]:
             proof.update(self.explain_along_path(additional_union_find, pending_proofs, b, c))
         return list(proof)
     
-    def explain_along_path(self, additional_union_find: LabelledUnionFind[T, T], pending_proofs: list[tuple[T, T]], a: T, c: T) -> list[P]:
+    def explain_along_path(self, additional_union_find: LabelledUnionFind[Term, Term], pending_proofs: list[tuple[Term, Term]], a: Term, c: Term) -> list[Predicate]:
         a = additional_union_find.get_label(a)
         c = additional_union_find.get_label(c)
-        proof: list[P] = []
+        proof: list[Predicate] = []
         while a != c:
             b = list(self.forest.predecessors(a))[0]
             edge = self.get_edge(b, a)
@@ -77,8 +77,8 @@ class ProofForest[T: Hashable, P]:
             a = additional_union_find.get_label(b)
         return proof
     
-    def clone(self) -> 'ProofForest[T, P]':
-        clone: ProofForest[T, P] = ProofForest()
+    def clone(self) -> 'ProofForest[Function, Term, Predicate]':
+        clone: ProofForest[Function, Term, Predicate] = ProofForest()
         clone.union_find = self.union_find.shallow_copy()
         clone.forest = self.forest.copy()
         return clone
@@ -88,7 +88,7 @@ class ProofForest[T: Hashable, P]:
         
         edge_labels = {}
         for n1, n2 in self.forest.edges:
-            edge = cast(AbstractEquation[T, T, P], self.forest[n1][n2][EDGE_ATTRIBUTE])
+            edge = cast(AbstractEquation[Term, Term, Predicate], self.forest[n1][n2][EDGE_ATTRIBUTE])
             label = f'{edge.predicate}, {edge.second_predicate}' if isinstance(edge, EquationPair) else str(edge.predicate) 
             edge_labels[(n1, n2)] = label
         nx.draw_networkx(self.forest, pos)

@@ -13,7 +13,9 @@ from .terms.basic_function_term import BasicFunctionTerm
 from .terms.generic_function_term import GenericFunctionTerm
 
 
-class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, GeoObject, Predicate]):
+Function = str | EqOp
+
+class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, GeoObject, Function, Predicate]):
     def deconstruct_predicate(self, predicate: Predicate) -> tuple[GeoObject, GeoObject]:
         if predicate.name != 'equals':
             raise ValueError('Can only merge equality predicates.')
@@ -22,7 +24,7 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, 
         left, right = predicate.components[0], predicate.components[1]
         return (left, right)
 
-    def deconstruct(self, value: GeoObject) -> Atom | Literal | GenericFunctionTerm[Atom | Literal]:
+    def deconstruct(self, value: GeoObject) -> Atom | Literal | GenericFunctionTerm[Function, Atom | Literal]:
         if isinstance(value, (Atom, Literal)):
             return value
         elif isinstance(value, ConstructionObject):
@@ -30,13 +32,18 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, 
             parameters = value.components
             deconsructed_parameters = tuple([self.deconstruct(parameter) for parameter in parameters])
             return GenericFunctionTerm(function, deconsructed_parameters)
+        elif isinstance(value, EquationObject):
+            deconsructed_parameters = (self.deconstruct(value.left), self.deconstruct(value.right))
+            return GenericFunctionTerm(value.op, deconsructed_parameters)
         else:
             raise ValueError("Cannot deconstruct an object that isn't an Atom, Literal, or ConstructionObject.")
 
-    def post_process_token_addition(self, term: BasicFunctionTerm[int]):
+    def post_process_token_addition(self, term: BasicFunctionTerm[Function, int]):
+        if isinstance(term.function, EqOp):
+            return
         symmetrical_orders = get_constructions()[term.function].symmetry.all_orders(term.parameters)
+        symmetrical_orders.remove(term.parameters)
         symmetrical_terms = [BasicFunctionTerm(term.function, order) for order in symmetrical_orders]
-        symmetrical_terms.remove(term)
         term_atom = self._flatten(term)
         for symmetrical_term in symmetrical_terms:
             self._merge(term_atom, symmetrical_term, None)

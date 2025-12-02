@@ -6,7 +6,7 @@ from .abstract_congruence_closure_tracker import AbstractCongruenceClosureTracke
 from .terms.generic_function_term import GenericFunctionTerm
 
 
-class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, Never, str]):    
+class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, Never, str, str]):    
     def deconstruct_predicate(self, predicate: str) -> tuple[str, str]:
         if predicate.count('=') != 1:
             raise ValueError('Predicate must contain precisely one equals ("=") symbol.')
@@ -15,7 +15,7 @@ class TextCongruenceClosureTracker(AbstractCongruenceClosureTracker[str, Never, 
         return (left, right)
         
 
-    def deconstruct(self, value: str) -> str | GenericFunctionTerm[str]:
+    def deconstruct(self, value: str) -> str | GenericFunctionTerm[str, str]:
         assert value.count('(') == value.count(')')
         if '(' not in value:
             return value

@@ -4,11 +4,11 @@ from ...geometry_trackers.congruence_closure_tracker.abstract_congruence_closure
 
 
 @dataclass
-class CongruenceClosureProblem[Atom, NonAtom, Predicate]:
+class CongruenceClosureProblem[Atom, NonAtom, Function, Predicate]:
     '''
     TODO: Document
     '''
-    tracker_class: type[AbstractCongruenceClosureTracker[Atom, NonAtom, Predicate]]
+    tracker_class: type[AbstractCongruenceClosureTracker[Atom, NonAtom, Function, Predicate]]
     input_predicates: list[Predicate]
     output_predicates: list[Predicate]
 
@@ -21,7 +21,7 @@ class CongruenceClosureProblem[Atom, NonAtom, Predicate]:
         return True
 
 
-    def initialize_tracker(self) -> AbstractCongruenceClosureTracker[Atom, NonAtom, Predicate]:
+    def initialize_tracker(self) -> AbstractCongruenceClosureTracker[Atom, NonAtom, Function, Predicate]:
         congruence_closure_tracker = self.tracker_class()
         for predicate in self.input_predicates:
             congruence_closure_tracker.merge(predicate)

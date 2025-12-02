@@ -3,9 +3,9 @@ from typing import Self
 
 
 @dataclass(frozen=True)
-class BasicFunctionTerm[T]:
-    function: str
-    parameters: tuple[T, ...]
+class BasicFunctionTerm[Function, Term]:
+    function: Function
+    parameters: tuple[Term, ...]
 
     def __eq__(self, other: Self) -> bool:
         return isinstance(other, BasicFunctionTerm) and \

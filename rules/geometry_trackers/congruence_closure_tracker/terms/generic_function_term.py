@@ -1,16 +1,16 @@
 from dataclasses import dataclass
-from typing import Optional, Self, Sequence
+from typing import Optional, Self
 
 from ..terms.basic_function_term import BasicFunctionTerm
 
 
 @dataclass(frozen=True)
-class GenericFunctionTerm[T]:
-    function: str
-    parameters: tuple[Self | T, ...]
+class GenericFunctionTerm[Function, Term]:
+    function: Function
+    parameters: tuple[Self | Term, ...]
     
-    def try_to_basic_term(self) -> Optional[BasicFunctionTerm[T]]:
-        parameters: list[T] = []
+    def try_to_basic_term(self) -> Optional[BasicFunctionTerm[Function, Term]]:
+        parameters: list[Term] = []
         for parameter in self.parameters:
             if isinstance(parameter, GenericFunctionTerm):
                 return None
@@ -20,7 +20,7 @@ class GenericFunctionTerm[T]:
         
     
     @staticmethod
-    def from_basic_term(term: BasicFunctionTerm[T]) -> 'GenericFunctionTerm[T]':
+    def from_basic_term(term: BasicFunctionTerm[Function, Term]) -> 'GenericFunctionTerm[Function, Term]':
         return GenericFunctionTerm(term.function, term.parameters)
 
     def __eq__(self, other: Self):

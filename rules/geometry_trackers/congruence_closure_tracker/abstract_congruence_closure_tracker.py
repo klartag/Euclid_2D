@@ -12,23 +12,23 @@ from .terms.generic_function_term import GenericFunctionTerm
 
 from .proof_forest import ProofForest
 
-
 Atom = TypeVar('Atom')
 NonAtom = TypeVar('NonAtom')
+Function = TypeVar('Function')
 Predicate = TypeVar('Predicate')
 
 Constant = int
-BasicFunctionEquation = Equation[BasicFunctionTerm[Constant], Constant, Predicate]
-SimpleTerm = Constant | BasicFunctionTerm[Constant]
+BasicFunctionEquation = Equation[BasicFunctionTerm[Function, Constant], Constant, Predicate]
+SimpleTerm = Constant | BasicFunctionTerm[Function, Constant]
 
-class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
-    tokens: IndexedSet[Atom | BasicFunctionTerm[Constant]]
-    pending: list[Equation[Constant, Constant, Predicate] | EquationPair[Constant, Predicate]]
+class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Function, Predicate]):
+    tokens: IndexedSet[Atom | BasicFunctionTerm[Function, Constant]]
+    pending: list[Equation[Constant, Constant, Predicate] | EquationPair[Function, Constant, Predicate]]
     representatives: ExtendedDefaultDict[Constant, Constant]
     class_lists: ExtendedDefaultDict[Constant, list[Constant]]
     use_lists: defaultdict[Constant, list[BasicFunctionEquation]]
-    lookup_table: dict[tuple[str, tuple[Constant, ...]], BasicFunctionEquation]
-    proof_forest: ProofForest[Constant, Predicate]
+    lookup_table: dict[tuple[Function, tuple[Constant, ...]], BasicFunctionEquation]
+    proof_forest: ProofForest[Function, Constant, Predicate]
 
     def __init__(self):
         self.tokens = IndexedSet()
@@ -47,20 +47,20 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         ...
         
     @abstractmethod
-    def deconstruct(self, value: Atom | NonAtom) -> Atom | GenericFunctionTerm[Atom]:
+    def deconstruct(self, value: Atom | NonAtom) -> Atom | GenericFunctionTerm[Function, Atom]:
         '''
         TODO: Document
         '''
         ...
         
     @abstractmethod
-    def reconstruct_function(self, function: str, parameters: list[Atom | NonAtom]) -> Atom | NonAtom:
+    def reconstruct_function(self, function: Function, parameters: list[Atom | NonAtom]) -> Atom | NonAtom:
         '''
         TODO: Document
         '''
         ...
 
-    def reconstruct(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Atom | NonAtom:
+    def reconstruct(self, value: Constant | BasicFunctionTerm[Function, Constant] | GenericFunctionTerm[Function, Constant]) -> Atom | NonAtom:
         '''
         TODO: Document
         '''
@@ -81,12 +81,12 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
     def project_atom_type(self, value: Atom) -> Constant: ...
     
     @overload
-    def project_atom_type(self, value: BasicFunctionTerm[Atom]) -> BasicFunctionTerm[Constant]: ...
+    def project_atom_type(self, value: BasicFunctionTerm[Function, Atom]) -> BasicFunctionTerm[Function, Constant]: ...
     
     @overload
-    def project_atom_type(self, value: GenericFunctionTerm[Atom]) -> GenericFunctionTerm[Constant]: ...
+    def project_atom_type(self, value: GenericFunctionTerm[Function, Atom]) -> GenericFunctionTerm[Function, Constant]: ...
 
-    def project_atom_type(self, value: Atom | BasicFunctionTerm[Atom] | GenericFunctionTerm[Atom]) -> Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]:
+    def project_atom_type(self, value: Atom | BasicFunctionTerm[Function, Atom] | GenericFunctionTerm[Function, Atom]) -> Constant | BasicFunctionTerm[Function, Constant] | GenericFunctionTerm[Function, Constant]:
         '''
         TODO: Document
         '''
@@ -132,7 +132,7 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         else:
             self._merge_complex_equation(left, self._flatten(right), predicate)
     
-    def _merge_complex_equation(self, left: BasicFunctionTerm[Constant], right: Constant, predicate: Predicate | None):
+    def _merge_complex_equation(self, left: BasicFunctionTerm[Function, Constant], right: Constant, predicate: Predicate | None):
         '''
         Adds the equation `left == right` to the Congruence Closure Tracker,
         where the equation is of the form `function(a1, a2, ...) = a`.
@@ -158,8 +158,8 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
 
     def _are_congruent(
         self,
-        left: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant],
-        right: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]
+        left: Constant | BasicFunctionTerm[Function, Constant] | GenericFunctionTerm[Function, Constant],
+        right: Constant | BasicFunctionTerm[Function, Constant] | GenericFunctionTerm[Function, Constant]
     ) -> bool:
         '''
         Returns whether `left == right` can be deduced from the equations input so far.
@@ -202,33 +202,33 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
                     self.use_lists[b_prime].append(use)
             del self.use_lists[old_a_prime]
 
-    def _get_lookup_key(self, term: BasicFunctionTerm[Constant]) -> tuple[str, tuple[Constant, ...]]:
+    def _get_lookup_key(self, term: BasicFunctionTerm[Function, Constant]) -> tuple[Function, tuple[Constant, ...]]:
         '''
         TODO: Document
         '''
         representatives = tuple([self.representatives[parameter] for parameter in term.parameters])
         return (term.function, representatives)
         
-    def _lookup(self, term: BasicFunctionTerm[Constant]) -> BasicFunctionEquation | None:
+    def _lookup(self, term: BasicFunctionTerm[Function, Constant]) -> BasicFunctionEquation | None:
         '''
         TODO: Document
         '''
         return self.lookup_table.get(self._get_lookup_key(term), None)
     
-    def _set_lookup(self, term: BasicFunctionTerm[Constant], equation: BasicFunctionEquation):
+    def _set_lookup(self, term: BasicFunctionTerm[Function, Constant], equation: BasicFunctionEquation):
         '''
         TODO: Document
         '''
         self.lookup_table[self._get_lookup_key(term)] = equation        
 
-    def _semi_flatten(self, term: GenericFunctionTerm[Constant]) -> BasicFunctionTerm[Constant]:
+    def _semi_flatten(self, term: GenericFunctionTerm[Function, Constant]) -> BasicFunctionTerm[Function, Constant]:
         '''
         TODO: Document
         '''
         parameters = [self._flatten(parameter) for parameter in term.parameters]
         return BasicFunctionTerm(term.function, tuple(parameters))
 
-    def _flatten(self, term: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> Constant:
+    def _flatten(self, term: Constant | BasicFunctionTerm[Function, Constant] | GenericFunctionTerm[Function, Constant]) -> Constant:
         '''
         TODO: Document
         '''
@@ -241,7 +241,7 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
             self._merge(term, self.tokens.index(term), None)
         return self.tokens.index(term)
 
-    def post_process_token_addition(self, term: BasicFunctionTerm[Constant]):
+    def post_process_token_addition(self, term: BasicFunctionTerm[Function, Constant]):
         pass
 
     def normalize(self, value: Atom | NonAtom) -> Atom | NonAtom:
@@ -253,7 +253,7 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Predicate]):
         normalized_token_value = self._normalize(_value)
         return self.reconstruct(normalized_token_value)
 
-    def _normalize(self, value: Constant | BasicFunctionTerm[Constant] | GenericFunctionTerm[Constant]) -> SimpleTerm:
+    def _normalize(self, value: Constant | BasicFunctionTerm[Function, Constant] | GenericFunctionTerm[Function, Constant]) -> SimpleTerm:
         '''
         TODO: Document
         '''

@@ -1,9 +1,14 @@
+from ...geometry_objects.atom import Atom
+from ...geometry_objects.eq_op import EqOp
+from ...geometry_objects.geo_object import GeoObject
+from ...geometry_objects.literal import Literal
+from ...predicates.predicate import Predicate
+from ...predicates.loader.pred_config import load_constructions_and_macros
+
 from ...proof.document.geometry_document import GeometryDocument
 from ...proof.document.reader.document_reader import DocumentReader
 
 from ...geometry_trackers.congruence_closure_tracker.congruence_closure_tracker import CongruenceClosureTracker
-
-from ...predicates.loader.pred_config import load_constructions_and_macros
 
 from .congruence_closure_problem import CongruenceClosureProblem
 
@@ -46,7 +51,7 @@ centroid(A, B, C) == centroid(midpoint(A, B), midpoint(B, C), midpoint(A, C))
 
 load_constructions_and_macros()
 
-GEOMETRY_CONGRUENCE_PROBLEMS = []
+GEOMETRY_CONGRUENCE_PROBLEMS: list[CongruenceClosureProblem[Atom | Literal, GeoObject, str | EqOp, Predicate]] = []
 
 for problem_statement in _GEOMETRY_CONGRUENCE_PROBLEMS:
     problem = DocumentReader().read(GeometryDocument.from_text(problem_statement), False)
