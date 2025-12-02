@@ -259,7 +259,7 @@ class ProofGenerator:
         # for p in points:
         #     for old_p in points:
         #         dist = ConstructionObject.from_args('distance', (p, old_p))
-        #         self.checker._geometry_tracker.equality_tracker.normalize(dist)
+        #         self.checker._geometry_tracker.get_object(dist, can_add=True)
 
     def check_finished(self) -> bool:
         """
@@ -305,8 +305,8 @@ class ProofGenerator:
             for lhs, rhs in zip(*condition):
                 lhs_index = obj_names.index(lhs)
                 rhs_index = obj_names.index(rhs)
-                lhs_sub = self.checker.geometry_tracker.equality_tracker.normalize(theorem_step.inputs[lhs_index])
-                rhs_sub = self.checker.geometry_tracker.equality_tracker.normalize(theorem_step.inputs[rhs_index])
+                lhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[lhs_index], can_add=False)
+                rhs_sub = self.checker.geometry_tracker.get_object(theorem_step.inputs[rhs_index], can_add=False)
                 if lhs_sub != rhs_sub:
                     break
             else:
@@ -335,7 +335,7 @@ def validate_proof(problem: GeometryProblem):
             assert theorem is not None
 
             subs = {
-                sig: checker.geometry_tracker.equality_tracker.normalize(inp)
+                sig: checker.geometry_tracker.get_object(inp, can_add=False)
                 for sig, inp in zip(theorem.signature, step.inputs)
             }
 
@@ -345,7 +345,7 @@ def validate_proof(problem: GeometryProblem):
                         continue
                     obj = obj.substitute(subs)
                     if obj not in proof_gen.checker.geometry_tracker._processed_objects and obj.type != GeoType.LITERAL:
-                        proof_gen.checker.geometry_tracker.equality_tracker.normalize(obj)
+                        proof_gen.checker.geometry_tracker.get_object(obj, can_add=False)
                         print(f'Adding object {obj}')
 
             if all(checker.geometry_tracker.contains_predicate(pred, can_add=False) for pred in step.result_predicates):

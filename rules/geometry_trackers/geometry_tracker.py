@@ -100,28 +100,39 @@ class GeometryTracker:
     """
 
     signature: Signature
+    _objects: UnionFind[GeoObject]
+    """All legal objects currently used by the proof."""
+    _processed_objects: set[GeoObject]
+    """All legal objects that can be used by the proof, but not yet. 
+    They are logged, but their conclusions haven't been added."""
     _predicates: set[Predicate]
     """All predicates known to be true."""
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
     _linear_algebra: LinearAlgebraTracker
-    """Tracks equalities between linear combinations of values."""
+    
     equality_tracker: CongruenceClosureTracker
     """Tracks equalities of Geometry Objects up to a relation with congruence closure."""
+
     embedding_tracker: Optional[Embedding]
     """Tracks 2D embeddings of the geometric configurations."""
 
     def __init__(self):
         self.signature = {}
+        self._objects = UnionFind()
+        self._processed_objects = set()
+        self._drawn_objects = set()
 
         self._predicates = set()
         self._asserted_predicates = set()
 
-        self._linear_algebra = LinearAlgebraTracker()
         self.equality_tracker = CongruenceClosureTracker()
         self.embedding_tracker = None
 
-        self.equality_tracker.normalize(ONE)
+        self.get_object(ONE, can_add=True)
+        
+
+        self._linear_algebra = LinearAlgebraTracker()
 
     def load_embedding(self, problem: GeometryProblem):
         """
@@ -129,6 +140,114 @@ class GeometryTracker:
         """
         if problem.embedding is not None:
             self.embedding_tracker = problem.embedding.shallow_copy()
+
+    def get_object(self, obj: GeoObject, *, can_add: bool) -> GeoObject:
+        """
+        Gets the canonical representative object in the proof checker associated with the given object by the equality system (This is important).
+        This function also handles the processing of construction objects, which is bad and should be refactored (TODO).
+
+        The proof checker tracks equalities of objects, such as `A == B`.
+        In this case, it has no need of predicates referring to `B`,
+        and converts all queries and operation to operations referring to `A`.
+        In addition, the equalities are propagated through constructions, so that `A == B` implies `Line(A, X) == Line(B, X)`.
+
+        Before any `return` that could return a construction object,
+        the function processes it if it should be processed, but hasn't been processed yet.
+
+        The function:
+
+        1. Checks if the object is present in the UnionFind tree.
+            This works for all processed objects, but might not work for constructions that weren't processed
+            (In the example above, prehaps `Line(A, X)` is processed, but `Line(B, X)` isn't).
+
+        2. If the object is a construction object, converts all its arguments to the canonical representatives of their arguments.
+            The equality system maintains that for any construction object, the result of substituting all its arguments
+            to their canonical representative must also be present in the UnionFind tree even if that is not the canonical representative,
+            to ensure that this step works.
+            In the example above, if we have `Line(B, X) == l` where `l` is the canonical representative,
+            then `Line(A, X)` will also be in the UnionFind tree.
+
+        3. If the object is an equation object, then we just substiute the components,
+            since linear algebra is not tracked by the equality system.
+
+        Now we perform two more actions apart from the stated purpose: (TODO: Refactor)
+        4. We validate that for a construction object, all requirements are known to be true.
+        5. We store new contruction objects in the UnionFind tree,
+            but not in the `self._processed_objects` set, to make finding them in the future easier.
+            We do this only if they should be added, or if we have checked that their requirements are satisfied.
+        """
+        # If we already know the object, we just add it.
+        if obj in self._objects:
+            # If the object was known, but not processed, we process it.
+            if can_add and obj not in self._processed_objects:
+                self.process_object(self._objects[obj])
+            res = self._objects[obj]
+            assert res <= obj, f'ProofChecker::get_object increased the value: {obj} => {res}'
+            return res
+
+        if isinstance(obj, Atom):
+            self.signature[obj.name] = obj.type
+
+        # If the object is a construct, we substitute the components.
+        # A construction object must always satisfy that the substitution of its components to the canonical components
+        # is also in the system.
+        if isinstance(obj, ConstructionObject):
+            res = obj.substitute({comp: self.get_object(comp, can_add=can_add) for comp in obj.components})
+            if res != obj:
+                # print(f'Substituted {obj} => {res}')
+                res = self.get_object(res, can_add=can_add)
+                # Logging the object and its substituted version for future reference.
+                assert res <= obj, f'Illegal substitution: {obj} => {res}'
+
+                # When we trust the object and don't check, we can't store references to it.
+                if can_add:
+                    self.add_equal_object(obj, res)
+
+                # The new object might already be known, or might have non-trivial equalities.
+                return self.get_object(res, can_add=can_add)
+
+        # If the object is an equation, we substitute the components.
+        if isinstance(obj, EquationObject):
+            return EquationObject(
+                self.get_object(obj.left, can_add=can_add), self.get_object(obj.right, can_add=can_add), obj.op
+            )
+
+        # We now have an new unknown object that shouldn't be substituted.
+        if isinstance(obj, ConstructionObject) and not can_add:
+            for pred in obj.requirements():
+                if not self.contains_predicate(pred, can_add=False):
+                    raise IllegalObjectError(
+                        f'Attempted to add the construction object {obj} without the ' f'requirement {pred}!'
+                    )
+
+        # Objects are stored as legal only if:
+        # 1. They are untrusted, but have been checked.
+        # 2. They should be added.
+        if can_add:
+            self._objects[obj]
+            self.process_object(obj)
+
+        return obj
+
+    def unique_objects(self) -> set[GeoObject]:
+        """
+        Returns an iterator over the set of canonical representative objects, not counting equal objects twice.
+        """
+        return set(self._objects.get_representatives()) & self._processed_objects
+
+    def all_objects(self) -> set[GeoObject]:
+        """
+        Returns an iterator over all tracked objects.
+        """
+        return set(self._processed_objects)
+
+    def represented_objects(self, obj) -> set[GeoObject]:
+        """
+        Returns all objects represented by the given object.
+        """
+        assert obj in self._objects
+        rep = self._objects[obj]
+        return self._objects.get_equivalences(rep) & self._processed_objects
 
     def all_predicates(self) -> set[Predicate]:
         """
@@ -152,9 +271,12 @@ class GeometryTracker:
         if angle.constructor.name != 'angle':
             return
 
+        assert angle in self._processed_objects and angle in self._objects
+
         a, b, c = angle.components
         if a != c:
-            rev_angle = self.equality_tracker.normalize(ConstructionObject.from_args('angle', (c, b, a)))
+            rev_angle = self.get_object(ConstructionObject.from_args('angle', (c, b, a)), can_add=True)
+            assert rev_angle in self._processed_objects and rev_angle in self._objects
             if self.embedding_tracker is not None:
                 self._linear_algebra.add_relation_mod(
                     LinearExpression({angle: 1, rev_angle: 1}), 0, 360, self.embedding_tracker, None
@@ -171,7 +293,7 @@ class GeometryTracker:
             return
         self._processed_objects.add(obj)
 
-        for equiv in list(self.equality_tracker.get_equivalences(obj)):
+        for equiv in list(self._objects.get_equivalences(obj)):
             self.process_object(equiv)
 
         if isinstance(obj, ConstructionObject):
@@ -179,7 +301,7 @@ class GeometryTracker:
             for req in obj.requirements():
                 self.add_predicate(req, f'Requirement of {obj}')
             for comp in obj.components:
-                self.process_object(self.equality_tracker.normalize(comp))
+                self.process_object(self.get_object(comp, can_add=True))
             for pred in obj.conclusions():
                 self.add_predicate(pred, f'conclusion of {obj}')
 
@@ -190,7 +312,7 @@ class GeometryTracker:
 
         if isinstance(obj, EquationObject):
             for comp in involved_objects(obj):
-                self.process_object(self.equality_tracker.normalize(comp))
+                self.process_object(self.get_object(comp, can_add=True))
 
         match obj.type:
             case GeoType.ANGLE:
@@ -245,7 +367,7 @@ class GeometryTracker:
             log_factors = get_log_eqn_factors(pred)
             if log_factors is not None:
                 for factor in log_factors:
-                    self.equality_tracker.normalize(factor)
+                    self.get_object(factor, can_add=True)
                 self._linear_algebra.add_relation(LinearExpression(log_factors), 0, self.embedding_tracker, pred)
 
     def _add_equal_objects_nonrecursive(self, a: GeoObject, b: GeoObject):
@@ -329,10 +451,11 @@ class GeometryTracker:
                 if isinstance(obj, ConstructionObject) and a in obj.components:
                     # Checking if the canonical object exists.
                     rep = self._objects[obj]
-                    substituted_rep = self.equality_tracker.normalize(
+                    substituted_rep = self.get_object(
                         ConstructionObject.from_args(
                             obj.constructor.name, tuple(self._objects[comp] for comp in obj.components)
-                        )
+                        ),
+                        can_add=True,
                     )
 
                     # The substituted object is already known to exist and be in the correct equivalence class.
@@ -462,9 +585,9 @@ class GeometryTracker:
         canonical representative of the original predicate.
         """
         for obj in pred.components:
-            self.equality_tracker.normalize(obj)
+            self.get_object(obj, can_add=can_add)
 
-        subs = {obj: self.equality_tracker.normalize(obj) for obj in pred.components}
+        subs = {obj: self.get_object(obj, can_add=can_add) for obj in pred.components}
 
         # if config.add_obj:
         #     print(f'get_predicate: {pred} {subs} {pred.substitute(subs)}')
@@ -559,7 +682,7 @@ class GeometryTracker:
                         == 0
                     )
 
-                return self.equality_tracker.are_congruent(a, b)
+                return self.get_object(a, can_add=can_add) == self.get_object(b, can_add=can_add)
             case 'equals_mod_360':
                 if self.embedding_tracker is None:
                         return False
@@ -585,6 +708,8 @@ class GeometryTracker:
         """
         res = GeometryTracker()
         res.signature = self.signature.copy()
+        res._objects = self._objects.shallow_copy()
+        res._processed_objects = set(self._processed_objects)
         res._predicates = set(self._predicates)
         res._asserted_predicates = set(self._asserted_predicates)
         res._linear_algebra = self._linear_algebra.clone()
@@ -602,12 +727,9 @@ class GeometryTracker:
         3. Embeddings of the objects into R^2, if they are present.
         """
         self.load_embedding(problem)
-        
-        assert problem.statement is not None
-
         # Adding the objects defined by the proof.
         for obj in problem.statement.assumption_objects.values():
-            self.equality_tracker.normalize(obj)
+            self.get_object(obj, can_add=True)
 
         # Adding the assumptions of the proof.
         for pred in problem.statement.assumption_predicates:
