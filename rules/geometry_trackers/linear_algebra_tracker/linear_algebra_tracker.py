@@ -37,7 +37,7 @@ class LinearAlgebraTracker:
         self.predicates = []
 
     def _add_key(self, key: GeoObject):
-        self.keys.add(ONE)
+        self.keys.add(key)
         self.matrix.extend_row_length(1)
 
     def add_relation(self, linear_expression: LinearExpression, value: int | Fraction, embedding: Embedding, predicate: Optional[Predicate]):
