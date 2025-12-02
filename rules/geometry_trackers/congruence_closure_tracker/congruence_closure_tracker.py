@@ -48,8 +48,12 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, 
         for symmetrical_term in symmetrical_terms:
             self._merge(term_atom, symmetrical_term, None)
 
-    def reconstruct_function(self, function: str, parameters: list[Atom | Literal | GeoObject]) -> Atom | Literal | GeoObject:
-        return ConstructionObject.from_args(function, tuple(parameters))
+    def reconstruct_function(self, function: Function, parameters: list[Atom | Literal | GeoObject]) -> Atom | Literal | GeoObject:
+        if isinstance(function, str):
+            return ConstructionObject.from_args(function, tuple(parameters))
+        else:
+            return EquationObject(parameters[0], parameters[1], function)
+
 
     def clone(self) -> 'CongruenceClosureTracker':
         clone = CongruenceClosureTracker()
