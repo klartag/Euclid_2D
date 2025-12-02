@@ -257,17 +257,6 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Function, Pre
         '''
         TODO: Document
         '''
-        
-        '''
-        TODO: In the `CongruenceClosureTracker` class, some functions have symmetries.
-        This normalize method does not behave properly with the symmetries.
-        
-        Maybe reconstructing + deconstructing the object and calling normalize multiple times
-        solves the issue?
-        But quite possibly we will have to take care of the lookup_table and other properties
-        in a more robust manner that takes possible symmetries into account.
-        '''
-        
         if isinstance(value, Constant):
             return self.representatives[value]
         
