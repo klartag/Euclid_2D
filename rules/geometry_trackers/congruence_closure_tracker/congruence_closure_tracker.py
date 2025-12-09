@@ -1,22 +1,33 @@
+from typing import cast
+
 from ...predicates.global_predicates import get_constructions
 from ...predicates.predicate import Predicate
+from ...predicates.predicate_factory import predicate_from_args
 
-from ...geometry_objects.atom import Atom
-from ...geometry_objects.literal import Literal
+from ...geometry_objects.atom import Atom as GeometryAtom
+from ...geometry_objects.literal import Literal as GeometryLiteral
 from ...geometry_objects.construction_object import ConstructionObject
 from ...geometry_objects.equation_object import EquationObject
 from ...geometry_objects.eq_op import EqOp
 from ...geometry_objects.geo_object import GeoObject
 
-from .abstract_congruence_closure_tracker import AbstractCongruenceClosureTracker
+from .abstract_congruence_closure_tracker import AbstractCongruenceClosureTracker, Constant
 from .terms.basic_function_term import BasicFunctionTerm
 from .terms.generic_function_term import GenericFunctionTerm
 
 
+Atom = GeometryAtom | GeometryLiteral | bool
+NonAtom = GeoObject | Predicate
 Function = str | EqOp
 
-class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, GeoObject, Function, Predicate]):
-    def deconstruct_predicate(self, predicate: Predicate) -> tuple[GeoObject, GeoObject]:
+class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom, NonAtom, Function, Predicate]):
+    def merge(self, predicate: Predicate):
+        if predicate.name == 'equals':
+            super().merge(predicate)
+        else:
+            super().merge_atoms(predicate, True, predicate)
+
+    def deconstruct_predicate(self, predicate: Predicate) -> tuple[Atom | NonAtom, Atom | NonAtom]:
         if predicate.name != 'equals':
             raise ValueError('Can only merge equality predicates.')
         if len(predicate.components) != 2:
@@ -24,21 +35,29 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, 
         left, right = predicate.components[0], predicate.components[1]
         return (left, right)
 
-    def deconstruct(self, value: GeoObject) -> Atom | Literal | GenericFunctionTerm[Function, Atom | Literal]:
-        if isinstance(value, (Atom, Literal)):
-            return value
-        elif isinstance(value, ConstructionObject):
-            function = value.constructor.name
+    def deconstruct(self, value: Atom | NonAtom) -> Atom | GenericFunctionTerm[Function, Atom]:
+        if isinstance(value, GeoObject):
+            if isinstance(value, (GeometryAtom, GeometryLiteral)):
+                return value
+            elif isinstance(value, ConstructionObject):
+                function = value.constructor.name
+                parameters = value.components
+                deconstructed_parameters = tuple([self.deconstruct(parameter) for parameter in parameters])
+                return GenericFunctionTerm(function, deconstructed_parameters)
+            elif isinstance(value, EquationObject):
+                deconsructed_parameters = (self.deconstruct(value.left), self.deconstruct(value.right))
+                return GenericFunctionTerm(value.op, deconsructed_parameters)
+            else:
+                raise ValueError("Encountered an unknown type of GeoObject.")
+        elif isinstance(value, Predicate):
+            function = value.name
             parameters = value.components
-            deconsructed_parameters = tuple([self.deconstruct(parameter) for parameter in parameters])
-            return GenericFunctionTerm(function, deconsructed_parameters)
-        elif isinstance(value, EquationObject):
-            deconsructed_parameters = (self.deconstruct(value.left), self.deconstruct(value.right))
-            return GenericFunctionTerm(value.op, deconsructed_parameters)
+            deconstructed_parameters = tuple([self.deconstruct(parameter) for parameter in parameters])
+            return GenericFunctionTerm(function, deconstructed_parameters)
         else:
-            raise ValueError("Cannot deconstruct an object that isn't an Atom, Literal, or ConstructionObject.")
+            return value
 
-    def post_process_token_addition(self, term: BasicFunctionTerm[Function, int]):
+    def post_process_token_addition(self, term: BasicFunctionTerm[Function, Constant]):
         if isinstance(term.function, EqOp):
             return
         symmetrical_orders = get_constructions()[term.function].symmetry.all_orders(term.parameters)
@@ -48,11 +67,16 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom | Literal, 
         for symmetrical_term in symmetrical_terms:
             self._merge(term_atom, symmetrical_term, None)
 
-    def reconstruct_function(self, function: Function, parameters: list[Atom | Literal | GeoObject]) -> Atom | Literal | GeoObject:
+    def reconstruct_function(self, function: Function, parameters: list[Atom | NonAtom]) -> Atom | NonAtom:
+        cast_parameters = cast(list[GeoObject], parameters)
         if isinstance(function, str):
-            return ConstructionObject.from_args(function, tuple(parameters))
+            tuple_parameters = tuple(cast_parameters)
+            if function in get_constructions():
+                return ConstructionObject.from_args(function, tuple_parameters)
+            else:
+                return predicate_from_args(function, tuple_parameters) 
         else:
-            return EquationObject(parameters[0], parameters[1], function)
+            return EquationObject(cast_parameters[0], cast_parameters[1], function)
 
 
     def clone(self) -> 'CongruenceClosureTracker':

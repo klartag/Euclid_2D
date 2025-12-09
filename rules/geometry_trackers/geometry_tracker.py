@@ -1,3 +1,4 @@
+from fractions import Fraction
 import heapq
 from typing import Optional
 
@@ -109,11 +110,11 @@ class GeometryTracker:
     """All predicates known to be true."""
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
-    _linear_algebra: LinearAlgebraTracker
     
+    _linear_algebra: LinearAlgebraTracker
+    """Tracks equalities between linear combinations of values."""
     equality_tracker: CongruenceClosureTracker
     """Tracks equalities of Geometry Objects up to a relation with congruence closure."""
-
     embedding_tracker: Optional[Embedding]
     """Tracks 2D embeddings of the geometric configurations."""
 
@@ -279,7 +280,7 @@ class GeometryTracker:
             assert rev_angle in self._processed_objects and rev_angle in self._objects
             if self.embedding_tracker is not None:
                 self._linear_algebra.add_relation_mod(
-                    LinearExpression({angle: 1, rev_angle: 1}), 0, 360, self.embedding_tracker, None
+                    LinearExpression({angle: Fraction(1), rev_angle: Fraction(1)}), 0, 360, self.embedding_tracker, None
                 )
 
     def process_object(self, obj: GeoObject):
@@ -412,8 +413,9 @@ class GeometryTracker:
         # Adding the equality relation to any tracker where at least one object appears.
         # Since one of the old objects will no longer be accessible, we only have to add an equality relation
         # If the old object was tracked in some form.
-        if self._linear_algebra.contains_key(a):
-            self._linear_algebra.add_relation(LinearExpression({a: 1, b: -1}), 0, self.embedding_tracker)
+        if a in self._linear_algebra.keys:
+            assert self.embedding_tracker is not None
+            self._linear_algebra.add_relation(LinearExpression({a: Fraction(1), b: Fraction(-1)}), 0, self.embedding_tracker, None)
 
     def add_equal_object(self, g1: GeoObject, g2: GeoObject):
         """
@@ -727,6 +729,9 @@ class GeometryTracker:
         3. Embeddings of the objects into R^2, if they are present.
         """
         self.load_embedding(problem)
+        
+        assert problem.statement is not None
+        
         # Adding the objects defined by the proof.
         for obj in problem.statement.assumption_objects.values():
             self.get_object(obj, can_add=True)

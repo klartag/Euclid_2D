@@ -244,6 +244,14 @@ class AbstractCongruenceClosureTracker(ABC, Generic[Atom, NonAtom, Function, Pre
     def post_process_token_addition(self, term: BasicFunctionTerm[Function, Constant]):
         pass
 
+    def get_equivalences(self, value: Atom | NonAtom) -> list[Atom | NonAtom]:
+        deconstructed_value = self.deconstruct(value)
+        _value = self.project_atom_type(deconstructed_value)
+        _flattened_value = self._flatten(_value)
+        _normalized_value = self.representatives[_flattened_value]
+        class_list = self.class_lists[_normalized_value]
+        return list(set([self.reconstruct(token) for token in class_list]))
+
     def normalize(self, value: Atom | NonAtom) -> Atom | NonAtom:
         '''
         TODO: Document
