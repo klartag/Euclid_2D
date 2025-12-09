@@ -143,6 +143,11 @@ class GeometryTracker:
             self.embedding_tracker = problem.embedding.shallow_copy()
 
     def get_object(self, obj: GeoObject, *, can_add: bool) -> GeoObject:
+        if can_add:
+            self.equality_tracker._flatten(self.equality_tracker.project_atom_type(self.equality_tracker.deconstruct(obj)))
+        return self._OLD_get_object(obj, can_add=can_add)
+    
+    def _OLD_get_object(self, obj: GeoObject, *, can_add: bool) -> GeoObject:
         """
         Gets the canonical representative object in the proof checker associated with the given object by the equality system (This is important).
         This function also handles the processing of construction objects, which is bad and should be refactored (TODO).
@@ -418,6 +423,10 @@ class GeometryTracker:
             self._linear_algebra.add_relation(LinearExpression({a: Fraction(1), b: Fraction(-1)}), 0, self.embedding_tracker, None)
 
     def add_equal_object(self, g1: GeoObject, g2: GeoObject):
+        self.equality_tracker.merge_atoms(g1, g2, predicate=predicate_from_args('equals', (g1, g2)))
+        return self._OLD_add_equal_object(g1, g2)
+
+    def _OLD_add_equal_object(self, g1: GeoObject, g2: GeoObject):
         """
         Adds a generic equality of objects.
         The objects are merged in the proof-checker's union-find tree.
@@ -530,7 +539,7 @@ class GeometryTracker:
         if isinstance(pred, MacroPredicate):
             for req_preds, conc_preds in pred.possible_conclusions():
                 if all(self.contains_predicate(req_pred, can_add=False) for req_pred in req_preds):
-                    for conc_pred in conc_preds:
+                    for conc_pred in conc_preds:                        
                         self.add_predicate(
                             conc_pred,
                             'Possible conclusion of {pred}',
@@ -572,6 +581,8 @@ class GeometryTracker:
                 self.add_predicate(predicate, 'Marking an object involve in some proved predicate as existing')
 
         # We add the predicate to self anyway.
+        
+        self.equality_tracker.merge(pred)
         self._predicates.add(pred)
 
     def get_predicate(self, pred: Predicate, *, can_add: bool) -> Predicate:

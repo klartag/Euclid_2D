@@ -1,4 +1,6 @@
-from typing import cast
+from typing import Tuple, cast
+
+from ...symmetry import Symmetry
 
 from ...predicates.global_predicates import get_constructions
 from ...predicates.predicate import Predicate
@@ -18,7 +20,7 @@ from .terms.generic_function_term import GenericFunctionTerm
 
 Atom = GeometryAtom | GeometryLiteral | bool
 NonAtom = GeoObject | Predicate
-Function = str | EqOp
+Function = Tuple[str, Symmetry] | EqOp
 
 class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom, NonAtom, Function, Predicate]):
     def merge(self, predicate: Predicate):
@@ -40,7 +42,7 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom, NonAtom, F
             if isinstance(value, (GeometryAtom, GeometryLiteral)):
                 return value
             elif isinstance(value, ConstructionObject):
-                function = value.constructor.name
+                function = (value.constructor.name, value.constructor.symmetry)
                 parameters = value.components
                 deconstructed_parameters = tuple([self.deconstruct(parameter) for parameter in parameters])
                 return GenericFunctionTerm(function, deconstructed_parameters)
@@ -50,7 +52,7 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom, NonAtom, F
             else:
                 raise ValueError("Encountered an unknown type of GeoObject.")
         elif isinstance(value, Predicate):
-            function = value.name
+            function = (value.name, value.symmetry)
             parameters = value.components
             deconstructed_parameters = tuple([self.deconstruct(parameter) for parameter in parameters])
             return GenericFunctionTerm(function, deconstructed_parameters)
@@ -60,7 +62,7 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom, NonAtom, F
     def post_process_token_addition(self, term: BasicFunctionTerm[Function, Constant]):
         if isinstance(term.function, EqOp):
             return
-        symmetrical_orders = get_constructions()[term.function].symmetry.all_orders(term.parameters)
+        symmetrical_orders = term.function[1].all_orders(term.parameters)
         symmetrical_orders.remove(term.parameters)
         symmetrical_terms = [BasicFunctionTerm(term.function, order) for order in symmetrical_orders]
         term_atom = self._flatten(term)
@@ -69,14 +71,14 @@ class CongruenceClosureTracker(AbstractCongruenceClosureTracker[Atom, NonAtom, F
 
     def reconstruct_function(self, function: Function, parameters: list[Atom | NonAtom]) -> Atom | NonAtom:
         cast_parameters = cast(list[GeoObject], parameters)
-        if isinstance(function, str):
-            tuple_parameters = tuple(cast_parameters)
-            if function in get_constructions():
-                return ConstructionObject.from_args(function, tuple_parameters)
-            else:
-                return predicate_from_args(function, tuple_parameters) 
-        else:
+        if isinstance(function, EqOp):
             return EquationObject(cast_parameters[0], cast_parameters[1], function)
+        else:
+            tuple_parameters = tuple(cast_parameters)
+            if function[0] in get_constructions():
+                return ConstructionObject.from_args(function[0], tuple_parameters)
+            else:
+                return predicate_from_args(function[0], tuple_parameters) 
 
 
     def clone(self) -> 'CongruenceClosureTracker':
