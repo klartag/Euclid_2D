@@ -95,7 +95,7 @@ class Matrix(Generic[A]):
                 return ()
             return tuple(sorted((k, inner[k]) for k in inner.keys() if inner[k] != 0))
 
-        def enumerate_block(block_coeffs: list[Fraction]) -> dict[tuple, list[tuple[int, ...]]]:
+        def enumerate_block(block_coeffs: list[Fraction], should_negate_signature: bool) -> dict[tuple, list[tuple[int, ...]]]:
             """
             Enumerate weighted sums for a contiguous block of coefficients,
             keeping only index-tuples that are strictly increasing across the block
@@ -109,50 +109,41 @@ class Matrix(Generic[A]):
             for indices in itertools.combinations_with_replacement(range(self.row_length), len(block_coeffs)):
                 v = SparseVector({}, self.row_length)
                 for c, idx in zip(block_coeffs, indices):
-                    v = v + (basis_projection[idx] * c)
+                    if should_negate_signature:
+                        v -= (basis_projection[idx] * c)
+                    else:
+                        v += (basis_projection[idx] * c)
                 out[sig(v)].append(tuple(indices))
             return out
 
         # --- Meet-in-the-middle join ---
         k = len(factors) // 2
-        left_coeffs = coefficients[:k]
-        right_coeffs = coefficients[k:]
+        left_coefficients = coefficients[:k]
+        right_coefficients = coefficients[k:]
 
-        left_map = enumerate_block(left_coeffs)
-        # For the right map we store signatures of the NEGATED sum so that
-        # we can match left_sum == -(right_sum).
-        right_map_raw = enumerate_block(right_coeffs)
-        right_map: dict[tuple, list[tuple[int, ...]]] = defaultdict(list)
-        for s, idx_lists in right_map_raw.items():
-            # Reconstruct a SparseVector to negate its signature robustly
-            if s == ():
-                neg_sig = ()
-            else:
-                # s is a tuple[(i, val)], all Fractions → negation is trivial
-                neg_sig = tuple((i, -val) for (i, val) in s)
-            right_map[neg_sig].extend(idx_lists)
+        left_map = enumerate_block(left_coefficients, False)
+        right_map = enumerate_block(right_coefficients, True)
 
         # Join and build results in original order (left part then right part)
         results_set: list[list[int]] = []
-        if not left_coeffs:
+        if len(left_coefficients) == 0:
             # whole thing on the right; nothing to join
-            for s, r_lists in right_map.items():
-                if s == ():
-                    for r in r_lists:
-                        # r already canonical within its block; just accept (no left side)
+            for signature, right_lists in right_map.items():
+                if signature == ():
+                    for r in right_lists:
                         results_set.append(list(r))
-        elif not right_coeffs:
-            for s, l_lists in left_map.items():
-                if s == ():
-                    for l in l_lists:
+        elif len(right_coefficients) == 0:
+            for signature, left_lists in left_map.items():
+                if signature == ():
+                    for l in left_lists:
                         results_set.append(list(l))
         else:
-            for s, l_lists in left_map.items():
-                r_lists = right_map.get(s)
-                if not r_lists:
+            for signature, left_lists in left_map.items():
+                right_lists = right_map.get(signature)
+                if not right_lists:
                     continue
-                for l in l_lists:
-                    for r in r_lists:
+                for l in left_lists:
+                    for r in right_lists:
                         # STRICT GLOBAL ORDER: all l’s then all r’s must be increasing
                         if l and r and not (l[-1] < r[0]):
                             continue
