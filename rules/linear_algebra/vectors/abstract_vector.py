@@ -10,12 +10,6 @@ class AbstractVector(ABC):
     def type_name(self) -> str: ...
 
     @abstractmethod
-    def __len__(self) -> int: ...
-
-    @abstractmethod
-    def __getitem__(self, i: int) -> Fraction: ...
-
-    @abstractmethod
     def __mul__(self, x: Fraction) -> Self: ...
 
     @abstractmethod
@@ -28,28 +22,10 @@ class AbstractVector(ABC):
     def __sub__(self, other: Self) -> Self: ...
 
     @abstractmethod
-    def extend_length(self, amount: int): ...
-
-    @abstractmethod
     def clone(self) -> Self: ...
 
     @abstractmethod
-    def permute(self, permutation: list[int]) -> Self: ...
-
-    @abstractmethod
     def __eq__(self, other: Self) -> bool: ...
-
-    def __iter__(self) -> Iterator[Fraction]:
-        return (self[i] for i in range(len(self)))
-
-    @abstractmethod
-    def first_nonzero_index(self) -> Optional[int]: ...
-
-    @abstractmethod
-    def count_nonzero_indices(self, max_index: Optional[int] = None) -> int: ...
-
-    def __bool__(self) -> bool:
-        return self.first_nonzero_index() is not None
 
     @abstractmethod
     def inner_repr(self) -> str: ...

@@ -1,10 +1,10 @@
 from fractions import Fraction
 from typing import Literal, Optional, Self, Sequence
 
-from .abstract_vector import AbstractVector
+from .proper_vector import ProperVector
 
 
-class DenseVector(AbstractVector):
+class DenseVector(ProperVector):
     type_name: Literal['Dense'] = 'Dense'
 
     inner: list[Fraction]
@@ -18,16 +18,16 @@ class DenseVector(AbstractVector):
     def __getitem__(self, i: int) -> Fraction:
         return self.inner[i]
 
-    def __mul__(self, x: Fraction) -> Self:
+    def __mul__(self, x: Fraction) -> 'DenseVector':
         return DenseVector([x * f for f in self.inner])
 
-    def __truediv__(self, x: Fraction) -> Self:
+    def __truediv__(self, x: Fraction) -> 'DenseVector':
         return DenseVector([f / x for f in self.inner])
 
-    def __add__(self, other: Self) -> Self:
+    def __add__(self, other: Self) -> 'DenseVector':
         return DenseVector([self[i] + other[i] for i in range(len(self))])
 
-    def __sub__(self, other: Self) -> Self:
+    def __sub__(self, other: Self) -> 'DenseVector':
         return DenseVector([self[i] - other[i] for i in range(len(self))])
 
     def __eq__(self, other: Self) -> bool:
@@ -43,12 +43,12 @@ class DenseVector(AbstractVector):
         return sum([1 for value in self.inner[:max_index] if value != 0])
 
     def extend_length(self, amount: int):
-        self.inner.extend([0 for _ in range(amount)])
+        self.inner.extend([Fraction(0) for _ in range(amount)])
 
-    def permute(self, permutation: list[int]) -> Self:
+    def permute(self, permutation: list[int]) -> 'DenseVector':
         return DenseVector([self.inner[permutation[i]] for i in range(len(self))])
 
-    def clone(self) -> Self:
+    def clone(self) -> 'DenseVector':
         return DenseVector(self.inner)
 
     def inner_repr(self) -> str:
@@ -60,3 +60,13 @@ class DenseVector(AbstractVector):
 
     def __hash__(self) -> int:
         return hash((self.type_name, tuple(self.inner)))
+    
+    @classmethod
+    def create_empty(cls: type[Self], length: int) -> Self:
+        return cls([Fraction(0)] * length)
+
+    @classmethod
+    def create_single(cls: type[Self], index: int, length: int) -> Self:
+        values = [Fraction(0)] * length
+        values[index] = Fraction(1)
+        return cls(values)

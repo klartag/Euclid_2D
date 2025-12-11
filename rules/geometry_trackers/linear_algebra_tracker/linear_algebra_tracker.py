@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Self, Tuple
+from typing import Dict, List, Optional, Tuple
 from fractions import Fraction
 
 from ...permutations import try_match_permutation
@@ -25,7 +25,7 @@ class LinearAlgebraTracker:
     _reverse_keys: Dict[GeoObject, int]
 
     def __init__(self):
-        self.matrix = Matrix(0)
+        self.matrix = Matrix(SparseVector, 0)
         self._keys = []
         self._reverse_keys = {}
         self._add_key(ONE)
@@ -107,7 +107,7 @@ class LinearAlgebraTracker:
         row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length)
         projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector(row, Fraction(0)))
 
-        if projected_row.first_nonzero_index() is not None:
+        if projected_row.vector.first_nonzero_index() is not None:
             return None
         return automatic_residue - projected_row.constant
 

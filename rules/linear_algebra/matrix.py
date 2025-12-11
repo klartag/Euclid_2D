@@ -5,20 +5,21 @@ from collections import defaultdict
 
 from fractions import Fraction
 
-from .vectors.abstract_vector import AbstractVector
-from .vectors.sparse_vector import SparseVector
+from .vectors.proper_vector import ProperVector
 from .vectors.augmented_vector import AugmentedVector
 
 
-A = TypeVar('A', bound=AbstractVector)
+A = TypeVar('A', bound=ProperVector)
 
 
 class Matrix(Generic[A]):
+    vector_class: type[A]
     diagonal_indices: List[int]
     rows: List[AugmentedVector[A, Fraction]]
     row_length: int
 
-    def __init__(self, row_length: int):
+    def __init__(self, vector_class: type[A], row_length: int):
+        self.vector_class = vector_class
         self.diagonal_indices = []
         self.rows = []
         self.constants = []
@@ -26,21 +27,21 @@ class Matrix(Generic[A]):
 
     def extend_row_length(self, amount: int):
         for row in self.rows:
-            row.extend_length(amount)
+            row.vector.extend_length(amount)
         self.row_length += amount
 
     def permute_columns(self, permutation: list[int]):
-        self.rows = [row.permute(permutation) for row in self.rows]
+        self.rows = [AugmentedVector(row.vector.permute(permutation), row.constant) for row in self.rows]
 
     def project_to_orthogonal_complement(self, vector: AugmentedVector[A, Fraction]) -> AugmentedVector[A, Fraction]:
         for i in range(len(self.rows)):
-            if vector[self.diagonal_indices[i]] != 0:
-                vector -= self.rows[i] * vector[self.diagonal_indices[i]]
+            if vector.vector[self.diagonal_indices[i]] != 0:
+                vector -= self.rows[i] * vector.vector[self.diagonal_indices[i]]
         return vector
 
     def in_span(self, row: AugmentedVector[A, Fraction]):
         projected_row = self.project_to_orthogonal_complement(row)
-        return projected_row.first_nonzero_index() is None and not projected_row.constant
+        return projected_row.vector.first_nonzero_index() is None and not projected_row.constant
 
     def add_row(self, row: AugmentedVector[A, Fraction]):
         row = self.project_to_orthogonal_complement(row)
@@ -48,14 +49,14 @@ class Matrix(Generic[A]):
         if not row.vector and row.constant:
             raise ValueError("Adding a row caused a contradiction in the augmented matrix.")
 
-        first_nonzero_index = row.first_nonzero_index()
+        first_nonzero_index = row.vector.first_nonzero_index()
         if first_nonzero_index is None:
             return
 
-        row /= row[first_nonzero_index]
+        row /= row.vector[first_nonzero_index]
         for i in range(len(self.rows)):
-            if self.rows[i][first_nonzero_index] != 0:
-                self.rows[i] -= row * self.rows[i][first_nonzero_index]
+            if self.rows[i].vector[first_nonzero_index] != 0:
+                self.rows[i] -= row * self.rows[i].vector[first_nonzero_index]
 
         row_index = 0
         while row_index < len(self.rows) and self.diagonal_indices[row_index] < first_nonzero_index:
@@ -83,7 +84,7 @@ class Matrix(Generic[A]):
         # --- Precompute P_i = projection of basis column i (vector part only) ---
         basis_projection: list[A] = []
         for i in range(self.row_length):
-            basis = AugmentedVector(SparseVector({i: 1}, self.row_length), Fraction(0))
+            basis = AugmentedVector(self.vector_class.create_single(i, self.row_length), Fraction(0))
             proj = self.project_to_orthogonal_complement(basis).vector
             basis_projection.append(proj)
 
@@ -93,11 +94,11 @@ class Matrix(Generic[A]):
             Returns: signature -> list of index tuples (in the order given by `block_coeffs`)
             """
             if len(block_coeffs) == 0:
-                return { hash(SparseVector({}, 0)): [()] }
+                return { hash(self.vector_class.create_empty(0)): [()] }
             out: dict[int, list[tuple[int, ...]]] = defaultdict(list)
 
             for indices in itertools.combinations_with_replacement(range(self.row_length), len(block_coeffs)):
-                v = SparseVector({}, self.row_length)
+                v = self.vector_class.create_empty(self.row_length)
                 for c, idx in zip(block_coeffs, indices):
                     v += (basis_projection[idx] * c)
                 if should_negate_signature:
@@ -125,10 +126,10 @@ class Matrix(Generic[A]):
         return results_set
 
     def __str__(self) -> str:
-        nonzero_keys = [i for i in range(self.row_length) if any([row[i] != 0 for row in self.rows])]
+        nonzero_keys = [i for i in range(self.row_length) if any([row.vector[i] != 0 for row in self.rows])]
         if len(nonzero_keys) == 0:
             return ''
-        table = [nonzero_keys + ['.']] + [[row[i] or '' for i in nonzero_keys] + [row.constant] for row in self.rows]
+        table = [nonzero_keys + ['.']] + [[row.vector[i] or '' for i in nonzero_keys] + [row.constant] for row in self.rows]
         table_repr = [[str(cell) for cell in row] for row in table]
         column_lengths = [max([len(row[i]) for row in table_repr]) for i in range(len(table_repr[0]))]
         padded_table_reprs = [
@@ -140,7 +141,7 @@ class Matrix(Generic[A]):
         return '\n'.join(table_row_reprs)
 
     def clone(self) -> 'Matrix':
-        cloned_matrix = Matrix(self.row_length)
+        cloned_matrix = Matrix(self.vector_class, self.row_length)
         cloned_matrix.diagonal_indices = self.diagonal_indices[:]
         cloned_matrix.rows = self.rows[:]
         return cloned_matrix
