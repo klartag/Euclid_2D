@@ -33,5 +33,4 @@ class PredicateParser(AbstractGeometryParser[Predicate]):
             predicate = parser.try_parse(text)
             if predicate is not None:
                 return predicate
-        raise Exception("cannot none")
         return None

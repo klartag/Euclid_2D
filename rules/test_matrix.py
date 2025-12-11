@@ -2,7 +2,8 @@ import pytest
 from fractions import Fraction
 
 from .linear_algebra.matrix import Matrix
-from .linear_algebra.vectors.augmented_vector import AugmentedVector
+from .linear_algebra.vectors.augmented_vectors.augmented_vector_2 import AugmentedVector2
+from .linear_algebra.vectors.constant_vector import ConstantVector
 from .linear_algebra.vectors.sparse_vector import SparseVector
 
 
@@ -23,7 +24,7 @@ def sample_matrix() -> Matrix[SparseVector]:
     ]
     
     for vector in vectors:
-        row = AugmentedVector(vector, Fraction(0))
+        row = AugmentedVector2(vector, ConstantVector(Fraction(0)))
         matrix.add_row(row)
     return matrix
 
@@ -41,5 +42,5 @@ def test_get_sparse_integer_linear_combinations(sample_matrix: Matrix[SparseVect
     for result in results:
         for coefficient, index in zip(coefficients, result):
             vector_sum += SparseVector.create_single(index, sample_matrix.row_length) * Fraction(coefficient)
-        projection = sample_matrix.project_to_orthogonal_complement(AugmentedVector(vector_sum, Fraction(0))).vector
+        projection = sample_matrix.project_to_orthogonal_complement(AugmentedVector2(vector_sum, ConstantVector(Fraction(0)))).inner0
         assert projection.first_nonzero_index() is None

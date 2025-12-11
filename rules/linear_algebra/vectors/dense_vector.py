@@ -1,10 +1,10 @@
 from fractions import Fraction
 from typing import Literal, Optional, Self, Sequence
 
-from .proper_vector import ProperVector
+from .abstract_iterable_vector import AbstractIterableVector
 
 
-class DenseVector(ProperVector):
+class DenseVector(AbstractIterableVector):
     type_name: Literal['Dense'] = 'Dense'
 
     inner: list[Fraction]
@@ -17,6 +17,9 @@ class DenseVector(ProperVector):
 
     def __getitem__(self, i: int) -> Fraction:
         return self.inner[i]
+    
+    def __setitem__(self, i: int, value: Fraction):
+        self.inner[i] = value
 
     def __mul__(self, x: Fraction) -> 'DenseVector':
         return DenseVector([x * f for f in self.inner])

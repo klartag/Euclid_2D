@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Iterator, Optional, Self
+from typing import Optional, Self
 
 from fractions import Fraction
 
@@ -32,9 +32,6 @@ class AbstractVector(ABC):
 
     def __str__(self) -> str:
         return f'{self.type_name}({self.inner_repr()})'
-
-    @abstractmethod
-    def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction: ...
 
     @abstractmethod
     def __hash__(self) -> int: ...

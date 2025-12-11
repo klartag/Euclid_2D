@@ -3,11 +3,11 @@ from typing import Literal, Mapping, Optional, Self
 from itertools import chain
 from fractions import Fraction
 
-from .proper_vector import ProperVector
+from .abstract_iterable_vector import AbstractIterableVector
 from .dense_vector import DenseVector
 
 
-class SparseVector(ProperVector):
+class SparseVector(AbstractIterableVector):
     type_name: Literal['Sparse'] = 'Sparse'
 
     inner: dict[int, Fraction]
@@ -23,6 +23,10 @@ class SparseVector(ProperVector):
 
     def __getitem__(self, i: int) -> Fraction:
         return self.inner.get(i, Fraction(0))
+    
+    def __setitem__(self, i: int, value: Fraction):
+        if value != 0:
+            self.inner[i] = value
 
     def __mul__(self, x: Fraction) -> 'SparseVector':
         if x == 0:
@@ -63,7 +67,7 @@ class SparseVector(ProperVector):
         return SparseVector(self.inner, len(self))
 
     def to_dense_vector(self) -> DenseVector:
-        return DenseVector(list(iter(self)))
+        return DenseVector(list(self))
 
     def inner_repr(self) -> str:
         rational_reprs = [f'{k}: {str(v)}' for (k, v) in self.inner.items()]

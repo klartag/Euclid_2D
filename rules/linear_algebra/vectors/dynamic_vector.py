@@ -1,7 +1,7 @@
 from fractions import Fraction
 from typing import Literal, Optional, Self, Union
 
-from .proper_vector import ProperVector
+from .abstract_iterable_vector import AbstractIterableVector
 from .dense_vector import DenseVector
 from .sparse_vector import SparseVector
 
@@ -10,7 +10,7 @@ DENSE_THRESHOLD = 1 / 4
 SPARSE_THRESHOLD = 1 / 20
 
 
-class DynamicVector(ProperVector):
+class DynamicVector(AbstractIterableVector):
     type_name: Literal['Dynamic'] = 'Dynamic'
 
     inner: Union[DenseVector, SparseVector]
@@ -39,6 +39,9 @@ class DynamicVector(ProperVector):
 
     def __getitem__(self, i: int) -> Fraction:
         return self.inner[i]
+    
+    def __setitem__(self, i: int, value: Fraction):
+        self.inner[i] = value
 
     def __mul__(self, x: Fraction) -> 'DynamicVector':
         return DynamicVector(self.inner * x)
@@ -46,22 +49,28 @@ class DynamicVector(ProperVector):
     def __truediv__(self, x: Fraction) -> 'DynamicVector':
         return DynamicVector(self.inner / x)
 
-    def __add__(self, other: Self) -> 'DynamicVector':
-        if self.inner.type_name == other.inner.type_name:
+    def __add__(self, other: Self) -> 'DynamicVector':        
+        if self.inner.type_name == 'Dense' and other.inner.type_name == 'Dense':
+            return DynamicVector(self.inner + other.inner).normalize()
+        if self.inner.type_name == 'Sparse' and other.inner.type_name == 'Sparse':
             return DynamicVector(self.inner + other.inner).normalize()
         inner0 = self.inner if self.inner.type_name == 'Dense' else self.inner.to_dense_vector()
         inner1 = other.inner if other.inner.type_name == 'Dense' else other.inner.to_dense_vector()
         return DynamicVector(inner0 + inner1).normalize()
 
     def __sub__(self, other: Self) -> 'DynamicVector':
-        if self.inner.type_name == other.inner.type_name:
+        if self.inner.type_name == 'Dense' and other.inner.type_name == 'Dense':
+            return DynamicVector(self.inner - other.inner).normalize()
+        if self.inner.type_name == 'Sparse' and other.inner.type_name == 'Sparse':
             return DynamicVector(self.inner - other.inner).normalize()
         inner0 = self.inner if self.inner.type_name == 'Dense' else self.inner.to_dense_vector()
         inner1 = other.inner if other.inner.type_name == 'Dense' else other.inner.to_dense_vector()
         return DynamicVector(inner0 - inner1).normalize()
 
     def __eq__(self, other: Self) -> bool:
-        if self.inner.type_name == other.inner.type_name:
+        if self.inner.type_name == 'Dense' and other.inner.type_name == 'Dense':
+            return self.inner == other.inner
+        if self.inner.type_name == 'Sparse' and other.inner.type_name == 'Sparse':
             return self.inner == other.inner
         inner0 = self.inner if self.inner.type_name == 'Dense' else self.inner.to_dense_vector()
         inner1 = other.inner if other.inner.type_name == 'Dense' else other.inner.to_dense_vector()

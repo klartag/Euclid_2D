@@ -3,6 +3,8 @@ from fractions import Fraction
 
 from ...permutations import try_match_permutation
 
+from ...predicates.predicate import Predicate
+
 from ...embeddings.embedding import Embedding
 from ...embeddings.embedded_objects.scalar import EmbeddedScalar
 
@@ -12,8 +14,9 @@ from ...geometry_objects.equation_object import EquationObject
 from ...geometry_objects.geo_object import GeoObject
 
 from ...linear_algebra.matrix import Matrix
-from ...linear_algebra.vectors.augmented_vector import AugmentedVector
+from ...linear_algebra.vectors.augmented_vectors.augmented_vector_2 import AugmentedVector2
 from ...linear_algebra.vectors.sparse_vector import SparseVector
+from ...linear_algebra.vectors.constant_vector import ConstantVector
 
 from .linear_expression import LinearExpression
 
@@ -23,12 +26,15 @@ class LinearAlgebraTracker:
 
     _keys: List[GeoObject]
     _reverse_keys: Dict[GeoObject, int]
+    
+    predicates: list[Predicate]
 
     def __init__(self):
         self.matrix = Matrix(SparseVector, 0)
         self._keys = []
         self._reverse_keys = {}
         self._add_key(ONE)
+        self.predicates = []
 
     def _add_key(self, key: GeoObject):
         self._reverse_keys[key] = len(self._keys)
@@ -38,7 +44,7 @@ class LinearAlgebraTracker:
     def contains_key(self, key: GeoObject):
         return key in self._reverse_keys
 
-    def add_relation(self, linear_expression: LinearExpression, value: int | Fraction, embedding: Embedding):
+    def add_relation(self, linear_expression: LinearExpression, value: int | Fraction, embedding: Embedding, predicate: Optional[Predicate]):
         '''
         TODO: The `embedding` parameter is not required,
         but we will keep it here *for now* because it allows us to raise an error whenever we add an incorrect relation.
@@ -68,17 +74,18 @@ class LinearAlgebraTracker:
 
         self.cached_sparse_combinations = None
 
-        self.matrix.add_row(
-            AugmentedVector(
+        if self.matrix.add_row(
+            AugmentedVector2(
                 SparseVector(
                     {self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length
                 ),
-                value,
+                ConstantVector(value),
             )
-        )
+        ) is not None and predicate is not None:
+            self.predicates.append(predicate)
 
     def add_relation_mod(
-        self, linear_expression: LinearExpression, value: int | Fraction, modulus: int, embedding: Embedding
+        self, linear_expression: LinearExpression, value: int | Fraction, modulus: int, embedding: Embedding, predicate: Optional[Predicate]
     ):
         value = Fraction(value)
 
@@ -92,7 +99,13 @@ class LinearAlgebraTracker:
 
         value += Fraction(round((scalar.value - value) / modulus) * modulus)
 
-        self.add_relation(linear_expression, value, embedding)
+        self.add_relation(linear_expression, value, embedding, predicate)
+
+    def explain_relation(self, linear_expression: LinearExpression) -> List[Predicate]:
+        row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items() if v != 0}, self.matrix.row_length)
+        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
+        predicate_indices = [i for i in range(len(projected_row.inner2)) if projected_row.inner2[i] != 0]
+        return [self.predicates[i] for i in predicate_indices]
 
     def try_evaluate(self, linear_expression: LinearExpression, embedding: Embedding) -> Optional[Fraction]:
         linear_expression = LinearExpression({k: v for (k, v) in linear_expression.items() if v != 0})
@@ -105,11 +118,11 @@ class LinearAlgebraTracker:
             return None
 
         row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items()}, self.matrix.row_length)
-        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector(row, Fraction(0)))
+        projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
 
-        if projected_row.vector.first_nonzero_index() is not None:
+        if projected_row.inner0.first_nonzero_index() is not None:
             return None
-        return automatic_residue - projected_row.constant
+        return automatic_residue - projected_row.inner1.inner
 
     def evaluate_automatic_part_of_expression(
         self, linear_expression: LinearExpression, embedding: Embedding
