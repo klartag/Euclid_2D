@@ -1,8 +1,11 @@
 from typing import List, TypeVar, Generic
-from .vectors.abstract_vector import AbstractVector
-from fractions import Fraction
+
+import itertools
 from collections import defaultdict
-from itertools import product
+
+from fractions import Fraction
+
+from .vectors.abstract_vector import AbstractVector
 from .vectors.sparse_vector import SparseVector
 from .vectors.augmented_vector import AugmentedVector
 
@@ -78,12 +81,11 @@ class Matrix(Generic[A]):
         coefficients = [Fraction(f) for f in factors]
 
         # --- Precompute P_i = projection of basis column i (vector part only) ---
-        P: list[SparseVector] = []
+        basis_projection: list[A] = []
         for i in range(self.row_length):
             basis = AugmentedVector(SparseVector({i: 1}, self.row_length), Fraction(0))
             proj = self.project_to_orthogonal_complement(basis).vector
-            # proj is a SparseVector
-            P.append(proj)
+            basis_projection.append(proj)
 
         # --- Local helpers  ---
         def sig(v: SparseVector) -> tuple[tuple[int, Fraction], ...]:
@@ -100,29 +102,19 @@ class Matrix(Generic[A]):
             (this implies within-block distinctness).
             Returns: signature -> list of index tuples (in block order).
             """
-            if not block_coeffs:
-                return {(): [()]}
+            if len(block_coeffs) == 0:
+                return { (): [()] }
             out: dict[tuple, list[tuple[int, ...]]] = defaultdict(list)
-            n = self.row_length
 
-            for idxs in product(range(n), repeat=len(block_coeffs)):
-                # STRICTLY INCREASING across the whole block
-                ok = True
-                for a, b in zip(idxs, idxs[1:]):
-                    if not (a < b):
-                        ok = False
-                        break
-                if not ok:
-                    continue
-
+            for indices in itertools.combinations_with_replacement(range(self.row_length), len(block_coeffs)):
                 v = SparseVector({}, self.row_length)
-                for c, idx in zip(block_coeffs, idxs):
-                    v = v + (P[idx] * c)
-                out[sig(v)].append(tuple(idxs))
+                for c, idx in zip(block_coeffs, indices):
+                    v = v + (basis_projection[idx] * c)
+                out[sig(v)].append(tuple(indices))
             return out
 
         # --- Meet-in-the-middle join ---
-        k = j // 2
+        k = len(factors) // 2
         left_coeffs = coefficients[:k]
         right_coeffs = coefficients[k:]
 
