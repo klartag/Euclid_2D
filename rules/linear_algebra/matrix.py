@@ -97,10 +97,8 @@ class Matrix(Generic[A]):
 
         def enumerate_block(block_coeffs: list[Fraction], should_negate_signature: bool) -> dict[tuple, list[tuple[int, ...]]]:
             """
-            Enumerate weighted sums for a contiguous block of coefficients,
-            keeping only index-tuples that are strictly increasing across the block
-            (this implies within-block distinctness).
-            Returns: signature -> list of index tuples (in block order).
+            Enumerate weighted sums for a contiguous block of coefficients.
+            Returns: signature -> list of index tuples (in the order given by `block_coeffs`)
             """
             if len(block_coeffs) == 0:
                 return { (): [()] }
@@ -109,46 +107,29 @@ class Matrix(Generic[A]):
             for indices in itertools.combinations_with_replacement(range(self.row_length), len(block_coeffs)):
                 v = SparseVector({}, self.row_length)
                 for c, idx in zip(block_coeffs, indices):
-                    if should_negate_signature:
-                        v -= (basis_projection[idx] * c)
-                    else:
-                        v += (basis_projection[idx] * c)
+                    v += (basis_projection[idx] * c)
+                if should_negate_signature:
+                    v *= Fraction(-1)
                 out[sig(v)].append(tuple(indices))
             return out
 
-        # --- Meet-in-the-middle join ---
+        # Splitting the coefficients into two:
         k = len(factors) // 2
         left_coefficients = coefficients[:k]
         right_coefficients = coefficients[k:]
 
-        left_map = enumerate_block(left_coefficients, False)
         right_map = enumerate_block(right_coefficients, True)
+        left_map = enumerate_block(left_coefficients, False)
 
         # Join and build results in original order (left part then right part)
         results_set: list[list[int]] = []
-        if len(left_coefficients) == 0:
-            # whole thing on the right; nothing to join
-            for signature, right_lists in right_map.items():
-                if signature == ():
-                    for r in right_lists:
-                        results_set.append(list(r))
-        elif len(right_coefficients) == 0:
-            for signature, left_lists in left_map.items():
-                if signature == ():
-                    for l in left_lists:
-                        results_set.append(list(l))
-        else:
-            for signature, left_lists in left_map.items():
-                right_lists = right_map.get(signature)
-                if not right_lists:
-                    continue
-                for l in left_lists:
-                    for r in right_lists:
-                        # STRICT GLOBAL ORDER: all l’s then all r’s must be increasing
-                        if l and r and not (l[-1] < r[0]):
-                            continue
-                        results_set.append(list(l + r))
-
+        for signature, left_lists in left_map.items():
+            right_lists = right_map.get(signature)
+            if right_lists is None:
+                continue
+            for l in left_lists:
+                for r in right_lists:
+                    results_set.append(list(l + r))
         return results_set
 
     def __str__(self) -> str:
