@@ -70,28 +70,22 @@ class Matrix(Generic[A]):
         (ignore constants).
         """
 
-        j = len(factors)
-        if not (1 <= j <= 4):
-            return []
-        if any(f == 0 for f in factors):
-            # Avoid degenerate blowups when a factor is zero.
-            return []
+        if not 1 <= len(factors) <= 4:
+            raise Exception("Cannot search linear combinations when the combination requires more than 4 factors.")
+        if 0 in factors:
+            raise Exception("Cannot search linear combinations when one of the factors is zero.")
 
-        coeffs = [Fraction(f) for f in factors]
-        n = self.row_length
+        coefficients = [Fraction(f) for f in factors]
 
         # --- Precompute P_i = projection of basis column i (vector part only) ---
         P: list[SparseVector] = []
-        for i in range(n):
+        for i in range(self.row_length):
             basis = AugmentedVector(SparseVector({i: 1}, self.row_length), Fraction(0))
             proj = self.project_to_orthogonal_complement(basis).vector
             # proj is a SparseVector
             P.append(proj)
 
         # --- Local helpers  ---
-        def zero_vec() -> SparseVector:
-            return SparseVector({}, self.row_length)
-
         def sig(v: SparseVector) -> tuple[tuple[int, Fraction], ...]:
             """Canonical, hashable signature of a sparse vector."""
             inner = v.inner
@@ -129,8 +123,8 @@ class Matrix(Generic[A]):
 
         # --- Meet-in-the-middle join ---
         k = j // 2
-        left_coeffs = coeffs[:k]
-        right_coeffs = coeffs[k:]
+        left_coeffs = coefficients[:k]
+        right_coeffs = coefficients[k:]
 
         left_map = enumerate_block(left_coeffs)
         # For the right map we store signatures of the NEGATED sum so that
