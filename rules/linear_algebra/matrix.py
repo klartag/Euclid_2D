@@ -87,22 +87,14 @@ class Matrix(Generic[A]):
             proj = self.project_to_orthogonal_complement(basis).vector
             basis_projection.append(proj)
 
-        # --- Local helpers  ---
-        def sig(v: SparseVector) -> tuple[tuple[int, Fraction], ...]:
-            """Canonical, hashable signature of a sparse vector."""
-            inner = v.inner
-            if not inner:
-                return ()
-            return tuple(sorted((k, inner[k]) for k in inner.keys() if inner[k] != 0))
-
-        def enumerate_block(block_coeffs: list[Fraction], should_negate_signature: bool) -> dict[tuple, list[tuple[int, ...]]]:
+        def enumerate_block(block_coeffs: list[Fraction], should_negate_signature: bool) -> dict[int, list[tuple[int, ...]]]:
             """
             Enumerate weighted sums for a contiguous block of coefficients.
             Returns: signature -> list of index tuples (in the order given by `block_coeffs`)
             """
             if len(block_coeffs) == 0:
-                return { (): [()] }
-            out: dict[tuple, list[tuple[int, ...]]] = defaultdict(list)
+                return { hash(SparseVector({}, 0)): [()] }
+            out: dict[int, list[tuple[int, ...]]] = defaultdict(list)
 
             for indices in itertools.combinations_with_replacement(range(self.row_length), len(block_coeffs)):
                 v = SparseVector({}, self.row_length)
@@ -110,7 +102,7 @@ class Matrix(Generic[A]):
                     v += (basis_projection[idx] * c)
                 if should_negate_signature:
                     v *= Fraction(-1)
-                out[sig(v)].append(tuple(indices))
+                out[hash(v)].append(tuple(indices))
             return out
 
         # Splitting the coefficients into two:
@@ -151,6 +143,7 @@ class Matrix(Generic[A]):
         cloned_matrix = Matrix(self.row_length)
         cloned_matrix.diagonal_indices = self.diagonal_indices[:]
         cloned_matrix.rows = self.rows[:]
+        return cloned_matrix
 
     def __repr__(self) -> str:
         return f'Matrix[{', '.join([str(row) for row in self.rows])}]'

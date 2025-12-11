@@ -82,3 +82,6 @@ class DynamicVector(AbstractVector):
 
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return self.inner.taxicab_norm(max_index)
+
+    def __hash__(self) -> int:
+        return hash((self.type_name, self.inner))

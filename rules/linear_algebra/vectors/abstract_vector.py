@@ -48,10 +48,7 @@ class AbstractVector(ABC):
     @abstractmethod
     def count_nonzero_indices(self, max_index: Optional[int] = None) -> int: ...
 
-    @abstractmethod
-    def __str__(self) -> str: ...
-
-    def __bool__(self) -> str:
+    def __bool__(self) -> bool:
         return self.first_nonzero_index() is not None
 
     @abstractmethod
@@ -62,3 +59,6 @@ class AbstractVector(ABC):
 
     @abstractmethod
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction: ...
+
+    @abstractmethod
+    def __hash__(self) -> int: ...

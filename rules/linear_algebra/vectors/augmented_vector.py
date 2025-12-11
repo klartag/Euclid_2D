@@ -68,3 +68,6 @@ class AugmentedVector(Generic[V, C], AbstractVector):
     
     def __str__(self) -> str:
         return f'Augmented[{self.vector} | {self.constant}]'
+
+    def __hash__(self) -> int:
+        return hash((self.type_name, self.vector, self.constant))

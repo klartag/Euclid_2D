@@ -74,3 +74,7 @@ class SparseVector(AbstractVector):
 
     def __str__(self) -> str:
         return f'Sparse[{self.inner}]'
+
+    def __hash__(self) -> int:
+        signature = tuple(sorted((key, self.inner[key]) for key in self.inner.keys() if self.inner[key] != 0))
+        return hash((self.type_name, signature))
