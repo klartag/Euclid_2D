@@ -45,12 +45,11 @@ class DynamicVector(AbstractIterableVector):
 
     def __mul__(self, x: Fraction) -> 'DynamicVector':
         return DynamicVector(self.inner * x)
-    
+
     def __truediv__(self, x: Fraction) -> 'DynamicVector':
         return DynamicVector(self.inner / x)
 
-    def __add__(self, other: Self) -> 'DynamicVector':
-        
+    def __add__(self, other: Self) -> 'DynamicVector':        
         if self.inner.type_name == 'Dense' and other.inner.type_name == 'Dense':
             return DynamicVector(self.inner + other.inner).normalize()
         if self.inner.type_name == 'Sparse' and other.inner.type_name == 'Sparse':
@@ -96,6 +95,13 @@ class DynamicVector(AbstractIterableVector):
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return self.inner.taxicab_norm(max_index)
 
-    @staticmethod
-    def zero(length: int) -> 'DynamicVector':
-        return DynamicVector(SparseVector({}, length))
+    def __hash__(self) -> int:
+        return hash((self.type_name, self.inner))
+
+    @classmethod
+    def create_empty(cls: type[Self], length: int) -> Self:
+        return cls(SparseVector.create_empty(length))
+    
+    @classmethod
+    def create_single(cls: type[Self], index: int, length: int) -> Self:
+        return cls(SparseVector.create_single(index, length))

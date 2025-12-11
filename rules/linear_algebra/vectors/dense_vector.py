@@ -61,6 +61,15 @@ class DenseVector(AbstractIterableVector):
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return sum([abs(x) for x in self.inner[:max_index]], Fraction(0))
 
-    @staticmethod
-    def zero(length: int) -> 'DenseVector':
-        return DenseVector([0] * length)
+    def __hash__(self) -> int:
+        return hash((self.type_name, tuple(self.inner)))
+    
+    @classmethod
+    def create_empty(cls: type[Self], length: int) -> Self:
+        return cls([Fraction(0)] * length)
+
+    @classmethod
+    def create_single(cls: type[Self], index: int, length: int) -> Self:
+        values = [Fraction(0)] * length
+        values[index] = Fraction(1)
+        return cls(values)
