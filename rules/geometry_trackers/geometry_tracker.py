@@ -1,3 +1,4 @@
+from fractions import Fraction
 import heapq
 from typing import Optional
 
@@ -405,7 +406,7 @@ class GeometryTracker:
         # Since one of the old objects will no longer be accessible, we only have to add an equality relation
         # If the old object was tracked in some form.
         if self._linear_algebra.contains_key(a):
-            self._linear_algebra.add_relation(LinearExpression({a: 1, b: -1}), 0, self.embedding_tracker)
+            self._linear_algebra.add_relation(LinearExpression({a: Fraction(1), b: Fraction(-1)}), 0, self.embedding_tracker, None)
 
     def add_equal_object(self, g1: GeoObject, g2: GeoObject):
         """
