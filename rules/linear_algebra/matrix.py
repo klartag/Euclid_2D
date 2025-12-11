@@ -70,8 +70,8 @@ class Matrix(Generic[A]):
         (ignore constants).
         """
 
-        if not 1 <= len(factors) <= 4:
-            raise Exception("Cannot search linear combinations when the combination requires more than 4 factors.")
+        if len(factors) == 0:
+            return [[]]
         if 0 in factors:
             raise Exception("Cannot search linear combinations when one of the factors is zero.")
 
