@@ -1,5 +1,9 @@
-from fractions import Fraction
 from typing import List, Optional, TypeVar, Generic
+
+import itertools
+from collections import defaultdict
+
+from fractions import Fraction
 
 from .vectors.abstract_iterable_vector import AbstractIterableVector
 from .vectors.constant_vector import ConstantVector
@@ -8,14 +12,15 @@ from .vectors.augmented_vectors.augmented_vector_3 import AugmentedVector3
 
 V = TypeVar('V', bound=AbstractIterableVector)
 
+
 class Matrix(Generic[V]):
-    _class: type[V]
+    vector_class: type[V]
     diagonal_indices: List[int]
     rows: List[AugmentedVector3[V, ConstantVector, V]]
     row_length: int
 
-    def __init__(self, inner_class: type[V], row_length: int):
-        self._class = inner_class
+    def __init__(self, vector_class: type[V], row_length: int):
+        self.vector_class = vector_class
         self.diagonal_indices = []
         self.rows = []
         self.row_length = row_length
@@ -26,7 +31,7 @@ class Matrix(Generic[V]):
         self.row_length += amount
 
     def project_to_orthogonal_complement(self, vector: AugmentedVector2[V, ConstantVector]) -> AugmentedVector3[V, ConstantVector, V]:
-        extended_vector: AugmentedVector3[V, ConstantVector, V] = AugmentedVector3(vector.inner0, vector.inner1, self._class.zero(len(self.rows)))
+        extended_vector: AugmentedVector3[V, ConstantVector, V] = AugmentedVector3(vector.inner0, vector.inner1, self.vector_class.create_empty(len(self.rows)))
         for i in range(len(self.rows)):
             if vector.inner0[self.diagonal_indices[i]] != 0:
                 extended_vector -= self.rows[i] * vector.inner0[self.diagonal_indices[i]]
@@ -64,45 +69,72 @@ class Matrix(Generic[V]):
         self.rows.insert(row_index, projected_row)
         return len(self.rows) - 1
 
-    def get_sparse_integer_linear_combinations(
-        self, max_coefficient_count: int, max_coefficient_sum: int
-    ) -> List[AugmentedVector2[V, ConstantVector]]:
-        combinations: List[AugmentedVector2[V, ConstantVector]] = []
-        for row_index in range(len(self.rows)):
-            diagonal_index_start = self.diagonal_indices[row_index]
-            diagonal_index_end = (
-                self.diagonal_indices[row_index + 1] if row_index < len(self.rows) - 1 else self.row_length
-            )
-            new_combinations: List[AugmentedVector2[V, ConstantVector]] = []
+    def get_sparse_integer_linear_combinations(self, factors: List[int]) -> List[List[int]]:
+        """
+        Return all index tuples [i1, ..., ij] (1 <= j <= 4) such that
+            sum_t factors[t] * e_{i_t}  ≡  0  (mod span(self.rows))
+        Equivalence is tested by projecting basis columns with
+        project_to_orthogonal_complement and comparing only the vector part
+        (ignore constants).
+        """
 
-            row = AugmentedVector2(self.rows[row_index].inner0, self.rows[row_index].inner1)
-            if row.inner0.count_nonzero_indices(diagonal_index_end) <= max_coefficient_count:
-                for i in range(max_coefficient_sum // row.inner0.taxicab_norm(diagonal_index_end)):
-                    new_combinations.append(row * Fraction(i + 1))
-            for old_combination in combinations:
-                old_combination -= row * old_combination.inner0[diagonal_index_start]
-                for i in range(-max_coefficient_sum, max_coefficient_sum + 1):
-                    potential_new_combination = old_combination + row * Fraction(i)
-                    if (
-                        potential_new_combination.inner0.count_nonzero_indices(diagonal_index_end) <= max_coefficient_count
-                        and potential_new_combination.inner0.taxicab_norm(diagonal_index_end) <= max_coefficient_sum
-                    ):
-                        new_combinations.append(potential_new_combination)
-            combinations = new_combinations
+        if len(factors) == 0:
+            return [[]]
+        if 0 in factors:
+            raise Exception("Cannot search linear combinations when one of the factors is zero.")
 
-        combinations = [
-            combination
-            for combination in combinations
-            if combination.inner0.count_nonzero_indices() <= max_coefficient_count
-            and combination.inner0.taxicab_norm() <= max_coefficient_sum
-        ]
-        return combinations
+        coefficients = [Fraction(f) for f in factors]
+
+        # --- Precompute P_i = projection of basis column i (vector part only) ---
+        basis_projection: list[V] = []
+        for i in range(self.row_length):
+            basis = AugmentedVector2(self.vector_class.create_single(i, self.row_length), ConstantVector(Fraction(0)))
+            proj = self.project_to_orthogonal_complement(basis).inner0
+            basis_projection.append(proj)
+
+        def enumerate_block(block_coeffs: list[Fraction], should_negate_signature: bool) -> dict[int, list[tuple[int, ...]]]:
+            """
+            Enumerate weighted sums for a contiguous block of coefficients.
+            Returns: signature -> list of index tuples (in the order given by `block_coeffs`)
+            """
+            if len(block_coeffs) == 0:
+                return { hash(self.vector_class.create_empty(0)): [()] }
+            out: dict[int, list[tuple[int, ...]]] = defaultdict(list)
+
+            for indices in itertools.combinations_with_replacement(range(self.row_length), len(block_coeffs)):
+                v = self.vector_class.create_empty(self.row_length)
+                for c, idx in zip(block_coeffs, indices):
+                    v += (basis_projection[idx] * c)
+                if should_negate_signature:
+                    v *= Fraction(-1)
+                out[hash(v)].append(tuple(indices))
+            return out
+
+        # Splitting the coefficients into two:
+        k = len(factors) // 2
+        left_coefficients = coefficients[:k]
+        right_coefficients = coefficients[k:]
+
+        right_map = enumerate_block(right_coefficients, True)
+        left_map = enumerate_block(left_coefficients, False)
+
+        # Join and build results in original order (left part then right part)
+        results_set: list[list[int]] = []
+        for signature, left_lists in left_map.items():
+            right_lists = right_map.get(signature)
+            if right_lists is None:
+                continue
+            for l in left_lists:
+                for r in right_lists:
+                    results_set.append(list(l + r))
+        return results_set
 
     def __str__(self) -> str:
         nonzero_keys = [i for i in range(self.row_length) if any([row.inner0[i] != 0 for row in self.rows])]
         if len(nonzero_keys) == 0:
             return ''
         table = [nonzero_keys + ['.']] + [[row.inner0[i] or '' for i in nonzero_keys] + [row.inner1.inner] for row in self.rows]
+
         table_repr = [[str(cell) for cell in row] for row in table]
         column_lengths = [max([len(row[i]) for row in table_repr]) for i in range(len(table_repr[0]))]
         padded_table_reprs = [
@@ -114,7 +146,7 @@ class Matrix(Generic[V]):
         return '\n'.join(table_row_reprs)
 
     def clone(self) -> 'Matrix[V]':
-        cloned_matrix = Matrix(self._class, self.row_length)
+        cloned_matrix = Matrix(self.vector_class, self.row_length)
         cloned_matrix.diagonal_indices = self.diagonal_indices[:]
         cloned_matrix.rows = self.rows[:]
         return cloned_matrix

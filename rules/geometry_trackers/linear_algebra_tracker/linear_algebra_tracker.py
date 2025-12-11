@@ -28,8 +28,6 @@ class LinearAlgebraTracker:
     keys: IndexedSet[GeoObject]
     predicates: list[Predicate]
 
-    cached_sparse_combinations: Optional[List[LinearExpression]] = None
-
     def __init__(self):
         self.matrix = Matrix(SparseVector, 0)
         self.keys = IndexedSet()
@@ -151,16 +149,8 @@ class LinearAlgebraTracker:
         return False
 
     def get_sparse_integer_linear_combinations(self, factors: List[int]) -> List[List[GeoObject]]:
-        if self.cached_sparse_combinations is None:
-            self.cached_sparse_combinations = self.update_sparse_integer_linear_combinations(4, 4)
-
-        combinations: List[List[GeoObject]] = []
-        for linear_expression in self.cached_sparse_combinations:
-            factor_match = self.try_match_factors(linear_expression, factors)
-            if factor_match is not None:
-                combinations.append(factor_match)
-
-        return combinations
+        matrix_combinations = self.matrix.get_sparse_integer_linear_combinations(factors)
+        return [[self.keys[i] for i in combination] for combination in matrix_combinations]
 
     def try_match_factors(self, linear_expression: LinearExpression, factors: List[int]) -> Optional[List[GeoObject]]:
         if len(linear_expression) != len(factors):
@@ -175,15 +165,6 @@ class LinearAlgebraTracker:
             return None
         
         return [expression_items[i][0] for i in permutation]
-
-
-    def update_sparse_integer_linear_combinations(
-        self, max_coefficient_count: int, max_coefficient_sum: int
-    ) -> List[LinearExpression]:
-        combinations = self.matrix.get_sparse_integer_linear_combinations(max_coefficient_count, max_coefficient_sum)
-        return [
-            LinearExpression({self.keys[k]: v for (k, v) in combination.inner0.inner.items()}) for combination in combinations
-        ]
 
     def clone(self) -> 'LinearAlgebraTracker':
         cloned_tracker = LinearAlgebraTracker()

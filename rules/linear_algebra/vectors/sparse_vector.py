@@ -76,6 +76,17 @@ class SparseVector(AbstractIterableVector):
     def taxicab_norm(self, max_index: Optional[int] = None) -> Fraction:
         return sum([abs(v) for (k, v) in self.inner.items() if max_index is None or k < max_index], Fraction(0))
 
-    @staticmethod
-    def zero(length: int) -> 'SparseVector':
-        return SparseVector({}, length)
+    def __str__(self) -> str:
+        return f'Sparse[{self.inner}]'
+
+    def __hash__(self) -> int:
+        signature = tuple(sorted((key, self.inner[key]) for key in self.inner.keys() if self.inner[key] != 0))
+        return hash((self.type_name, signature))
+
+    @classmethod
+    def create_empty(cls: type[Self], length: int) -> Self:
+        return cls({}, length)
+    
+    @classmethod
+    def create_single(cls: type[Self], index: int, length: int) -> Self:
+        return cls({index: Fraction(1)}, length)

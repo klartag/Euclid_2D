@@ -44,3 +44,9 @@ class AugmentedVector3(Generic[V0, V1, V2], AbstractVector):
 
     def clone(self) -> 'AugmentedVector3[V0, V1, V2]':
         return AugmentedVector3(self.inner0.clone(), self.inner1.clone(), self.inner2.clone())
+    
+    def __str__(self) -> str:
+        return f'Augmented[{self.inner0} | {self.inner1} | {self.inner2}]'
+
+    def __hash__(self) -> int:
+        return hash((self.type_name, self.inner0, self.inner1, self.inner2))
