@@ -133,19 +133,19 @@ class Matrix(Generic[A]):
             right_map[neg_sig].extend(idx_lists)
 
         # Join and build results in original order (left part then right part)
-        results_set: set[tuple[int, ...]] = set()
+        results_set: list[list[int]] = []
         if not left_coeffs:
             # whole thing on the right; nothing to join
             for s, r_lists in right_map.items():
                 if s == ():
                     for r in r_lists:
                         # r already canonical within its block; just accept (no left side)
-                        results_set.add(tuple(r))
+                        results_set.append(list(r))
         elif not right_coeffs:
             for s, l_lists in left_map.items():
                 if s == ():
                     for l in l_lists:
-                        results_set.add(tuple(l))
+                        results_set.append(list(l))
         else:
             for s, l_lists in left_map.items():
                 r_lists = right_map.get(s)
@@ -156,9 +156,9 @@ class Matrix(Generic[A]):
                         # STRICT GLOBAL ORDER: all l’s then all r’s must be increasing
                         if l and r and not (l[-1] < r[0]):
                             continue
-                        results_set.add(tuple(l + r))
+                        results_set.append(list(l + r))
 
-        return [list(t) for t in results_set]
+        return results_set
 
     def __str__(self) -> str:
         nonzero_keys = [i for i in range(self.row_length) if any([row[i] != 0 for row in self.rows])]
