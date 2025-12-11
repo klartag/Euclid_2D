@@ -28,15 +28,15 @@ class InteractivePredicateChecker:
                 if text == 'quit()':
                     break
 
-                if text.lower().startswith('!'):
+                if text.startswith('!'):
                     text = text[1:]
                     obj = self.parse_geometry_object_or_predicate(text)
                     print(self.geometry_tracker.equality_tracker.normalize(obj))
-                elif text.lower().startswith('?'):
+                elif text.startswith('?'):
                     text = text[1:]
                     predicate = self.predicate_parser.try_parse(text)
                     if predicate is None:
-                        raise ValueError("Could not parase predicate")
+                        raise ValueError("Could not parse predicate")
                     factors = get_linear_eqn_factors(predicate)
                     if factors is None:
                         raise ValueError("Invalid factors")
@@ -45,6 +45,23 @@ class InteractivePredicateChecker:
                     if not self.geometry_tracker.contains_predicate(predicate, can_add=False):
                         raise ValueError("Predicate is False.")
                     explanation = self.geometry_tracker._linear_algebra.explain_relation(LinearExpression(factors))
+                    print('\n'.join([str(p) for p in explanation]))
+                elif text.startswith('&'):
+                    text = text[1:]
+                    predicate = self.predicate_parser.try_parse(text)
+                    if predicate is None:
+                        raise ValueError("Could not parse predicate")
+                    if not self.geometry_tracker.contains_predicate(predicate, can_add=False):
+                        raise ValueError("Predicate is False.")
+                    if predicate.name == 'equals':
+                        left, right = predicate.components
+                        if not self.geometry_tracker.equality_tracker.are_congruent(left, right):
+                            raise ValueError("The equality tracker does not know these objects are equal.")
+                        explanation = self.geometry_tracker.equality_tracker.explain(left, right)
+                    else:
+                        if not self.geometry_tracker.equality_tracker.are_congruent(predicate, True):
+                            raise ValueError("The equality tracker does not know this predicate is true.")
+                        explanation = self.geometry_tracker.equality_tracker.explain(predicate, True)
                     print('\n'.join([str(p) for p in explanation]))
                 else:
                     obj = self.parse_geometry_object_or_predicate(text)
