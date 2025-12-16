@@ -96,7 +96,7 @@ class LinearAlgebraTracker:
         self.add_relation(linear_expression, value, embedding, predicate)
 
     def explain_relation(self, linear_expression: LinearExpression) -> List[Predicate]:
-        row = SparseVector({self.keys.index(k): v for (k, v) in linear_expression.items() if v != 0}, self.matrix.row_length)
+        row = SparseVector({self.keys.index(k): v for (k, v) in linear_expression.items() if v != 0 and not LinearAlgebraTracker.is_automatically_evaluated(k)}, self.matrix.row_length)
         projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
         predicate_indices = [i for i in range(len(projected_row.inner2)) if projected_row.inner2[i] != 0]
         return [self.predicates[i] for i in predicate_indices]
