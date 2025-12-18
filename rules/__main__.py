@@ -5,6 +5,7 @@ from .proof_gen.main import validate_main as proof_validator_main, main as proof
 from .trimmers.new_trimmer import main as new_trimmer_main
 from .embeddings.embedder.embedder import main as embedder_main
 from .trimmers.trimmer import main as trimmer_main
+from .trimmers.fast_trimmer.dependency_graph import main as dependency_graph_main
 from .proof_prettifier import main as prettifier_main
 from .predicates.loader.pred_config import load_constructions_and_macros
 
@@ -21,6 +22,7 @@ trim [<args>]           -   Shortens a given proof.
 new_trim [<args>]       -   Shortens a given proof with the new trimmer.
 prettify [<args>]       -   Makes a proof more readable for our neural net.
 interactive [<args>]    -   Loads the proof into an interactive checker.
+dependencies [<args>]   - Calculates the dependency graph of steps in a proof.
 
 Specific arguments for each command are explained when provided with the `-h` flag.
 For instance: `python -m rules prove -h`.
@@ -35,6 +37,7 @@ PROGRAM_LIST = {
     'new_trim': new_trimmer_main,
     'prettify': prettifier_main,
     'interactive': interactive_main,
+    'dependencies': dependency_graph_main
 }
 
 

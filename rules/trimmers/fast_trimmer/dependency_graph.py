@@ -1,12 +1,19 @@
-from rules.geometry_trackers.geometry_tracker import GeometryTracker
+import argparse
+from pathlib import Path
+
+from tqdm import tqdm
+
 from ...theorem import Theorem
 
 from ...geometry_trackers.congruence_closure_tracker.congruence_closure_tracker import CongruenceClosureTracker
 from ...geometry_trackers.linear_algebra_tracker.linear_algebra_tracker import LinearAlgebraTracker
 from ...geometry_trackers.linear_algebra_tracker.linear_expression import LinearExpression
+from ...geometry_trackers.geometry_tracker import GeometryTracker
 
 from ...predicates.predicate import Predicate
 
+from ...proof.document.geometry_document import GeometryDocument
+from ...proof.document.reader.document_reader import DocumentReader
 from ...proof.steps.step import Step
 from ...proof.steps.theorem_step import TheoremStep
 from ...proof.geometry_problem import GeometryProblem
@@ -32,7 +39,7 @@ class DependencyGraph:
         checker.load_proof()
         problem_assumption_geometry_tracker = checker.geometry_tracker.clone()
         dependencies: dict[int, list[int]] = {}
-        for step_index in range(len(self.steps)):
+        for step_index in tqdm(range(len(self.steps))):
             step = self.steps[step_index]
             if isinstance(step, TheoremStep):
                 dependencies[step_index] = self.get_theorem_step_dependencies(problem_assumption_geometry_tracker, checker, step)
@@ -92,3 +99,22 @@ class DependencyGraph:
         print(f">> {predicate}")
         return None
         raise Exception(f"Could not find the predicate {predicate} in the proof steps.")
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Verifies that proofs are correct.')
+    parser.add_argument('path', help='The path of the problem file to verify.', type=Path)
+    args = parser.parse_args()
+
+    document = GeometryDocument.open(args.path)
+    problem = DocumentReader().read(document, read_proof_body=True)
+    graph = DependencyGraph(problem).calculate_dependencies()
+    
+    assert problem.proof is not None
+    
+    step_texts = [f'{f"{i}:":<6}{step.to_language_format()}' for i, step in enumerate(problem.proof.steps)]
+    
+    for i in range(len(problem.proof.steps)):
+        print(step_texts[i])
+        for j in graph.get(i, []):
+            print(f'\t', step_texts[j])
