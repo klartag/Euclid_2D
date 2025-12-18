@@ -97,8 +97,6 @@ class DependencyGraph:
             if isinstance(step, TheoremStep):
                 if predicate in step.result_predicates:
                     return i
-        print(f">> {predicate}")
-        return None
         raise Exception(f"Could not find the predicate {predicate} in the proof steps.")
 
 
