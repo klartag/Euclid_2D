@@ -1,3 +1,5 @@
+import sys
+
 from .parsers.geometry_object_parser.geometry_object_parser import GeometryObjectParser
 from .parsers.predicate_parser.predicate_parser import PredicateParser
 from .proof_checker_utils import get_linear_eqn_factors
@@ -21,10 +23,14 @@ class InteractivePredicateChecker:
     def run(self):
         self.predicate_parser = PredicateParser(self.geometry_tracker.signature)
         self.geometry_object_parser = GeometryObjectParser(self.geometry_tracker.signature)
+        
+        text = ''
 
         while True:
             try:
-                text = input('>> ')
+                if 'debugpy' not in sys.modules:
+                    text = input('>> ')
+
                 if text == 'quit()':
                     break
 

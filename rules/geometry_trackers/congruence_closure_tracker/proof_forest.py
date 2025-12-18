@@ -1,7 +1,9 @@
+import sys
 from typing import Hashable, cast
 from networkx import DiGraph, lowest_common_ancestor
-import matplotlib.pyplot as plt
 import networkx as nx
+if 'debugpy' not in sys.modules:
+    import matplotlib.pyplot as plt
 
 from ...union_find.union_find import UnionFind
 from ...union_find.labelled_union_find import LabelledUnionFind
