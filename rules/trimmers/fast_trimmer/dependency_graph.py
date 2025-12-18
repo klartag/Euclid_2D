@@ -108,13 +108,12 @@ def main():
 
     document = GeometryDocument.open(args.path)
     problem = DocumentReader().read(document, read_proof_body=True)
-    graph = DependencyGraph(problem).calculate_dependencies()
+    graph = DependencyGraph(problem)
+    dependencies = graph.calculate_dependencies()
     
-    assert problem.proof is not None
+    step_texts = [f'{f"{i}:":<6}{step.to_language_format()}' for i, step in enumerate(graph.steps)]
     
-    step_texts = [f'{f"{i}:":<6}{step.to_language_format()}' for i, step in enumerate(problem.proof.steps)]
-    
-    for i in range(len(problem.proof.steps)):
+    for i in range(len(graph.steps)):
         print(step_texts[i])
-        for j in graph.get(i, []):
+        for j in dependencies.get(i, []):
             print(f'\t', step_texts[j])
