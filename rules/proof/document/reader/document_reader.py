@@ -1,5 +1,7 @@
 from typing import Iterable
 
+from ....embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
+
 from ...geometry_problem import GeometryProblem
 
 from ..document_section import DocumentSection
@@ -24,6 +26,12 @@ class DocumentReader:
         proof = proof_reader.read(document.get_section_content(DocumentSection.PROOF)) if read_proof_body else None
         embedding_lines = document.get_section_content(DocumentSection.EMBEDDING)
         embedding = embedding_reader.read(embedding_lines) if len(embedding_lines) > 0 else None
+        
+        if embedding is not None:
+            collector = NonDegeneracyPredicateCollector()
+            non_degenerecy_predicates = collector.collect(statement.assumption_objects, embedding)
+            statement.auxiliary_predicates.extend(non_degenerecy_predicates)
+        
         return GeometryProblem(statement, embedding, proof)
 
     def remove_comments(self, lines: Iterable[str]) -> Iterable[str]:

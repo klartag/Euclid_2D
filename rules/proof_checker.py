@@ -6,7 +6,6 @@ from tqdm import trange
 
 from .geometry_trackers.linear_algebra_tracker.linear_expression import LinearExpression
 
-from .embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
 from .embeddings.embedded_predicate_value import EmbeddedPredicateValue
 
 from .interactive_predicate_checker import InteractivePredicateChecker
@@ -391,10 +390,6 @@ class ProofChecker:
 def check_proof(path: Path, verbose=False, interactive: bool = False):
     document = GeometryDocument.open(path)
     problem = DocumentReader().read(document, read_proof_body=True)
-    if problem.embedding is not None:
-        collector = NonDegeneracyPredicateCollector()
-        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
-        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
     checker = ProofChecker(problem)
     try:
         checker.check(verbose)
@@ -437,11 +432,6 @@ def interactive_main():
 
     document = GeometryDocument.open(args.path)
     problem = DocumentReader().read(document, read_proof_body=True)
-
-    if problem.embedding is not None:
-        collector = NonDegeneracyPredicateCollector()
-        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
-        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
 
     checker = ProofChecker(problem)
     try:

@@ -2,7 +2,6 @@ from pathlib import Path
 import time
 from tqdm import tqdm
 
-from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
 from ..proof.document.document_section import DocumentSection
 from ..proof.document.geometry_document import GeometryDocument
 from ..proof.document.reader.document_reader import DocumentReader
@@ -120,11 +119,6 @@ def main():
 
     document = GeometryDocument.open(args.path)
     problem = DocumentReader().read(document, read_proof_body=True)
-
-    if problem.embedding is not None:
-        collector = NonDegeneracyPredicateCollector()
-        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
-        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
 
     start_time = time.time()
     trimmer = ProofTrimmer(problem)

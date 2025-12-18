@@ -7,7 +7,6 @@ from frozendict import frozendict
 
 from util import BASE_PATH
 
-from ..embeddings.non_degenerecy_predicate_collection.collector import NonDegeneracyPredicateCollector
 from ..interactive_predicate_checker import InteractivePredicateChecker
 from ..predicates.predicate import Predicate
 from ..predicates.global_predicates import get_constructions
@@ -402,11 +401,6 @@ def validate_proof(problem: GeometryProblem):
 
 
 def prove(problem: GeometryProblem, interactive: bool, verbose: bool) -> GeometryProblem:
-    if problem.embedding is not None:
-        collector = NonDegeneracyPredicateCollector()
-        non_degenerecy_predicates = collector.collect(problem.statement.assumption_objects, problem.embedding)
-        problem.statement.auxiliary_predicates.extend(non_degenerecy_predicates)
-
     proof_generator = ProofGenerator(problem, actions_per_step=10000, verbose=verbose)
 
     try:

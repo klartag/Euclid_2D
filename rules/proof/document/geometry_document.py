@@ -13,7 +13,7 @@ class GeometryDocument:
     sections: Dict[DocumentSection, List[str]]
 
     @staticmethod
-    def open(path: str) -> 'GeometryDocument':
+    def open(path: Path) -> 'GeometryDocument':
         full_path = GeometryDocument.get_full_problem_path(path)
         text = open(full_path, 'r').read()
         sections = GeometryDocument.parse_sections(text)
@@ -46,7 +46,7 @@ class GeometryDocument:
         open(self.path, 'w').write(text)
 
     @staticmethod
-    def get_full_problem_path(path_base: str) -> Path:
+    def get_full_problem_path(path_base: Path) -> Path:
         full_path_options = [BASE_PATH / 'rules' / 'proof_samples' / path_base, BASE_PATH / path_base, Path(path_base)]
 
         for path_base in full_path_options:

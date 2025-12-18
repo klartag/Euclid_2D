@@ -3,6 +3,7 @@ from pathlib import Path
 
 from tqdm import tqdm
 
+
 from ...theorem import Theorem
 
 from ...geometry_trackers.congruence_closure_tracker.congruence_closure_tracker import CongruenceClosureTracker
@@ -108,11 +109,12 @@ def main():
 
     document = GeometryDocument.open(args.path)
     problem = DocumentReader().read(document, read_proof_body=True)
+
     graph = DependencyGraph(problem)
     dependencies = graph.calculate_dependencies()
-    
+
     step_texts = [f'{f"{i}:":<6}{step.to_language_format()}' for i, step in enumerate(graph.steps)]
-    
+
     for i in range(len(graph.steps)):
         print(step_texts[i])
         for j in dependencies.get(i, []):
