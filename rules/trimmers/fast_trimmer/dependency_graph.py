@@ -34,13 +34,14 @@ class DependencyGraph:
         assert self.problem.proof is not None
         return self.problem.proof.steps
     
-    def calculate_dependencies(self) -> dict[int, list[int]]:
+    def calculate_dependencies(self, verbose: bool=False) -> dict[int, list[int]]:
         ProofChecker(self.problem).check()
         checker = ProofChecker(self.problem)
         checker.load_proof()
         problem_assumption_geometry_tracker = checker.geometry_tracker.clone()
         dependencies: dict[int, list[int]] = {}
-        for step_index in tqdm(range(len(self.steps))):
+        iterator_wrapper = tqdm if verbose else lambda x: x
+        for step_index in iterator_wrapper(range(len(self.steps))):
             step = self.steps[step_index]
             if isinstance(step, TheoremStep):
                 dependencies[step_index] = self.get_theorem_step_dependencies(problem_assumption_geometry_tracker, checker, step)
@@ -56,11 +57,11 @@ class DependencyGraph:
         for predicate in substituted_predicates:
             if not predicate.is_open():
                 explanation_predicates = list(filter(lambda predicate: not problem_assumption_geometry_tracker.contains_predicate(predicate, can_add=False), self.get_predicate_dependencies(checker, predicate))) 
-                explanation_steps = list(filter(None, [self.get_step_index_from_predicate(predicate) for explanation_predicate in explanation_predicates]))
+                explanation_steps = list(filter(None, [self.get_step_index_from_predicate(explanation_predicate) for explanation_predicate in explanation_predicates]))
                 dependencies.extend(explanation_steps)
         return dependencies
 
-    def get_predicate_dependencies(self, checker: ProofChecker, predicate: Predicate) -> list[Predicate]:
+    def get_predicate_dependencies(self, checker: ProofChecker, predicate: Predicate) -> list[Predicate]:    
         equality_tracker_dependencies = self.get_equality_tracker_dependencies(checker.geometry_tracker.equality_tracker, predicate)
         if equality_tracker_dependencies is not None:
             return equality_tracker_dependencies
@@ -103,13 +104,14 @@ class DependencyGraph:
 def main():
     parser = argparse.ArgumentParser(description='Verifies that proofs are correct.')
     parser.add_argument('path', help='The path of the problem file to verify.', type=Path)
+    parser.add_argument('-v', help='Prints debug information', action='store_true')
     args = parser.parse_args()
 
     document = GeometryDocument.open(args.path)
     problem = DocumentReader().read(document, read_proof_body=True)
 
     graph = DependencyGraph(problem)
-    dependencies = graph.calculate_dependencies()
+    dependencies = graph.calculate_dependencies(verbose=args.v)
 
     step_texts = [f'{f"{i}:":<6}{step.to_language_format()}' for i, step in enumerate(graph.steps)]
 
