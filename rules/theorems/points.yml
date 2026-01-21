@@ -22,3 +22,15 @@ uniqueness_of_collinear_double_distance:
   conclude:
     - C == D
   rank: 3
+
+  midpoint_definition:
+    inputs:
+      - A, B: Point
+    where:
+      - exists(midpoint(A, B))
+    conclude:
+      - between(A, midpoint(A, B), B)
+      - distance(A, midpoint(A, B)) == distance(B, midpoint(A, B))
+      - 2 * distance(A, midpoint(A, B)) == distance(A, B)
+    possible_conclusions:
+      - A != B => distinct(A, midpoint(A, B), B)

@@ -36,8 +36,6 @@ angle:
     - C != B
   construct:
     - a: Angle
-  conclude:
-    - a == direction(B, C) - direction(B, A) mod 360
 
 direction:
   inputs:
@@ -57,8 +55,6 @@ orientation:
     - C != B
   construct:
     - o: Angle
-  conclude:
-    - 2 * o == 180 mod 360
 
 #primitive/ cosmetical - I'm not sure
 radical_axis:
@@ -79,8 +75,6 @@ Line:
     - A != B
   construct:
     - L: Line
-  conclude:
-    - A, B in L
 
 #primitive
 Circle:
@@ -91,8 +85,6 @@ Circle:
     - not_collinear(A, B, C)
   construct:
     - c: Circle
-  conclude:
-    - A, B, C in c
 
 #primitive
 line_intersection:
@@ -103,8 +95,6 @@ line_intersection:
   # Does this cause issues, or is it just okay?
   construct:
     - P: Point
-  conclude:
-    - P in l, m
 
 # primitive
 midpoint:
@@ -113,12 +103,6 @@ midpoint:
   preprocess: symmetric
   construct:
     - O: Point
-  conclude:
-    - between(A, O, B)
-    - distance(A, O) == distance(B, O)
-    - 2 * distance(A, O) == distance(A, B)
-  possible_conclusions:
-    - A != B => distinct(A, O, B)
 
 #primitive
 parallel_line:
@@ -127,9 +111,6 @@ parallel_line:
     - l: Line
   construct:
     - l': Line
-  conclude:
-    - A in l'
-    - parallel(l, l')
 
 # cosmetical
 perpendicular_line:
@@ -138,10 +119,6 @@ perpendicular_line:
     - l: Line
   construct:
     - l': Line
-  conclude:
-  #sufficient
-    - A in l'
-    - perpendicular(l, l')
 
 #cosmetical
 circumcenter:
@@ -152,8 +129,6 @@ circumcenter:
     - not_collinear(A, B, C)
   construct:
     - O: Point
-  conclude:
-    - O == center(Circle(A, B, C))
 
 #primitive
 incircle:
@@ -164,11 +139,6 @@ incircle:
     - not_collinear(A, B, C)
   construct:
     - c: Circle
-  conclude:
-    - tangent(Line(A, B), c)
-    - tangent(Line(B, C), c)
-    - tangent(Line(C, A), c)
-    - incenter(A, B, C) == center(c)
 
 #primitive
 excircle: # excircle correspond to vertex A
@@ -179,11 +149,6 @@ excircle: # excircle correspond to vertex A
     - not_collinear(A, B, C)
   construct:
     - c: Circle
-  conclude:
-    - tangent(Line(A, B), c)
-    - tangent(Line(B, C), c)
-    - tangent(Line(C, A), c)
-    - excenter(A, B, C) == center(c)
 
 line_circle_tangent_point:
   inputs:
@@ -191,16 +156,12 @@ line_circle_tangent_point:
     - c: Circle
   construct:
     - P: Point
-  conclude:
-    - P in l, c
 
 circle_circle_tangent_point:
   inputs:
     - c, d: Circle
   construct:
     - P: Point
-  conclude:
-    - P in c, d
 
 point_circle_tangent_line:
   inputs:
@@ -210,9 +171,6 @@ point_circle_tangent_line:
     - P in c
   construct:
     - l: Line
-  conclude:
-    - P in l
-    - tangent(l, c)
 
 #primitive
 line_circle_other_intersection: # We need one intersection so that the other intersection is known 
@@ -224,8 +182,6 @@ line_circle_other_intersection: # We need one intersection so that the other int
     - P in L, c
   construct:
     - Q: Point
-  conclude:
-    - Q in L, c
 
 #primitive
 circle_circle_other_intersection: # We need one intersection so that the other intersection is known 
@@ -236,8 +192,6 @@ circle_circle_other_intersection: # We need one intersection so that the other i
     - P in c, d
   construct:
     - Q: Point
-  conclude:
-    - Q in c, d
 
 #primitive
 internal_angle_bisector: #bisector trough the point B
@@ -248,8 +202,6 @@ internal_angle_bisector: #bisector trough the point B
     - not_one_of(B, A, C)
   construct:
     - l: Line
-  conclude:
-    - B in l
     
 #primitive
 external_angle_bisector: #bisector trough the point B
@@ -260,8 +212,6 @@ external_angle_bisector: #bisector trough the point B
     - not_one_of(B, A, C)
   construct:
     - l: Line
-  conclude:
-    - B in l
 
 # cosmetical
 median: #line from point A to the midpoint of the segment BC
@@ -272,8 +222,6 @@ median: #line from point A to the midpoint of the segment BC
     - not_collinear(A, B, C)
   construct:
     - l: Line
-  conclude:
-    - l == Line(A, midpoint(B, C))
 
 #cosmetical
 excenter: #the center of the circle whoe's tangent to BC and incribe in between BC, the extension of AB and the extension of AC
@@ -284,9 +232,6 @@ excenter: #the center of the circle whoe's tangent to BC and incribe in between 
     - not_collinear(A, B, C)
   construct:
     - P: Point
-  conclude:
-    - P in external_angle_bisector(A, C, B), external_angle_bisector(A, B, C), internal_angle_bisector(B, A, C)
-    - P == line_intersection(external_angle_bisector(A, C, B), external_angle_bisector(A, B, C))
 
 #cosmetical
 incenter: #the center of the circle inscribe in triangle ABC
@@ -297,9 +242,6 @@ incenter: #the center of the circle inscribe in triangle ABC
     - not_collinear(A, B, C)
   construct:
     - P: Point
-  conclude:
-    - P in internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B), internal_angle_bisector(C, A, B)
-    - P == line_intersection(internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B))
 
 #cosmetical
 centroid: #intersection of the medians in traingle ABC
@@ -318,12 +260,6 @@ projection:
     - l: Line
   construct:
     - Q: Point
-  conclude:
-  #sufficient
-    - Q == line_intersection(perpendicular_line(P, l), l)
-  possible_conclusions:
-    - P not in l => perpendicular_line(P, l) == Line(P, Q)
-    - P in l => P == Q
 
 # cosmetical
 altitude: #altitude from A to BC
@@ -334,9 +270,6 @@ altitude: #altitude from A to BC
     - not_collinear(A, B, C)
   construct:
     - l: Line
-  conclude:
-  #sufficient
-    - l == perpendicular_line(A, Line(B, C))
 
 #cosmetical
 orthocenter: #intersection of the altitudes in traingle ABC
@@ -357,29 +290,6 @@ perpendicular_bisector:
     - A != B
   construct:
     - l: Line
-  conclude:
-  #sufficient
-    - l == perpendicular_line(midpoint(A, B), Line(A, B))
-
-# primitive 
-nine_points_circle:
-  inputs:
-    - A, B, C: Point
-  preprocess: symmetric
-  where:
-    - not_collinear(A, B, C)
-  construct:
-    - c: Circle
-  conclude:
-    - midpoint(A, B) in c
-    - midpoint(B, C) in c
-    - midpoint(C, A) in c
-    - midpoint(A, orthocenter(A, B, C)) in c
-    - midpoint(B, orthocenter(A, B, C)) in c
-    - midpoint(C, orthocenter(A, B, C)) in c
-    - projection(A, Line(B, C)) in c
-    - projection(B, Line(A, C)) in c
-    - projection(C, Line(A, B)) in c
 
 # cosmetical
 isogonal_conjugate:

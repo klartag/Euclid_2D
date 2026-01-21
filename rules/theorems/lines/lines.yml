@@ -11,6 +11,22 @@ line_definition:
     - l == Line(A, B)
   rank: 5
 
+points_on_line:
+  inputs:
+    - A, B: Point
+  where:
+    - exists(Line(A, B))
+  conclude:
+    - A, B in Line(A, B)
+
+line_intersection_is_on_lines:
+  inputs:
+    - l, m: Line
+  where:
+    - exists(line_intersection(l, m))
+  conclude:
+    - line_intersection(l, m) in l, m
+
 line_uniqueness:
   inputs:
     - A, B: Point
@@ -61,3 +77,23 @@ concurrent_sufficient_conditions:
   conclude:
     - concurrent(k, m, l)
   rank: 5
+
+parallel_line_definition:
+  inputs:
+    - A: Point
+    - l: Line
+  where:
+    - exists(parallel_line(A, l))
+  conclude:
+    - A in parallel_line(A, l)
+    - parallel(l, parallel_line(A, l))
+
+perpendicular_line_definition:
+  inputs:
+    - A: Point
+    - l: Line
+  where:
+    - exists(perpendicular_line(A, l))
+  conclude:
+    - A in perpendicular_line(A, l)
+    - perpendicular(l, perpendicular_line(A, l))

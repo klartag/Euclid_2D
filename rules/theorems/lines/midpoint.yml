@@ -9,3 +9,11 @@ midpoint_definition:
   rank: 5
   trivial_if_equal:
     - [A, B]
+
+median_definition: #line from point A to the midpoint of the segment BC
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(median(A, B, C))
+  conclude:
+    - median(A, B, C) == Line(A, midpoint(B, C))

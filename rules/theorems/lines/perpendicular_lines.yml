@@ -57,3 +57,25 @@ projection_definition:
   conclude:
     - A' == projection(A, l)
   rank: 5
+
+projection_of_point_definition:
+  inputs:
+    - P: Point
+    - l: Line
+  where:
+    - exists(projection(P, l))
+  conclude:
+  #sufficient
+    - projection(P, l) == line_intersection(perpendicular_line(P, l), l)
+  possible_conclusions:
+    - P not in l => perpendicular_line(P, l) == Line(P, projection(P, l))
+    - P in l => P == projection(P, l)
+
+altitude_is_perpendicular:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(altitude(A, B, C))
+  conclude:
+  #sufficient
+    - altitude(A, B, C) == perpendicular_line(A, Line(B, C))

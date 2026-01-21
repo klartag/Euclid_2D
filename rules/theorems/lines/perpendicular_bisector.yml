@@ -8,6 +8,15 @@ perpendicular_bisector_definition:
   conclude:
     - l == perpendicular_bisector(A, B)
 
+perpendicular_bisector_is_perpendicular:
+  inputs:
+    - A, B: Point
+  where:
+    - exists(perpendicular_bisector(A, B))
+  conclude:
+  #sufficient
+    - perpendicular_bisector(A, B) == perpendicular_line(midpoint(A, B), Line(A, B))
+
 perpendicular_bisector_properties:
   inputs:
     - A, B: Point
