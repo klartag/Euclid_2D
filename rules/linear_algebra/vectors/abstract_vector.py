@@ -5,15 +5,23 @@ from fractions import Fraction
 
 
 class AbstractVector(ABC):
+    # TODO: Document
+
     @property
     @abstractmethod
-    def type_name(self) -> str: ...
+    def type_name(self) -> str:
+        # TODO: Document
+        ...
 
     @abstractmethod
-    def __mul__(self, x: Fraction) -> Self: ...
+    def __mul__(self, x: Fraction) -> Self:
+        # TODO: Document
+        ...
 
     @abstractmethod
-    def __truediv__(self, x: Fraction) -> Self: ...
+    def __truediv__(self, x: Fraction) -> Self:
+        # TODO: Document
+        ...
 
     @abstractmethod
     def __add__(self, other: Self) -> Self: ...
@@ -28,7 +36,9 @@ class AbstractVector(ABC):
     def __eq__(self, other: Self) -> bool: ...
 
     @abstractmethod
-    def inner_repr(self) -> str: ...
+    def inner_repr(self) -> str:
+        # TODO: Document
+        ...
 
     def __str__(self) -> str:
         return f'{self.type_name}({self.inner_repr()})'

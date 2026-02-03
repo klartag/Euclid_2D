@@ -10,6 +10,8 @@ V2 = TypeVar('V2', bound=AbstractVector)
 
 
 class AugmentedVector3(Generic[V0, V1, V2], AbstractVector):
+    # TODO: Document
+
     type_name: Literal['Augmented3'] = 'Augmented3'
 
     inner0: V0

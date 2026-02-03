@@ -14,6 +14,8 @@ V = TypeVar('V', bound=AbstractIterableVector)
 
 
 class Matrix(Generic[V]):
+    # TODO: Document
+
     vector_class: type[V]
     diagonal_indices: List[int]
     rows: List[AugmentedVector3[V, ConstantVector, V]]
@@ -26,11 +28,13 @@ class Matrix(Generic[V]):
         self.row_length = row_length
 
     def extend_row_length(self, amount: int):
+        # TODO: Document
         for row in self.rows:
             row.inner0.extend_length(amount)
         self.row_length += amount
 
     def project_to_orthogonal_complement(self, vector: AugmentedVector2[V, ConstantVector]) -> AugmentedVector3[V, ConstantVector, V]:
+        # TODO: Document
         extended_vector: AugmentedVector3[V, ConstantVector, V] = AugmentedVector3(vector.inner0, vector.inner1, self.vector_class.create_empty(len(self.rows)))
         for i in range(len(self.rows)):
             if vector.inner0[self.diagonal_indices[i]] != 0:
@@ -38,10 +42,12 @@ class Matrix(Generic[V]):
         return extended_vector
 
     def in_span(self, row: AugmentedVector2[V, ConstantVector]):
+        # TODO: Document
         projected_row = self.project_to_orthogonal_complement(row)
         return projected_row.inner0.first_nonzero_index() is None and not projected_row.inner1
 
     def add_row(self, row: AugmentedVector2[V, ConstantVector]) -> Optional[int]:
+        # TODO: Document
         projected_row = self.project_to_orthogonal_complement(row)
 
         if not projected_row.inner0 and projected_row.inner1:

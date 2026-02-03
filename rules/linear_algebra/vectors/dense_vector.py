@@ -5,6 +5,8 @@ from .abstract_iterable_vector import AbstractIterableVector
 
 
 class DenseVector(AbstractIterableVector):
+    # TODO: Document
+
     type_name: Literal['Dense'] = 'Dense'
 
     inner: list[Fraction]

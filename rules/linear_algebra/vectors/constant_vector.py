@@ -5,6 +5,8 @@ from .abstract_vector import AbstractVector
 
 
 class ConstantVector(AbstractVector):
+    # TODO: Document
+
     type_name: Literal['Constant'] = 'Constant'
 
     inner: Fraction

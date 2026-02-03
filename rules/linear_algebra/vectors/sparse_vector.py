@@ -8,6 +8,8 @@ from .dense_vector import DenseVector
 
 
 class SparseVector(AbstractIterableVector):
+    # TODO: Document
+
     type_name: Literal['Sparse'] = 'Sparse'
 
     inner: dict[int, Fraction]

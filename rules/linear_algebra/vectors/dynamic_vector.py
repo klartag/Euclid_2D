@@ -11,6 +11,8 @@ SPARSE_THRESHOLD = 1 / 20
 
 
 class DynamicVector(AbstractIterableVector):
+    # TODO: Document
+
     type_name: Literal['Dynamic'] = 'Dynamic'
 
     inner: Union[DenseVector, SparseVector]
