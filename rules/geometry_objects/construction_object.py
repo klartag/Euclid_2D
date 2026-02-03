@@ -22,7 +22,7 @@ CONDITION_LABEL = 'where'
 CONSTRUCTION_LABEL = 'construct'
 RESULT_PREDICATE_LABEL = 'conclude'
 POSS_CONCLUSIONS_LABEL = 'possible_conclusions'
-
+# TODO: Document
 
 @dataclass(frozen=True)
 class Construction:

@@ -30,6 +30,7 @@ class LogConstruction(Construction):
 
 
 def as_log_equation(self) -> dict[GeoObject, Fraction] | None:
+    # TODO: Document
     if (val := self.as_literal()) is not None:
         if val <= 0:
             return None

@@ -6,6 +6,7 @@ from .geo_type import GeoType
 
 
 class GeoObject(ABC):
+    # TODO: Document
     __slots__ = 'name', 'type', 'id', 'depth'
     name: str
     type: GeoType
@@ -28,10 +29,14 @@ class GeoObject(ABC):
         ...
 
     @abstractmethod
-    def as_linear_equation(self) -> 'dict[GeoObject, Fraction] | None': ...
+    def as_linear_equation(self) -> 'dict[GeoObject, Fraction] | None':
+        # TODO: Document
+        ...
 
     @abstractmethod
-    def as_literal(self) -> Fraction | None: ...
+    def as_literal(self) -> Fraction | None:
+        # TODO: Document
+        ...
 
     @abstractmethod
     def clone(self) -> 'GeoObject': ...
@@ -58,4 +63,5 @@ class GeoObject(ABC):
         return self.name
 
     def to_language_format(self) -> str:
+        # TODO: Document
         return self.name

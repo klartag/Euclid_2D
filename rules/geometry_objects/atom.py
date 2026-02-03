@@ -6,6 +6,7 @@ from .geo_object import GeoObject
 
 
 class Atom(GeoObject):
+    # TODO: Document
     def __init__(self, name: str, type_: GeoType) -> None:
         self.name = name
         self.type = type_

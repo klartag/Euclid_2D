@@ -2,6 +2,8 @@ from enum import Enum
 
 
 class EqOp(Enum):
+    # TODO: Document
+
     ADD = '+'
     SUB = '-'
     MUL = '*'

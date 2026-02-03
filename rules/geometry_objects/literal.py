@@ -7,9 +7,12 @@ from .geo_object import GeoObject
 
 
 LITERAL_PATTERN = r'(-?\d+(\.\d+)?)'
+# TODO: Document
 
 
 class Literal(GeoObject):
+    # TODO: Document
+
     def __init__(self, name: str | Fraction) -> None:
         self.name = str(name)
         self.type = GeoType.LITERAL
@@ -47,7 +50,7 @@ class Literal(GeoObject):
 
 ONE = Literal('1')
 ZERO = Literal('0')
-
+# TODO: Document
 
 def is_literal(data: str) -> bool:
     """
