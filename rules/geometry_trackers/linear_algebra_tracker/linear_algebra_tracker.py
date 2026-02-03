@@ -22,6 +22,8 @@ from .linear_expression import LinearExpression
 
 
 class LinearAlgebraTracker:
+    # TODO: Document
+
     matrix: Matrix[SparseVector]
 
     _keys: List[GeoObject]
@@ -45,6 +47,7 @@ class LinearAlgebraTracker:
         return key in self._reverse_keys
 
     def add_relation(self, linear_expression: LinearExpression, value: int | Fraction, embedding: Embedding, predicate: Optional[Predicate]):
+        # TODO: Document
         '''
         TODO: The `embedding` parameter is not required,
         but we will keep it here *for now* because it allows us to raise an error whenever we add an incorrect relation.
@@ -87,6 +90,7 @@ class LinearAlgebraTracker:
     def add_relation_mod(
         self, linear_expression: LinearExpression, value: int | Fraction, modulus: int, embedding: Embedding, predicate: Optional[Predicate]
     ):
+        # TODO: Document
         value = Fraction(value)
 
         linear_expression_object = linear_expression.to_equation_object()
@@ -102,12 +106,14 @@ class LinearAlgebraTracker:
         self.add_relation(linear_expression, value, embedding, predicate)
 
     def explain_relation(self, linear_expression: LinearExpression) -> List[Predicate]:
+        # TODO: Document
         row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items() if v != 0}, self.matrix.row_length)
         projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
         predicate_indices = [i for i in range(len(projected_row.inner2)) if projected_row.inner2[i] != 0]
         return [self.predicates[i] for i in predicate_indices]
 
     def try_evaluate(self, linear_expression: LinearExpression, embedding: Embedding) -> Optional[Fraction]:
+        # TODO: Document
         linear_expression = LinearExpression({k: v for (k, v) in linear_expression.items() if v != 0})
 
         (linear_expression, automatic_residue) = self.evaluate_automatic_part_of_expression(
@@ -127,6 +133,7 @@ class LinearAlgebraTracker:
     def evaluate_automatic_part_of_expression(
         self, linear_expression: LinearExpression, embedding: Embedding
     ) -> Tuple[LinearExpression, int]:
+        # TODO: Document
         automatic_part = LinearExpression(
             {k: v for (k, v) in linear_expression.items() if LinearAlgebraTracker.is_automatically_evaluated(k)}
         )
@@ -146,6 +153,7 @@ class LinearAlgebraTracker:
 
     @staticmethod
     def is_automatically_evaluated(obj: GeoObject) -> bool:
+        # TODO: Document
         if isinstance(obj, Literal):
             return True
         if isinstance(obj, ConstructionObject):
@@ -155,10 +163,12 @@ class LinearAlgebraTracker:
         return False
 
     def get_sparse_integer_linear_combinations(self, factors: List[int]) -> List[List[GeoObject]]:
+        # TODO: Document
         matrix_combinations = self.matrix.get_sparse_integer_linear_combinations(factors)
         return [[self._keys[i] for i in combination] for combination in matrix_combinations]
 
     def try_match_factors(self, linear_expression: LinearExpression, factors: List[int]) -> Optional[List[GeoObject]]:
+        # TODO: Document
         if len(linear_expression) != len(factors):
             return None
         expression_items = list(linear_expression.items())

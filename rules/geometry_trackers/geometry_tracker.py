@@ -28,10 +28,6 @@ from ..union_find import UnionFind
 from .linear_algebra_tracker.linear_algebra_tracker import LinearAlgebraTracker
 from .linear_algebra_tracker.linear_expression import LinearExpression
 
-NUMERIC_PRECISION = 1e-3
-"""
-"""
-
 
 def involved_objects(
     obj: Construction | GeoObject | Predicate | Theorem, res: set[GeoObject] | None = None
@@ -99,6 +95,7 @@ class GeometryTracker:
     """
 
     signature: Signature
+    # TODO: Document
     _objects: UnionFind[GeoObject]
     """All legal objects currently used by the proof."""
     _processed_objects: set[GeoObject]
@@ -109,7 +106,7 @@ class GeometryTracker:
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
     _linear_algebra: LinearAlgebraTracker
-
+    # TODO: Document
     embedding_tracker: Optional[Embedding]
     """Tracks 2D embeddings of the geometric configurations."""
 

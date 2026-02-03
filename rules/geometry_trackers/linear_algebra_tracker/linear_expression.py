@@ -10,6 +10,8 @@ from ...geometry_objects.geo_object import GeoObject
 
 
 class LinearExpression:
+    # TODO: Document
+
     inner: Dict[GeoObject, Fraction]
 
     def __init__(self, inner: Dict[GeoObject, Fraction]):
@@ -34,6 +36,7 @@ class LinearExpression:
         return len(self.inner)
 
     def to_equation_object(self) -> EquationObject | Literal:
+        # TODO: Document
         if len(self.inner) == 0:
             return Literal('0')
 
@@ -44,6 +47,7 @@ class LinearExpression:
         return reduce(lambda x, y: EquationObject(x, y, EqOp.ADD), monomials)
 
     def _rational_to_equation_object(self, constant: Fraction) -> EquationObject | Literal:
+        # TODO: Document
         if isinstance(constant, int):
             return Literal(str(constant))
         else:
