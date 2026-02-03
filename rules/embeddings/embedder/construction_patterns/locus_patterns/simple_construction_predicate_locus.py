@@ -12,6 +12,8 @@ from .unpacking_predicate_locus import UnpackingPredicateLocus, unpack_index_opt
 
 @dataclass
 class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
+    # TODO: Document
+
     construction_name: str
     construction_index_options: Union[int, Sequence[int], None]
 
@@ -44,6 +46,7 @@ class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
         construction_object: ConstructionObject,
         construction_index: int
     ) -> Optional[ExtendedGeoObject]:
+        # TODO: Document
         if construction_object.constructor.name != self.construction_name:
             return None
         

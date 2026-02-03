@@ -30,9 +30,12 @@ EMBEDDING_ATTEMPTS = 50
 
 
 class DiagramEmbedder:
+    # TODO: Document
+
     def is_assumption_necessary(
         self, signature: Signature, assumption: Predicate, assumptions: List[Predicate]
     ) -> bool:
+        # TODO: Document
         try:
             assumption_objects = {
                 obj.name: obj for pred in assumptions + [assumption] for obj in pred.involved_objects()
@@ -51,6 +54,7 @@ class DiagramEmbedder:
                 raise
 
     def remove_necessary_assumptions(self, signature: Signature, assumptions: List[Predicate]) -> List[Predicate]:
+        # TODO: Document
         necessary_assumptions = []
         for assumption in assumptions:
             if self.is_assumption_necessary(signature, assumption, necessary_assumptions):
@@ -60,6 +64,7 @@ class DiagramEmbedder:
     def try_sequence_object(
         self, object_: GeoObject, predicates_containing_object: List[Predicate]
     ) -> Optional[EmbeddedConstruction]:
+        # TODO: Document
         for pattern in CONSTRUCTION_PATTERNS:
             try:
                 construction = pattern.match(object_, predicates_containing_object)
@@ -73,6 +78,7 @@ class DiagramEmbedder:
     def sequence_assumptions(
         self, objects: List[GeoObject], predicates: List[Predicate]
     ) -> Optional[List[EmbeddedConstruction]]:
+        # TODO: Document
         predicates = predicates[:]
         constructions: List[EmbeddedConstruction] = []
 
@@ -98,6 +104,7 @@ class DiagramEmbedder:
     def embed_construction_sequence(
         self, constructions: List[EmbeddedConstruction], predicates_by_step: List[List[Predicate]]
     ) -> Iterator[Embedding]:
+        # TODO: Document
         stage = 0
         construction_options: List[List[EmbeddedObject]] = []
         embedding = Embedding()
@@ -134,6 +141,7 @@ class DiagramEmbedder:
                     stage -= 1
 
     def check_predicates(self, embedding: Embedding, predicates: List[Predicate]) -> bool:
+        # TODO: Document
         for pred in predicates:
             if embedding.evaluate_predicate(pred) != EmbeddedPredicateValue.Correct:
                 return False
@@ -141,6 +149,7 @@ class DiagramEmbedder:
             return True
 
     def embed(self, problem: GeometryProblem) -> Optional[Embedding]:
+        # TODO: Document
         objects = list(problem.statement.assumption_objects.values())
         split_predicates = SequencingPreprocessor(SPLITTING_PATTERNS).preprocess_assumptions(
             problem.statement.assumption_predicates

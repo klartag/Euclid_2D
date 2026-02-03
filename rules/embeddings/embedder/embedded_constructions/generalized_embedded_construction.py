@@ -10,9 +10,12 @@ from ...embedder.embedded_geo_objects.embedded_geo_object import ExtendedGeoObje
 from .embedded_construction import EmbeddedConstruction
 
 GeneralizedConstructionMethod =  Callable[[Tuple[EmbeddedObject], Unpack[Tuple[EmbeddedObject, ...]]], Tuple[EmbeddedObject, ...]]
+# TODO: Document
 
 @dataclass
 class GeneralizedEmbeddedConstruction(EmbeddedConstruction):
+    # TODO: Document
+
     construction_method: GeneralizedConstructionMethod
 
     def __init__(self, input_objects: Tuple[ExtendedGeoObject, ...], output_name: str, construction_method: GeneralizedConstructionMethod):

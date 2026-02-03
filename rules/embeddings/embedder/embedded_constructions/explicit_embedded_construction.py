@@ -13,6 +13,8 @@ from .embedded_construction import EmbeddedConstruction
 
 @dataclass
 class ExplicitEmbeddedConstruction(EmbeddedConstruction):
+    # TODO: Document
+
     construction_method: ConstructionMethod
     
     def __init__(self, input_objects: Tuple[ExtendedGeoObject, ...], output_name: str, construction_method: ConstructionMethod):

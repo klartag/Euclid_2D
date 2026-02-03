@@ -19,9 +19,11 @@ SPLITTING_PATTERNS: List[PredicatePreprocessingPattern] = [
     ParallelogramSplitter(),
     RectangleSplitter()
 ]
+# TODO: Document
 
 INEQUALITY_REMOVAL_PATTERNS: List[PredicatePreprocessingPattern] = [
     OpenPredicateRemovalPattern(),
     CollinearInequalityRemover(),
     OrientationEqualityRemover()
 ]
+# TODO: Document

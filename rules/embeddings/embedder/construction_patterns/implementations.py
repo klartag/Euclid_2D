@@ -38,3 +38,4 @@ CONSTRUCTION_PATTERNS: List[ConstructionPattern] = [
     ExplicitConstructionPattern(),
     ContainmentPattern(),
 ]
+# TODO: Document

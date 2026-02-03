@@ -9,6 +9,7 @@ from .concyclic import concyclic
 
 
 def trapezoid(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint) -> bool:
+    # TODO: Document
     if collinear(point0, point1, point2):
         return False
 
@@ -24,10 +25,12 @@ def trapezoid(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoin
 def isosceles_trapezoid(
     point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint
 ) -> bool:
+    # TODO: Document
     return trapezoid(point0, point1, point2, point3) and concyclic(point0, point1, point2, point3)
 
 
 def parallelogram(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint) -> bool:
+    # TODO: Document
     if collinear(point0, point1, point2):
         return False
 
@@ -43,6 +46,7 @@ def parallelogram(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: Embedded
 
 
 def rhombus(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint) -> bool:
+    # TODO: Document
     perpendicular_bisector02 = perpendicular_bisector(point0, point2)
     perpendicular_bisector13 = perpendicular_bisector(point1, point3)
 
@@ -56,6 +60,7 @@ def rhombus(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint,
 
 
 def rectangle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint) -> bool:
+    # TODO: Document
     line01 = line(point0, point1)
     line12 = line(point1, point2)
     if line01 is None or line12 is None:
@@ -65,4 +70,5 @@ def rectangle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoin
 
 
 def square(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint) -> bool:
+    # TODO: Document
     return rectangle(point0, point1, point2, point3) and rhombus(point0, point1, point2, point3)

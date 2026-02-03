@@ -13,6 +13,8 @@ from .unpacking_predicate_locus import unpack_index_options
 
 @dataclass
 class EqualConstructionsLocus(LocusPattern):
+    # TODO: Document
+
     locus_construction_method: Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], EmbeddedGeoObject]
     first_construction_name: str
     first_construction_index_options: Union[int, Sequence[int], None]
@@ -47,6 +49,7 @@ class EqualConstructionsLocus(LocusPattern):
         rhs: ConstructionObject,
         rhs_index: int
     ) -> Optional[ExtendedGeoObject]:
+        # TODO: Document
         if lhs.constructor.name != self.first_construction_name:
             return None
         

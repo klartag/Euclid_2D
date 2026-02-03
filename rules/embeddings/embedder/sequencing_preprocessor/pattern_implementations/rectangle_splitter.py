@@ -8,6 +8,8 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class RectangleSplitter(PredicatePreprocessingPattern):
+    # TODO: Document
+
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name != 'rectangle':
             return None

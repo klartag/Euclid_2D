@@ -11,6 +11,7 @@ from .equal_constructions_locus import EqualConstructionsLocus
 def construction_generator(
     construction_name: str, parameter_order: Optional[Tuple[int]] = None
 ) -> Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], ExtendedGeoObject]:
+    # TODO: Document
     if parameter_order is None:
         return lambda *args: EmbeddedGeoObject(construction_name, args)
     else:
@@ -58,6 +59,7 @@ LOCUS_PATTERNS: List[LocusPattern] = [
     SimplePredicateConstructionLocus(construction_generator('tangent_line'), 'tangent', None, 'Line', None),
     EqualConstructionsLocus(construction_generator('perpendicular_bisector'), 'distance', None, 'distance', None),
 ]
+# TODO: Document
 
 DUAL_LOCUS_PATTERNS: List[LocusPattern] = [
     SimplePredicateLocus(construction_generator('polar'), 'in', 1),
@@ -65,3 +67,4 @@ DUAL_LOCUS_PATTERNS: List[LocusPattern] = [
         lambda line: EmbeddedGeoObject('line_from_origin', (EmbeddedGeoObject('pole', (line,)),)), 'parallel', None
     ),
 ]
+# TODO: Document

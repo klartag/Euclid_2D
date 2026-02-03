@@ -5,6 +5,7 @@ from .parallels_and_perpendiculars import perpendicular_line
 
 
 def radical_axis(circle0: EmbeddedCircle, circle1: EmbeddedCircle) -> EmbeddedLine:
+	# TODO: Document
     center_line = line(circle0.center, circle1.center)
 
     ratio = (1 + (circle0.radius_squared - circle1.radius_squared) / (circle0.center - circle1.center).length_squared()) / 2

@@ -6,6 +6,7 @@ from .concurrent import concurrent
 
 
 def concyclic(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint) -> bool:
+	# TODO: Document
     if point0.is_equal(point1) or point0.is_equal(point2) or point0.is_equal(point3) \
        or point1.is_equal(point2) or point1.is_equal(point3) or point2.is_equal(point3):
         return True

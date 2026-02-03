@@ -9,6 +9,8 @@ PI = mpf(mp.pi)
 
 
 class EmbeddedObject(ABC):
+    # TODO: Document
+
     @abstractmethod
     def _type(self) -> str: ...
 

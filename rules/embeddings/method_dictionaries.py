@@ -91,13 +91,16 @@ _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ExtendedConstructionMethod] = 
     'radical_axis': radical_axis,
     'radius': radius,
 }
+# TODO: Document
 
 
 CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ConstructionMethod] = {}
+# TODO: Document
 
 CONSTRUCTION_METHOD_DICTIONARY.update(
     {name: normalize_return_type(func) for name, func in _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY.items()}
 )
+# TODO: Document
 
 
 PREDICATE_METHOD_DICTIONARY: Dict[str, PredicateMethod] = {
@@ -137,3 +140,4 @@ PREDICATE_METHOD_DICTIONARY: Dict[str, PredicateMethod] = {
     'trapezoid': trapezoid,
     'triangle': not_collinear,
 }
+# TODO: Document

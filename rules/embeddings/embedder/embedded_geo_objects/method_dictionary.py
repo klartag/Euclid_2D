@@ -19,6 +19,8 @@ from ...constructions.tangent import tangent_line
 
 @dataclass
 class ConstructionData:
+    # TODO: Document
+
     type: str
     method: ConstructionMethod
 
@@ -32,20 +34,24 @@ _EMBEDDED_GEO_OBJECT_POINT_CONSTRUCTIONS: Dict[str, ConstructionMethod] = {
     'rotate_point': rotate_point,
     'pole': pole,
 }
+# TODO: Document
 
 _EMBEDDED_GEO_OBJECT_LINE_CONSTRUCTIONS: Dict[str, ConstructionMethod] = {
     'tangent_line': tangent_line,
     'polar': polar,
     'line_from_origin': line_from_origin,
 }
+# TODO: Document
 
 _EMBEDDED_GEO_OBJECT_CIRCLE_CONSTRUCTIONS: Dict[str, ConstructionMethod] = {
     'circle_from_center_and_point': circle_from_center_and_point,
     'circle_from_center_and_radius': circle_from_center_and_radius,
     'circle_from_two_points_and_angle': circle_from_two_points_and_angle,
 }
+# TODO: Document
 
 EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY: Dict[str, ConstructionData] = {}
+# TODO: Document
 
 EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY.update(
     [
