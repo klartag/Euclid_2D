@@ -12,13 +12,18 @@ from ...geometry_objects.literal import Literal
 
 
 class NonDegeneracyPredicateCollector:
-    # TODO: Document
+    """
+    A class that knows to find the list of true predicates in an embedding that
+    it is allowed to assume without proving.
+    """
 
     def __init__(self):
         pass
 
     def collect(self, assumption_objects: dict[str, GeoObject], embedding: Embedding) -> List[Predicate]:
-        # TODO: Document
+        """
+        Returns the list of all predicates that are allowed to be assumed without proving.
+        """
         triangle_non_degenerecy_predicates = self.collect_triangle_non_degenerecy_predicates(
             assumption_objects, embedding
         )
@@ -28,7 +33,12 @@ class NonDegeneracyPredicateCollector:
     def collect_triangle_non_degenerecy_predicates(
         self, assumption_objects: dict[str, GeoObject], embedding: Embedding
     ) -> List[Predicate]:
-        # TODO: Document
+        """
+        Returns the list of all predicates of the form
+        *   not_collinear(A, B, C)
+        *   orientation(A, B, C) = 90 mod 360
+        *   orientation(A, B, C) = -90 mod 360
+        """
         predicates = []
 
         points = {name: point for (name, point) in embedding.items() if isinstance(point, EmbeddedPoint)}
@@ -69,7 +79,13 @@ class NonDegeneracyPredicateCollector:
     def collect_probably_between_predicates(
         self, assumption_objects: dict[str, GeoObject], embedding: Embedding
     ) -> List[Predicate]:
-        # TODO: Document
+        """
+        For any three points A, B, C that satisfy `between(A, B, C)`,
+        returns the predicate `probably_between(A, B, C)`.
+        
+        The predicate `probably_between(A, B, C)` declares that B is between A and C,
+        but that it is only allowed to be assumed once the predicate `collinear(A, B, C)` has been proved.
+        """
         predicates = []
 
         points = {name: point for (name, point) in embedding.items() if isinstance(point, EmbeddedPoint)}
