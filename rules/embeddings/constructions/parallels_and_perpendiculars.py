@@ -8,16 +8,16 @@ from .line_intersection import line_intersection
 from .line import line
 
 def parallel_line(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedLine:
-	# TODO: Document
+    # TODO: Document
     return EmbeddedLine(point, line.direction)
 
 def perpendicular_line(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedLine:
-	# TODO: Document
+    # TODO: Document
     orthogonal_direction = EmbeddedPoint(line.direction.y, -line.direction.x)
     return EmbeddedLine(point, orthogonal_direction)
 
 def perpendicular_bisector(point0: EmbeddedPoint, point1: EmbeddedPoint) -> EmbeddedLine:
-	# TODO: Document
+    # TODO: Document
     if point0.is_equal(point1):
         raise UndefinedEmbeddingError("Cannot calculate perpendicular bisector of two identical points.")
     midpoint = (point0 + point1).scale(mpf('0.5'))
@@ -26,13 +26,13 @@ def perpendicular_bisector(point0: EmbeddedPoint, point1: EmbeddedPoint) -> Embe
     return EmbeddedLine(midpoint, orthogonal_direction)
 
 def altitude(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedLine:
-	# TODO: Document
+    # TODO: Document
     if collinear(point0, point1, point2):
         raise UndefinedEmbeddingError("Cannot calculate altitude of triangle with collinear vertices.")
     return perpendicular_line(point0, line(point1, point2))
 
 def orthocenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedPoint:
-	# TODO: Document
+    # TODO: Document
     if collinear(point0, point1, point2):
         raise UndefinedEmbeddingError("Cannot calculate orthocenter of triangle with collinear vertices.")
     altitude0 = altitude(point0, point1, point2)

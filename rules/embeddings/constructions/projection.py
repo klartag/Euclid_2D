@@ -4,7 +4,7 @@ from .line_intersection import line_intersection
 
 
 def project(point: EmbeddedPoint, line: EmbeddedLine) -> EmbeddedPoint:
-	# TODO: Document
+    # TODO: Document
     orthogonal_direction = EmbeddedPoint(line.direction.y, -line.direction.x)
     altitude = EmbeddedLine(point, orthogonal_direction)
     return line_intersection(altitude, line)
