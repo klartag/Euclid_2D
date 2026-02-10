@@ -5,9 +5,9 @@ from .point import EmbeddedPoint
 
 
 class EmbeddedCurve(EmbeddedObject):
-    # TODO: Document
+    '''Represents a curve embedded in coordinate space.'''
 
     @abstractmethod
     def contains_point(self, point: EmbeddedPoint) -> bool:
-        # TODO: Document
+        '''Returns whether this curve contains a point.'''
         ...

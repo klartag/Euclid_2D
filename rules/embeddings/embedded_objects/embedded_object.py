@@ -9,7 +9,7 @@ PI = mpf(mp.pi)
 
 
 class EmbeddedObject(ABC):
-    # TODO: Document
+    '''Represents an object embedded in coordinate space.'''
 
     @abstractmethod
     def _type(self) -> str: ...
