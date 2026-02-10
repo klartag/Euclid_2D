@@ -20,7 +20,10 @@ from .undefined_embedding_error import UndefinedEmbeddingError
 
 
 class Embedding:
-    # TODO: Document
+    '''
+    Represents a collection of geometry objects,
+    where each of them are named and embedded in a coordinate plane.
+    '''
     embedding: DefaultDict[str, Optional[EmbeddedObject]]
 
     def __init__(self):
