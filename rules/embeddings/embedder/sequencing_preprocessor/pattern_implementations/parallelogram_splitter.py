@@ -8,7 +8,10 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class ParallelogramSplitter(PredicatePreprocessingPattern):
-    # TODO: Document
+    '''
+    Splits a predicate saying a quadrilateral is a parallelogram,
+    into smaller predicates that together are equivalent.
+    '''
 
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name != 'parallelogram':

@@ -5,7 +5,9 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class OpenPredicateRemovalPattern(PredicatePreprocessingPattern):
-    # TODO: Document
+    '''
+    If a predicate is open, removes it.
+    '''
 
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.is_open():

@@ -7,7 +7,9 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class DistinctPredicateSplitter(PredicatePreprocessingPattern):
-    # TODO: Document
+    '''
+    Splits any `distinct` predicates into a list of `not_equals` predicates.
+    '''
 
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name != 'distinct':
