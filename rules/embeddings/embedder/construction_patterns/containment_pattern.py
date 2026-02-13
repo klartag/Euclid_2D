@@ -24,7 +24,6 @@ from .locus_patterns.implementations import LOCUS_PATTERNS, DUAL_LOCUS_PATTERNS
 
 
 SINGLE_LOCUS_TYPE_PATTERNS = {GeoType.LINE: point_on_line, GeoType.CIRCLE: point_on_circle}
-# TODO: Document
 
 
 LOCUS_INTERSECTION_TYPE_PATTERNS = {
@@ -32,11 +31,16 @@ LOCUS_INTERSECTION_TYPE_PATTERNS = {
     (GeoType.LINE, GeoType.CIRCLE): line_circle_intersection,
     (GeoType.CIRCLE, GeoType.CIRCLE): circle_circle_intersection,
 }
-# TODO: Document
 
 
 def concatenate_polar(func: ConstructionMethod) -> ConstructionMethod:
-    # TODO: Document
+    '''
+    Takes as input a ConstructionMethod that returns Points,
+    and returns a ConstructionMethod that returns Lines.
+    
+    The returned method applies the first method,
+    and then returns the polar of each Point in the result.
+    '''
     def wrapper(*parameters: Tuple[EmbeddedObject, ...]) -> Tuple[EmbeddedObject, ...]:
         construction_result = func(*parameters)
         return tuple([polar(point) for point in construction_result])
@@ -46,7 +50,15 @@ def concatenate_polar(func: ConstructionMethod) -> ConstructionMethod:
 
 
 class ContainmentPattern(ConstructionPattern):
-    # TODO: Document
+    '''
+    A ConstructionPattern that knows how to embed a Point, given a list of curves it is contained inside of.
+    
+    *   If the point is contained in only one curve,
+        uses the mappings in `SINGLE_LOCUS_TYPE_PATTERNS` to take a random sample of a point in the curve.
+    *   If the point is contained in two curves,
+        uses `LOCUS_INTERSECTION_TYPE_PATTERNS` to take the intersection of two curves.    
+    '''
+    # TODO: Document more on how this pattern can also use polarity to find embeddings for Line objects.
     def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[EmbeddedConstruction]:
         if object_.type not in [GeoType.POINT, GeoType.LINE]:
             return None
