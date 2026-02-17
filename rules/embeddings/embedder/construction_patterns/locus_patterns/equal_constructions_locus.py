@@ -13,7 +13,17 @@ from .unpacking_predicate_locus import unpack_index_options
 
 @dataclass
 class EqualConstructionsLocus(LocusPattern):
-    # TODO: Document
+    '''
+    Recognizes locii of the format
+    `f(A0, B0, ...) = g(A1, B1, ...)`
+    where `f` and `g` are two constructions,
+    and the object we are looking for appears precisely as one of the parameters in `f`,
+    and precisely as one of the parameters in `g`.
+
+    For example, instances of this class would know that
+    *   The locus of all points `X` that satisfy `distance(A, X) == distance(B, X)`
+        is the perpendicular bisector of AB.
+    '''
 
     locus_construction_method: Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], EmbeddedGeoObject]
     first_construction_name: str

@@ -1,4 +1,4 @@
-from typing import Callable, List, Optional, Tuple, Unpack
+from typing import Callable, List, Optional, Sequence, Tuple, Unpack
 
 from ...embedded_geo_objects.embedded_geo_object import EmbeddedGeoObject, ExtendedGeoObject
 
@@ -11,14 +11,17 @@ from .equal_constructions_locus import EqualConstructionsLocus
 def construction_generator(
     construction_name: str, parameter_order: Optional[Tuple[int]] = None
 ) -> Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], ExtendedGeoObject]:
-    # TODO: Document
+    '''
+    A method that takes the name of a Construction,
+    and returns a method that can call this construction to create EmbeddedGeoObjects.
+    '''
     if parameter_order is None:
         return lambda *args: EmbeddedGeoObject(construction_name, args)
     else:
         return lambda *args: EmbeddedGeoObject(construction_name, tuple(args[i] for i in parameter_order))
 
 
-LOCUS_PATTERNS: List[LocusPattern] = [
+LOCUS_PATTERNS: Sequence[LocusPattern] = [
     SimplePredicateLocus(lambda locus: locus, 'in', 0),
     SimplePredicateLocus(construction_generator('Line'), 'collinear', None),
     SimplePredicateLocus(construction_generator('Line'), 'between', None),
@@ -59,7 +62,9 @@ LOCUS_PATTERNS: List[LocusPattern] = [
     SimplePredicateConstructionLocus(construction_generator('tangent_line'), 'tangent', None, 'Line', None),
     EqualConstructionsLocus(construction_generator('perpendicular_bisector'), 'distance', None, 'distance', None),
 ]
-# TODO: Document
+'''
+A list of LocusPatterns that each can try match the locus of a point.
+'''
 
 DUAL_LOCUS_PATTERNS: List[LocusPattern] = [
     SimplePredicateLocus(construction_generator('polar'), 'in', 1),
@@ -67,4 +72,9 @@ DUAL_LOCUS_PATTERNS: List[LocusPattern] = [
         lambda line: EmbeddedGeoObject('line_from_origin', (EmbeddedGeoObject('pole', (line,)),)), 'parallel', None
     ),
 ]
-# TODO: Document
+'''
+A list of LocusPatterns that each can try match the locus of a line.
+Since a set of lines cannot easily be described by an ExtendedGeoObject,
+the LocusPattern returns the locus of the *duals* of the lines
+(which is a set of points, and *can* be described by an ExtendedGeoObject).
+'''

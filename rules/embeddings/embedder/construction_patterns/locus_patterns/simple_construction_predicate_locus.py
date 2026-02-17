@@ -12,7 +12,21 @@ from .unpacking_predicate_locus import UnpackingPredicateLocus, unpack_index_opt
 
 @dataclass
 class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
-    # TODO: Document
+    '''
+    Knows to identify locii of objects defined by a predicate,
+    where the object whose locus we are looking for
+    *does not at all appear* in every arguments of the predicate except for one.
+    
+    And that last argument is a `ConstructionObject`, where the object whose locus we are looking for
+    *does not at all appear* in every arguments of the predicate except for one,
+    and is *equal* to that last argument of the predicate.
+    
+    For example, instances of this class would know that
+    *   The locus of all points `X` that satisfy `parallel(l, Line(A, X))`
+        is the line passing through A parallel to l.
+    *   The locus of all points `X` that satisfy `angle(A, X, B) == a mod 360`,
+        is some circle passing through A and B (where the circle depends on the angle `a`).
+    '''
 
     construction_name: str
     construction_index_options: Union[int, Sequence[int], None]
@@ -46,7 +60,21 @@ class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
         construction_object: ConstructionObject,
         construction_index: int
     ) -> Optional[ExtendedGeoObject]:
-        # TODO: Document
+        '''
+        Identical to `match_predicate_parameter_option`, but attempts to match a specific case for the
+        index of the ConstructionObject that `object_` exists in.
+        
+        object_:                        The object whose locus we want to find.
+        rest_of_predicate_components:   The rest of the arguments to the `self.predicate_name` predicate defining the locus.
+        construction_object:            The ConstructionObject in the last argument of the predicate.
+        construction_index:             The index in which we are checking whether `object_` appears in `construction_object`.
+        
+        Returns:                        If there is a match for the pattern, calls `self.locus_construction_method`,
+                                        inputting as parameters
+                                        * The rest of the components in the ConstructionObject
+                                        * The rest of the components in the predicate
+                                        (in that order).
+        '''
         if construction_object.constructor.name != self.construction_name:
             return None
         
