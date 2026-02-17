@@ -56,9 +56,10 @@ class ContainmentPattern(ConstructionPattern):
     *   If the point is contained in only one curve,
         uses the mappings in `SINGLE_LOCUS_TYPE_PATTERNS` to take a random sample of a point in the curve.
     *   If the point is contained in two curves,
-        uses `LOCUS_INTERSECTION_TYPE_PATTERNS` to take the intersection of two curves.    
+        uses `LOCUS_INTERSECTION_TYPE_PATTERNS` to take the intersection of two curves.
+    *   If the object we are attempting to match is a line, concatenates the polar operation to the result
+        of `construction_method`.
     '''
-    # TODO: Document more on how this pattern can also use polarity to find embeddings for Line objects.
     def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[EmbeddedConstruction]:
         if object_.type not in [GeoType.POINT, GeoType.LINE]:
             return None
@@ -92,7 +93,10 @@ class ContainmentPattern(ConstructionPattern):
         return None
 
     def parse_containment_predicate(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]:
-        # TODO: Document
+        '''
+        Attempts to use all existing LocusPatterns (i.e., those in `LOCUS_PATTERNS` and in `DUAL_LOCUS_PATTERNS`)
+        to recognize the locus defining the locations of `object_` such that `predicate` is satisfied.
+        '''
         patterns = []
         if object_.type == GeoType.POINT:
             patterns = LOCUS_PATTERNS
