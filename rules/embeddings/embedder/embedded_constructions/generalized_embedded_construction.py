@@ -14,7 +14,11 @@ GeneralizedConstructionMethod =  Callable[[Tuple[EmbeddedObject], Unpack[Tuple[E
 
 @dataclass
 class GeneralizedEmbeddedConstruction(EmbeddedConstruction):
-    # TODO: Document
+    '''
+    An EmbeddedConstruction where the construction is defined
+    by applying a GeneralizedConstructionMethod.
+    # TODO: Document what that is?
+    '''
 
     construction_method: GeneralizedConstructionMethod
 

@@ -13,7 +13,10 @@ from .embedded_construction import EmbeddedConstruction
 
 @dataclass
 class ExplicitEmbeddedConstruction(EmbeddedConstruction):
-    # TODO: Document
+    '''
+    An EmbeddedConstruction where the construction is defined
+    by applying a ConstructionMethod.
+    '''
 
     construction_method: ConstructionMethod
     

@@ -9,8 +9,9 @@ from ..embedded_constructions.embedded_construction import EmbeddedConstruction
 
 class ConstructionPattern(ABC):
     '''
-    Represents a way in which the embedding of a GeoObject can be constructed,
-    given the embeddings of some other GeoObjects.
+    Represents a pattern that a list of predicates may follow,
+    that can help understand how to construct a GeoObject
+    given the predicates it satisfies.
     '''
 
     @abstractmethod

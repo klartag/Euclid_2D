@@ -59,7 +59,19 @@ class EqualConstructionsLocus(LocusPattern):
         rhs: ConstructionObject,
         rhs_index: int
     ) -> Optional[ExtendedGeoObject]:
-        # TODO: Document
+        '''
+        Identical to `LocusPattern.match`, but does so for a specific set of indices.
+        
+        object_:    The GeoObject we are trying to match.
+        lhs:        The ConstructionObject on the left hand side of the `equals` predicate.
+        lhs_index:  The index in `lhs` in which `object_` should be found.
+        rhs:        The ConstructionObject on the right hand side of the `equals` predicate.
+        rhs_index:  The index in `rhs` in which `object_` should be found.
+        
+        If `object_` exists in the `lhs_index` index of `lhs`, in the `rhs_index` index of `rhs`,
+        and nowhere else,
+        Returns `self.locus_construction_method` applied on the rest of the components of the `lhs` and `rhs`.
+        '''
         if lhs.constructor.name != self.first_construction_name:
             return None
         
