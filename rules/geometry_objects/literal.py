@@ -7,11 +7,14 @@ from .geo_object import GeoObject
 
 
 LITERAL_PATTERN = r'(-?\d+(\.\d+)?)'
-# TODO: Document
+'''
+A regex pattern that can recognize whether the string represents a literal.
+(Recognizes numbers, both positive and negative, and optionally containing a decimal point.)
+'''
 
 
 class Literal(GeoObject):
-    # TODO: Document
+    '''A geometry object who has a constant value depicted in its name.'''
 
     def __init__(self, name: str | Fraction) -> None:
         self.name = str(name)
@@ -50,7 +53,7 @@ class Literal(GeoObject):
 
 ONE = Literal('1')
 ZERO = Literal('0')
-# TODO: Document
+
 
 def is_literal(data: str) -> bool:
     """

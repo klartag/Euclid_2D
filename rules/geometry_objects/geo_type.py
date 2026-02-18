@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class GeoType(Enum):
-    # TODO: Document
+    '''An enum representing the types of objects that might exist in a geometry problem.'''
 
     SCALAR = 'Scalar'
     POINT = 'Point'
@@ -14,8 +14,9 @@ class GeoType(Enum):
 
 
 R_EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE)
-EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE, GeoType.LITERAL, GeoType.ORIENTATION)
 # TODO: Document
+EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE, GeoType.LITERAL, GeoType.ORIENTATION)
+'''The types of objects that can be parameters of an EquationObject.'''
 
 Signature = dict[str, GeoType]
-# TODO: Document
+'''Represents a mapping that describes, for each named object, what its type is.'''

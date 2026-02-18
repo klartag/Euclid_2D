@@ -30,7 +30,13 @@ class LogConstruction(Construction):
 
 
 def as_log_equation(self) -> dict[GeoObject, Fraction] | None:
-    # TODO: Document
+    '''
+    Attempts to create a linear equation, similarly to `GeoObject.as_linear_equation`,
+    but instead of doing it on the value of `self`, does it on the *log* of `self`.
+    
+    self:   A GeometryObject. (directly below this function declaration,
+            this method is injected into `GeoObject` as a class method.)
+    '''
     if (val := self.as_literal()) is not None:
         if val <= 0:
             return None
