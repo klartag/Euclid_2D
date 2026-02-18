@@ -14,7 +14,10 @@ class GeoType(Enum):
 
 
 R_EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE)
-# TODO: Document
+'''
+The types of objects that a `Literal` can be input inside of,
+as an argument for a construction or an arugment for a theorem step.
+'''
 EQN_TYPES = (GeoType.SCALAR, GeoType.ANGLE, GeoType.LITERAL, GeoType.ORIENTATION)
 '''The types of objects that can be parameters of an EquationObject.'''
 
