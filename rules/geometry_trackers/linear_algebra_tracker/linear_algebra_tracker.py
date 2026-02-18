@@ -22,14 +22,26 @@ from .linear_expression import LinearExpression
 
 
 class LinearAlgebraTracker:
-    # TODO: Document
+    '''A class that tracks equalities between linear combinations of scalars.'''
 
     matrix: Matrix[SparseVector]
+    '''
+    A matrix whose rows contain linear combinations that are known to be equal to zero.
+    '''
 
     _keys: List[GeoObject]
+    '''
+    A list of GeoObjects, telling us which objects the columns in `matrix` represent.
+    '''
     _reverse_keys: Dict[GeoObject, int]
+    '''
+    A mapping from a GeoObject to its index in `_keys`.
+    '''
     
     predicates: list[Predicate]
+    '''
+    The list of predicates that the rows of `matrix` represent. 
+    '''
 
     def __init__(self):
         self.matrix = Matrix(SparseVector, 0)
@@ -47,7 +59,12 @@ class LinearAlgebraTracker:
         return key in self._reverse_keys
 
     def add_relation(self, linear_expression: LinearExpression, value: int | Fraction, embedding: Embedding, predicate: Optional[Predicate]):
-        # TODO: Document
+        '''
+        Adds to the tracker the statement that the expression `linear_expression` equals `value`.
+        
+        predicate:      A predicate to tell the tracker which relation this expression represents.
+        '''
+        
         '''
         TODO: The `embedding` parameter is not required,
         but we will keep it here *for now* because it allows us to raise an error whenever we add an incorrect relation.
@@ -90,7 +107,11 @@ class LinearAlgebraTracker:
     def add_relation_mod(
         self, linear_expression: LinearExpression, value: int | Fraction, modulus: int, embedding: Embedding, predicate: Optional[Predicate]
     ):
-        # TODO: Document
+        '''
+        Adds to the tracker the statement that the expression `linear_expression` is equivalent to `value` modulo `modulus`.
+        
+        predicate:      A predicate to tell the tracker which relation this expression represents.
+        '''
         value = Fraction(value)
 
         linear_expression_object = linear_expression.to_equation_object()
@@ -106,14 +127,20 @@ class LinearAlgebraTracker:
         self.add_relation(linear_expression, value, embedding, predicate)
 
     def explain_relation(self, linear_expression: LinearExpression) -> List[Predicate]:
-        # TODO: Document
+        '''
+        Returns a list of predicates that can be used to explain why `linear_expression` is true.
+        '''
         row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items() if v != 0}, self.matrix.row_length)
         projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
         predicate_indices = [i for i in range(len(projected_row.inner2)) if projected_row.inner2[i] != 0]
         return [self.predicates[i] for i in predicate_indices]
 
     def try_evaluate(self, linear_expression: LinearExpression, embedding: Embedding) -> Optional[Fraction]:
-        # TODO: Document
+        '''
+        Attempts to evaluate the value of `linear_expression`.
+        Uses an `embedding` to evaluate parts of the expression that should be evaluated automatically
+        (such as values of Orientations).
+        '''
         linear_expression = LinearExpression({k: v for (k, v) in linear_expression.items() if v != 0})
 
         (linear_expression, automatic_residue) = self.evaluate_automatic_part_of_expression(
