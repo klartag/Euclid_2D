@@ -14,10 +14,18 @@ from .construction_pattern import ConstructionPattern
 
 
 class ReverseContainmentPattern(ConstructionPattern):
-    # TODO: Document
+    '''
+    sA ConstructionPattern that knows how to embed an EmbeddedCurve, given a list of points it contains.
+    '''
 
     contained_point_count: int
+    '''
+    How many points are required to define the curve.
+    '''
     return_type: str
+    '''
+    The GeoType of the curve.
+    '''
     construction_type: Type[EmbeddedConstruction]
     construction_method: ConstructionMethod
 

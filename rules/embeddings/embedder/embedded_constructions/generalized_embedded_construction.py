@@ -9,15 +9,28 @@ from ...embedder.embedded_geo_objects.embedded_geo_object import ExtendedGeoObje
 
 from .embedded_construction import EmbeddedConstruction
 
-GeneralizedConstructionMethod =  Callable[[Tuple[EmbeddedObject], Unpack[Tuple[EmbeddedObject, ...]]], Tuple[EmbeddedObject, ...]]
-# TODO: Document
+GeneralizedConstructionMethod =  Callable[
+    [Tuple[EmbeddedObject], Unpack[Tuple[EmbeddedObject, ...]]],
+    Tuple[EmbeddedObject, ...]
+]
+'''
+A method, where
+*   The first parameter is a tuple of EmbeddedObjects
+    (This will be the list of all of the objects that have already been embedded)
+*   Each of the rest of the parameters is an EmbeddedObject.
+
+This method applies a construction.
+The construction is almost completely defined without the first parameter,
+and the first one is used only in the case that there are some uniqueness constraints:
+E.g., if it is required that the result of the construction is not identical to any already existing object,
+or not too close to any already existing object.
+'''
 
 @dataclass
 class GeneralizedEmbeddedConstruction(EmbeddedConstruction):
     '''
     An EmbeddedConstruction where the construction is defined
     by applying a GeneralizedConstructionMethod.
-    # TODO: Document what that is?
     '''
 
     construction_method: GeneralizedConstructionMethod
