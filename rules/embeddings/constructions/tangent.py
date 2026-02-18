@@ -10,7 +10,10 @@ from .line import line
 
 
 def line_circle_tangent_point(line: EmbeddedLine, circle: EmbeddedCircle) -> EmbeddedPoint:
-    # TODO: Document
+    '''
+    Returns the point of tangency between a line and a circle.
+    (If the given line and circle are not tangent to each other, raises an error.)
+    '''
     projection = project(circle.center, line)
     if not circle.contains_point(projection):
         raise UndefinedEmbeddingError("Cannot calculate tangent point of line not tangent to the circle")
@@ -18,7 +21,10 @@ def line_circle_tangent_point(line: EmbeddedLine, circle: EmbeddedCircle) -> Emb
 
 
 def circle_circle_tangent_point(circle0: EmbeddedCircle, circle1: EmbeddedCircle) -> EmbeddedPoint:
-    # TODO: Document
+    '''
+    Returns the point of tangency between two circles.
+    (If the given circles are not tangent to each other, raises an error.)
+    '''
     center_line = line(circle0.center, circle1.center)
     potential_tangency_candidates = line_circle_intersection(center_line, circle0)
     for candidate in potential_tangency_candidates:
@@ -29,7 +35,10 @@ def circle_circle_tangent_point(circle0: EmbeddedCircle, circle1: EmbeddedCircle
 
 
 def point_circle_tangent_line(point: EmbeddedPoint, circle: EmbeddedCircle) -> EmbeddedLine:
-    # TODO: Document
+    '''
+    Returns the line tangent to a circle at a given point.
+    (If the given point does not lie on the circle, raises an error.)
+    '''
     if not circle.contains_point(point):
         raise UndefinedEmbeddingError("Cannot calculate tangent line from point not on the circle")
     center_line = line(point, circle.center)
@@ -37,7 +46,10 @@ def point_circle_tangent_line(point: EmbeddedPoint, circle: EmbeddedCircle) -> E
 
 
 def tangent_line(point: EmbeddedPoint, circle: EmbeddedCircle) -> Tuple[EmbeddedLine]:
-    # TODO: Document
+    '''
+    Returns all tangent lines to a circle that pass through a given point.
+    (The point need not necessarily lie on the circle.)
+    '''
     power_of_a_point = (circle.center - point).length_squared() - circle.radius_squared
     if abs(power_of_a_point) < EPSILON**2:
         return (point_circle_tangent_line(point, circle),)
