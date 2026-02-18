@@ -7,12 +7,15 @@ from ..predicates.collinear import collinear
 from .line import line
 
 def midpoint(point0: EmbeddedPoint, point1: EmbeddedPoint) -> EmbeddedPoint:
-    # TODO: Document
+    '''Returns the midpoint of two points.'''
     return (point0 + point1).scale(mpf('0.5'))
 
 
 def median(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedLine:
-    '''Returns the midpoint of two points.'''
+    '''
+    Returns the median of a triangle defined by three points.
+    The median picked is the one passing through `point0`.
+    '''
     if collinear(point0, point1, point2):
         raise UndefinedEmbeddingError("Cannot calculate median of triangle with collinear vertices.")
     return line(point0, midpoint(point1, point2))

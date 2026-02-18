@@ -9,12 +9,24 @@ from .new_object import new_point
 from .projection import project
 
 def line_on_point(objects: Sequence[EmbeddedObject], point: EmbeddedPoint) -> Tuple[EmbeddedLine]:
-    # TODO: Document
+    '''
+    Returns a variety of lines passing through a given point.
+    
+    objects:    The list of objects embedded so far.
+                (Used to heurisitcally decide which variety of lines to give.)
+    point:      The point the lines must pass through.
+    '''
     # TODO: Return multiple lines dep. on which lines already exist through the point.
     return (EmbeddedLine(point, new_point()),)
 
 def point_on_circle(objects: Sequence[EmbeddedObject], circle: EmbeddedCircle) -> Tuple[EmbeddedPoint]:
-    # TODO: Document
+    '''
+    Returns a variety of poitns passing through a given circle.
+    
+    objects:    The list of objects embedded so far.
+                (Used to heurisitcally decide which variety of points to give.)
+    circle:     The circle the points must be on.
+    '''
     points = [point for point in objects if isinstance(point, EmbeddedPoint)]
     points_on_circle = [point for point in points if circle.contains_point(point)]
 
@@ -40,7 +52,13 @@ def point_on_circle(objects: Sequence[EmbeddedObject], circle: EmbeddedCircle) -
     return tuple([circle.center + EmbeddedPoint(mp.cos(angle), mp.sin(angle)).scale(circle.radius_squared ** 0.5) for angle in result_angles])
 
 def point_on_line(objects: Sequence[EmbeddedObject], line: EmbeddedLine) -> Tuple[EmbeddedPoint]:
-    # TODO: Document
+    '''
+    Returns a variety of poitns passing through a given circle.
+    
+    objects:    The list of objects embedded so far.
+                (Used to heurisitcally decide which variety of points to give.)
+    line:       The line the points must be on.
+    '''
     points = [point for point in objects if isinstance(point, EmbeddedPoint)] \
         + [project(circle.center, line) for circle in objects if isinstance(circle, EmbeddedCircle) and tangent(line, circle)]
     

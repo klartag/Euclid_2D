@@ -8,7 +8,7 @@ from .line import line
 
 
 def circumcenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedPoint:
-    # TODO: Document
+    '''Returns the center of the circle passing through three points.'''
     if point0.is_equal(point1) or point0.is_equal(point2) or point1.is_equal(point2):
         raise UndefinedEmbeddingError("Cannot calculate circumcenter when some of the points are identical.")
 
