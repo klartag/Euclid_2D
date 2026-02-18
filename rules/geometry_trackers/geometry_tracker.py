@@ -95,7 +95,7 @@ class GeometryTracker:
     """
 
     signature: Signature
-    # TODO: Document
+    """A mapping from the names of named objects, to their types."""
     _objects: UnionFind[GeoObject]
     """All legal objects currently used by the proof."""
     _processed_objects: set[GeoObject]
@@ -106,7 +106,7 @@ class GeometryTracker:
     _asserted_predicates: set[Predicate]
     """The predicates added by assert steps. These are used as markers, and are not substituted by other actions."""
     _linear_algebra: LinearAlgebraTracker
-    # TODO: Document
+    """Tracks the truth values of equalities between linear combinations of scalars."""
     embedding_tracker: Optional[Embedding]
     """Tracks 2D embeddings of the geometric configurations."""
 
