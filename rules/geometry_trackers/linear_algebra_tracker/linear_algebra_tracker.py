@@ -160,7 +160,15 @@ class LinearAlgebraTracker:
     def evaluate_automatic_part_of_expression(
         self, linear_expression: LinearExpression, embedding: Embedding
     ) -> Tuple[LinearExpression, int]:
-        # TODO: Document
+        '''
+        Uses an embedding to evaluate the part of a linear expression that is allowed to be automatically evaluated.
+        See `LinearAlgebraTracker.is_automatically_evaluated` for more info on what this means.
+        
+        Returns a tuple, where
+        *   The first value in the tuple is what is left of the LinearExpression after removing the automatically evaluated bits.
+        *   The second value in the tuple is the evaluated value of the automatically evaluated part of the expression.
+            (Assumes the automatically evaluted part is be an integer, and fails to run otherwise.)
+        '''
         automatic_part = LinearExpression(
             {k: v for (k, v) in linear_expression.items() if LinearAlgebraTracker.is_automatically_evaluated(k)}
         )
@@ -180,7 +188,18 @@ class LinearAlgebraTracker:
 
     @staticmethod
     def is_automatically_evaluated(obj: GeoObject) -> bool:
-        # TODO: Document
+        '''
+        Some GeoObjects do not need their own columns in the matrix of a LinearAlgebraTracker,
+        and rather, can be automaticaly evaluated by an Embedding, because it is assumed that the value is known
+        (and there is no need to prove that the value is known).
+        
+        This method returns whether a GeoObject is one of those.
+        
+        This happens in three cases:
+        1.  If a GeoObject is a literal.
+        2.  If a GeoObject is an `orientation` of three points.
+        3.  If a GeoObject is an EquationObject that combines other GeoObjects that can be automatically evaluated.
+        '''
         if isinstance(obj, Literal):
             return True
         if isinstance(obj, ConstructionObject):
@@ -190,12 +209,20 @@ class LinearAlgebraTracker:
         return False
 
     def get_sparse_integer_linear_combinations(self, factors: List[int]) -> List[List[GeoObject]]:
-        # TODO: Document
+        '''
+        Given a list of factors `factors = [f_1, f_2, f_3, ..., f_k]`,
+        returns all tuple of GeoObjects [`o_1, o_2, o_3, ..., o_k`],
+        such that it follows from the matrix in the LinearAlgebraTracker that
+        `f_1 * o_1 + f_2 * o_2 + f_3 * o_3 + ... + f_k * o_k = 0`.
+        '''
         matrix_combinations = self.matrix.get_sparse_integer_linear_combinations(factors)
         return [[self._keys[i] for i in combination] for combination in matrix_combinations]
 
     def try_match_factors(self, linear_expression: LinearExpression, factors: List[int]) -> Optional[List[GeoObject]]:
-        # TODO: Document
+        '''
+        Checks whether the scalar coefficients in a LinearExpression matches a list of given factors, up to some permutation.
+        If they do, returns the GeoObjects in the LinearExpression in an order so that their coefficients match the order in `factors`. 
+        '''
         if len(linear_expression) != len(factors):
             return None
         expression_items = list(linear_expression.items())
