@@ -20,10 +20,10 @@ from .undefined_embedding_error import UndefinedEmbeddingError
 
 
 class Embedding:
-    '''
+    """
     Represents a collection of geometry objects,
     where each of them are named and embedded in a coordinate plane.
-    '''
+    """
     embedding: DefaultDict[str, Optional[EmbeddedObject]]
 
     def __init__(self):
@@ -60,7 +60,7 @@ class Embedding:
         return copied_embedding
 
     def evaluate_object(self, obj: ExtendedGeoObject) -> Tuple[EmbeddedObject, ...]:
-        '''Calculates where a given GeoObject would appear in this embedding.'''
+        """Calculates where a given GeoObject would appear in this embedding."""
         if isinstance(obj, EmbeddedGeoObject):
             return self.evaluate_embedded_geo_object(obj)
         elif obj.name in self.embedding:
@@ -137,7 +137,7 @@ class Embedding:
         return tuple(results)
 
     def evaluate_predicate(self, predicate: Predicate) -> EmbeddedPredicateValue:
-        '''Evaluates whether a predicate is true or not according to this embedding.'''
+        """Evaluates whether a predicate is true or not according to this embedding."""
         if predicate.name in PREDICATE_METHOD_DICTIONARY:
             predicate_method = PREDICATE_METHOD_DICTIONARY[predicate.name]
             embedded_parameter_options: List[Tuple[EmbeddedObject, ...]] = []

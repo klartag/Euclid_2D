@@ -22,26 +22,26 @@ from .linear_expression import LinearExpression
 
 
 class LinearAlgebraTracker:
-    '''A class that tracks equalities between linear combinations of scalars.'''
+    """A class that tracks equalities between linear combinations of scalars."""
 
     matrix: Matrix[SparseVector]
-    '''
+    """
     A matrix whose rows contain linear combinations that are known to be equal to zero.
-    '''
+    """
 
     _keys: List[GeoObject]
-    '''
+    """
     A list of GeoObjects, telling us which objects the columns in `matrix` represent.
-    '''
+    """
     _reverse_keys: Dict[GeoObject, int]
-    '''
+    """
     A mapping from a GeoObject to its index in `_keys`.
-    '''
+    """
     
     predicates: list[Predicate]
-    '''
+    """
     The list of predicates that the rows of `matrix` represent. 
-    '''
+    """
 
     def __init__(self):
         self.matrix = Matrix(SparseVector, 0)
@@ -59,16 +59,16 @@ class LinearAlgebraTracker:
         return key in self._reverse_keys
 
     def add_relation(self, linear_expression: LinearExpression, value: int | Fraction, embedding: Embedding, predicate: Optional[Predicate]):
-        '''
+        """
         Adds to the tracker the statement that the expression `linear_expression` equals `value`.
         
         predicate:      A predicate to tell the tracker which relation this expression represents.
-        '''
+        """
         
-        '''
+        """
         TODO: The `embedding` parameter is not required,
         but we will keep it here *for now* because it allows us to raise an error whenever we add an incorrect relation.
-        '''
+        """
         value = Fraction(value)
 
         for geo_object in linear_expression.inner.keys():
@@ -107,11 +107,11 @@ class LinearAlgebraTracker:
     def add_relation_mod(
         self, linear_expression: LinearExpression, value: int | Fraction, modulus: int, embedding: Embedding, predicate: Optional[Predicate]
     ):
-        '''
+        """
         Adds to the tracker the statement that the expression `linear_expression` is equivalent to `value` modulo `modulus`.
         
         predicate:      A predicate to tell the tracker which relation this expression represents.
-        '''
+        """
         value = Fraction(value)
 
         linear_expression_object = linear_expression.to_equation_object()
@@ -127,20 +127,20 @@ class LinearAlgebraTracker:
         self.add_relation(linear_expression, value, embedding, predicate)
 
     def explain_relation(self, linear_expression: LinearExpression) -> List[Predicate]:
-        '''
+        """
         Returns a list of predicates that can be used to explain why `linear_expression` is true.
-        '''
+        """
         row = SparseVector({self._reverse_keys[k]: v for (k, v) in linear_expression.items() if v != 0}, self.matrix.row_length)
         projected_row = self.matrix.project_to_orthogonal_complement(AugmentedVector2(row, ConstantVector(Fraction(0))))
         predicate_indices = [i for i in range(len(projected_row.inner2)) if projected_row.inner2[i] != 0]
         return [self.predicates[i] for i in predicate_indices]
 
     def try_evaluate(self, linear_expression: LinearExpression, embedding: Embedding) -> Optional[Fraction]:
-        '''
+        """
         Attempts to evaluate the value of `linear_expression`.
         Uses an `embedding` to evaluate parts of the expression that should be evaluated automatically
         (such as values of Orientations).
-        '''
+        """
         linear_expression = LinearExpression({k: v for (k, v) in linear_expression.items() if v != 0})
 
         (linear_expression, automatic_residue) = self.evaluate_automatic_part_of_expression(
@@ -160,7 +160,7 @@ class LinearAlgebraTracker:
     def evaluate_automatic_part_of_expression(
         self, linear_expression: LinearExpression, embedding: Embedding
     ) -> Tuple[LinearExpression, int]:
-        '''
+        """
         Uses an embedding to evaluate the part of a linear expression that is allowed to be automatically evaluated.
         See `LinearAlgebraTracker.is_automatically_evaluated` for more info on what this means.
         
@@ -168,7 +168,7 @@ class LinearAlgebraTracker:
         *   The first value in the tuple is what is left of the LinearExpression after removing the automatically evaluated bits.
         *   The second value in the tuple is the evaluated value of the automatically evaluated part of the expression.
             (Assumes the automatically evaluted part is be an integer, and fails to run otherwise.)
-        '''
+        """
         automatic_part = LinearExpression(
             {k: v for (k, v) in linear_expression.items() if LinearAlgebraTracker.is_automatically_evaluated(k)}
         )
@@ -188,7 +188,7 @@ class LinearAlgebraTracker:
 
     @staticmethod
     def is_automatically_evaluated(obj: GeoObject) -> bool:
-        '''
+        """
         Some GeoObjects do not need their own columns in the matrix of a LinearAlgebraTracker,
         and rather, can be automaticaly evaluated by an Embedding, because it is assumed that the value is known
         (and there is no need to prove that the value is known).
@@ -199,7 +199,7 @@ class LinearAlgebraTracker:
         1.  If a GeoObject is a literal.
         2.  If a GeoObject is an `orientation` of three points.
         3.  If a GeoObject is an EquationObject that combines other GeoObjects that can be automatically evaluated.
-        '''
+        """
         if isinstance(obj, Literal):
             return True
         if isinstance(obj, ConstructionObject):
@@ -209,20 +209,20 @@ class LinearAlgebraTracker:
         return False
 
     def get_sparse_integer_linear_combinations(self, factors: List[int]) -> List[List[GeoObject]]:
-        '''
+        """
         Given a list of factors `factors = [f_1, f_2, f_3, ..., f_k]`,
         returns all tuple of GeoObjects [`o_1, o_2, o_3, ..., o_k`],
         such that it follows from the matrix in the LinearAlgebraTracker that
         `f_1 * o_1 + f_2 * o_2 + f_3 * o_3 + ... + f_k * o_k = 0`.
-        '''
+        """
         matrix_combinations = self.matrix.get_sparse_integer_linear_combinations(factors)
         return [[self._keys[i] for i in combination] for combination in matrix_combinations]
 
     def try_match_factors(self, linear_expression: LinearExpression, factors: List[int]) -> Optional[List[GeoObject]]:
-        '''
+        """
         Checks whether the scalar coefficients in a LinearExpression matches a list of given factors, up to some permutation.
         If they do, returns the GeoObjects in the LinearExpression in an order so that their coefficients match the order in `factors`. 
-        '''
+        """
         if len(linear_expression) != len(factors):
             return None
         expression_items = list(linear_expression.items())

@@ -356,10 +356,10 @@ class ProofChecker:
         self.check_steps(step_count, skim=skim, verbose=verbose)
 
     def check_steps(self, step_count=None, skim=False, verbose=False):
-        '''
+        """
         Checks the next `step_count` steps in the proof that have not yet been checked.
         If `step_count == None`, checks all of the remaining steps in the proof.
-        '''
+        """
         steps_left = len(self.problem.proof.steps) - self.checked_steps
 
         if step_count == None:

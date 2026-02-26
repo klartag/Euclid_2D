@@ -13,7 +13,7 @@ from .unpacking_predicate_locus import unpack_index_options
 
 @dataclass
 class EqualConstructionsLocus(LocusPattern):
-    '''
+    """
     Recognizes locii of the format
     `f(A0, B0, ...) = g(A1, B1, ...)`
     where `f` and `g` are two constructions,
@@ -23,7 +23,7 @@ class EqualConstructionsLocus(LocusPattern):
     For example, instances of this class would know that
     *   The locus of all points `X` that satisfy `distance(A, X) == distance(B, X)`
         is the perpendicular bisector of AB.
-    '''
+    """
 
     locus_construction_method: Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], EmbeddedGeoObject]
     first_construction_name: str
@@ -59,7 +59,7 @@ class EqualConstructionsLocus(LocusPattern):
         rhs: ConstructionObject,
         rhs_index: int
     ) -> Optional[ExtendedGeoObject]:
-        '''
+        """
         Identical to `LocusPattern.match`, but does so for a specific set of indices.
         
         object_:    The GeoObject we are trying to match.
@@ -71,7 +71,7 @@ class EqualConstructionsLocus(LocusPattern):
         If `object_` exists in the `lhs_index` index of `lhs`, in the `rhs_index` index of `rhs`,
         and nowhere else,
         Returns `self.locus_construction_method` applied on the rest of the components of the `lhs` and `rhs`.
-        '''
+        """
         if lhs.constructor.name != self.first_construction_name:
             return None
         

@@ -9,10 +9,10 @@ from .reflection import reflect_point
 
 
 def isogonal_conjugate(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint, point3: EmbeddedPoint) -> EmbeddedPoint:
-    '''
+    """
     Returns the isogonal conjugate of `point3`
     with respect to the triangle defined by `point0`, `point1`, and `point2`.
-    '''
+    """
     if collinear(point1, point2, point3):
         raise UndefinedEmbeddingError("Cannot calculate isogonal conjugate where the triangle's vertices are collinear.")
     if collinear(point0, point1, point2) or collinear(point0, point1, point3) or collinear(point0, point2, point3):

@@ -11,10 +11,10 @@ from .equal_constructions_locus import EqualConstructionsLocus
 def construction_generator(
     construction_name: str, parameter_order: Optional[Tuple[int]] = None
 ) -> Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], ExtendedGeoObject]:
-    '''
+    """
     A method that takes the name of a Construction,
     and returns a method that can call this construction to create EmbeddedGeoObjects.
-    '''
+    """
     if parameter_order is None:
         return lambda *args: EmbeddedGeoObject(construction_name, args)
     else:
@@ -62,9 +62,9 @@ LOCUS_PATTERNS: Sequence[LocusPattern] = [
     SimplePredicateConstructionLocus(construction_generator('tangent_line'), 'tangent', None, 'Line', None),
     EqualConstructionsLocus(construction_generator('perpendicular_bisector'), 'distance', None, 'distance', None),
 ]
-'''
+"""
 A list of LocusPatterns that each can try match the locus of a point.
-'''
+"""
 
 DUAL_LOCUS_PATTERNS: List[LocusPattern] = [
     SimplePredicateLocus(construction_generator('polar'), 'in', 1),
@@ -72,9 +72,9 @@ DUAL_LOCUS_PATTERNS: List[LocusPattern] = [
         lambda line: EmbeddedGeoObject('line_from_origin', (EmbeddedGeoObject('pole', (line,)),)), 'parallel', None
     ),
 ]
-'''
+"""
 A list of LocusPatterns that each can try match the locus of a line.
 Since a set of lines cannot easily be described by an ExtendedGeoObject,
 the LocusPattern returns the locus of the *duals* of the lines
 (which is a set of points, and *can* be described by an ExtendedGeoObject).
-'''
+"""

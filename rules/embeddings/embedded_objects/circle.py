@@ -12,10 +12,10 @@ from .point import EmbeddedPoint
 
 @dataclass
 class EmbeddedCircle(EmbeddedCurve):
-    '''
+    """
     Represents a circle given a center
     and the square of its radius.
-    '''
+    """
 
     center: EmbeddedPoint
     radius_squared: mpf

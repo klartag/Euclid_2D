@@ -6,7 +6,7 @@ from .geo_type import GeoType
 
 
 class GeoObject(ABC):
-    '''An object on a 2D plane that can be used in a geometry problem.'''
+    """An object on a 2D plane that can be used in a geometry problem."""
     __slots__ = 'name', 'type', 'id', 'depth'
     name: str
     type: GeoType
@@ -30,15 +30,15 @@ class GeoObject(ABC):
 
     @abstractmethod
     def as_linear_equation(self) -> 'dict[GeoObject, Fraction] | None':
-        '''Returns a linear combination of objects that represent this GeoObject.'''
+        """Returns a linear combination of objects that represent this GeoObject."""
         ...
 
     @abstractmethod
     def as_literal(self) -> Fraction | None:
-        '''
+        """
         Tries to parse this object as a literal scalar.
         Returns the parsed object (as a Fraction) if possible.
-        Otherwise returns None.'''
+        Otherwise returns None."""
         ...
 
     @abstractmethod
@@ -66,5 +66,5 @@ class GeoObject(ABC):
         return self.name
 
     def to_language_format(self) -> str:
-        '''Converts the object into a readable string that can be parsed by the DocumentParser.'''
+        """Converts the object into a readable string that can be parsed by the DocumentParser."""
         return self.name

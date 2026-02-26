@@ -30,20 +30,20 @@ EMBEDDING_ATTEMPTS = 50
 
 
 class DiagramEmbedder:
-    '''
+    """
     A class that knows how to generate an Embedding, given a GeometryProblem.
-    '''
+    """
 
     def is_assumption_necessary(
         self, signature: Signature, assumption: Predicate, assumptions: List[Predicate]
     ) -> bool:
-        '''
+        """
         Given the predicate `assumption`, returns whether the ProofGenerator can prove it given the predicates in `assumptions`,
         even if the ProofGenerator does not get an Embedding as input.
         
         The purpose is to see whether the DiagramEmbedder should care to try to satisfy the predicate `assumption`,
         or whether it is okay to ignore it when sequencing the objects in the signature.
-        '''
+        """
         try:
             assumption_objects = {
                 obj.name: obj for pred in assumptions + [assumption] for obj in pred.involved_objects()
@@ -62,14 +62,14 @@ class DiagramEmbedder:
                 raise
 
     def remove_necessary_assumptions(self, signature: Signature, assumptions: List[Predicate]) -> List[Predicate]:
-        '''
+        """
         Given a list of assumptions in a GeometryProblem,
         returns a subset of the assumptions,
         such that any embedding that satisfies the returned subset of assupmtions,
         necessarily also satisfies the entire original list of assumptions.
         
         Returns a minimal subset, in the sense that it cannot be made any smaller. 
-        '''
+        """
         necessary_assumptions = []
         for assumption in assumptions:
             if self.is_assumption_necessary(signature, assumption, necessary_assumptions):
@@ -79,12 +79,12 @@ class DiagramEmbedder:
     def try_sequence_object(
         self, object_: GeoObject, predicates_containing_object: List[Predicate]
     ) -> Optional[EmbeddedConstruction]:
-        '''
+        """
         Attempts to find a ConstructionPattern that recognizes how an object `object_` can be built in an embedding,
         given the list of assumptions containing this object.
         
         If an appropriate ConstructionPattern is found, returns an EmbeddedConstruction that describes how to create the object.
-        '''
+        """
         for pattern in CONSTRUCTION_PATTERNS:
             try:
                 construction = pattern.match(object_, predicates_containing_object)
@@ -98,11 +98,11 @@ class DiagramEmbedder:
     def sequence_assumptions(
         self, objects: List[GeoObject], predicates: List[Predicate]
     ) -> Optional[List[EmbeddedConstruction]]:
-        '''
+        """
         Given a list of GeoObjects, and a list of Predicates these objects must follow,
         attempts to create a list of EmbeddedConstructions, that when followed (in the order of the returned list),
         generate an Embedding that contains all the objects and that satisfy all the predicates.
-        '''
+        """
         predicates = predicates[:]
         constructions: List[EmbeddedConstruction] = []
 
@@ -128,7 +128,7 @@ class DiagramEmbedder:
     def embed_construction_sequence(
         self, constructions: List[EmbeddedConstruction], predicates_by_step: List[List[Predicate]]
     ) -> Iterator[Embedding]:
-        '''
+        """
         constructions:          A list of instructions on how to generate an embedding.
         predicates_by_step:     The predicates from the GeometryProblem that should now
                                 be satisfied after applying each step in `constructions`.
@@ -136,7 +136,7 @@ class DiagramEmbedder:
         Returns:                Some possible configurations of embeddings that satisfy the `constructions`.
                                 The embedding may sometimes fail (on some difficult sequences of constructions)
                                 and in that case the returned iterator will contain no elements.
-        '''
+        """
         stage = 0
         construction_options: List[List[EmbeddedObject]] = []
         embedding = Embedding()
@@ -173,7 +173,7 @@ class DiagramEmbedder:
                     stage -= 1
 
     def check_predicates(self, embedding: Embedding, predicates: List[Predicate]) -> bool:
-        '''Returns whether an Embedding satisfies a list of predicates.'''
+        """Returns whether an Embedding satisfies a list of predicates."""
         for pred in predicates:
             if embedding.evaluate_predicate(pred) != EmbeddedPredicateValue.Correct:
                 return False
@@ -181,7 +181,7 @@ class DiagramEmbedder:
             return True
 
     def embed(self, problem: GeometryProblem) -> Optional[Embedding]:
-        '''
+        """
         Given a GeometryProblem, attempts to generate an Embedding that satisfies its assumptions.
         The steps it goes through is as follows:
         
@@ -202,7 +202,7 @@ class DiagramEmbedder:
             *   Also attempts to run the sequencer `EMBEDDING_ATTEMPTS` times,
                 in case some generations (which pick the initial points randomly) fail at
                 generating an embedding.
-        '''
+        """
         objects = list(problem.statement.assumption_objects.values())
         split_predicates = SequencingPreprocessor(SPLITTING_PATTERNS).preprocess_assumptions(
             problem.statement.assumption_predicates

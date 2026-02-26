@@ -13,10 +13,10 @@ from .embedded_construction import EmbeddedConstruction
 
 @dataclass
 class ExplicitEmbeddedConstruction(EmbeddedConstruction):
-    '''
+    """
     An EmbeddedConstruction where the construction is defined
     by applying a ConstructionMethod.
-    '''
+    """
 
     construction_method: ConstructionMethod
     

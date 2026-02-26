@@ -2,7 +2,7 @@ from typing import Optional, TypeVar
 from abc import ABC, abstractmethod
 
 G = TypeVar("G")
-'''The type of object to parse'''
+"""The type of object to parse"""
 
 
 class AbstractGeometryParser[G](ABC):

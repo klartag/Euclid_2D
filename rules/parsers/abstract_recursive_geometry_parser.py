@@ -5,13 +5,13 @@ from abc import abstractmethod
 from .abstract_geometry_parser import AbstractGeometryParser
 
 G = TypeVar("G")
-'''The type of object to parse'''
+"""The type of object to parse"""
 
 D = TypeVar("D")
-'''The type of the data defining the object'''
+"""The type of the data defining the object"""
 
 C = TypeVar("C")
-'''The type of each component inside the object'''
+"""The type of each component inside the object"""
 
 
 @dataclass

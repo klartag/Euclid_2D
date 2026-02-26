@@ -12,12 +12,12 @@ from .construction_pattern import ConstructionPattern
 
 
 class ExplicitConstructionPattern(ConstructionPattern):
-    '''
+    """
     A ConstructionPattern that knows how to recognize equalities between an Atom and a ConstructionObject.
     For example, it can take as input a predicate that looks like
     `euler_line(A, B, C) == l`
     and return instructions on how to construct `l`.
-    '''
+    """
 
     def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[ExplicitEmbeddedConstruction]:
         if len(predicates) != 1:

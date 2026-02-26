@@ -12,7 +12,7 @@ from .locus_pattern_matcher import LocusPattern
 
 @dataclass
 class UnpackingPredicateLocus(LocusPattern):
-    '''
+    """
     A locus pattern that knows to parse a predicate of the type
     `predicate(A, B, C, ...)`
     where one of the arguments should be taken special note of.
@@ -24,25 +24,25 @@ class UnpackingPredicateLocus(LocusPattern):
     where `X` is the object whose locus we are looking to define.
     In this case, `locus_construction_method` would be initialized as the function that takes two points (A, B),
     and returns the object `Line(A, B)`, as this is the locus of points `X` that satisfies `collinear(A, X, B)`.
-    '''
+    """
 
     locus_construction_method: Callable[[Unpack[Tuple[ExtendedGeoObject, ...]]], EmbeddedGeoObject]
-    '''
+    """
     A method that takes the *rest* of the parameters given to `predicate_name`
     (all the parameters except the object whose locus we want)
     and returns the locus of the object.
-    '''
+    """
     predicate_name: str
-    '''
+    """
     The name of the predicate to parse.
-    '''
+    """
     parameter_index_options: Union[int, Sequence[int], None]
-    '''
+    """
     The indices in the predicate where the object is allowed to appear.
     *   If it is of the type `int`, this is the only index where the object may appear.
     *   If it is of the type `Sequence[int]`, this is the list of indices where the object may appear.
     *   If it is `None`, the object may appear in any index.
-    '''
+    """
 
     def match(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]:
         for parameter_index in unpack_index_options(self.parameter_index_options, len(predicate.components)):
@@ -53,20 +53,20 @@ class UnpackingPredicateLocus(LocusPattern):
 
     @abstractmethod
     def match_predicate_parameter_option(self, object_: GeoObject, predicate: Predicate, parameter_index: int) -> Optional[ExtendedGeoObject]:
-        '''
+        """
         Identical to `LocusPattern.match`, but specifically attempts to recognize the Locus Pattern in `predicate`,
         given that the special index to find `object_` in is the index `parameter_index`.
-        '''
+        """
         ...
 
 def unpack_index_options(parameter_index_options: Union[int, Sequence[int], None], component_count: int) -> Sequence[int]:
-    '''
+    """
     Takes `parameter_index_options`, and parses it into a `Sequence[int]` describing all possible indices the object whose locus we want
     can take in the predicate we are parsing.
     The rules for parsing are as described in the documentation for `parameter_index_options` in the `UnpackingPredicate` class.
     
     component_count:    The total number of parameters in the predicate we are parsing.
-    '''
+    """
     if parameter_index_options is None:
         return list(range(component_count))
     elif isinstance(parameter_index_options, Sequence):

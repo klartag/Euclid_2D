@@ -12,7 +12,7 @@ from .unpacking_predicate_locus import UnpackingPredicateLocus, unpack_index_opt
 
 @dataclass
 class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
-    '''
+    """
     Knows to identify locii of objects defined by a predicate,
     where the object whose locus we are looking for
     *does not at all appear* in every arguments of the predicate except for one.
@@ -26,7 +26,7 @@ class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
         is the line passing through A parallel to l.
     *   The locus of all points `X` that satisfy `angle(A, X, B) == a mod 360`,
         is some circle passing through A and B (where the circle depends on the angle `a`).
-    '''
+    """
 
     construction_name: str
     construction_index_options: Union[int, Sequence[int], None]
@@ -60,7 +60,7 @@ class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
         construction_object: ConstructionObject,
         construction_index: int
     ) -> Optional[ExtendedGeoObject]:
-        '''
+        """
         Identical to `match_predicate_parameter_option`, but attempts to match a specific case for the
         index of the ConstructionObject that `object_` exists in.
         
@@ -74,7 +74,7 @@ class SimplePredicateConstructionLocus(UnpackingPredicateLocus):
                                         * The rest of the components in the ConstructionObject
                                         * The rest of the components in the predicate
                                         (in that order).
-        '''
+        """
         if construction_object.constructor.name != self.construction_name:
             return None
         

@@ -10,11 +10,11 @@ COLLINEAR_INEQUALITY_PREDICATE_NAMES = ['between', 'collinear_and_not_between']
 
 
 class CollinearInequalityRemover(PredicatePreprocessingPattern):
-    '''
+    """
     If a predicate is an inequality predicate relating to collinear points,
     (i.e. those whose names are in `COLLINEAR_INEQUALITY_PREDICATE_NAMES`),
     removes them.
-    '''
+    """
 
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name in COLLINEAR_INEQUALITY_PREDICATE_NAMES:

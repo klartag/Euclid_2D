@@ -11,7 +11,7 @@ from .radical_axis import radical_axis
 def line_circle_other_intersection(
     first_intersection: EmbeddedPoint, line: EmbeddedLine, circle: EmbeddedCircle
 ) -> EmbeddedPoint:
-    '''Given a line, a circle, and one of its two intersection points, returns the other intersection point.'''
+    """Given a line, a circle, and one of its two intersection points, returns the other intersection point."""
     orthogonal_direction = EmbeddedPoint(line.direction.y, -line.direction.x)
     symmetry_line = EmbeddedLine(circle.center, orthogonal_direction)
     other_intersection = reflect_point(first_intersection, symmetry_line)
@@ -23,7 +23,7 @@ def line_circle_other_intersection(
 def circle_circle_other_intersection(
     first_intersection: EmbeddedPoint, circle0: EmbeddedCircle, circle1: EmbeddedCircle
 ) -> EmbeddedPoint:
-    '''Given two circles and one of its two intersection points, returns the other intersection point.'''
+    """Given two circles and one of its two intersection points, returns the other intersection point."""
     if circle0.center.is_equal(circle1.center):
         raise UndefinedEmbeddingError("The circles are concentric and do not have valid intersections.")
     symmetry_line = EmbeddedLine(circle0.center, circle1.center - circle0.center)
@@ -34,9 +34,9 @@ def circle_circle_other_intersection(
 
 
 def quadratic_equation_solutions(a: mpf, b: mpf, c: mpf) -> Tuple[mpf, ...]:
-    '''
+    """
     Returns the solutions of the quadratic equation `ax^2 + bx + c = 0`.
-    '''
+    """
     determinant = b**2 - 4 * a * c
     if abs(determinant) < EPSILON ** 2:
         return (-b / (2*a),)
@@ -47,7 +47,7 @@ def quadratic_equation_solutions(a: mpf, b: mpf, c: mpf) -> Tuple[mpf, ...]:
 
 
 def line_circle_intersection(line: EmbeddedLine, circle: EmbeddedCircle) -> Tuple[EmbeddedPoint, ...]:
-    '''Returns all intersections of a line and a circle.'''
+    """Returns all intersections of a line and a circle."""
     a = line.direction.length_squared()
     b = 2 * line.direction.scalar_product(line.point - circle.center)
     c = (line.point - circle.center).length_squared() - circle.radius_squared
@@ -57,6 +57,6 @@ def line_circle_intersection(line: EmbeddedLine, circle: EmbeddedCircle) -> Tupl
 
 
 def circle_circle_intersection(circle0: EmbeddedCircle, circle1: EmbeddedCircle) -> Tuple[EmbeddedPoint, ...]:
-    '''Returns all intersections of two circles.'''
+    """Returns all intersections of two circles."""
     axis = radical_axis(circle0, circle1)
     return line_circle_intersection(axis, circle0)

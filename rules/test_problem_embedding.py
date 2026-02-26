@@ -98,10 +98,10 @@ RANDOM_SAMPLE_CORRECT_PROBLEMS = sorted(
 
 @pytest.mark.parametrize("problem_id", range(1000))
 def test_linear_problem_embedding(problem_id: str):
-    '''
+    """
     Tests that the DiagramEmbedder can figure out in what order
     objects need to be built, in order to create an embedding.
-    '''
+    """
     if problem_id in RANDOM_SAMPLE_PARTIALLY_INCORRECT_PROBLEMS:
         pytest.skip()
 

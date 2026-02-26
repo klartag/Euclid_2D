@@ -7,10 +7,10 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class OrientationEqualityRemover(PredicatePreprocessingPattern):
-    '''
+    """
     If a predicate is any sort of equality between two objects,
     where one of them is an `orientation` object, removesi t.
-    '''
+    """
 
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name not in ['equals', 'equals_mod_360', 'identical']:

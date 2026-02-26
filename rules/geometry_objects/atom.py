@@ -6,7 +6,7 @@ from .geo_object import GeoObject
 
 
 class Atom(GeoObject):
-    '''A geometric object that has a name.'''
+    """A geometric object that has a name."""
     def __init__(self, name: str, type_: GeoType) -> None:
         self.name = name
         self.type = type_

@@ -10,9 +10,9 @@ from .embedded_object import EmbeddedObject, EPSILON
 
 @dataclass
 class EmbeddedScalar(EmbeddedObject):
-    '''
+    """
     Represents the scalar held in `value`.
-    '''
+    """
 
     value: mpf
 

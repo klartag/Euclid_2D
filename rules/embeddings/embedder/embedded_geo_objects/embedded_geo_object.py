@@ -11,7 +11,7 @@ from .method_dictionary import EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY
 
 @dataclass
 class EmbeddedGeoObject:
-    '''
+    """
     Represents a GeoObject that is constructed by some construction,
     with parameters being either GeoObjects or other EmbeddedGeoObjects.
     
@@ -19,7 +19,7 @@ class EmbeddedGeoObject:
     that we use to define GeoObjects during a proof,
     and may instead be a method taken from `EMBEDDED_GEO_OBJECT_CONSTRUCTION_DICTIONARY`,
     which is a list of constructions used only for embeddings.
-    '''
+    """
 
     type: str = field(init=False)
     is_in_construction_dictionary: bool = field(init=False)
