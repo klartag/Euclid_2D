@@ -6,14 +6,7 @@ circle_circle_tangent_point_definition:
   conclude:
     - circle_circle_tangent_point(c, d) in c, d
 
-circle_circle_other_intersection_definition:
-  inputs:
-    - P: Point
-    - c, d: Circle
-  where:
-    - exists(circle_circle_other_intersection(P, c, d))
-  conclude:
-    - circle_circle_other_intersection(P, c, d) in c, d
+
 
 circle_tangency_unique_intersection:
   inputs:

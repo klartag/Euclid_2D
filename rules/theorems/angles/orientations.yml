@@ -1,3 +1,11 @@
+orientation_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(orientation(A, B, C))
+  conclude:
+    - 2 * orientation(A, B, C) == 180 mod 360
+
 divide_by_2_mod_180:
   inputs:
     - A, B, C, A', B', C': Point

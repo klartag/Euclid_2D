@@ -1,4 +1,4 @@
-line_definition:
+line_property:
   inputs:
     - A, B: Point
     - l: Line
@@ -11,7 +11,7 @@ line_definition:
     - l == Line(A, B)
   rank: 5
 
-points_on_line:
+line_definition:
   inputs:
     - A, B: Point
   where:
@@ -19,7 +19,7 @@ points_on_line:
   conclude:
     - A, B in Line(A, B)
 
-line_intersection_is_on_lines:
+line_intersection_definition:
   inputs:
     - l, m: Line
   where:
@@ -42,7 +42,7 @@ line_uniqueness:
   trivial_if_equal:
     - [l1, l2]
 
-line_intersection_definition:
+line_intersection_property:
   inputs:
     - A: Point
     - k, l: Line
@@ -78,22 +78,4 @@ concurrent_sufficient_conditions:
     - concurrent(k, m, l)
   rank: 5
 
-parallel_line_definition:
-  inputs:
-    - A: Point
-    - l: Line
-  where:
-    - exists(parallel_line(A, l))
-  conclude:
-    - A in parallel_line(A, l)
-    - parallel(l, parallel_line(A, l))
 
-perpendicular_line_definition:
-  inputs:
-    - A: Point
-    - l: Line
-  where:
-    - exists(perpendicular_line(A, l))
-  conclude:
-    - A in perpendicular_line(A, l)
-    - perpendicular(l, perpendicular_line(A, l))

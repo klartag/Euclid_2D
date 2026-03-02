@@ -6,14 +6,6 @@ angle_definition:
   conclude:
     - angle(A, B, C) == direction(B, C) - direction(B, A) mod 360
 
-orientation_definition:
-  inputs:
-    - A, B, C: Point
-  where:
-    - exists(orientation(A, B, C))
-  conclude:
-    - 2 * orientation(A, B, C) == 180 mod 360
-
 same_angle:
   inputs:
     - O, A, B, C: Point

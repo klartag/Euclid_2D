@@ -14,7 +14,7 @@ perpendicular_angle_conditions:
   possible_conclusions:
     - perpendicular(Line(A, B), Line(B, C)) <=> angle(A, B, C) == orientation(A, B, C) mod 360
 
-perpendicular_line_definition:
+perpendicular_line_property:
   inputs:
     - A: Point
     - k, l: Line
@@ -35,7 +35,7 @@ double_perpendicular_and_parallel:
   trivial_if_equal:
     - [k, m]
 
-altitude_definition:
+altitude_property:
   inputs:
     - A, B, C: Point
     - l: Line
@@ -47,7 +47,7 @@ altitude_definition:
   conclude:
     - l == altitude(A, B, C)
 
-projection_definition:
+projection_property:
   inputs:
     - A, A': Point
     - l: Line
@@ -58,24 +58,32 @@ projection_definition:
     - A' == projection(A, l)
   rank: 5
 
-projection_of_point_definition:
+projection_definition:
   inputs:
     - P: Point
     - l: Line
   where:
     - exists(projection(P, l))
   conclude:
-  #sufficient
     - projection(P, l) == line_intersection(perpendicular_line(P, l), l)
   possible_conclusions:
     - P not in l => perpendicular_line(P, l) == Line(P, projection(P, l))
     - P in l => P == projection(P, l)
 
-altitude_is_perpendicular:
+altitude_definition:
   inputs:
     - A, B, C: Point
   where:
     - exists(altitude(A, B, C))
   conclude:
-  #sufficient
     - altitude(A, B, C) == perpendicular_line(A, Line(B, C))
+
+perpendicular_line_definition:
+  inputs:
+    - A: Point
+    - l: Line
+  where:
+    - exists(perpendicular_line(A, l))
+  conclude:
+    - A in perpendicular_line(A, l)
+    - perpendicular(l, perpendicular_line(A, l))

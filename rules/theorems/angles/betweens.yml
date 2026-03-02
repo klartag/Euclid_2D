@@ -29,18 +29,3 @@ probably_between_and_collinear_implies_between:
   conclude:
     - between(A, B, C)
 
-internal_angle_bisector_definition:
-  inputs:
-    - A, B, C: Point
-  where:
-    - exists(internal_angle_bisector(A, B, C))
-  conclude:
-    - B in internal_angle_bisector(A, B, C)
-
-external_angle_bisector: #bisector trough the point B
-  inputs:
-    - A, B, C: Point
-  where:
-    - exists(external_angle_bisector(A, B, C))
-  conclude:
-    - B in external_angle_bisector(A, B, C)

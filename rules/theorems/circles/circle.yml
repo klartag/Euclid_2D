@@ -10,7 +10,7 @@ circle_definition:
     - c == Circle(A, B, C)
   rank: 5
 
-points_on_circle:
+circumcircle_definition:
   inputs:
     - A, B, C: Point
   where:
@@ -18,41 +18,5 @@ points_on_circle:
   conclude:
     - A, B, C in Circle(A, B, C)
 
-incircle_definition:
-  inputs:
-    - A, B, C: Point
-  preprocess: symmetric
-  where:
-    - exists(incircle(A, B, C))
-  conclude:
-    - tangent(Line(A, B), incircle(A, B, C))
-    - tangent(Line(B, C), incircle(A, B, C))
-    - tangent(Line(C, A), incircle(A, B, C))
-    - incenter(A, B, C) == center(incircle(A, B, C))
 
-excircle_definition:
-  inputs:
-    - A, B, C: Point
-  where:
-    - exists(excircle(A, B, C))
-  conclude:
-    - tangent(Line(A, B), excircle(A, B, C))
-    - tangent(Line(B, C), excircle(A, B, C))
-    - tangent(Line(C, A), excircle(A, B, C))
-    - excenter(A, B, C) == center(excircle(A, B, C))
 
-nine_points_on_circle:
-  inputs:
-    - A, B, C: Point
-  where:
-    - exists(Circle(A, B, C))
-  conclude:
-    - midpoint(A, B) in nine_points_circle(A, B, C)
-    - midpoint(B, C) in nine_points_circle(A, B, C)
-    - midpoint(C, A) in nine_points_circle(A, B, C)
-    - midpoint(A, orthocenter(A, B, C)) in nine_points_circle(A, B, C)
-    - midpoint(B, orthocenter(A, B, C)) in nine_points_circle(A, B, C)
-    - midpoint(C, orthocenter(A, B, C)) in nine_points_circle(A, B, C)
-    - projection(A, Line(B, C)) in nine_points_circle(A, B, C)
-    - projection(B, Line(A, C)) in nine_points_circle(A, B, C)
-    - projection(C, Line(A, B)) in nine_points_circle(A, B, C)

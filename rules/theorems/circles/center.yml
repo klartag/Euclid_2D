@@ -36,24 +36,7 @@ circumcenter_definition:
   inputs:
     - A, B, C: Point
   where:
-    - exists(circumcenter(A, B, C)(
+    - exists(circumcenter(A, B, C))
   conclude:
     - circumcenter(A, B, C) == center(Circle(A, B, C))
 
-excenter_definition:
-  inputs:
-    - A, B, C: Point
-  where:
-    - exists(excenter(A, B, C))
-  conclude:
-    - excenter(A, B, C) in external_angle_bisector(A, C, B), external_angle_bisector(A, B, C), internal_angle_bisector(B, A, C)
-    - excenter(A, B, C) == line_intersection(external_angle_bisector(A, C, B), external_angle_bisector(A, B, C))
-
-incenter_definition:
-  inputs:
-    - A, B, C: Point
-  where:
-    - exists(incenter(A, B, C))
-  conclude:
-    - incenter(A, B, C) in internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B), internal_angle_bisector(C, A, B)
-    - incenter(A, B, C) == line_intersection(internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B))
