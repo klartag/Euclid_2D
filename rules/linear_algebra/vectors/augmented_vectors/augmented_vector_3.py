@@ -10,7 +10,7 @@ V2 = TypeVar('V2', bound=AbstractVector)
 
 
 class AugmentedVector3(Generic[V0, V1, V2], AbstractVector):
-    # TODO: Document
+    """A vector that holds a tuple of three vector types."""
 
     type_name: Literal['Augmented3'] = 'Augmented3'
 

@@ -5,7 +5,7 @@ from .abstract_iterable_vector import AbstractIterableVector
 
 
 class DenseVector(AbstractIterableVector):
-    # TODO: Document
+    """A vector whose values are held in a list."""
 
     type_name: Literal['Dense'] = 'Dense'
 

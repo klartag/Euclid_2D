@@ -5,22 +5,20 @@ from fractions import Fraction
 
 
 class AbstractVector(ABC):
-    # TODO: Document
+    """Some type of vector"""
 
     @property
     @abstractmethod
     def type_name(self) -> str:
-        # TODO: Document
+        """A string that depicts the class name of the vector."""
         ...
 
     @abstractmethod
     def __mul__(self, x: Fraction) -> Self:
-        # TODO: Document
         ...
 
     @abstractmethod
     def __truediv__(self, x: Fraction) -> Self:
-        # TODO: Document
         ...
 
     @abstractmethod
@@ -37,7 +35,7 @@ class AbstractVector(ABC):
 
     @abstractmethod
     def inner_repr(self) -> str:
-        # TODO: Document
+        """Returns a string representation of the contents of the vector."""
         ...
 
     def __str__(self) -> str:

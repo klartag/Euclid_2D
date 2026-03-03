@@ -5,7 +5,7 @@ from .abstract_vector import AbstractVector
 
 
 class ConstantVector(AbstractVector):
-    # TODO: Document
+    """A vector class that only holds a single value."""
 
     type_name: Literal['Constant'] = 'Constant'
 
