@@ -12,7 +12,7 @@ from .implementations.equation_object_parser import EquationObjectParser
 
 
 class GeometryObjectParser(AbstractGeometryParser[GeoObject]):
-    # TODO: Document
+    """A parser for GeoObjects of any type."""
 
     signature: Signature
     parsers: list[AbstractGeometryParser[GeoObject]]

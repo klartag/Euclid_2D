@@ -6,9 +6,8 @@ G = TypeVar("G")
 
 
 class AbstractGeometryParser[G](ABC):
-    # TODO: Document
+    """A class that can parse text that depicts some sort of object related to geometry or the proof system."""
 
     @abstractmethod
     def try_parse(self, text: str) -> Optional[G]:
-        # TODO: Document
         ...

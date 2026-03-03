@@ -9,7 +9,9 @@ from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParse
 
 
 class ConstructionObjectParser(AbstractRecursiveGeometryParser[ConstructionObject, Construction, GeoObject]):
-    # TODO: Document
+    """
+    A parser for ConstructionObjects.
+    """
 
     def _try_split_components(self, data: str) -> Optional[tuple[Construction, tuple[str, ...]]]:
         if '(' not in data:

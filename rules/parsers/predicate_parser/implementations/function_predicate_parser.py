@@ -11,7 +11,10 @@ from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParse
 
 @dataclass
 class FunctionPredicateParser(AbstractRecursiveGeometryParser[Predicate, str, GeoObject]):
-    # TODO: Document
+    """
+    A parser for predicates that are of the form
+    `predicate(component1, component2, ...)`.
+    """
 
     def _try_split_components(self, text: str) -> Optional[tuple[str, tuple[str, ...]]]:
         if '(' not in text:
