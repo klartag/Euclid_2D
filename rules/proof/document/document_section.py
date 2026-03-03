@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class DocumentSection(Enum):
+    """TODO: Document"""
     DEFAULT = None
     ASSUMPTION = 'Assumptions'
     EMBEDDING = 'Embedding'

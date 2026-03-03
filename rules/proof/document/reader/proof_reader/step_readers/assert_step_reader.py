@@ -10,6 +10,8 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class AssertStepReader(AbstractStepReader[AssertStep]):
+    """TODO: Document"""
+
     pattern = r'We have (proved|shown) (.*)$'
 
     predicate_parser: PredicateParser

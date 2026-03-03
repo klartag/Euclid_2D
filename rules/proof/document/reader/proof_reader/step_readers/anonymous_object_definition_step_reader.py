@@ -9,6 +9,8 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class AnonymousObjectDefinitionStepReader(AbstractStepReader[ObjDefineStep]):
+    """TODO: Document"""
+
     pattern = rf'We introduce (.*)$'
     predicate_parser: PredicateParser
 

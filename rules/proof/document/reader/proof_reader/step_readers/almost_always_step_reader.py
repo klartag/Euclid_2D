@@ -10,6 +10,8 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class AlmostAlwaysStepReader(AbstractStepReader[AlmostAlwaysStep]):
+    """TODO: Document"""
+
     pattern = r'It is almost always true that (.*)$'
 
     predicate_parser: PredicateParser

@@ -8,6 +8,7 @@ from .step import Step
 
 @dataclass
 class CommentStep(Step):
+    """TODO: Document"""
     comment: str
 
     def to_language_format(self):

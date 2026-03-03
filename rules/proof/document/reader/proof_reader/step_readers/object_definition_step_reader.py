@@ -15,6 +15,8 @@ OBJECT_DEFINITION_PATTERN = rf'Let {OBJECT_NAME_PATTERN} := (.*)$'
 
 
 class ObjectDefinitionStepReader(AbstractStepReader[ObjDefineStep]):
+    """TODO: Document"""
+
     pattern = OBJECT_DEFINITION_PATTERN
 
     signature: Signature

@@ -11,6 +11,8 @@ from .problem_statement_reader import ProblemStatementReader
 
 
 class DocumentReader:
+    """TODO: Document"""
+
     def read(self, document: GeometryDocument, read_proof_body: bool) -> GeometryProblem:
         """
         Parses a string representing a proof.
