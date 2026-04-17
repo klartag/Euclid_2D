@@ -6,7 +6,7 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class CommentStepReader(AbstractStepReader[CommentStep]):
-    """TODO: Document"""
+    """Reads a proof step that is a comment."""
 
     pattern = r'Comment: \w*(.*)'
 

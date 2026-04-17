@@ -10,7 +10,7 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class AlmostAlwaysStepReader(AbstractStepReader[AlmostAlwaysStep]):
-    """TODO: Document"""
+    """Reads a proof step that says a predicate can be assumed without requiring a proof."""
 
     pattern = r'It is almost always true that (.*)$'
 

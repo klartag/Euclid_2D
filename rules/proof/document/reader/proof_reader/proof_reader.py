@@ -18,10 +18,11 @@ from .step_readers import (
 
 
 class ProofReader:
-    """TODO: Document"""
+    """Can read a proof."""
 
     signature: Signature
     step_readers: list[AbstractStepReader]
+    """A list of readers for every kind of step that can appear in the proof."""
 
     def __init__(self, signature: Signature):
         self.signature = signature
@@ -48,7 +49,7 @@ class ProofReader:
             raise ProofParseError(f'Error when parsing line {line} ====> Because of {e}') from e
 
     def read_step(self, line: str) -> Step:
-        """TODO: Document"""
+        """Reads a single step in the proof."""
         for reader in self.step_readers:
             step = reader.try_read(line)
             if step is not None:

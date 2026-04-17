@@ -9,20 +9,23 @@ from .document_section import DocumentSection
 
 @dataclass
 class GeometryDocument:
-    """TODO: Document"""
+    """A class representing a file containing a geometry problem."""
+    
     path: Path
+    """The path containing the geometry problem."""
     sections: Dict[DocumentSection, List[str]]
+    """The different sections contained within the document."""
 
     @staticmethod
     def open(path: str) -> 'GeometryDocument':
-        """TODO: Document"""
+        """Creates a `GeometryDocument` from a path."""
         path = GeometryDocument.get_full_problem_path(path)
         text = open(path, 'r').read()
         sections = GeometryDocument.parse_sections(text)
         return GeometryDocument(path, sections)
 
     def get_text(self) -> str:
-        """TODO: Document"""
+        """Returns the document as a string."""
         lines = []
         for section in DocumentSection:
             if section in self.sections:
@@ -32,23 +35,29 @@ class GeometryDocument:
         return '\n'.join(lines)
 
     def get_section_header(self, section: DocumentSection) -> List[str]:
-        """TODO: Document"""
+        """
+        Gets the lines in the document that define the header of a section.
+        If the section does not exist, returns an empty list.
+        """
         if section == DocumentSection.DEFAULT or section not in self.sections:
             return []
         return [f'{section.value}:']
 
     def get_section_content(self, section: DocumentSection) -> List[str]:
-        """TODO: Document"""
+        """
+        Gets the lines in the document containing the content of a section.
+        If the section does not exist, returns an empty list.
+        """
         return self.sections.get(section, [])
 
     def save(self):
-        """TODO: Document"""
+        """Saves the document, at `self.path`."""
         text = self.get_text()
         open(self.path, 'w').write(text)
 
     @staticmethod
     def get_full_problem_path(path_base: str) -> Path:
-        """TODO: Document"""
+        """Returns the full path to a proof file."""
         full_path_options = [BASE_PATH / 'rules' / 'proof_samples' / path_base, BASE_PATH / path_base, Path(path_base)]
 
         for path_base in full_path_options:
@@ -59,7 +68,7 @@ class GeometryDocument:
 
     @staticmethod
     def parse_sections(text: str) -> Dict[DocumentSection, List[str]]:
-        """TODO: Document"""
+        """Parses the text of a GeometryDocumentinto sections."""
         sections = {}
         current_header = DocumentSection.DEFAULT
         for line in text.splitlines():
@@ -74,7 +83,10 @@ class GeometryDocument:
 
     @staticmethod
     def try_parse_section_header(header: str) -> Optional[DocumentSection]:
-        """TODO: Document"""
+        """
+        Tries to parse a line as a section header.
+        If the line is not a valid header, returns `None`.
+        """
         header = header.strip()
         if not (len(header) > 0 and header[-1] == ':'):
             return None

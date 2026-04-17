@@ -7,20 +7,26 @@ from ..predicates.predicate import Predicate
 
 @dataclass
 class Statement:
-    """TODO: Document"""
+    """The statement of a geometry problem."""
+    
     signature: Signature
     assumption_objects: dict[str, GeoObject]
+    """All objects mentioned in the problem assumptions."""
     assumption_predicates: list[Predicate]
+    """The predicates given in the problem assumptions."""
     auxiliary_predicates: list[Predicate]
+    """Any auxiliary predicates that should be assumed, other than those in `self.assumption_predicates`."""
     target_objects: dict[str, GeoObject]
+    """Names of objects that should be defined in order to solve the problem."""
     target_predicates: list[Predicate]
+    """The predicates that must be proved."""
 
     def get_all_objects(self) -> dict[str, GeoObject]:
-        """TODO: Document"""
+        """Returns all objects mentioned in the assumption and target predicates."""
         return self.assumption_objects | self.target_objects
 
     def starting_predicates(self) -> list[Predicate]:
-        """TODO: Document"""
+        """Returns all predicates that should be taken as given at the beginning of a proof."""
         return self.assumption_predicates + self.auxiliary_predicates
 
     def shallow_copy(self) -> 'Statement':

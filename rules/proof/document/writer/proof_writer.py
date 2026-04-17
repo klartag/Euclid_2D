@@ -9,7 +9,7 @@ from .document_section_writer import DocumentSectionWriter
 
 
 class ProofWriter(DocumentSectionWriter[Proof]):
-    """TODO: Document"""
+    """A DocumentSectionWriter that can write the Proof section of a GeometryDocument."""
 
     section = DocumentSection.PROOF
 

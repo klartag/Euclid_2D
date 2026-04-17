@@ -10,7 +10,7 @@ from .document_section_writer import DocumentSectionWriter
 
 
 class AssumptionsWriter(DocumentSectionWriter[Statement]):
-    """TODO: Document"""
+    """A DocumentSectionWriter that can write the Assumptions section of a GeometryDocument."""
 
     section = DocumentSection.ASSUMPTION
 

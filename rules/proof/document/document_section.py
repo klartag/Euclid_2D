@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class DocumentSection(Enum):
-    """TODO: Document"""
+    """An enum listing the kinds of sections allowed in a GeometryDocument."""
     DEFAULT = None
     ASSUMPTION = 'Assumptions'
     EMBEDDING = 'Embedding'

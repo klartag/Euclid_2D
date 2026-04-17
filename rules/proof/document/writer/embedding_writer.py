@@ -11,7 +11,7 @@ from .document_section_writer import DocumentSectionWriter
 
 
 class EmbeddingWriter(DocumentSectionWriter[Embedding]):
-    """TODO: Document"""
+    """A DocumentSectionWriter that can write the Embedding section of a GeometryDocument."""
 
     section = DocumentSection.EMBEDDING
 

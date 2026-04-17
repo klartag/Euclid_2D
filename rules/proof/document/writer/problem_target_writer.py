@@ -9,7 +9,7 @@ from .document_section_writer import DocumentSectionWriter
 
 
 class ProblemTargetWriter(DocumentSectionWriter[Statement]):
-    """TODO: Document"""
+    """A DocumentSectionWriter that can write the `Need to Prove` section of a GeometryDocument."""
 
     section = DocumentSection.TARGET
 

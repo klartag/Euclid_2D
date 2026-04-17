@@ -14,7 +14,7 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class TheoremStepReader(AbstractStepReader[TheoremStep]):
-    """TODO: Document"""
+    """Reads a proof step that applies a theorem."""
 
     pattern = r'By (\w+)( on )?(.*) we get (.*)$'
 

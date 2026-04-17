@@ -9,7 +9,7 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class AnonymousObjectDefinitionStepReader(AbstractStepReader[ObjDefineStep]):
-    """TODO: Document"""
+    """Reads a proof step that declares an object exists without giving it a name."""
 
     pattern = rf'We introduce (.*)$'
     predicate_parser: PredicateParser

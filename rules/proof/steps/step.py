@@ -7,7 +7,7 @@ from ...geometry_objects.geo_object import GeoObject
 
 @dataclass
 class Step(abc.ABC):
-    """TODO: Document"""
+    """A step of a proof."""
 
     @abc.abstractmethod
     def to_language_format(self) -> str:
