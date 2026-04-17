@@ -11,6 +11,10 @@ from .proof.steps import AssertStep, TheoremStep
 
 
 class ProofPrettifier:
+    """
+    A class intended to be able to make a proof more readable.
+    """
+    
     def __init__(self):
         pass
 
