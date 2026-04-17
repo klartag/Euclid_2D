@@ -2,6 +2,13 @@ from typing import Optional
 
 
 def generic_split_args(text: str, separator_chars: str) -> Optional[tuple[list[str], list[str]]]:
+    """
+    Splits the given string wherever the character is in `separator_chars`,
+    while ignoring separating characters that are inside parenthesis.
+    
+    Returns a tuple, where the first item is the list of strings remaining after splitting,
+    and the second item is the list of separating characters that were removed during the splitting.
+    """
     text = text.strip()
     if len(text) == 0:
         return ([], [])
@@ -39,6 +46,11 @@ def split_args(text: str) -> Optional[list[str]]:
 
 
 def alternating_merge_string(lines0: list[str], lines1: list[str]) -> str:
+    """
+    Merges two lists of strings into one long string, alternatively concatenating
+    strings from the first list and then from the second list.
+    """
+
     if len(lines0) < len(lines1):
         lines0.extend([''] * (len(lines1) - len(lines0)))
     if len(lines0) > len(lines1):
@@ -47,4 +59,9 @@ def alternating_merge_string(lines0: list[str], lines1: list[str]) -> str:
 
 
 def is_valid_parenthesis(text: str) -> bool:
+    """
+    Returns whether the `(` and `)` characters in this string can be paired
+    such that each `(` appears before its matching `)`.
+    """
+    
     return generic_split_args(text[1:-1], '') is not None
