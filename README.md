@@ -68,20 +68,20 @@ Scalars and angles are both real numbers, the difference being that the value of
 Objects will have names, usually marked by a single letter.
 Sometimes they might have longer names, an index associated with them, and a prime (`'`) symbol on them.
 Here are some examples of valid names for objects:
-* A
-* B_1
-* M2
-* C'
-* AQ
+* `A`
+* `B_1`
+* `M2`
+* `C'`
+* `AQ`
 
 The name of an object does not contain information on its type, and any object type of object could potentially have any name.
 Although for geometry objects that can be embedded in a plane (i.e., objects that are **not** scalars), we will usually follow the following conventions:
 
 | Object Type | Naming convention | Common names              |
 |-------------|-------------------|---------------------------|
-| Point       | Capital letters   | A, B, C, P, Q, R, X, Y, Z |
-| Line        | Lowercase letters | f, g, h, p, q, r, s, t    |
-| Circle      | Lowercase letters | c, d, e, o, w             |
+| Point       | Capital letters   | `A, B, C, P, Q, R, X, Y, Z` |
+| Line        | Lowercase letters | `f, g, h, p, q, r, s, t`    |
+| Circle      | Lowercase letters | `c, d, e, o, w`             |
 
 These conventions are for the base name. There are no specified conventions for whether to use underscores for indexing, or whether to use primes (`'`).
 Those can appear on any object.
