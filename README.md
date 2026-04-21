@@ -18,8 +18,7 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Running an interactive terminal](#solver-interacting)  | How to evaluate expressions and predicates in a geometry problem (possibly with a partially-written proof) |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Prettifying](#solver-prettifying)                      | How to make a proof easier to read by humans |
 
-<a name="introduction"><a />
-## Introduction
+## <a name="introduction"/> Introduction
 
 This is an open-source research project focused on using AI to solve, invent, and analyze problems in 2D Euclidean geometry.
 
