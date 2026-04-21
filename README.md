@@ -99,7 +99,7 @@ We call those objects **atoms**.
 
 We can use these, together with **constructions**, to create more geometry objects.
 
-#### Construction Functions
+#### Construction functions
 
 Many constructions are used exactly like a function, that takes geometry objects as input, and returns a geometry object in its output.
 
