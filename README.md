@@ -41,22 +41,22 @@ https://console.cloud.google.com/storage/browser/euclid_2d?inv=1&invt=Ab4r5g&pro
 
 ## <span id="problem-generator">Generating Problems</span>
 
-###<span id="problem-generator-introduction"> Introduction</span>
+### <span id="problem-generator-introduction"> Introduction</span>
 
-###<span id="problem-generator-capabilities"> Capabilities</span>
+### <span id="problem-generator-capabilities"> Capabilities</span>
 
-###<span id="problem-generator-introduction"> Usage</span>
+### <span id="problem-generator-introduction"> Usage</span>
 
 ## <span id="solver">Solving Problems</span>
 
-###<span id="solver-embedding"> Embedding a question</span>
+### <span id="solver-embedding"> Embedding a question</span>
 
-###<span id="solver-proof-generation"> Generating a proof</span>
+### <span id="solver-proof-generation"> Generating a proof</span>
 
-###<span id="solver-trimming"> Trimming proofs</span>
+### <span id="solver-trimming"> Trimming proofs</span>
 
-###<span id="solver-checking"> Checking + Validating a proof</span>
+### <span id="solver-checking"> Checking + Validating a proof</span>
 
-###<span id="solver-interacting"> Running an interactive terminal</span>
+### <span id="solver-interacting"> Running an interactive terminal</span>
 
-###<span id="solver-prettifying"> Prettifying</span>
+### <span id="solver-prettifying"> Prettifying</span>
