@@ -37,38 +37,26 @@ The level of Euclidean Geometry problems we are aiming at is roughly that of e.g
 Google bucket link:
 https://console.cloud.google.com/storage/browser/euclid_2d?inv=1&invt=Ab4r5g&project=versatile-bolt-330819
 
-<a name="syntax">
-## Geometry Syntax
+## <span id="syntax">Geometry Syntax</span>
 
-<a name="problem-generator">
-## Generating Problems
+## <span id="problem-generator">Generating Problems</span>
 
-<a name="problem-generator-introduction">
-### Introduction
+###<span id="problem-generator-introduction"> Introduction</span>
 
-<a name="problem-generator-capabilities">
-### Capabilities
+###<span id="problem-generator-capabilities"> Capabilities</span>
 
-<a name="problem-generator-introduction">
-### Usage
+###<span id="problem-generator-introduction"> Usage</span>
 
-<a name="solver">
-## Solving Problems
+## <span id="solver">Solving Problems</span>
 
-<a name="solver-embedding">
-### Embedding a question
+###<span id="solver-embedding"> Embedding a question</span>
 
-<a name="solver-proof-generation">
-### Generating a proof
+###<span id="solver-proof-generation"> Generating a proof</span>
 
-<a name="solver-trimming">
-### Trimming proofs
+###<span id="solver-trimming"> Trimming proofs</span>
 
-<a name="solver-checking">
-### Checking + Validating a proof
+###<span id="solver-checking"> Checking + Validating a proof</span>
 
-<a name="solver-interacting">
-### Running an interactive terminal
+###<span id="solver-interacting"> Running an interactive terminal</span>
 
-<a name="solver-prettifying">
-### Prettifying
+###<span id="solver-prettifying"> Prettifying</span>
