@@ -5,12 +5,24 @@
 | Section                                   | Description                                                               |
 |-------------------------------------------|---------------------------------------------------------------------------|
 | [Introduction](#introduction)             | What is this repository about?                                            |
-| [Geometry Syntax](#syntax)                | How to formulate a geometry problem or proof                              |
+| [Geometry Syntax](#syntax) | How to formulate a geometry problem or proof                              |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Object Types](#syntax-object-types)    | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#syntax-constructions)  | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#syntax-predicates)        | |
+| [Geometry Configuration Rules](#configuration) | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#configuration-constructions)   | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#configuration-predicates)         | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Theorems](#configuration-theorems)             | |
+| [Geometry Document](#syntax-structure) | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Assumptions](#syntax-assumptions)      | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)          | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Need to prove](#syntax-need-to-prove)  | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Proof](#syntax-proof)                  | |
 | [Generating Problems](#problem-generator) | How to generate geometry problems (just their statements, without proof)  |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Introduction](#problem-generator-introduction)         |   |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Capabilities](#problem-generator-capabilities)         |   |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Usage](#problem-generator-introduction)                |   |
-| [Solving Problems](#solver)               | How to solve geometry problems                                            |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Introduction](#problem-generator-introduction)         | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Capabilities](#problem-generator-capabilities)         | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Usage](#problem-generator-introduction)                | |
+| [Solving Problems](#solver) | How to solve geometry problems |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding a question](#solver-embedding)               | How to take a geometry problem and embed it in 2D space |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Generating a proof](#solver-proof-generation)          | How to take a geometry problem and generate a proof |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Trimming proofs](#solver-trimming)                     | How to shorten a proof until its length is locally optimal |
@@ -37,26 +49,31 @@ The level of Euclidean Geometry problems we are aiming at is roughly that of e.g
 Google bucket link:
 https://console.cloud.google.com/storage/browser/euclid_2d?inv=1&invt=Ab4r5g&project=versatile-bolt-330819
 
-## <span id="syntax">Geometry Syntax </span>
+## <span id="syntax"> Geometry Syntax </span>
+### <span id="syntax-object-types"> Object Types </span>
+### <span id="syntax-constructions"> Constructions </span>
+### <span id="syntax-predicates"> Predicates </span>
 
-## <span id="problem-generator">Generating Problems </span>
+## <span id="configuration"> Geometry Configuration Rules </span>
+### <span id="configuration-constructions"> Constructions </span>
+### <span id="configuration-predicates"> Predicates </span>
+### <span id="configuration-theorems"> Theorems </span>
 
+## <span id="syntax-structure"> Geometry Document </span>
+### <span id="syntax-assumptions"> Assumptions </span>
+### <span id="syntax-embedding"> Embedding </span>
+### <span id="syntax-need-to-prove"> Need to prove </span>
+### <span id="syntax-proof"> Proof </span>
+
+## <span id="problem-generator"> Generating Problems </span>
 ### <span id="problem-generator-introduction"> Introduction </span>
-
 ### <span id="problem-generator-capabilities"> Capabilities </span>
-
 ### <span id="problem-generator-introduction"> Usage </span>
 
-## <span id="solver">Solving Problems </span>
-
+## <span id="solver"> Solving Problems </span>
 ### <span id="solver-embedding"> Embedding a question </span>
-
 ### <span id="solver-proof-generation"> Generating a proof </span>
-
 ### <span id="solver-trimming"> Trimming proofs </span>
-
 ### <span id="solver-checking"> Checking + Validating a proof </span>
-
 ### <span id="solver-interacting"> Running an interactive terminal </span>
-
 ### <span id="solver-prettifying"> Prettifying </span>
