@@ -101,28 +101,52 @@ We can use these, together with **constructions**, to create more geometry objec
 
 #### Construction Functions
 
-Some constructions are used exactly like a function, that takes geometry objects as input, and returns a geometry object in its output.
-For example, `midpoint` is a construction that takes two points, and returns a third point.
-Given two points `A` and `B`, the object described by
-```
-midpoint(A, B)
-```
-is also a point. Specifically, it is the point in the center of the segment from `A` to `B`.
+Many constructions are used exactly like a function, that takes geometry objects as input, and returns a geometry object in its output.
 
-Another example is the construction `Circle`, which takes three points, and returns the circle passing through those three points:
-```
-Circle(A, B, C)
-```
+Here are some examples:
 
-A third example is the construction `parallel_line`, which takes two parameters: The first a point and the second a line. Like so:
-```
-parallel_line(A, l)
-```
-This returns an object whose definition is "The line which is parallel to `l` and passes through `A`".
+1. `midpoint` is a construction that takes two points, and returns a third point.
+  Given two points `A` and `B`, the object described by
+  ```
+  midpoint(A, B)
+  ```
+  is also a point. Specifically, it is the point in the center of the segment from `A` to `B`.
 
-#### Binary operator
+2. `Circle` is a construction that takes three points, and returns the circle passing through those three points:
+  ```
+  Circle(A, B, C)
+  ```
 
-Most (but not all) constructions are called 
+3. `parallel_line` is a construction which takes two parameters: The first a point and the second a line. Like so:
+  ```
+  parallel_line(A, l)
+  ```
+  This returns an object whose definition is "The line which is parallel to `l` and passes through `A`".
+
+4. `angle` is a construction that takes three points:
+  ```
+  angle(A, B, C)
+  ```
+  and returns a scalar describing by how much the ray from B in the direction of A
+  must be rotated clockwise to reach the ray from B in the direction of C.
+
+Each construction has a predefined number of parameters it must receive, and each parameter has a predefined type.
+A construction cannot be called on a different number of parameters, or with parameters of the wrong type.
+
+#### Binary operators
+
+Some constructions are simply binary operators on real numbers.
+The four basic arithmetic operations can be used as binary operators: `+, -, *, /`.
+
+For example, if `x` is a scalar, and `A, B, C` are points, the following are valid uses of arithmetic operators:
+```
+x + angle(A, B, C)
+(x - 2) * 3
+3 * angle(A, B, C) / 2
+distance(A, B) / distance(A, C)
+```
+Usually, we will not write expressions such as `(x - 2) * 3`, as our proof engine does not know to apply the distributive property.
+Nonetheless, this expression is valid and will parse.
 
 ### <span id="syntax-predicates"> Predicates </span>
 
