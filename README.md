@@ -51,6 +51,41 @@ https://console.cloud.google.com/storage/browser/euclid_2d?inv=1&invt=Ab4r5g&pro
 
 ## <span id="syntax"> Geometry Syntax </span>
 ### <span id="syntax-object-types"> Object Types </span>
+
+Throughout this repository, we will be describing different objects that are relevant to geometry problems.
+These will be referred to as **geometry objects**.
+There are a few types of objects, each type having a different range of values.
+
+1. Points
+2. Lines
+3. Circles
+4. Scalars
+5. Angles
+
+Points, lines, and circles are objects that can be embedded in a 2D plane.
+Scalars and angles are both real numbers, the difference being that the value of an angle is only defined modulo 360°.
+
+Objects will have names, usually marked by a single letter.
+Sometimes they might have longer names, an index associated with them, and a prime (`'`) symbol on them.
+Here are some examples of valid names for objects:
+* A
+* B_1
+* M2
+* C'
+* AQ
+
+The name of an object does not contain information on its type, and any object type of object could potentially have any name.
+Although for geometry objects that can be embedded in a plane (i.e., objects that are **not** scalars), we will usually follow the following conventions:
+
+| Object Type | Naming convention | Common names              |
+|-------------|-------------------|---------------------------|
+| Point       | Capital letters   | A, B, C, P, Q, R, X, Y, Z |
+| Line        | Lowercase letters | f, g, h, p, q, r, s, t    |
+| Circle      | Lowercase letters | c, d, e, o, w             |
+
+These conventions are for the base name. There are no specified conventions for whether to use underscores for indexing, or whether to use primes (`'`).
+Those can appear on any object.
+
 ### <span id="syntax-constructions"> Constructions </span>
 ### <span id="syntax-predicates"> Predicates </span>
 
