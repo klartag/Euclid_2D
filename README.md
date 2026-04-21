@@ -18,7 +18,7 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Running an interactive terminal](#solver-interacting)  | How to evaluate expressions and predicates in a geometry problem (possibly with a partially-written proof) |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Prettifying](#solver-prettifying)                      | How to make a proof easier to read by humans |
 
-<a name="introduction"/>
+<a name="introduction">
 ## Introduction
 
 This is an open-source research project focused on using AI to solve, invent, and analyze problems in 2D Euclidean geometry.
@@ -38,38 +38,38 @@ The level of Euclidean Geometry problems we are aiming at is roughly that of e.g
 Google bucket link:
 https://console.cloud.google.com/storage/browser/euclid_2d?inv=1&invt=Ab4r5g&project=versatile-bolt-330819
 
-<a name="syntax"/>
+<a name="syntax">
 ## Geometry Syntax
 
-<a name="problem-generator"/>
+<a name="problem-generator">
 ## Generating Problems
 
-<a name="problem-generator-introduction"/>
+<a name="problem-generator-introduction">
 ### Introduction
 
-<a name="problem-generator-capabilities"/>
+<a name="problem-generator-capabilities">
 ### Capabilities
 
-<a name="problem-generator-introduction"/>
+<a name="problem-generator-introduction">
 ### Usage
 
-<a name="solver"/>
+<a name="solver">
 ## Solving Problems
 
-<a name="solver-embedding"/>
+<a name="solver-embedding">
 ### Embedding a question
 
-<a name="solver-proof-generation"/>
+<a name="solver-proof-generation">
 ### Generating a proof
 
-<a name="solver-trimming"/>
+<a name="solver-trimming">
 ### Trimming proofs
 
-<a name="solver-checking"/>
+<a name="solver-checking">
 ### Checking + Validating a proof
 
-<a name="solver-interacting"/>
+<a name="solver-interacting">
 ### Running an interactive terminal
 
-<a name="solver-prettifying"/>
+<a name="solver-prettifying">
 ### Prettifying
