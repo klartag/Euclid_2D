@@ -5,23 +5,23 @@
 | Section                                   | Description                                                               |
 |-------------------------------------------|---------------------------------------------------------------------------|
 | [Introduction](#introduction)             | What is this repository about?                                            |
-| [Geometry Syntax](#syntax) | How to formulate a geometry problem or proof                              |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Object Types](#syntax-object-types)    | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#syntax-constructions)  | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#syntax-predicates)        | |
-| [Geometry Configuration Rules](#configuration) | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#configuration-constructions)   | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#configuration-predicates)         | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Theorems](#configuration-theorems)             | |
-| [Geometry Document](#syntax-structure) | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Assumptions](#syntax-assumptions)      | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)          | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Need to prove](#syntax-need-to-prove)  | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Proof](#syntax-proof)                  | |
+| [Geometry Syntax](#syntax) | How to formulate a geometry problem or proof.                              |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Object Types](#syntax-object-types)    | What are the different types of objects that can appear in a problem statement or proof. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#syntax-constructions)  | How to use geometric objects to describe more geometric objects. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#syntax-predicates)        | How to use geometric objects to describe predicates. |
+| [Geometry Configuration Rules](#configuration) | What are the rules that geometric objects abide to? |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#configuration-constructions)   | How constructions are defined. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#configuration-predicates)         | How predicates are defined. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Theorems](#configuration-theorems)             | How theorems are defined. |
+| [Geometry Document](#syntax-structure) | All about the file format in which we save geometry problem statements and proofs. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Assumptions](#syntax-assumptions)      | The section containing the given predicates in the problem. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)          | The section containing a coordinate embedding of geometry objects. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Need to prove](#syntax-need-to-prove)  | The section containing the predicates that need to be proved. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Proof](#syntax-proof)                  | The section containing the proof. |
 | [Generating Problems](#problem-generator) | How to generate geometry problems (just their statements, without proof)  |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Introduction](#problem-generator-introduction)         | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Capabilities](#problem-generator-capabilities)         | |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Usage](#problem-generator-introduction)                | |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Introduction](#problem-generator-introduction)         | What is this module about? |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Capabilities](#problem-generator-capabilities)         | What can we do with it? |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Usage](#problem-generator-introduction)                | How do we use it? |
 | [Solving Problems](#solver) | How to solve geometry problems |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding a question](#solver-embedding)               | How to take a geometry problem and embed it in 2D space |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Generating a proof](#solver-proof-generation)          | How to take a geometry problem and generate a proof |
