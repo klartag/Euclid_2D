@@ -18,17 +18,17 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)          | The section containing a coordinate embedding of geometry objects. |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Need to prove](#syntax-need-to-prove)  | The section containing the predicates that need to be proved. |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Proof](#syntax-proof)                  | The section containing the proof. |
-| [Generating Problems](#problem-generator) | How to generate geometry problems (just their statements, without proof)  |
+| [Generating Problems](#problem-generator) | How to generate geometry problems (just their statements, without proof).  |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Introduction](#problem-generator-introduction)         | What is this module about? |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Capabilities](#problem-generator-capabilities)         | What can we do with it? |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Usage](#problem-generator-introduction)                | How do we use it? |
 | [Solving Problems](#solver) | How to solve geometry problems |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding a question](#solver-embedding)               | How to take a geometry problem and embed it in 2D space |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Generating a proof](#solver-proof-generation)          | How to take a geometry problem and generate a proof |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Trimming proofs](#solver-trimming)                     | How to shorten a proof until its length is locally optimal |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Checking + Validating a proof](#solver-checking)       | How to make sure a written proof is correct |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Running an interactive terminal](#solver-interacting)  | How to evaluate expressions and predicates in a geometry problem (possibly with a partially-written proof) |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Prettifying](#solver-prettifying)                      | How to make a proof easier to read by humans |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding a question](#solver-embedding)               | How to take a geometry problem and embed it in 2D space. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Generating a proof](#solver-proof-generation)          | How to take a geometry problem and generate a proof. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Trimming proofs](#solver-trimming)                     | How to shorten a proof until its length is locally optimal. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Checking + Validating a proof](#solver-checking)       | How to make sure a written proof is correct. |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Running an interactive terminal](#solver-interacting)  | How to evaluate expressions and predicates in a geometry problem (possibly with a partially-written proof). |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Prettifying](#solver-prettifying)                      | How to make a proof easier to read by humans. |
 
 ## <span id="introduction"> Introduction </span>
 
