@@ -112,16 +112,19 @@ Here are some examples:
   ```
   is also a point. Specifically, it is the point in the center of the segment from `A` to `B`.
 
-2. `Circle` is a construction that takes three points, and returns the circle passing through those three points:
-  ```
-  Circle(A, B, C)
-  ```
-
-3. `parallel_line` is a construction which takes two parameters: The first a point and the second a line. Like so:
+2. `parallel_line` is a construction which takes two parameters: The first a point and the second a line. Like so:
   ```
   parallel_line(A, l)
   ```
   This returns an object whose definition is "The line which is parallel to `l` and passes through `A`".
+
+3. `Circle` is a construction that takes three points, and returns the circle passing through those three points:
+  ```
+  Circle(A, B, C)
+  ```
+
+  Note that although most constructions are written in lowercase, very few constructions have a capital letter in the beginning.
+  This is important, as construction names are case-sensitive.
 
 4. `angle` is a construction that takes three points:
   ```
