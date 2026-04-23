@@ -136,7 +136,10 @@ Here are some examples:
 Each construction has a predefined number of parameters it must receive, and each parameter has a predefined type.
 A construction cannot be called on a different number of parameters, or with parameters of the wrong type.
 
-#### Binary operators
+The full list of construction functions can be found in [./rules/constructions_and_predicates/constructions_database.yml].
+The format in which that file is written is described [further down in this document](#configuration-constructions).
+
+#### Binary construction operators
 
 Some constructions are simply binary operators on real numbers.
 The four basic arithmetic operations can be used as binary operators: `+, -, *, /`.
@@ -152,6 +155,101 @@ Usually, we will not write expressions such as `(x - 2) * 3`, as our proof engin
 Nonetheless, this expression is valid and will parse.
 
 ### <span id="syntax-predicates"> Predicates </span>
+
+Predicates are statements that have a boolean value (are either true or false).
+Like [geometry objects](#syntax-object-types), they are depicted by a string of text.
+Predicates are very useful, and will be used in order to describe a few things:
+
+1. The givens in a geometry problem
+2. The statement that the geometry problem requires we prove
+3. The results that each step of a proof gives us
+
+Predicates could be seen as a type of geometry object, but they are described by a separate Python class.
+
+#### Predicate functions
+
+Like geometry objects, many predicates are described by a function that take geometry objects as parameters.
+Some examples are:
+
+1. `concyclic` is a predicate that takes four points as input:
+```
+concyclic(A, B, C, D)
+```
+and states that all four of those points lie on a single circle.
+
+2. `concurrent` is a predicate that takes three lines as input:
+```
+concurrent(f, g, h)
+```
+and states that all three of these lines intersect at a single point.
+
+3. `congruent_triangles` takes six points:
+```
+congruent_triangles(A, B, C, X, Y, Z)
+```
+and states that the triangles `ΔABC` and `ΔXYZ` are congruent.
+
+Some predicates are a bit unusual in the way they take parameters:
+
+4. `tangent` is a predicate that takes two curves:
+```
+tangent(c, d)
+```
+and states that they are tangent to each other.
+This predicate is unusual in that it takes multiple parameter types:
+At least one of `c` and `d` must be a circle, but the other parameter can be either a circle or a line.
+
+5. `distinct` is a predicate that takes a list of geometry objects, and states that no two are equal.
+It can take an arbitrary number of parameters:
+```
+distinct(f, g, h, j, k, l)
+```
+but all the parameters must be of the same object type.
+
+#### Binary predicate operators
+
+Some predicates are not described by functions, but rather by binary operators.
+
+1. One of them is the `==` operator,
+that states that two scalars are equal: If `x`, `y`, and `z` are scalars, then one could write
+```
+2 * x + 1 == y + z
+```
+
+2. Another is the `!=` operator, which states that two values are not equal.
+```
+2 * x + 1 != y + z
+```
+
+3. A variant of the `==` predicate checks whether two values are equal modulo 360°.
+This predicate is called by adding the suffix `mod 360` to the predicate. For example,
+if `A, B, C, D` are points, then one could write the predicate
+```
+angle(A, B, C) + 180 == angle(C, D, A) mod 360
+```
+
+4. The `!=` operator can also be written together with the `mod 360` suffix, and its meaning at this point is self-explanatory.
+
+5. The `in` predicate, which takes a list of points (say, `A, B`) and a list of curves (say, `c, l`).
+As long as each curve is either a line or a circle, its type does not matter.
+Then, the predicate
+```
+A, B in c, l
+```
+states that each of the curves on the right side of the `in` operator contains each of the points on the left side of the `in` operator.
+
+6. The `not in` predicate, which states the negation of the `in` predicate. I.e., the predicate
+```
+A, B not in c, l
+```
+states that no curve on the right side of the `in` operator may touch any of the points on the left side of the `in` operator.
+
+#### Where can I find the full list of possible predicates?
+
+A mostly complete list of predicate functions can be found in [./rules/constructions_and_predicates/predicates_database.yml].
+The format in which that file is written is described [further down in this document](#configuration-predicates).
+
+The rest of the predicates (the more unusual ones) are defined under the directory [./rules/predicates/implementations].
 
 ## <span id="configuration"> Geometry Configuration Rules </span>
 ### <span id="configuration-constructions"> Constructions </span>
