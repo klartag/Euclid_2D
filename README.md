@@ -136,7 +136,7 @@ Here are some examples:
 Each construction has a predefined number of parameters it must receive, and each parameter has a predefined type.
 A construction cannot be called on a different number of parameters, or with parameters of the wrong type.
 
-The full list of construction functions can be found in [./rules/constructions_and_predicates/constructions_database.yml].
+The full list of construction functions can be found in [rules/constructions_and_predicates/constructions_database.yml].
 The format in which that file is written is described [further down in this document](#configuration-constructions).
 
 #### Binary construction operators
@@ -246,10 +246,10 @@ states that no curve on the right side of the `in` operator may touch any of the
 
 #### Where can I find the full list of possible predicates?
 
-A mostly complete list of predicate functions can be found in [link](rules/constructions_and_predicates/predicates_database.yml).
+A mostly complete list of predicate functions can be found in [rules/constructions_and_predicates/predicates_database.yml].
 The format in which that file is written is described [further down in this document](#configuration-predicates).
 
-The rest of the predicates (the more unusual ones) are defined under [this directory](rules\predicates\implementations).
+The rest of the predicates (the more unusual ones) are defined under the directory [rules/predicates/implementations].
 
 ## <span id="configuration"> Geometry Configuration Rules </span>
 ### <span id="configuration-constructions"> Constructions </span>
