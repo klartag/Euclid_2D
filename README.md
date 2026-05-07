@@ -394,7 +394,7 @@ This is the return type of the construction:
 I.e., the object `point_circle_tangent_line(A, c)` is of the Line type.
 
 The reason this object is given a name, is so it can be called in the
-[`conclude`](#configuration-constructions-conclude) and [`possible_conclusion`](#configuration-constructions-possible-conclusion) sections.
+[`conclude`](#configuration-constructions-conclude) and [`possible_conclusions`](#configuration-constructions-possible-conclusions) sections.
 
 #### <span id="configuration-constructions-conclude"> `conclude` </span>
 
