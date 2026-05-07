@@ -350,11 +350,51 @@ internal_angle_bisector:
 
 This value tells us that if the order of parameters is reversed, the object is identical. I.e., `interal_angle_bisector(A, B, C)` equals `internal_angle_bisector(C, B, A)`.
 
-The full list of values that the `preprocess` tag can take, can be found in the [symmetry.py](rules/symmetry.py) file.
+The full list of values that the `preprocess` tag may have can be found in the [symmetry.py](rules/symmetry.py) file.
 
 #### <span id="configuration-constructions-where"> `where` </span>
 
+This section is a list of which constraints have to be true before this construction may be *defined*.
+A good example is the construction `isogonal_conjugate`:
+```yml
+isogonal_conjugate:
+  ...
+  inputs:
+    - P, A, B, C: Point
+  where:
+    - not_collinear(A, B, C)
+    - not_collinear(P, A, B)
+    - not_collinear(P, B, C)
+    - not_collinear(P, A, C)
+  ...
+```
+which is only defined when no three points out of the four inputs are collinear.
+
 #### <span id="configuration-constructions-construct"> `construct` </span>
+
+This section is a declaration of the type of object that this construction returns.
+For example, the construction `point_circle_tangent_line`
+```yml
+point_circle_tangent_line:
+  ...
+  inputs:
+    - P: Point
+    - c: Circle
+  construct:
+    - l: Line
+  ...
+```
+takes a point and circle as input, and constructs the line tangent to the circle at this point.
+(Presumeably the point must be on the circle, but this is taken care of in the [`where`](#configuration-constructions-where) section of this construction.)
+
+The declaration of the `construct` section looks identical to how the objects in the `inputs` section are defined,
+but there is one crucial difference, and that is that **only one object** may be declared in the `construct` section.
+
+This is the return type of the construction:
+I.e., the object `point_circle_tangent_line(A, c)` is of the Line type.
+
+The reason this object is given a name, is so it can be called in the
+[`conclude`](#configuration-constructions-conclude) and [`possible_conclusion`](#configuration-constructions-possible-conclusion) sections.
 
 #### <span id="configuration-constructions-conclude"> `conclude` </span>
 
