@@ -2,34 +2,40 @@
 
 ### Table of Contents
 
-| Section                                                                           | Description                                                                                                   | Status? |
-|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|---------|
-| [Introduction](#introduction)                                                     | What is this repository about?                                                                                |    x    |
-| [Geometry Syntax](#syntax)                                                        | How to formulate a geometry problem or proof.                                                                 |    x    |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Object Types](#syntax-object-types)                    | What are the different types of objects that can appear in a problem statement or proof.                      |    x    |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Literals](#syntax-literals)                            | How to describe scalars with values that are known ahead of time.                                             |    x    |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#syntax-constructions)                  | How to use geometric objects to describe more geometric objects.                                              |    x    |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#syntax-predicates)                        | How to use geometric objects to describe predicates.                                                          |    x    |
-| [Geometry Document](#syntax-structure)                                            | All about the file format in which we save geometry problem statements and proofs.                            |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Assumptions](#syntax-assumptions)                      | The section containing the given predicates in the problem.                                                   |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)                          | The section containing a coordinate embedding of geometry objects.                                            |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Need to prove](#syntax-need-to-prove)                  | The section containing the predicates that need to be proved.                                                 |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Proof](#syntax-proof)                                  | The section containing the proof.                                                                             |         |
-| [Geometry Configuration Rules](#configuration)                                    | What are the rules that geometric objects abide to?                                                           |    x    |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#configuration-constructions)           | How constructions are defined.                                                                                |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#configuration-predicates)                 | How predicates are defined.                                                                                   |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Theorems](#configuration-theorems)                     | How theorems are defined.                                                                                     |         |
-| [Generating Problems](#problem-generator)                                         | How to generate geometry problems (just their statements, without proof).                                     |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Introduction](#problem-generator-introduction)         | What is this module about?                                                                                    |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Capabilities](#problem-generator-capabilities)         | What can we do with it?                                                                                       |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Usage](#problem-generator-introduction)                | How do we use it?                                                                                             |         |
-| [Solving Problems](#solver)                                                       | How to solve geometry problems                                                                                |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding a question](#solver-embedding)               | How to take a geometry problem and embed it in 2D space.                                                      |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Generating a proof](#solver-proof-generation)          | How to take a geometry problem and generate a proof.                                                          |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Trimming proofs](#solver-trimming)                     | How to shorten a proof until its length is locally optimal.                                                   |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Checking + Validating a proof](#solver-checking)       | How to make sure a written proof is correct.                                                                  |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Running an interactive terminal](#solver-interacting)  | How to evaluate expressions and predicates in a geometry problem (possibly with a partially-written proof).   |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Prettifying](#solver-prettifying)                      | How to make a proof easier to read by humans.                                                                 |         |
+| Section                                                                                                                       | Description                                                                                                   | Status? |
+|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|---------|
+| [Introduction](#introduction)                                                                                                 | What is this repository about?                                                                                |    x    |
+| [Geometry Syntax](#syntax)                                                                                                    | How to formulate a geometry problem or proof.                                                                 |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Object Types](#syntax-object-types)                                                                | What are the different types of objects that can appear in a problem statement or proof.                      |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Literals](#syntax-literals)                                                                        | How to describe scalars with values that are known ahead of time.                                             |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#syntax-constructions)                                                              | How to use geometric objects to describe more geometric objects.                                              |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#syntax-predicates)                                                                    | How to use geometric objects to describe predicates.                                                          |    x    |
+| [Geometry Document](#syntax-structure)                                                                                        | All about the file format in which we save geometry problem statements and proofs.                            |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Assumptions](#syntax-assumptions)                                                                  | The section containing the given predicates in the problem.                                                   |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)                                                                      | The section containing a coordinate embedding of geometry objects.                                            |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Need to prove](#syntax-need-to-prove)                                                              | The section containing the predicates that need to be proved.                                                 |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Proof](#syntax-proof)                                                                              | The section containing the proof.                                                                             |         |
+| [Geometry Configuration Rules](#configuration)                                                                                | What are the rules that geometric objects abide to?                                                           |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#configuration-constructions)                                                       | How constructions are defined.                                                                                |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`inputs`](#configuration-constructions-inputs)                             | The `inputs` section in the definition of a construction.                                                     |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`preprocess`](#configuration-constructions-preprocess)                     | The `preprocess` section in the definition of a construction.                                                 |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`where`](#configuration-constructions-where)                               | The `where` section in the definition of a construction.                                                      |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`construct`](#configuration-constructions-construct)                       | The `construct` section in the definition of a construction.                                                  |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`conclude`](#configuration-constructions-conclude)                         | The `conclude` section in the definition of a construction.                                                   |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`possible_conclusions`](#configuration-constructions-possible-conclusions) | The `possible_conclusions` section in the definition of a construction.                                       |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#configuration-predicates)                                                             | How predicates are defined.                                                                                   |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Theorems](#configuration-theorems)                                                                 | How theorems are defined.                                                                                     |         |
+| [Generating Problems](#problem-generator)                                                                                     | How to generate geometry problems (just their statements, without proof).                                     |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Introduction](#problem-generator-introduction)                                                     | What is this module about?                                                                                    |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Capabilities](#problem-generator-capabilities)                                                     | What can we do with it?                                                                                       |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Usage](#problem-generator-introduction)                                                            | How do we use it?                                                                                             |         |
+| [Solving Problems](#solver)                                                                                                   | How to solve geometry problems                                                                                |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding a question](#solver-embedding)                                                           | How to take a geometry problem and embed it in 2D space.                                                      |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Generating a proof](#solver-proof-generation)                                                      | How to take a geometry problem and generate a proof.                                                          |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Trimming proofs](#solver-trimming)                                                                 | How to shorten a proof until its length is locally optimal.                                                   |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Checking + Validating a proof](#solver-checking)                                                   | How to make sure a written proof is correct.                                                                  |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Running an interactive terminal](#solver-interacting)                                              | How to evaluate expressions and predicates in a geometry problem (possibly with a partially-written proof).   |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Prettifying](#solver-prettifying)                                                                  | How to make a proof easier to read by humans.                                                                 |         |
 
 ## <span id="introduction"> Introduction </span>
 
@@ -311,7 +317,6 @@ This section declares what the parameters of a construction are.
 For example, consider the following construction:
 ```yml
 circle_circle_other_intersection: 
-  ...
   inputs:
     - P: Point
     - c, d: Circle
@@ -341,7 +346,6 @@ Setting `preprocess` to `symmetric` immediately tells our grammar that, for exam
 Another example for a value that `preprocess` can take is `between`:
 ```yml
 internal_angle_bisector:
-  ...
   inputs:
     - A, B, C: Point
   preprocess: between
@@ -358,9 +362,9 @@ This section is a list of which constraints have to be true before this construc
 A good example is the construction `isogonal_conjugate`:
 ```yml
 isogonal_conjugate:
-  ...
   inputs:
     - P, A, B, C: Point
+  ...
   where:
     - not_collinear(A, B, C)
     - not_collinear(P, A, B)
@@ -370,16 +374,20 @@ isogonal_conjugate:
 ```
 which is only defined when no three points out of the four inputs are collinear.
 
+These predicates affect our code in two ways:
+1.  When a construction is declared in the [problem statement](#syntax-assumptions), then all the predicates under their `where` section are immediately assumed.
+2.  When a construction is declared in the [proof](#syntax-proof), if not all predicates under the `where` section have been proven, the code will throw an error.
+
 #### <span id="configuration-constructions-construct"> `construct` </span>
 
 This section is a declaration of the type of object that this construction returns.
 For example, the construction `point_circle_tangent_line`
 ```yml
 point_circle_tangent_line:
-  ...
   inputs:
     - P: Point
     - c: Circle
+  ...
   construct:
     - l: Line
   ...
@@ -398,8 +406,58 @@ The reason this object is given a name (in the case of `point_circle_tangent_lin
 
 #### <span id="configuration-constructions-conclude"> `conclude` </span>
 
+This section lists predicates that can be immediately derived from the existence of this construction.
+Whenever a construction is declared, all the predicates are assumed to be true.
+
+For example, consider the construction `incenter`:
+```yml
+incenter:
+  inputs:
+    - A, B, C: Point
+  ...
+  construct:
+    - P: Point
+  conclude:
+    - P in internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B), internal_angle_bisector(C, A, B)
+    - P == line_intersection(internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B))
+```
+
+Inside the predicates listed in the `conclude` block, the name `P` references the result of the construction `incenter(A, B, C)`.
+So for example, given three points `X, Y, Z`, creating the object `incenter(X, Y, Z)` in a geometry problem statement or proof will automatically make the system assume the predicate `incenter(X, Y, Z) in internal_angle_bisector(X, Y, Z)`.
+
 #### <span id="configuration-constructions-possible-conclusions"> `possible_conclusions` </span>
 
+Much like the `conclude` section, this section lists predicates that can be immediately derived from the existence of this construction.
+The difference is that the predicates in this section are conditioned.
+I.e., they are only derived, if another additional predicate is satisfied.
+
+For example, consider the construction `projection`:
+```yml
+projection:
+  inputs:
+    - P: Point
+    - l: Line
+  construct:
+    - Q: Point
+  ...
+  possible_conclusions:
+    - P not in l => perpendicular_line(P, l) == Line(P, Q)
+    - P in l => P == Q
+```
+
+Each item in the `possible_conclusions` block consists of two predicates, separated in the middle by the `=>` characters.
+Very intuitively, it describes the idea that the predicate on the left implies the predicate on the right.
+
+Given a point `A` and a line `f`, creating the object `projection(A, f)` will not automatically create the predicate `A == projection(A, f)`.
+(Which it shouldn't, of course. That would be a false conclusion.)
+But if the predicate `A in f` is known, then `A == projection(A, f)` will be immediately assumed.
+
+Note that **all** of the predicates on the right-hand side of the `=>` operator contain `Q`, as these are supposed to be predicates **about** the object `Q`
+(which was declared in the `construct` section).
+On the other hand, **none** of the predicates on the left-hand side of the `=>` operator contain `Q`, as these are supposed to be predicates that it makes sense
+to speak of **before** the object `projection(P, l)` is defined.
+In the grammar of the langauge it is legitimate to have predicates on the left-hand side that contain `Q`, or predicates on the right-hand side that do not contain `Q`,
+but this would be bad practice and is not recommended.
 
 ### <span id="configuration-predicates"> Predicates </span>
 ### <span id="configuration-theorems"> Theorems </span>
