@@ -24,7 +24,18 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`conclude`](#configuration-constructions-conclude)                         | The `conclude` section in the definition of a construction.                                                   |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`possible_conclusions`](#configuration-constructions-possible-conclusions) | The `possible_conclusions` section in the definition of a construction.                                       |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#configuration-predicates)                                                             | How predicates are defined.                                                                                   |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`inputs`](#configuration-predicates-inputs)                                | The `inputs` section in the definition of a predicate.                                                        |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`preprocess`](#configuration-predicates-preprocess)                        | The `preprocess` section in the definition of a predicate.                                                    |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`conclude`](#configuration-predicates-conclude)                            | The `conclude` section in the definition of a predicate.                                                      |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Theorems](#configuration-theorems)                                                                 | How theorems are defined.                                                                                     |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`inputs`](#configuration-theorems-inputs)                                  | The `inputs` section in the definition of a theorem.                                                          |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`where`](#configuration-theorems-where)                                    | The `where` section in the definition of a theorem.                                                           |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`where_embedding`](#configuration-theorems-where-embedding)                | The `where_embedding` section in the definition of a theorem.                                                 |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`conclude`](#configuration-theorems-conclude)                              | The `conclude` section in the definition of a theorem.                                                        |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`possible_conclusions`](#configuration-theorems-possible-conclusions)      | The `possible_conclusions` section in the definition of a theorem.                                            |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`rank`](#configuration-theorems-rank)                                      | The `rank` section in the definition of a theorem.                                                            |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`trivial_if_equal`](#configuration-theorems-trivial-if-equal)              | The `trivial_if_equal` section in the definition of a theorem.                                                |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`metadata`](#configuration-theorems-metadata)                              | The `metadata` section in the definition of a theorem.                                                        |         |
 | [Generating Problems](#problem-generator)                                                                                     | How to generate geometry problems (just their statements, without proof).                                     |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Introduction](#problem-generator-introduction)                                                     | What is this module about?                                                                                    |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Capabilities](#problem-generator-capabilities)                                                     | What can we do with it?                                                                                       |         |
@@ -460,8 +471,21 @@ In the grammar of the langauge it is legitimate to have predicates on the left-h
 but this would be bad practice and is not recommended.
 
 ### <span id="configuration-predicates"> Predicates </span>
+
+#### <span id="configuration-predicates-inputs"> `inputs` </span>
+#### <span id="configuration-predicates-preprocess"> `preprocess` </span>
+#### <span id="configuration-predicates-conclude"> `conclude` </span>
+
 ### <span id="configuration-theorems"> Theorems </span>
 
+#### <span id="configuration-theorems-inputs"> `inputs` </span>
+#### <span id="configuration-theorems-where"> `where` </span>
+#### <span id="configuration-theorems-where-embedding"> `where_embedding` </span>
+#### <span id="configuration-theorems-conclude"> `conclude` </span>
+#### <span id="configuration-theorems-possible-conclusions"> `possible_conclusions` </span>
+#### <span id="configuration-theorems-rank"> `rank` </span>
+#### <span id="configuration-theorems-trivial-if-equal"> `trivial_if_equal` </span>
+#### <span id="configuration-theorems-metadata"> `metadata` </span>
 
 ## <span id="problem-generator"> Generating Problems </span>
 ### <span id="problem-generator-introduction"> Introduction </span>
