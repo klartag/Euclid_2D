@@ -393,7 +393,7 @@ but there is one crucial difference, and that is that **only one object** may be
 This is the return type of the construction:
 I.e., the object `point_circle_tangent_line(A, c)` is of the Line type.
 
-The reason this object is given a name, is so it can be called in the
+The reason this object is given a name (in the case of `point_circle_tangent_line`, it is called `l`), is so it can be called in the
 [`conclude`](#configuration-constructions-conclude) and [`possible_conclusions`](#configuration-constructions-possible-conclusions) sections.
 
 #### <span id="configuration-constructions-conclude"> `conclude` </span>
