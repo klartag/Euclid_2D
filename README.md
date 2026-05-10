@@ -10,6 +10,8 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Literals](#syntax-literals)                                                                        | How to describe scalars with values that are known ahead of time.                                             |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#syntax-constructions)                                                              | How to use geometric objects to describe more geometric objects.                                              |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#syntax-predicates)                                                                    | How to use geometric objects to describe predicates.                                                          |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Declarations](#syntax-declarations)                                                                | How to declare the existence of new geometric objects.                                                        |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Implications](#syntax-implications)                                                                | How to declare that predicates imply other predicates.                                                        |         |
 | [Geometry Document](#syntax-structure)                                                                                        | All about the file format in which we save geometry problem statements and proofs.                            |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Assumptions](#syntax-assumptions)                                                                  | The section containing the given predicates in the problem.                                                   |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)                                                                      | The section containing a coordinate embedding of geometry objects.                                            |         |
@@ -269,6 +271,40 @@ The format of this file is described [further down in this document](#configurat
 The rest of the predicates (the more unusual ones) are defined inside this [directory](rules/predicates/implementations).
 
 
+### <span id="syntax-declarations"> Declarations </span>
+
+In various locations, it will be required to prescribe, for each geometric object that is an **atom**, what its type is.
+This is important because while, it is clear that `midpoint(A, B)` is a point, it may not be clear whether an object `C` is also a point.
+
+The way it is declared is with a line of text following the following syntax:
+```yml
+A: Point
+```
+This line of text says that the object on the left side of the colon, has the type named on the right side of the colon.
+It is also possible to declare multiple objects at once, so long as they have the same type:
+```yml
+A, B, C: Point
+f, g, h, l: Line
+c, d: Circle
+x, y, z, w, t: Scalar
+```
+
+### <span id="syntax-implications"> Implications </span>
+
+In various locations, it will be important to mention, that a predicate implies another predicate.
+These sorts of implication statements will have the following syntax:
+```
+[Predicate 1] [Symbol] [Predicate 2]
+```
+Where `[Predicate 1]` and `[Predicate 2]` are predicates (using the usual [predicate](#syntax-predicates) syntax),
+and `[Symbol]` is one of the following:
+
+| Symbol | Meaning                                               |
+|--------|-------------------------------------------------------|
+| `=>`   | `[Predicate 1]` implies `[Predicate 2]`.              |
+| `<=`   | `[Predicate 2]` implies `[Predicate 1]`.              |
+| `<=>`  | `[Predicate 1]` and `[Predicate 2]` imply each other. |
+
 ## <span id="syntax-structure"> Geometry Document </span>
 ### <span id="syntax-assumptions"> Assumptions </span>
 ### <span id="syntax-embedding"> Embedding </span>
@@ -325,6 +361,9 @@ Next, we will be going over what the different sections mean, and how to read th
 #### <span id="configuration-constructions-inputs"> `inputs` </span>
 
 This section declares what the parameters of a construction are.
+
+It is a section with a list of lines, each line following [object declaration](#syntax-declarations) syntax.
+
 For example, consider the following construction:
 ```yml
 circle_circle_other_intersection: 
@@ -406,8 +445,8 @@ point_circle_tangent_line:
 takes a point and circle as input, and constructs the line tangent to the circle at this point.
 (Presumeably the point must be on the circle, but this is taken care of in the [`where`](#configuration-constructions-where) section of this construction.)
 
-The declaration of the `construct` section looks identical to how the objects in the `inputs` section are defined,
-but there is one crucial difference, and that is that **only one object** may be declared in the `construct` section.
+The declaration of the `construct` section follows [object declaration](#syntax-declarations) syntax,
+but **only one object** may be declared in the `construct` section.
 
 This is the return type of the construction:
 I.e., the object `point_circle_tangent_line(A, c)` is of the Line type.
@@ -456,14 +495,14 @@ projection:
     - P in l => P == Q
 ```
 
-Each item in the `possible_conclusions` block consists of two predicates, separated in the middle by the `=>` characters.
-Very intuitively, it describes the idea that the predicate on the left implies the predicate on the right.
+Each item in the `possible_conclusions` block follows [predicate implication](#syntax-implications) syntax,
+but they may only use the `=>` form of implications.
 
 Given a point `A` and a line `f`, creating the object `projection(A, f)` will not automatically create the predicate `A == projection(A, f)`.
 (Which it shouldn't, of course. That would be a false conclusion.)
 But if the predicate `A in f` is known, then `A == projection(A, f)` will be immediately assumed.
 
-Note that **all** of the predicates on the right-hand side of the `=>` operator contain `Q`, as these are supposed to be predicates **about** the object `Q`
+Note that in the example above **all** of the predicates on the right-hand side of the `=>` operator contain `Q`, as these are supposed to be predicates **about** the object `Q`
 (which was declared in the `construct` section).
 On the other hand, **none** of the predicates on the left-hand side of the `=>` operator contain `Q`, as these are supposed to be predicates that it makes sense
 to speak of **before** the object `projection(P, l)` is defined.
