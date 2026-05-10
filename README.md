@@ -26,6 +26,9 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`conclude`](#configuration-constructions-conclude)                         | The `conclude` section in the definition of a construction.                                                   |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`possible_conclusions`](#configuration-constructions-possible-conclusions) | The `possible_conclusions` section in the definition of a construction.                                       |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#configuration-predicates)                                                             | How predicates are defined.                                                                                   |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`inputs`](#configuration-predicates-inputs)                                | The `inputs` section in the definition of a predicate.                                                        |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`preprocess`](#configuration-predicates-preprocess)                        | The `preprocess` section in the definition of a predicate.                                                    |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`conclude`](#configuration-predicates-conclude)                            | The `conclude` section in the definition of a predicate.                                                      |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Theorems](#configuration-theorems)                                                                 | How theorems are defined.                                                                                     |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`inputs`](#configuration-theorems-inputs)                                  | The `inputs` section in the definition of a theorem.                                                          |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`where`](#configuration-theorems-where)                                    | The `where` section in the definition of a theorem.                                                           |         |
@@ -537,9 +540,23 @@ trapezoid:
     - parallel(Line(A, B), Line(C, D))
 ```
 
-All three sections work precisely as the sections of the same name work when [defining constructions](#configuration-constructions).
 
-One important difference is that sometimes, the `conclude` section will also contain an item called `self`.
+#### <span id="configuration-predicates-inputs"> `inputs` </span>
+
+The `inputs` section is declared precisely in the same way as [the same section in the construction configuration file](#configuration-constructions-inputs):
+The parameters are declared using the [object declaration](#syntax-declarations) syntax,
+and read from left-to-right and top-to-bottom.
+
+#### <span id="configuration-predicates-preprocess"> `preprocess` </span>
+
+The `preprocess` section has the same values and meanings as [the same section in the construction configuration file](#configuration-constructions-preprocess).
+
+#### <span id="configuration-predicates-conclude"> `conclude` </span>
+
+The `conclude` section contains a list of predicates that work in [the same way as the corresponding section in the construction configuration file](#configuration-constructions-conclude),
+except for one crucial difference:
+
+Sometimes, the `conclude` section will also contain an item called `self`.
 Two examples for this behavior is in the definitions of the `concyclic` and `collinear_and_not_between` predicates:
 
 ```yml
@@ -573,6 +590,56 @@ It's a bit of a funny way of saying this, but the point is that predicates that 
 will never be automatically assumed given other predicates.
 
 ### <span id="configuration-theorems"> Theorems </span>
+
+The definitions of all theorems can be found under this [directory](rules/theorems).
+The theorems are organized in a tree of directories, each containing `.yml` files.
+Any `.yml` file anywhere under the [rules/theorems] directory will be parsed into a list of theorems.
+
+Each  `.yml` mapping in the top-level of each file represents a different theorem, that can be used in a [proof](#syntax-proof).
+The definition of each theorem includes a few sections.
+The general shape of a theorem may look more or less as follows:
+
+```yml
+theorem:
+  inputs:
+    ...
+  where:
+    ...
+  where_embedding:
+    ...
+  conclude:
+    ...
+  possible_conclusions:
+    ...
+  rank: ...
+  trivial_if_equal: ...
+  metadata: ...
+```
+
+The word `theorem` is replaced with the name of the theorem.
+The sections `inputs` and `where` are required.
+The rest of the sections are optional, although if neither the `conclude` nor the `possible_conlcusions` sections exist,
+the theorem will be meaningless.
+
+For example, the theorem `radical_axis_is_perpendicular_to_center_line` is defined as follows:
+```yml
+radical_axis_is_perpendicular_to_center_line:
+  inputs:
+    - l: Line
+    - c, d: Circle
+  where:
+    - l == radical_axis(c, d)
+    - exists(Line(center(c), center(d)))
+  conclude:
+    - perpendicular(Line(center(c), center(d)), l)
+  rank: 5
+```
+
+This is the theorem that states:
+> Given two circles and their radical axis line,
+> The radical axis is perpendicular to the line connecting the centers of the circles.
+
+This theorem can be found in this [file](rules/theorems/circles/radical_axis.yml), together with other theorems about radical axes.
 
 #### <span id="configuration-theorems-inputs"> `inputs` </span>
 #### <span id="configuration-theorems-where"> `where` </span>
