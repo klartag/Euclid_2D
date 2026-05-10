@@ -26,9 +26,6 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`conclude`](#configuration-constructions-conclude)                         | The `conclude` section in the definition of a construction.                                                   |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`possible_conclusions`](#configuration-constructions-possible-conclusions) | The `possible_conclusions` section in the definition of a construction.                                       |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#configuration-predicates)                                                             | How predicates are defined.                                                                                   |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`inputs`](#configuration-predicates-inputs)                                | The `inputs` section in the definition of a predicate.                                                        |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`preprocess`](#configuration-predicates-preprocess)                        | The `preprocess` section in the definition of a predicate.                                                    |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`conclude`](#configuration-predicates-conclude)                            | The `conclude` section in the definition of a predicate.                                                      |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Theorems](#configuration-theorems)                                                                 | How theorems are defined.                                                                                     |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`inputs`](#configuration-theorems-inputs)                                  | The `inputs` section in the definition of a theorem.                                                          |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`where`](#configuration-theorems-where)                                    | The `where` section in the definition of a theorem.                                                           |         |
@@ -297,7 +294,7 @@ These sorts of implication statements will have the following syntax:
 [Predicate 1] [Symbol] [Predicate 2]
 ```
 Where `[Predicate 1]` and `[Predicate 2]` are predicates (using the usual [predicate](#syntax-predicates) syntax),
-and `[Symbol]` is one of the following:
+and `[Symbol]` is precisely what you would expect:
 
 | Symbol | Meaning                                               |
 |--------|-------------------------------------------------------|
@@ -511,9 +508,69 @@ but this would be bad practice and is not recommended.
 
 ### <span id="configuration-predicates"> Predicates </span>
 
-#### <span id="configuration-predicates-inputs"> `inputs` </span>
-#### <span id="configuration-predicates-preprocess"> `preprocess` </span>
-#### <span id="configuration-predicates-conclude"> `conclude` </span>
+Before reading this section, it is recommended to be acquainted more or less with the grammar on how to [use predicates](#syntax-predicates).
+
+The definitions of all predicates can be found in this [file](rules/constructions_and_predicates/predicates_database.yml).
+Each  `.yml` mapping in the top-level of the file represents a different predicate.
+The definition of each predicate includes a few sections.
+The general shape of a predicate may look more or less as follows:
+
+```yml
+predicate:
+  inputs:
+    ...
+  preprocess: ...
+  conclude:
+    ...
+```
+
+The word `predicate` is replaced with the name of the predicate.
+The sections `inputs` and `conclude` are required, while `preprocess` is optional and may be completely omitted.
+For example, the following construction `trapezoid` is defined as follows:
+```yml
+trapezoid:
+  inputs:
+    - A, B, C, D: Point
+  preprocess: pi_rotate
+  conclude:
+    - convex(A, B, C, D)
+    - parallel(Line(A, B), Line(C, D))
+```
+
+All three sections work precisely as the sections of the same name work when [defining constructions](#configuration-constructions).
+
+One important difference is that sometimes, the `conclude` section will also contain an item called `self`.
+Two examples for this behavior is in the definitions of the `concyclic` and `collinear_and_not_between` predicates:
+
+```yml
+concyclic:
+  inputs:
+    - A, B, C, D: Point
+  preprocess: symmetric
+  conclude:
+    - self
+```
+
+```yml
+collinear_and_not_between:
+  inputs:
+  - A, B, C: Point
+  preprocess: between 
+  conclude:
+    - self
+    - collinear(A, B, C)
+```
+
+The reason for these items is due to the following feature:
+> The predicates in the `conclude` section of a predicate definition,
+> are assumed to be **necessary and sufficient** conditions for the predicate.
+I.e., if all items in the `conclude` section of a predicate have been proved, our system will conclude that the predicate itself is true.
+This is useful at times, when a predicate is not interesting in itself, but is more of a sort of "macro" that combines other predicates
+(such as the `trapezoid` example above).
+Other predicates, such as `concyclic`, are sort of atomic, and cannot *really* be described by a simpler set of predicates.
+The `self` predicate, in a sense, adds the predicate itself to the list of necessary and sufficient conditions for the predicate.
+It's a bit of a funny way of saying this, but the point is that predicates that have the `self` item in their `conclude` section,
+will never be automatically assumed given other predicates.
 
 ### <span id="configuration-theorems"> Theorems </span>
 
