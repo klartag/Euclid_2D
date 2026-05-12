@@ -413,6 +413,11 @@ To embed a point, the dictionary looks like the example above:
 
 where both the `[X Coordinate]` and `[Y Coordinate]` values are written as **strings**, so that they can be written in arbitrarily large accuracy.
 
+For example, the point `A` from [Problem 1.1](rules/proof_samples/figures/1_1.jl) is embedded as follows:
+```jl
+A := {"x": "-1.280151...", "y": "-0.868268..."}
+```
+
 #### Embedding Lines
 
 To embed a line, the dictionary looks as follows:
@@ -442,10 +447,7 @@ and `[Number]` is a number formatted as a string, and is equal to the square of 
 For example, the circle `c` in [this problem](rules/proof_samples/linear/random_sample/1.jl) is embedded as follows:
 
 ```jl
-Embedding:
-...
 c := {"center": {"x": "-1.079398...", "y": "-0.029693..."}, "radius_squared": "0.692093..."}
-...
 ```
 
 ### <span id="syntax-need-to-prove"> Need to prove </span>
