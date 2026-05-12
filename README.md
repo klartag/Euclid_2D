@@ -35,9 +35,9 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`where_embedding`](#configuration-theorems-where-embedding)                | The `where_embedding` section in the definition of a theorem.                                                 |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`conclude`](#configuration-theorems-conclude)                              | The `conclude` section in the definition of a theorem.                                                        |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`possible_conclusions`](#configuration-theorems-possible-conclusions)      | The `possible_conclusions` section in the definition of a theorem.                                            |    x    |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`rank`](#configuration-theorems-rank)                                      | The `rank` section in the definition of a theorem.                                                            |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`trivial_if_equal`](#configuration-theorems-trivial-if-equal)              | The `trivial_if_equal` section in the definition of a theorem.                                                |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`metadata`](#configuration-theorems-metadata)                              | The `metadata` section in the definition of a theorem.                                                        |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`rank`](#configuration-theorems-rank)                                      | The `rank` section in the definition of a theorem.                                                            |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`trivial_if_equal`](#configuration-theorems-trivial-if-equal)              | The `trivial_if_equal` section in the definition of a theorem.                                                |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  [`metadata`](#configuration-theorems-metadata)                              | The `metadata` section in the definition of a theorem.                                                        |    x    |
 | [Generating Problems](#problem-generator)                                                                                     | How to generate geometry problems (just their statements, without proof).                                     |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Introduction](#problem-generator-introduction)                                                     | What is this module about?                                                                                    |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Capabilities](#problem-generator-capabilities)                                                     | What can we do with it?                                                                                       |         |
@@ -741,8 +741,85 @@ The 0 index here refers to the fact that this is the item in index 0 in the list
 (just as was mentioned a [few paragraphs earlier](#giving-theorems-names-given-possible-conclusions)).
 
 #### <span id="configuration-theorems-rank"> `rank` </span>
+
+The rank of a theorem is a number from 1 to 5, which attempts to describe how important this theorem is.
+I.e., if one must choose to apply theorems in a certain order, than theorems with a higher rank should be applied first.
+
+Theorems without a `rank` section are considered to have a rank of 0.
+
+Ranks were picked relatively arbitrarily. As most of the time, all theorems are applied anyway (eventually)
+rank currently does not very much affect the [proof generator](#solver).
+
 #### <span id="configuration-theorems-trivial-if-equal"> `trivial_if_equal` </span>
+
+The section `trivial_is_equal` contains a list of items, and each item depicts a situation which, if it is true, this theorem step can be skipped.
+
+For example, consider the theorem `parallel_lines_are_transitive`:
+
+```yml
+parallel_lines_are_transitive:
+  inputs:
+    - k, l, m: Line
+  where:
+    - parallel(k, l)
+    - parallel(l, m)
+  conclude:
+    - parallel(k, m)
+  trivial_if_equal:
+    - [k, l]
+    - [l, m]
+    - [k, m]
+```
+
+This theorem states that the property of a pair of lines being parallel is a transitive relation.
+Of course, it is trivial to state that a line is parallel to itself, and so if any two of the three lines are equal,
+the conclusion of the theorem is trivial.
+
+The three items in the list: `[k, l]`, `[l, m]`, `[k, m]` are lists of the three pairs of lines.
+This gives us a heuristic which could (potentially) make it easier to filter through theorem steps that are irrelevant to apply.
+
+Each item in the list is of the form `[object_0, object_1]`, and the item stands to say "if the objects are equal, skip this theorem step".
+
+There is another form that an item in the `trivial_if_equal` list can take. Consider the theorem `sss_congruence`:
+
+```yml
+sss_congruence:
+  inputs:
+    - A, B, C, A', B', C': Point
+  ...
+  trivial_if_equal:
+    - [[A, B, C], [A', B', C']]
+```
+
+This theorem checks when the triangles `ABC` and `A'B'C'` are congruent.
+If they are, this theorem will conclude the predicate `congruent_triangles(A, B, C, A', B', C')`.
+But the predicate `congruent_triangles(A, B, C, A, B, C)` is absolutely trivial (and not needed),
+and so if the points A, B, C each equal the points A', B', C' (respectively) then the theorem step is not needed.
+
 #### <span id="configuration-theorems-metadata"> `metadata` </span>
+
+This is a section that contains an extra tag that tells us something about how the theorem should be handled.
+At the moment, the only existing possible value of this tag is `auto`.
+
+For example, see the theorem `draw_circle_circle_tangency`.
+Whenever a line is tangent to a circle, this theorem makes sure the intersection point exists and is available for other theorems to use:
+
+```yml
+draw_circle_circle_tangency:
+  inputs:
+    - c, d: Circle
+  where:
+    - tangent(c, d)
+  conclude:
+    - exists(circle_circle_tangent_point(c, d))
+  metadata: auto
+```
+
+What the `auto` tag says is that, whenever this theorem can be applied,
+it should be applied automatically, and there is no reason to even **mention** that this theorem has been applied.
+
+This tag is ignored by the [proof generator](#solver), but if the [proof prettifier](#solver-prettifying) is ever implemented,
+one of the things it should do is remove steps in the proof that have the `auto` tag.
 
 ## <span id="problem-generator"> Generating Problems </span>
 ### <span id="problem-generator-introduction"> Introduction </span>
