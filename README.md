@@ -12,7 +12,7 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Predicates](#syntax-predicates)                                                                    | How to use geometric objects to describe predicates.                                                          |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Declarations](#syntax-declarations)                                                                | How to declare the existence of new geometric objects.                                                        |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Implications](#syntax-implications)                                                                | How to declare that predicates imply other predicates.                                                        |    x    |
-| [Geometry Document](#syntax-structure)                                                                                        | All about the file format in which we save geometry problem statements and proofs.                            |         |
+| [Geometry Document](#syntax-structure)                                                                                        | All about the file format in which we save geometry problem statements and proofs.                            |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Assumptions](#syntax-assumptions)                                                                  | The section containing the given predicates in the problem.                                                   |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)                                                                      | The section containing a coordinate embedding of geometry objects.                                            |         |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Need to prove](#syntax-need-to-prove)                                                              | The section containing the predicates that need to be proved.                                                 |         |
@@ -306,6 +306,43 @@ and `[Symbol]` is precisely what you would expect:
 | `<=>`  | `[Predicate 1]` and `[Predicate 2]` imply each other. |
 
 ## <span id="syntax-structure"> Geometry Document </span>
+
+In the [proof_samples](rules/proof_samples) directory you will find many `.jl` files.
+Each of these files states a geometry problem, and possibly also contains a proof.
+
+A geometry document is divided into sections.
+The section names are:
+* Assumptions
+* Embedding
+* Need to prove
+* Proof
+
+In the beginning of each section, you will see the section name with a colon character `:` to show that the section is beginning.
+
+For example, a document might read something along the lines of:
+
+```jl
+Assumptions:
+...
+Embedding:
+...
+Need to prove:
+...
+Proof:
+...
+```
+
+All of the sections are optional, but some sections might be required to use some modules in the [`geometry solver`](#solver).
+For example, the [embedder](#solver-embedding) can only be used if the `Assumptions` and `Need to prove` sections exist,
+and for the [prover](#solver-proof-generation) to be used, the `Assumptions`, `Need to prove`, and `Embedding` sections must all exist.
+
+The order of the sections does not matter, but the order mentioned above is the recommended convention.
+
+Empty lines can be freely added throughout the document, and are ignored.
+Additionally, lines that begin with a `#` character are considered commments, and are ignored.
+
+What follows, are explanations as to what each section is for, and how they are formatted:
+
 ### <span id="syntax-assumptions"> Assumptions </span>
 ### <span id="syntax-embedding"> Embedding </span>
 ### <span id="syntax-need-to-prove"> Need to prove </span>
