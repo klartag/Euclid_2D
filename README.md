@@ -579,8 +579,10 @@ collinear_and_not_between:
 ```
 
 The reason for these items is due to the following feature:
+
 > The predicates in the `conclude` section of a predicate definition,
 > are assumed to be **necessary and sufficient** conditions for the predicate.
+
 I.e., if all items in the `conclude` section of a predicate have been proved, our system will conclude that the predicate itself is true.
 This is useful at times, when a predicate is not interesting in itself, but is more of a sort of "macro" that combines other predicates
 (such as the `trapezoid` example above).
