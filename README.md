@@ -644,10 +644,102 @@ This is the theorem that states:
 This theorem can be found in this [file](rules/theorems/circles/radical_axis.yml), together with other theorems about radical axes.
 
 #### <span id="configuration-theorems-inputs"> `inputs` </span>
+
+The `inputs` section is declared precisely in the same way as [the same section in the construction configuration file](#configuration-constructions-inputs):
+The parameters are declared using the [object declaration](#syntax-declarations) syntax,
+and read from left-to-right and top-to-bottom.
+
 #### <span id="configuration-theorems-where"> `where` </span>
+
+The `where` section is declared precisely in the same way as [the same section in the construction configuration file](#configuration-constructions-where).
+This describes the predicates that must be proved for it to be allowed to apply the theorem as a step in a proof.
+
 #### <span id="configuration-theorems-where-embedding"> `where_embedding` </span>
+
+The `where_embedding` section is declared precisely in the same way as the `where` section.
+It also describes predicates that must be true for the theorem to be applied,
+but instead of requiring that the predicates be proved, it is only required that the predicates are true.
+
+This is saved for predicates that are inequalities, such as "The point A is on the left side of the line BC".
+These are predicates that we allow to be checked numerically in an embedding, while still considering it a valid proof.
+
+For example, a `where_embedding` predicate might require that a set of objects are distinct:
+
+```yml
+concyclic_definition_0:
+  inputs:
+    - A, B, C, D: Point
+  where:
+    - concyclic(A, B, C, D)
+  where_embedding:
+    - distinct(A, B, C)
+  conclude:
+    - D in Circle(A, B, C)
+  ...
+```
+Here, it is required that `A`, `B`, and `C` are distinct points, because otherwise the object `Circle(A, B, C)` would not be defined.
+
 #### <span id="configuration-theorems-conclude"> `conclude` </span>
+
+The `conclude` section is declared precisely in the same way as [the same section in the construction configuration file](#configuration-constructions-conclude).
+These are the predicates that can be deduced, whenever the theorem is applied.
+
 #### <span id="configuration-theorems-possible-conclusions"> `possible_conclusions` </span>
+
+The `possible_conclusions` section is declared precisely in the same way as [the same section in the construction configuration file](#configuration-constructions-possible-conclusions).
+
+For example, consider the theorem `tangent_chord_angle`, which speaks of the angle between a line tangent to a circle, and a chord with an endpoint on the point of tangency:
+
+```yml
+tangent_chord_angle:
+  inputs:
+    - A, B, C, D: Point
+  ...
+  possible_conclusions:
+    - angle(B, C, A) == angle(B, A, D) mod 360 => tangent(Line(A, D), Circle(A, B, C))
+    - angle(B, C, A) == angle(B, A, D) + 180 mod 360 => tangent(Line(A, D), Circle(A, B, C))
+```
+
+This theorem is essentially two theorems packed in one:
+If `angle(B, C, A) == angle(B, A, D) mod 360`, one can conclude some predicate,
+and if `angle(B, C, A) == angle(B, A, D) + 180 mod 360`, then one concludes a different predicate.
+
+Because the inputs to the theorems and some of the conditions in order to apply the theorem are similar,
+it is comfortable to use both of them under the same theorem name.
+
+<span id="giving-theorems-names-given-possible-conclusions"> </span>
+
+The way these are used in a proof, is that the theorem is not called by its name (`tangent_chord_angle`),
+but rather by its name, and appended to it, is the index of the relevant possible conclusion in the list.
+
+I.e., if we apply the first item in the list, we use a theorem called `tangent_chord_angle_v0`.
+If we apply the second item in the list, we use a theorem called `tangent_chord_angle_v1`.
+
+Unlike the [`possible_conclusions`](#configuration-constructions-possible-conclusions) section for constructions,
+it is allowed to use all three sorts of implication symbols in this section: `=>`, `<=`, and `<=>`.
+
+The `<=>` symbol is special, in the sense that it splits the theorem into **two** further theorems:
+The one stating that the left hand side implies the right, and the one stating that the right hand side implies the left.
+
+For example, consider the theorem `double_perpendicular_and_parallel`, which speaks of a triplet of lines that has two perpendicular pairs:
+
+```yml
+double_perpendicular_and_parallel:
+  inputs:
+    - k, l, m: Line
+  where:
+    - perpendicular(k, l)
+  possible_conclusions:
+    - perpendicular(l, m) <=> parallel(k, m)
+  ...
+```
+
+In this case, in order to call the `=>` direction of the theorem, we will use a theorem named `double_perpendicular_and_parallel_v0_r`.
+To call the `<=` direction, we will use a theorem named ``double_perpendicular_and_parallel_v0_l`.
+
+The 0 index here refers to the fact that this is the item in index 0 in the list of possible conclusions
+(just as was mentioned a [few paragraphs earlier](#giving-theorems-names-given-possible-conclusions)).
+
 #### <span id="configuration-theorems-rank"> `rank` </span>
 #### <span id="configuration-theorems-trivial-if-equal"> `trivial_if_equal` </span>
 #### <span id="configuration-theorems-metadata"> `metadata` </span>
