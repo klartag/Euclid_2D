@@ -13,9 +13,9 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Declarations](#syntax-declarations)                                                                | How to declare the existence of new geometric objects.                                                        |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Implications](#syntax-implications)                                                                | How to declare that predicates imply other predicates.                                                        |    x    |
 | [Geometry Document](#syntax-structure)                                                                                        | All about the file format in which we save geometry problem statements and proofs.                            |    x    |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Assumptions](#syntax-assumptions)                                                                  | The section containing the given predicates in the problem.                                                   |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)                                                                      | The section containing a coordinate embedding of geometry objects.                                            |         |
-| &nbsp;&nbsp;&nbsp;&nbsp;  [Need to prove](#syntax-need-to-prove)                                                              | The section containing the predicates that need to be proved.                                                 |         |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Assumptions](#syntax-assumptions)                                                                  | The section containing the given predicates in the problem.                                                   |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Embedding](#syntax-embedding)                                                                      | The section containing a coordinate embedding of geometry objects.                                            |    x    |
+| &nbsp;&nbsp;&nbsp;&nbsp;  [Need to prove](#syntax-need-to-prove)                                                              | The section containing the predicates that need to be proved.                                                 |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Proof](#syntax-proof)                                                                              | The section containing the proof.                                                                             |         |
 | [Geometry Configuration Rules](#configuration)                                                                                | What are the rules that geometric objects abide to?                                                           |    x    |
 | &nbsp;&nbsp;&nbsp;&nbsp;  [Constructions](#configuration-constructions)                                                       | How constructions are defined.                                                                                |    x    |
@@ -344,8 +344,122 @@ Additionally, lines that begin with a `#` character are considered commments, an
 What follows, are explanations as to what each section is for, and how they are formatted:
 
 ### <span id="syntax-assumptions"> Assumptions </span>
+
+This section contains all of the "givens" of a problem.
+This includes all of the predicates that are assumed to be true, and all of the declarations of geometry objects.
+
+Each line in this section is either a [predicate](#syntax-predicates), or an [object declaration](#syntax-declarations).
+
+For an example of how this section may look like, consider the `Assumptions` section from [Problem 1.1](rules/proof_samples/figures/1_1.jl) from the Geometry In Figures book.
+```jl
+Assumptions:
+A, B, C, O: Point
+perpendicular(Line(A, B), Line(A, C))
+O == midpoint(B, C)
+```
+This sets up the problem as a problem containing the points A, B, C, O, where the lines AB and AC are perpendicular, and O is the midpoint of the segment BC.
+
 ### <span id="syntax-embedding"> Embedding </span>
+
+This section contains a numerical embedding of the geometry problem.
+It is held to a very high accuracy, which is set in this [file](rules/embeddings/embedded_objects/embedded_object.py).
+Currently, `mp.dps` is set to `2000`, indicating that embeddings should be accurate to 2000 digits after the decimal point.
+
+The embedding given in [Problem 1.1](rules/proof_samples/figures/1_1.jl) looks like:
+
+```jl
+Embedding:
+C := {"x": "-2.542900...", "y": "2.826717..."}
+B := {"x": "1.865846...", "y": "0.206865..."}
+O := {"x": "-0.338526...", "y": "1.516791..."}
+A := {"x": "-1.280151...", "y": "-0.868268..."}
+```
+
+(To avoid writing long strings, the very accurate decimal numbers were shortened, and their endings were replaced with `...`.
+See the original file for the fully accurate version of the embedding.)
+
+The embedding will be the embedding of each of the **atoms** in the Assumptions.
+I.e., any geometry object that was [**declared**](#syntax-declarations).
+The delcarations follow the format:
+
+```jl
+[Object name] := [JSON value describing the object]
+```
+
+The JSON value is **usually** a JSON dictionary, and follows a slightly different format depending on the type of the object: Whether it is a Scalar, Point, Line, or Circle.
+
+#### Embedding Scalars
+
+To embed a scalar, the JSON value is simply the value of the scalar, written as a string.
+For example:
+```jl
+Assumptions:
+alpha: Scalar
+
+Embedding:
+alpha := "0.123"
+```
+declares the embedding of a problem, where the scalar `alpha` turns out to equal `0.123`.
+
+It is written as a string to allow for arbitrarily large accuracy in the embedding.
+
+#### Embedding Points
+
+To embed a point, the dictionary looks like the example above:
+
+```jl
+[Point] := {"x": [X Coordinate], "y": [Y Coordinate]}
+```
+
+where both the `[X Coordinate]` and `[Y Coordinate]` values are written as **strings**, so that they can be written in arbitrarily large accuracy.
+
+#### Embedding Lines
+
+To embed a line, the dictionary looks as follows:
+
+```jl
+[Line] := {"point": [Point 0], "direction": [Point 1]}
+```
+where each of `[Point 0]` and `[Point 1]` is a valid dictionary describing a Point (as we defined above).
+The value of `[Point 0]` is the value of a point on the line, and the value of `[Point 1]` is the value of a vector pointing in a direction parallel to the line.
+I.e., the line consists of all points of the form `[Point 0] + t * [Point 1]` where `t` goes over the real numbers.
+
+For example, the line `f` in [this problem](rules/proof_samples/linear/random_sample/1.jl) is embedded as follows:
+
+```jl
+f := {"point": {"x": "-1.369442...", "y": "0.750029..."}, "direction": {"x": "1.115500...", "y": "-0.883229..."}}
+```
+
+#### Embedding Circles
+
+To embed a circle, the dictionary looks as follows:
+```jl
+[Circle] := {"center": [Point], "radius_squared": [Number]}
+```
+where `[Point]` is formatted like a dictionary describing a point, and is equal to the center of the circle,
+and `[Number]` is a number formatted as a string, and is equal to the square of the radius of the circle.
+
+For example, the circle `c` in [this problem](rules/proof_samples/linear/random_sample/1.jl) is embedded as follows:
+
+```jl
+Embedding:
+...
+c := {"center": {"x": "-1.079398...", "y": "-0.029693..."}, "radius_squared": "0.692093..."}
+...
+```
+
 ### <span id="syntax-need-to-prove"> Need to prove </span>
+
+This section contains what is required to prove in the problem.
+It is also a list of predicates, although usually only one predicate is mentioned.
+
+In [Problem 1.1](rules/proof_samples/figures/1_1.jl), the need to prove section looks as follows:
+
+```jl
+Need to prove:
+distance(A, O) == distance(B, O)
+```
+
 ### <span id="syntax-proof"> Proof </span>
 ## <span id="configuration"> Geometry Configuration Rules </span>
 
