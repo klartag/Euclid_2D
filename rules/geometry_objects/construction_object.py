@@ -16,14 +16,6 @@ if TYPE_CHECKING:
 from dataclasses import dataclass, field
 
 
-INPUT_LABEL = 'inputs'
-PREPROCESS_LABEL = 'preprocess'
-CONDITION_LABEL = 'where'
-CONSTRUCTION_LABEL = 'construct'
-RESULT_PREDICATE_LABEL = 'conclude'
-POSS_CONCLUSIONS_LABEL = 'possible_conclusions'
-
-
 @dataclass(frozen=True)
 class Construction:
     """

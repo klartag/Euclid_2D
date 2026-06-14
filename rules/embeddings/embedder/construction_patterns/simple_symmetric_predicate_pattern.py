@@ -11,6 +11,14 @@ from .construction_pattern import ConstructionPattern
 
 
 class SimpleSymmetricPredicatePattern(ConstructionPattern):
+    """
+    A ConstructionPattern that knows to build an object assuming it:
+
+    *   Appears in a single predicate
+    *   In that predicate, appears directly in one of the arguments,
+        and only as that argument.
+    """
+
     construction_type: Type[EmbeddedConstruction]
     construction_method: ConstructionMethod
     predicate_name: str

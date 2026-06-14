@@ -11,6 +11,8 @@ from .implementations.infix_predicate_parser import InfixPredicateParser
 
 
 class PredicateParser(AbstractGeometryParser[Predicate]):
+    """A parser that can parse any Predicate."""
+
     signature: Signature
     parsers: list[AbstractGeometryParser[Predicate]]
 

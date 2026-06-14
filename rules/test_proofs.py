@@ -106,9 +106,9 @@ def load_constructions_and_macros_for_tests():
     GEVA_PROBLEM_NAMES + FIGURES_PROBLEM_NAMES + IMO_SHORTLIST_PROBLEMS,
 )
 def test_check_proof(problem_name: str):
-    '''
+    """
     Tests that the Proof Checker works on a geometry problem.
-    '''
+    """
     if is_proof_empty(problem_name):
         pytest.skip("No proof found in problem file. Skipping test...")
     check_proof(problem_name)
@@ -128,9 +128,9 @@ def test_check_proof(problem_name: str):
     ],
 )
 def test_proof_generator(problem_name: str):
-    '''
+    """
     Tests that the Proof Generator works on a geometry problem.
-    '''
+    """
     if is_proof_empty(problem_name):
         pytest.skip("No proof found in problem file. Skipping test...")
     document = GeometryDocument.open(problem_name)

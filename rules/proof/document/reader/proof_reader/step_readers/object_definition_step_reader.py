@@ -15,6 +15,8 @@ OBJECT_DEFINITION_PATTERN = rf'Let {OBJECT_NAME_PATTERN} := (.*)$'
 
 
 class ObjectDefinitionStepReader(AbstractStepReader[ObjDefineStep]):
+    """Reads a proof step that declares the existence of an object and gives it a name."""
+
     pattern = OBJECT_DEFINITION_PATTERN
 
     signature: Signature

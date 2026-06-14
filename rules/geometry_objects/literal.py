@@ -7,9 +7,15 @@ from .geo_object import GeoObject
 
 
 LITERAL_PATTERN = r'(-?\d+(\.\d+)?)'
+"""
+A regex pattern that can recognize whether the string represents a literal.
+(Recognizes numbers, both positive and negative, and optionally containing a decimal point.)
+"""
 
 
 class Literal(GeoObject):
+    """A geometry object who has a constant value depicted in its name."""
+
     def __init__(self, name: str | Fraction) -> None:
         self.name = str(name)
         self.type = GeoType.LITERAL

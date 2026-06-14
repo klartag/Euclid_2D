@@ -16,6 +16,10 @@ from ..errors import ProofCheckError
 
 
 class ProofTrimmer:
+    """
+    A class that can remove steps from a proof of a GeometryProblem until there are no unnecessary steps.
+    """
+
     problem: GeometryProblem
     trimmed_problem: GeometryProblem
 

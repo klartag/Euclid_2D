@@ -12,8 +12,18 @@ from ..embedded_constructions.explicit_embedded_construction import ExplicitEmbe
 
 
 class EmptyPattern(ConstructionPattern):
+    """
+    Describes a pattern in which an object can be embedded without restrictions.
+    """
+
     object_type: str
+    """
+    The type of object this pattern represents.
+    """
     construction_method: ConstructionMethod
+    """
+    A ConstructionMethod that knows to randomly sample an object of the type `object_type`.
+    """
 
     def __init__(self, object_type: str, construction_method: ExtendedConstructionMethod):
         self.object_type = object_type

@@ -12,10 +12,27 @@ from ...abstract_recursive_geometry_parser import AbstractRecursiveGeometryParse
 
 @dataclass
 class InfixPredicateParser(AbstractRecursiveGeometryParser[Predicate, None, GeoObject]):
+    """
+    A parser for predicates of the form
+    `[lhs] [infix] [rhs] [suffix]`
+    where `[lhs]` and `[rhs]` are GeoObjects,
+    and `[infix]` and `[suffix]` are the strings that describe the predicate.
+    
+    Can also match predicates where there is no `[suffix]` string.
+    
+    Can, for example, match predicates of the formats
+    *   `lhs == rhs`
+        (In this case, [infix] is "==" and [suffix] is `None`)
+    *   `lhs != rhs mod 360`
+        (In this case, [infix] is "==" and [suffix] is "mod 360").
+    """
+
     predicate_name: str
     infix: str
     suffix: Optional[str] = None
+    
     allow_multiple_arguments: bool = False
+    """Whether [rhs] can be a comma-separated list of GeoObjects."""
 
     def _try_split_components(self, text: str) -> Optional[tuple[None, tuple[str, ...]]]:
         regex = self.get_regex_matcher()

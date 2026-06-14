@@ -8,6 +8,14 @@ from .dense_vector import DenseVector
 
 
 class SparseVector(AbstractIterableVector):
+    """
+    A vector where values are held in a dictionary.
+    For each index in the vector, the dictionary at that index holds the value of the vector.
+    If the dictionary does not have the index as a key, the value is 0.
+    
+    Useful in holding vectors with very few nonzero indices.
+    """
+
     type_name: Literal['Sparse'] = 'Sparse'
 
     inner: dict[int, Fraction]

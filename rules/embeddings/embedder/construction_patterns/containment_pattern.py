@@ -34,6 +34,13 @@ LOCUS_INTERSECTION_TYPE_PATTERNS = {
 
 
 def concatenate_polar(func: ConstructionMethod) -> ConstructionMethod:
+    """
+    Takes as input a ConstructionMethod that returns Points,
+    and returns a ConstructionMethod that returns Lines.
+    
+    The returned method applies the first method,
+    and then returns the polar of each Point in the result.
+    """
     def wrapper(*parameters: Tuple[EmbeddedObject, ...]) -> Tuple[EmbeddedObject, ...]:
         construction_result = func(*parameters)
         return tuple([polar(point) for point in construction_result])
@@ -43,6 +50,16 @@ def concatenate_polar(func: ConstructionMethod) -> ConstructionMethod:
 
 
 class ContainmentPattern(ConstructionPattern):
+    """
+    A ConstructionPattern that knows how to embed a Point, given a list of curves it is contained inside of.
+    
+    *   If the point is contained in only one curve,
+        uses the mappings in `SINGLE_LOCUS_TYPE_PATTERNS` to take a random sample of a point in the curve.
+    *   If the point is contained in two curves,
+        uses `LOCUS_INTERSECTION_TYPE_PATTERNS` to take the intersection of two curves.
+    *   If the object we are attempting to match is a line, concatenates the polar operation to the result
+        of `construction_method`.
+    """
     def match(self, object_: GeoObject, predicates: List[Predicate]) -> Optional[EmbeddedConstruction]:
         if object_.type not in [GeoType.POINT, GeoType.LINE]:
             return None
@@ -76,6 +93,10 @@ class ContainmentPattern(ConstructionPattern):
         return None
 
     def parse_containment_predicate(self, object_: GeoObject, predicate: Predicate) -> Optional[ExtendedGeoObject]:
+        """
+        Attempts to use all existing LocusPatterns (i.e., those in `LOCUS_PATTERNS` and in `DUAL_LOCUS_PATTERNS`)
+        to recognize the locus defining the locations of `object_` such that `predicate` is satisfied.
+        """
         patterns = []
         if object_.type == GeoType.POINT:
             patterns = LOCUS_PATTERNS

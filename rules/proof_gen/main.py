@@ -19,8 +19,8 @@ from .proof_generator import validate_proof, prove
 
 def validate_main():
     parser = argparse.ArgumentParser(
-        description='''Tries to validate that a proof can be found by the proof generator,
-without actually running the proof generator.'''
+        description="""Tries to validate that a proof can be found by the proof generator,
+without actually running the proof generator."""
     )
     parser.add_argument('path')
     args = parser.parse_args()

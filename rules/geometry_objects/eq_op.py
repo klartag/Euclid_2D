@@ -2,6 +2,8 @@ from enum import Enum
 
 
 class EqOp(Enum):
+    """An enum describing the type of mathematical operations that can be done to two Scalar objects."""
+
     ADD = '+'
     SUB = '-'
     MUL = '*'

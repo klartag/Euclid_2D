@@ -10,10 +10,10 @@ from .point import EmbeddedPoint
 
 @dataclass
 class EmbeddedLine(EmbeddedCurve):
-    '''
+    """
     Represents a line, going through `point`,
     and looking towards the direction `direction`.
-    '''
+    """
 
     point: EmbeddedPoint
     direction: EmbeddedPoint

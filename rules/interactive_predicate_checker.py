@@ -10,6 +10,28 @@ from .predicates.predicate import Predicate
 
 
 class InteractivePredicateChecker:
+    """
+    A class that can take user input and use it to
+    evaluate objects and predicates in a GeometryProblem.
+    
+    Features:
+    1.  It can evaluate text such as
+        > circumcircle(A, B, midpoint(C, D))
+        and return the coordinates of an object (according to the values of A, B, C, D in the embedding).
+    
+    2.  It can evaluate predicates such as
+        > perpendicular(Line(A, B), Line(C, D))
+        and returns
+        *   Whether it is True or False in the embedding.
+        *   Whether the GeometryTracker knows this predicate is true.
+        
+    3.  If a predicate is entered, followed by a question mark symbol `?`:
+        > perpendicular(Line(A, B), Line(C, D))?
+        and the predicate has been proved,
+        we will also return a list of predicates explaining
+        how this predicate was proven in the appropriate step of the proof.
+    """
+    
     geometry_tracker: GeometryTracker
 
     def __init__(self, geometry_tracker: GeometryTracker):

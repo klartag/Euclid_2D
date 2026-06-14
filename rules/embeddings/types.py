@@ -4,11 +4,17 @@ from .embedded_objects.embedded_object import EmbeddedObject
 
 
 ExtendedConstructionMethod = Callable[
-    [Unpack[Tuple[EmbeddedObject, ...]]], Union[EmbeddedObject, Tuple[EmbeddedObject, ...]]
+    [Unpack[Tuple[EmbeddedObject, ...]]],
+    Union[EmbeddedObject, Tuple[EmbeddedObject, ...]]
 ]
-ConstructionMethod = Callable[[Unpack[Tuple[EmbeddedObject, ...]]], Tuple[EmbeddedObject, ...]]
-PredicateMethod = Callable[[Unpack[Tuple[EmbeddedObject, ...]]], bool]
-
+ConstructionMethod = Callable[
+    [Unpack[Tuple[EmbeddedObject, ...]]],
+    Tuple[EmbeddedObject, ...]
+]
+PredicateMethod = Callable[
+    [Unpack[Tuple[EmbeddedObject, ...]]],
+    bool
+]
 
 def normalize_return_type(func: ExtendedConstructionMethod) -> ConstructionMethod:
     def wrapper(*parameters: Tuple[EmbeddedObject, ...]) -> Tuple[EmbeddedObject, ...]:

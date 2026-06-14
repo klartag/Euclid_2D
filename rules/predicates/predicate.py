@@ -10,10 +10,6 @@ from ..rule_utils import union
 from ..geometry_objects.geo_type import GeoType
 
 
-# CONSTRUCTIONS: Optional[dict[str, Construction]] = {}
-# MACROS: Optional[dict[str, MacroData]] = {}
-
-
 INPUT_LABEL = 'inputs'
 PREPROCESS_LABEL = 'preprocess'
 RESULT_PREDICATE_LABEL = 'conclude'

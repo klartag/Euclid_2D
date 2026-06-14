@@ -10,7 +10,14 @@ from ...geometry_objects.geo_object import GeoObject
 
 
 class LinearExpression:
+    """Represents a linear expression of scalars."""
+
     inner: Dict[GeoObject, Fraction]
+    """
+    A mapping from each GeoObject
+    (which must be a scalar for this expression to make sense)
+    to a Fraction depicting how many times it appears in the linear expression.
+    """
 
     def __init__(self, inner: Dict[GeoObject, Fraction]):
         self.inner = inner
@@ -34,6 +41,9 @@ class LinearExpression:
         return len(self.inner)
 
     def to_equation_object(self) -> EquationObject | Literal:
+        """
+        Returns an EquationObject that represents this linear expression.
+        """
         if len(self.inner) == 0:
             return Literal('0')
 
@@ -44,6 +54,7 @@ class LinearExpression:
         return reduce(lambda x, y: EquationObject(x, y, EqOp.ADD), monomials)
 
     def _rational_to_equation_object(self, constant: Fraction) -> EquationObject | Literal:
+        """Converts a Fraction into a GeoObject representing its value."""
         if isinstance(constant, int):
             return Literal(str(constant))
         else:

@@ -8,6 +8,7 @@ from .line import line
 
 
 def circumcenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedPoint:
+    """Returns the center of the circle passing through three points."""
     if point0.is_equal(point1) or point0.is_equal(point2) or point1.is_equal(point2):
         raise UndefinedEmbeddingError("Cannot calculate circumcenter when some of the points are identical.")
 
@@ -21,20 +22,27 @@ def circumcenter(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedP
 
 
 def circumcircle(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedCircle:
+    """Returns the circle passing through three points."""
     center = circumcenter(point0, point1, point2)
     return EmbeddedCircle(center, (point0 - center).length_squared())
 
 def circle_from_center_and_point(point0: EmbeddedPoint, point1: EmbeddedPoint) -> EmbeddedCircle:
+    """Returns a circle given its center and a point on its circumference."""
     if point0.is_equal(point1):
         raise UndefinedEmbeddingError("Cannot create circle passing through its center.")
     return EmbeddedCircle(point0, (point0 - point1).length_squared())
 
 def circle_from_center_and_radius(point: EmbeddedPoint, scalar: EmbeddedScalar) -> EmbeddedCircle:
+    """Returns a circle given its center and radius."""
     if scalar.value < EPSILON:
         raise UndefinedEmbeddingError("Cannot create circle of radius zero.")
     return EmbeddedCircle(point, scalar.value ** 2)
 
 def circle_from_two_points_and_angle(point0: EmbeddedPoint, point1: EmbeddedPoint, angle: EmbeddedScalar) -> EmbeddedCircle:
+    """
+    Returns a circle given two points on its circumference,
+    and the angle from which any third point on the circle must see those two.
+    """
     if point0.is_equal(point1):
         raise UndefinedEmbeddingError("Cannot create circle given two identical points")
     if angle.value % 180 < EPSILON or (-angle.value) % 180 < EPSILON:

@@ -14,6 +14,8 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class TheoremStepReader(AbstractStepReader[TheoremStep]):
+    """Reads a proof step that applies a theorem."""
+
     pattern = r'By (\w+)( on )?(.*) we get (.*)$'
 
     geometry_object_parser: GeometryObjectParser
@@ -24,7 +26,6 @@ class TheoremStepReader(AbstractStepReader[TheoremStep]):
         self.predicate_parser = PredicateParser(signature)
 
     def read(self, line: str, match: Match[str]) -> TheoremStep:
-        # Matching a theorem step using a named theorem.
         name, _, args, results = match.groups()
         args = split_args(args) if args else []
         results = split_args(results)

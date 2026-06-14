@@ -14,6 +14,16 @@ V = TypeVar('V', bound=AbstractIterableVector)
 
 
 class Matrix(Generic[V]):
+    """
+    Keeps track of a Matrix, in canonical form.
+    
+    vector_class:       The type of the vector depicting each row in the matrix.
+    diagonal_indices:   In each row, the index of the first nonzero value.
+                        (This list is strictly increasing, since `Matrix` is always in canonical form.)
+    rows:               The rows of the matrix.
+    row_length:         The length of each row in the matrix.
+    """
+
     vector_class: type[V]
     diagonal_indices: List[int]
     rows: List[AugmentedVector3[V, ConstantVector, V]]
@@ -26,11 +36,18 @@ class Matrix(Generic[V]):
         self.row_length = row_length
 
     def extend_row_length(self, amount: int):
+        """Adds `amount` columns to the matrix."""
         for row in self.rows:
             row.inner0.extend_length(amount)
         self.row_length += amount
 
     def project_to_orthogonal_complement(self, vector: AugmentedVector2[V, ConstantVector]) -> AugmentedVector3[V, ConstantVector, V]:
+        """
+        Does the first stage of Gaussian elimination to a vector,
+        removing all values in the vector in the indices that appear in `self.diagonal_indices`.
+        
+        Returns the projected vector, and appends to it a vector describing the linear combination of rows that produces this projection.
+        """
         extended_vector: AugmentedVector3[V, ConstantVector, V] = AugmentedVector3(vector.inner0, vector.inner1, self.vector_class.create_empty(len(self.rows)))
         for i in range(len(self.rows)):
             if vector.inner0[self.diagonal_indices[i]] != 0:
@@ -38,10 +55,16 @@ class Matrix(Generic[V]):
         return extended_vector
 
     def in_span(self, row: AugmentedVector2[V, ConstantVector]):
+        """Returns whether a vector is contained within the linear span of the matrix rows."""
         projected_row = self.project_to_orthogonal_complement(row)
         return projected_row.inner0.first_nonzero_index() is None and not projected_row.inner1
 
     def add_row(self, row: AugmentedVector2[V, ConstantVector]) -> Optional[int]:
+        """
+        Adds a row to the matrix, perserving the canonical form of the matrix.
+        If a new row of the matrix was added (i.e., if the given vector was *not* in the linear span of the matrix rows),
+        returns an index that represents the given row.
+        """
         projected_row = self.project_to_orthogonal_complement(row)
 
         if not projected_row.inner0 and projected_row.inner1:

@@ -21,6 +21,16 @@ EXPLICIT_OTHER_INTERSECTION_PREDICATE_NAMES = [
 
 
 class ExplicitIntersectionSplitter(PredicatePreprocessingPattern):
+    """
+    Splits an equality between a Point object and an intersection between curves,
+    into `in` predicates that define the intersection.
+    
+    For example, splits the predicate
+    `A == line_circle_other_intersection(B, l, c)`
+    into
+    `A in l` and `A in c`.
+    """
+
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name != 'equals' or len(predicate.components) != 2:
             return None
@@ -35,12 +45,21 @@ class ExplicitIntersectionSplitter(PredicatePreprocessingPattern):
         return [predicate_from_args('in', (lhs, component)) for component in containing_components]
 
     def is_explicit_intersection_object(self, obj: GeoObject) -> bool:
+        """Returns whether a construction object is defined as an intersection of some other GeoObjects."""
         if not isinstance(obj, ConstructionObject):
             return False
         return obj.constructor.name in EXPLICIT_INTERSECTION_PREDICATE_NAMES or \
             obj.constructor.name in EXPLICIT_OTHER_INTERSECTION_PREDICATE_NAMES
 
     def extract_containing_components(self, obj: ConstructionObject) -> List[GeoObject]:
+        """
+        Given a construction object that is defined as an intersection of some other GeoObjects,
+        returns the objects whose intersection it is defining.
+        
+        (This is pretty much just the list of parameters of the construction,
+        but in the case of the constructions whose names are in `EXPLICIT_OTHER_INTERSECTION_PREDICATE_NAMES`,
+        the first parameter must be ignored.)
+        """
         if obj.constructor.name in EXPLICIT_OTHER_INTERSECTION_PREDICATE_NAMES:
             return obj.components[1:]
         else:

@@ -8,6 +8,11 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class RectangleSplitter(PredicatePreprocessingPattern):
+    """
+    Splits a predicate saying a quadrilateral is a rectangle,
+    into smaller predicates that together are equivalent.
+    """
+
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name != 'rectangle':
             return None

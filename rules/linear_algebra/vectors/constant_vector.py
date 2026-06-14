@@ -5,6 +5,8 @@ from .abstract_vector import AbstractVector
 
 
 class ConstantVector(AbstractVector):
+    """A vector class that only holds a single value."""
+
     type_name: Literal['Constant'] = 'Constant'
 
     inner: Fraction

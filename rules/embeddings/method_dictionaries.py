@@ -94,6 +94,10 @@ _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ExtendedConstructionMethod] = 
 
 
 CONSTRUCTION_METHOD_DICTIONARY: Dict[str, ConstructionMethod] = {}
+"""
+A mapping from the name of a construction,
+to a method that can embed the construction given the embeddings of its parameters.
+"""
 
 CONSTRUCTION_METHOD_DICTIONARY.update(
     {name: normalize_return_type(func) for name, func in _SIMPLE_CONSTRUCTION_METHOD_DICTIONARY.items()}
@@ -137,3 +141,7 @@ PREDICATE_METHOD_DICTIONARY: Dict[str, PredicateMethod] = {
     'trapezoid': trapezoid,
     'triangle': not_collinear,
 }
+"""
+A mapping from the name of a predicate,
+to a method that can check a predicate given the embeddings of its parameters.
+"""

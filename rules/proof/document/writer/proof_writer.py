@@ -9,6 +9,8 @@ from .document_section_writer import DocumentSectionWriter
 
 
 class ProofWriter(DocumentSectionWriter[Proof]):
+    """A DocumentSectionWriter that can write the Proof section of a GeometryDocument."""
+
     section = DocumentSection.PROOF
 
     def get_section_value(self, problem: GeometryProblem) -> Optional[Proof]:

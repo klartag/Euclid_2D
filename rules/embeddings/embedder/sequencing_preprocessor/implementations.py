@@ -19,9 +19,11 @@ SPLITTING_PATTERNS: List[PredicatePreprocessingPattern] = [
     ParallelogramSplitter(),
     RectangleSplitter()
 ]
+"""PredicatePreprocessingPatterns that split complex predicates into a list of simpler predicates."""
 
 INEQUALITY_REMOVAL_PATTERNS: List[PredicatePreprocessingPattern] = [
     OpenPredicateRemovalPattern(),
     CollinearInequalityRemover(),
     OrientationEqualityRemover()
 ]
+"""PredicatePreprocessingPatterns that remove assumptions that do not need to be taken into account during sequencing."""

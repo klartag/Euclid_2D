@@ -9,6 +9,7 @@ from .proof import Proof
 
 @dataclass
 class GeometryProblem:
+    """Holds information relevant to a problem and solution of a geometry problem."""
     statement: Optional[Statement]
     embedding: Optional[Embedding]
     proof: Optional[Proof]

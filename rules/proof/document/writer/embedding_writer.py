@@ -11,6 +11,8 @@ from .document_section_writer import DocumentSectionWriter
 
 
 class EmbeddingWriter(DocumentSectionWriter[Embedding]):
+    """A DocumentSectionWriter that can write the Embedding section of a GeometryDocument."""
+
     section = DocumentSection.EMBEDDING
 
     def get_section_value(self, problem: GeometryProblem) -> Optional[Embedding]:

@@ -10,6 +10,8 @@ from ....geometry_objects.geo_type import GeoType, Signature
 
 
 class EmbeddingReader:
+    """Reads an Embedding."""
+
     signature: Signature
 
     def __init__(self, signature: Signature):

@@ -10,6 +10,8 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class AssertStepReader(AbstractStepReader[AssertStep]):
+    """Reads a proof step that declares a predicate has already been proven by the proof up to this point."""
+
     pattern = r'We have (proved|shown) (.*)$'
 
     predicate_parser: PredicateParser

@@ -2,6 +2,9 @@ from ..undefined_embedding_error import UndefinedEmbeddingError
 from ..embedded_objects import EmbeddedPoint, EmbeddedLine
 
 def internal_angle_bisector(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedLine:
+    """
+    Returns the internal angle bisector of an angle defined by three points.
+    """
     if point0.is_equal(point1) or point1.is_equal(point2):
         raise UndefinedEmbeddingError("Cannot evaluate internal angle bisector when two points are equal.")
 
@@ -16,6 +19,9 @@ def internal_angle_bisector(point0: EmbeddedPoint, point1: EmbeddedPoint, point2
 
 
 def external_angle_bisector(point0: EmbeddedPoint, point1: EmbeddedPoint, point2: EmbeddedPoint) -> EmbeddedLine:
+    """
+    Returns the external angle bisector of an angle defined by three points.
+    """
     if point0.is_equal(point1) or point1.is_equal(point2):
         raise UndefinedEmbeddingError("Cannot evaluate external angle bisector when two points are equal.")
 

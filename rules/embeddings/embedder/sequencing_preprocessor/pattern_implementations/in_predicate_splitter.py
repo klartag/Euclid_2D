@@ -8,6 +8,18 @@ from ..pattern import PredicatePreprocessingPattern
 
 
 class InPredicateSplitter(PredicatePreprocessingPattern):
+    """
+    Splits an `in` predicate that contains multiple objects into a list of `in` predicates, each containing two parameters.
+    
+    For example, if A, B, C are points, and j, k, l are lines,
+    splits the predicate
+    A, B, C in j, k, l
+    Into the nine predicates
+    A in j, B in j, C in j,
+    A in k, B in k, C in k,
+    A in l, B in l, C in l.
+    """
+
     def try_match(self, predicate: Predicate) -> Optional[List[Predicate]]:
         if predicate.name != 'in':
             return None

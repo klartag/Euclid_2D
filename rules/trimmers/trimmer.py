@@ -16,6 +16,10 @@ MIN_CHECKPOINT_STEPS = 2
 
 
 class ProofTrimmer:
+    """
+    A class that can remove steps from a proof of a GeometryProblem until there are no unnecessary steps.
+    """
+
     problem: GeometryProblem
     trimmed_problem: GeometryProblem
     checkpoints: list[ProofChecker]

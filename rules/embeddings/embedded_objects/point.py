@@ -9,9 +9,9 @@ from .embedded_object import EmbeddedObject, EPSILON
 
 @dataclass
 class EmbeddedPoint(EmbeddedObject):
-    '''
+    """
     Represents the point (x, y).
-    '''
+    """
 
     x: mpf
     y: mpf

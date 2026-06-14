@@ -8,6 +8,7 @@ from .step import Step
 
 @dataclass
 class CommentStep(Step):
+    """A step in the proof that does nothing, and is just a comment."""
     comment: str
 
     def to_language_format(self):

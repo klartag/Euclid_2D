@@ -10,6 +10,8 @@ from .document_section_writer import DocumentSectionWriter
 
 
 class AssumptionsWriter(DocumentSectionWriter[Statement]):
+    """A DocumentSectionWriter that can write the Assumptions section of a GeometryDocument."""
+
     section = DocumentSection.ASSUMPTION
 
     def get_section_value(self, problem: GeometryProblem) -> Optional[Statement]:

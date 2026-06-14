@@ -13,6 +13,8 @@ from .proof_writer import ProofWriter
 
 
 class DocumentWriter:
+    """A class that can write a GeometryDocument."""
+
     def __init__(self):
         self.assumptions_writer = AssumptionsWriter()
         self.embedding_writer = EmbeddingWriter()
@@ -20,11 +22,16 @@ class DocumentWriter:
         self.proof_writer = ProofWriter()
 
     def write_sections(self, problem: GeometryProblem, document: GeometryDocument, *sections: list[DocumentSection]):
+        """
+        Updates a GeometryDocument with data from a GeometryProblem.
+        The sections that are updated are the ones listed in the `sections` parameter.
+        """
         for section in sections:
             writer = self.get_section_writer(section)
             writer.write(problem, document)
 
     def get_section_writer(self, section: DocumentSection) -> Optional[DocumentSectionWriter]:
+        """Given a `DocumentSection`, returns a `DocumentSectionWriter` that knows to write this section."""
         match section:
             case DocumentSection.ASSUMPTION:
                 return self.assumptions_writer

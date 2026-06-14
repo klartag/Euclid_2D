@@ -9,6 +9,8 @@ from .document_section_writer import DocumentSectionWriter
 
 
 class ProblemTargetWriter(DocumentSectionWriter[Statement]):
+    """A DocumentSectionWriter that can write the `Need to Prove` section of a GeometryDocument."""
+
     section = DocumentSection.TARGET
 
     def get_section_value(self, problem: GeometryProblem) -> Optional[Statement]:

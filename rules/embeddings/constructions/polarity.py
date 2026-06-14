@@ -10,6 +10,7 @@ ORIGIN = EmbeddedPoint(mpf(0), mpf(0))
 
 
 def pole(line: EmbeddedLine) -> EmbeddedPoint:
+    """Returns the pole of a line."""
     if line.contains_point(ORIGIN):
         raise UndefinedEmbeddingError("Poles are undefined for lines through the origin.")
     origin_projection = project(ORIGIN, line)
@@ -17,6 +18,7 @@ def pole(line: EmbeddedLine) -> EmbeddedPoint:
 
 
 def polar(point: EmbeddedPoint) -> EmbeddedLine:
+    """Returns the polar of a point."""
     if point.is_equal(ORIGIN):
         raise UndefinedEmbeddingError("Poles are undefined for lines through the origin.")
     inverted_point = point.scale(1 / point.length_squared())
@@ -25,6 +27,7 @@ def polar(point: EmbeddedPoint) -> EmbeddedLine:
 
 
 def line_from_origin(point: EmbeddedPoint) -> EmbeddedLine:
+    """Returns the line through `point` that passes through the origin."""
     if point.is_equal(ORIGIN):
         raise UndefinedEmbeddingError("Poles are undefined for lines through the origin.")
     return EmbeddedLine(ORIGIN, point)

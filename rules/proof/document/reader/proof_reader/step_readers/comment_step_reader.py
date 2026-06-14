@@ -6,6 +6,8 @@ from ..abstract_step_reader import AbstractStepReader
 
 
 class CommentStepReader(AbstractStepReader[CommentStep]):
+    """Reads a proof step that is a comment."""
+
     pattern = r'Comment: \w*(.*)'
 
     def read(self, line: str, match: Match[str]) -> CommentStep:

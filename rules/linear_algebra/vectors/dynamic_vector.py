@@ -11,6 +11,10 @@ SPARSE_THRESHOLD = 1 / 20
 
 
 class DynamicVector(AbstractIterableVector):
+    """
+    A vector that can heuristically decide whether to hold its values like a `DenseVector` or a `SparseVector`.
+    """
+
     type_name: Literal['Dynamic'] = 'Dynamic'
 
     inner: Union[DenseVector, SparseVector]
