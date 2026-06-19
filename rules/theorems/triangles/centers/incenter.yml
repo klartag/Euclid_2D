@@ -37,3 +37,40 @@ excenter_concurrency_alternate:
     - excenter(A, B, C) in external_angle_bisector(B, C, A)
     - excenter(A, B, C) in internal_angle_bisector(B, A, C)
 
+excenter_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(excenter(A, B, C))
+  conclude:
+    - excenter(A, B, C) in external_angle_bisector(A, C, B), external_angle_bisector(A, B, C), internal_angle_bisector(B, A, C)
+
+incenter_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(incenter(A, B, C))
+  conclude:
+    - incenter(A, B, C) in internal_angle_bisector(A, B, C), internal_angle_bisector(A, C, B), internal_angle_bisector(C, A, B)
+
+incircle_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(incircle(A, B, C))
+  conclude:
+    - tangent(Line(A, B), incircle(A, B, C))
+    - tangent(Line(B, C), incircle(A, B, C))
+    - tangent(Line(C, A), incircle(A, B, C))
+    - incenter(A, B, C) == center(incircle(A, B, C))
+
+excircle_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(excircle(A, B, C))
+  conclude:
+    - tangent(Line(A, B), excircle(A, B, C))
+    - tangent(Line(B, C), excircle(A, B, C))
+    - tangent(Line(C, A), excircle(A, B, C))
+    - excenter(A, B, C) == center(excircle(A, B, C))

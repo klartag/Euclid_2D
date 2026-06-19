@@ -31,3 +31,12 @@ circle_by_three_points_and_center:
   conclude:
     - O == center(Circle(A, B, C))
   rank: 3
+
+circumcenter_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(circumcenter(A, B, C))
+  conclude:
+    - circumcenter(A, B, C) == center(Circle(A, B, C))
+

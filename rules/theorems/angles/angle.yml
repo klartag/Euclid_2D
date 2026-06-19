@@ -1,3 +1,11 @@
+angle_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(angle(A, B, C))
+  conclude:
+    - angle(A, B, C) == direction(B, C) - direction(B, A) mod 360
+
 same_angle:
   inputs:
     - O, A, B, C: Point

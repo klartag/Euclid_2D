@@ -28,3 +28,4 @@ probably_between_and_collinear_implies_between:
     - probably_between(A, B, C)
   conclude:
     - between(A, B, C)
+

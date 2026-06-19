@@ -1,4 +1,4 @@
-perpendicular_bisector_definition:
+perpendicular_bisector_property:
   inputs:
     - A, B: Point
     - l: Line
@@ -7,6 +7,14 @@ perpendicular_bisector_definition:
     - distance(A, line_intersection(l, Line(A, B))) == distance(B, line_intersection(l, Line(A, B)))
   conclude:
     - l == perpendicular_bisector(A, B)
+
+perpendicular_bisector_definition:
+  inputs:
+    - A, B: Point
+  where:
+    - exists(perpendicular_bisector(A, B))
+  conclude:
+    - perpendicular_bisector(A, B) == perpendicular_line(midpoint(A, B), Line(A, B))
 
 perpendicular_bisector_properties:
   inputs:

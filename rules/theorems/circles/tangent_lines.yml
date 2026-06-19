@@ -1,3 +1,23 @@
+line_circle_tangent_point_definition:
+  inputs:
+    - l: Line
+    - c: Circle
+  where:
+    - exists(line_circle_tangent_point(l, c))
+  conclude:
+    - line_circle_tangent_point(l, c) in l, c
+
+point_circle_tangent_line_definition:
+  inputs:
+    - P: Point
+    - c: Circle
+  where:
+    - exists(point_circle_tangent_line(P, c))
+  conclude:
+    - P in point_circle_tangent_line(P, c)
+    - tangent(point_circle_tangent_line(P, c), c)
+
+
 tangent_definition_from_perpendicularity:
   inputs:
     - A: Point

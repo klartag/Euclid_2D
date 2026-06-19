@@ -1,4 +1,4 @@
-internal_angle_bisector_definition:
+internal_angle_bisector_property:
   inputs:
     - A, B, C, O: Point
   where:
@@ -7,7 +7,7 @@ internal_angle_bisector_definition:
   possible_conclusions:
     - internal_bisector_definition <=> internal_bisector_property
 
-external_angle_bisector_definition:
+external_angle_bisector_property:
   inputs:
     - A, B, C, O: Point
   where:
@@ -24,3 +24,19 @@ angle_bisectors_are_perpendicular:
     - exists(external_angle_bisector(A, B, C))
   conclude:
     - perpendicular(internal_angle_bisector(A, B, C), external_angle_bisector(A, B, C))
+
+internal_angle_bisector_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(internal_angle_bisector(A, B, C))
+  conclude:
+    - B in internal_angle_bisector(A, B, C)
+
+external_angle_bisector_definition: #bisector trough the point B
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(external_angle_bisector(A, B, C))
+  conclude:
+    - B in external_angle_bisector(A, B, C)

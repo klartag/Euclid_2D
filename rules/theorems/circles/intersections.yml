@@ -23,3 +23,22 @@ circle_circle_intersection_has_at_most_two_points_1:
   conclude:
     - B == C
   metadata: auto
+
+circle_circle_other_intersection_definition:
+  inputs:
+    - P: Point
+    - c, d: Circle
+  where:
+    - exists(circle_circle_other_intersection(P, c, d))
+  conclude:
+    - circle_circle_other_intersection(P, c, d) in c, d
+
+line_circle_other_intersection_definition:
+  inputs:
+    - P: Point
+    - l: Line
+    - c: Circle
+  where:
+    - exists(line_circle_other_intersection(P, l, c))
+  conclude:
+    - line_circle_other_intersection(P, l, c) in l, c

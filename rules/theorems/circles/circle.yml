@@ -9,3 +9,14 @@ circle_definition:
   conclude:
     - c == Circle(A, B, C)
   rank: 5
+
+circumcircle_definition:
+  inputs:
+    - A, B, C: Point
+  where:
+    - exists(Circle(A, B, C))
+  conclude:
+    - A, B, C in Circle(A, B, C)
+
+
+

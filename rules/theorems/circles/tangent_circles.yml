@@ -1,3 +1,13 @@
+circle_circle_tangent_point_definition:
+  inputs:
+    - c, d: Circle
+  where:
+    - exists(circle_circle_tangent_point(c, d))
+  conclude:
+    - circle_circle_tangent_point(c, d) in c, d
+
+
+
 circle_tangency_unique_intersection:
   inputs:
     - A, B: Point

@@ -1,4 +1,4 @@
-parallel_line_definition:
+parallel_line_property:
   inputs:
     - A: Point
     - k, l: Line
@@ -59,3 +59,13 @@ parallel_lines_are_transitive:
     - [k, l]
     - [l, m]
     - [k, m]
+
+parallel_line_definition:
+  inputs:
+    - A: Point
+    - l: Line
+  where:
+    - exists(parallel_line(A, l))
+  conclude:
+    - A in parallel_line(A, l)
+    - parallel(l, parallel_line(A, l))
