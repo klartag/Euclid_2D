@@ -58,16 +58,28 @@ The subject has a rich history, including Tarski's work on the decidability of E
 
 We focus on Large Language Models (LLMs), hoping to integrate an LLM proficient in geometry with those knowledgeable in other domains. We hope this integration will create a synergistic effect, enhancing the capabilities of LLMs across a broad spectrum of logical and geometrical applications.
 
-We are testing the following hypotheses.
+We are testing the following two hypotheses:
+1. LLMs of moderate size (< 70B parameters) can learn to solve Euclidean geometry problems.
+2. With the support of accompanying software (e.g., verifiers or numerical embeddings), such LLMs can solve Euclidean geometry problems.
 
-Hypothesis 1: LLMs of moderate size (< 70B parameters) can learn to solve Euclidean geometry problems.
-
-Hypothesis 2: With the support of accompanying software (e.g., verifiers or numerical embeddings), such LLMs can solve Euclidean geometry problems.
-
-The level of Euclidean Geometry problems we are aiming at is roughly that of e.g. Akopyan's book "Geometry in Figures". We acknowledge the support of MSR for this project during its initial phase.
+The level of Euclidean Geometry problems we are aiming at is roughly that of e.g. Akopyan's book "Geometry in Figures".
 
 Google bucket link:
 https://console.cloud.google.com/storage/browser/euclid_2d?inv=1&invt=Ab4r5g&project=versatile-bolt-330819
+
+
+We acknowledge the support of MSR for this project during its initial phase,
+and the support of the Weizmann Institute of Science for the entire duration of the project.
+
+This project was made possible by the following people (in no particular order):
+* [Boaz Klartag](https://scholar.google.com/citations?user=pshOFsUAAAAJ)
+* [Ronen Eldan](https://scholar.google.com/citations?user=G8a4FrwAAAAJ)
+* [Yi Zhang](https://scholar.google.com/citations?user=lc6CVqEAAAAJ)
+* [Ron Solan](https://github.com/ormorni)
+* Or Khalifa
+* [Zahi Hazan](https://scholar.google.com/citations?user=3Llq6IkAAAAJ)
+* [Agam Guberman](https://github.com/ineptnonsense)
+
 
 ## <span id="syntax"> Geometry Syntax </span>
 ### <span id="syntax-object-types"> Object Types </span>
